@@ -3,7 +3,7 @@
 class Database
 {
     private $host = "localhost"; // Change this according to your database configuration
-    private $dbname = "vikassawantsacademy";
+    private $dbname = "novakids";
     private $username = "root";
     private $password = "";
     private $charset = "utf8mb4";

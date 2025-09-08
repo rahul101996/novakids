@@ -16,7 +16,11 @@ $route->group(['', 'WebController'], function ($route) {
 
 $route->group(['', 'CollectionController'], function ($route) {
     $route->route('admin/collections', 'index');
-        $route->route('admin/add-collections', 'index');
+    $route->route('admin/add-collections', 'AddCollections');
+    $route->route('/edit-collection/[i:id]', 'AddCollections');
+        $route->route('/admin/add-product', 'AddProducts');
+
+
 
     // $route->route('/', 'index');
 
