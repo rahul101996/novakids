@@ -43,11 +43,7 @@ class WebController extends LoginController
         //  echo "hello";
         // die();
         // $this->checkSession();
-        $ibps_po_course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'ibps-po' ORDER BY `id` DESC LIMIT 1")[0];
-        $ibps_clerk_course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'ibps-clerk' ORDER BY `id` DESC LIMIT 1")[0];
-        $sbi_clerk_course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'sbi-clerk' ORDER BY `id` DESC LIMIT 1")[0];
-        // printWithPre
-        $sbi_po_course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'sbi-po' ORDER BY `id` DESC LIMIT 1")[0];
+       
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             require 'views/website/index.php';
         }
