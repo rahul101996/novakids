@@ -1,109 +1,455 @@
-<footer class="w-full flex items-center justify-center bg-[url(/public/images/Rectangle-5165.png)] bg-[#030f40] py-16   text-white">
-    <div class="w-[80%] flex items-start justify-start gap-24 max-lg:w-[85%] max-lg:flex-col max-lg:gap-5 ">
-        <div class="w-[30%] flex items-start flex-col justify-start max-lg:w-full">
-            <img src="/public/logos/logo.png" class="h-16" alt="">
-            <p class="text-xs mt-3">We understand that every student has unique needs and abilities, that’s why our curriculum is designed to adapt to your needs and help you grow!</p>
-            <div class="w-full md:w-[85%] flex flex-col items-start mt-3">
+<style>
+    /* Floating Animation */
+    @keyframes float {
 
-                <p class="font-bold">@social_media</p>
-                <div class="flex items-center gap-3 mt-2">
-                    <a href="https://www.facebook.com/vikassawantsacademy/" class="bg-[#31364b] px-4 py-2 rounded-full"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
-                    <a href="https://www.instagram.com/vikassawantsacademy4bankexam/" class="bg-[#31364b] px-3 py-2 rounded-full"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-                    <a href="https://www.linkedin.com/company/vikas-sawants-academy/" class="bg-[#31364b] px-3 py-2 rounded-full"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
-                    <a href="https://www.youtube.com/c/VikasSawantsAcademy" class="bg-[#31364b] px-3 py-2 rounded-full"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
-                </div>
+        0%,
+        100% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+
+    .float-animation {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    /* Gradient Text Animation */
+    @keyframes gradient-shift {
+
+        0%,
+        100% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+
+    .gradient-text {
+        background: linear-gradient(-45deg, #fff, #ccc, #fff, #999);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-shift 4s ease infinite;
+    }
+
+    /* Social Icon Hover Effects */
+    .social-hover {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .social-hover::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.6s;
+    }
+
+    .social-hover:hover::before {
+        left: 100%;
+    }
+
+    .social-hover:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+    }
+
+    /* Newsletter Input Animation */
+    .newsletter-input {
+        position: relative;
+        transition: all 0.3s ease;
+        background: #fff;
+        color: #000;
+    }
+
+    .newsletter-input:focus {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        outline: none;
+        border-color: #000;
+    }
+
+    /* Subscribe Button Animation */
+    .subscribe-btn {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .subscribe-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s;
+    }
+
+    .subscribe-btn:hover::before {
+        left: 100%;
+    }
+
+    .subscribe-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Link Hover Effects */
+    .link-hover {
+        position: relative;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .link-hover::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #fff;
+        transition: width 0.3s ease;
+    }
+
+    .link-hover:hover::after {
+        width: 100%;
+    }
+
+    .link-hover:hover {
+        color: #fff;
+        transform: translateX(5px);
+    }
+
+    /* Payment Method Hover */
+    .payment-icon {
+        transition: all 0.3s ease;
+    }
+
+    .payment-icon:hover {
+        transform: translateY(-3px) rotate(5deg);
+        background: #ffffff22;
+        color: white !important;
+    }
+
+    /* Trust Badge Animation */
+    .trust-badge {
+        transition: all 0.3s ease;
+    }
+
+    .trust-badge:hover {
+        transform: scale(1.05);
+        color: #fff;
+    }
+
+    /* Stagger Animation */
+    .stagger-item {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .stagger-item:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .stagger-item:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .stagger-item:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    .stagger-item:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+
+    .stagger-item:nth-child(5) {
+        animation-delay: 0.5s;
+    }
+
+    .stagger-item:nth-child(6) {
+        animation-delay: 0.6s;
+    }
+
+    .stagger-item:nth-child(7) {
+        animation-delay: 0.7s;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Pulse Animation for Brand */
+    .pulse-slow {
+        animation: pulse-custom 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-custom {
+
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.02);
+        }
+    }
+
+    /* Background Pattern Animation */
+    .bg-pattern {
+        background-color: #d1d5db;
+        /* Gray background */
+        background-image: radial-gradient(circle at 20% 80%, rgba(0, 0, 0, 0.05) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(0, 0, 0, 0.05) 0%, transparent 50%);
+        animation: pattern-move 20s ease-in-out infinite;
+    }
+
+    @keyframes pattern-move {
+
+        0%,
+        100% {
+            background-position: 0% 0%, 100% 100%;
+        }
+
+        50% {
+            background-position: 100% 0%, 0% 100%;
+        }
+    }
+
+    /* Footer colors */
+    footer {
+        background-color: #000;
+        color: #fff;
+    }
+
+    footer a,
+    footer p,
+    footer span,
+    footer i {
+        color: #fff !important;
+    }
+</style>
+
+
+
+<!-- Tailwind Animations -->
+<style>
+    @keyframes spin-slow {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .animate-spin-slow {
+        animation: spin-slow 20s linear infinite;
+    }
+</style>
+
+
+<footer class="w-full overflow-hidden">
+    <!-- Newsletter Section - Single Row Gen-Z Style -->
+    <div class="relative bg-gray-900 py-12 overflow-hidden w-full">
+        <div
+            class="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-6">
+
+            <!-- Text -->
+            <div class="flex-1 text-center md:text-left">
+                <h3 class="text-2xl md:text-3xl font-extrabold text-white mb-2">
+                    Stay in the Loop!
+                </h3>
+                <p class="text-gray-300 text-sm md:text-base">
+                    Get exclusive drops & vibes straight to your inbox.
+                </p>
             </div>
-            <a href="https://play.google.com/store/apps/details?id=co.jarvis.vikasa" target="_blank">
-                <img src="/public/images/Google.png" class="mt-7" alt="">
-            </a>
 
-            <div class="mt-4 font-[400]">Got Questions? Call us</div>
-            <div class="w-full grid grid-cols-1">
-                <a href="tel:+918169099028" class="text-base md:text-lg font-[600] w-full grid grid-cols-2"><span class="text-left">Admission &ensp;:</span> <span class="text-left">+91 816 909 9028</span> </a>
-                <a href="tel:+918652221988" class="text-base md:text-lg font-[600] w-full grid grid-cols-2"><span class="text-left">Helpline &ensp;&ensp;&ensp;:</span> <span class="text-left">+91 865 222 1988</span></a>
-
-                <a href="tel:+919702146136" class="text-base md:text-lg font-[600] w-full grid grid-cols-2"><span class="text-left">Business &ensp;&ensp;:</span> <span class="text-left">+91 970 214 6136</span></a>
+            <!-- Form -->
+            <div class="flex-1 flex space-x-2 md:space-x-4">
+                <input type="email" placeholder="Your email"
+                    class="flex-1 px-4 py-3 rounded-xl border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all text-sm" />
+                <button
+                    class="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-bold px-6 py-3 rounded-xl shadow-md transform transition-transform hover:scale-105 hover:brightness-110 text-sm">
+                    Subscribe
+                </button>
             </div>
-
-            <p class="mt-4 flex items-center gap-3 font-[400]">
-                <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 5C1 2.2 2.6 1 5 1H13C15.4 1 17 2.2 17 5V10.6C17 13.4 15.4 14.6 13 14.6H5" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path d="M13 5.40039L10.496 7.40015C9.672 8.05607 8.32 8.05607 7.496 7.40015L5 5.40039" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path d="M1 11.4004H5.8" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path d="M1 8.19922H3.4" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>info@vikassawantsacademy.com
-            </p>
-            <div class="flex items-start gap-3 mt-4">
-                <img src="/public/images/address-white.png" class="h-6" alt="">
-                <p class="text-sm">702/5 Shiv Amrut Dham CHS, Near Yogidham Complex, Kalyan Murbad Road, Kalyan - Thane, Maharashtra.</p>
-            </div>
-            <!-- Certification Logos -->
-            <!-- <div class="flex items-center gap-4 mt-6 flex-wrap">
-                <img src="/public/images/iso.jpeg" alt="ISO Logo" class="h-10 object-contain">
-                <img src="/public/images/iaf.png" alt="IAF Logo" class="h-10 object-contain">
-                <img src="/public/images/kab.jpeg" alt="KAB Logo" class="h-10 object-contain">
-            </div> -->
 
         </div>
-        <div class="w-[70%] grid grid-cols-3 gap-5 items-start justify-start max-lg:w-full max-lg:grid-cols-1 relative max-lg:pb-32">
-            <div class="w-full flex flex-col items-start justify-start">
-                <h2 class="font-bold text-xl">Company</h2>
-                <a href="/" class="mt-4">Home</a>
-                <a href="/contact-us" class="mt-2">Contact</a>
-                <a href="/blogs" class="mt-2">Blogs & News</a>
-                <a href="https://channelpartner.vikassawantsacademy.com/" target="_blank" class="mt-2">Channel Partner</a>
-                <a href="/vsa-profile" class="mt-2">VSA Profile</a>
-                <a href="/mission-vision" class="mt-2">Mission & Vision</a>
-                <a href="/directors-profile" class="mt-2">Director's Message</a>
-                <a href="/media-events" class="mt-2">Media & Events</a>
-            </div>
-            <div class="w-full flex flex-col items-start justify-start">
-                <h2 class="font-bold text-xl">Quick Links</h2>
-                <a href="/banking-exams/ibps-clerk" class="mt-2">IBPS CLERK</a>
-                <a href="/banking-exams/ibps-po" class="mt-2">IBPS PO</a>
-                <a href="/banking-exams/sbi-po" class="mt-4">SBI PO</a>
-                <a href="/banking-exams/sbi-clerk" class="mt-2">SBI CLERK</a>
 
-                <a href="/banking-exams/rbi" class="mt-4">RBI</a>
-                <a href="/ssc-exams/chsl" class="mt-2">SSC CHSL (10+2)
-                </a>
-                <a href="/ssc-exams/cgl" class="mt-2">SSC CGL</a>
-                <a href="/ssc-exams/mts" class="mt-2">SSC MTS</a>
-                <a href="/railways-exams" class="mt-2">Railways</a>
-                <a href="/psc-exams/upsc" class="mt-2">UPSC</a>
-                <a href="/psc-exams/mpsc" class="mt-2">MPSC</a>
-                <a href="/psc-exams/csat" class="mt-2">CSAT</a>
-            </div>
-            <div class="w-full flex flex-col items-start justify-start">
-                <h2 class="font-bold text-xl">Privacy</h2>
-                <a href="/privacy-policy" class="mt-4">Privacy Policy</a>
-                <a href="/terms-and-conditions" class="mt-2">Terms and Conditions
-                </a>
-                <a href="/cancellation-and-refund" class="mt-2">Cancellation and Refund</a>
-                <!-- <div class="mt-6 flex gap-4 flex-wrap">
-                    <img src="/public/images/iso.jpeg" alt="ISO Logo" class="h-10 object-contain bg-white p-1 rounded shadow">
-                    <img src="/public/images/iaf.png" alt="IAF Logo" class="h-10 object-contain bg-white p-1 rounded shadow">
-                    <img src="/public/images/kab.jpeg" alt="KAB Logo" class="h-10 object-contain bg-white p-1 rounded shadow">
-                </div> -->
-            </div>
+        <!-- Floating Shapes -->
+        <div class="absolute -top-6 -left-6 w-16 h-16 bg-pink-500 rounded-full opacity-25 animate-spin-slow"></div>
+        <div class="absolute -bottom-12 -right-6 w-24 h-24 bg-purple-500 rounded-full opacity-15 animate-pulse"></div>
+    </div>
+    <!-- Main Footer Content (black background) -->
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+                <!-- Brand Section -->
+                <div class="lg:col-span-2">
+                    <div class="mb-8">
+                        <div class="w-auto h-28 flex mb-4">
+                            <img src="/public/logos/nova_logo2.png" alt="Brand Logo"
+                                class="w-auto h-auto rounded-lg object-cover">
+                        </div>
+                        <p class="text-gray-600 max-w-sm  leading-relaxed">
+                            Authentic streetwear for the next generation. Quality pieces that speak your language and
+                            match your vibe.
+                        </p>
+                    </div>
+
+                    <!-- Social Links -->
+                    <!-- Social Icons - Gen-Z Style -->
+                    <div class="flex space-x-4 justify-center md:justify-start mb-8">
+                        <!-- Instagram -->
+                        <a href="#"
+                            class="group relative w-12 h-12 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-gradient-to-tr from-pink-500 via-purple-500 to-yellow-400 shadow-lg transform transition-transform hover:-translate-y-2 hover:scale-110">
+                            <i class="fab fa-instagram text-white text-xl md:text-xl"></i>
+                            <span
+                                class="absolute inset-0 rounded-full bg-white opacity-10 group-hover:opacity-20 transition-opacity"></span>
+                        </a>
+
+                        <!-- TikTok -->
+                        <a href="#"
+                            class="group relative w-12 h-12 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-blue-600 shadow-lg transform transition-transform hover:-translate-y-2 hover:scale-110">
+                            <i class="fab fa-facebook-f text-white text-xl md:text-xl"></i>
+                            <span
+                                class="absolute inset-0 rounded-full bg-white opacity-10 group-hover:opacity-20 transition-opacity"></span>
+                        </a>
+
+                        <!-- YouTube -->
+                        <a href="#"
+                            class="group relative w-12 h-12 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-red-500 shadow-lg transform transition-transform hover:-translate-y-2 hover:scale-110">
+                            <i class="fab fa-youtube text-white text-xl md:text-xl"></i>
+                            <span
+                                class="absolute inset-0 rounded-full bg-white opacity-10 group-hover:opacity-20 transition-opacity"></span>
+                        </a>
+
+                        <!-- Discord -->
+                        <a href="#"
+                            class="group relative w-12 h-12 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-indigo-500 shadow-lg transform transition-transform hover:-translate-y-2 hover:scale-110">
+                            <i class="fab fa-discord text-white text-xl md:text-xl"></i>
+                            <span
+                                class="absolute inset-0 rounded-full bg-white opacity-10 group-hover:opacity-20 transition-opacity"></span>
+                        </a>
+                    </div>
 
 
+                    <!-- Contact Info -->
+                    <div class="text-sm text-gray-600 space-y-2">
+                        <p class="flex items-center"><i class="fas fa-envelope mr-3"></i> support@Nova Kids.com</p>
+                        <p class="flex items-center"><i class="fab fa-whatsapp mr-3"></i> +1 (555) 123-4567</p>
+                    </div>
+                </div>
 
-            <!-- Absolute Certification Logos BELOW the columns -->
-            <div class="absolute left-0 -bottom-[8rem] w-full flex flex-col justify-center mt-6 z-10 max-lg:bottom-0  max-lg:mt-0">
-                <h3 class="text-white text-sm md:text-lg font-bold tracking-wide  mb-4">
-                    Official Certifications & Accreditations
-                </h3>
-                <div class="flex items-center gap-6 flex-wrap">
-                    <img src="/public/images/iso.jpeg" alt="ISO Logo" class="h-16 w-16 object-contain bg-white p-1 rounded shadow">
-                    <img src="/public/images/iaf.png" alt="IAF Logo" class="h-16 w-16 object-contain bg-white p-1 rounded shadow">
-                    <img src="/public/images/kab.jpeg" alt="KAB Logo" class="h-16 w-16 object-contain bg-white p-1 rounded shadow">
-                    <img src="/public/images/msme-logo.png" alt="KAB Logo" class="h-16  w-16 object-contain bg-white p-1 rounded shadow">
+                <!-- Shop Links -->
+                <div>
+                    <h4 class="font-bold text-white mb-6 text-lg">Shop</h4>
+                    <ul class="space-y-3">
+                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">New Arrivals</a></li>
+                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Bestsellers</a></li>
+                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Sale</a></li>
+                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">T-Shirts</a></li>
+                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Hoodies</a></li>
+                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Bottoms</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Care -->
+                <div>
+                    <h4 class="font-bold text-white mb-6 text-lg">Customer Care</h4>
+                    <ul class="space-y-3">
+                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Size Guide</a></li>
+                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Shipping Info</a></li>
+                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Returns & Exchanges</a>
+                        </li>
+                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">FAQ</a></li>
+                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- About -->
+                <div>
+                    <h4 class="font-bold text-white mb-6 text-lg">About</h4>
+                    <ul class="space-y-3 mb-6">
+                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Our Story</a></li>
+                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Brand Partners</a></li>
+                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Client Reviews</a></li>
+                    </ul>
+
+                    <!-- Trust Badges -->
+                    <div class="space-y-3">
+                        <div class="trust-badge flex items-center text-sm text-gray-500 cursor-pointer">
+                            <i class="fas fa-shield-alt mr-3 text-green-500"></i>
+                            <span>Secure Payments</span>
+                        </div>
+                        <div class="trust-badge flex items-center text-sm text-gray-500 cursor-pointer">
+                            <i class="fas fa-truck mr-3 text-blue-500"></i>
+                            <span>Free Shipping Rs.2000+</span>
+                        </div>
+                        <div class="trust-badge flex items-center text-sm text-gray-500 cursor-pointer">
+                            <i class="fas fa-undo mr-3 text-purple-500"></i>
+                            <span>7-Day Returns</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
         </div>
     </div>
-    <?php include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/footerscript.php"; ?>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-gray-700 py-4">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
+                <!-- Copyright -->
+                <div class="text-sm">© 2025 Nova Kids. All rights reserved.</div>
+                <!-- Payment Methods -->
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm">We accept:</span>
+                    <div class="flex space-x-3">
+                        <div class="payment-icon bg-gray-800 p-3 rounded-lg cursor-pointer">
+                            <i class="fab fa-cc-visa text-xl"></i>
+                        </div>
+                        <div class="payment-icon bg-gray-800 p-3 rounded-lg cursor-pointer">
+                            <i class="fab fa-cc-mastercard text-xl"></i>
+                        </div>
+                        <div class="payment-icon bg-gray-800 p-3 rounded-lg cursor-pointer">
+                            <i class="fab fa-paypal text-xl"></i>
+                        </div>
+                        <div class="payment-icon bg-gray-800 p-3 rounded-lg cursor-pointer">
+                            <i class="fab fa-apple-pay text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Legal Links -->
+                <div class="flex space-x-6 text-sm">
+                    <a href="#" class="link-hover">Privacy Policy</a>
+                    <a href="#" class="link-hover">Terms of Service</a>
+                    <a href="#" class="link-hover">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </footer>
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/footerscript.php"; ?>
