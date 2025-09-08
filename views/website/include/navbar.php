@@ -237,9 +237,16 @@
 
     <!-- Right: Icons -->
     <div class="flex gap-8 items-center ml-auto pr-12 py-3">
-        <button class="nav-text p-2 rounded-full hover:bg-white/10 transition-all duration-300 active:scale-95">
+        <div class="flex items-center">
+            <input type="text" placeholder="Search..."
+                class="search-expand bg-white/20 text-white placeholder-white/70 px-3 py-1 rounded-full text-sm border-0 focus:outline-none focus:ring-2 focus:ring-white/30">
+            <button class="nav-text p-2 rounded-full hover:bg-white/10 transition-all duration-300 active:scale-95">
+                <i class="fas fa-search text-lg"></i>
+            </button>
+        </div>
+        <!-- <button class="nav-text p-2 rounded-full hover:bg-white/10 transition-all duration-300 active:scale-95">
             <i class="fas fa-search text-lg"></i>
-        </button>
+        </button> -->
         <button class="nav-text p-2 rounded-full hover:bg-white/10 transition-all duration-300 active:scale-95">
             <i class="fas fa-user text-lg"></i>
         </button>
