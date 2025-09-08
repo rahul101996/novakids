@@ -686,6 +686,94 @@
         </div>
     </section>
 
+    <style>
+        /* Custom outlined text effect */
+        .text-outline {
+            color: transparent;
+            -webkit-text-stroke: 1px #cccccc;
+            text-stroke: 1px black;
+        }
+
+        .text-outline:hover {
+            color: black;
+            -webkit-text-stroke: 1px black;
+            text-stroke: 1px black;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .marquee {
+            animation: scroll 10s linear infinite;
+        }
+
+        .marquee-content {
+            min-width: 200%;
+        }
+    </style>
+
+    <!-- Marquee Section -->
+    <section class="overflow-hidden bg-gradient-to-r from-orange-50 via-transparent to-orange-50 py-8 my-10">
+        <div class="relative w-full group">
+            <div class="marquee flex whitespace-nowrap group-hover:[animation-play-state:paused]">
+                <div class="marquee-content flex items-center space-x-10 px-10">
+                    <!-- Repeat Content Twice for Infinite Scroll -->
+                    <template id="marquee-items">
+                        <div class="flex items-center space-x-4 text-outline hover:text-black transition-all duration-300 text-gray-300 font-[400] text-7xl cursor-pointer"
+                            style="font-family: 'Outfit', sans-serif;">
+                            <span>Streetwear</span>
+                            <span class="text-black text-6xl">
+                                #
+                            </span>
+                        </div>
+
+                        <div class="flex items-center space-x-4 text-outline hover:text-black transition-all duration-300 text-gray-300 font-[400] text-7xl cursor-pointer"
+                            style="font-family: 'Outfit', sans-serif;">
+                            <span>Sneakers</span>
+                             <span class="text-black text-6xl">
+                                #
+                            </span>
+                        </div>
+
+                        <div class="flex items-center space-x-4 text-outline hover:text-black transition-all duration-300 text-gray-300 font-[400] text-7xl cursor-pointer"
+                            style="font-family: 'Outfit', sans-serif;">
+                            <span>Oversized Fits</span>
+                            <span class="text-black text-6xl">
+                                #
+                            </span>
+                        </div>
+
+                        <div class="flex items-center space-x-4 text-outline hover:text-black transition-all duration-300 text-gray-300 font-[400] text-7xl cursor-pointer"
+                            style="font-family: 'Outfit', sans-serif;">
+                            <span>Casual Drip</span>
+                             <span class="text-black text-6xl">
+                                #
+                            </span>
+                        </div>
+                    </template>
+
+                    <!-- Inject Items Twice -->
+                    <div class="flex items-center space-x-10">
+                        <script>
+                            const items = document.getElementById('marquee-items').content;
+                            const container = document.currentScript.parentElement;
+                            container.appendChild(items.cloneNode(true));
+                            container.appendChild(items.cloneNode(true)); // Two copies for infinite loop
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
     <section class="py-16 w-[90vw] mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
