@@ -121,7 +121,7 @@
         left: 0;
         width: 0;
         height: 2px;
-        background: #fff;
+        background: #f59056ff;
         transition: width 0.3s ease;
     }
 
@@ -214,15 +214,6 @@
         }
     }
 
-    /* Background Pattern Animation */
-    .bg-pattern {
-        background-color: #d1d5db;
-        /* Gray background */
-        background-image: radial-gradient(circle at 20% 80%, rgba(0, 0, 0, 0.05) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(0, 0, 0, 0.05) 0%, transparent 50%);
-        animation: pattern-move 20s ease-in-out infinite;
-    }
-
     @keyframes pattern-move {
 
         0%,
@@ -249,8 +240,6 @@
     }
 </style>
 
-
-
 <!-- Tailwind Animations -->
 <style>
     @keyframes spin-slow {
@@ -269,7 +258,7 @@
 </style>
 
 <section class="bg-gray-100 py-10">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
 
         <!-- Complimentary Shipping -->
         <div class="flex flex-col items-center">
@@ -385,8 +374,8 @@
 
                     <!-- Contact Info -->
                     <div class="text-sm text-gray-600 space-y-2">
-                        <p class="flex items-center"><i class="fas fa-envelope mr-3"></i> support@Nova Kids.com</p>
-                        <p class="flex items-center"><i class="fab fa-whatsapp mr-3"></i> +1 (555) 123-4567</p>
+                        <p class="flex items-center"><i class="fas fa-envelope mr-3"></i> support@novakids.com</p>
+                        <p class="flex items-center"><i class="fab fa-whatsapp mr-3"></i> +1 1234567890</p>
                     </div>
                 </div>
 

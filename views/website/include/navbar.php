@@ -1,13 +1,13 @@
 <!-- Top Bar -->
 <div
-    class="flex items-center justify-center w-full px-6 py-2 bg-gradient-to-tr from-gray-500 via-gray-700 to-gray-500 sticky top-0 z-50">
+    class="flex items-center justify-center w-full px-6 py-2 bg-black sticky top-0 z-50">
     <p id="rotating-text1" class="text-sm text-white font-medium tracking-wide"></p>
 </div>
 
 <style>
     .mega-menu {
         opacity: 0;
-        margin-top: 14px;
+        margin-top: 10px;
         visibility: hidden;
         transform: translateY(-10px);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -43,19 +43,19 @@
 </style>
 
 <nav
-    class="fixed w-full flex items-center justify-between py-1.5 z-50 transition-all duration-300 bg-black/70 backdrop-blur-sm">
+    class="sticky w-full flex items-center justify-between shadow z-50 transition-all duration-300 bg-white">
     <!-- Left: Navigation -->
     <li class="relative group list-none">
         <button
-            class="nav-text text-white relative px-6 py-3 text-lg font-semibold flex items-center gap-2 transition-all duration-300">
+            class="nav-text text-black relative px-6 py-3 text-lg font-semibold flex items-center gap-2 transition-all duration-300">
             Boys Collection
             <i class="fas fa-chevron-down text-sm group-hover:rotate-180 transition-transform duration-300"></i>
         </button>
         <!-- Mega Menu -->
         <div
-            class="mega-menu absolute left-0 top-full w-screen bg-white py-8 px-8 grid grid-cols-5 gap-8 z-50 shadow-xl">
+            class="mega-menu absolute left-0 top-full w-screen bg-white py-8 px-8 grid grid-cols-5 gap-10 z-50 shadow-xl">
             <!-- Hero Section -->
-            <div class="relative rounded-lg overflow-hidden h-[400px] bg-gray-900">
+            <div class="relative overflow-hidden h-[400px] bg-gray-900">
                 <img src="/public/images/333.avif" alt="Streetwear Collection"
                     class="w-full h-full object-cover opacity-80">
 
@@ -75,7 +75,8 @@
                         class="absolute inset-0 bg-gradient-to-r from-purple-800 to-orange-700 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700"></span>
                 </button>
             </div>
-            <div class="relative rounded-lg overflow-hidden h-[400px] bg-gray-900">
+
+            <div class="relative overflow-hidden h-[400px] bg-gray-900">
                 <img src="/public/images/444.avif" alt="Streetwear Collection"
                     class="w-full h-full object-cover opacity-80 ">
 
@@ -204,32 +205,32 @@
     <!-- Logo -->
     <div class="flex items-center absolute left-1/2 transform -translate-x-1/2">
         <a href="/" class="block">
-            <img src="/public/logos/nova_logo2 (1).png" alt="Logo" class="w-36">
+            <img src="/public/logos/nova_logo_png.png" alt="Logo" class="w-32">
         </a>
     </div>
 
 
     <!-- Right: Icons -->
-    <div class="flex gap-8 items-center ml-auto pr-12 py-3">
+    <div class="flex gap-5 items-center ml-auto pr-12 py-3">
         <div class="flex items-center">
             <input type="text" placeholder="Search..."
-                class="search-expand bg-white/20 text-white placeholder-white/70 px-3 py-1 rounded-full text-sm border-0 focus:outline-none focus:ring-2 focus:ring-white/30">
+                class="search-expand bg-white/20 text-black placeholder-white/70 px-3 py-1 rounded-full text-sm border-0 focus:outline-none focus:ring-2 focus:ring-white/30">
             <button
-                class="nav-text text-white p-2 rounded-full hover:bg-white/10 transition-all duration-300 active:scale-95">
+                class="nav-text text-black p-2 rounded-full hover:bg-white/10 transition-all duration-300 active:scale-95">
                 <i class="fas fa-search text-lg"></i>
             </button>
         </div>
         <button
-            class="nav-text text-white p-2 rounded-full hover:bg-white/10 transition-all duration-300 active:scale-95">
+            class="nav-text text-black p-2 rounded-full hover:bg-white/10 transition-all duration-300 active:scale-95">
             <i class="fas fa-user text-lg"></i>
         </button>
         <div class="relative">
             <button
-                class="openCartBtn nav-text text-white p-2 rounded-full hover:bg-white/10 transition-all duration-300 active:scale-95">
+                class="openCartBtn nav-text text-black p-2 rounded-full hover:bg-white/10 transition-all duration-300 active:scale-95">
                 <i class="fas fa-shopping-cart text-lg"></i>
             </button>
             <span
-                class="absolute -top-2 -right-2 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md">
+                class="absolute -top-2 -right-2 bg-[#f25b21] text-black text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md">
                 0
             </span>
         </div>

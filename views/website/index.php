@@ -8,13 +8,46 @@
 
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
 
+    <style>
+        @keyframes glitch {
+            0% {
+                text-shadow: 2px 0 red, -2px 0 blue;
+            }
+
+            20% {
+                text-shadow: -2px -2px lime, 2px 2px pink;
+            }
+
+            40% {
+                text-shadow: 2px 2px cyan, -2px -2px yellow;
+            }
+
+            60% {
+                text-shadow: -2px 2px magenta, 2px -2px orange;
+            }
+
+            80% {
+                text-shadow: 2px -2px purple, -2px 2px teal;
+            }
+
+            100% {
+                text-shadow: none;
+            }
+        }
+
+        .group-hover\:animate-glitch {
+            animation: glitch 0.6s steps(2, end) infinite;
+        }
+    </style>
+
     <!-- Hero Section -->
-    <section class="relative h-[98vh] flex items-center bg-gradient-to-r from-red-800 to-black overflow-hidden">
+    <section class="relative h-[88vh] flex items-center bg-gradient-to-r from-red-800 to-black overflow-hidden">
         <!-- Background Image Overlay -->
         <div class="absolute inset-0 bg-[url('/public/images/banner.webp')] bg-cover bg-center opacity-70"></div>
 
         <!-- Big Heading (Top Left) -->
-        <h2 class="absolute top-22 left-10 text-7xl font-extrabold text-white animate-slide-left">
+        <h2 class="absolute top-16 left-10 text-7xl font-extrabold text-white" data-aos="fade-right"
+            data-aos-duration="1000" data-aos-delay="100">
             NEW <br> IN <br> FOR <br> YOUNGSTARS
         </h2>
 
@@ -27,44 +60,11 @@
                 <span
                     class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
             </button>
-
-            <style>
-                @keyframes glitch {
-                    0% {
-                        text-shadow: 2px 0 red, -2px 0 blue;
-                    }
-
-                    20% {
-                        text-shadow: -2px -2px lime, 2px 2px pink;
-                    }
-
-                    40% {
-                        text-shadow: 2px 2px cyan, -2px -2px yellow;
-                    }
-
-                    60% {
-                        text-shadow: -2px 2px magenta, 2px -2px orange;
-                    }
-
-                    80% {
-                        text-shadow: 2px -2px purple, -2px 2px teal;
-                    }
-
-                    100% {
-                        text-shadow: none;
-                    }
-                }
-
-                .group-hover\:animate-glitch {
-                    animation: glitch 0.6s steps(2, end) infinite;
-                }
-            </style>
         </div>
 
-
         <!-- Random Supporting Text (Top Right) -->
-        <div
-            class="absolute top-28 right-16 bg-white/10 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/20 animate-rise">
+        <div class="absolute top-28 right-16 bg-white/10 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/20"
+            data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
             <p class="text-white text-xl font-bold tracking-wider uppercase">
                 ✦ Limited Drop
             </p>
@@ -77,81 +77,6 @@
             #GenZStyle
         </p>
     </section>
-
-    <style>
-        @keyframes slide-left {
-            0% {
-                opacity: 0;
-                transform: translateX(-80px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes pop {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes rise {
-            0% {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fade {
-            0% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .animate-slide-left {
-            animation: slide-left 1s ease-out forwards;
-        }
-
-        .animate-pop {
-            animation: pop 1s ease-out forwards;
-            animation-delay: 0.3s;
-        }
-
-        .animate-rise {
-            animation: rise 1.2s ease-out forwards;
-            animation-delay: 0.6s;
-        }
-
-        .animate-fade {
-            animation: fade 2s ease-out forwards;
-            animation-delay: 1s;
-        }
-    </style>
-
-
-    <!-- Owl Carousel CSS -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
-
 
     <style>
         /* Place nav buttons below the carousel */
@@ -176,16 +101,11 @@
             /* fully rounded */
             transition: all 0.3s ease;
         }
-
-        /* Hover effect */
-        /* .new-arrival-carousel .owl-nav button span:hover {
-            background: #fca45cff;
-        } */
     </style>
 
     <section class="bg-white py-14 w-full">
         <div class="w-[90vw] max-md:w-[90vw] mx-auto">
-            <div class="flex flex-col mb-10">
+            <div class="flex flex-col mb-10" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="100">
                 <h3 class="text-left text-3xl font-extrabold mb-3 uppercase">New Arrival</h3>
                 <p class="text-left text-gray-600 text-lg max-w-xl">
                     Be the first to explore our latest drop — fresh styles crafted for teens who love to stay ahead of
@@ -196,6 +116,165 @@
 
             <div class="relative">
                 <div class="owl-carousel owl-theme new-arrival-carousel">
+                    <!-- Product 2 -->
+                    <a href="products/product-details" class="block">
+                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                            <!-- Discount Badge -->
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                                SAVE 14%
+                            </span>
+
+                            <!-- Product Images -->
+                            <div class="relative w-full h-[400px] overflow-hidden group">
+                                <!-- Default Image -->
+                                <img src="/public/images/111.avif" alt="Product 1"
+                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+
+                                <!-- Hover Image -->
+                                <img src="/public/images/1112.avif" alt="Product 1 Hover"
+                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+
+                                <!-- Add to favorites Icon (top-right) -->
+                                <button
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+
+                                <!-- Add to Cart Icon -->
+                                <button
+                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+
+                            <!-- Product Details -->
+                            <div class="p-4 text-center">
+                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
+                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Product 3 -->
+                    <a href="products/product-details" class="block">
+                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                            <!-- Discount Badge -->
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                                SAVE 14%
+                            </span>
+
+                            <!-- Product Images -->
+                            <div class="relative w-full h-[400px] overflow-hidden group">
+                                <!-- Default Image -->
+                                <img src="/public/images/333.avif" alt="Product 1"
+                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+
+                                <!-- Hover Image -->
+                                <img src="/public/images/3332.avif" alt="Product 1 Hover"
+                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+
+                                <!-- Add to favorites Icon (top-right) -->
+                                <button
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+
+                                <!-- Add to Cart Icon -->
+                                <button
+                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+
+                            <!-- Product Details -->
+                            <div class="p-4 text-center">
+                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
+                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Product 4 -->
+                    <a href="products/product-details" class="block">
+                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                            <!-- Discount Badge -->
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                                SAVE 14%
+                            </span>
+
+                            <!-- Product Images -->
+                            <div class="relative w-full h-[400px] overflow-hidden group">
+                                <!-- Default Image -->
+                                <img src="/public/images/4441.avif" alt="Product 1"
+                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+
+                                <!-- Hover Image -->
+                                <img src="/public/images/4442.avif" alt="Product 1 Hover"
+                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+
+                                <!-- Add to favorites Icon (top-right) -->
+                                <button
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+
+                                <!-- Add to Cart Icon -->
+                                <button
+                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+
+                            <!-- Product Details -->
+                            <div class="p-4 text-center">
+                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
+                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Product 5 -->
+                    <a href="products/product-details" class="block">
+                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                            <!-- Discount Badge -->
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                                SAVE 14%
+                            </span>
+
+                            <!-- Product Images -->
+                            <div class="relative w-full h-[400px] overflow-hidden group">
+                                <!-- Default Image -->
+                                <img src="/public/images/11.avif" alt="Product 1"
+                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+
+                                <!-- Hover Image -->
+                                <img src="/public/images/555.avif" alt="Product 1 Hover"
+                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+
+                                <!-- Add to favorites Icon (top-right) -->
+                                <button
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+
+                                <!-- Add to Cart Icon -->
+                                <button
+                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+
+                            <!-- Product Details -->
+                            <div class="p-4 text-center">
+                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
+                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                            </div>
+                        </div>
+                    </a>
 
                     <!-- Product Card -->
                     <a href="products/product-details" class="block">
@@ -237,184 +316,31 @@
                             </div>
                         </div>
                     </a>
-
-                    <!-- Product 2 -->
-                    <a href="products/product-details" class="block">
-                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
-                            <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
-                                SAVE 14%
-                            </span>
-
-                            <!-- Product Images -->
-                            <div class="relative w-full h-[400px] overflow-hidden group">
-                                <!-- Default Image -->
-                                <img src="/public/images/4.webp" alt="Product 1"
-                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-
-                                <!-- Hover Image -->
-                                <img src="/public/images/5.webp" alt="Product 1 Hover"
-                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-
-                                <!-- Add to favorites Icon (top-right) -->
-                                <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-
-                                <!-- Add to Cart Icon -->
-                                <button
-                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-
-                            <!-- Product Details -->
-                            <div class="p-4 text-center">
-                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Product 3 -->
-                    <a href="products/product-details" class="block">
-                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
-                            <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
-                                SAVE 14%
-                            </span>
-
-                            <!-- Product Images -->
-                            <div class="relative w-full h-[400px] overflow-hidden group">
-                                <!-- Default Image -->
-                                <img src="/public/images/7.webp" alt="Product 1"
-                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-
-                                <!-- Hover Image -->
-                                <img src="/public/images/6.webp" alt="Product 1 Hover"
-                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-
-                                <!-- Add to favorites Icon (top-right) -->
-                                <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-
-                                <!-- Add to Cart Icon -->
-                                <button
-                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-
-                            <!-- Product Details -->
-                            <div class="p-4 text-center">
-                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Product 4 -->
-                    <a href="products/product-details" class="block">
-                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
-                            <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
-                                SAVE 14%
-                            </span>
-
-                            <!-- Product Images -->
-                            <div class="relative w-full h-[400px] overflow-hidden group">
-                                <!-- Default Image -->
-                                <img src="/public/images/2.webp" alt="Product 1"
-                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-
-                                <!-- Hover Image -->
-                                <img src="/public/images/1.webp" alt="Product 1 Hover"
-                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-
-                                <!-- Add to favorites Icon (top-right) -->
-                                <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-
-                                <!-- Add to Cart Icon -->
-                                <button
-                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-
-                            <!-- Product Details -->
-                            <div class="p-4 text-center">
-                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Product 5 -->
-                    <a href="products/product-details" class="block">
-                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
-                            <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
-                                SAVE 14%
-                            </span>
-
-                            <!-- Product Images -->
-                            <div class="relative w-full h-[400px] overflow-hidden group">
-                                <!-- Default Image -->
-                                <img src="/public/images/1.webp" alt="Product 1"
-                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-
-                                <!-- Hover Image -->
-                                <img src="/public/images/2.webp" alt="Product 1 Hover"
-                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-
-                                <!-- Add to favorites Icon (top-right) -->
-                                <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-
-                                <!-- Add to Cart Icon -->
-                                <button
-                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-
-                            <!-- Product Details -->
-                            <div class="p-4 text-center">
-                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
-                            </div>
-                        </div>
-                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Section -->
-    <section class="pb-12">
-        <h2 class="text-center text-3xl font-extrabold mb-3 uppercase">Categories</h2>
-        <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto mb-8">
-            Discover the latest collection of trendy, comfortable, and versatile outfits designed for teen boys who love
-            to express their style — from everyday casuals to bold streetwear vibes, Nova Kids has it all.
-        </p>
+    <section class="pb-12 relative">
+        <div class="absolute -top-14 -left-14 w-auto h-auto opacity-20">
+            <img src="/public/images/naruto.webp" alt="" class="w-40 h-auto">
+        </div>
+        <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+            <h2 class="text-center text-3xl font-extrabold mb-3 uppercase">Categories</h2>
+            <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+                Discover the latest collection of trendy, comfortable, and versatile outfits designed for teen boys who
+                love
+                to express their style — from everyday casuals to bold streetwear vibes, Nova Kids has it all.
+            </p>
+        </div>
 
 
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 w-[90vw] mx-auto px-4">
 
             <!-- Tees -->
-            <div class="relative group overflow-hidden shadow-lg">
+            <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
+                data-aos-delay="200">
                 <img src="/public/images/11.avif" alt="Tees"
                     class="w-full h-[400px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
                 <!-- Overlay -->
@@ -429,7 +355,8 @@
             </div>
 
             <!-- Co-ords -->
-            <div class="relative group overflow-hidden shadow-lg">
+            <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
+                data-aos-delay="200">
                 <img src="/public/images/coooo.png" alt="Co-ords"
                     class="w-full h-[400px] object-cover object-bottom transform group-hover:scale-110 transition duration-700 ease-out">
                 <div
@@ -442,7 +369,8 @@
             </div>
 
             <!-- Joggers -->
-            <div class="relative group overflow-hidden shadow-lg">
+            <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
+                data-aos-delay="200">
                 <img src="/public/images/Joggers.avif" alt="Joggers"
                     class="w-full h-[400px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
                 <div
@@ -453,7 +381,8 @@
                     <span class="group-hover:text-[#f25b21] transition-colors duration-300">Joggers</span>
                 </div>
             </div>
-            <div class="relative group overflow-hidden shadow-lg">
+            <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
+                data-aos-delay="200">
                 <img src="/public/images/45.png" alt="Tees"
                     class="w-full h-[400px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
                 <!-- Overlay -->
@@ -510,7 +439,7 @@
         </div>
     </section>
 
-    <section class="relative w-full h-auto mb-10">
+    <section class="relative w-full h-auto">
         <!-- Banner Image -->
         <img src="/public/images/b2.avif" alt="" class="w-full h-auto">
 
@@ -535,7 +464,7 @@
 
                     <img src="/public/images/f8.webp" alt="Product 1" class="w-20 h-20 object-cover">
                     <div>
-                        <p class="text-sm font-semibold text-gray-800">Product Name 2</p>
+                        <p class="text-sm font-semibold text-gray-800">Gotham Shirt</p>
                         <p class="text-sm font-semibold text-[#f25b21]">Rs. 1,999</p>
                         <a href="#" class="text-sm text-gray-800 underline">View Product</a>
                     </div>
@@ -565,7 +494,7 @@
 
                     <img src="/public/images/f9.webp" alt="Product 2" class="w-20 h-20 object-cover">
                     <div>
-                        <p class="text-sm font-semibold text-gray-800">Product Name 2</p>
+                        <p class="text-sm font-semibold text-gray-800">Gotham Shirt</p>
                         <p class="text-sm font-semibold text-[#f25b21]">Rs. 1,999</p>
                         <a href="#" class="text-sm text-gray-800 underline">View Product</a>
                     </div>
@@ -575,12 +504,18 @@
         </div>
     </section>
 
-    <section class="py-12">
-        <h2 class="text-center text-3xl font-extrabold mb-3">SHOP BY STYLE</h2>
-        <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto mb-8">
-            Explore a range of styles crafted for every mood and moment — from laid-back casuals to standout streetwear,
-            Nova Kids makes sure you look on point, every time.
-        </p>
+    <section class="pb-12 pt-20 relative overflow-hidden">
+        <div class="absolute -top-8 -right-12 w-auto h-auto opacity-20">
+            <img src="/public/images/net.webp" alt="" class="w-48 h-auto">
+        </div>
+        <div class="flex flex-col items-center mb-8" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+            <h2 class="text-center text-3xl font-extrabold mb-3">SHOP BY STYLE</h2>
+            <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+                Explore a range of styles crafted for every mood and moment — from laid-back casuals to standout
+                streetwear,
+                Nova Kids makes sure you look on point, every time.
+            </p>
+        </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-[90vw] mx-auto px-4">
 
@@ -637,7 +572,7 @@
 
     <section class="bg-white py-14 w-full">
         <div class="w-[90vw] max-md:w-[90vw] mx-auto">
-            <div class="flex flex-col mb-10">
+            <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                 <h2 class="text-center text-3xl font-extrabold mb-3 uppercase">Featured Collection</h2>
                 <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto mb-8">
                     Handpicked styles that define the season — our featured collection brings together the freshest
@@ -851,12 +786,12 @@
 
                             <!-- Multiple images stacked -->
 
-                            <img src="/public/images/2.webp"
+                            <img src="/public/images/f9.webp"
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
-                            <img src="/public/images/1.webp"
+                            <img src="/public/images/f10.webp"
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                            <img src="/public/images/3.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+                            <!-- <img src="/public/images/f9.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0"> -->
 
                             <!-- Dots -->
                             <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
@@ -896,12 +831,12 @@
                             </button>
 
                             <!-- Multiple images stacked -->
-                            <img src="/public/images/1.webp"
+                            <img src="/public/images/f11.webp"
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
-                            <img src="/public/images/2.webp"
+                            <img src="/public/images/f12.webp"
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                            <img src="/public/images/3.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+                            <!-- <img src="/"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0"> -->
 
                             <!-- Dots -->
                             <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
@@ -941,12 +876,12 @@
                             </button>
 
                             <!-- Multiple images stacked -->
-                            <img src="/public/images/3.webp"
+                            <img src="/public/images/f13.webp"
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
-                            <img src="/public/images/1.webp"
+                            <img src="/public/images/f14.webp"
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                            <img src="/public/images/2.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+                            <!-- <img src="/"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0"> -->
 
                             <!-- Dots -->
                             <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
@@ -987,12 +922,12 @@
                             </button>
 
                             <!-- Multiple images stacked -->
-                            <img src="/public/images/1.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
                             <img src="/public/images/2.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
+                            <img src="/public/images/1.webp"
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                            <img src="/public/images/3.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+                            <!-- <img src="/public/images/3.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0"> -->
 
                             <!-- Dots -->
                             <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
@@ -1283,7 +1218,7 @@
                 margin: 10,
                 nav: true,
                 dots: false,
-                autoplay: false,
+                autoplay: true,
                 autoplayTimeout: 3000,
                 responsive: {
                     0: { items: 1 },
@@ -1360,6 +1295,15 @@
                 e.stopPropagation();
                 // your cart/heart logic goes here
             });
+        });
+    </script>
+
+    <!-- Include AOS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        AOS.init({
+            once: true, // Ensures the animation runs only once
         });
     </script>
 

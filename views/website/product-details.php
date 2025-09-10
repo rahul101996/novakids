@@ -146,7 +146,7 @@
                             </button>
                             <button
                                 class="p-3 rounded-full glass-effect hover:bg-white hover:shadow-lg transition-all duration-300 group">
-                                <svg class="w-6 h-6 text-gray-600 group-hover:text-blue-500 group-hover:scale-110 transition-all"
+                                <svg class="w-6 h-6 text-gray-600 group-hover:text-[#f25b21] group-hover:scale-110 transition-all"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
@@ -157,10 +157,10 @@
 
                     <!-- Pricing -->
                     <div class="flex items-center space-x-4">
-                        <span class="text-xl font-bold text-red-600">₹1,199.00</span>
+                        <span class="text-xl font-bold text-[#f25b21]">₹1,199.00</span>
                         <span class="text-sm text-gray-500 line-through">₹1,899.00</span>
                         <span
-                            class="bg-red-100 text-red-800 text-sm font-semibold px-3 py-1 rounded-full animate-bounce-gentle">34%
+                            class="bg-orange-100 text-[#f25b21] text-sm font-semibold px-3 py-1 rounded-full animate-bounce-gentle">34%
                             OFF</span>
                     </div>
 
@@ -177,7 +177,7 @@
 
                     <div class="flex flex-wrap gap-3">
                         <button
-                            class="size-option p-2 h-12 w-12 border-2 border-blue-500 bg-blue-50 text-blue-600 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg">XS</button>
+                            class="size-option p-2 h-12 w-12 border-2 border-[#f25b21] bg-orange-50 text-[#f25b21] rounded-lg font-semibold transition-all duration-300 hover:shadow-lg">XS</button>
                         <button
                             class="size-option p-2 h-12 w-12 border border-gray-300 hover:border-gray-400 rounded-lg font-semibold transition-all duration-300">S</button>
                         <button
@@ -516,7 +516,7 @@
                             <div class="p-4 text-center">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
                                 <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
-                                <p class="text-red-600 font-bold">Rs. 1,199.00</p>
+                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
                             </div>
                         </div>
 
@@ -611,10 +611,10 @@
             option.addEventListener('click', function () {
                 // Remove ring from all options
                 document.querySelectorAll('.color-option').forEach(opt => {
-                    opt.classList.remove('ring-4', 'ring-blue-500', 'ring-offset-2');
+                    opt.classList.remove('ring-4', 'ring-[#f25b21]', 'ring-offset-2');
                 });
                 // Add ring to selected option
-                this.classList.add('ring-4', 'ring-blue-500', 'ring-offset-2');
+                this.classList.add('ring-4', 'ring-[#f25b21]', 'ring-offset-2');
             });
         });
 
@@ -623,12 +623,12 @@
             option.addEventListener('click', function () {
                 // Remove selected state from all options
                 document.querySelectorAll('.size-option').forEach(opt => {
-                    opt.classList.remove('border-blue-500', 'bg-blue-50', 'text-blue-600');
+                    opt.classList.remove('border-[#f25b21]', 'bg-blue-50', 'text-blue-600');
                     opt.classList.add('border-gray-300');
                 });
                 // Add selected state to clicked option
                 this.classList.remove('border-gray-300');
-                this.classList.add('border-blue-500', 'bg-blue-50', 'text-blue-600');
+                this.classList.add('border-[#f25b21]', 'bg-blue-50', 'text-blue-600');
             });
         });
 

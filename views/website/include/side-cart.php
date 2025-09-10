@@ -22,9 +22,11 @@
 <div class="w-full bg-black/50 z-[9999] h-[100vh]  fixed top-0 left-0 hidden" id="overlay"></div>
 
 <div class="w-full bg-black/50 z-[9999] h-[100vh]  fixed top-0 left-0 hidden"></div>
-<div id="cartSidebar" class="cart-sidebar  cart-sidebar-closed fixed top-0 right-0 w-[25%] bg-white shadow-lg h-screen z-[9999] max-md:w-[90%]">
+<div id="cartSidebar"
+    class="cart-sidebar  cart-sidebar-closed fixed top-0 right-0 w-[25%] bg-white shadow-lg h-screen z-[9999] max-md:w-[90%]">
     <div class="h-full flex flex-col shadow-4xl ">
-        <form method="post" action="/cart/<?= $_SESSION['language'] ?>" id="cart-sidebar-container" class="h-full flex flex-col">
+        <form method="post" action="/cart/<?= $_SESSION['language'] ?>" id="cart-sidebar-container"
+            class="h-full flex flex-col">
 
         </form>
     </div>
@@ -160,54 +162,54 @@
         document.getElementById("All_Side_Total").innerText = '₹' + total
         return total
     }
-async function minus(ele, product_id) {
-    console.log("minusing....");
-    const row = ele.parentElement;
-    const current = row.querySelector(".quantity");
-    const selling_price = parseFloat(row.querySelector(".selling_price").value);
+    async function minus(ele, product_id) {
+        console.log("minusing....");
+        const row = ele.parentElement;
+        const current = row.querySelector(".quantity");
+        const selling_price = parseFloat(row.querySelector(".selling_price").value);
 
-    if (parseInt(current.innerText) > 1) {
-        current.innerText = parseInt(current.innerText) - 1;
-        await addToCartSidebar(product_id, ele, -1);
+        if (parseInt(current.innerText) > 1) {
+            current.innerText = parseInt(current.innerText) - 1;
+            await addToCartSidebar(product_id, ele, -1);
 
-        const productCard = ele.closest(".product-card");
-        const totalElement = productCard.querySelector(".total");
-        totalElement.innerText = '₹' + (parseInt(current.innerText) * selling_price).toFixed(2);
+            const productCard = ele.closest(".product-card");
+            const totalElement = productCard.querySelector(".total");
+            totalElement.innerText = '₹' + (parseInt(current.innerText) * selling_price).toFixed(2);
 
-        row.querySelector(".quantityo").value = current.innerText;
-    } else {
-        const cart_id = row.querySelector(".cartid").value;
-        const thisEle = ele.closest(".product-card").querySelector(".deleteBut");
-        // console.log("This is the element",thisEle, cart_id);
-        deleteCart(thisEle, cart_id);
-        openCart();
+            row.querySelector(".quantityo").value = current.innerText;
+        } else {
+            const cart_id = row.querySelector(".cartid").value;
+            const thisEle = ele.closest(".product-card").querySelector(".deleteBut");
+            // console.log("This is the element",thisEle, cart_id);
+            deleteCart(thisEle, cart_id);
+            openCart();
+        }
+
+        setTotal();
     }
 
-    setTotal();
-}
 
+    async function plus(ele, product_id) {
+        const row = ele.parentElement;
+        const max = 10;
+        const current = row.querySelector(".quantity");
+        const selling_price = parseFloat(row.querySelector(".selling_price").value);
 
-  async function plus(ele, product_id) {
-    const row = ele.parentElement;
-    const max = 10;
-    const current = row.querySelector(".quantity");
-    const selling_price = parseFloat(row.querySelector(".selling_price").value);
+        if (parseInt(current.innerText) < max) {
+            current.innerText = parseInt(current.innerText) + 1;
+            await addToCartSidebar(product_id, ele);
 
-    if (parseInt(current.innerText) < max) {
-        current.innerText = parseInt(current.innerText) + 1;
-        await addToCartSidebar(product_id, ele);
+            const productCard = ele.closest('.product-card');
+            const totalElement = productCard.querySelector('.total');
+            totalElement.innerText = '₹' + (current.innerText * selling_price).toFixed(2);
 
-        const productCard = ele.closest('.product-card');
-        const totalElement = productCard.querySelector('.total');
-        totalElement.innerText = '₹' + (current.innerText * selling_price).toFixed(2);
+            row.querySelector(".quantityo").value = current.innerText;
+        }
 
-        row.querySelector(".quantityo").value = current.innerText;
+        setTotal();
     }
 
-    setTotal();
-}
-
-        async function addToCartSidebar(product_id, ele, quantity = 1) {
+    async function addToCartSidebar(product_id, ele, quantity = 1) {
 
         // console.log("hello")
         const request = await axios.post("/books/<?= $_SESSION['language'] ?>", new URLSearchParams({
@@ -226,7 +228,7 @@ async function minus(ele, product_id) {
             toastr.success(request.data.message);
         }
     }
- document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
 
         AddToCart();
     });
@@ -236,8 +238,8 @@ async function minus(ele, product_id) {
         const addToCartBtn = document.querySelectorAll('.addToCartBtn');
         console.log(addToCartBtn);
         if (addToCartBtn) {
-            addToCartBtn.forEach(function(btn) {
-                btn.addEventListener('click', function(event) {
+            addToCartBtn.forEach(function (btn) {
+                btn.addEventListener('click', function (event) {
                     let ee = btn.parentElement
                     console.log(ee);
                     addToCartSidebar(ee.querySelector(".sideProductId").value, btn)
