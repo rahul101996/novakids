@@ -30,6 +30,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NovaKids</title>
+    <link rel="icon" href="/public/logos/nova_favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="/public/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet"
@@ -47,15 +48,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
 
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
+
     <style>
-       .lato-regular {
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
+        .archivo-narrow-k {
+            font-family: "Archivo Narrow", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: <weight>;
+            font-style: normal;
+        }
     </style>
 
 </head>
@@ -63,7 +67,7 @@
 
 <!-- Scroll Toggle Button -->
 <button id="scrollToggleBtn"
-    class="fixed bottom-6 right-6 z-50 bg-[#1066dd] text-white p-3 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
+    class="fixed bottom-6 right-6 z-50 bg-[#f25b21] text-white p-3 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
     onclick="handleScrollToggle()" title="Scroll">
     <!-- Arrow Icon -->
     <svg id="scrollIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"

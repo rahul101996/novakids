@@ -141,7 +141,7 @@
 
     .payment-icon:hover {
         transform: translateY(-3px) rotate(5deg);
-        background: #ffffff22;
+        /* background: #ffffff22; */
         color: white !important;
     }
 
@@ -268,6 +268,29 @@
     }
 </style>
 
+<section class="bg-gray-100 py-10">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+
+        <!-- Complimentary Shipping -->
+        <div class="flex flex-col items-center">
+            <img src="/public/images/gif1.webp" alt="" class="h-24 w-24 mb-4">
+            <p class="font-semibold text-gray-900">Complimentary Shipping</p>
+        </div>
+
+        <!-- Consciously Crafted -->
+        <div class="flex flex-col items-center">
+            <img src="/public/images/gif2.webp" alt="" class="h-24 w-24 mb-4">
+            <p class="font-semibold text-gray-900">Consciously Crafted</p>
+        </div>
+
+        <!-- Quick Easy Returns -->
+        <div class="flex flex-col items-center">
+            <img src="/public/images/gif3.webp" alt="" class="h-24 w-24 mb-4">
+            <p class="font-semibold text-gray-900">Quick Easy Returns</p>
+        </div>
+
+    </div>
+</section>
 
 <footer class="w-full overflow-hidden">
     <!-- Newsletter Section - Single Row Gen-Z Style -->
@@ -288,9 +311,14 @@
             <!-- Form -->
             <div class="flex-1 flex space-x-2 md:space-x-4">
                 <input type="email" placeholder="Your email"
-                    class="flex-1 px-4 py-3 rounded-xl border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all text-sm" />
+                    class="flex-1 px-4 py-3 rounded-xl border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 transition-all text-sm" />
+                <!-- <button
+                    class="bg-gradient-to-r from-purple-500 to-orange-500 text-white font-bold px-6 py-3 rounded-xl shadow-md transform transition-transform hover:scale-105 hover:brightness-110 text-sm">
+                    Subscribe
+                </button> -->
+
                 <button
-                    class="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-bold px-6 py-3 rounded-xl shadow-md transform transition-transform hover:scale-105 hover:brightness-110 text-sm">
+                    class="bg-gradient-to-r from-[#57458f] to-[#bf5452] text-white font-bold px-6 py-3 rounded-lg shadow-md transform transition-transform hover:scale-105 hover:brightness-110 text-sm">
                     Subscribe
                 </button>
             </div>
@@ -307,8 +335,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
                 <!-- Brand Section -->
                 <div class="lg:col-span-2">
-                    <div class="mb-8">
-                        <div class="w-auto h-28 flex mb-4">
+                    <div class="mb-6">
+                        <div class="w-auto h-24 flex mb-4">
                             <img src="/public/logos/nova_logo2.png" alt="Brand Logo"
                                 class="w-auto h-auto rounded-lg object-cover">
                         </div>
@@ -320,10 +348,10 @@
 
                     <!-- Social Links -->
                     <!-- Social Icons - Gen-Z Style -->
-                    <div class="flex space-x-4 justify-center md:justify-start mb-8">
+                    <div class="flex space-x-4 justify-center md:justify-start mb-6">
                         <!-- Instagram -->
                         <a href="#"
-                            class="group relative w-12 h-12 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-gradient-to-tr from-pink-500 via-purple-500 to-yellow-400 shadow-lg transform transition-transform hover:-translate-y-2 hover:scale-110">
+                            class="group relative w-12 h-12 md:w-10 md:h-10 flex items-center justify-center rounded-full shadow-lg transform transition-transform hover:-translate-y-2 hover:scale-110">
                             <i class="fab fa-instagram text-white text-xl md:text-xl"></i>
                             <span
                                 class="absolute inset-0 rounded-full bg-white opacity-10 group-hover:opacity-20 transition-opacity"></span>
@@ -331,7 +359,7 @@
 
                         <!-- TikTok -->
                         <a href="#"
-                            class="group relative w-12 h-12 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-blue-600 shadow-lg transform transition-transform hover:-translate-y-2 hover:scale-110">
+                            class="group relative w-12 h-12 md:w-10 md:h-10 flex items-center justify-center rounded-full shadow-lg transform transition-transform hover:-translate-y-2 hover:scale-110">
                             <i class="fab fa-facebook-f text-white text-xl md:text-xl"></i>
                             <span
                                 class="absolute inset-0 rounded-full bg-white opacity-10 group-hover:opacity-20 transition-opacity"></span>
@@ -339,7 +367,7 @@
 
                         <!-- YouTube -->
                         <a href="#"
-                            class="group relative w-12 h-12 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-red-500 shadow-lg transform transition-transform hover:-translate-y-2 hover:scale-110">
+                            class="group relative w-12 h-12 md:w-10 md:h-10 flex items-center justify-center rounded-full shadow-lg transform transition-transform hover:-translate-y-2 hover:scale-110">
                             <i class="fab fa-youtube text-white text-xl md:text-xl"></i>
                             <span
                                 class="absolute inset-0 rounded-full bg-white opacity-10 group-hover:opacity-20 transition-opacity"></span>
@@ -347,7 +375,7 @@
 
                         <!-- Discord -->
                         <a href="#"
-                            class="group relative w-12 h-12 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-indigo-500 shadow-lg transform transition-transform hover:-translate-y-2 hover:scale-110">
+                            class="group relative w-12 h-12 md:w-10 md:h-10 flex items-center justify-center rounded-full shadow-lg transform transition-transform hover:-translate-y-2 hover:scale-110">
                             <i class="fab fa-discord text-white text-xl md:text-xl"></i>
                             <span
                                 class="absolute inset-0 rounded-full bg-white opacity-10 group-hover:opacity-20 transition-opacity"></span>
@@ -368,7 +396,6 @@
                     <ul class="space-y-3">
                         <li class="stagger-item"><a href="#" class="link-hover text-gray-600">New Arrivals</a></li>
                         <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Bestsellers</a></li>
-                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Sale</a></li>
                         <li class="stagger-item"><a href="#" class="link-hover text-gray-600">T-Shirts</a></li>
                         <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Hoodies</a></li>
                         <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Bottoms</a></li>
@@ -392,7 +419,7 @@
                 <div>
                     <h4 class="font-bold text-white mb-6 text-lg">About</h4>
                     <ul class="space-y-3 mb-6">
-                        <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Our Story</a></li>
+                        <!-- <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Our Story</a></li> -->
                         <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Brand Partners</a></li>
                         <li class="stagger-item"><a href="#" class="link-hover text-gray-600">Client Reviews</a></li>
                     </ul>
@@ -422,21 +449,21 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
                 <!-- Copyright -->
-                <div class="text-sm">© 2025 Nova Kids. All rights reserved.</div>
+                <div class="text-sm">© <?= date('Y') ?> Nova Kids. All rights reserved.</div>
                 <!-- Payment Methods -->
-                <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-4 hidden">
                     <span class="text-sm">We accept:</span>
                     <div class="flex space-x-3">
-                        <div class="payment-icon bg-gray-800 p-3 rounded-lg cursor-pointer">
+                        <div class="payment-icon rounded-lg cursor-pointer">
                             <i class="fab fa-cc-visa text-xl"></i>
                         </div>
-                        <div class="payment-icon bg-gray-800 p-3 rounded-lg cursor-pointer">
+                        <div class="payment-icon rounded-lg cursor-pointer">
                             <i class="fab fa-cc-mastercard text-xl"></i>
                         </div>
-                        <div class="payment-icon bg-gray-800 p-3 rounded-lg cursor-pointer">
+                        <div class="payment-icon rounded-lg cursor-pointer">
                             <i class="fab fa-paypal text-xl"></i>
                         </div>
-                        <div class="payment-icon bg-gray-800 p-3 rounded-lg cursor-pointer">
+                        <div class="payment-icon rounded-lg cursor-pointer">
                             <i class="fab fa-apple-pay text-xl"></i>
                         </div>
                     </div>
