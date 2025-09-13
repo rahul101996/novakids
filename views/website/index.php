@@ -12,11 +12,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="min-h-screen">
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
 
-        <div class="w-full flex items-center justify-center  bg-[#272c6c]">
-            <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/marquee.php'; ?>
-        </div>
-
-        <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/home-banner.php'; ?>
+        
 
         <div class="w-full flex items-center justify-center py-20 max-lg:py-10 max-lg:py-10">
             <div class="w-[80%] flex items-center justify-center gap-[7vw] max-lg:flex-col-reverse max-md:w-[85%] max-lg:w-[90%]">
