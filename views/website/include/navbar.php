@@ -1,6 +1,4 @@
 <!-- Top Bar -->
-
-
 <style>
     .mega-menu {
         opacity: 0;
@@ -36,6 +34,22 @@
     .search-expand.active {
         width: 200px;
         opacity: 10;
+    }
+
+    @keyframes slideDown {
+        from {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .animate-slideDown {
+        animation: slideDown 0.4s ease-out;
     }
 </style>
 
@@ -306,29 +320,17 @@
                 </div>
             </div>
 
-
-            <style>
-                @keyframes slideDown {
-                    from {
-                        transform: translateY(-100%);
-                        opacity: 0;
-                    }
-
-                    to {
-                        transform: translateY(0);
-                        opacity: 1;
-                    }
-                }
-
-                .animate-slideDown {
-                    animation: slideDown 0.4s ease-out;
-                }
-            </style>
-
             <button onclick="window.location.href='/signup'"
                 class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
                 <i class="fas fa-user text-lg"></i>
             </button>
+            <!-- wishlist -->
+            <div class="flex items-center">
+                <button onclick="window.location.href='/wishlist'"
+                    class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
+                    <i class="fas fa-heart text-lg"></i>
+                </button>
+            </div>
             <div class="relative">
                 <button
                     class="openCartBtn nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">

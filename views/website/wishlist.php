@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/header.php'; ?>
+
+<body class="overflow-x-hidden archivo-narrow-k">
+    <?php
+    include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/breadcrumb.php';
+    ?>
+
+    <div class="w-full mx-auto px-4 pb-8">
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-gray-900">Wishlist</h1>
+            <p class="text-gray-600 mt-2">
+                Manage your wishlist and keep track of the products you love.
+            </p>
+            <div class="w-24 h-[3px] bg-[#f25b21] mt-3 mx-auto"></div>
+        </div>
+        <!-- Wishlist Content -->
+        <div class="text-center py-12 border border-gray-300 border-dashed w-[50%] mx-auto">
+            <!-- Heart Icon with Badge -->
+            <div class="relative inline-block mb-6">
+                <i class="fa-regular fa-heart text-6xl text-gray-400"></i>
+                <span
+                    class="absolute -top-2 -right-3 bg-black text-white text-xs font-semibold rounded-full h-6 w-6 flex items-center justify-center">0</span>
+            </div>
+
+            <!-- Message -->
+            <p class="text-lg font-medium mb-2">Your Wishlist Is Currently Empty</p>
+            <p class="text-gray-500 text-sm mb-8">Click the <i class="fa-regular fa-heart"></i> icons to add products
+            </p>
+
+            <button
+                class="relative border-2 border-black py-2 px-5 rounded-lg overflow-hidden transition duration-300 group">
+                <!-- Text -->
+                <span
+                    class="relative z-10 text-black font-semibold group-hover:text-white transition-colors duration-300">
+                    Return to Shop
+                </span>
+                <!-- Animated BG -->
+                <span
+                    class="absolute inset-0 bg-black scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+            </button>
+        </div>
+    </div>
+
+
+    <?php
+    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/sidecart.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/footer.php";
+    ?>
+
+</body>

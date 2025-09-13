@@ -407,6 +407,18 @@ class WebController extends LoginController
             require 'views/website/blogs.php';
         }
     }
+    public function wishlist()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "Wishlist";
+        $pageTitle = "Wishlist";
+
+        // $this->checkSession();
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+            require 'views/website/wishlist.php';
+        }
+    }
     public function getCentersByDistrict()
     {
 
@@ -419,7 +431,7 @@ class WebController extends LoginController
 
         // printWithPre($centers);
     }
-    public function PrivacyPolicy()
+    public function privacyPolicy()
     {
         $siteName = getDBObject()->getSiteName();
         $pageModule = "Privacy Policy";
@@ -430,7 +442,7 @@ class WebController extends LoginController
             require 'views/website/privacy-policy.php';
         }
     }
-    public function TermsAndConditions()
+    public function termsAndConditions()
     {
         $siteName = getDBObject()->getSiteName();
         $pageModule = "Terms And Conditions";
@@ -439,6 +451,28 @@ class WebController extends LoginController
         // $this->checkSession();
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             require 'views/website/terms-and-conditions.php';
+        }
+    }
+    public function faq()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "FAQ";
+        $pageTitle = "FAQ";
+
+        // $this->checkSession();
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/website/faq.php';
+        }
+    }
+    public function returnExchange()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "Return And Exchange";
+        $pageTitle = "Return And Exchange";
+
+        // $this->checkSession();
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/website/return_exchange.php';
         }
     }
     public function CancellationAndRefund()

@@ -93,29 +93,7 @@
     }
 </style>
 
-<section class="bg-gray-100 pt-4 pb-8">
-    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
 
-        <!-- Complimentary Shipping -->
-        <div class="flex flex-col items-center">
-            <img src="/public/images/gif1.webp" alt="" class="h-20 w-20">
-            <p class="font-semibold text-gray-900">Complimentary Shipping</p>
-        </div>
-
-        <!-- Consciously Crafted -->
-        <div class="flex flex-col items-center">
-            <img src="/public/images/gif2.webp" alt="" class="h-20 w-20">
-            <p class="font-semibold text-gray-900">Consciously Crafted</p>
-        </div>
-
-        <!-- Quick Easy Returns -->
-        <div class="flex flex-col items-center">
-            <img src="/public/images/gif3.webp" alt="" class="h-20 w-20">
-            <p class="font-semibold text-gray-900">Quick Easy Returns</p>
-        </div>
-
-    </div>
-</section>
 
 <div class="relative bg-black py-8 overflow-hidden w-full">
     <div
@@ -134,9 +112,9 @@
         <!-- Form -->
         <div class="flex-1 flex space-x-2 md:space-x-4">
             <input type="email" placeholder="Your email"
-                class="flex-1 px-4 py-2 rounded-xl border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 transition-all text-sm" />
+                class="flex-1 px-4 py-2 rounded-md border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 transition-all text-sm" />
             <a href="#"
-                class="relative inline-block px-6 py-2 rounded-lg border border-white text-white group-hover:text-black font-semibold overflow-hidden group">
+                class="relative inline-block px-6 py-2 rounded-md border border-white text-white group-hover:text-black font-semibold overflow-hidden group">
                 <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
                     Subscribe
                 </span>
@@ -157,7 +135,7 @@
                 <div class="mb-6">
                     <div class="w-auto h-16 flex mb-4">
                         <img src="/public/logos/newuniverse.png" alt="Brand Logo"
-                            class="w-auto h-auto rounded-lg object-cover">
+                            class="w-auto h-auto rounded-md object-cover">
                     </div>
                     <p class="text-gray-600 max-w-sm  leading-relaxed">
                         Authentic streetwear for the next generation. Quality pieces that speak your language and
@@ -198,39 +176,34 @@
                     </a>
                 </div>
 
-                <!-- Contact Info -->
                 <div class="text-sm text-gray-600 space-y-2">
                     <p class="flex items-center"><i class="fas fa-envelope mr-3"></i> support@novauniverse.com</p>
                     <p class="flex items-center"><i class="fab fa-whatsapp mr-3"></i> +1 1234567890</p>
                 </div>
             </div>
 
-            <!-- Shop Links -->
             <div>
                 <h4 class="font-bold text-black mb-6 text-lg">Shop</h4>
                 <ul class="space-y-3">
                     <li><a href="#" class="link-hover text-gray-600">New Arrivals</a></li>
                     <li><a href="#" class="link-hover text-gray-600">Bestsellers</a></li>
                     <li><a href="#" class="link-hover text-gray-600">T-Shirts</a></li>
-                    <li><a href="#" class="link-hover text-gray-600">Hoodies</a></li>
                     <li><a href="#" class="link-hover text-gray-600">Bottoms</a></li>
                 </ul>
             </div>
 
-            <!-- Customer Care -->
             <div>
                 <h4 class="font-bold text-black mb-6 text-lg">Customer Care</h4>
                 <ul class="space-y-3">
                     <li><a href="#" class="link-hover text-gray-600">Size Guide</a></li>
                     <li><a href="#" class="link-hover text-gray-600">Shipping Info</a></li>
-                    <li><a href="#" class="link-hover text-gray-600">Returns & Exchanges</a>
+                    <li><a href="/return-exchange" class="link-hover text-gray-600">Returns & Exchanges</a>
                     </li>
-                    <li><a href="#" class="link-hover text-gray-600">FAQ</a></li>
+                    <!-- <li><a href="/faq" class="link-hover text-gray-600">FAQ</a></li> -->
                     <li><a href="/contact" class="link-hover text-gray-600">Contact Us</a></li>
                 </ul>
             </div>
 
-            <!-- About -->
             <div>
                 <h4 class="font-bold text-black mb-6 text-lg">About</h4>
                 <ul class="space-y-3 mb-6">
@@ -269,24 +242,24 @@
                 <div class="flex items-center space-x-4 hidden">
                     <span class="text-sm">We accept:</span>
                     <div class="flex space-x-3">
-                        <div class="payment-icon rounded-lg cursor-pointer">
+                        <div class="payment-icon rounded-md cursor-pointer">
                             <i class="fab fa-cc-visa text-xl"></i>
                         </div>
-                        <div class="payment-icon rounded-lg cursor-pointer">
+                        <div class="payment-icon rounded-md cursor-pointer">
                             <i class="fab fa-cc-mastercard text-xl"></i>
                         </div>
-                        <div class="payment-icon rounded-lg cursor-pointer">
+                        <div class="payment-icon rounded-md cursor-pointer">
                             <i class="fab fa-paypal text-xl"></i>
                         </div>
-                        <div class="payment-icon rounded-lg cursor-pointer">
+                        <div class="payment-icon rounded-md cursor-pointer">
                             <i class="fab fa-apple-pay text-xl"></i>
                         </div>
                     </div>
                 </div>
                 <!-- Legal Links -->
                 <div class="flex space-x-6 text-sm">
-                    <a href="#" class="link-hover">Privacy Policy</a>
-                    <a href="#" class="link-hover">Terms of Service</a>
+                    <a href="/privacy-policy" class="link-hover">Privacy Policy</a>
+                    <a href="/terms-and-conditions" class="link-hover">Terms of Service</a>
                     <a href="#" class="link-hover">Cookies</a>
                 </div>
             </div>

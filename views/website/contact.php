@@ -6,7 +6,6 @@
 <body class="overflow-x-hidden archivo-narrow-k">
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
 
-
     <section class="bg-white grid grid-cols-1 md:grid-cols-5 w-full h-auto mx-auto">
         <div class="w-full h-[90vh] col-span-2">
             <img src="/public/images/contactbg.png" alt="" class="h-full">
@@ -15,6 +14,7 @@
             <!-- Heading -->
             <h2 class="text-3xl font-extrabold text-gray-900 mb-10 tracking-wide">
                 GET IN TOUCH
+                  <div class="w-20 h-[3px] bg-[#f25b21] mt-3 mx-auto"></div>
             </h2>
 
             <!-- Contact Form -->
@@ -60,7 +60,8 @@
             <!-- Call Us -->
             <div>
                 <div class="flex justify-center mb-3 group">
-                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
+                    <div
+                        class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
                         <i class="fas fa-phone text-xl group-hover:text-white"></i>
                     </div>
                 </div>
@@ -71,7 +72,8 @@
             <!-- Address -->
             <div>
                 <div class="flex justify-center mb-3 group">
-                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
+                    <div
+                        class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
                         <i class="fas fa-map-marker-alt text-xl group-hover:text-white"></i>
                     </div>
                 </div>
@@ -82,7 +84,8 @@
             <!-- Social Media -->
             <div>
                 <div class="flex justify-center mb-3 group">
-                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
+                    <div
+                        class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
                         <i class="fas fa-share-alt text-xl group-hover:text-white"></i>
                     </div>
                 </div>

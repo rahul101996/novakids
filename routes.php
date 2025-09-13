@@ -15,6 +15,11 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('login', 'login');
     $route->route('signup', 'signup');
     $route->route('contact', 'ContactUs');
+    $route->route('wishlist', 'wishlist');
+    $route->route('return-exchange', 'returnExchange');
+    $route->route('faq', 'faq');
+    $route->route('terms-and-conditions', 'termsAndConditions');
+    $route->route('privacy-policy', 'privacyPolicy');
     // $route->route('/', 'index');
 
 });

@@ -6,7 +6,7 @@
 <body class="overflow-x-hidden archivo-narrow-k">
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
 
-    <div class="w-full bg-white items-center justify-center p-8">
+    <div class="w-full bg-white items-center justify-center">
         <div class="w-[60%] items-center justify-center p-8 mx-auto">
             <!-- Header -->
             <div class="text-center mb-10">
@@ -15,6 +15,7 @@
                     Don't have an account?
                     <a href="/signup" class="text-blue-600 underline">Sign Up</a>
                 </p>
+                  <div class="w-20 h-[3px] bg-[#f25b21] mt-3 mx-auto"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">

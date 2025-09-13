@@ -54,7 +54,7 @@
         <!-- Button (Bottom Left, off-center) -->
         <div class="absolute bottom-20 left-10">
             <button onclick="window.location.href = 'products/product-details'"
-                class="relative px-10 py-3 bg-transparent hover:bg-white text-white hover:text-black border border-white rounded-lg font-semibold shadow-lg overflow-hidden group transition-all duration-300">
+                class="relative px-10 py-3 bg-transparent hover:bg-white text-white hover:text-black border border-white rounded-md font-semibold shadow-lg overflow-hidden group transition-all duration-300">
                 <span class="relative z-10 block transition-colors duration-500 group-hover:animate-glitch">SHOP
                     NOW</span>
                 <span
@@ -391,7 +391,7 @@
                     Stylish boys’ tees and <br> active outfits
                 </h2>
                 <a href="products/product-details"
-                    class="relative inline-block px-6 py-2 rounded-lg border border-white text-white font-semibold overflow-hidden group">
+                    class="relative inline-block px-6 py-2 rounded-md border border-white text-white font-semibold overflow-hidden group">
                     <!-- Text -->
                     <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
                         Shop Now
@@ -411,7 +411,7 @@
                     Comfort wear for every <br> boys’ occasion
                 </h2>
                 <a href="products/product-details"
-                    class="relative inline-block px-6 py-2 rounded-lg border border-white text-white font-semibold overflow-hidden group">
+                    class="relative inline-block px-6 py-2 rounded-md border border-white text-white font-semibold overflow-hidden group">
                     <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
                         Shop Now
                     </span>
@@ -1074,7 +1074,7 @@
                 </p>
 
                 <button
-                    class="flex-1 relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
+                    class="flex-1 relative rounded-md overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
                     <span
                         class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
                         @novauniverse
@@ -1234,5 +1234,6 @@
 
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/views/website/sidecart.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/specifications.php";
     include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/footer.php"; ?>
 </body>

@@ -7,13 +7,21 @@
 <body class="overflow-x-hidden archivo-narrow-k">
 
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
-    <style>
-        /* .glass-effect {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        } */
 
+    <!-- Breadcrumbs -->
+    <div class="text-sm pt-6 px-6">
+        <ol class="flex items-center space-x-2 text-gray-500">
+            <li>
+                <a href="/" class="hover:text-black">Home</a>
+            </li>
+            <li>
+                <span class="mx-1">/</span>
+            </li>
+            <li class="text-black font-semibold">Product Details</li>
+        </ol>
+    </div>
+
+    <style>
         .image-hover {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -679,7 +687,7 @@
 
     <!-- Modal -->
     <div id="sizeChartModal" class="hidden fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-        <div class="bg-white rounded-xl shadow-lg max-w-3xl w-full max-h-[90vh] relative flex flex-col">
+        <div class="bg-white rounded-md shadow-lg max-w-3xl w-full max-h-[90vh] relative flex flex-col">
             <!-- Close button -->
             <button onclick="document.getElementById('sizeChartModal').classList.add('hidden')"
                 class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 animate-rotate-pingpong">
@@ -966,5 +974,6 @@
 
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/views/website/sidecart.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/specifications.php";
     include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/footer.php"; ?>
 </body>
