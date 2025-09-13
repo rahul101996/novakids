@@ -64,6 +64,36 @@ class WebController extends LoginController
         }
     }
 
+    public function login()
+    {
+
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "Login Page";
+        $pageTitle = "Login Page";
+        //  echo "hello";
+        // die();
+        // $this->checkSession();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            require 'views/website/login.php';
+        }
+    }
+
+    public function signup()
+    {
+
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "Signup Page";
+        $pageTitle = "Signup Page";
+        //  echo "hello";
+        // die();
+        // $this->checkSession();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            require 'views/website/signup.php';
+        }
+    }
+
     public function sbiClerk()
     {
 

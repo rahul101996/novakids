@@ -11,7 +11,10 @@ $route->group(['', 'LoginController'], function ($route) {
 
 $route->group(['', 'WebController'], function ($route) {
     $route->route('', 'index');
-     $route->route('products/product-details', 'productDetails');
+    $route->route('products/product-details', 'productDetails');
+    $route->route('login', 'login');
+    $route->route('signup', 'signup');
+    $route->route('contact', 'ContactUs');
     // $route->route('/', 'index');
 
 });
@@ -20,7 +23,7 @@ $route->group(['', 'CollectionController'], function ($route) {
     $route->route('admin/collections', 'index');
     $route->route('admin/add-collections', 'AddCollections');
     $route->route('/edit-collection/[i:id]', 'AddCollections');
-        $route->route('/admin/add-product', 'AddProducts');
+    $route->route('/admin/add-product', 'AddProducts');
 
 
 

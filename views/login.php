@@ -1,8 +1,7 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php"; ?>
 
 <body class="bg-gray-50 font-sans">
-    <div class="relative min-h-screen flex flex-col items-center justify-center px-4 bg-cover bg-center"
-        style="background-image: url('/public/images/bg16.jpg'); background: #57458F;
+    <div class="relative min-h-screen flex flex-col items-center justify-center px-4 bg-cover bg-center" style="background-image: url('/public/images/bg16.jpg'); background: #57458F;
 background: linear-gradient(87deg, rgba(87, 69, 143, 1) 25%, rgba(197, 86, 82, 1) 75%);">
         <!-- Overlay -->
         <div class="absolute inset-0 bg-black bg-opacity-10"></div>

@@ -3,108 +3,105 @@
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/header.php'; ?>
 
-<style>
+<body class="overflow-x-hidden archivo-narrow-k">
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
 
-</style>
 
-<body>
-
-    <div class="min-h-screen">
-        <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
-        <div class="w-full flex items-center justify-center  bg-[#272c6c]">
-            <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/marquee.php'; ?>
+    <section class="bg-white grid grid-cols-1 md:grid-cols-5 w-full h-auto mx-auto">
+        <div class="w-full h-[90vh] col-span-2">
+            <img src="/public/images/contactbg.png" alt="" class="h-full">
         </div>
+        <div class="w-full mx-auto text-center items-center justify-center flex flex-col col-span-2">
+            <!-- Heading -->
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-10 tracking-wide">
+                GET IN TOUCH
+            </h2>
 
-        <div class="w-full flex flex-col items-center justify-center min-h-screen" style="background-color: transparent;
-    background-image: linear-gradient(180deg, #D6D7F9 0%, #D6D7F900 100%);">
-            <div class="w-full flex items-center justify-center py-16 max-lg:pt-5">
-
-                <div class="w-[80%] gap-10 items-start justify-center flex ">
-                    <div class="w-full flex items-start justify-start gap-5 max-lg:text-xs">
-                        <a href="/">
-                            <img src="/public/images/home-icon.png" class="h-6 max-lg:h-4" alt="">
-                        </a>
-                        <img src="/public/images/forward-black.png" class="h-6 max-lg:h-4" alt="">
-                        <span>Contact</span>
+            <!-- Contact Form -->
+            <form class="space-y-8 w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="text-left">
+                        <label class="block text-sm font-medium text-gray-700">Your Name</label>
+                        <input type="text"
+                            class="w-full border-b border-gray-400 focus:border-black outline-none py-2" />
+                    </div>
+                    <div class="text-left">
+                        <label class="block text-sm font-medium text-gray-700">Your Email</label>
+                        <input type="email"
+                            class="w-full border-b border-gray-400 focus:border-black outline-none py-2" />
                     </div>
                 </div>
-            </div>
-            <div class="w-[80%]  items-center justify-center flex max-lg:flex-col max-lg:w-[85%] gap-10">
-                <div class="w-full flex flex-col items-start justify-center">
-                    <div class="bg-white py-2 px-7 rounded-full flex items-center justify-center gap-3 max-lg:text-xs">
-                        <img src="/public/images/ok.png" class="h-10 max-lg:h-6" alt="">
-                        <p>Keep In Touch With Us
-                        </p>
-                    </div>
-                    <h1 class="text-5xl font-bold mt-10 max-lg:text-3xl max-lg:mt-5">
-                        We would love to <br> hear from You.
 
-                    </h1>
-                    <span class="mt-7 text-gray-500">Connecting people with knowledge
+                <div class="text-left">
+                    <label class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <input type="text" class="w-full border-b border-gray-400 focus:border-black outline-none py-2" />
+                </div>
+
+                <div class="text-left">
+                    <label class="block text-sm font-medium text-gray-700">Message</label>
+                    <textarea rows="2"
+                        class="w-full border-b border-gray-400 focus:border-black outline-none py-2"></textarea>
+                </div>
+
+                <button
+                    class="flex relative mx-auto overflow-hidden group transform border-2 border-black bg-transparent text-black">
+                    <span
+                        class="relative z-10 flex py-2 px-6 items-center justify-center text-center mx-auto gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
+                        Send Message
                     </span>
-                    <div class="w-full flex items-start justify-center mt-10 max-lg:flex-col max-lg:items-start gap-10">
-                        <div class="w-full flex flex-col items-start justify-start">
-                            <div class="w-full flex items-start justify-start gap-2">
-                                <img src="/public/images/mail-black.png" class="h-6" alt=""> <span class="font-semibold">MAIL</span>
-                            </div>
+                    <span
+                        class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
+                    </span>
+                </button>
+            </form>
 
-                            <div class="w-full flex items-center justify-center gap-3 mt-3">
-                                <a href="mailto:contact@vikassawantacademy.com" class="w-full">info@vikassawantacademy.com
-                                </a>
-                            </div>
-                        </div>
-                        <div class="w-full flex flex-col items-start justify-start">
-                            <div class="w-full flex items-start justify-start gap-2">
-                                <img src="/public/images/phone-black.png" class="h-6" alt=""> <span class="font-semibold">PHONE</span>
-                            </div>
-                            <div class="w-full grid grid-cols-1 items-center justify-center gap-3 mt-3">
-                                <a href="phone:8652221988" class="w-full">+91-8652221988
-
-                                </a>
-                                <a href="phone:9702146136" class="w-full">+91-9702146136
-
-                                </a>
-                                <a href="phone:918169099028" class="w-full">+91-8169099028
-
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full flex items-center flex-col justify-center mt-10">
-                        <div class="w-full flex items-start justify-start gap-2">
-                            <img src="/public/images/address-black.png" class="h-6" alt=""> <span class="font-semibold">ADDRESS</span>
-                        </div>
-                        <p class="mt-3 w-full">702/5 Shiv Amrut Dham Society, Yogidham Complex, Kalyan Murbad road, Kalyan West -421301.</p>
-
+        </div>
+        <div class="w-full mx-auto flex flex-col items-center justify-center gap-12 text-center">
+            <!-- Call Us -->
+            <div>
+                <div class="flex justify-center mb-3 group">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
+                        <i class="fas fa-phone text-xl group-hover:text-white"></i>
                     </div>
                 </div>
-                <div class="w-full flex flex-col items-end justify-end relative max-lg:mt-10">
-                    <form action="/contact-mail" method="post" class="flex items-center justify-center flex-col gap-5 bg-[#030f40] text-white rounded-[4vh] w-[80%] max-lg:w-full max-lg:p-8 p-14 relative z-[5]">
-                        <h2 class="w-full font-semibold text-xl">Questions or feedback?
-                        </h2>
-                        <input type="text" placeholder="Name" name="name" class="w-full border text-black border-gray-300 p-3 rounded-full outline-none">
-                        <input type="text" placeholder="Example@gmail.com" name="email" class="w-full border text-black border-gray-300 p-3 rounded-full outline-none">
-                        <textarea name="message" placeholder="Your Message" class="w-full border text-black border-gray-300 p-3 rounded-2xl outline-none h-[200px]" id=""></textarea>
-                        <button class="w-full bg-yellow-400 text-black py-3 rounded-full">Send Message</button>
-                    </form>
-                    <div class="absolute top-14 left-0 ">
-                        <img src="/public/images/Group-9790.png" alt="">
+                <h3 class="text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">Call Us</h3>
+                <p class="text-gray-900 font-medium">+1 (814) 251-9966</p>
+            </div>
+
+            <!-- Address -->
+            <div>
+                <div class="flex justify-center mb-3 group">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
+                        <i class="fas fa-map-marker-alt text-xl group-hover:text-white"></i>
                     </div>
-                    <div class="absolute bottom-20   left-0">
-                        <img src="/public/images/vector-4.png" alt="">
+                </div>
+                <h3 class="text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">Address</h3>
+                <p class="text-gray-900 font-medium">info@example.com</p>
+            </div>
+
+            <!-- Social Media -->
+            <div>
+                <div class="flex justify-center mb-3 group">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
+                        <i class="fas fa-share-alt text-xl group-hover:text-white"></i>
                     </div>
-                    <div class="absolute top-24 -right-5 z-[6]">
-                        <img src="/public/images/vector-8.svg" alt="">
-                    </div>
+                </div>
+                <h3 class="text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">Follow Us</h3>
+                <div class="flex justify-center space-x-5 mt-2 text-gray-600">
+                    <a href="#" class="hover:text-black"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-black"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-black"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-black"><i class="fab fa-pinterest"></i></a>
                 </div>
             </div>
         </div>
-        <div class="w-full flex items-center justify-center mt-14">
 
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1639.591583274616!2d73.15263470118222!3d19.24788940603705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be79420dafddd3b%3A0xfaf809414be9b2be!2sShiv%20Amrut%20Dham%20Co-operative%20Housing%20Society.!5e0!3m2!1sen!2sin!4v1752141447160!5m2!1sen!2sin" class="w-full h-[50vh]" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-    </div>
+    </section>
 
-    <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/footer.php'; ?>
+
+    <?php
+    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/sidecart.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/footer.php";
+    ?>
 
 </body>

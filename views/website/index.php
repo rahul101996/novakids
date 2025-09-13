@@ -142,8 +142,8 @@
 
                                 <!-- Add to Cart Icon -->
                                 <button
-                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart"></i>
+                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                                 </button>
                             </div>
 
@@ -182,8 +182,8 @@
 
                                 <!-- Add to Cart Icon -->
                                 <button
-                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart"></i>
+                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                                 </button>
                             </div>
 
@@ -222,8 +222,8 @@
 
                                 <!-- Add to Cart Icon -->
                                 <button
-                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart"></i>
+                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                                 </button>
                             </div>
 
@@ -262,8 +262,8 @@
 
                                 <!-- Add to Cart Icon -->
                                 <button
-                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart"></i>
+                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                                 </button>
                             </div>
 
@@ -302,8 +302,8 @@
 
                                 <!-- Add to Cart Icon -->
                                 <button
-                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart"></i>
+                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                                 </button>
                             </div>
 
@@ -331,13 +331,12 @@
             <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
                 Discover the latest collection of trendy, comfortable, and versatile outfits designed for teen boys who
                 love
-                to express their style — from everyday casuals to bold streetwear vibes, Nova Kids has it all.
+                to express their style — from everyday casuals to bold streetwear vibes, Nova Universe has it all.
             </p>
         </div>
 
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 w-[90vw] mx-auto px-4">
-
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-[90vw] mx-auto px-4">
             <!-- Tees -->
             <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                 data-aos-delay="200">
@@ -350,7 +349,7 @@
                 <!-- Text -->
                 <div
                     class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl tracking-wide">
-                    <span class="group-hover:text-[#f25b21] transition-colors duration-300 ">Tees</span>
+                    <span class="group-hover:text-[#f25b21] transition-colors duration-300 uppercase">Tees</span>
                 </div>
             </div>
 
@@ -364,7 +363,7 @@
                 </div>
                 <div
                     class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl tracking-wide">
-                    <span class="group-hover:text-[#f25b21] transition-colors duration-300">Co-ords</span>
+                    <span class="group-hover:text-[#f25b21] transition-colors duration-300 uppercase">Co-ords</span>
                 </div>
             </div>
 
@@ -378,21 +377,7 @@
                 </div>
                 <div
                     class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl tracking-wide">
-                    <span class="group-hover:text-[#f25b21] transition-colors duration-300">Joggers</span>
-                </div>
-            </div>
-            <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
-                data-aos-delay="200">
-                <img src="/public/images/45.png" alt="Tees"
-                    class="w-full h-[400px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
-                <!-- Overlay -->
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
-                </div>
-                <!-- Text -->
-                <div
-                    class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl tracking-wide">
-                    <span class="group-hover:text-[#f25b21] transition-colors duration-300 ">Hoodies</span>
+                    <span class="group-hover:text-[#f25b21] transition-colors duration-300 uppercase">Joggers</span>
                 </div>
             </div>
         </div>
@@ -427,11 +412,9 @@
                 </h2>
                 <a href="products/product-details"
                     class="relative inline-block px-6 py-2 rounded-lg border border-white text-white font-semibold overflow-hidden group">
-                    <!-- Text -->
                     <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
                         Shop Now
                     </span>
-                    <!-- Background overlay -->
                     <span
                         class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
                 </a>
@@ -504,7 +487,7 @@
         </div>
     </section>
 
-    <section class="pb-12 pt-20 relative overflow-hidden">
+    <section class="pb-12 pt-20 relative overflow-hidden hidden">
         <div class="absolute -top-8 -right-12 w-auto h-auto opacity-20">
             <img src="/public/images/net.webp" alt="" class="w-48 h-auto">
         </div>
@@ -513,7 +496,7 @@
             <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
                 Explore a range of styles crafted for every mood and moment — from laid-back casuals to standout
                 streetwear,
-                Nova Kids makes sure you look on point, every time.
+                Nova universe makes sure you look on point, every time.
             </p>
         </div>
 
@@ -545,19 +528,6 @@
         </div>
     </section>
 
-    <section class="py-10 w-full h-auto">
-        <div class="relative">
-            <img src="/public/images/123.avif" alt="" class="w-full h-auto">
-
-            <!-- Button positioned bottom-left -->
-            <button onclick="window.location.href = 'products/product-details'"
-                class="absolute bottom-28 left-36 bg-black border border-white hover:border-yellow-200 text-white px-5 py-2 rounded-lg font-semibold shadow-lg hover:bg-yellow-200 hover:text-black transition">
-                Shop Now
-            </button>
-        </div>
-    </section>
-
-
     <section class="relative w-full h-[80vh] bg-fixed bg-center bg-cover hidden"
         style="background-image: url('/public/images/123.avif');">
 
@@ -570,7 +540,10 @@
         </div>
     </section>
 
-    <section class="bg-white py-14 w-full">
+    <section class="bg-white py-14 w-full relative">
+        <div class="absolute -top-12 -right-14 w-auto h-auto opacity-20">
+            <img src="/public/images/net.webp" alt="" class="w-48 h-auto">
+        </div>
         <div class="w-[90vw] max-md:w-[90vw] mx-auto">
             <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                 <h2 class="text-center text-3xl font-extrabold mb-3 uppercase">Featured Collection</h2>
@@ -598,8 +571,8 @@
 
                             <!-- Add to Cart Icon -->
                             <button
-                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart"></i>
+                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                             </button>
 
                             <!-- Multiple images stacked -->
@@ -611,11 +584,11 @@
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
 
                             <!-- Dots -->
-                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                            <!-- <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
                                 <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
                                 <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
                                 <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                            </div>
+                            </div> -->
                         </div>
 
                         <!-- Product info below the images -->
@@ -644,8 +617,8 @@
 
                             <!-- Add to Cart Icon -->
                             <button
-                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart"></i>
+                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                             </button>
 
                             <!-- Multiple images stacked -->
@@ -655,13 +628,6 @@
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
                             <img src="/public/images/f99.webp"
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-
-                            <!-- Dots -->
-                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                            </div>
                         </div>
 
                         <!-- Product info below the images -->
@@ -689,8 +655,8 @@
 
                             <!-- Add to Cart Icon -->
                             <button
-                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart"></i>
+                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                             </button>
 
                             <!-- Multiple images stacked -->
@@ -700,14 +666,6 @@
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
                             <img src="/public/images/f55.webp"
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-
-                            <!-- Dots -->
-                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                            </div>
-
                         </div>
 
                         <!-- Product info below the images -->
@@ -735,8 +693,8 @@
 
                             <!-- Add to Cart Icon -->
                             <button
-                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart"></i>
+                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                             </button>
 
                             <!-- Multiple images stacked -->
@@ -746,13 +704,6 @@
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
                             <img src="/public/images/f77.webp"
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-
-                            <!-- Dots -->
-                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                            </div>
                         </div>
 
                         <!-- Product info below the images -->
@@ -780,8 +731,8 @@
 
                             <!-- Add to Cart Icon -->
                             <button
-                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart"></i>
+                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                             </button>
 
                             <!-- Multiple images stacked -->
@@ -790,15 +741,6 @@
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
                             <img src="/public/images/f10.webp"
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                            <!-- <img src="/public/images/f9.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0"> -->
-
-                            <!-- Dots -->
-                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                            </div>
                         </div>
 
                         <!-- Product info below the images -->
@@ -826,8 +768,8 @@
 
                             <!-- Add to Cart Icon -->
                             <button
-                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart"></i>
+                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                             </button>
 
                             <!-- Multiple images stacked -->
@@ -835,15 +777,6 @@
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
                             <img src="/public/images/f12.webp"
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                            <!-- <img src="/"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0"> -->
-
-                            <!-- Dots -->
-                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                            </div>
                         </div>
 
                         <!-- Product info below the images -->
@@ -871,8 +804,8 @@
 
                             <!-- Add to Cart Icon -->
                             <button
-                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart"></i>
+                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                             </button>
 
                             <!-- Multiple images stacked -->
@@ -880,15 +813,6 @@
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
                             <img src="/public/images/f14.webp"
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                            <!-- <img src="/"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0"> -->
-
-                            <!-- Dots -->
-                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                            </div>
 
                         </div>
 
@@ -917,8 +841,8 @@
 
                             <!-- Add to Cart Icon -->
                             <button
-                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart"></i>
+                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                             </button>
 
                             <!-- Multiple images stacked -->
@@ -926,15 +850,6 @@
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
                             <img src="/public/images/1.webp"
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                            <!-- <img src="/public/images/3.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0"> -->
-
-                            <!-- Dots -->
-                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
-                            </div>
                         </div>
 
                         <!-- Product info below the images -->
@@ -950,19 +865,6 @@
     </section>
 
     <style>
-        /* Custom outlined text effect */
-        .text-outline {
-            color: transparent;
-            -webkit-text-stroke: 1px #222222ff;
-            text-stroke: 1px black;
-        }
-
-        /* .text-outline:hover {
-            color: black;
-            -webkit-text-stroke: 1px black;
-            text-stroke: 1px black;
-        } */
-
         @keyframes scroll {
             0% {
                 transform: translateX(0%);
@@ -974,7 +876,7 @@
         }
 
         .marquee {
-            animation: scroll 10s linear infinite;
+            animation: scroll 12s linear infinite;
         }
 
         .marquee-content {
@@ -983,40 +885,71 @@
     </style>
 
     <!-- Marquee Section -->
-    <section class="overflow-hidden bg-gradient-to-r from-orange-50 via-transparent to-orange-50 py-8 my-10">
+    <section class="overflow-hidden bg-gradient-to-r from-orange-50 via-transparent to-orange-50 py-2 my-6">
         <div class="relative w-full group">
             <div class="marquee flex whitespace-nowrap">
                 <div class="marquee-content flex items-center space-x-10 px-10">
                     <!-- Repeat Content Twice for Infinite Scroll -->
                     <template id="marquee-items">
-                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-300 font-[400] text-4xl cursor-pointer"
-                            style="font-family: 'Outfit', sans-serif;">
+                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
+                            >
                             <span>Streetwear</span>
-                            <span class="text-gray-300 text-4xl">
+                            <span class="text-gray-900 text-2xl">
                                 #
                             </span>
                         </div>
 
-                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-300 font-[400] text-4xl cursor-pointer"
-                            style="font-family: 'Outfit', sans-serif;">
+                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
+                            >
                             <span>Sneakers</span>
-                            <span class="text-gray-300 text-4xl">
+                            <span class="text-gray-900 text-2xl">
                                 #
                             </span>
                         </div>
 
-                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-300 font-[400] text-4xl cursor-pointer"
-                            style="font-family: 'Outfit', sans-serif;">
+                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
+                            >
                             <span>Oversized Fits</span>
-                            <span class="text-gray-300 text-4xl">
+                            <span class="text-gray-900 text-2xl">
                                 #
                             </span>
                         </div>
 
-                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-300 font-[400] text-4xl cursor-pointer"
-                            style="font-family: 'Outfit', sans-serif;">
+                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
+                            >
                             <span>Casual Drip</span>
-                            <span class="text-gray-300 text-4xl">
+                            <span class="text-gray-900 text-2xl">
+                                #
+                            </span>
+                        </div>
+                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
+                            >
+                            <span>Streetwear</span>
+                            <span class="text-gray-900 text-2xl">
+                                #
+                            </span>
+                        </div>
+
+                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
+                            >
+                            <span>Sneakers</span>
+                            <span class="text-gray-900 text-2xl">
+                                #
+                            </span>
+                        </div>
+
+                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
+                            >
+                            <span>Oversized Fits</span>
+                            <span class="text-gray-900 text-2xl">
+                                #
+                            </span>
+                        </div>
+
+                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
+                            >
+                            <span>Casual Drip</span>
+                            <span class="text-gray-900 text-2xl">
                                 #
                             </span>
                         </div>
@@ -1141,23 +1074,17 @@
                 </p>
 
                 <button
-                    class="flex-1 relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black hover:border-transparent bg-transparent text-black">
-
-                    <!-- Text -->
+                    class="flex-1 relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
                     <span
                         class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
-                        @novakids
+                        @novauniverse
                     </span>
-
-                    <!-- Gradient overlay (starts hidden, slides in on hover) -->
                     <span
-                        class="absolute inset-0 bg-gradient-to-r from-[#57458f] to-[#bf5452] -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
+                        class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
                     </span>
                 </button>
 
             </div>
-
-            <!-- Right Side Grid (Scrollable) -->
 
             <div class="masonry-container md:h-[180vh] overflow-y-auto" id="masonryGrid">
                 <div class="masonry-item" style="height: 360px;">
@@ -1175,8 +1102,6 @@
                 <div class="masonry-item" style="height: 130px;">
                     <img src="/public/images/banner.webp" alt="Forest">
                 </div>
-
-                <!-- Added 5 more images -->
                 <div class="masonry-item" style="height: 120px;">
                     <img src="/public/images/banner.webp" alt="Mountain">
                 </div>
@@ -1200,17 +1125,6 @@
         </div>
     </section>
 
-
-
-
-
-
-
-
-    <!-- jQuery & Owl Carousel JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
     <script>
         $(document).ready(function () {
             $(".new-arrival-carousel").owlCarousel({
@@ -1218,7 +1132,7 @@
                 margin: 10,
                 nav: true,
                 dots: false,
-                autoplay: true,
+                autoplay: false,
                 autoplayTimeout: 3000,
                 responsive: {
                     0: { items: 1 },
