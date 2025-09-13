@@ -1155,6 +1155,17 @@
         });
     </script>
 
+    <!-- SwiperJS Script -->
+    <script>
+        new Swiper(".product-swiper", {
+            loop: true,
+            autoplay: {
+                delay: 1200,
+                disableOnInteraction: false,
+            },
+        });
+    </script>
+
     <script>
         const productCards = document.querySelectorAll('.changingimg');
 
