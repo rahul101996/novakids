@@ -6,6 +6,16 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js"></script>
 
+<!-- Include AOS JS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+    AOS.init({
+        once: true, // Ensures the animation runs only once
+    });
+</script>
+
+
 <script>
     function OpenAccordian(el) {
         const content = el.querySelector('.accordion-content');
@@ -29,21 +39,21 @@
             icon.classList.remove('-rotate-90');
         }
     }
-    <?php if (isset($_SESSION['err']) && !empty($_SESSION['err'])) : ?>
+    <?php if (isset($_SESSION['err']) && !empty($_SESSION['err'])): ?>
         console.log("Error: <?= $_SESSION['err'] ?>");
         $(document).ready(function onDocumentReady() {
             toastr.error("<?= $_SESSION['err'] ?>");
         });
         <?php unset($_SESSION['err']); ?>
     <?php endif; ?>
-    <?php if (isset($_SESSION['success']) && !empty($_SESSION['success'])) : ?>
+    <?php if (isset($_SESSION['success']) && !empty($_SESSION['success'])): ?>
         console.log("Success: <?= $_SESSION['success'] ?>");
-        $(document).ready(function() {
+        $(document).ready(function () {
             toastr.success("<?= $_SESSION['success'] ?>");
         });
         <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.home-banner-slider').owlCarousel({
             loop: true,
             items: 1, // Fade effect works best with a single item
@@ -55,7 +65,7 @@
             nav: false
         });
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.testimonial').owlCarousel({
             loop: true,
             items: 1, // Fade effect works best with a single item
@@ -65,14 +75,14 @@
             nav: false
         });
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.testimonial-video').owlCarousel({
             loop: true,
             items: 2, // Fade effect works best with a single item
             autoplay: true,
             autoplayTimeout: 4000, // Adjust timing as needed
             margin: 20,
-                        autoplayHoverPause: true,
+            autoplayHoverPause: true,
 
 
             dots: false,
@@ -90,7 +100,7 @@
             }
         });
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.PastQuiz').owlCarousel({
             loop: true,
             margin: 15,
@@ -143,7 +153,7 @@
             console.error("Banner slider not found");
         }
     }
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const counters = document.querySelectorAll(".count-up");
 
         const observer = new IntersectionObserver(
@@ -163,8 +173,8 @@
                     }
                 });
             }, {
-                threshold: 0.5
-            }
+            threshold: 0.5
+        }
         );
 
         counters.forEach((counter) => observer.observe(counter));

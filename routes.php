@@ -8,8 +8,10 @@ $route->group(['', 'LoginController'], function ($route) {
     $route->route('admin', 'index');
     $route->route('logout', 'logout');
 });
+
 $route->group(['', 'WebController'], function ($route) {
     $route->route('', 'index');
+     $route->route('products/product-details', 'productDetails');
     // $route->route('/', 'index');
 
 });

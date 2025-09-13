@@ -4,514 +4,1321 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/header.php'; ?>
 
 
-<body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VZ39TM5"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    <div class="min-h-screen">
-        <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
+<body class="overflow-x-hidden archivo-narrow-k">
 
-        
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
 
-        <div class="w-full flex items-center justify-center py-20 max-lg:py-10 max-lg:py-10">
-            <div class="w-[80%] flex items-center justify-center gap-[7vw] max-lg:flex-col-reverse max-md:w-[85%] max-lg:w-[90%]">
-                <div class="w-[50%] flex flex-col items-center justify-center max-lg:w-full">
-                    <div class="w-full flex items-center justify-center gap-4 max-md:flex-col">
-                        <div class="w-[45%] max-lg:w-full rounded-[50px] overflow-hidden h-[38vh] flex items-start justify-center flex-col p-5 text-white bg-[#272c6c] gap-5">
-                            <h2 class="text-4xl font-bold  ">100k</h2>
-                            <p class="">Your Trusted Bank Exam Partner
-                                Guiding You to Success in IBPS, SBI, SSC & Railway Exams.</p>
-                            <img src="/public/images/review_img.png" alt="">
-                        </div>
-                        <div class="w-[55%] max-lg:w-full rounded-[50px] overflow-hidden h-[38vh] "><img src="https://masterlife.jwsuperthemes.com/wp-content/uploads/2024/02/image_h2-1024x684.jpg" class="w-full h-full object-cover" alt=""></div>
-                    </div>
-                    <div class="w-full h-[1px] bg-gray-300 my-10"></div>
-                    <div class="flex items-center justify-center gap-4">
-                        <div class="w-fit">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="47" viewBox="0 0 50 47" fill="none">
-                                <g style="mix-blend-mode:difference">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M34.6699 35.8034C43.3449 34.5135 50 27.0339 50 18C50 8.05887 41.9411 0 32 0C24.4663 0 18.0136 4.62831 15.3301 11.1966C6.65512 12.4865 0 19.9661 0 29C0 38.9411 8.05887 47 18 47C25.5337 47 31.9864 42.3717 34.6699 35.8034ZM31.2774 35.9858C32.3774 33.8995 33 31.5224 33 29C33 20.7157 26.2843 14 18 14C16.7413 14 15.5188 14.155 14.3506 14.4471C14.5758 13.3222 14.9058 12.2352 15.3301 11.1966C16.2013 11.0671 17.0928 11 18 11C27.9411 11 36 19.0589 36 29C36 31.4074 35.5274 33.7044 34.6699 35.8034C33.7987 35.9329 32.9072 36 32 36C31.758 36 31.5171 35.9952 31.2774 35.9858ZM31.2774 35.9858C28.7649 40.7513 23.7618 44 18 44C9.71573 44 3 37.2843 3 29C3 21.9744 7.83 16.077 14.3506 14.4471C14.1206 15.5957 14 16.7837 14 18C14 27.6991 21.6713 35.6065 31.2774 35.9858Z" fill="black"></path>
-                                </g>
-                            </svg>
-                        </div>
-                        <p class="text-gray-500">"At Vikas Sawants Academy, we are more than just a coaching institute — we are your dedicated partners in achieving success in competitive exams like IBPS, SBI, SSC, and Railway.
-                            <span class="text-blue-500 font-semibold">With over a decade of experience and a results-driven approach, we offer expert guidance, structured study plans, and high-quality content to help aspirants reach their goals.
+    <style>
+        @keyframes glitch {
+            0% {
+                text-shadow: 2px 0 red, -2px 0 blue;
+            }
 
-                            </span>"<br>
+            20% {
+                text-shadow: -2px -2px lime, 2px 2px pink;
+            }
 
-                        </p>
-                    </div>
-                </div>
-                <div class="w-[50%] flex flex-col items-center justify-center gap-10 max-lg:w-full">
-                    <h2 class="text-5xl font-bold text-gray-800 max-lg:text-3xl max-lg:text-2xl">Get the Skills to Crack Competitive Exams. Build the Career You Deserve.</h2>
-                    <p class="text-gray-500">At <b class="text-black">Vikas Sawants Academy</b> we empower aspirants through expert-led coaching for <span class="text-blue-500 font-semibold">Bank (IBPS, SBI), SSC, MPSC, UPSC, MBA entrance, and Railway exams</span>. Our goal-focused programs, live classes, and practice-driven learning help you master every exam and secure your dream job in government or public sector services.</p>
-                    <div class="w-full flex items-center justify-start gap-4 max-lg:text-xs">
-                        <a href="/register" class="bg-gray-800 py-3 px-7 text-white rounded-full transition-all duration-200 transform hover:-translate-y-1">Create an account</a>
-                        <a href="/register" class="bg-white border border-gray-300 py-3 px-7 text-gray-800 rounded-full hover:bg-gray-800 hover:text-white transition-all duration-200 transform hover:-translate-y-1">
-                            Get started today
-                        </a>
+            40% {
+                text-shadow: 2px 2px cyan, -2px -2px yellow;
+            }
 
-                    </div>
-                </div>
-            </div>
+            60% {
+                text-shadow: -2px 2px magenta, 2px -2px orange;
+            }
+
+            80% {
+                text-shadow: 2px -2px purple, -2px 2px teal;
+            }
+
+            100% {
+                text-shadow: none;
+            }
+        }
+
+        .group-hover\:animate-glitch {
+            animation: glitch 0.6s steps(2, end) infinite;
+        }
+    </style>
+
+    <!-- Hero Section -->
+    <section class="relative h-[88vh] flex items-center bg-gradient-to-r from-red-800 to-black overflow-hidden">
+        <!-- Background Image Overlay -->
+        <div class="absolute inset-0 bg-[url('/public/images/banner.webp')] bg-cover bg-center opacity-70"></div>
+
+        <!-- Big Heading (Top Left) -->
+        <h2 class="absolute top-16 left-10 text-7xl font-extrabold text-white" data-aos="fade-right"
+            data-aos-duration="1000" data-aos-delay="100">
+            NEW <br> IN <br> FOR <br> YOUNGSTARS
+        </h2>
+
+        <!-- Button (Bottom Left, off-center) -->
+        <div class="absolute bottom-20 left-10">
+            <button onclick="window.location.href = 'products/product-details'"
+                class="relative px-10 py-3 bg-transparent hover:bg-white text-white hover:text-black border border-white rounded-lg font-semibold shadow-lg overflow-hidden group transition-all duration-300">
+                <span class="relative z-10 block transition-colors duration-500 group-hover:animate-glitch">SHOP
+                    NOW</span>
+                <span
+                    class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+            </button>
         </div>
-        <div class="w-full flex items-center justify-center py-20 max-lg:py-10">
-            <div class="w-[80%] flex items-center justify-center gap-[7vw] max-lg:w-[85%] max-lg:flex-col max-lg:flex-col">
-                <div class="w-[50%] flex flex-col items-start justify-center gap-7 font-semibold max-lg:w-full max-lg:w-full">
-                    <h2 class="text-5xl font-bold text-gray-800 max-lg:text-3xl">Leading the Rankings in India
 
-                    </h2>
-                    <p class="text-gray-500"><b class="text-blue-500">Vikas Sawants Academy (VSA) is India's No.1 institute for competitive exam preparation</b>. With over 15 years of excellence, VSA has helped thousands of students achieve success in Banking (IBPS, SBI), MPSC/UPSC, MBA (CAT/CMAT), SSC, and Railway exams.
-                    </p>
-                    <p class="text-gray-500 mt-2">
-                        Our expert faculty, structured study material, and result-oriented online and offline coaching have made VSA a trusted name across India.During the past 15 years, we have helped over thousands of students to secure jobs in Banks as probationary officers and clerks. VSA’s classroom Online coaching program has been designed to address the need of interpersonal learning.
-                    </p>
-                    <p class="text-gray-500 mt-2">We offer weekend batches, regular tests, and free interview guidance to ensure every student is job-ready.</p>
-
-
-
-                </div>
-                <div class="w-[40%] flex flex-col items-center justify-center gap-10 relative max-lg:w-full">
-                    <div class="w-full flex items-center justify-center">
-                        <div id="forward" onclick="banner_forward(this)"
-                            class="absolute z-[999] top-[50%] left-[2vw] border bg-white border-white p-2 rounded-full cursor-pointer max-lg:top-[87%] max-lg:top-[50%] max-lg:left-[5vw]">
-                            <img src="/public/images/backward-black.png" class="w-[25px] h-[25px] max-lg:w-[12px] max-lg:h-[12px]"
-                                alt="">
-                        </div>
-                        <div id="backward" onclick="banner_backward(this)"
-                            class="absolute z-[999] top-[50%] right-[2vw] border bg-white  border-white p-2 rounded-full cursor-pointer max-lg:top-[87%] max-lg:right-[75vw] max-lg:top-[50%]  max-lg:right-[5vw]">
-                            <img src="/public/images/forward-black.png" class="w-[25px] h-[25px] max-lg:w-[12px] max-lg:h-[12px]"
-                                alt="">
-                        </div>
-                        <!-- <div class="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-[99]"></div> -->
-                        <div class="owl-carousel home-slider w-full">
-
-                            <img src="/public/home-slider/home-1.jpeg" alt="">
-                            <img src="/public/home-slider/home-2.jpeg" alt="">
-                            <img src="/public/images/home-slider/1 (1).jpeg" alt="">
-                            <img src="/public/images/home-slider/1 (2).jpeg" alt="">
-                            <img src="/public/images/home-slider/1 (3).jpeg" alt="">
-                            <img src="/public/images/home-slider/1 (4).jpeg" alt="">
-                            <!-- <img src="/public/images/home-slider/1 (5).jpeg" alt="">
-                            <img src="/public/images/home-slider/1 (6).jpeg" alt=""> -->
-                            <img src="/public/images/home-slider/1 (7).jpeg" alt="">
-                            <img src="/public/images/home-slider/1 (8).jpeg" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Random Supporting Text (Top Right) -->
+        <div class="absolute top-28 right-16 bg-white/10 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/20"
+            data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+            <p class="text-white text-xl font-bold tracking-wider uppercase">
+                ✦ Limited Drop
+            </p>
+            <span class="text-sm text-gray-300">Streetwear ’25</span>
         </div>
-        <div class="w-full flex items-center justify-center py-20 bg-[#030f40] h-screen max-lg:h-auto max-lg:py-10">
-            <div class="w-[80%] flex flex-col items-center justify-center gap-[7vw] text-white max-lg:w-[85%]">
-                <div class="w-full flex  items-start justify-between gap-7 max-lg:flex-col  ">
-                    <div class="flex items-start justify-center flex-col w-[40%] gap-7 max-lg:w-full ">
-                        <h2 class="text-blue-500 uppercase text-sm">Our Services</h2>
-                        <h2 class="text-5xl font-bold max-lg:text-3xl">Coaching
-                            is
-                            How
-                            You
-                            Unlock
-                            Your
-                            Greatest
-                            Self</h2>
-                    </div>
-                    <div class="flex items-start justify-center flex-col w-[40%] gap-7 max-lg:w-full ">
-                        <p>Join India’s Most Trusted and Budget-Friendly Educational Platform
-                            Unleash your true potential with Vikas Sawants Academy – where expert guidance meets affordability, empowering you to succeed in every competitive exam.</p>
-                        <a href="/register" class="bg-white border border-gray-300 py-3 px-7 max-lg:text-sm max-lg:py-2  text-gray-800 rounded-full hover:bg-gray-800 hover:text-white transition-all duration-200 transform hover:-translate-y-1">
-                            Get started today
-                        </a>
-                    </div>
-
-                </div>
-                <div class="w-full grid grid-cols-4 items-start justify-center gap-10 max-md:grid-cols-2 max-lg:grid-cols-4 ">
-                    <div class="w-full flex flex-col items-start justify-center border-r border-[#364066] ">
-                        <img src="/public/images/icons8-camera-50.png" class="opacity-[50%] hover:opacity-[100%] max-lg:w-[40px] transition-all duration-200 transform hover:-translate-y-1" alt="">
-                        <p class="text-xl font-semibold mt-7 max-lg:text-sm max-lg:mt-2 ">Daily Live Classes</p>
-                        <span class="mt-2 max-lg:text-xs">Interactive learning with expert educators
-
-                        </span>
-                    </div>
-                    <div class="w-full flex flex-col items-start justify-center border-r border-[#364066]">
-                        <img src="/public/images/icons8-test-50.png" class="opacity-[50%] max-lg:w-[40px] hover:opacity-[100%] transition-all duration-200 transform hover:-translate-y-1" alt="">
-                        <p class="text-xl font-semibold mt-7 max-lg:mt-2 max-lg:text-sm ">10K +
-                        </p>
-                        <span class="mt-2 max-lg:text-xs">Practice tests, notes & <br> sample papers
-
-                        </span>
-                    </div>
-                    <div class="w-full flex flex-col items-start justify-center border-r border-[#364066]">
-                        <img src="/public/images/icons8-inquiry-50.png" class="opacity-[50%] max-lg:w-[40px] hover:opacity-[100%] transition-all duration-200 transform hover:-translate-y-1" alt="">
-                        <p class="text-xl font-semibold mt-7 max-lg:mt-2 max-lg:text-sm ">24 x 7</p>
-                        <span class="mt-2 max-lg:text-xs">Instant doubt-solving <br> support anytime
-
-                        </span>
-                    </div>
-                    <div class="w-full flex flex-col items-start justify-center max-md:border-r border-[#364066]">
-                        <img src="/public/images/icons8-certificate-50.png" class="opacity-[50%] max-lg:w-[40px] hover:opacity-[100%] transition-all duration-200 transform hover:-translate-y-1" alt="">
-                        <p class="text-xl font-semibold mt-7 max-lg:mt-2 max-lg:text-sm ">100 +</p>
-                        <span class="mt-2 max-lg:text-xs">Offline centers across <br> major cities
 
 
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w-full flex items-center justify-center py-20 max-lg:py-10 bg-[url(/public/images/bg-1.png)] bg-[#f8f8f8] bg-cover">
-            <div class="w-[80%] flex items-center flex-col justify-center max-lg:w-[85%]">
-                <h2 class="text-5xl font-bold text-gray-800 max-lg:text-3xl max-lg:text-center">Our Most Popular Courses</h2>
-                <p class="text-blue-500 mt-7 w-[70%] text-center max-lg:text-sm max-lg:w-full">India’s No.1 Online Live Coaching for IBPS, SBI, RRB, MBA-CET & SSC exams. Get complete banking prep in one place with our all-in-one Online Classroom Program.</p>
+        <!-- Another Random Tagline (Bottom Right, tilted) -->
+        <p class="absolute bottom-12 right-12 text-2xl font-bold text-white rotate-[-6deg] opacity-80 animate-fade">
+            #GenZStyle
+        </p>
+    </section>
 
-                <div class="grid grid-cols-4 items-center justify-center gap-5 mt-10 w-full max-lg:grid-cols-2 max-md:grid-cols-1">
-                    <form method="POST" action="/razorpay" class="min-h-[50vh] w-full flex flex-col  bg-white ">
-                        <div class="w-full h-[50%] ">
-                            <img src="/<?= $sbi_po_course['image'] ?>" class="w-full h-full object-cover" alt="">
-                        </div>
+    <style>
+        /* Place nav buttons below the carousel */
+        .new-arrival-carousel .owl-nav {
+            position: absolute;
+            top: -55px;
+            /* push below blog cards */
+            left: 96%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
 
-                        <div class="flex flex-col w-full p-3 items-start justify-start ">
-                            <span class="uppercase text-sm bg-[#030f40] text-white py-1 px-3 rounded-full">SBI PO</span>
-                            <p class="mt-2 font-semibold"><?= $sbi_po_course['name'] ?></p>
-                            <p class="text-sm mt-2 text-gray-500"><?= $sbi_po_course['description'] ?></p>
-                            <p class="mt-2"><span class="text-gray-400 line-through">₹<?= formatNumber($sbi_po_course['regular_fee']) ?></span>&ensp;₹<?= formatNumber($sbi_po_course['discount_fee']) ?></p>
-                            <input type="price" name="price" value="<?= $sbi_po_course['discount_fee'] ?>" hidden>
-                            <input type="text" name="course_id" value="<?= $sbi_po_course['id'] ?>" hidden>
+        /* Style smaller buttons */
+        .new-arrival-carousel .owl-nav button span {
+            font-size: 16px;
+            padding: 6px 10px;
+            background: #000000ff;
+            /* Tailwind pink-500 */
+            color: white;
+            border-radius: 9999px;
+            /* fully rounded */
+            transition: all 0.3s ease;
+        }
+    </style>
 
-                            <?php
-                            if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-                            ?>
-                                <button name="submit" class="px-5 py-2 bg-[#030f40] text-white rounded-full hover:bg-black w-full mt-3">Buy Now</button>
-                            <?php } else {
-                            ?>
-                                <a href="/login" class="px-5 py-2 bg-[#030f40] flex items-center justify-center text-white rounded-full hover:bg-black w-full mt-3">Buy Now</a>
-                            <?php } ?>
-
-                        </div>
-
-
-                    </form>
-                    <form method="POST" action="/razorpay" class="min-h-[50vh] w-full flex flex-col bg-white">
-                        <div class="w-full h-[50%] ">
-                            <img src="/<?= $sbi_clerk_course['image'] ?>" class="w-full h-full object-cover" alt="">
-                        </div>
-
-                        <div class="flex flex-col w-full p-3 items-start justify-start">
-                            <span class="uppercase text-sm bg-[#030f40] text-white py-1 px-3 rounded-full">SBI Clerk</span>
-                            <p class="mt-2 font-semibold"><?= $sbi_clerk_course['name'] ?></p>
-                            <p class="text-sm mt-2 text-gray-500"><?= $sbi_clerk_course['description'] ?></p>
-                            <p class="mt-2"><span class="text-gray-400 line-through">₹<?= formatNumber($sbi_clerk_course['regular_fee']) ?></span>&ensp;₹<?= formatNumber($sbi_clerk_course['discount_fee']) ?></p>
-                            <input type="price" name="price" value="<?= $sbi_clerk_course['discount_fee'] ?>" hidden>
-                            <input type="text" name="course_id" value="<?= $sbi_clerk_course['id'] ?>" hidden>
-
-                            <?php
-                            if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-                            ?>
-                                <button name="submit" class="px-5 py-2 bg-[#030f40] text-white rounded-full hover:bg-black w-full mt-3">Buy Now</button>
-                            <?php } else {
-                            ?>
-                                <a href="/login" class="px-5 py-2 bg-[#030f40] text-white rounded-full hover:bg-black w-full mt-3 flex items-center justify-center">Buy Now</a>
-                            <?php } ?>
-
-                        </div>
-
-
-                    </form>
-                    <form method="POST" action="/razorpay" class="min-h-[50vh] w-full flex flex-col bg-white">
-                        <div class="w-full h-[50%] ">
-                            <img src="/<?= $ibps_po_course['image'] ?>" class="w-full h-full object-cover" alt="">
-                        </div>
-
-                        <div class="flex flex-col w-full p-3 items-start justify-start">
-                            <span class="uppercase text-sm bg-[#030f40] text-white py-1 px-3 rounded-full">IBPS PO</span>
-                            <p class="mt-2 font-semibold"><?= $ibps_po_course['name'] ?></p>
-                            <p class="text-sm mt-2 text-gray-500"><?= $ibps_po_course['description'] ?></p>
-                            <p class="mt-2"><span class="text-gray-400 line-through">₹<?= formatNumber($ibps_po_course['regular_fee']) ?></span>&ensp;₹<?= formatNumber($ibps_po_course['discount_fee']) ?></p>
-                            <input type="price" name="price" value="<?= $ibps_po_course['discount_fee'] ?>" hidden>
-                            <input type="text" name="course_id" value="<?= $ibps_po_course['id'] ?>" hidden>
-
-                            <?php
-                            if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-                            ?>
-                                <button name="submit" class="px-5 py-2 bg-[#030f40] text-white rounded-full hover:bg-black w-full mt-3">Buy Now</button>
-                            <?php } else {
-                            ?>
-                                <a href="/login" class="px-5 py-2 bg-[#030f40] text-white rounded-full hover:bg-black w-full mt-3 flex items-center justify-center">Buy Now</a>
-                            <?php } ?>
-
-                        </div>
-
-
-                    </form>
-                    <form method="POST" action="/razorpay" class="min-h-[50vh] w-full flex flex-col bg-white">
-                        <div class="w-full h-[50%] ">
-                            <img src="/<?= $ibps_clerk_course['image'] ?>" class="w-full h-full object-cover" alt="">
-                        </div>
-
-                        <div class="flex flex-col w-full p-3 items-start justify-start">
-                            <span class="uppercase text-sm bg-[#030f40] text-white py-1 px-3 rounded-full">IBPS CLERK</span>
-                            <p class="mt-2 font-semibold"><?= $ibps_clerk_course['name'] ?></p>
-                            <p class="text-sm mt-2 text-gray-500"><?= $ibps_clerk_course['description'] ?></p>
-                            <p class="mt-2"><span class="text-gray-400 line-through">₹<?= formatNumber($ibps_clerk_course['regular_fee']) ?></span>&ensp;₹<?= formatNumber($ibps_clerk_course['discount_fee']) ?></p>
-                            <input type="price" name="price" value="<?= $ibps_clerk_course['discount_fee'] ?>" hidden>
-                            <input type="text" name="course_id" value="<?= $ibps_clerk_course['id'] ?>" hidden>
-
-                            <?php
-                            if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-                            ?>
-                                <button name="submit" class="px-5 py-2 bg-[#030f40] text-white rounded-full hover:bg-black w-full mt-3">Buy Now</button>
-                            <?php } else {
-                            ?>
-                                <a href="/login" class="px-5 py-2 bg-[#030f40] text-white rounded-full hover:bg-black w-full mt-3 flex items-center justify-center">Buy Now</a>
-                            <?php } ?>
-
-                        </div>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="w-full flex items-center justify-center py-20 max-lg:py-10">
-        <div class="w-[80%] flex items-center justify-center gap-[6vw] max-lg:flex-col-reverse max-lg:w-[85%]">
-            <div class="w-[50%] flex flex-col items-center justify-center relative max-lg:w-full ">
-                <div class="w-full flex relative items-center justify-center"> <img src="/public/images/vikas-sir.png" class="w-[65%]" alt="">
-                    <img src="/public/images/profile-bg.png" class="absolute bottom-0 left-[50%] translate-x-[-50%] z-[-1] w-[70%]" alt="">
-                </div>
-                <h3 class="text-xl font-semibold mt-6">Mr. Vikas Sawant</h3>
-                <p class="text-blue-500 mt-2 font-semibold">(Founder & CEO Of VSA)</p>
-            </div>
-            <div class="w-[50%] flex flex-col items-start justify-center gap-7 max-lg:w-full max-lg:gap-1 ">
-                <span class="text-blue-500">About Me</span>
-                <h2 class="text-5xl font-semibold text-gray-800 mt-3 max-lg:text-3xl">Brain Behind Vikas Sawants Academy</h2>
-                <p class="text-gray-500 mt-4">The visionary force behind Vikas Sawants Academy.
-                    Empowering students to achieve success in competitive exams.</p>
-                <div onclick="OpenAccordian(this)" class="accordion-item w-full flex items-start flex-col justify-start gap-3 bg-[#030f40] text-white px-4 py-6 rounded-xl mt-7 cursor-pointer">
-                    <div class="w-full flex items-start justify-between">
-                        <h2 class="text-xl font-semibold max-lg:text-lg">About Me</h2>
-                        <div class="icon-wrapper bg-white rounded-full w-fit p-2 transition-transform duration-300">
-                            <img src="/public/images/icons8-down-right-32.png" class="h-6 icon-img" alt="">
-                        </div>
-                    </div>
-                    <div class="accordion-content w-full overflow-hidden transition-all duration-500 max-h-0">
-                        <p class="text-white py-2">
-                            I founded this institute on the belief that every student has the ability to learn and get their dream banking jobs...
-                        </p>
-                    </div>
-                </div>
-
-                <div onclick="OpenAccordian(this)" class="accordion-item w-full flex items-start flex-col justify-start gap-3 bg-[#030f40] text-white  px-4 py-6 rounded-xl mt-3 cursor-pointer">
-                    <div class="w-full flex items-start justify-between">
-                        <h2 class="text-xl font-semibold max-lg:text-lg">Get The Right Path From The Best Learning Platform</h2>
-                        <div class="icon-wrapper bg-white rounded-full w-fit p-2 transition-transform duration-300">
-                            <img src="/public/images/icons8-down-right-32.png" class="h-6 icon-img" alt="">
-                        </div>
-                    </div>
-                    <div class="accordion-content w-full overflow-hidden transition-all duration-500 max-h-0">
-                        <p class="text-white py-2">
-                            Discover your potential with expert guidance, structured learning, and proven results — only at VSA, Maharashtra’s leading platform for competitive exam success.</p>
-                    </div>
-                </div>
-
-                <div onclick="OpenAccordian(this)" class="w-full flex items-start flex-col justify-start gap-3 bg-[#030f40] text-white  px-4 py-6 rounded-xl mt-3 cursor-pointer">
-                    <div class="w-full flex items-start justify-between">
-                        <h2 class="text-xl font-semibold max-lg:text-lg">Learn From The Professionals</h2>
-                        <div class="bg-white rounded-full w-fit p-2 icon-wrapper">
-                            <img src="/public/images/icons8-down-right-32.png" class="h-6 icon-img" alt="">
-                        </div>
-                    </div>
-                    <div class="w-full overflow-hidden transition-all duration-500 max-h-0 accordion-content">
-                        <p class="text-white py-2">Gain expert insights, practical strategies, and top-quality guidance from experienced educators dedicated to your success.</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="w-full flex items-center justify-center py-20 max-lg:py-10 max-lg:border-t border-gray-200">
-        <div class="w-[80%] flex flex-col items-center justify-center max-lg:w-[85%]">
-            <div class="w-full flex flex-col items-center justify-center">
-                <p class="uppercase text-blue-500 max-lg:text-sm">Learn from Creative Experts</p>
-                <h2 class="text-5xl font-semibold text-gray-800 mt-3 max-lg:text-3xl max-lg:mt-2">Meet Our Best Faculty
-                </h2>
-                <p class="text-blue-500 mt-2 w-[55%] text-center max-lg:w-full">Get to know the passionate educators behind our students' success — experienced, dedicated, and committed to excellence.</p>
-            </div>
-            <div class="w-full grid grid-cols-4 items-center justify-center gap-5 mt-14 max-lg:grid-cols-2">
-                <div class="w-full flex flex-col items-center justify-center relative">
-                    <div class="w-full flex relative items-center justify-center"> <img src="/public/images/vikas-sir.png" class="w-[85%]" alt="">
-                        <!-- <img src="/public/images/profile-bg.png" class="absolute bottom-0 left-[50%] translate-x-[-50%] z-[-1] w-[70%]" alt=""> -->
-                    </div>
-                    <h3 class="text-xl font-semibold mt-6 max-lg:text-xs max-lg:mt-3">Quant & Reasoning Expert</h3>
-                    <p class="text-gray-500 text-center max-lg:text-xs">18+ years of Teaching Experience,Mentored 6.5 Lakhs students</p>
-                </div>
-                <div class="w-full flex flex-col items-center justify-center relative">
-                    <div class="w-full flex relative items-center justify-center"> <img src="/public/images/experts-2.png" class="w-[85%]" alt="">
-                        <!-- <img src="/public/images/profile-bg.png" class="absolute bottom-0 left-[50%] translate-x-[-50%] z-[-1] w-[70%]" alt=""> -->
-                    </div>
-                    <h3 class="text-xl font-semibold mt-6 max-lg:text-xs max-lg:mt-3">English Language Expert
-                    </h3>
-                    <p class="text-gray-500 text-center max-lg:text-xs">25+ years of Teaching Experience.
-
-                    </p>
-                </div>
-                <div class="w-full flex flex-col items-center justify-center relative">
-                    <div class="w-full flex relative items-center justify-center"> <img src="/public/images/experts-3.png" class="w-[85%]" alt="">
-                        <!-- <img src="/public/images/profile-bg.png" class="absolute bottom-0 left-[50%] translate-x-[-50%] z-[-1] w-[70%]" alt=""> -->
-                    </div>
-                    <h3 class="text-xl font-semibold mt-6 max-lg:text-xs max-lg:mt-3">General Awareness Expert
-                    </h3>
-                    <p class="text-gray-500 text-center max-lg:text-xs">6+ years of Teaching Experience.
-
-                    </p>
-                </div>
-                <div class="w-full flex flex-col items-center justify-center relative">
-                    <div class="w-full flex relative items-center justify-center"> <img src="/public/images/experts-4.png" class="w-[85%]" alt="">
-                        <!-- <img src="/public/images/profile-bg.png" class="absolute bottom-0 left-[50%] translate-x-[-50%] z-[-1] w-[70%]" alt=""> -->
-                    </div>
-                    <h3 class="text-xl font-semibold mt-6 max-lg:text-xs max-lg:mt-3">Reasoning Faculty
-                    </h3>
-                    <p class="text-gray-500 text-center max-lg:text-xs">8+ years of Teaching Experience, Cracked SBI,RAILWAY & CIDCO EXAM in First Attempt.
-
-                    </p>
-                </div>
+    <section class="bg-white py-14 w-full">
+        <div class="w-[90vw] max-md:w-[90vw] mx-auto">
+            <div class="flex flex-col mb-10" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="100">
+                <h3 class="text-left text-3xl font-extrabold mb-3 uppercase">New Arrival</h3>
+                <p class="text-left text-gray-600 text-lg max-w-xl">
+                    Be the first to explore our latest drop — fresh styles crafted for teens who love to stay ahead of
+                    the trend.
+                </p>
 
             </div>
 
-        </div>
-    </div>
-    <div class="w-full flex items-center justify-center text-white py-20 bg-[url('/public/images/bg.jpg')]">
-        <div class="w-[80%] flex flex-col items-center justify-center">
-            <div class="w-full flex flex-col items-center justify-center">
-                <h2 class="text-5xl font-semibold max-lg:text-3xl max-lg:text-center">Download Our App Now
-                </h2>
-                <p class="text-gray-300 mt-4 w-[65%] text-center max-lg:w-full">Experience seamless learning anytime, anywhere! Access courses, practice tests, and real-time updates—right from your mobile.
-                    📱 Available on Google Play & App Store <span class="italic">(To log in use organization code: <b class="text-white"> Vikasa</b>)</span>.</p>
-                <div class="flex items-center justify-center gap-3">
-                    <a href="https://play.google.com/store/apps/details?id=co.jarvis.vikasa" target="_blank">
-                        <img src="/public/images/Google.png" class="mt-7 h-10" alt="">
-                    </a>
-                    <a href="https://apps.apple.com/in/app/classplus/id1324522260" target="_blank">
-                        <img src="/public/images/app-store.png" class="mt-7 h-10" alt="">
-                    </a>
-                </div>
-            </div>
+            <div class="relative">
+                <div class="owl-carousel owl-theme new-arrival-carousel">
+                    <!-- Product 2 -->
+                    <a href="products/product-details" class="block">
+                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                            <!-- Discount Badge -->
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                                SAVE 14%
+                            </span>
 
-        </div>
-    </div>
+                            <!-- Product Images -->
+                            <div class="relative w-full h-[400px] overflow-hidden group">
+                                <!-- Default Image -->
+                                <img src="/public/images/111.avif" alt="Product 1"
+                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
 
-    <?php include('views/website/include/testimonials.php'); ?>
-    <div class="w-full flex items-center justify-center">
-        <div class="w-[80%] flex items-center justify-center h-[1px] bg-gray-300"></div>
-    </div>
-    <div class="w-full flex items-center justify-center py-20 max-lg:py-10">
-        <div class="w-[80%] flex flex-col items-center justify-center max-lg:w-[85%]">
-            <span class="w-full text-blue-500 uppercase">Feedback Videos</span>
-            <h2 class="w-full text-3xl font-semibold mt-2 ">India's Largest Bank Exam Preparation <br>Online Community
-            </h2>
-            <p class="w-full text-blue-500 mt-2">Join a thriving community of thousands of serious aspirants from across the country preparing for IBPS, SBI, RBI, and other competitive bank exams. Get access to expert guidance, live doubt-solving, daily quizzes, updated study materials, and peer support—all in one place. Whether you're just starting out or aiming to boost your score, our community is your ultimate companion on the journey to a successful banking career.</p>
+                                <!-- Hover Image -->
+                                <img src="/public/images/1112.avif" alt="Product 1 Hover"
+                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
 
-            <div class="w-full flex items-center justify-center mt-10 relative">
-                <div id="forward" onclick="banner_backward(this)"
-                    class="absolute z-[999] top-[40%] shadow left-[1vw] border bg-white border-white p-2 rounded-full cursor-pointer max-lg:top-[87%] max-lg:top-[50%] max-lg:left-[5vw]">
-                    <img src="/public/images/backward-black.png" class="w-[25px] h-[25px] max-lg:w-[12px] max-lg:h-[12px]"
-                        alt="">
-                </div>
-                <div id="backward" onclick="banner_forward(this)"
-                    class="absolute z-[999] top-[40%] shadow right-[1vw] border bg-white  border-white p-2 rounded-full cursor-pointer max-lg:top-[87%] max-lg:right-[75vw] max-lg:top-[50%]  max-lg:right-[5vw]">
-                    <img src="/public/images/forward-black.png" class="w-[25px] h-[25px] max-lg:w-[12px] max-lg:h-[12px]"
-                        alt="">
-                </div>
-                <div class="w-[90%] flex items-center justify-center owl-carousel testimonial-video">
-                    <iframe class="w-full h-[45vh] rounded-2xl" src="https://www.youtube.com/embed/GCU_OnfcSSo?si=SdO-Vntm4BceyFTM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    <iframe class="w-full h-[45vh] rounded-2xl" src="https://www.youtube.com/embed/OGeRRkBx_Uo?si=oZTw6H-79ZVUZSqd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    <iframe class="w-full h-[45vh] rounded-2xl" src="https://www.youtube.com/embed/sPUImcLNXCY?si=J9FbC1hOYGgqoXGF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    <iframe class="w-full h-[45vh] rounded-2xl" src="https://www.youtube.com/embed/NQaefl0I3yE?si=npqm9ZyLm5FajAEf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    <iframe class="w-full h-[45vh] rounded-2xl" src="https://www.youtube.com/embed/2E2IZqBaDi8?si=hMYbPQ2cOAPRUxPz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
+                                <!-- Add to favorites Icon (top-right) -->
+                                <button
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-heart"></i>
+                                </button>
 
-            </div>
-        </div>
-    </div>
-    <?php
-    if (1 == 1) {
-        $popup = getDisplayPopup($this->db);
-        // printWithPre($popup);
-        // var_dump($popup);
-        if (count($popup) > 0) {
-            $popup = $popup[0];
-
-
-    ?>
-            <div id="popup" class="w-full bg-[#2c2c2c6b] flex items-center justify-center h-screen fixed top-0 left-0 z-[99999999] hidden">
-                <div class="w-[50%] h-auto max-lg:h-auto bg-white relative flex  items-center justify-center max-lg:w-[90%] max-lg:flex-col">
-                    <div class="flex items-center justify-center absolute top-3 rounded-full right-3  bg-[#0000006b] w-8 h-8 " id="closepoup"><i class="fa-solid fa-xmark text-white"></i></div>
-                    <a href="<?= $popup['link'] ?>" class="w-full h-full flex items-center justify-center max-lg:h-[40%]">
-                        <img src="/<?= $popup['img'] ?>" class="w-full h-full object-cover " alt="">
-                    </a>
-                    <div class="w-full h-[70%] flex items-center justify-center flex-col gap-6    max-lg:h-[60%] hidden">
-                        <img src="/asset/logo.png" class="w-1/2 h-auto mb-6" alt="">
-                        <h2 class="text-4xl font-semibold w-full text-center px-3  max-lg:text-2xl" style="font-family: 'Dancing Script', cursive;"><?= $popup['heading'] ?></h2>
-                        <p class="w-full text-center px-3 text-gray-500  max-lg:text-sm"><?= $popup['description'] ?></p>
-                        <?php if ($popup['link'] != null || $popup['link'] != "") { ?>
-                            <div class="w-full px-3">
-                                <a href="<?= $popup['link'] ?>">
-                                    <button class="button_slide slide_right text-white w-full py-2">BUY NOW</button>
-                                </a>
+                                <!-- Add to Cart Icon -->
+                                <button
+                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
                             </div>
-                        <?php } ?>
-                    </div>
+
+                            <!-- Product Details -->
+                            <div class="p-4 text-center">
+                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
+                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Product 3 -->
+                    <a href="products/product-details" class="block">
+                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                            <!-- Discount Badge -->
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                                SAVE 14%
+                            </span>
+
+                            <!-- Product Images -->
+                            <div class="relative w-full h-[400px] overflow-hidden group">
+                                <!-- Default Image -->
+                                <img src="/public/images/333.avif" alt="Product 1"
+                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+
+                                <!-- Hover Image -->
+                                <img src="/public/images/3332.avif" alt="Product 1 Hover"
+                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+
+                                <!-- Add to favorites Icon (top-right) -->
+                                <button
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+
+                                <!-- Add to Cart Icon -->
+                                <button
+                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+
+                            <!-- Product Details -->
+                            <div class="p-4 text-center">
+                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
+                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Product 4 -->
+                    <a href="products/product-details" class="block">
+                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                            <!-- Discount Badge -->
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                                SAVE 14%
+                            </span>
+
+                            <!-- Product Images -->
+                            <div class="relative w-full h-[400px] overflow-hidden group">
+                                <!-- Default Image -->
+                                <img src="/public/images/4441.avif" alt="Product 1"
+                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+
+                                <!-- Hover Image -->
+                                <img src="/public/images/4442.avif" alt="Product 1 Hover"
+                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+
+                                <!-- Add to favorites Icon (top-right) -->
+                                <button
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+
+                                <!-- Add to Cart Icon -->
+                                <button
+                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+
+                            <!-- Product Details -->
+                            <div class="p-4 text-center">
+                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
+                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Product 5 -->
+                    <a href="products/product-details" class="block">
+                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                            <!-- Discount Badge -->
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                                SAVE 14%
+                            </span>
+
+                            <!-- Product Images -->
+                            <div class="relative w-full h-[400px] overflow-hidden group">
+                                <!-- Default Image -->
+                                <img src="/public/images/11.avif" alt="Product 1"
+                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+
+                                <!-- Hover Image -->
+                                <img src="/public/images/555.avif" alt="Product 1 Hover"
+                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+
+                                <!-- Add to favorites Icon (top-right) -->
+                                <button
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+
+                                <!-- Add to Cart Icon -->
+                                <button
+                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+
+                            <!-- Product Details -->
+                            <div class="p-4 text-center">
+                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
+                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Product Card -->
+                    <a href="products/product-details" class="block">
+                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                            <!-- Discount Badge -->
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                                SAVE 14%
+                            </span>
+
+                            <!-- Product Images -->
+                            <div class="relative w-full h-[400px] overflow-hidden group">
+                                <!-- Default Image -->
+                                <img src="/public/images/1.webp" alt="Product 1"
+                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+
+                                <!-- Hover Image -->
+                                <img src="/public/images/2.webp" alt="Product 1 Hover"
+                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+
+                                <!-- Add to favorites Icon (top-right) -->
+                                <button
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+
+                                <!-- Add to Cart Icon -->
+                                <button
+                                    class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+
+
+                            <!-- Product Details -->
+                            <div class="p-4 text-center">
+                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
+                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section -->
+    <section class="pb-12 relative">
+        <div class="absolute -top-14 -left-14 w-auto h-auto opacity-20">
+            <img src="/public/images/naruto.webp" alt="" class="w-40 h-auto">
+        </div>
+        <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+            <h2 class="text-center text-3xl font-extrabold mb-3 uppercase">Categories</h2>
+            <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+                Discover the latest collection of trendy, comfortable, and versatile outfits designed for teen boys who
+                love
+                to express their style — from everyday casuals to bold streetwear vibes, Nova Kids has it all.
+            </p>
+        </div>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 w-[90vw] mx-auto px-4">
+
+            <!-- Tees -->
+            <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
+                data-aos-delay="200">
+                <img src="/public/images/11.avif" alt="Tees"
+                    class="w-full h-[400px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                <!-- Overlay -->
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
+                </div>
+                <!-- Text -->
+                <div
+                    class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl tracking-wide">
+                    <span class="group-hover:text-[#f25b21] transition-colors duration-300 ">Tees</span>
+                </div>
+            </div>
+
+            <!-- Co-ords -->
+            <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
+                data-aos-delay="200">
+                <img src="/public/images/coooo.png" alt="Co-ords"
+                    class="w-full h-[400px] object-cover object-bottom transform group-hover:scale-110 transition duration-700 ease-out">
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
+                </div>
+                <div
+                    class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl tracking-wide">
+                    <span class="group-hover:text-[#f25b21] transition-colors duration-300">Co-ords</span>
+                </div>
+            </div>
+
+            <!-- Joggers -->
+            <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
+                data-aos-delay="200">
+                <img src="/public/images/Joggers.avif" alt="Joggers"
+                    class="w-full h-[400px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
+                </div>
+                <div
+                    class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl tracking-wide">
+                    <span class="group-hover:text-[#f25b21] transition-colors duration-300">Joggers</span>
+                </div>
+            </div>
+            <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
+                data-aos-delay="200">
+                <img src="/public/images/45.png" alt="Tees"
+                    class="w-full h-[400px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                <!-- Overlay -->
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
+                </div>
+                <!-- Text -->
+                <div
+                    class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl tracking-wide">
+                    <span class="group-hover:text-[#f25b21] transition-colors duration-300 ">Hoodies</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 h-[90vh] mt-12">
+        <!-- Left Image Block -->
+        <div class="relative bg-cover bg-center bg-top" style="background-image: url('/public/images/f5.webp');">
+            <div class="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center text-white">
+                <h2 class="text-xl md:text-2xl font-semibold mb-4">
+                    Stylish boys’ tees and <br> active outfits
+                </h2>
+                <a href="products/product-details"
+                    class="relative inline-block px-6 py-2 rounded-lg border border-white text-white font-semibold overflow-hidden group">
+                    <!-- Text -->
+                    <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
+                        Shop Now
+                    </span>
+                    <!-- Background overlay -->
+                    <span
+                        class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                </a>
 
             </div>
-    <?php  }
-    } ?>
-    <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/footer.php'; ?>
+        </div>
+
+        <!-- Right Image Block -->
+        <div class="relative bg-cover bg-top" style="background-image: url('/public/images/b1.jpg');">
+            <div class="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center text-white">
+                <h2 class="text-xl md:text-2xl font-semibold mb-4">
+                    Comfort wear for every <br> boys’ occasion
+                </h2>
+                <a href="products/product-details"
+                    class="relative inline-block px-6 py-2 rounded-lg border border-white text-white font-semibold overflow-hidden group">
+                    <!-- Text -->
+                    <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
+                        Shop Now
+                    </span>
+                    <!-- Background overlay -->
+                    <span
+                        class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative w-full h-auto">
+        <!-- Banner Image -->
+        <img src="/public/images/b2.avif" alt="" class="w-full h-auto">
+
+        <!-- Hotspot 1 (bottom-left) -->
+        <div class="absolute bottom-[20%] left-[30%] group">
+            <!-- Animated Dot -->
+            <div class="relative flex items-center justify-center">
+                <!-- Outer Ping -->
+                <span class="absolute inline-flex h-6 w-6 rounded-full bg-orange-500 opacity-75 animate-ping"></span>
+                <!-- Inner Dot -->
+                <span class="relative inline-flex h-4 w-4 rounded-full bg-orange-500 border-2 border-white"></span>
+            </div>
+
+            <!-- Tooltip -->
+            <div
+                class="absolute bottom-10 -left-[120px] opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                <div class="relative bg-white shadow-lg p-2 w-64 flex items-center space-x-2">
+                    <!-- Pointer -->
+                    <div
+                        class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white">
+                    </div>
+
+                    <img src="/public/images/f8.webp" alt="Product 1" class="w-20 h-20 object-cover">
+                    <div>
+                        <p class="text-sm font-semibold text-gray-800">Gotham Shirt</p>
+                        <p class="text-sm font-semibold text-[#f25b21]">Rs. 1,999</p>
+                        <a href="#" class="text-sm text-gray-800 underline">View Product</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Hotspot 2 (center) -->
+        <div class="absolute top-[27%] left-[52%] transform -translate-x-1/2 group">
+            <!-- Animated Dot -->
+            <div class="relative flex items-center justify-center">
+                <!-- Outer Ping -->
+                <span class="absolute inline-flex h-6 w-6 rounded-full bg-orange-500 opacity-75 animate-ping"></span>
+                <!-- Inner Dot -->
+                <span class="relative inline-flex h-4 w-4 rounded-full bg-orange-500 border-2 border-white"></span>
+            </div>
+
+            <!-- Tooltip -->
+            <div
+                class="absolute top-10 left-1/2 -translate-x-1/2 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                <div class="relative bg-white shadow-lg p-2 w-64 flex items-center space-x-2">
+                    <!-- Pointer -->
+                    <div
+                        class="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-transparent border-b-white">
+                    </div>
+
+                    <img src="/public/images/f9.webp" alt="Product 2" class="w-20 h-20 object-cover">
+                    <div>
+                        <p class="text-sm font-semibold text-gray-800">Gotham Shirt</p>
+                        <p class="text-sm font-semibold text-[#f25b21]">Rs. 1,999</p>
+                        <a href="#" class="text-sm text-gray-800 underline">View Product</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="pb-12 pt-20 relative overflow-hidden">
+        <div class="absolute -top-8 -right-12 w-auto h-auto opacity-20">
+            <img src="/public/images/net.webp" alt="" class="w-48 h-auto">
+        </div>
+        <div class="flex flex-col items-center mb-8" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+            <h2 class="text-center text-3xl font-extrabold mb-3">SHOP BY STYLE</h2>
+            <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+                Explore a range of styles crafted for every mood and moment — from laid-back casuals to standout
+                streetwear,
+                Nova Kids makes sure you look on point, every time.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-[90vw] mx-auto px-4">
+
+            <!-- Korean Look -->
+            <a href="products/product-details" class="block">
+                <div class="relative group">
+                    <img src="/public/images/img1.avif" alt="Korean Look"
+                        class="w-full h-[400px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                </div>
+            </a>
+
+            <a href="products/product-details" class="block">
+                <!-- Textured Polos -->
+                <div class="relative group">
+                    <img src="/public/images/img2.avif" alt="Textured Polos"
+                        class="w-full h-[400px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                </div>
+            </a>
+
+            <a href="products/product-details" class="block">
+                <!-- Plaid Shirts -->
+                <div class="relative group">
+                    <img src="/public/images/img3.avif" alt="Plaid Shirts"
+                        class="w-full h-[400px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="py-10 w-full h-auto">
+        <div class="relative">
+            <img src="/public/images/123.avif" alt="" class="w-full h-auto">
+
+            <!-- Button positioned bottom-left -->
+            <button onclick="window.location.href = 'products/product-details'"
+                class="absolute bottom-28 left-36 bg-black border border-white hover:border-yellow-200 text-white px-5 py-2 rounded-lg font-semibold shadow-lg hover:bg-yellow-200 hover:text-black transition">
+                Shop Now
+            </button>
+        </div>
+    </section>
+
+
+    <section class="relative w-full h-[80vh] bg-fixed bg-center bg-cover hidden"
+        style="background-image: url('/public/images/123.avif');">
+
+        <!-- Optional overlay for readability -->
+        <div class="absolute inset-0 bg-black/30"></div>
+
+        <!-- Content on top -->
+        <div class="relative z-10 flex items-center justify-center h-full">
+            <h2 class="text-white text-4xl font-bold">Parallax Section</h2>
+        </div>
+    </section>
+
+    <section class="bg-white py-14 w-full">
+        <div class="w-[90vw] max-md:w-[90vw] mx-auto">
+            <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                <h2 class="text-center text-3xl font-extrabold mb-3 uppercase">Featured Collection</h2>
+                <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto mb-8">
+                    Handpicked styles that define the season — our featured collection brings together the freshest
+                    trends, bold designs, and everyday essentials crafted to elevate your wardrobe.
+                </p>
+
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <a href="products/product-details" class="block">
+                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
+                        <div class="relative w-full h-[400px] overflow-hidden">
+                            <!-- Discount badge -->
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                                SAVE 23%
+                            </span>
+
+                            <!-- Add to favorites Icon (top-right) -->
+                            <button
+                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-heart"></i>
+                            </button>
+
+                            <!-- Add to Cart Icon -->
+                            <button
+                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+
+                            <!-- Multiple images stacked -->
+                            <img src="/public/images/f1.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
+                            <img src="/public/images/f2.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+                            <img src="/public/images/f33.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+
+                            <!-- Dots -->
+                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                            </div>
+                        </div>
+
+                        <!-- Product info below the images -->
+                        <div class="p-4 text-center">
+                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
+                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                        </div>
+                    </div>
+                </a>
+
+
+                <a href="products/product-details" class="block">
+                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
+                        <div class="relative w-full h-[400px] overflow-hidden">
+                            <!-- Discount badge -->
+                            <span
+                                class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">SAVE
+                                23%</span>
+
+                            <!-- Add to favorites Icon (top-right) -->
+                            <button
+                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-heart"></i>
+                            </button>
+
+                            <!-- Add to Cart Icon -->
+                            <button
+                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+
+                            <!-- Multiple images stacked -->
+                            <img src="/public/images/f7.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
+                            <img src="/public/images/f8.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+                            <img src="/public/images/f99.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+
+                            <!-- Dots -->
+                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                            </div>
+                        </div>
+
+                        <!-- Product info below the images -->
+                        <div class="p-4 text-center">
+                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
+                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="products/product-details" class="block">
+                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
+                        <div class="relative w-full h-[400px] overflow-hidden">
+                            <!-- Discount badge -->
+                            <span
+                                class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">SAVE
+                                23%</span>
+
+                            <!-- Add to favorites Icon (top-right) -->
+                            <button
+                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-heart"></i>
+                            </button>
+
+                            <!-- Add to Cart Icon -->
+                            <button
+                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+
+                            <!-- Multiple images stacked -->
+                            <img src="/public/images/f3.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
+                            <img src="/public/images/f4.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+                            <img src="/public/images/f55.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+
+                            <!-- Dots -->
+                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                            </div>
+
+                        </div>
+
+                        <!-- Product info below the images -->
+                        <div class="p-4 text-center">
+                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
+                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="products/product-details" class="block">
+                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
+                        <div class="relative w-full h-[400px] overflow-hidden">
+                            <!-- Discount badge -->
+                            <span
+                                class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">SAVE
+                                23%</span>
+
+                            <!-- Add to favorites Icon (top-right) -->
+                            <button
+                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-heart"></i>
+                            </button>
+
+                            <!-- Add to Cart Icon -->
+                            <button
+                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+
+                            <!-- Multiple images stacked -->
+                            <img src="/public/images/f5.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
+                            <img src="/public/images/f6.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+                            <img src="/public/images/f77.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+
+                            <!-- Dots -->
+                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                            </div>
+                        </div>
+
+                        <!-- Product info below the images -->
+                        <div class="p-4 text-center">
+                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
+                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="products/product-details" class="block">
+                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
+                        <div class="relative w-full h-[400px] overflow-hidden">
+                            <!-- Discount badge -->
+                            <span
+                                class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">SAVE
+                                23%</span>
+
+                            <!-- Add to favorites Icon (top-right) -->
+                            <button
+                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-heart"></i>
+                            </button>
+
+                            <!-- Add to Cart Icon -->
+                            <button
+                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+
+                            <!-- Multiple images stacked -->
+
+                            <img src="/public/images/f9.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
+                            <img src="/public/images/f10.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+                            <!-- <img src="/public/images/f9.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0"> -->
+
+                            <!-- Dots -->
+                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                            </div>
+                        </div>
+
+                        <!-- Product info below the images -->
+                        <div class="p-4 text-center">
+                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
+                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="products/product-details" class="block">
+                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
+                        <div class="relative w-full h-[400px] overflow-hidden">
+                            <!-- Discount badge -->
+                            <span
+                                class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">SAVE
+                                23%</span>
+
+                            <!-- Add to favorites Icon (top-right) -->
+                            <button
+                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-heart"></i>
+                            </button>
+
+                            <!-- Add to Cart Icon -->
+                            <button
+                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+
+                            <!-- Multiple images stacked -->
+                            <img src="/public/images/f11.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
+                            <img src="/public/images/f12.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+                            <!-- <img src="/"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0"> -->
+
+                            <!-- Dots -->
+                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                            </div>
+                        </div>
+
+                        <!-- Product info below the images -->
+                        <div class="p-4 text-center">
+                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
+                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="products/product-details" class="block">
+                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
+                        <div class="relative w-full h-[400px] overflow-hidden">
+                            <!-- Discount badge -->
+                            <span
+                                class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">SAVE
+                                23%</span>
+
+                            <!-- Add to favorites Icon (top-right) -->
+                            <button
+                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-heart"></i>
+                            </button>
+
+                            <!-- Add to Cart Icon -->
+                            <button
+                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+
+                            <!-- Multiple images stacked -->
+                            <img src="/public/images/f13.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
+                            <img src="/public/images/f14.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+                            <!-- <img src="/"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0"> -->
+
+                            <!-- Dots -->
+                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                            </div>
+
+                        </div>
+
+                        <!-- Product info below the images -->
+                        <div class="p-4 text-center">
+                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
+                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="products/product-details" class="block">
+                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
+                        <div class="relative w-full h-[400px] overflow-hidden">
+                            <!-- Discount badge -->
+                            <span
+                                class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">SAVE
+                                23%</span>
+
+                            <!-- Add to favorites Icon (top-right) -->
+                            <button
+                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-heart"></i>
+                            </button>
+
+                            <!-- Add to Cart Icon -->
+                            <button
+                                class="openCartBtn absolute top-14 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+
+                            <!-- Multiple images stacked -->
+                            <img src="/public/images/2.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
+                            <img src="/public/images/1.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+                            <!-- <img src="/public/images/3.webp"
+                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0"> -->
+
+                            <!-- Dots -->
+                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                                <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
+                            </div>
+                        </div>
+
+                        <!-- Product info below the images -->
+                        <div class="p-4 text-center">
+                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
+                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Custom outlined text effect */
+        .text-outline {
+            color: transparent;
+            -webkit-text-stroke: 1px #222222ff;
+            text-stroke: 1px black;
+        }
+
+        /* .text-outline:hover {
+            color: black;
+            -webkit-text-stroke: 1px black;
+            text-stroke: 1px black;
+        } */
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .marquee {
+            animation: scroll 10s linear infinite;
+        }
+
+        .marquee-content {
+            min-width: 200%;
+        }
+    </style>
+
+    <!-- Marquee Section -->
+    <section class="overflow-hidden bg-gradient-to-r from-orange-50 via-transparent to-orange-50 py-8 my-10">
+        <div class="relative w-full group">
+            <div class="marquee flex whitespace-nowrap">
+                <div class="marquee-content flex items-center space-x-10 px-10">
+                    <!-- Repeat Content Twice for Infinite Scroll -->
+                    <template id="marquee-items">
+                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-300 font-[400] text-4xl cursor-pointer"
+                            style="font-family: 'Outfit', sans-serif;">
+                            <span>Streetwear</span>
+                            <span class="text-gray-300 text-4xl">
+                                #
+                            </span>
+                        </div>
+
+                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-300 font-[400] text-4xl cursor-pointer"
+                            style="font-family: 'Outfit', sans-serif;">
+                            <span>Sneakers</span>
+                            <span class="text-gray-300 text-4xl">
+                                #
+                            </span>
+                        </div>
+
+                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-300 font-[400] text-4xl cursor-pointer"
+                            style="font-family: 'Outfit', sans-serif;">
+                            <span>Oversized Fits</span>
+                            <span class="text-gray-300 text-4xl">
+                                #
+                            </span>
+                        </div>
+
+                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-300 font-[400] text-4xl cursor-pointer"
+                            style="font-family: 'Outfit', sans-serif;">
+                            <span>Casual Drip</span>
+                            <span class="text-gray-300 text-4xl">
+                                #
+                            </span>
+                        </div>
+                    </template>
+
+                    <!-- Inject Items Twice -->
+                    <div class="flex items-center space-x-10">
+                        <script>
+                            const items = document.getElementById('marquee-items').content;
+                            const container = document.currentScript.parentElement;
+                            container.appendChild(items.cloneNode(true));
+                            container.appendChild(items.cloneNode(true)); // Two copies for infinite loop
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <style>
+        /* Animated gradient text */
+        .animated-gradient {
+            background-image: linear-gradient(270deg, #f58529, #dd2a7b, #8134af, #515bd4);
+            background-size: 600% 600%;
+            animation: gradientMove 4s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Instagram button */
+        .instagram-btn {
+            background-image: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+            background-size: 300% 300%;
+            animation: gradientMove 8s ease infinite;
+        }
+
+        .instagram-btn:hover {
+            filter: brightness(1.2);
+            transform: scale(1.05);
+        }
+    </style>
+
+
+    <style>
+        .masonry-container {
+            column-count: 2;
+            /* ✅ Always 2 columns */
+            column-gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .masonry-item {
+            display: inline-block;
+            margin-bottom: 20px;
+            width: 100%;
+            break-inside: avoid;
+            /* border-radius: 16px; */
+            overflow: hidden;
+        }
+
+        .masonry-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            /* border-radius: 16px; */
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .masonry-container {
+                column-count: 3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .masonry-container {
+                column-count: 2;
+                column-gap: 15px;
+                padding: 0 15px;
+            }
+
+            .masonry-item {
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .masonry-container {
+                column-count: 1;
+                max-width: 300px;
+            }
+        }
+    </style>
+
+    <section class="py-16 w-[90vw] mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+            <!-- Left Side Text (Sticky) -->
+            <div class="md:sticky top-24 self-start">
+                <h2 class="text-5xl md:text-6xl font-extrabold uppercase leading-tight md:mt-24">
+                    Follow us <br> on
+                    <span class="animated-gradient bg-clip-text text-transparent">
+                        Instagram
+                    </span>
+                </h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-md mb-8">
+                    Stay updated with the latest drops, streetwear vibes, and Gen-Z inspo straight from our feed.
+                </p>
+
+                <button
+                    class="flex-1 relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black hover:border-transparent bg-transparent text-black">
+
+                    <!-- Text -->
+                    <span
+                        class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
+                        @novakids
+                    </span>
+
+                    <!-- Gradient overlay (starts hidden, slides in on hover) -->
+                    <span
+                        class="absolute inset-0 bg-gradient-to-r from-[#57458f] to-[#bf5452] -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
+                    </span>
+                </button>
+
+            </div>
+
+            <!-- Right Side Grid (Scrollable) -->
+
+            <div class="masonry-container md:h-[180vh] overflow-y-auto" id="masonryGrid">
+                <div class="masonry-item" style="height: 360px;">
+                    <img src="/public/images/111.avif" alt="Nature">
+                </div>
+
+                <div class="masonry-item" style="height: 250px;">
+                    <img src="/public/images/222.avif" alt="Ocean">
+                </div>
+
+                <div class="masonry-item" style="height: 300px;">
+                    <img src="/public/images/333.avif" alt="Sky">
+                </div>
+
+                <div class="masonry-item" style="height: 130px;">
+                    <img src="/public/images/banner.webp" alt="Forest">
+                </div>
+
+                <!-- Added 5 more images -->
+                <div class="masonry-item" style="height: 120px;">
+                    <img src="/public/images/banner.webp" alt="Mountain">
+                </div>
+
+                <div class="masonry-item" style="height: 280px;">
+                    <img src="/public/images/Joggers.avif" alt="River">
+                </div>
+
+                <div class="masonry-item" style="height: 260px;">
+                    <img src="/public/images/f7.webp" alt="Desert">
+                </div>
+
+                <div class="masonry-item" style="height: 140px;">
+                    <img src="/public/images/11.avif" alt="Beach">
+                </div>
+
+                <div class="masonry-item" style="height: 200px;">
+                    <img src="/public/images/f5.webp" alt="Valley">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+    <!-- jQuery & Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
     <script>
-        $(document).ready(function() {
-            $('.home-slider').owlCarousel({
+        $(document).ready(function () {
+            $(".new-arrival-carousel").owlCarousel({
                 loop: true,
                 margin: 10,
-                nav: false,
-                dots: true,
+                nav: true,
+                dots: false,
                 autoplay: true,
                 autoplayTimeout: 3000,
                 responsive: {
-                    0: {
-                        items: 1
-                    },
-                    768: {
-                        items: 1
-                    },
-                    1024: {
-                        items: 1
-                    }
+                    0: { items: 1 },
+                    600: { items: 2 },
+                    1000: { items: 4 },
+                    1280: { items: 4 }
                 }
             });
         });
     </script>
 
+    <!-- SwiperJS Script -->
     <script>
-        function showpopup() {
-            setTimeout(() => {
-                const popup = document.getElementById('popup');
-                popup.classList.remove('hidden');
-            }, 3000); // 3000 milliseconds = 3 seconds
-        }
-
-        window.onload = function() {
-            showpopup();
-        };
-        document.getElementById('closepoup').addEventListener('click', function() {
-            document.getElementById('popup').classList.add('hidden')
-            close_popup();
-
-        })
-        async function close_popup() {
-            const request = await axios.post("", new URLSearchParams({
-                popup: 'true'
-            }));
-            console.log(request.data)
-        }
+        new Swiper(".product-swiper", {
+            loop: true,
+            autoplay: {
+                delay: 1200,
+                disableOnInteraction: false,
+            },
+        });
     </script>
+
+    <!-- SwiperJS Script -->
+    <script>
+        new Swiper(".product-swiper", {
+            loop: true,
+            autoplay: {
+                delay: 1200,
+                disableOnInteraction: false,
+            },
+        });
+    </script>
+
+    <script>
+        const productCards = document.querySelectorAll('.changingimg');
+
+        productCards.forEach(card => {
+            const images = card.querySelectorAll('img');
+            const dots = card.querySelectorAll('div.absolute.bottom-2 span');
+            let currentIndex = 0;
+            let interval;
+
+            function updateDots(index) {
+                dots.forEach((dot, idx) => {
+                    dot.classList.toggle('opacity-100', idx === index);
+                    dot.classList.toggle('opacity-50', idx !== index);
+                });
+            }
+
+            updateDots(currentIndex);
+
+            card.addEventListener('mouseenter', () => {
+                interval = setInterval(() => {
+                    images[currentIndex].classList.remove('opacity-100');
+                    images[currentIndex].classList.add('opacity-0');
+
+                    currentIndex = (currentIndex + 1) % images.length;
+
+                    images[currentIndex].classList.remove('opacity-0');
+                    images[currentIndex].classList.add('opacity-100');
+
+                    updateDots(currentIndex);
+                }, 1000);
+            });
+
+            card.addEventListener('mouseleave', () => {
+                clearInterval(interval);
+
+                // Reset to first image
+                images.forEach((img, idx) => {
+                    img.classList.toggle('opacity-100', idx === 0);
+                    img.classList.toggle('opacity-0', idx !== 0);
+                });
+                currentIndex = 0;
+                updateDots(currentIndex);
+            });
+        });
+    </script>
+
+    <script>
+        // Stop redirection when clicking cart/heart
+        document.querySelectorAll('.stop-link').forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.preventDefault();
+                e.stopPropagation();
+                // your cart/heart logic goes here
+            });
+        });
+    </script>
+
+    <!-- Include AOS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        AOS.init({
+            once: true, // Ensures the animation runs only once
+        });
+    </script>
+
+    <?php
+    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/sidecart.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/footer.php"; ?>
 </body>

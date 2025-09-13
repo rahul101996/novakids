@@ -13,7 +13,7 @@ class WebController extends LoginController
         }
         parent::__construct($this->db);
     }
-    public  function current_url(): string
+    public function current_url(): string
     {
         // Detect protocol
         $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
@@ -43,11 +43,27 @@ class WebController extends LoginController
         //  echo "hello";
         // die();
         // $this->checkSession();
-       
+
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             require 'views/website/index.php';
         }
     }
+
+    public function productDetails()
+    {
+
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "Product Page";
+        $pageTitle = "Product Page";
+        //  echo "hello";
+        // die();
+        // $this->checkSession();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            require 'views/website/product-details.php';
+        }
+    }
+
     public function sbiClerk()
     {
 
@@ -67,7 +83,7 @@ class WebController extends LoginController
     }
     public function sbiPo()
     {
-$url = $this->current_url();
+        $url = $this->current_url();
         // echo $url;
         $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
         $siteName = getDBObject()->getSiteName();
@@ -81,7 +97,7 @@ $url = $this->current_url();
     }
     public function IbpsClerk()
     {
-$url = $this->current_url();
+        $url = $this->current_url();
         // echo $url;
         $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
         $siteName = getDBObject()->getSiteName();
@@ -291,7 +307,7 @@ $url = $this->current_url();
             require 'views/website/csat.php';
         }
     }
-    public  function ContactUs()
+    public function ContactUs()
     {
         $siteName = getDBObject()->getSiteName();
         $pageModule = "Contact Us";
@@ -384,7 +400,8 @@ $url = $this->current_url();
             require 'views/website/privacy-policy.php';
         }
     }
-    public function TermsAndConditions(){
+    public function TermsAndConditions()
+    {
         $siteName = getDBObject()->getSiteName();
         $pageModule = "Terms And Conditions";
         $pageTitle = "Terms And Conditions";
@@ -394,7 +411,8 @@ $url = $this->current_url();
             require 'views/website/terms-and-conditions.php';
         }
     }
-    public function CancellationAndRefund(){
+    public function CancellationAndRefund()
+    {
         $siteName = getDBObject()->getSiteName();
         $pageModule = "Cancellation And Refund";
         $pageTitle = "Cancellation And Refund";
@@ -404,24 +422,24 @@ $url = $this->current_url();
             require 'views/website/cancellation-and-refund.php';
         }
     }
-   public function UpdateOrder()
-{
-    $order = $_POST['value'];
-    $id = $_POST['id'];
-    // echo $id;
-    // echo $order;
+    public function UpdateOrder()
+    {
+        $order = $_POST['value'];
+        $id = $_POST['id'];
+        // echo $id;
+        // echo $order;
 
-    if ($id != null) {
-        $update = update(['order_no' => $order], $id, 'tbl_home_banner');
-        if ($update) {
-            echo json_encode(['success' => true]);
+        if ($id != null) {
+            $update = update(['order_no' => $order], $id, 'tbl_home_banner');
+            if ($update) {
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Update failed']);
+            }
         } else {
-            echo json_encode(['success' => false, 'message' => 'Update failed']);
+            echo json_encode(['success' => false, 'message' => 'Invalid ID']);
         }
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid ID']);
     }
-}
 
     public function ViewBlog($title = null)
     {
@@ -518,7 +536,7 @@ ORDER BY id DESC LIMIT 5");
         $states = $this->getData2("SELECT * FROM `tbl_state`");
         $Enrolled_courses = $this->getData2("SELECT * FROM `course_payment` WHERE `user_id` = " . $_SESSION['userid']);
         // printWithPre($Enrolled_courses);
-        
+
 
 
         require 'views/website/myprofile.php';
@@ -539,7 +557,8 @@ ORDER BY id DESC LIMIT 5");
     {
         require 'views/website/media-events.php';
     }
-    public function ContactMail(){
+    public function ContactMail()
+    {
         require 'views/website/contact-mail.php';
     }
 }
