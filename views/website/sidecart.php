@@ -1,3 +1,25 @@
+<!-- Add this style -->
+<style>
+    @keyframes rotatePingPong {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        50% {
+            transform: rotate(90deg);
+        }
+
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+
+    .animate-rotate-pingpong {
+        animation: rotatePingPong 4s ease-in-out infinite;
+    }
+</style>
+
+
 <!-- Overlay -->
 <div id="overlay" class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-500 z-40">
 </div>
@@ -13,52 +35,33 @@
         <button id="closeCart" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong">
             <i class="fas fa-times"></i>
         </button>
-
-        <!-- Add this style -->
-        <style>
-            @keyframes rotatePingPong {
-                0% {
-                    transform: rotate(0deg);
-                }
-
-                50% {
-                    transform: rotate(45deg);
-                }
-
-                100% {
-                    transform: rotate(0deg);
-                }
-            }
-
-            .animate-rotate-pingpong {
-                animation: rotatePingPong 2s ease-in-out infinite;
-            }
-        </style>
-
     </div>
 
     <!-- Cart Items -->
     <div class="flex-1 overflow-y-auto p-4 space-y-6">
         <!-- Free shipping message + progress bar -->
-        <div>
-            <p class="text-sm mb-2">
-                Buy <span class="text-[#f25b21] font-bold">₹261.00</span> more to enjoy
+        <div id="shippingMessage">
+            <p id="remainingText" class="text-sm mb-2">
+                Buy <span id="remainingAmount" class="text-[#f25b21] font-bold">₹261.00</span> more to enjoy
                 <span class="font-semibold">FREE Shipping</span>
             </p>
-            <div class="relative w-full h-2 bg-gray-200 rounded-full mt-6">
+            <p id="congratsMessage" class="text-sm font-semibold text-green-600 hidden">
+                🎉 Congrats! You are eligible for FREE Shipping
+            </p>
+            <div class="relative w-[90%] h-2 bg-gray-200 rounded-full mt-6">
                 <!-- progress fill -->
-                <div class="h-2 bg-[#f25b21] rounded-full" style="width: 42%;"></div>
+                <div id="progressBar" class="h-2 bg-[#f25b21] rounded-full" style="width: 0%;"></div>
 
                 <!-- truck icon -->
-                <div class="absolute -top-3" style="left: 42%;">
+                <div id="truckIcon" class="absolute -top-3" style="left: 0%;">
                     <span
                         class="flex items-center justify-center w-7 h-7 rounded-full border border-[#f25b21] bg-white">
                         <i class="fas fa-truck text-[#f25b21] text-sm"></i>
                     </span>
                 </div>
             </div>
-
         </div>
+
 
         <!-- Cart item -->
         <div class="flex items-center gap-4 border-b py-4">
@@ -69,13 +72,13 @@
             <div class="flex-1">
                 <h3 class="font-semibold text-base">The Great Manifestor Polo</h3>
                 <p class="text-sm text-gray-500">Size: L</p>
-                <p class="font-bold text-[#f25b21]">₹1,199</p>
+                <p class="font-bold text-[#f25b21]">₹<span id="cartTotal">1199</span></p>
 
                 <!-- Quantity controls -->
                 <div class="flex items-center mt-2">
-                    <button class="px-3  border rounded-l hover:bg-gray-100">-</button>
-                    <span class="px-4  border-t border-b">1</span>
-                    <button class="px-3  border rounded-r hover:bg-gray-100">+</button>
+                    <button id="qtyMinus" class="px-3 border rounded-l hover:bg-gray-100">-</button>
+                    <span id="qtyDisplay" class="px-4 border-t border-b">1</span>
+                    <button id="qtyPlus" class="px-3 border rounded-r hover:bg-gray-100">+</button>
                 </div>
             </div>
 
@@ -106,7 +109,8 @@
                     class="absolute inset-0 bg-black scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
             </button>
 
-            <button class="relative w-full font-semibold py-2 rounded-lg border-2 border-[#f25b21] overflow-hidden group">
+            <button
+                class="relative w-full font-semibold py-2 rounded-lg border-2 border-[#f25b21] overflow-hidden group">
                 <!-- Text -->
                 <span class="relative z-10 text-white group-hover:text-[#f25b21] transition-colors duration-300">
                     Checkout
@@ -143,4 +147,63 @@
     openCartBtns.forEach(btn => btn.addEventListener('click', openCart));
     closeCart.addEventListener('click', closeCartFn);
     overlay.addEventListener('click', closeCartFn);
+</script>
+
+<script>
+    const targetFreeShipping = 1460; // Free shipping threshold
+    const itemPrice = 1199; // Price of one item
+    let quantity = 1; // default
+
+    // Elements
+    const progressBar = document.getElementById("progressBar");
+    const truckIcon = document.getElementById("truckIcon");
+    const remainingText = document.getElementById("remainingText");
+    const remainingAmountEl = document.getElementById("remainingAmount");
+    const congratsMessage = document.getElementById("congratsMessage");
+    const qtyDisplay = document.getElementById("qtyDisplay");
+    const cartTotalEl = document.getElementById("cartTotal");
+
+    const qtyMinus = document.getElementById("qtyMinus");
+    const qtyPlus = document.getElementById("qtyPlus");
+
+    function updateCart() {
+        const subtotal = itemPrice * quantity;
+        const remaining = targetFreeShipping - subtotal;
+
+        // Update total price
+        cartTotalEl.textContent = subtotal.toLocaleString();
+
+        // Calculate progress %
+        let progress = (subtotal / targetFreeShipping) * 100;
+        if (progress > 100) progress = 100;
+
+        progressBar.style.width = progress + "%";
+        truckIcon.style.left = progress + "%";
+
+        if (remaining > 0) {
+            congratsMessage.classList.add("hidden");
+            remainingText.classList.remove("hidden");
+            remainingAmountEl.textContent = "₹" + remaining.toLocaleString();
+        } else {
+            remainingText.classList.add("hidden");
+            congratsMessage.classList.remove("hidden");
+        }
+    }
+
+    // Quantity controls
+    qtyMinus.addEventListener("click", () => {
+        if (quantity > 1) {
+            quantity--;
+            qtyDisplay.textContent = quantity;
+            updateCart();
+        }
+    });
+
+    qtyPlus.addEventListener("click", () => {
+        quantity++;
+        qtyDisplay.textContent = quantity;
+        updateCart();
+    });
+
+    updateCart(); // initial call
 </script>
