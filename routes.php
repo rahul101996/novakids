@@ -35,7 +35,34 @@ $route->group(['', 'CollectionController'], function ($route) {
     // $route->route('/', 'index');
 
 });
+$route->group(['', 'CategoryController'], function ($route) {
 
+    // $route->route('admin/add-packaging', 'AddCollections');
+    $route->route('/admin/add-category', 'index');
+    $route->route('/admin/category-list', 'CategoryList');
+    $route->route('/edit-category/[i:id]', 'index');
+    $route->route('/delete-category/[i:id]', 'DeleteCategory');
+
+
+
+
+    // $route->route('/', 'index');
+
+});
+$route->group(['', 'PackageController'], function ($route) {
+
+    // $route->route('admin/add-packaging', 'AddCollections');
+    $route->route('/admin/add-packaging', 'index');
+    $route->route('/admin/packages-list', 'PackageList');
+    $route->route('/edit-package/[i:id]', 'index');
+    $route->route('/delete-package/[i:id]', 'DeleteCategory');
+
+
+
+
+    // $route->route('/', 'index');
+
+});
 $route->group(['', 'DashboardController', 'auth'], function ($route) {
     $route->route('dashboard', 'index');
 });

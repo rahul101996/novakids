@@ -91,6 +91,35 @@
                     </svg>
                     Customers
                 </a>
+                <div>
+                    <button @click="open === 'master' ? open = null : open = 'master'"
+                        class="w-full flex items-center justify-between px-4 py-2 hover:bg-slate-700 rounded-lg">
+                        <span class="flex items-center">
+                            <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                            Master
+                        </span>
+                        <svg :class="{'rotate-180': open === 'master'}"
+                            class="h-4 w-4 transform transition-transform"
+                            xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div x-show="open === 'master'" x-collapse class="ml-10 mt-2 space-y-1">
+                        <a href="/admin/category-list" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                            Category
+                        </a>
+                        <a href="/admin/packages-list" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                            Add Packaging
+                        </a>
+                        
+                    </div>
+                </div>
             </nav>
 
             <!-- Alpine.js (needed for dropdowns) -->

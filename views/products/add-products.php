@@ -43,6 +43,23 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <textarea class="w-full h-40 border-0 focus:ring-0 resize-y p-3 summernote"
                                 placeholder="" name="description"><?= isset($collection['description']) ? $collection['description'] : '' ?></textarea>
                         </div>
+                        <h2 class="text-sm font-medium mt-3">Category</h2>
+                                <div class="w-full flex items-center justify-start">
+                                    <select name="products[]" class="selectElement" multiple>
+                                        <option value="">-- Select a Product --</option>
+                                        <option value="1">T-Shirt</option>
+                                        <option value="2">Jeans</option>
+                                        <option value="3">Jacket</option>
+                                        <option value="4">Sweater</option>
+                                        <option value="5">Shorts</option>
+                                        <option value="6">Dress</option>
+                                        <option value="7">Skirt</option>
+                                        <option value="8">Shirt</option>
+                                        <option value="9">Blazer</option>
+                                        <option value="10">Hoodie</option>
+                                    </select>
+
+                                </div>
                     </div>
 
 
