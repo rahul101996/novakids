@@ -13,7 +13,7 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('', 'index');
     $route->route('products/product-details', 'productDetails');
     $route->route('login', 'login');
-    $route->route('signup', 'signup');
+    $route->route('shop', 'shop');
     $route->route('contact', 'ContactUs');
     $route->route('wishlist', 'wishlist');
     $route->route('return-exchange', 'returnExchange');

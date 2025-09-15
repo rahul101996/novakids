@@ -31,10 +31,10 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .color-option:hover {
+        /* .color-option:hover {
             transform: scale(1.1) rotate(5deg);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
+        } */
 
         .accordion-content {
             height: 0;
@@ -364,15 +364,17 @@
 
                         <!-- Delivery & Return Info -->
                         <div class="mt-6 space-y-3 text-gray-700">
-                            <p><i class="fa-solid fa-truck-fast mr-2 text-gray-900"></i><span
-                                    class="font-semibold">Delivery & Return</span></p>
-                            <!-- <p><i class="fa-solid fa-ruler mr-2 text-gray-900"></i><span class="font-semibold">Size
-                                    Guide</span></p> -->
-                            <p><i class="fa-regular fa-calendar-days mr-2 text-gray-900"></i><span
+                            <button id="openDeliveryModal" class="cursor-pointer flex items-center gap-2">
+                                <i class="fa-solid fa-truck-fast text-gray-900"></i>
+                                <span class="font-semibold">Delivery & Return</span>
+                            </button>
+
+                            <p>
+                                <i class="fa-regular fa-calendar-days mr-3 text-gray-900"></i><span
                                     class="font-semibold">Estimated Delivery:</span> Sep 13 - Sep 17
                             </p>
                             <p>
-                                <i class="fa-regular fa-eye mr-2 text-gray-900"></i>
+                                <i class="fa-regular fa-eye mr-1 text-gray-900"></i>
                                 <span id="viewerCount" class="font-semibold"></span> people are viewing this right now
                             </p>
 
@@ -422,64 +424,187 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section class="mt-20 grid md:grid-cols-4 gap-6 animate-fade-in w-[85vw] mx-auto">
-            <div
-                class="text-center p-6 glass-effect rounded-md hover:shadow-md transition-all duration-300 hover:scale-105 group">
-                <div
-                    class="w-12 h-12 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors">
-                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                    </svg>
+        <style>
+            /* Position nav buttons top-right */
+            .review-carousel .owl-nav {
+                position: absolute;
+                top: -58px;
+                /* adjust as needed */
+                right: 0;
+                display: flex;
+                gap: 8px;
+            }
+
+            /* Style nav buttons */
+            .review-carousel .owl-nav button.owl-prev,
+            .review-carousel .owl-nav button.owl-next {
+                background-color: black !important;
+                color: white !important;
+                border-radius: 50%;
+                /* makes it circular */
+                width: 25px;
+                height: 25px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 18px !important;
+                line-height: 1;
+                border: none !important;
+            }
+
+            /* Hover effect */
+            .review-carousel .owl-nav button:hover {
+                background-color: #333 !important;
+            }
+
+            /* Remove default focus outline */
+            .review-carousel .owl-nav button:focus {
+                outline: none !important;
+            }
+        </style>
+
+
+        <section class="w-[90vw] mx-auto mt-10 py-16 px-5 grid grid-cols-1 md:grid-cols-5 gap-10">
+            <!-- Left Side -->
+            <div class="md:col-span-3">
+                <!-- Average Rating -->
+                <h3 class="text-2xl font-bold mb-4">Customer Reviews</h3>
+
+                <!-- Scrolling Reviews (Owl Carousel) -->
+                <div class="owl-carousel owl-theme review-carousel">
+                    <!-- Review 1 -->
+                    <div class="p-6 bg-white border rounded-md relative m-2 h-[35vh] flex flex-col justify-between">
+                        <div class="flex flex-col gap-3 items-start mb-3 text-[#f25b21]">
+                            <span> ★★★★★</span>
+                            <p class="text-gray-700 italic leading-relaxed">
+                                "Amazing quality and super fast delivery! The packaging was premium and the product
+                                feels
+                                luxurious."
+                            </p>
+                        </div>
+                        <!-- Reviewer Info -->
+                        <div class="flex gap-4 items-center mt-4 w-full">
+                            <div class="flex items-center w-10 h-10">
+                                <img src="/public/images/dp.png" alt="John D."
+                                    class="w-full h-full rounded-full object-cover border mr-3">
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-800">John D.</p>
+                                <!-- <p class="text-xs text-gray-500">Verified Buyer</p> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="p-6 bg-white border rounded-md relative m-2 h-[35vh] flex flex-col justify-between">
+                        <div class="flex flex-col gap-3 items-start mb-3 text-[#f25b21]">
+                            <span> ★★★★★</span>
+                            <p class="text-gray-700 italic leading-relaxed">
+                                "Loved the fabric and the trendy style! Feels super comfortable and stylish at the same
+                                time."
+                            </p>
+                        </div>
+                        <div class="flex gap-4 items-center mt-4">
+                            <div class="flex items-center w-10 h-10">
+                                <img src="/public/images/dp.png" alt="John D."
+                                    class="w-full h-full rounded-full object-cover border mr-3">
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-800">Sarah M.</p>
+                                <!-- <p class="text-xs text-gray-500">Fashion Enthusiast</p> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="p-6 bg-white border rounded-md relative m-2 h-[35vh] flex flex-col justify-between">
+                        <div class="flex flex-col gap-3 items-start mb-3 text-[#f25b21]">
+                            <span> ★★★★★</span>
+                            <p class="text-gray-700 italic leading-relaxed">
+                                "Great fit and excellent customer service. They really care about their customers and it
+                                shows!"
+                            </p>
+                        </div>
+
+                        <div class="flex gap-4 items-center mt-4">
+                            <div class="flex items-center w-10 h-10">
+                                <img src="/public/images/dp.png" alt="John D."
+                                    class="w-full h-full rounded-full object-cover border mr-3">
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-800">Alex P.</p>
+                                <!-- <p class="text-xs text-gray-500">Loyal Customer</p> -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="font-semibold text-gray-900">Free Shipping</h3>
-                <p class="text-sm text-gray-600 mt-2">On orders above ₹999</p>
+
             </div>
 
-            <div
-                class="text-center p-6 glass-effect rounded-md hover:shadow-md transition-all duration-300 hover:scale-105 group">
-                <div
-                    class="w-12 h-12 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center group-hover:bg-green-200 transition-colors">
-                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-                <h3 class="font-semibold text-gray-900">Easy Returns</h3>
-                <p class="text-sm text-gray-600 mt-2">30 days return policy</p>
-            </div>
+            <!-- Right Side -->
+           <div class="md:col-span-2">
+  <!-- Overall Rating -->
+  <div class="flex items-center space-x-2 mb-5">
+    <div>
+      <span class="text-2xl text-orange-500">★★★★★</span>
+    </div>
+    <div>
+      <p class="font-semibold">4.7 out of 5</p>
+      <p class="text-sm text-gray-500">Based on 37 reviews ✅</p>
+    </div>
+  </div>
 
-            <div
-                class="text-center p-6 glass-effect rounded-md hover:shadow-md transition-all duration-300 hover:scale-105 group">
-                <div
-                    class="w-12 h-12 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center group-hover:bg-purple-200 transition-colors">
-                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
-                </div>
-                <h3 class="font-semibold text-gray-900">Secure Payment</h3>
-                <p class="text-sm text-gray-600 mt-2">100% secure checkout</p>
-            </div>
+  <!-- 5 stars -->
+  <div class="flex items-center mb-2">
+    <span class="text-orange-500 mr-2">★★★★★</span>
+    <div class="flex-1 bg-gray-200 h-3 rounded">
+      <div class="bg-orange-500 h-3 rounded" style="width: 70%;"></div>
+    </div>
+    <span class="ml-2 text-sm">26</span>
+  </div>
 
-            <div
-                class="text-center p-6 glass-effect rounded-md hover:shadow-md transition-all duration-300 hover:scale-105 group">
-                <div
-                    class="w-12 h-12 mx-auto mb-4 bg-orange-100 rounded-full flex items-center justify-center group-hover:bg-orange-200 transition-colors">
-                    <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.636a9.364 9.364 0 010 18.728 9.364 9.364 0 010-18.728z" />
-                    </svg>
-                </div>
-                <h3 class="font-semibold text-gray-900">24/7 Support</h3>
-                <p class="text-sm text-gray-600 mt-2">Always here to help</p>
-            </div>
+  <!-- 4 stars -->
+  <div class="flex items-center mb-2">
+    <span class="text-orange-500 mr-2">★★★★☆</span>
+    <div class="flex-1 bg-gray-200 h-3 rounded">
+      <div class="bg-orange-500 h-3 rounded" style="width: 20%;"></div>
+    </div>
+    <span class="ml-2 text-sm">7</span>
+  </div>
+
+  <!-- 3 stars -->
+  <div class="flex items-center mb-2">
+    <span class="text-orange-500 mr-2">★★★☆☆</span>
+    <div class="flex-1 bg-gray-200 h-3 rounded">
+      <div class="bg-orange-500 h-3 rounded" style="width: 6%;"></div>
+    </div>
+    <span class="ml-2 text-sm">2</span>
+  </div>
+
+  <!-- 2 stars -->
+  <div class="flex items-center mb-2">
+    <span class="text-orange-500 mr-2">★★☆☆☆</span>
+    <div class="flex-1 bg-gray-200 h-3 rounded">
+      <div class="bg-orange-500 h-3 rounded" style="width: 3%;"></div>
+    </div>
+    <span class="ml-2 text-sm">1</span>
+  </div>
+
+  <!-- 1 star -->
+  <div class="flex items-center">
+    <span class="text-orange-500 mr-2">★☆☆☆☆</span>
+    <div class="flex-1 bg-gray-200 h-3 rounded">
+      <div class="bg-orange-500 h-3 rounded" style="width: 1%;"></div>
+    </div>
+    <span class="ml-2 text-sm">1</span>
+  </div>
+</div>
+
         </section>
+
 
         <section class="bg-white py-14 w-full">
             <div class="w-[90vw] max-md:w-[90vw] mx-auto">
@@ -685,9 +810,9 @@
         </section>
     </div>
 
-    <!-- Modal -->
+    <!-- Size Modal -->
     <div id="sizeChartModal" class="hidden fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-        <div class="bg-white rounded-md shadow-lg max-w-3xl w-full max-h-[90vh] relative flex flex-col">
+        <div class="bg-white shadow-lg max-w-3xl w-full max-h-[80vh] relative flex flex-col animate-slideDown">
             <!-- Close button -->
             <button onclick="document.getElementById('sizeChartModal').classList.add('hidden')"
                 class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 animate-rotate-pingpong">
@@ -783,6 +908,49 @@
         </div>
     </div>
 
+    <!-- Delivery Modal -->
+    <div id="deliveryModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white w-full w-[65vw] shadow-lg relative p-8 animate-slideDown">
+            <!-- Close Button -->
+            <button id="closeDeliveryModal"
+                class="absolute top-4 right-4 text-gray-600 hover:text-black animate-rotate-pingpong">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Modal Content -->
+            <h2 class="text-2xl font-bold mb-4">Delivery & Return</h2>
+            <p class="text-gray-700 mb-4">
+                We want you to be happy with your purchase and we apologize if it is not.
+                For whatever reason that you are not satisfied, we provide exchanges and returns
+                if the following conditions are met.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-2">Rules</h3>
+            <p class="text-gray-600 mb-4">
+                All exchanges and returns must be raised within 10 days of the invoice date for
+                local orders, and 20 days for overseas orders. For local deliveries, there is an
+                option
+                to exchange at any of our boutiques or through our online portal.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-2">Interpretation and Definitions</h3>
+            <p class="text-gray-600 mb-6">
+                All requests for returns must be strictly made online. Refunds and exchanges
+                will be processed according to company policy for both local and overseas
+                deliveries.
+            </p>
+
+            <button onclick="window.location.href='/return-exchange'"
+                class="relative font-semibold py-2 px-6 rounded-md border-2 border-black overflow-hidden group">
+                <span class="relative z-10 text-white group-hover:text-black transition-colors duration-300">
+                    Read More
+                </span>
+                <span
+                    class="absolute inset-0 bg-black transition-transform duration-300 origin-left group-hover:scale-x-0 scale-x-100"></span>
+            </button>
+        </div>
+    </div>
+
     <!-- Sticky Bottom Strip -->
     <div id="bottomStrip" class="fixed bottom-0 left-0 w-full bg-gray-50 shadow-lg border-t p-2 hidden z-50">
         <div class="w-[90vw] mx-auto flex items-center justify-between">
@@ -858,6 +1026,24 @@
     </script>
 
     <script>
+        $(document).ready(function () {
+            $(".review-carousel").owlCarousel({
+                items: 2,
+                margin: 10,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
+                loop: true,
+                dots: false,
+                nav: true,
+                navText: ["‹", "›"], // simple arrows
+                animateOut: 'fadeOut'
+            });
+        });
+    </script>
+
+
+    <script>
         document.querySelectorAll('.accordion').forEach(acc => {
             const btn = acc.querySelector('button');
             const content = acc.querySelector('.accordion-content');
@@ -887,6 +1073,29 @@
                         }
                         content.removeEventListener('transitionend', handler);
                     });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const modal = document.getElementById('deliveryModal');
+            const openBtn = document.getElementById('openDeliveryModal');
+            const closeBtn = document.getElementById('closeDeliveryModal');
+
+            openBtn.addEventListener('click', () => {
+                modal.classList.remove('hidden');
+            });
+
+            closeBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+
+            // Close on background click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
                 }
             });
         });

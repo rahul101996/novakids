@@ -53,7 +53,7 @@
 
         <!-- Button (Bottom Left, off-center) -->
         <div class="absolute bottom-20 left-10">
-            <button onclick="window.location.href = 'products/product-details'"
+            <button onclick="window.location.href = 'shop'"
                 class="relative px-10 py-3 bg-transparent hover:bg-white text-white hover:text-black border border-white rounded-md font-semibold shadow-lg overflow-hidden group transition-all duration-300">
                 <span class="relative z-10 block transition-colors duration-500 group-hover:animate-glitch">SHOP
                     NOW</span>
@@ -120,12 +120,12 @@
                     <a href="products/product-details" class="block">
                         <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[400px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/111.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -160,12 +160,12 @@
                     <a href="products/product-details" class="block">
                         <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[400px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/333.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -200,12 +200,12 @@
                     <a href="products/product-details" class="block">
                         <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[400px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/4441.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -240,12 +240,12 @@
                     <a href="products/product-details" class="block">
                         <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[400px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/11.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -280,12 +280,12 @@
                     <a href="products/product-details" class="block">
                         <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[400px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/1.webp" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -336,12 +336,12 @@
         </div>
 
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-[90vw] mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-16 w-[90vw] mx-auto px-4">
             <!-- Tees -->
             <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                 data-aos-delay="200">
                 <img src="/public/images/11.avif" alt="Tees"
-                    class="w-full h-[400px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                    class="w-full h-[380px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
                 <!-- Overlay -->
                 <div
                     class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
@@ -357,7 +357,7 @@
             <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                 data-aos-delay="200">
                 <img src="/public/images/coooo.png" alt="Co-ords"
-                    class="w-full h-[400px] object-cover object-bottom transform group-hover:scale-110 transition duration-700 ease-out">
+                    class="w-full h-[380px] object-cover object-bottom transform group-hover:scale-110 transition duration-700 ease-out">
                 <div
                     class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
                 </div>
@@ -371,7 +371,7 @@
             <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                 data-aos-delay="200">
                 <img src="/public/images/Joggers.avif" alt="Joggers"
-                    class="w-full h-[400px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                    class="w-full h-[380px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
                 <div
                     class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
                 </div>
@@ -506,7 +506,7 @@
             <a href="products/product-details" class="block">
                 <div class="relative group">
                     <img src="/public/images/img1.avif" alt="Korean Look"
-                        class="w-full h-[400px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                        class="w-full h-[350px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
                 </div>
             </a>
 
@@ -514,7 +514,7 @@
                 <!-- Textured Polos -->
                 <div class="relative group">
                     <img src="/public/images/img2.avif" alt="Textured Polos"
-                        class="w-full h-[400px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                        class="w-full h-[350px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
                 </div>
             </a>
 
@@ -522,7 +522,7 @@
                 <!-- Plaid Shirts -->
                 <div class="relative group">
                     <img src="/public/images/img3.avif" alt="Plaid Shirts"
-                        class="w-full h-[400px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                        class="w-full h-[350px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
                 </div>
             </a>
         </div>
@@ -557,9 +557,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[400px] overflow-hidden">
+                        <div class="relative w-full h-[350px] overflow-hidden">
                             <!-- Discount badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 23%
                             </span>
 
@@ -603,10 +603,9 @@
 
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[400px] overflow-hidden">
+                        <div class="relative w-full h-[350px] overflow-hidden">
                             <!-- Discount badge -->
-                            <span
-                                class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">SAVE
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
                                 23%</span>
 
                             <!-- Add to favorites Icon (top-right) -->
@@ -641,10 +640,9 @@
 
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[400px] overflow-hidden">
+                        <div class="relative w-full h-[350px] overflow-hidden">
                             <!-- Discount badge -->
-                            <span
-                                class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">SAVE
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
                                 23%</span>
 
                             <!-- Add to favorites Icon (top-right) -->
@@ -679,10 +677,9 @@
 
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[400px] overflow-hidden">
+                        <div class="relative w-full h-[350px] overflow-hidden">
                             <!-- Discount badge -->
-                            <span
-                                class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">SAVE
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
                                 23%</span>
 
                             <!-- Add to favorites Icon (top-right) -->
@@ -717,10 +714,9 @@
 
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[400px] overflow-hidden">
+                        <div class="relative w-full h-[350px] overflow-hidden">
                             <!-- Discount badge -->
-                            <span
-                                class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">SAVE
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
                                 23%</span>
 
                             <!-- Add to favorites Icon (top-right) -->
@@ -754,10 +750,9 @@
 
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[400px] overflow-hidden">
+                        <div class="relative w-full h-[350px] overflow-hidden">
                             <!-- Discount badge -->
-                            <span
-                                class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">SAVE
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
                                 23%</span>
 
                             <!-- Add to favorites Icon (top-right) -->
@@ -790,10 +785,9 @@
 
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[400px] overflow-hidden">
+                        <div class="relative w-full h-[350px] overflow-hidden">
                             <!-- Discount badge -->
-                            <span
-                                class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">SAVE
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
                                 23%</span>
 
                             <!-- Add to favorites Icon (top-right) -->
@@ -827,10 +821,9 @@
 
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[400px] overflow-hidden">
+                        <div class="relative w-full h-[350px] overflow-hidden">
                             <!-- Discount badge -->
-                            <span
-                                class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 rounded z-20">SAVE
+                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
                                 23%</span>
 
                             <!-- Add to favorites Icon (top-right) -->
@@ -891,63 +884,63 @@
                 <div class="marquee-content flex items-center space-x-10 px-10">
                     <!-- Repeat Content Twice for Infinite Scroll -->
                     <template id="marquee-items">
-                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
-                            >
+                        <div
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
                             <span>Streetwear</span>
                             <span class="text-gray-900 text-2xl">
                                 #
                             </span>
                         </div>
 
-                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
-                            >
+                        <div
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
                             <span>Sneakers</span>
                             <span class="text-gray-900 text-2xl">
                                 #
                             </span>
                         </div>
 
-                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
-                            >
+                        <div
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
                             <span>Oversized Fits</span>
                             <span class="text-gray-900 text-2xl">
                                 #
                             </span>
                         </div>
 
-                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
-                            >
+                        <div
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
                             <span>Casual Drip</span>
                             <span class="text-gray-900 text-2xl">
                                 #
                             </span>
                         </div>
-                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
-                            >
+                        <div
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
                             <span>Streetwear</span>
                             <span class="text-gray-900 text-2xl">
                                 #
                             </span>
                         </div>
 
-                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
-                            >
+                        <div
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
                             <span>Sneakers</span>
                             <span class="text-gray-900 text-2xl">
                                 #
                             </span>
                         </div>
 
-                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
-                            >
+                        <div
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
                             <span>Oversized Fits</span>
                             <span class="text-gray-900 text-2xl">
                                 #
                             </span>
                         </div>
 
-                        <div class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer"
-                            >
+                        <div
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
                             <span>Casual Drip</span>
                             <span class="text-gray-900 text-2xl">
                                 #
@@ -965,6 +958,39 @@
                         </script>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pt-16 w-full">
+        <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+            <h2 class="text-center text-3xl font-extrabold mb-3 uppercase">Our Partners</h2>
+            <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto mb-8">
+                We’re proud to work with trusted partners who share our vision and help us create lasting impact
+                together.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 w-[80vw] mx-auto max-md:w-[90vw]">
+            <div
+                class="h-36 rounded-lg overflow-hidden w-full p-2 border border-white hover:border hover:border-gray-300">
+                <img src="/public/images/partner1.png" alt="p1" class="w-full h-full object-contain">
+            </div>
+            <div
+                class="h-36 rounded-lg overflow-hidden w-full p-2 border border-white hover:border hover:border-gray-300">
+                <img src="/public/images/partner2.png" alt="p2" class="w-full h-full object-contain">
+            </div>
+            <div
+                class="h-36 rounded-lg overflow-hidden w-full p-2 border border-white hover:border hover:border-gray-300">
+                <img src="/public/images/partner3.png" alt="p3" class="w-full h-full object-contain">
+            </div>
+            <div
+                class="h-36 rounded-lg overflow-hidden w-full p-2 border border-white hover:border hover:border-gray-300">
+                <img src="/public/images/partner4.png" alt="p4" class="w-full h-full object-contain">
+            </div>
+            <div
+                class="h-36 rounded-lg overflow-hidden w-full p-2 border border-white hover:border hover:border-gray-300">
+                <img src="/public/images/partner5.png" alt="p5" class="w-full h-full object-contain">
             </div>
         </div>
     </section>
@@ -990,18 +1016,6 @@
             100% {
                 background-position: 0% 50%;
             }
-        }
-
-        /* Instagram button */
-        .instagram-btn {
-            background-image: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
-            background-size: 300% 300%;
-            animation: gradientMove 8s ease infinite;
-        }
-
-        .instagram-btn:hover {
-            filter: brightness(1.2);
-            transform: scale(1.05);
         }
     </style>
 
@@ -1125,6 +1139,93 @@
         </div>
     </section>
 
+    <!-- Modal Background -->
+    <div id="newsletterModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+        <!-- Modal Content -->
+        <div class="bg-white shadow-lg w-full w-[35vw] relative animate-slideDown">
+
+            <!-- Close button -->
+            <button id="closeModal"
+                class="absolute top-3 right-3 text-black hover:text-black text-xl animate-rotate-pingpong">
+                ✕</button>
+
+            <!-- Image -->
+            <img src="/public/images/news.jpg" alt="Newsletter Banner" class="h-52 w-full object-cover">
+
+            <!-- Content -->
+            <div class="p-6 text-center w-[80%] mx-auto">
+                <h2 class="text-lg font-bold mb-2">NEWSLETTER</h2>
+                <p class="text-gray-600 text-sm mb-4">
+                    Receive our weekly newsletter.<br>
+                    For dietary content, fashion insider and the best offers.
+                </p>
+
+                <!-- Email Input -->
+                <input type="email" placeholder="Enter Your Email Address"
+                    class="w-full border border-gray-300 rounded-md p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-black">
+
+                <button
+                    class="relative w-full font-semibold py-2 rounded-lg border-2 border-black overflow-hidden group">
+                    <!-- Text -->
+                    <span class="relative z-10 text-white group-hover:text-black transition-colors duration-300">
+                        Subscribe
+                    </span>
+                    <!-- Animated BG -->
+                    <span
+                        class="absolute inset-0 bg-black transition-transform duration-300 origin-left group-hover:scale-x-0 scale-x-100"></span>
+                </button>
+
+                <!-- Social icons -->
+                <div class="flex justify-center space-x-4 mt-5 text-gray-600">
+                    <a href="#" class="hover:text-black"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="hover:text-black"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="hover:text-black"><i class="fab fa-pinterest"></i></a>
+                    <a href="#" class="hover:text-black"><i class="fab fa-vimeo"></i></a>
+                </div>
+
+                <!-- Don't show again -->
+                <div class="flex items-center justify-center mt-4">
+                    <input id="noPopup" type="checkbox" class="mr-2">
+                    <label for="noPopup" class="text-sm text-gray-600">Don't show this popup again</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const modal = document.getElementById('newsletterModal');
+            const closeBtn = document.getElementById('closeModal');
+            const noPopupCheckbox = document.getElementById('noPopup');
+
+            // Show modal after 5s unless "Don't show again" is checked
+            if (!localStorage.getItem('hideNewsletterModal')) {
+                setTimeout(() => {
+                    modal.classList.remove('hidden');
+                }, 3000);
+            }
+
+            // Close modal
+            closeBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                if (noPopupCheckbox.checked) {
+                    localStorage.setItem('hideNewsletterModal', 'true');
+                }
+            });
+
+            // Close modal if clicked outside content
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    if (noPopupCheckbox.checked) {
+                        localStorage.setItem('hideNewsletterModal', 'true');
+                    }
+                }
+            });
+        });
+    </script>
+
+
     <script>
         $(document).ready(function () {
             $(".new-arrival-carousel").owlCarousel({
@@ -1212,16 +1313,7 @@
         });
     </script>
 
-    <script>
-        // Stop redirection when clicking cart/heart
-        document.querySelectorAll('.stop-link').forEach(btn => {
-            btn.addEventListener('click', e => {
-                e.preventDefault();
-                e.stopPropagation();
-                // your cart/heart logic goes here
-            });
-        });
-    </script>
+
 
     <!-- Include AOS JS -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>

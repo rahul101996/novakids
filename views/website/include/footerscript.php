@@ -17,7 +17,16 @@
     });
 </script>
 
-
+<script>
+    // Stop redirection when clicking cart/heart
+    document.querySelectorAll('.stop-link').forEach(btn => {
+        btn.addEventListener('click', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            // your cart/heart logic goes here
+        });
+    });
+</script>
 <script>
     function OpenAccordian(el) {
         const content = el.querySelector('.accordion-content');

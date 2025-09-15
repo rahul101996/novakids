@@ -79,18 +79,18 @@ class WebController extends LoginController
         }
     }
 
-    public function signup()
+    public function shop()
     {
 
         $siteName = getDBObject()->getSiteName();
-        $pageModule = "Signup Page";
-        $pageTitle = "Signup Page";
+        $pageModule = "Shop Page";
+        $pageTitle = "Shop Page";
         //  echo "hello";
         // die();
         // $this->checkSession();
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            require 'views/website/signup.php';
+            require 'views/website/shop.php';
         }
     }
 
