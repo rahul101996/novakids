@@ -11,7 +11,7 @@ $route->group(['', 'LoginController'], function ($route) {
 
 $route->group(['', 'WebController'], function ($route) {
     $route->route('', 'index');
-     $route->route('products/product-details', 'productDetails');
+    $route->route('products/product-details', 'productDetails');
     // $route->route('/', 'index');
 
 });
@@ -20,14 +20,41 @@ $route->group(['', 'CollectionController'], function ($route) {
     $route->route('admin/collections', 'index');
     $route->route('admin/add-collections', 'AddCollections');
     $route->route('/edit-collection/[i:id]', 'AddCollections');
-        $route->route('/admin/add-product', 'AddProducts');
+    $route->route('/admin/add-product', 'AddProducts');
 
 
 
     // $route->route('/', 'index');
 
 });
+$route->group(['', 'CategoryController'], function ($route) {
 
+    // $route->route('admin/add-packaging', 'AddCollections');
+    $route->route('/admin/add-category', 'index');
+    $route->route('/admin/category-list', 'CategoryList');
+    $route->route('/edit-category/[i:id]', 'index');
+    $route->route('/delete-category/[i:id]', 'DeleteCategory');
+
+
+
+
+    // $route->route('/', 'index');
+
+});
+$route->group(['', 'PackageController'], function ($route) {
+
+    // $route->route('admin/add-packaging', 'AddCollections');
+    $route->route('/admin/add-packaging', 'index');
+    $route->route('/admin/packages-list', 'PackageList');
+    $route->route('/edit-packaging/[i:id]', 'index');
+    $route->route('/delete-packaging/[i:id]', 'DeleteCategory');
+
+
+
+
+    // $route->route('/', 'index');
+
+});
 $route->group(['', 'DashboardController', 'auth'], function ($route) {
     $route->route('dashboard', 'index');
 });

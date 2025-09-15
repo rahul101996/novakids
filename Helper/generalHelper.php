@@ -213,7 +213,7 @@ function getRealIP()
     return $ip;
 }
 
-function uploadFile($file, $upload_dir, $allowed_extensions = ['png', 'jpg', 'jpeg', 'webp', 'pdf'])
+function uploadFile($file, $upload_dir, $allowed_extensions = ['png', 'jpg', 'jpeg', 'webp', 'pdf', 'avif'])
 {
 
     // Check if file was uploaded without errors
@@ -433,7 +433,7 @@ function add($data, $table, $timestamp = true)
 
     // Prepare the SQL statement
     $sql = "INSERT INTO `$table` (" . $columns . ") VALUES (" . $placeholders . ")";
-    // echo $sql;
+    echo $sql;
     $stmt = $db->prepare($sql);
 
     // Bind the values
