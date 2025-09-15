@@ -54,8 +54,8 @@ $route->group(['', 'PackageController'], function ($route) {
     // $route->route('admin/add-packaging', 'AddCollections');
     $route->route('/admin/add-packaging', 'index');
     $route->route('/admin/packages-list', 'PackageList');
-    $route->route('/edit-packaging/[i:id]', 'index');
-    $route->route('/delete-packaging/[i:id]', 'DeleteCategory');
+    $route->route('/edit-package/[i:id]', 'index');
+    $route->route('/delete-package/[i:id]', 'DeleteCategory');
 
 
 

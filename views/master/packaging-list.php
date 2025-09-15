@@ -51,50 +51,78 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             <div class="w-full text-sm">
                 <!-- Table Header -->
                 <div class="space-y-2">
-    <!-- Table Header -->
-    <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-2 text-gray-500 bg-gray-100 rounded">
-        <span>Sr. No</span>
-        <span>Category</span>
-        <span>Image</span>
-        <span>Action</span>
-    </div>
+                    <!-- Table Header -->
+                    <div class="grid grid-cols-[auto_minmax(0,3fr)_minmax(0,1fr)] items-center gap-10 px-4 py-2 text-gray-500 bg-gray-100 rounded">
+                        <span>Sr. No</span>
+                        <span>Package</span>
+                        <span>Action</span>
+                    </div>
 
-    <!-- Table Rows -->
-    <?php foreach ($categories as $key => $category) { ?>
-        <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-3 hover:bg-gray-50 text-gray-800 rounded">
-            <!-- Sr. No -->
-            <div class="flex items-center space-x-3">
-                <span><?= $key + 1 ?></span>
-                <svg class="h-4 w-4 text-gray-400 cursor-grab" viewBox="0 0 24 24" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="9" cy="6" r="1.5" />
-                    <circle cx="15" cy="6" r="1.5" />
-                    <circle cx="9" cy="12" r="1.5" />
-                    <circle cx="15" cy="12" r="1.5" />
-                    <circle cx="9" cy="18" r="1.5" />
-                    <circle cx="15" cy="18" r="1.5" />
-                </svg>
+                    <!-- Table Rows -->
+                    <?php foreach ($packages as $key => $package) { ?>
+                        <div class="grid grid-cols-[auto_minmax(0,3fr)_minmax(0,1fr)] items-center gap-10 px-4 py-3 hover:bg-gray-50 text-gray-800 rounded">
+                            <!-- Sr. No -->
+                            <div class="flex items-center space-x-3">
+                                <span><?= $key + 1 ?></span>
+                                <svg class="h-4 w-4 text-gray-400 cursor-grab" viewBox="0 0 24 24" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="9" cy="6" r="1.5" />
+                                    <circle cx="15" cy="6" r="1.5" />
+                                    <circle cx="9" cy="12" r="1.5" />
+                                    <circle cx="15" cy="12" r="1.5" />
+                                    <circle cx="9" cy="18" r="1.5" />
+                                    <circle cx="15" cy="18" r="1.5" />
+                                </svg>
+                            </div>
+
+                            <!-- Package Title and Image -->
+                            <div class="flex items-center space-x-3">
+                                <div class="flex items-center w-full justify-start p-4 border border-gray-300 rounded gap-6">
+                                    <?php
+                                    if($package['package_type'] == "box"){
+                                        echo '<i class="fa-solid fa-box text-gray-500 text-3xl"></i>';
+                                    }elseif($package['package_type'] == "envelope"){
+                                        echo '<i class="fa-solid fa-envelope-open text-gray-500 text-3xl"></i>';
+                                    }else{
+                                        echo '<i class="fa-solid fa-door-closed text-gray-500 text-3xl"></i>';
+                                    }
+                                    
+                                    ?>
+                                    <div class="flex flex-col items-start justify-start">
+                                        <div class="text-gray-800 text-xl mb-0 flex items-center gap-2 justify-start">
+                                            <p class=" mb-0"><?= $package['package_name'] ?></p>
+                                            <?php
+                                            if ($package['is_default'] == 1) {
+                                                echo '<span class="text-gray-500 bg-white px-3 py-1 rounded-full text-xs border border-gray-300">Store default</span>';
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="flex items-center justify-start mt-1 text-gray-600 gap-3 text-lg">
+                                            <span><?= $package['length'] ?></span>
+                                            <span>X</span>
+                                            <span><?= $package['width'] ?></span>
+                                            <span>X</span>
+                                            <span><?= $package['height'] ?></span> :
+                                            <span><?= $package['dimentions_unit'] ?></span>
+                                            <span class="ml-4"><?= $package['weight'] ?></span>
+                                            <span><?= $package['weight_unit'] ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action -->
+                            <div class="flex space-x-2">
+                                <a href="/edit-package/<?= $package['id'] ?>" class="text-blue-500 hover:text-blue-600"><i class="fa-solid fa-pen"></i></a>
+                                <a href="/delete-package/<?= $package['id'] ?>" class="text-red-500 hover:text-red-600"><i class="fa-solid fa-trash"></i></a>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+
+
+
             </div>
-
-            <!-- Category Title -->
-            <div class="font-medium"><?= htmlspecialchars($category['category']) ?></div>
-
-            <!-- Image -->
-            <div>
-                <img src="/<?= htmlspecialchars($category['img']) ?>" class="w-24 rounded" alt="Category Image">
-            </div>
-
-            <!-- Action -->
-            <div class="flex space-x-2">
-                <a href="/edit-category/<?= $category['id'] ?>" class="text-blue-500 hover:text-blue-600"><i class="fa-solid fa-pen"></i></a>
-                <a href="/delete-category/<?= $category['id'] ?>" class="text-red-500 hover:text-red-600"><i class="fa-solid fa-trash"></i></a>
-            </div>
-        </div>
-    <?php } ?>
-</div>
-
-
-
 
 
         </main>

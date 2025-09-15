@@ -34,44 +34,90 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     <div class="lg:col-span-2 flex flex-col gap-6">
 
                         <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Title</label>
-                            <input
-                                class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($category['category']) ? $category['category'] : '' ?>" name="category"
-                                id="title" placeholder="e.g., Summer collection, Under $100, Staff picks" type="text" />
-                            <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
-                                for="description">Description</label>
-                            <div class="border border-gray-300 rounded-md">
-                                <textarea class="w-full h-40 border-0 focus:ring-0 resize-y p-3"
-                                    placeholder="" name="description"><?= isset($category['description']) ? $category['description'] : '' ?></textarea>
-                            </div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Package Type</label>
+                            <div class="w-full flex items-center justify-start mt-2">
+                                <select name="package_type" id="package_type" class="selectElement">
+                                    <option value="">-- Select a Product --</option>
+                                    <option value="box" <?= ($package['package_type'] == 'box') ? 'selected' : '' ?>>BOX</option>
+                                    <option value="envelope" <?= ($package['package_type'] == 'envelope') ? 'selected' : '' ?>>ENVELOPE</option>
+                                    <option value="soft_package" <?= ($package['package_type'] == 'soft_package') ? 'selected' : '' ?>>SOFT PACKAGE</option>
 
+                                </select>
+
+                            </div>
+                            <div class="w-full flex items-center justify-start  gap-3">
+                                <div class="w-full flex flex-col items-start justify-start">
+                                    <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
+                                        for="description">Length</label>
+                                    <div class="border border-gray-300 rounded-md">
+                                        <input type="text" name="length" value="<?= $package['length'] ?>" id="length" class="w-full p-2 rounded-md">
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-col items-start justify-start">
+                                    <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
+                                        for="description">Width</label>
+                                    <div class="border border-gray-300 rounded-md">
+                                        <input type="text" name="width" value="<?= $package['width'] ?>" id="width" class="w-full p-2 rounded-md">
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-col items-start justify-start">
+                                    <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
+                                        for="description">Height</label>
+                                    <div class="border border-gray-300 rounded-md">
+                                        <input type="text" name="height" value="<?= $package['height'] ?>" id="height" class="w-full p-2 rounded-md">
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-col items-start justify-start">
+                                    <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
+                                        for="description">Unit</label>
+                                    <div class="border border-gray-300 rounded-md">
+                                        <select name="dimentions_unit" class="px-2 py-2">
+                                            <option value="cm" <?= ($package['dimentions_unit'] == 'cm') ? 'selected' : '' ?>>CM</option>
+                                            <option value="in" <?= ($package['dimentions_unit'] == 'in') ? 'selected' : '' ?>>IN</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full flex items-center justify-start  gap-3">
+
+                                <div class="w-[33%] flex flex-col items-start justify-start">
+                                    <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
+                                        for="description">Weight</label>
+                                    <div class="border border-gray-300 rounded-md">
+                                        <input type="text" value="<?= $package['weight'] ?>" name="weight" id="weight" class="w-full p-2 rounded-md">
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-col items-start justify-start">
+                                    <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
+                                        for="description">Unit</label>
+                                    <div class="border border-gray-300 rounded-md">
+                                        <select name="weight_unit" class="px-2 py-2">
+                                            <option value="gm" <?= ($package['weight_unit'] == 'gm') ? 'selected' : '' ?>>gm</option>
+                                            <option value="kg" <?= ($package['weight_unit'] == 'kg') ? 'selected' : '' ?>>kg</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <label class="block text-sm font-medium text-gray-700 mt-4" for="title">Package Name</label>
+                            <div class="w-full flex items-center justify-start mt-2">
+                                <input type="text" value="<?= $package['package_name'] ?>" name="package_name" id="package_name" class="w-full p-2 border border-gray-300 rounded-md">
+                            </div>
+                            <div class="w-full flex items-start justify-start mt-4 gap-3">
+                                <input type="checkbox" name="is_default" <?= ($package['is_default'] == 1) ? 'checked' : '' ?> class="h-4 w-4 mt-2">
+                                <p class="font-semibold">Use as default package <br>
+                                    <span class="text-gray-500 text-sm font-normal">Used to calculate rates at checkout and pre-selected when buying labels</span>
+                                </p>
+                            </div>
                         </div>
+
                     </div>
 
                     <div class="lg:col-span-1 flex flex-col gap-6">
 
 
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h2 class="text-base font-medium text-gray-900">Media</h2>
-                            <div class="space-y-1 text-center flex flex-col items-center border-2 border-gray-300 border-dashed rounded-lg p-8">
 
-                                <div id="imagePreview" class="<?= isset($category['img']) ? '' : 'hidden' ?> mb-4">
-                                    <!-- <input type="hidden" name="old_vdata_image" value=""> -->
-                                    <img src="/<?= isset($category['img']) ? $category['img'] : '' ?>" alt="Preview" class="mx-auto h-32 object-cover">
-                                </div>
-                                <svg class="mx-auto h-8 w-8 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                                <div class="flex text-sm text-gray-600">
-                                    <label for="vdata_image" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none">
-                                        <span>Upload a file</span>
-                                        <input id="vdata_image" name="img" type="file" class="sr-only" accept="image/*" <?= isset($category['img']) ? '' : 'required' ?>>
-                                    </label>
-                                    <p class="pl-1">or drag and drop</p>
-                                </div>
-                                <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
-                            </div>
-                        </div>
 
 
 
@@ -83,7 +129,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                 </div>
                 <div class="w-[85%]">
-                    <button class="bg-black border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" name="<?= isset($category['id']) ? 'update' : 'add' ?>">Save</button>
+                    <button class="bg-black border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" name="<?= isset($package['id']) ? 'update' : 'add' ?>">Save</button>
                 </div>
             </form>
         </main>
