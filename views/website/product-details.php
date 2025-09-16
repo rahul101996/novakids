@@ -130,9 +130,9 @@
         </ol>
     </div>
 
-    <div class="w-full mx-auto">
+    <div class="w-full mx-auto max-md:mt-6">
         <section class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start w-[90vw] h-auto mx-auto relative">
-            <div class="md:h-[200vh] overflow-y-auto grid grid-cols-2 max-md:grid-cols-2 gap-2">
+            <div class="md:h-[200vh] overflow-y-auto grid grid-cols-2 max-md:hidden gap-2">
                 <div class="bg-gray-200 overflow-hidden shadow-lg cursor-pointer">
                     <img src="/public/images/222.avif" alt="View 1"
                         class="w-full h-full object-cover image-hover cursor-zoom-in">
@@ -166,6 +166,131 @@
                         class="w-full h-full object-cover image-hover cursor-zoom-in">
                 </div>
             </div>
+
+            <!-- Mobile Carousel -->
+            <div class="md:hidden relative">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide">
+                            <img src="/public/images/222.avif" alt="View 1"
+                                class="w-full h-[400px] object-cover shadow-lg cursor-zoom-in">
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="swiper-slide">
+                            <img src="/public/images/333.avif" alt="View 2"
+                                class="w-full h-[400px] object-cover shadow-lg cursor-zoom-in">
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="swiper-slide">
+                            <img src="/public/images/444.avif" alt="View 3"
+                                class="w-full h-[400px] object-cover shadow-lg cursor-zoom-in">
+                        </div>
+
+                        <!-- Slide 4 -->
+                        <div class="swiper-slide">
+                            <img src="/public/images/7.webp" alt="View 4"
+                                class="w-full h-[400px] object-cover shadow-lg cursor-zoom-in">
+                        </div>
+                    </div>
+
+                    <!-- Pagination (dots) -->
+                    <div class="swiper-pagination"></div>
+                </div>
+
+                <!-- Single View Similar Button -->
+                <button id="viewSimilarBtn"
+                    class="absolute bottom-4 left-4 px-4 py-2 z-50 bg-white/80 text-black text-sm font-medium rounded-md shadow flex items-center gap-2">
+                    <i class="fas fa-layer-group"></i> View Similar
+                </button>
+
+                <!-- Bottom Bar -->
+                <div id="bottomBar"
+                    class="fixed bottom-0 left-0 w-full bg-white shadow-2xl rounded-t-2xl transform translate-y-full transition-transform duration-300 ease-in-out z-[9999]">
+
+                    <!-- Handle -->
+                    <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto my-3"></div>
+
+                    <!-- Header -->
+                    <div class="flex items-center justify-between px-4 pb-3 border-b border-gray-200">
+                        <h3 class="text-base font-semibold text-gray-900">Similar Products</h3>
+                        <button id="closeBottomBar"
+                            class="text-gray-500 hover:text-black text-lg animate-rotate-pingpong">✕</button>
+                    </div>
+
+                    <!-- Product List -->
+                    <div class="p-4 grid grid-cols-2 gap-3 max-h-[60vh] overflow-y-auto">
+                        <div class="border shadow-sm overflow-hidden">
+                            <img src="/public/images/f5.webp" alt="Product 1" class="w-full h-44 object-cover">
+                            <div class="p-2">
+                                <p class="text-sm font-medium text-gray-800 truncate">Oversized Tee</p>
+                                <p class="text-xs text-gray-500">$24.99</p>
+                            </div>
+                        </div>
+
+                        <div class="border shadow-sm overflow-hidden">
+                            <img src="/public/images/f2.webp" alt="Product 2" class="w-full h-44 object-cover">
+                            <div class="p-2">
+                                <p class="text-sm font-medium text-gray-800 truncate">Slim Jogger</p>
+                                <p class="text-xs text-gray-500">$34.99</p>
+                            </div>
+                        </div>
+
+                        <div class="border shadow-sm overflow-hidden">
+                            <img src="/public/images/f8.webp" alt="Product 3" class="w-full h-44 object-cover">
+                            <div class="p-2">
+                                <p class="text-sm font-medium text-gray-800 truncate">Streetwear Co-ord</p>
+                                <p class="text-xs text-gray-500">$49.99</p>
+                            </div>
+                        </div>
+
+                        <div class="border shadow-sm overflow-hidden">
+                            <img src="/public/images/f10.webp" alt="Product 4" class="w-full h-44 object-cover">
+                            <div class="p-2">
+                                <p class="text-sm font-medium text-gray-800 truncate">Co-ord</p>
+                                <p class="text-xs text-gray-500">$49.99</p>
+                            </div>
+                        </div>
+
+                        <div class="border shadow-sm overflow-hidden">
+                            <img src="/public/images/f5.webp" alt="Product 1" class="w-full h-44 object-cover">
+                            <div class="p-2">
+                                <p class="text-sm font-medium text-gray-800 truncate">Oversized Tee</p>
+                                <p class="text-xs text-gray-500">$24.99</p>
+                            </div>
+                        </div>
+
+                        <div class="border shadow-sm overflow-hidden">
+                            <img src="/public/images/f2.webp" alt="Product 2" class="w-full h-44 object-cover">
+                            <div class="p-2">
+                                <p class="text-sm font-medium text-gray-800 truncate">Slim Jogger</p>
+                                <p class="text-xs text-gray-500">$34.99</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JS -->
+                <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                        const viewBtn = document.getElementById("viewSimilarBtn");
+                        const bottomBar = document.getElementById("bottomBar");
+                        const closeBtn = document.getElementById("closeBottomBar");
+
+                        viewBtn.addEventListener("click", () => {
+                            bottomBar.classList.remove("translate-y-full");
+                        });
+
+                        closeBtn.addEventListener("click", () => {
+                            bottomBar.classList.add("translate-y-full");
+                        });
+                    });
+                </script>
+
+            </div>
+
 
             <!-- Product Details Section -->
             <div class="md:sticky top-32 self-start space-y-4">
@@ -917,7 +1042,8 @@
             <div class="flex items-center gap-3 max-md:justify-end max-md:w-full">
                 <div class="flex items-center border border-gray-500 rounded">
                     <button class="px-3 py-1 text-black bg-transparent">-</button>
-                    <input type="text" value="1" class="w-10 text-center border-l border-r border-gray-500 text-black bg-transparent">
+                    <input type="text" value="1"
+                        class="w-10 text-center border-l border-r border-gray-500 text-black bg-transparent">
                     <button class="px-3 py-1 text-black bg-transparent">+</button>
                 </div>
                 <button
@@ -1069,6 +1195,21 @@
                     modal.classList.add('hidden');
                 }
             });
+        });
+    </script>
+
+    <!-- SwiperJS (Add in <head>) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+
+    <!-- SwiperJS (Add before </body>) -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
         });
     </script>
 

@@ -239,7 +239,7 @@
             </a>
         </div>
 
-        <div class="flex md:gap-1 items-center ml-auto md:pr-12 max-md:pr-5 py-1.5">
+        <div class="flex md:gap-1 items-center ml-auto md:pr-12 max-md:pr-3 py-1.5">
             <div class="flex items-center">
                 <button id="openSearch"
                     class="text-black p-2 max-md:text-xs rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
@@ -251,7 +251,7 @@
                         </svg>
                     </div>
                     <div class="md:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="24px"
+                        <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="24px"
                             fill="#000000">
                             <path
                                 d="M400-320q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70Zm-42-98 226-227-57-57-169 170-85-84-57 56 142 142Zm42 178q-134 0-227-93T80-560q0-134 93-227t227-93q134 0 227 93t93 227q0 56-17.5 105.5T653-364l227 228-56 56-228-227q-41 32-90.5 49.5T400-240Zm0-320Z" />
@@ -274,7 +274,7 @@
                     </svg>
                 </div>
                 <div class="md:hidden">
-                    <svg width="20" height="23" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    <svg width="22" height="22" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
                         id="svgkp">
                         <path
                             d="M22.9129 12.935L13.7571 23.0474C13.5348 23.2929 13.1284 23.1084 13.1669 22.7794L14.0816 14.9731H10.6991C10.4034 14.9731 10.2484 14.6219 10.4478 14.4035L20.3133 3.59739C20.5589 3.32834 20.9984 3.58134 20.8891 3.92887L18.2354 12.3664H22.6607C22.9557 12.3664 23.1109 12.7163 22.9129 12.935Z"
@@ -297,7 +297,7 @@
                         </svg>
                     </div>
                     <div class="md:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="24px"
+                        <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="24px"
                             fill="#000000">
                             <path
                                 d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z" />
@@ -306,7 +306,7 @@
                 </button>
             </div>
 
-            <div class="relative">
+            <div class="relative max-md:mr-1">
                 <button
                     class="openCartBtn nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
                     <div class="max-md:hidden">
@@ -317,7 +317,7 @@
                         </svg>
                     </div>
                     <div class="md:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="24px"
+                        <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="24px"
                             fill="#000000">
                             <path
                                 d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
@@ -325,13 +325,171 @@
                     </div>
                 </button>
                 <span
-                    class="absolute -top-1 -right-3 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md">
+                    class="absolute -top-1 max-md:-top-2 -right-3 max-md:right-0 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md">
                     0
                 </span>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <div class="md:hidden">
+                <button id="menu-toggle" class="p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="28px"
+                        fill="#000000">
+                        <path
+                            d="M120-240v-80h520v80H120Zm664-40L584-480l200-200 56 56-144 144 144 144-56 56ZM120-440v-80h400v80H120Zm0-200v-80h520v80H120Z" />
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
 </nav>
+
+<!-- Sidebar (Mobile) -->
+<div id="mobile-sidebar"
+    class="fixed top-0 left-0 h-screen w-[80%] max-w-xs bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out z-[100] overflow-y-auto">
+
+    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <h2 class="text-lg font-semibold text-black">Boys Collection</h2>
+        <button id="menu-close" class="text-gray-600 hover:text-black text-xl animate-rotate-pingpong">
+            ✕
+        </button>
+    </div>
+
+    <div class="px-4 py-6 space-y-6">
+        <div class="border-b border-gray-200">
+            <button class="accordion-header w-full flex justify-between items-center py-3 text-gray-900 font-medium">
+                Tees / Relaxed Tees
+                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <div class="accordion-content hidden pl-3 pb-3 space-y-2 text-sm text-gray-700">
+                <a href="#" class="block hover:text-black">Oversized Tees</a>
+                <a href="#" class="block hover:text-black">Graphic Tees</a>
+                <a href="#" class="block hover:text-black">Long Sleeves</a>
+                <a href="#" class="block hover:text-black">Tank Tops</a>
+            </div>
+        </div>
+
+        <div class="border-b border-gray-200">
+            <button class="accordion-header w-full flex justify-between items-center py-3 text-gray-900 font-medium">
+                Joggers
+                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <div class="accordion-content hidden pl-3 pb-3 space-y-2 text-sm text-gray-700">
+                <a href="#" class="block hover:text-black">Classic Joggers</a>
+                <a href="#" class="block hover:text-black">Slim Fit Joggers</a>
+                <a href="#" class="block hover:text-black">Cargo Joggers</a>
+                <a href="#" class="block hover:text-black">Athletic Joggers</a>
+            </div>
+        </div>
+
+        <div class="border-b border-gray-200">
+            <button class="accordion-header w-full flex justify-between items-center py-3 text-gray-900 font-medium">
+                Co-ords
+                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <div class="accordion-content hidden pl-3 pb-3 space-y-2 text-sm text-gray-700">
+                <a href="#" class="block hover:text-black">Casual Co-ords</a>
+                <a href="#" class="block hover:text-black">Lounge Co-ords</a>
+                <a href="#" class="block hover:text-black">Streetwear Co-ords</a>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <h3 class="text-base font-semibold text-gray-900">Trending Products</h3>
+
+            <div class="grid grid-cols-2 gap-2">
+                <!-- Product 1 -->
+                <a href="products/product-details">
+                    <div class="border overflow-hidden shadow-sm hover:shadow-md transition">
+                        <img src="/public/images/f5.webp" alt="Product 1" class="w-full h-28 object-cover">
+                        <div class="p-2">
+                            <p class="text-sm font-medium text-gray-800 truncate">Oversized Tee</p>
+                            <p class="text-xs text-gray-500">$24.99</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 2 -->
+                <a href="products/product-details">
+                    <div class="border overflow-hidden shadow-sm hover:shadow-md transition">
+                        <img src="/public/images/f2.webp" alt="Product 2" class="w-full h-28 object-cover">
+                        <div class="p-2">
+                            <p class="text-sm font-medium text-gray-800 truncate">Slim Jogger</p>
+                            <p class="text-xs text-gray-500">$34.99</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 3 -->
+                <a href="products/product-details">
+                    <div class="border overflow-hidden shadow-sm hover:shadow-md transition">
+                        <img src="/public/images/f8.webp" alt="Product 3" class="w-full h-28 object-cover">
+                        <div class="p-2">
+                            <p class="text-sm font-medium text-gray-800 truncate">Streetwear Co-ord</p>
+                            <p class="text-xs text-gray-500">$49.99</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 4 -->
+                <a href="products/product-details">
+                    <div class="border overflow-hidden shadow-sm hover:shadow-md transition">
+                        <img src="/public/images/f10.webp" alt="Product 3" class="w-full h-28 object-cover">
+                        <div class="p-2">
+                            <p class="text-sm font-medium text-gray-800 truncate">Co-ord</p>
+                            <p class="text-xs text-gray-500">$49.99</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <a href="/shop"
+                class="block text-center px-4 py-2 rounded-md border border-black font-semibold text-black hover:bg-black hover:text-white transition">
+                View All
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="fixed inset-0 bg-black/40 hidden z-[90]"></div>
+
+<!-- Script -->
+<script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const sidebar = document.getElementById('mobile-sidebar');
+    const overlay = document.getElementById('overlay');
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+    // Sidebar open/close
+    menuToggle.addEventListener('click', () => {
+        sidebar.classList.remove('-translate-x-full');
+        overlay.classList.remove('hidden');
+    });
+
+    menuClose.addEventListener('click', () => {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+    });
+
+    overlay.addEventListener('click', () => {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+    });
+
+    // Accordion toggle
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('i');
+
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180'); // rotate chevron
+        });
+    });
+</script>
 
 <div id="loginModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center hidden z-50">
     <div
