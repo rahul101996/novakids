@@ -41,17 +41,15 @@
     </style>
 
     <!-- Hero Section -->
-    <section class="relative h-[88vh] flex items-center bg-gradient-to-r from-red-800 to-black overflow-hidden">
+    <section
+        class="relative h-[88vh] max-md:h-[90vh] flex items-center bg-gradient-to-r from-red-800 to-black overflow-hidden">
         <!-- Background Image Overlay -->
         <div class="absolute inset-0 bg-[url('/public/images/banner.webp')] bg-cover bg-center opacity-70"></div>
-
-        <!-- Big Heading (Top Left) -->
-        <h2 class="absolute top-16 left-10 text-7xl font-extrabold text-white" data-aos="fade-right"
-            data-aos-duration="1000" data-aos-delay="100">
+        <h2 class="absolute md:top-16 md:left-10 max-md:left-8 max-md:bottom-40 text-7xl max-md:text-5xl font-extrabold text-white"
+            data-aos="fade-right" data-aos-duration="1000" data-aos-delay="100">
             NEW <br> IN <br> FOR <br> YOUNGSTARS
         </h2>
 
-        <!-- Button (Bottom Left, off-center) -->
         <div class="absolute bottom-20 left-10">
             <button onclick="window.location.href = 'shop'"
                 class="relative px-10 py-3 bg-transparent hover:bg-white text-white hover:text-black border border-white rounded-md font-semibold shadow-lg overflow-hidden group transition-all duration-300">
@@ -62,8 +60,7 @@
             </button>
         </div>
 
-        <!-- Random Supporting Text (Top Right) -->
-        <div class="absolute top-28 right-16 bg-white/10 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/20"
+        <div class="absolute top-28 right-16 bg-white/10 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/20 max-md:hidden"
             data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
             <p class="text-white text-xl font-bold tracking-wider uppercase">
                 ✦ Limited Drop
@@ -71,9 +68,8 @@
             <span class="text-sm text-gray-300">Streetwear ’25</span>
         </div>
 
-
-        <!-- Another Random Tagline (Bottom Right, tilted) -->
-        <p class="absolute bottom-12 right-12 text-2xl font-bold text-white rotate-[-6deg] opacity-80 animate-fade">
+        <p
+            class="absolute bottom-12 right-12 max-md:bottom-4 max-md:right-4 text-2xl font-bold text-white rotate-[-6deg] opacity-80 animate-fade">
             #GenZStyle
         </p>
     </section>
@@ -101,31 +97,39 @@
             /* fully rounded */
             transition: all 0.3s ease;
         }
+
+        @media (max-width: 768px) {
+            .new-arrival-carousel .owl-nav {
+                top: -120px;
+                left: 85%;
+            }
+        }
     </style>
 
     <section class="bg-white py-14 w-full">
         <div class="w-[90vw] max-md:w-[90vw] mx-auto">
-            <div class="flex flex-col mb-10" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="100">
+            <div class="flex flex-col mb-10 max-md:mb-2" data-aos="fade-right" data-aos-duration="1000"
+                data-aos-delay="100">
                 <h3 class="text-left text-3xl font-extrabold mb-3 uppercase">New Arrival</h3>
-                <p class="text-left text-gray-600 text-lg max-w-xl">
+                <p class="text-left text-gray-600 text-lg max-md:text-base max-w-xl">
                     Be the first to explore our latest drop — fresh styles crafted for teens who love to stay ahead of
                     the trend.
                 </p>
-
             </div>
 
             <div class="relative">
                 <div class="owl-carousel owl-theme new-arrival-carousel">
                     <!-- Product 2 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div
+                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/111.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -150,22 +154,23 @@
                             <!-- Product Details -->
                             <div class="p-4 text-center">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
+                                <p class="text-[#f25b21] font-bold">₹ 1,199.00</p>
                             </div>
                         </div>
                     </a>
 
                     <!-- Product 3 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div
+                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/333.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -190,22 +195,23 @@
                             <!-- Product Details -->
                             <div class="p-4 text-center">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
+                                <p class="text-[#f25b21] font-bold">₹ 1,199.00</p>
                             </div>
                         </div>
                     </a>
 
                     <!-- Product 4 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div
+                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/4441.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -230,22 +236,23 @@
                             <!-- Product Details -->
                             <div class="p-4 text-center">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
+                                <p class="text-[#f25b21] font-bold">₹ 1,199.00</p>
                             </div>
                         </div>
                     </a>
 
                     <!-- Product 5 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div
+                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/11.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -270,22 +277,23 @@
                             <!-- Product Details -->
                             <div class="p-4 text-center">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
+                                <p class="text-[#f25b21] font-bold">₹ 1,199.00</p>
                             </div>
                         </div>
                     </a>
 
                     <!-- Product Card -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div
+                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/1.webp" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -311,8 +319,8 @@
                             <!-- Product Details -->
                             <div class="p-4 text-center">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
+                                <p class="text-[#f25b21] font-bold">₹ 1,199.00</p>
                             </div>
                         </div>
                     </a>
@@ -328,27 +336,27 @@
         </div>
         <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
             <h2 class="text-center text-3xl font-extrabold mb-3 uppercase">Categories</h2>
-            <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
-                Discover the latest collection of trendy, comfortable, and versatile outfits designed for teen boys who
-                love
-                to express their style — from everyday casuals to bold streetwear vibes, Nova Universe has it all.
+            <p class="text-center text-gray-600 text-lg max-md:text-base max-w-2xl max-md:px-2 mx-auto">
+                Discover trendy, comfortable, and versatile outfits for teen boys — from casual wear to bold streetwear,
+                Nova Universe has it all.
             </p>
+
         </div>
 
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-16 w-[90vw] mx-auto px-4">
+        <div class="grid grid-cols-3 md:grid-cols-3 md:gap-16 w-[90vw] max-md:w-full mx-auto md:px-4">
             <!-- Tees -->
             <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                 data-aos-delay="200">
                 <img src="/public/images/11.avif" alt="Tees"
-                    class="w-full h-[380px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                    class="w-full h-[380px] max-md:h-[200px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
                 <!-- Overlay -->
                 <div
                     class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
                 </div>
                 <!-- Text -->
                 <div
-                    class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl tracking-wide">
+                    class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl max-md:text-base tracking-wide">
                     <span class="group-hover:text-[#f25b21] transition-colors duration-300 uppercase">Tees</span>
                 </div>
             </div>
@@ -357,13 +365,14 @@
             <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                 data-aos-delay="200">
                 <img src="/public/images/coooo.png" alt="Co-ords"
-                    class="w-full h-[380px] object-cover object-bottom transform group-hover:scale-110 transition duration-700 ease-out">
+                    class="w-full h-[380px] max-md:h-[200px] object-cover object-bottom transform group-hover:scale-110 transition duration-700 ease-out">
                 <div
                     class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
                 </div>
                 <div
-                    class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl tracking-wide">
-                    <span class="group-hover:text-[#f25b21] transition-colors duration-300 uppercase">Co-ords</span>
+                    class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl max-md:text-base tracking-wide">
+                    <span
+                        class="group-hover:text-[#f25b21] transition-colors duration-300 uppercase whitespace-nowrap">Co-ords</span>
                 </div>
             </div>
 
@@ -371,26 +380,26 @@
             <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                 data-aos-delay="200">
                 <img src="/public/images/Joggers.avif" alt="Joggers"
-                    class="w-full h-[380px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                    class="w-full h-[380px] max-md:h-[200px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
                 <div
                     class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
                 </div>
                 <div
-                    class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl tracking-wide">
+                    class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl max-md:text-base tracking-wide">
                     <span class="group-hover:text-[#f25b21] transition-colors duration-300 uppercase">Joggers</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="grid grid-cols-1 md:grid-cols-2 h-[90vh] mt-12">
+    <section class="grid grid-cols-1 md:grid-cols-2 h-[90vh] max-md:h-[150vh] mt-12">
         <!-- Left Image Block -->
         <div class="relative bg-cover bg-center bg-top" style="background-image: url('/public/images/f5.webp');">
             <div class="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center text-white">
                 <h2 class="text-xl md:text-2xl font-semibold mb-4">
                     Stylish boys’ tees and <br> active outfits
                 </h2>
-                <a href="products/product-details"
+                <a href="/shop"
                     class="relative inline-block px-6 py-2 rounded-md border border-white text-white font-semibold overflow-hidden group">
                     <!-- Text -->
                     <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
@@ -410,7 +419,7 @@
                 <h2 class="text-xl md:text-2xl font-semibold mb-4">
                     Comfort wear for every <br> boys’ occasion
                 </h2>
-                <a href="products/product-details"
+                <a href="/shop"
                     class="relative inline-block px-6 py-2 rounded-md border border-white text-white font-semibold overflow-hidden group">
                     <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
                         Shop Now
@@ -422,12 +431,12 @@
         </div>
     </section>
 
-    <section class="relative w-full h-auto">
+    <section class="relative w-full h-auto max-md:h-[30vh]">
         <!-- Banner Image -->
-        <img src="/public/images/b2.avif" alt="" class="w-full h-auto">
+        <img src="/public/images/b2.avif" alt="" class="w-full h-auto max-md:h-[30vh]">
 
         <!-- Hotspot 1 (bottom-left) -->
-        <div class="absolute bottom-[20%] left-[30%] group">
+        <div class="absolute bottom-[20%] left-[30%] group max-md:hidden">
             <!-- Animated Dot -->
             <div class="relative flex items-center justify-center">
                 <!-- Outer Ping -->
@@ -448,7 +457,7 @@
                     <img src="/public/images/f8.webp" alt="Product 1" class="w-20 h-20 object-cover">
                     <div>
                         <p class="text-sm font-semibold text-gray-800">Gotham Shirt</p>
-                        <p class="text-sm font-semibold text-[#f25b21]">Rs. 1,999</p>
+                        <p class="text-sm font-semibold text-[#f25b21]">₹ 1,999</p>
                         <a href="#" class="text-sm text-gray-800 underline">View Product</a>
                     </div>
                 </div>
@@ -478,7 +487,7 @@
                     <img src="/public/images/f9.webp" alt="Product 2" class="w-20 h-20 object-cover">
                     <div>
                         <p class="text-sm font-semibold text-gray-800">Gotham Shirt</p>
-                        <p class="text-sm font-semibold text-[#f25b21]">Rs. 1,999</p>
+                        <p class="text-sm font-semibold text-[#f25b21]">₹ 1,999</p>
                         <a href="#" class="text-sm text-gray-800 underline">View Product</a>
                     </div>
                 </div>
@@ -493,7 +502,7 @@
         </div>
         <div class="flex flex-col items-center mb-8" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
             <h2 class="text-center text-3xl font-extrabold mb-3">SHOP BY STYLE</h2>
-            <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+            <p class="text-center text-gray-600 text-lg max-md:text-base max-md:px-2 max-w-2xl mx-auto">
                 Explore a range of styles crafted for every mood and moment — from laid-back casuals to standout
                 streetwear,
                 Nova universe makes sure you look on point, every time.
@@ -506,7 +515,7 @@
             <a href="products/product-details" class="block">
                 <div class="relative group">
                     <img src="/public/images/img1.avif" alt="Korean Look"
-                        class="w-full h-[350px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                        class="w-full h-[350px] max-md:h-[250px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
                 </div>
             </a>
 
@@ -514,7 +523,7 @@
                 <!-- Textured Polos -->
                 <div class="relative group">
                     <img src="/public/images/img2.avif" alt="Textured Polos"
-                        class="w-full h-[350px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                        class="w-full h-[350px] max-md:h-[250px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
                 </div>
             </a>
 
@@ -522,7 +531,7 @@
                 <!-- Plaid Shirts -->
                 <div class="relative group">
                     <img src="/public/images/img3.avif" alt="Plaid Shirts"
-                        class="w-full h-[350px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                        class="w-full h-[350px] max-md:h-[250px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
                 </div>
             </a>
         </div>
@@ -540,24 +549,24 @@
         </div>
     </section>
 
-    <section class="bg-white py-14 w-full relative">
-        <div class="absolute -top-12 -right-14 w-auto h-auto opacity-20">
-            <img src="/public/images/net.webp" alt="" class="w-48 h-auto">
+    <section class="bg-white py-14 w-full relative overflow-hidden">
+        <div class="absolute -top-12 -right-14 max-md:-right-8 max-md:-top-10 w-auto h-auto opacity-20">
+            <img src="/public/images/net.webp" alt="" class="w-48 max-md:w-32 h-auto">
         </div>
         <div class="w-[90vw] max-md:w-[90vw] mx-auto">
             <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                 <h2 class="text-center text-3xl font-extrabold mb-3 uppercase">Featured Collection</h2>
-                <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto mb-8">
+                <p class="text-center text-gray-600 text-lg max-md:text-base max-w-2xl mx-auto">
                     Handpicked styles that define the season — our featured collection brings together the freshest
                     trends, bold designs, and everyday essentials crafted to elevate your wardrobe.
                 </p>
 
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-12 max-md:gap-2">
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] overflow-hidden">
+                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
                             <!-- Discount badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 23%
@@ -594,8 +603,8 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
-                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
                 </a>
@@ -603,7 +612,7 @@
 
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] overflow-hidden">
+                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
                             <!-- Discount badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
                                 23%</span>
@@ -632,15 +641,15 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
-                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
                 </a>
 
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] overflow-hidden">
+                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
                             <!-- Discount badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
                                 23%</span>
@@ -669,15 +678,15 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
-                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
                 </a>
 
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] overflow-hidden">
+                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
                             <!-- Discount badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
                                 23%</span>
@@ -706,15 +715,15 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
-                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
                 </a>
 
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] overflow-hidden">
+                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
                             <!-- Discount badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
                                 23%</span>
@@ -742,15 +751,15 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
-                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
                 </a>
 
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] overflow-hidden">
+                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
                             <!-- Discount badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
                                 23%</span>
@@ -777,15 +786,15 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
-                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
                 </a>
 
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] overflow-hidden">
+                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
                             <!-- Discount badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
                                 23%</span>
@@ -813,15 +822,15 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
-                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
                 </a>
 
                 <a href="products/product-details" class="block">
                     <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] overflow-hidden">
+                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
                             <!-- Discount badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
                                 23%</span>
@@ -848,8 +857,8 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">Rs. 1,299.00</p>
-                            <p class="text-[#f25b21] font-bold">Rs. 999.00</p>
+                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
+                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
                 </a>
@@ -878,71 +887,71 @@
     </style>
 
     <!-- Marquee Section -->
-    <section class="overflow-hidden bg-gradient-to-r from-orange-50 via-transparent to-orange-50 py-2 my-6">
+    <section class="overflow-hidden bg-gradient-to-r from-orange-50 via-transparent to-orange-50 py-2 md:my-6">
         <div class="relative w-full group">
             <div class="marquee flex whitespace-nowrap">
                 <div class="marquee-content flex items-center space-x-10 px-10">
                     <!-- Repeat Content Twice for Infinite Scroll -->
                     <template id="marquee-items">
                         <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
                             <span>Streetwear</span>
-                            <span class="text-gray-900 text-2xl">
+                            <span class="text-gray-900 text-2xl max-md:text-lg">
                                 #
                             </span>
                         </div>
 
                         <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
                             <span>Sneakers</span>
-                            <span class="text-gray-900 text-2xl">
+                            <span class="text-gray-900 text-2xl max-md:text-lg">
                                 #
                             </span>
                         </div>
 
                         <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
                             <span>Oversized Fits</span>
-                            <span class="text-gray-900 text-2xl">
+                            <span class="text-gray-900 text-2xl max-md:text-lg">
                                 #
                             </span>
                         </div>
 
                         <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
                             <span>Casual Drip</span>
-                            <span class="text-gray-900 text-2xl">
+                            <span class="text-gray-900 text-2xl max-md:text-lg">
                                 #
                             </span>
                         </div>
                         <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
                             <span>Streetwear</span>
-                            <span class="text-gray-900 text-2xl">
+                            <span class="text-gray-900 text-2xl max-md:text-lg">
                                 #
                             </span>
                         </div>
 
                         <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
                             <span>Sneakers</span>
-                            <span class="text-gray-900 text-2xl">
+                            <span class="text-gray-900 text-2xl max-md:text-lg">
                                 #
                             </span>
                         </div>
 
                         <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
                             <span>Oversized Fits</span>
-                            <span class="text-gray-900 text-2xl">
+                            <span class="text-gray-900 text-2xl max-md:text-lg">
                                 #
                             </span>
                         </div>
 
                         <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl cursor-pointer">
+                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
                             <span>Casual Drip</span>
-                            <span class="text-gray-900 text-2xl">
+                            <span class="text-gray-900 text-2xl max-md:text-lg">
                                 #
                             </span>
                         </div>
@@ -965,31 +974,31 @@
     <section class="pt-16 w-full">
         <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
             <h2 class="text-center text-3xl font-extrabold mb-3 uppercase">Our Partners</h2>
-            <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto mb-8">
+            <p class="text-center text-gray-600 text-lg max-md:text-base max-md:px-4 max-w-2xl mx-auto">
                 We’re proud to work with trusted partners who share our vision and help us create lasting impact
                 together.
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 w-[80vw] mx-auto max-md:w-[90vw]">
+        <div class="grid grid-cols-3 md:grid-cols-5 md:gap-4 w-[80vw] mx-auto max-md:w-[90vw]">
             <div
-                class="h-36 rounded-lg overflow-hidden w-full p-2 border border-white hover:border hover:border-gray-300">
+                class="h-36 max-md:h-24 rounded-lg overflow-hidden w-full md:p-2 border border-white hover:border hover:border-gray-300">
                 <img src="/public/images/partner1.png" alt="p1" class="w-full h-full object-contain">
             </div>
             <div
-                class="h-36 rounded-lg overflow-hidden w-full p-2 border border-white hover:border hover:border-gray-300">
+                class="h-36 max-md:h-24 rounded-lg overflow-hidden w-full md:p-2 border border-white hover:border hover:border-gray-300">
                 <img src="/public/images/partner2.png" alt="p2" class="w-full h-full object-contain">
             </div>
             <div
-                class="h-36 rounded-lg overflow-hidden w-full p-2 border border-white hover:border hover:border-gray-300">
+                class="h-36 max-md:h-24 rounded-lg overflow-hidden w-full md:p-2 border border-white hover:border hover:border-gray-300">
                 <img src="/public/images/partner3.png" alt="p3" class="w-full h-full object-contain">
             </div>
             <div
-                class="h-36 rounded-lg overflow-hidden w-full p-2 border border-white hover:border hover:border-gray-300">
+                class="h-36 max-md:h-24 rounded-lg overflow-hidden w-full md:p-2 border border-white hover:border hover:border-gray-300">
                 <img src="/public/images/partner4.png" alt="p4" class="w-full h-full object-contain">
             </div>
             <div
-                class="h-36 rounded-lg overflow-hidden w-full p-2 border border-white hover:border hover:border-gray-300">
+                class="h-36 max-md:h-24 rounded-lg overflow-hidden w-full md:p-2 border border-white hover:border hover:border-gray-300">
                 <img src="/public/images/partner5.png" alt="p5" class="w-full h-full object-contain">
             </div>
         </div>
@@ -1056,34 +1065,35 @@
         @media (max-width: 768px) {
             .masonry-container {
                 column-count: 2;
-                column-gap: 15px;
+                column-gap: 5px;
                 padding: 0 15px;
             }
 
             .masonry-item {
-                margin-bottom: 15px;
+                margin-bottom: 0px;
             }
         }
 
         @media (max-width: 480px) {
             .masonry-container {
-                column-count: 1;
-                max-width: 300px;
+                column-count: 3;
+                max-width: 500px;
+                padding: 0px;
             }
         }
     </style>
 
-    <section class="py-16 w-[90vw] mx-auto">
+    <section class="py-16 max-md:pt-8 w-[90vw] mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
             <!-- Left Side Text (Sticky) -->
             <div class="md:sticky top-24 self-start">
-                <h2 class="text-5xl md:text-6xl font-extrabold uppercase leading-tight md:mt-24">
+                <h2 class="text-3xl md:text-6xl font-extrabold uppercase leading-tight md:mt-24">
                     Follow us <br> on
                     <span class="animated-gradient bg-clip-text text-transparent">
                         Instagram
                     </span>
                 </h2>
-                <p class="mt-4 text-lg text-gray-600 max-w-md mb-8">
+                <p class="mt-4 text-lg text-gray-600 max-w-md mb-8 max-md:mb-4">
                     Stay updated with the latest drops, streetwear vibes, and Gen-Z inspo straight from our feed.
                 </p>
 
@@ -1100,39 +1110,40 @@
 
             </div>
 
-            <div class="masonry-container md:h-[180vh] overflow-y-auto" id="masonryGrid">
-                <div class="masonry-item" style="height: 360px;">
+            <div class="masonry-container md:h-[180vh] max-md:h-[80vh] md:overflow-y-auto max-md:overflow-hidden"
+                id="masonryGrid">
+                <div class="masonry-item h-[360px] max-md:h-[200px]">
                     <img src="/public/images/111.avif" alt="Nature">
                 </div>
 
-                <div class="masonry-item" style="height: 250px;">
+                <div class="masonry-item h-[250px] max-md:h-[150px]">
                     <img src="/public/images/222.avif" alt="Ocean">
                 </div>
 
-                <div class="masonry-item" style="height: 300px;">
+                <div class="masonry-item h-[300px] max-md:h-[150px]">
                     <img src="/public/images/333.avif" alt="Sky">
                 </div>
 
-                <div class="masonry-item" style="height: 130px;">
+                <div class="masonry-item h-[130px] max-md:h-[100px]">
                     <img src="/public/images/banner.webp" alt="Forest">
                 </div>
-                <div class="masonry-item" style="height: 120px;">
+                <div class="masonry-item h-[120px] max-md:h-[200px]">
                     <img src="/public/images/banner.webp" alt="Mountain">
                 </div>
 
-                <div class="masonry-item" style="height: 280px;">
+                <div class="masonry-item h-[280px] max-md:h-[200px]">
                     <img src="/public/images/Joggers.avif" alt="River">
                 </div>
 
-                <div class="masonry-item" style="height: 260px;">
+                <div class="masonry-item h-[260px] max-md:h-[200px]">
                     <img src="/public/images/f7.webp" alt="Desert">
                 </div>
 
-                <div class="masonry-item" style="height: 140px;">
+                <div class="masonry-item h-[140px] max-md:h-[150px]">
                     <img src="/public/images/11.avif" alt="Beach">
                 </div>
 
-                <div class="masonry-item" style="height: 200px;">
+                <div class="masonry-item h-[200px] max-md:h-[150px]">
                     <img src="/public/images/f5.webp" alt="Valley">
                 </div>
             </div>
@@ -1142,7 +1153,7 @@
     <!-- Modal Background -->
     <div id="newsletterModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
         <!-- Modal Content -->
-        <div class="bg-white shadow-lg w-full w-[35vw] relative animate-slideDown">
+        <div class="bg-white shadow-lg w-full w-[35vw] max-md:w-[85vw] relative animate-slideDown">
 
             <!-- Close button -->
             <button id="closeModal"
@@ -1150,10 +1161,10 @@
                 ✕</button>
 
             <!-- Image -->
-            <img src="/public/images/news.jpg" alt="Newsletter Banner" class="h-52 w-full object-cover">
+            <img src="/public/images/news.jpg" alt="Newsletter Banner" class="h-52 max-md:h-44 w-full object-cover">
 
             <!-- Content -->
-            <div class="p-6 text-center w-[80%] mx-auto">
+            <div class="p-6 text-center w-[80%] max-md:w-full mx-auto">
                 <h2 class="text-lg font-bold mb-2">NEWSLETTER</h2>
                 <p class="text-gray-600 text-sm mb-4">
                     Receive our weekly newsletter.<br>
@@ -1236,7 +1247,7 @@
                 autoplay: false,
                 autoplayTimeout: 3000,
                 responsive: {
-                    0: { items: 1 },
+                    0: { items: 2 },
                     600: { items: 2 },
                     1000: { items: 4 },
                     1280: { items: 4 }

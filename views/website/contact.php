@@ -6,13 +6,29 @@
 <body class="overflow-x-hidden archivo-narrow-k">
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
 
-    <section class="bg-white grid grid-cols-1 md:grid-cols-5 w-full h-auto mx-auto">
-        <div class="w-full h-[90vh] col-span-2">
-            <img src="/public/images/contactbg.png" alt="" class="h-full">
+    <!-- Add this CSS (can go in a <style> tag or your CSS file) -->
+    <style>
+        /* Hide scrollbar for Chrome, Safari and Edge */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for Firefox */
+        .hide-scrollbar {
+            scrollbar-width: none;
+        }
+    </style>
+
+    <section class="bg-white grid grid-cols-1 md:grid-cols-5 w-full md:h-screen mx-auto">
+        <!-- Left Fixed Image -->
+        <div class="hidden md:block col-span-2 h-screen sticky top-0">
+            <img src="/public/images/contactbg.png" alt="" class="w-full h-full object-cover">
         </div>
 
-        <div class="w-full mx-auto text-center items-center justify-center flex flex-col col-span-2">
-            <div class="w-full mx-auto text-center items-center justify-center flex flex-col">
+        <!-- Right Scrollable Content -->
+        <div class="col-span-3 md:overflow-y-auto md:h-screen px-6 md:px-12 hide-scrollbar">
+            <div class="w-full mx-auto text-center flex flex-col py-12">
+
                 <!-- Heading -->
                 <h2 class="text-3xl font-extrabold text-gray-900 mb-10 tracking-wide">
                     GET IN TOUCH
@@ -20,7 +36,7 @@
                 </h2>
 
                 <!-- Contact Form -->
-                <form class="space-y-8 w-full">
+                <form class="space-y-8 w-full max-w-2xl mx-auto">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="text-left">
                             <label class="block text-sm font-medium text-gray-700">Your Name</label>
@@ -42,7 +58,7 @@
 
                     <div class="text-left">
                         <label class="block text-sm font-medium text-gray-700">Message</label>
-                        <textarea rows="2"
+                        <textarea rows="3"
                             class="w-full border-b border-gray-400 focus:border-black outline-none py-2"></textarea>
                     </div>
 
@@ -58,52 +74,56 @@
                     </button>
                 </form>
 
-            </div>
-            <div class="w-full mx-auto flex items-center justify-center gap-12 text-center py-16">
-                <!-- Call Us -->
-                <div>
-                    <div class="flex justify-center mb-3 group">
-                        <div
-                            class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
-                            <i class="fas fa-phone text-xl group-hover:text-white"></i>
-                        </div>
-                    </div>
-                    <h3 class="text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">Call Us</h3>
-                    <p class="text-gray-900 font-medium">+1 (814) 251-9966</p>
-                </div>
+                <!-- Contact Info -->
+                <div
+                    class="w-full mx-auto flex flex-wrap md:flex-nowrap items-center justify-center gap-12 text-center py-16">
 
-                <!-- Address -->
-                <div>
-                    <div class="flex justify-center mb-3 group">
-                        <div
-                            class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
-                            <i class="fas fa-map-marker-alt text-xl group-hover:text-white"></i>
+                    <!-- Call Us -->
+                    <div>
+                        <div class="flex justify-center mb-3 group">
+                            <div
+                                class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
+                                <i class="fas fa-phone text-xl group-hover:text-white"></i>
+                            </div>
                         </div>
+                        <h3 class="text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">Call Us</h3>
+                        <p class="text-gray-900 font-medium">+1 (814) 251-9966</p>
                     </div>
-                    <h3 class="text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">Address</h3>
-                    <p class="text-gray-900 font-medium">info@example.com</p>
-                </div>
 
-                <!-- Social Media -->
-                <div>
-                    <div class="flex justify-center mb-3 group">
-                        <div
-                            class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
-                            <i class="fas fa-share-alt text-xl group-hover:text-white"></i>
+                    <!-- Address -->
+                    <div>
+                        <div class="flex justify-center mb-3 group">
+                            <div
+                                class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
+                                <i class="fas fa-map-marker-alt text-xl group-hover:text-white"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">Address</h3>
+                        <p class="text-gray-900 font-medium">info@example.com</p>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div>
+                        <div class="flex justify-center mb-3 group">
+                            <div
+                                class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
+                                <i class="fas fa-share-alt text-xl group-hover:text-white"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">Follow Us</h3>
+                        <div class="flex justify-center space-x-5 mt-2 text-gray-600">
+                            <a href="#" class="hover:text-black"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="hover:text-black"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="hover:text-black"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="hover:text-black"><i class="fab fa-pinterest"></i></a>
                         </div>
                     </div>
-                    <h3 class="text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">Follow Us</h3>
-                    <div class="flex justify-center space-x-5 mt-2 text-gray-600">
-                        <a href="#" class="hover:text-black"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="hover:text-black"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="hover:text-black"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="hover:text-black"><i class="fab fa-pinterest"></i></a>
-                    </div>
+
                 </div>
             </div>
         </div>
-
     </section>
+
 
 
     <?php

@@ -2,10 +2,16 @@
 
 class Database
 {
-    private $host = "localhost"; // Change this according to your database configuration
+    private $host = "localhost"; 
     private $dbname = "novakids";
     private $username = "root";
     private $password = "";
+
+    // private $host = "localhost"; 
+    // private $dbname = "u597096203_novakids";
+    // private $username = "u597096203_novakids";
+    // private $password = "f[A7m9pbh";
+
     private $charset = "utf8mb4";
     private $pdo;
     private $base_url = "https://vikassawantsacademy.com/";

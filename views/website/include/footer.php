@@ -143,7 +143,7 @@
                     </p>
                 </div>
 
-                <div class="flex space-x-4 justify-center md:justify-start mb-6">
+                <div class="flex space-x-4 justify-start mb-6">
                     <!-- Instagram -->
                     <a href="#"
                         class="group relative w-12 h-12 md:w-10 md:h-10 flex items-center justify-center rounded-full shadow-lg transform transition-transform hover:-translate-y-2 hover:scale-110">

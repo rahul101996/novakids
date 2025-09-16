@@ -123,30 +123,32 @@
             <!-- Top bar -->
             <div class="flex items-center justify-between border-b p-6 sticky top-20 h-fit bg-white z-40 w-full">
                 <div class="flex items-center justify-between w-[90vw] mx-auto">
-                    <div class="flex items-center gap-4 text-sm">
+                    <div class="flex max-md:flex-col items-start gap-4 text-sm">
                         <button id="filterToggle"
                             class="flex items-center gap-2 px-3 py-1 border rounded hover:bg-gray-100">
                             <i id="filterIcon" class="fa-solid fa-sliders"></i> Filters
                         </button>
-                        <button class="text-sm text-gray-600 hover:underline">Clear Filters</button>
-                        <!-- Active Filters (Dummy Data) -->
                         <div class="flex gap-2">
-                            <span class="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded text-gray-700">
-                                M
-                                <button class="text-gray-500 hover:text-black">
-                                    <i class="fa-solid fa-xmark text-xs"></i>
-                                </button>
-                            </span>
-                            <span class="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded text-gray-700">
-                                Joggers
-                                <button class="text-gray-500 hover:text-black">
-                                    <i class="fa-solid fa-xmark text-xs"></i>
-                                </button>
-                            </span>
+                            <button class="text-sm text-gray-600 hover:underline">Clear Filters</button>
+                            <!-- Active Filters (Dummy Data) -->
+                            <div class="flex gap-2">
+                                <span class="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded text-gray-700">
+                                    M
+                                    <button class="text-gray-500 hover:text-black">
+                                        <i class="fa-solid fa-xmark text-xs"></i>
+                                    </button>
+                                </span>
+                                <span class="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded text-gray-700">
+                                    Joggers
+                                    <button class="text-gray-500 hover:text-black">
+                                        <i class="fa-solid fa-xmark text-xs"></i>
+                                    </button>
+                                </span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-4 text-sm">
+                    <div class="flex items-center gap-4 text-sm max-md:hidden">
                         <!-- Sorting -->
                         <select class="border rounded px-2 py-1 text-sm">
                             <option>Default Sorting</option>
@@ -159,7 +161,7 @@
                         <!-- <div class="flex gap-2 text-lg text-gray-500">
                         <i class="fa-solid fa-border-all cursor-pointer hover:text-black"></i>
                         <i class="fa-solid fa-list cursor-pointer hover:text-black"></i>
-                    </div> -->
+                        </div> -->
 
                         <!-- Show count -->
                         <!-- <select class="border rounded px-2 py-1 text-sm">
@@ -167,7 +169,7 @@
                         <option>Show 12</option>
                         <option>Show 18</option>
                         <option>Show 24</option>
-                    </select> -->
+                        </select> -->
                     </div>
                 </div>
             </div>
@@ -268,14 +270,14 @@
             <!-- Products Section -->
             <main class="md:col-span-3 w-[90vw] mx-auto pb-16">
                 <!-- Product Grid -->
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-md:gap-3">
                     <a href="products/product-details" class="block">
-                        <div class="group relative p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <img src="/public/images/111.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
 
@@ -303,14 +305,14 @@
 
                     <!-- Product 3 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/333.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -343,14 +345,14 @@
 
                     <!-- Product 4 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/4441.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -383,14 +385,14 @@
 
                     <!-- Product 5 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/11.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -422,12 +424,12 @@
                     </a>
 
                     <a href="products/product-details" class="block">
-                        <div class="group relative p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <img src="/public/images/111.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
 
@@ -455,14 +457,14 @@
 
                     <!-- Product 3 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/333.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -495,14 +497,14 @@
 
                     <!-- Product 4 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/4441.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -535,14 +537,14 @@
 
                     <!-- Product 5 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/11.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -574,12 +576,12 @@
                     </a>
 
                     <a href="products/product-details" class="block">
-                        <div class="group relative p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <img src="/public/images/111.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
 
@@ -607,14 +609,14 @@
 
                     <!-- Product 3 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/333.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -647,14 +649,14 @@
 
                     <!-- Product 4 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/4441.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -687,14 +689,14 @@
 
                     <!-- Product 5 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] overflow-hidden group">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/11.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">

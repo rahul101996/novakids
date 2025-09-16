@@ -8,19 +8,68 @@
 
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
 
-    <!-- Breadcrumbs -->
-    <div class="text-sm pt-6 px-6">
-        <ol class="flex items-center space-x-2 text-gray-500">
-            <li>
-                <a href="/" class="hover:text-black">Home</a>
-            </li>
-            <li>
-                <span class="mx-1">/</span>
-            </li>
-            <li class="text-black font-semibold">Product Details</li>
-        </ol>
-    </div>
+    <style>
+        /* Position nav buttons top-right */
+        .review-carousel .owl-nav {
+            position: absolute;
+            top: -58px;
+            /* adjust as needed */
+            right: 0;
+            display: flex;
+            gap: 8px;
+        }
 
+        /* Style nav buttons */
+        .review-carousel .owl-nav button.owl-prev,
+        .review-carousel .owl-nav button.owl-next {
+            background-color: black !important;
+            color: white !important;
+            border-radius: 50%;
+            /* makes it circular */
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px !important;
+            line-height: 1;
+            border: none !important;
+        }
+
+        /* Hover effect */
+        .review-carousel .owl-nav button:hover {
+            background-color: #333 !important;
+        }
+
+        /* Remove default focus outline */
+        .review-carousel .owl-nav button:focus {
+            outline: none !important;
+        }
+    </style>
+    <style>
+        /* Place nav buttons below the carousel */
+        .like-carousel .owl-nav {
+            position: absolute;
+            top: -60px;
+            /* push below blog cards */
+            left: 90%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Style smaller buttons */
+        .like-carousel .owl-nav button span {
+            font-size: 16px;
+            padding: 6px 10px;
+            background: #000000ff;
+            /* Tailwind pink-500 */
+            color: white;
+            border-radius: 9999px;
+            /* fully rounded */
+            transition: all 0.3s ease;
+        }
+    </style>
     <style>
         .image-hover {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -30,11 +79,6 @@
             transform: scale(1.05) rotate(1deg);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
-
-        /* .color-option:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        } */
 
         .accordion-content {
             height: 0;
@@ -73,39 +117,22 @@
         }
     </style>
 
-    <style>
-        /* Place nav buttons below the carousel */
-        .like-carousel .owl-nav {
-            position: absolute;
-            top: -80px;
-            /* push below blog cards */
-            left: 90%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
+    <!-- Breadcrumbs -->
+    <div class="text-sm pt-6 px-6">
+        <ol class="flex items-center space-x-2 text-gray-500">
+            <li>
+                <a href="/" class="hover:text-black">Home</a>
+            </li>
+            <li>
+                <span class="mx-1">/</span>
+            </li>
+            <li class="text-black font-semibold">Product Details</li>
+        </ol>
+    </div>
 
-        /* Style smaller buttons */
-        .like-carousel .owl-nav button span {
-            font-size: 16px;
-            padding: 6px 10px;
-            background: #000000ff;
-            /* Tailwind pink-500 */
-            color: white;
-            border-radius: 9999px;
-            /* fully rounded */
-            transition: all 0.3s ease;
-        }
-
-        /* Hover effect */
-        /* .like-carousel .owl-nav button span:hover {
-            background: #fca45cff;
-        } */
-    </style>
-
-    <div class="w-full mx-auto py-8">
-        <section class="grid grid-cols-2 gap-16 items-start w-[90vw] h-auto mx-auto relative">
-            <div class="md:h-[200vh] overflow-y-auto grid grid-cols-2 gap-2">
+    <div class="w-full mx-auto">
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start w-[90vw] h-auto mx-auto relative">
+            <div class="md:h-[200vh] overflow-y-auto grid grid-cols-2 max-md:grid-cols-2 gap-2">
                 <div class="bg-gray-200 overflow-hidden shadow-lg cursor-pointer">
                     <img src="/public/images/222.avif" alt="View 1"
                         class="w-full h-full object-cover image-hover cursor-zoom-in">
@@ -237,30 +264,30 @@
 
                 <!-- Quantity and Add to Cart -->
                 <div class="space-y-4">
-                    <div class="flex items-center space-x-6">
-                        <!-- Quantity Selector -->
-                        <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
+                    <div class="grid grid-cols-4 max-md:grid-cols-2 max-md:gap-4 sm:items-center sm:space-x-6 w-full">
+                        <div class="flex items-center border border-gray-300 rounded-md overflow-hidden max-md:order-1">
                             <button class="px-4 py-1.5 hover:bg-gray-100 transition-colors text-xl font-bold">−</button>
                             <input type="number" value="1" min="1"
                                 class="w-16 py-1.5 text-center border-l border-r border-gray-300 focus:outline-none">
                             <button class="px-4 py-1.5 hover:bg-gray-100 transition-colors text-xl font-bold">+</button>
                         </div>
 
-                        <!-- Add to Cart -->
-
-                        <button
-                            class="openCartBtn flex-1 relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
-                            <span
-                                class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
-                                <i class="fas fa-cart-plus"></i> Add to Cart
-                            </span>
-                            <span
-                                class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
-                            </span>
-                        </button>
-                        <div class="flex space-x-3">
+                        <div class="col-span-2 max-md:order-3">
                             <button
-                                class="h-12 w-12 items-center justify-center flex rounded-md border hover:bg-white hover:shadow-lg transition-all duration-300 group">
+                                class="openCartBtn w-full sm:flex-1 relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
+                                <span
+                                    class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                </span>
+                                <span
+                                    class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
+                                </span>
+                            </button>
+                        </div>
+
+                        <div class="flex space-x-3 max-md:order-2">
+                            <button
+                                class="h-12 w-12 flex items-center justify-center rounded-md border hover:bg-white hover:shadow-lg transition-all duration-300 group">
                                 <svg class="w-6 h-6 text-gray-600 group-hover:text-red-500 group-hover:scale-110 transition-all"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -268,7 +295,7 @@
                                 </svg>
                             </button>
                             <button
-                                class="h-12 w-12 items-center justify-center flex rounded-md border hover:bg-white hover:shadow-lg transition-all duration-300 group">
+                                class="h-12 w-12 flex items-center justify-center rounded-md border hover:bg-white hover:shadow-lg transition-all duration-300 group">
                                 <svg class="w-6 h-6 text-gray-600 group-hover:text-[#f25b21] group-hover:scale-110 transition-all"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -278,55 +305,19 @@
                         </div>
                     </div>
 
-                    <!-- Quick Actions -->
                     <div class="grid grid-cols-2 gap-4 hidden">
                         <button
                             class="relative overflow-hidden rounded-md py-2 px-6 font-semibold flex items-center justify-center gap-2 bg-gradient-to-r from-purple-800 to-orange-700 text-white">
-
-                            <!-- Text -->
                             <span class="relative z-10 flex items-center gap-2">
                                 <i class="fas fa-bolt"></i> BUY NOW
                             </span>
-
-                            <!-- Continuous shimmer overlay -->
                             <span class="absolute inset-0 shimmer-overlay"></span>
                         </button>
-
-                        <style>
-                            /* Shimmer keyframes */
-                            @keyframes shimmer {
-                                0% {
-                                    transform: translateX(-100%) skewX(12deg);
-                                }
-
-                                100% {
-                                    transform: translateX(100%) skewX(12deg);
-                                }
-                            }
-
-                            /* Overlay styling */
-                            .shimmer-overlay {
-                                background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                width: 100%;
-                                height: 100%;
-                                transform: translateX(-100%) skewX(12deg);
-                                animation: shimmer 2s infinite linear;
-                                pointer-events: none;
-                                /* ensure button clicks still work */
-                            }
-                        </style>
-
-
-                        <!-- Wishlist -->
                         <button
                             class="relative rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
                                         transition-all duration-500 hover:border-purple-500 hover:text-purple-600 hover:shadow-lg">
                             <i class="fas fa-heart"></i> WISHLIST
                         </button>
-
                     </div>
 
                     <div class="flex flex-col">
@@ -427,66 +418,26 @@
             </div>
         </section>
 
-        <style>
-            /* Position nav buttons top-right */
-            .review-carousel .owl-nav {
-                position: absolute;
-                top: -58px;
-                /* adjust as needed */
-                right: 0;
-                display: flex;
-                gap: 8px;
-            }
-
-            /* Style nav buttons */
-            .review-carousel .owl-nav button.owl-prev,
-            .review-carousel .owl-nav button.owl-next {
-                background-color: black !important;
-                color: white !important;
-                border-radius: 50%;
-                /* makes it circular */
-                width: 25px;
-                height: 25px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 18px !important;
-                line-height: 1;
-                border: none !important;
-            }
-
-            /* Hover effect */
-            .review-carousel .owl-nav button:hover {
-                background-color: #333 !important;
-            }
-
-            /* Remove default focus outline */
-            .review-carousel .owl-nav button:focus {
-                outline: none !important;
-            }
-        </style>
-
-
-        <section class="w-[90vw] mx-auto mt-10 py-16 px-5 grid grid-cols-1 md:grid-cols-5 gap-10">
+        <section class="w-[90vw] mx-auto md:mt-10 py-10 grid grid-cols-1 md:grid-cols-5 gap-10">
             <!-- Left Side -->
             <div class="md:col-span-3">
                 <!-- Average Rating -->
-                <h3 class="text-2xl font-bold mb-4">Customer Reviews</h3>
+                <h3 class="text-2xl font-bold mb-2">Customer Reviews</h3>
 
                 <!-- Scrolling Reviews (Owl Carousel) -->
                 <div class="owl-carousel owl-theme review-carousel">
                     <!-- Review 1 -->
-                    <div class="p-6 bg-white border rounded-md relative m-2 h-[35vh] flex flex-col justify-between">
-                        <div class="flex flex-col gap-3 items-start mb-3 text-[#f25b21]">
+                    <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                        <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
                             <span> ★★★★★</span>
-                            <p class="text-gray-700 italic leading-relaxed">
-                                "Amazing quality and super fast delivery! The packaging was premium and the product
+                            <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                "Amazing quality and fast delivery! The packaging was premium and the product
                                 feels
                                 luxurious."
                             </p>
                         </div>
                         <!-- Reviewer Info -->
-                        <div class="flex gap-4 items-center mt-4 w-full">
+                        <div class="flex gap-4 items-center w-full">
                             <div class="flex items-center w-10 h-10">
                                 <img src="/public/images/dp.png" alt="John D."
                                     class="w-full h-full rounded-full object-cover border mr-3">
@@ -499,15 +450,15 @@
                     </div>
 
                     <!-- Review 2 -->
-                    <div class="p-6 bg-white border rounded-md relative m-2 h-[35vh] flex flex-col justify-between">
-                        <div class="flex flex-col gap-3 items-start mb-3 text-[#f25b21]">
+                    <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                        <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
                             <span> ★★★★★</span>
-                            <p class="text-gray-700 italic leading-relaxed">
+                            <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
                                 "Loved the fabric and the trendy style! Feels super comfortable and stylish at the same
                                 time."
                             </p>
                         </div>
-                        <div class="flex gap-4 items-center mt-4">
+                        <div class="flex gap-4 items-center">
                             <div class="flex items-center w-10 h-10">
                                 <img src="/public/images/dp.png" alt="John D."
                                     class="w-full h-full rounded-full object-cover border mr-3">
@@ -520,16 +471,16 @@
                     </div>
 
                     <!-- Review 3 -->
-                    <div class="p-6 bg-white border rounded-md relative m-2 h-[35vh] flex flex-col justify-between">
-                        <div class="flex flex-col gap-3 items-start mb-3 text-[#f25b21]">
+                    <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                        <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
                             <span> ★★★★★</span>
-                            <p class="text-gray-700 italic leading-relaxed">
+                            <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
                                 "Great fit and excellent customer service. They really care about their customers and it
                                 shows!"
                             </p>
                         </div>
 
-                        <div class="flex gap-4 items-center mt-4">
+                        <div class="flex gap-4 items-center">
                             <div class="flex items-center w-10 h-10">
                                 <img src="/public/images/dp.png" alt="John D."
                                     class="w-full h-full rounded-full object-cover border mr-3">
@@ -541,74 +492,72 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <!-- Right Side -->
-           <div class="md:col-span-2">
-  <!-- Overall Rating -->
-  <div class="flex items-center space-x-2 mb-5">
-    <div>
-      <span class="text-2xl text-orange-500">★★★★★</span>
-    </div>
-    <div>
-      <p class="font-semibold">4.7 out of 5</p>
-      <p class="text-sm text-gray-500">Based on 37 reviews ✅</p>
-    </div>
-  </div>
+            <div class="md:col-span-2">
+                <!-- Overall Rating -->
+                <div class="flex items-center space-x-2 mb-6">
+                    <div>
+                        <span class="text-2xl text-orange-500">★★★★★</span>
+                    </div>
+                    <div>
+                        <p class="font-semibold">4.7 out of 5</p>
+                        <p class="text-sm text-gray-500">Based on 37 reviews ✅</p>
+                    </div>
+                </div>
 
-  <!-- 5 stars -->
-  <div class="flex items-center mb-2">
-    <span class="text-orange-500 mr-2">★★★★★</span>
-    <div class="flex-1 bg-gray-200 h-3 rounded">
-      <div class="bg-orange-500 h-3 rounded" style="width: 70%;"></div>
-    </div>
-    <span class="ml-2 text-sm">26</span>
-  </div>
+                <!-- 5 stars -->
+                <div class="flex items-center mb-2">
+                    <span class="text-orange-500 mr-2">★★★★★</span>
+                    <div class="flex-1 bg-gray-200 h-3 rounded">
+                        <div class="bg-orange-500 h-3 rounded" style="width: 70%;"></div>
+                    </div>
+                    <span class="ml-2 text-sm">26</span>
+                </div>
 
-  <!-- 4 stars -->
-  <div class="flex items-center mb-2">
-    <span class="text-orange-500 mr-2">★★★★☆</span>
-    <div class="flex-1 bg-gray-200 h-3 rounded">
-      <div class="bg-orange-500 h-3 rounded" style="width: 20%;"></div>
-    </div>
-    <span class="ml-2 text-sm">7</span>
-  </div>
+                <!-- 4 stars -->
+                <div class="flex items-center mb-2">
+                    <span class="text-orange-500 mr-2">★★★★☆</span>
+                    <div class="flex-1 bg-gray-200 h-3 rounded">
+                        <div class="bg-orange-500 h-3 rounded" style="width: 20%;"></div>
+                    </div>
+                    <span class="ml-2 text-sm">7</span>
+                </div>
 
-  <!-- 3 stars -->
-  <div class="flex items-center mb-2">
-    <span class="text-orange-500 mr-2">★★★☆☆</span>
-    <div class="flex-1 bg-gray-200 h-3 rounded">
-      <div class="bg-orange-500 h-3 rounded" style="width: 6%;"></div>
-    </div>
-    <span class="ml-2 text-sm">2</span>
-  </div>
+                <!-- 3 stars -->
+                <div class="flex items-center mb-2">
+                    <span class="text-orange-500 mr-2">★★★☆☆</span>
+                    <div class="flex-1 bg-gray-200 h-3 rounded">
+                        <div class="bg-orange-500 h-3 rounded" style="width: 6%;"></div>
+                    </div>
+                    <span class="ml-2 text-sm">2</span>
+                </div>
 
-  <!-- 2 stars -->
-  <div class="flex items-center mb-2">
-    <span class="text-orange-500 mr-2">★★☆☆☆</span>
-    <div class="flex-1 bg-gray-200 h-3 rounded">
-      <div class="bg-orange-500 h-3 rounded" style="width: 3%;"></div>
-    </div>
-    <span class="ml-2 text-sm">1</span>
-  </div>
+                <!-- 2 stars -->
+                <div class="flex items-center mb-2">
+                    <span class="text-orange-500 mr-2">★★☆☆☆</span>
+                    <div class="flex-1 bg-gray-200 h-3 rounded">
+                        <div class="bg-orange-500 h-3 rounded" style="width: 3%;"></div>
+                    </div>
+                    <span class="ml-2 text-sm">1</span>
+                </div>
 
-  <!-- 1 star -->
-  <div class="flex items-center">
-    <span class="text-orange-500 mr-2">★☆☆☆☆</span>
-    <div class="flex-1 bg-gray-200 h-3 rounded">
-      <div class="bg-orange-500 h-3 rounded" style="width: 1%;"></div>
-    </div>
-    <span class="ml-2 text-sm">1</span>
-  </div>
-</div>
+                <!-- 1 star -->
+                <div class="flex items-center">
+                    <span class="text-orange-500 mr-2">★☆☆☆☆</span>
+                    <div class="flex-1 bg-gray-200 h-3 rounded">
+                        <div class="bg-orange-500 h-3 rounded" style="width: 1%;"></div>
+                    </div>
+                    <span class="ml-2 text-sm">1</span>
+                </div>
+            </div>
 
         </section>
 
-
         <section class="bg-white py-14 w-full">
             <div class="w-[90vw] max-md:w-[90vw] mx-auto">
-                <div class="flex flex-col mb-10">
+                <div class="flex flex-col mb-6">
                     <h3 class="text-left text-3xl font-extrabold uppercase">YOU MAY ALSO LIKE</h3>
                 </div>
 
@@ -616,14 +565,15 @@
                     <div class="owl-carousel owl-theme like-carousel">
 
                         <!-- Product Card -->
-                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div
+                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[400px] overflow-hidden">
+                            <div class="relative w-full h-[300px] max-md:h-[250px] overflow-hidden">
                                 <!-- Default Image -->
                                 <img src="/public/images/1.webp" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -648,20 +598,21 @@
                             <!-- Product Details -->
                             <div class="p-4 text-center">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
-                                <p class="text-red-600 font-bold">Rs. 1,199.00</p>
+                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
+                                <p class="text-red-600 font-bold">₹ 1,199.00</p>
                             </div>
                         </div>
 
                         <!-- Product 2 -->
-                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div
+                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[400px] overflow-hidden">
+                            <div class="relative w-full h-[300px] max-md:h-[250px] overflow-hidden">
                                 <!-- Default Image -->
                                 <img src="/public/images/4.webp" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -686,20 +637,21 @@
                             <!-- Product Details -->
                             <div class="p-4 text-center">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
-                                <p class="text-red-600 font-bold">Rs. 1,199.00</p>
+                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
+                                <p class="text-red-600 font-bold">₹ 1,199.00</p>
                             </div>
                         </div>
 
                         <!-- Product 3 -->
-                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div
+                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[400px] overflow-hidden">
+                            <div class="relative w-full h-[300px] max-md:h-[250px] overflow-hidden">
                                 <!-- Default Image -->
                                 <img src="/public/images/6.webp" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -724,20 +676,21 @@
                             <!-- Product Details -->
                             <div class="p-4 text-center">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
-                                <p class="text-red-600 font-bold">Rs. 1,199.00</p>
+                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
+                                <p class="text-red-600 font-bold">₹ 1,199.00</p>
                             </div>
                         </div>
 
                         <!-- Product 4 -->
-                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div
+                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[400px] overflow-hidden">
+                            <div class="relative w-full h-[300px] max-md:h-[250px] overflow-hidden">
                                 <!-- Default Image -->
                                 <img src="/public/images/2.webp" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -762,20 +715,21 @@
                             <!-- Product Details -->
                             <div class="p-4 text-center">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
+                                <p class="text-[#f25b21] font-bold">₹ 1,199.00</p>
                             </div>
                         </div>
 
                         <!-- Product 5 -->
-                        <div class="group relative m-2 p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div
+                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[400px] overflow-hidden">
+                            <div class="relative w-full h-[300px] max-md:h-[250px] overflow-hidden">
                                 <!-- Default Image -->
                                 <img src="/public/images/1.webp" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -800,8 +754,8 @@
                             <!-- Product Details -->
                             <div class="p-4 text-center">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
-                                <p class="text-red-600 font-bold">Rs. 1,199.00</p>
+                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
+                                <p class="text-red-600 font-bold">₹ 1,199.00</p>
                             </div>
                         </div>
                     </div>
@@ -812,7 +766,7 @@
 
     <!-- Size Modal -->
     <div id="sizeChartModal" class="hidden fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-        <div class="bg-white shadow-lg max-w-3xl w-full max-h-[80vh] relative flex flex-col animate-slideDown">
+        <div class="bg-white shadow-lg w-[55%] max-md:w-[90%] max-h-[80vh] relative flex flex-col animate-slideDown">
             <!-- Close button -->
             <button onclick="document.getElementById('sizeChartModal').classList.add('hidden')"
                 class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 animate-rotate-pingpong">
@@ -821,7 +775,7 @@
 
             <!-- Header -->
             <div class="p-6 pb-2 flex-shrink-0">
-                <h2 class="text-2xl font-bold mb-1">SIZE CHART</h2>
+                <h2 class="text-2xl max-md:text-lg font-bold mb-1">SIZE CHART</h2>
                 <p class="text-sm text-gray-500">Reviews: Fits true to size</p>
             </div>
 
@@ -831,12 +785,6 @@
                 <div class="flex items-center gap-2 mb-6">
                     <span class="text-gray-700 font-medium">Measuring Unit :</span>
                     <span>Inches</span>
-                    <!-- <label class="flex items-center gap-1 cursor-pointer">
-                        <input type="radio" name="unit" checked class="accent-blue-600"> Inches
-                    </label>
-                    <label class="flex items-center gap-1 cursor-pointer">
-                        <input type="radio" name="unit" class="accent-blue-600"> Centimetres
-                    </label> -->
                 </div>
 
                 <!-- Table -->
@@ -910,7 +858,7 @@
 
     <!-- Delivery Modal -->
     <div id="deliveryModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white w-full w-[65vw] shadow-lg relative p-8 animate-slideDown">
+        <div class="bg-white w-full w-[65vw] max-md:w-[94vw] shadow-lg relative p-8 max-md:p-5 animate-slideDown">
             <!-- Close Button -->
             <button id="closeDeliveryModal"
                 class="absolute top-4 right-4 text-gray-600 hover:text-black animate-rotate-pingpong">
@@ -928,7 +876,7 @@
             <h3 class="text-xl font-semibold mb-2">Rules</h3>
             <p class="text-gray-600 mb-4">
                 All exchanges and returns must be raised within 10 days of the invoice date for
-                local orders, and 20 days for overseas orders. For local deliveries, there is an
+                local orders, and 20 days for overseas orde₹ For local deliveries, there is an
                 option
                 to exchange at any of our boutiques or through our online portal.
             </p>
@@ -952,31 +900,30 @@
     </div>
 
     <!-- Sticky Bottom Strip -->
-    <div id="bottomStrip" class="fixed bottom-0 left-0 w-full bg-gray-50 shadow-lg border-t p-2 hidden z-50">
-        <div class="w-[90vw] mx-auto flex items-center justify-between">
-            <!-- Product Info -->
+    <div id="bottomStrip" class="fixed bottom-0 left-0 w-full bg-gray-200 shadow-lg border-t p-2 hidden z-50">
+        <div class="w-[90vw] mx-auto flex max-md:flex-col items-center max-md:gap-2 max-md:items-start justify-between">
             <div class="flex items-center gap-4">
-                <img src="/public/images/333.avif" alt="Product" class="w-20 h-20 object-cover">
+                <img src="/public/images/333.avif" alt="Product"
+                    class="w-16 h-16 max-md:w-12 max-md:h-12 object-cover border border-white">
                 <div>
-                    <h4 class="font-medium text-gray-800">BLACK EVERYDAY JOGGERS</h4>
+                    <h4 class="font-medium text-black max-md:text-sm">BLACK EVERYDAY JOGGERS</h4>
                     <p class="text-sm">
-                        <span class="line-through text-gray-400">$230.00</span>
-                        <span class="text-red-500 font-semibold"> $189.00</span>
+                        <span class="line-through text-black"> ₹230.00</span>
+                        <span class="text-[#f25b21] font-semibold text-lg max-md:text-base"> ₹189.00</span>
                     </p>
                 </div>
             </div>
 
-            <!-- Actions -->
-            <div class="flex items-center gap-3">
-                <div class="flex items-center border rounded">
-                    <button class="px-3 py-1 text-gray-600">-</button>
-                    <input type="text" value="1" class="w-10 text-center border-l border-r">
-                    <button class="px-3 py-1 text-gray-600">+</button>
+            <div class="flex items-center gap-3 max-md:justify-end max-md:w-full">
+                <div class="flex items-center border border-gray-500 rounded">
+                    <button class="px-3 py-1 text-black bg-transparent">-</button>
+                    <input type="text" value="1" class="w-10 text-center border-l border-r border-gray-500 text-black bg-transparent">
+                    <button class="px-3 py-1 text-black bg-transparent">+</button>
                 </div>
                 <button
-                    class="openCartBtn flex-1 relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
+                    class="openCartBtn flex-1 relative rounded-md overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
                     <span
-                        class="relative z-10 flex py-1.5 px-6 items-center justify-center gap-2 font-semibold text-base transition-colors duration-700 group-hover:text-white">
+                        class="relative z-10 flex py-1.5 px-6 items-center justify-center gap-2 font-semibold text-base max-md:text-sm transition-colors duration-700 group-hover:text-white">
                         <i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart
                     </span>
                     <span
@@ -1016,7 +963,7 @@
                 autoplay: true,
                 autoplayTimeout: 3000,
                 responsive: {
-                    0: { items: 1 },
+                    0: { items: 2 },
                     600: { items: 2 },
                     1000: { items: 4 },
                     1280: { items: 4 }
@@ -1025,7 +972,7 @@
         });
     </script>
 
-    <script>
+    <!-- <script>
         $(document).ready(function () {
             $(".review-carousel").owlCarousel({
                 items: 2,
@@ -1040,7 +987,31 @@
                 animateOut: 'fadeOut'
             });
         });
+    </script> -->
+
+    <script>
+        $(document).ready(function () {
+            $(".review-carousel").owlCarousel({
+                margin: 10,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
+                loop: true,
+                dots: false,
+                nav: true,
+                navText: ["‹", "›"],
+                animateOut: 'fadeOut',
+                responsive: {
+                    0: { items: 1 },     // Mobile
+                    640: { items: 1 },   // Small tablets
+                    768: { items: 2 },   // Tablets
+                    1024: { items: 2 },  // Desktops
+                    1280: { items: 2 }   // Large screens
+                }
+            });
+        });
     </script>
+
 
 
     <script>
