@@ -10,7 +10,7 @@
     ?>
 
     <div class="w-full mx-auto px-4 pb-8">
-        <div class="text-center mb-10">
+        <div class="text-center mb-10 max-md:mt-6">
             <h1 class="text-4xl font-bold text-gray-900">Wishlist</h1>
             <p class="text-gray-600 mt-2">
                 Manage your wishlist and keep track of the products you love.
@@ -18,7 +18,7 @@
             <div class="w-24 h-[3px] bg-[#f25b21] mt-3 mx-auto"></div>
         </div>
         <!-- Wishlist Content -->
-        <div class="text-center py-12 border border-gray-300 border-dashed w-[50%] mx-auto">
+        <div class="text-center py-12 border border-gray-300 border-dashed w-[50%] max-md:w-[85%] mx-auto">
             <!-- Heart Icon with Badge -->
             <div class="relative inline-block mb-6">
                 <i class="fa-regular fa-heart text-6xl text-gray-400"></i>
@@ -31,14 +31,12 @@
             <p class="text-gray-500 text-sm mb-8">Click the <i class="fa-regular fa-heart"></i> icons to add products
             </p>
 
-            <button
+            <button onclick="window.location.href='/shop'"
                 class="relative border-2 border-black py-2 px-5 rounded-lg overflow-hidden transition duration-300 group">
-                <!-- Text -->
                 <span
                     class="relative z-10 text-black font-semibold group-hover:text-white transition-colors duration-300">
                     Return to Shop
                 </span>
-                <!-- Animated BG -->
                 <span
                     class="absolute inset-0 bg-black scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
             </button>
