@@ -120,86 +120,61 @@
             <div class="relative">
                 <div class="owl-carousel owl-theme new-arrival-carousel">
                     <!-- Product 2 -->
-                    <a href="products/product-details" class="block">
-                        <div
-                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
-                            <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
-                                SAVE 14%
-                            </span>
+                    <?php
 
-                            <!-- Product Images -->
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
-                                <!-- Default Image -->
-                                <img src="/public/images/111.avif" alt="Product 1"
-                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+                    foreach ($products as $key => $product) {
+                        $images = json_decode($product['product_images'], true);
+                        $SecondImage = true;
+                        (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
+                        $comparePrice = floatval($product['compare_price']);
+                        $price = floatval($product['price']);
+                        $discountAmount = $comparePrice - $price;
+                        $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
-                                <!-- Hover Image -->
-                                <img src="/public/images/1112.avif" alt="Product 1 Hover"
-                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                        // printWithPre($images);
+                    ?>
+                        <a href="products/product-details" class="block">
+                            <div
+                                class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                                <!-- Discount Badge -->
+                                <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
+                                    SAVE <?=  $discountPercentage  ?>%
+                                </span>
 
-                                <!-- Add to favorites Icon (top-right) -->
-                                <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-heart"></i>
-                                </button>
+                                <!-- Product Images -->
+                                <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
+                                    <!-- Default Image -->
+                                    <img src="<?= $images[0] ?>" alt="Product 1"
+                                        class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
 
-                                <!-- Add to Cart Icon -->
-                                <button
-                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                </button>
+                                    <!-- Hover Image -->
+
+                                    <img src="<?= $SecondImage ?>" alt="Product 1 Hover"
+                                        class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+
+                                    <!-- Add to favorites Icon (top-right) -->
+                                    <button
+                                        class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+
+                                    <!-- Add to Cart Icon -->
+                                    <button
+                                        class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                        <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                                    </button>
+                                </div>
+
+                                <!-- Product Details -->
+                                <div class="p-4 text-center">
+                                    <h3 class="text-sm font-semibold"><?= $product['name'] ?></h3>
+                                    <p class="text-gray-500 line-through text-sm">₹ <?= formatNumber($product['compare_price']) ?>.00</p>
+                                    <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?>.00</p>
+                                </div>
                             </div>
+                        </a>
 
-                            <!-- Product Details -->
-                            <div class="p-4 text-center">
-                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">₹ 1,199.00</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Product 3 -->
-                    <a href="products/product-details" class="block">
-                        <div
-                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
-                            <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
-                                SAVE 14%
-                            </span>
-
-                            <!-- Product Images -->
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
-                                <!-- Default Image -->
-                                <img src="/public/images/333.avif" alt="Product 1"
-                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-
-                                <!-- Hover Image -->
-                                <img src="/public/images/3332.avif" alt="Product 1 Hover"
-                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-
-                                <!-- Add to favorites Icon (top-right) -->
-                                <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-
-                                <!-- Add to Cart Icon -->
-                                <button
-                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                </button>
-                            </div>
-
-                            <!-- Product Details -->
-                            <div class="p-4 text-center">
-                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">₹ 1,199.00</p>
-                            </div>
-                        </div>
-                    </a>
+                    <?php } ?>
 
                     <!-- Product 4 -->
                     <a href="products/product-details" class="block">
@@ -283,47 +258,7 @@
                         </div>
                     </a>
 
-                    <!-- Product Card -->
-                    <a href="products/product-details" class="block">
-                        <div
-                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
-                            <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
-                                SAVE 14%
-                            </span>
 
-                            <!-- Product Images -->
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
-                                <!-- Default Image -->
-                                <img src="/public/images/1.webp" alt="Product 1"
-                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-
-                                <!-- Hover Image -->
-                                <img src="/public/images/2.webp" alt="Product 1 Hover"
-                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-
-                                <!-- Add to favorites Icon (top-right) -->
-                                <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-
-                                <!-- Add to Cart Icon -->
-                                <button
-                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                </button>
-                            </div>
-
-
-                            <!-- Product Details -->
-                            <div class="p-4 text-center">
-                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">₹ 1,199.00</p>
-                            </div>
-                        </div>
-                    </a>
                 </div>
             </div>
         </div>
@@ -346,49 +281,26 @@
 
         <div class="grid grid-cols-3 md:grid-cols-3 md:gap-16 w-[90vw] max-md:w-full mx-auto md:px-4">
             <!-- Tees -->
-            <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
-                data-aos-delay="200">
-                <img src="/public/images/11.avif" alt="Tees"
-                    class="w-full h-[380px] max-md:h-[200px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
-                <!-- Overlay -->
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
-                </div>
-                <!-- Text -->
-                <div
-                    class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl max-md:text-base tracking-wide">
-                    <span class="group-hover:text-[#f25b21] transition-colors duration-300 uppercase">Tees</span>
-                </div>
-            </div>
+            <?php
+            foreach ($categories as $key => $category) {
 
-            <!-- Co-ords -->
-            <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
-                data-aos-delay="200">
-                <img src="/public/images/coooo.png" alt="Co-ords"
-                    class="w-full h-[380px] max-md:h-[200px] object-cover object-bottom transform group-hover:scale-110 transition duration-700 ease-out">
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
-                </div>
-                <div
-                    class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl max-md:text-base tracking-wide">
-                    <span
-                        class="group-hover:text-[#f25b21] transition-colors duration-300 uppercase whitespace-nowrap">Co-ords</span>
-                </div>
-            </div>
 
-            <!-- Joggers -->
-            <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
-                data-aos-delay="200">
-                <img src="/public/images/Joggers.avif" alt="Joggers"
-                    class="w-full h-[380px] max-md:h-[200px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
+            ?>
+                <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
+                    data-aos-delay="200">
+                    <img src="/<?= $category['img'] ?>" alt="Tees"
+                        class="w-full h-[380px] max-md:h-[200px] object-cover object-top transform group-hover:scale-110 transition duration-700 ease-out">
+                    <!-- Overlay -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
+                    </div>
+                    <!-- Text -->
+                    <div
+                        class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl max-md:text-base tracking-wide w-full text-center">
+                        <span class="group-hover:text-[#f25b21] transition-colors duration-300 uppercase text-center "><?= $category['category'] ?></span>
+                    </div>
                 </div>
-                <div
-                    class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl max-md:text-base tracking-wide">
-                    <span class="group-hover:text-[#f25b21] transition-colors duration-300 uppercase">Joggers</span>
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </section>
 
@@ -1204,7 +1116,7 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const modal = document.getElementById('newsletterModal');
             const closeBtn = document.getElementById('closeModal');
             const noPopupCheckbox = document.getElementById('noPopup');
@@ -1238,7 +1150,7 @@
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".new-arrival-carousel").owlCarousel({
                 loop: true,
                 margin: 10,
@@ -1247,10 +1159,18 @@
                 autoplay: false,
                 autoplayTimeout: 3000,
                 responsive: {
-                    0: { items: 2 },
-                    600: { items: 2 },
-                    1000: { items: 4 },
-                    1280: { items: 4 }
+                    0: {
+                        items: 2
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 4
+                    },
+                    1280: {
+                        items: 4
+                    }
                 }
             });
         });

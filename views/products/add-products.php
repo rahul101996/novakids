@@ -296,12 +296,13 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     <img src="/<?= isset($collection['image']) ? $collection['image'] : '' ?>" alt="Preview" class="mx-auto h-32 object-cover">
                                 </div>
                                 <svg class="mx-auto h-8 w-8 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    </path>
                                 </svg>
                                 <div class="flex text-sm text-gray-600">
                                     <label for="vdata_image" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none">
                                         <span>Upload a file</span>
-                                        <input id="vdata_image" name="product_image" type="file" class="sr-only" accept="image/*" required>
+                                        <input id="vdata_image" name="product_images[]" type="file" class="sr-only" accept="image/*" required multiple>
                                     </label>
                                     <p class="pl-1">or drag and drop</p>
                                 </div>
@@ -328,7 +329,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             console.log("hello");
             const optionsContainer = document.getElementById('optionsContainer');
             const options = [];
-// console.log("hello1", optionsContainer);
+            // console.log("hello1", optionsContainer);
             for (const optionDiv of optionsContainer.children) {
                 // console.log(optionDiv);
                 const optionName = optionDiv.querySelector('input[type="text"]').value.trim();
@@ -440,7 +441,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             button.parentElement.remove();
         }
 
-        
+
 
         function cartesianProduct(options) {
             if (!options.length) return [];
@@ -467,7 +468,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
         }
 
         function displayVariants(variants, options) {
-            console.log("fbjh",variants)
+            console.log("fbjh", variants)
             const tbody = document.getElementById('variantsTableBody');
             tbody.innerHTML = '';
 
@@ -532,7 +533,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             });
 
             document.getElementById('variantsSection').classList.remove('hidden');
-            
+
         }
         // toastr.error("Product added successfully");
     </script>

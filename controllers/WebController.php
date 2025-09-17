@@ -44,7 +44,9 @@ class WebController extends LoginController
         // die();
         // $this->checkSession();
         $categories = getData("tbl_category");
-        printWithPre($categories);
+        $products = getData("tbl_products");
+        // printWithPre($products);
+    
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             require 'views/website/index.php';
