@@ -72,7 +72,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                             <!-- <span class="text-gray-500 sm:text-sm">₹</span> -->
                                         </div>
-                                        <input type="text" name="price" id="price" class="w-full border border-gray-800 rounded-md  focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00">
+                                        <input type="number" step="0.1"   name="price" id="price" class="w-full border border-gray-800 rounded-md  focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00" oninput="CalculateProfitMargin()" >
                                     </div>
                                 </div>
                                 <div>
@@ -86,7 +86,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                             <!-- <span class="text-gray-500 sm:text-sm">₹</span> -->
                                         </div>
-                                        <input type="text" name="compare_price" id="compare-price" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00">
+                                        <input type="number" name="compare_price" id="compare-price" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00" oninput="CalculateProfitMargin()">
                                     </div>
                                 </div>
                             </div>
@@ -109,19 +109,20 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     </label>
                                     <div class="relative mt-1 rounded-md">
 
-                                        <input type="text" name="cost_per_item" id="cost-per-item" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00">
+                                        <input type="text" name="cost_per_item" id="cost-per-item" oninput="CalculateProfitMargin()" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00">
                                     </div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Profit</label>
-                                    <input type="text" name="profit" id="cost-per-item" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00">
+                                    <input type="text" name="profit" id="profit" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00" readonly>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700">Margin</label>
-                                    <input type="text" name="margin" id="cost-per-item" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00">
+                                    <label class="block text-sm font-medium text-gray-700">Margin (%)</label>
+                                    <input type="text" name="margin" id="margin" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00" readonly>
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="bg-white p-6 rounded-lg shadow-sm">
                             <h2 class="text-base font-medium text-gray-900">Inventory</h2>
@@ -534,6 +535,17 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
             document.getElementById('variantsSection').classList.remove('hidden');
 
+        }
+
+        function CalculateProfitMargin() {
+            var cost_per_item = document.getElementById("cost-per-item").value;
+            var price = document.getElementById("price").value;
+            var compare_price = document.getElementById("compare-price").value;
+            var profit = price - cost_per_item;
+            var margin = ((price - cost_per_item) / price) * 100;
+            margin = margin.toFixed() + "%";
+            document.getElementById("profit").value = profit;
+            document.getElementById("margin").value = margin;
         }
         // toastr.error("Product added successfully");
     </script>
