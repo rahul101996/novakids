@@ -21,7 +21,7 @@
 
 
 <!-- Overlay -->
-<div id="overlay" class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-500 z-40">
+<div id="sidecartOverlay" class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-500 z-40">
 </div>
 
 <!-- Side Cart -->
@@ -180,25 +180,25 @@
     const openCartBtns = document.querySelectorAll('.openCartBtn');
     const sideCart = document.getElementById('sideCart');
     const closeCart = document.getElementById('closeCart');
-    const overlay = document.getElementById('overlay');
+    const cartOverlay = document.getElementById('sidecartOverlay');
 
     function openCart() {
         sideCart.classList.remove('translate-x-full');
         sideCart.classList.add('translate-x-0');
-        overlay.classList.remove('opacity-0', 'pointer-events-none');
-        overlay.classList.add('opacity-100');
+        cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
+        cartOverlay.classList.add('opacity-100');
     }
 
     function closeCartFn() {
         sideCart.classList.remove('translate-x-0');
         sideCart.classList.add('translate-x-full');
-        overlay.classList.remove('opacity-100');
-        overlay.classList.add('opacity-0', 'pointer-events-none');
+        cartOverlay.classList.remove('opacity-100');
+        cartOverlay.classList.add('opacity-0', 'pointer-events-none');
     }
 
     openCartBtns.forEach(btn => btn.addEventListener('click', openCart));
     closeCart.addEventListener('click', closeCartFn);
-    overlay.addEventListener('click', closeCartFn);
+    cartOverlay.addEventListener('click', closeCartFn);
 </script>
 
 <script>

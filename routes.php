@@ -17,9 +17,12 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('contact', 'ContactUs');
     $route->route('wishlist', 'wishlist');
     $route->route('return-exchange', 'returnExchange');
+    $route->route('size-guide', 'sizeGuide');
+     $route->route('shipping-info', 'shippingInfo');
     $route->route('faq', 'faq');
     $route->route('terms-and-conditions', 'termsAndConditions');
     $route->route('privacy-policy', 'privacyPolicy');
+     $route->route('cookies', 'cookies');
     // $route->route('/', 'index');
 
 });

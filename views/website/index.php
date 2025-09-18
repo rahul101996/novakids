@@ -106,7 +106,7 @@
         }
     </style>
 
-    <section class="bg-white py-14 w-full">
+    <section class="bg-white py-14 max-md:py-8 w-full">
         <div class="w-[90vw] max-md:w-[90vw] mx-auto">
             <div class="flex flex-col mb-10 max-md:mb-2" data-aos="fade-right" data-aos-duration="1000"
                 data-aos-delay="100">
@@ -132,13 +132,13 @@
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
                         // printWithPre($images);
-                    ?>
+                        ?>
                         <a href="products/product-details" class="block">
                             <div
                                 class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
                                 <!-- Discount Badge -->
                                 <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
-                                    SAVE <?=  $discountPercentage  ?>%
+                                    SAVE <?= $discountPercentage ?>%
                                 </span>
 
                                 <!-- Product Images -->
@@ -168,7 +168,9 @@
                                 <!-- Product Details -->
                                 <div class="p-4 text-center">
                                     <h3 class="text-sm font-semibold"><?= $product['name'] ?></h3>
-                                    <p class="text-gray-500 line-through text-sm">₹ <?= formatNumber($product['compare_price']) ?>.00</p>
+                                    <p class="text-gray-500 line-through text-sm">₹
+                                        <?= formatNumber($product['compare_price']) ?>.00
+                                    </p>
                                     <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?>.00</p>
                                 </div>
                             </div>
@@ -265,9 +267,9 @@
     </section>
 
     <!-- Section -->
-    <section class="pb-12 relative">
-        <div class="absolute -top-14 -left-14 w-auto h-auto opacity-20">
-            <img src="/public/images/naruto.webp" alt="" class="w-40 h-auto">
+    <section class="md:pb-12 relative">
+        <div class="absolute -top-14 max-md:-top-16 -left-14 w-auto h-auto opacity-20">
+            <img src="/public/images/naruto.webp" alt="" class="w-40 max-md:w-28 h-auto">
         </div>
         <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
             <h2 class="text-center text-3xl font-extrabold mb-3 uppercase">Categories</h2>
@@ -285,7 +287,7 @@
             foreach ($categories as $key => $category) {
 
 
-            ?>
+                ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
                     <img src="/<?= $category['img'] ?>" alt="Tees"
@@ -297,7 +299,8 @@
                     <!-- Text -->
                     <div
                         class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl max-md:text-base tracking-wide w-full text-center">
-                        <span class="group-hover:text-[#f25b21] transition-colors duration-300 uppercase text-center "><?= $category['category'] ?></span>
+                        <span
+                            class="group-hover:text-[#f25b21] transition-colors duration-300 uppercase text-center "><?= $category['category'] ?></span>
                     </div>
                 </div>
             <?php } ?>
@@ -461,7 +464,7 @@
         </div>
     </section>
 
-    <section class="bg-white py-14 w-full relative overflow-hidden">
+    <section class="bg-white py-14 max-md:py-8 w-full relative overflow-hidden">
         <div class="absolute -top-12 -right-14 max-md:-right-8 max-md:-top-10 w-auto h-auto opacity-20">
             <img src="/public/images/net.webp" alt="" class="w-48 max-md:w-32 h-auto">
         </div>
@@ -472,7 +475,6 @@
                     Handpicked styles that define the season — our featured collection brings together the freshest
                     trends, bold designs, and everyday essentials crafted to elevate your wardrobe.
                 </p>
-
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-12 max-md:gap-2">
@@ -515,7 +517,6 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
                             <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
@@ -553,7 +554,6 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
                             <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
@@ -590,7 +590,6 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
                             <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
@@ -627,7 +626,6 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
                             <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
@@ -663,7 +661,6 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
                             <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
@@ -698,7 +695,6 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
                             <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
@@ -734,7 +730,6 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
                             <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
@@ -769,7 +764,6 @@
                         <!-- Product info below the images -->
                         <div class="p-4 text-center">
                             <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-gray-500 line-through text-sm">₹ 1,299.00</p>
                             <p class="text-[#f25b21] font-bold">₹ 999.00</p>
                         </div>
                     </div>
@@ -795,6 +789,12 @@
 
         .marquee-content {
             min-width: 200%;
+        }
+
+        @media screen {
+            .marquee {
+                animation: scroll 6s linear infinite;
+            }
         }
     </style>
 
@@ -883,7 +883,7 @@
         </div>
     </section>
 
-    <section class="pt-16 w-full">
+    <section class="pt-16 max-md:pt-8 w-full">
         <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
             <h2 class="text-center text-3xl font-extrabold mb-3 uppercase">Our Partners</h2>
             <p class="text-center text-gray-600 text-lg max-md:text-base max-md:px-4 max-w-2xl mx-auto">
@@ -915,7 +915,6 @@
             </div>
         </div>
     </section>
-
 
     <style>
         /* Animated gradient text */
@@ -995,7 +994,7 @@
         }
     </style>
 
-    <section class="py-16 max-md:pt-8 w-[90vw] mx-auto">
+    <section class="py-16 max-md:pt-6 max-md:pb-4 w-[90vw] mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
             <!-- Left Side Text (Sticky) -->
             <div class="md:sticky top-24 self-start">
@@ -1116,7 +1115,7 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const modal = document.getElementById('newsletterModal');
             const closeBtn = document.getElementById('closeModal');
             const noPopupCheckbox = document.getElementById('noPopup');
@@ -1150,7 +1149,7 @@
 
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".new-arrival-carousel").owlCarousel({
                 loop: true,
                 margin: 10,

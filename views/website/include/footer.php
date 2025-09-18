@@ -129,7 +129,7 @@
 <footer class="w-full overflow-hidden">
 
     <div class="w-[90vw] mx-auto py-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 max-md:gap-6">
             <!-- Brand Section -->
             <div class="lg:col-span-2">
                 <div class="mb-6">
@@ -183,7 +183,7 @@
             </div>
 
             <div>
-                <h4 class="font-bold text-black mb-6 text-lg">Shop</h4>
+                <h4 class="font-bold text-black mb-6 max-md:mb-3 text-lg">Shop</h4>
                 <ul class="space-y-3">
                     <li><a href="#" class="link-hover text-gray-600">New Arrivals</a></li>
                     <li><a href="#" class="link-hover text-gray-600">Bestsellers</a></li>
@@ -193,21 +193,19 @@
             </div>
 
             <div>
-                <h4 class="font-bold text-black mb-6 text-lg">Customer Care</h4>
+                <h4 class="font-bold text-black mb-6 max-md:mb-3 text-lg">Customer Care</h4>
                 <ul class="space-y-3">
-                    <li><a href="#" class="link-hover text-gray-600">Size Guide</a></li>
-                    <li><a href="#" class="link-hover text-gray-600">Shipping Info</a></li>
+                    <li><a href="/size-guide" class="link-hover text-gray-600">Size Guide</a></li>
+                    <li><a href="/shipping-info" class="link-hover text-gray-600">Shipping Info</a></li>
                     <li><a href="/return-exchange" class="link-hover text-gray-600">Returns & Exchanges</a>
                     </li>
-                    <!-- <li><a href="/faq" class="link-hover text-gray-600">FAQ</a></li> -->
                     <li><a href="/contact" class="link-hover text-gray-600">Contact Us</a></li>
                 </ul>
             </div>
 
             <div>
-                <h4 class="font-bold text-black mb-6 text-lg">About</h4>
+                <h4 class="font-bold text-black mb-6 max-md:mb-3 text-lg">About</h4>
                 <ul class="space-y-3 mb-6">
-                    <!-- <li><a href="#" class="link-hover text-gray-600">Our Story</a></li> -->
                     <li><a href="#" class="link-hover text-gray-600">Brand Partners</a></li>
                     <li><a href="#" class="link-hover text-gray-600">Client Reviews</a></li>
                 </ul>
@@ -260,7 +258,7 @@
                 <div class="flex space-x-6 text-sm">
                     <a href="/privacy-policy" class="link-hover">Privacy Policy</a>
                     <a href="/terms-and-conditions" class="link-hover">Terms of Service</a>
-                    <a href="#" class="link-hover">Cookies</a>
+                    <a href="/cookies" class="link-hover">Cookies</a>
                 </div>
             </div>
         </div>

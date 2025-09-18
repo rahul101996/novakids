@@ -233,30 +233,41 @@
             </div>
         </li>
 
-        <div class="flex items-center absolute md:left-1/2 transform md:-translate-x-1/2 max-md:left-2">
+        <!-- Mobile Menu Toggle Button -->
+        <div class="md:hidden flex items-center">
+            <button id="menu-toggle" class="p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px"
+                    fill="#4b4b4bff">
+                    <path
+                        d="M120-240v-80h520v80H120Zm664-40L584-480l200-200 56 56-144 144 144 144-56 56ZM120-440v-80h400v80H120Zm0-200v-80h520v80H120Z" />
+                </svg>
+            </button>
+
+            <button class="openSearch">
+                <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="24px"
+                    fill="#4b4b4bff">
+                    <path
+                        d="M400-320q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70Zm-42-98 226-227-57-57-169 170-85-84-57 56 142 142Zm42 178q-134 0-227-93T80-560q0-134 93-227t227-93q134 0 227 93t93 227q0 56-17.5 105.5T653-364l227 228-56 56-228-227q-41 32-90.5 49.5T400-240Zm0-320Z" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="flex items-center absolute left-1/2 transform -translate-x-1/2">
             <a href="/" class="block">
-                <img src="/public/logos/newuniverse.png" alt="Logo" class="h-12 max-md:h-10">
+                <img src="/public/logos/newuniverse.png" alt="Logo" class="h-12 max-md:hidden">
+                <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
             </a>
         </div>
 
-        <div class="flex md:gap-1 items-center ml-auto md:pr-12 max-md:pr-3 py-1.5">
-            <div class="flex items-center">
-                <button id="openSearch"
-                    class="text-black p-2 max-md:text-xs rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
-                    <div class="max-md:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                            fill="#000000">
-                            <path
-                                d="M400-320q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70Zm-42-98 226-227-57-57-169 170-85-84-57 56 142 142Zm42 178q-134 0-227-93T80-560q0-134 93-227t227-93q134 0 227 93t93 227q0 56-17.5 105.5T653-364l227 228-56 56-228-227q-41 32-90.5 49.5T400-240Zm0-320Z" />
-                        </svg>
-                    </div>
-                    <div class="md:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="24px"
-                            fill="#000000">
-                            <path
-                                d="M400-320q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70Zm-42-98 226-227-57-57-169 170-85-84-57 56 142 142Zm42 178q-134 0-227-93T80-560q0-134 93-227t227-93q134 0 227 93t93 227q0 56-17.5 105.5T653-364l227 228-56 56-228-227q-41 32-90.5 49.5T400-240Zm0-320Z" />
-                        </svg>
-                    </div>
+        <div class="flex md:gap-1 items-center ml-auto md:pr-12 max-md:pr-1 py-1.5">
+            <div class="flex items-center max-md:hidden">
+                <button
+                    class="openSearch text-black p-2 max-md:text-xs rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        fill="#000000">
+                        <path
+                            d="M400-320q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70Zm-42-98 226-227-57-57-169 170-85-84-57 56 142 142Zm42 178q-134 0-227-93T80-560q0-134 93-227t227-93q134 0 227 93t93 227q0 56-17.5 105.5T653-364l227 228-56 56-228-227q-41 32-90.5 49.5T400-240Zm0-320Z" />
+                    </svg>
                 </button>
             </div>
 
@@ -286,18 +297,11 @@
                 </div>
             </button>
 
-            <div class="flex items-center">
+            <div class="flex items-center max-md:hidden">
                 <button onclick="window.location.href='/wishlist'"
                     class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
                     <div class="max-md:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                            fill="#000000">
-                            <path
-                                d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z" />
-                        </svg>
-                    </div>
-                    <div class="md:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="24px"
                             fill="#000000">
                             <path
                                 d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z" />
@@ -318,7 +322,7 @@
                     </div>
                     <div class="md:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="24px"
-                            fill="#000000">
+                            fill="#4b4b4bff">
                             <path
                                 d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
                         </svg>
@@ -330,23 +334,14 @@
                 </span>
             </div>
 
-            <!-- Mobile Menu Toggle Button -->
-            <div class="md:hidden">
-                <button id="menu-toggle" class="p-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="28px"
-                        fill="#000000">
-                        <path
-                            d="M120-240v-80h520v80H120Zm664-40L584-480l200-200 56 56-144 144 144 144-56 56ZM120-440v-80h400v80H120Zm0-200v-80h520v80H120Z" />
-                    </svg>
-                </button>
-            </div>
+
         </div>
     </div>
 </nav>
 
 <!-- Sidebar (Mobile) -->
 <div id="mobile-sidebar"
-    class="fixed top-0 left-0 h-screen w-[80%] max-w-xs bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out z-[100] overflow-y-auto">
+    class="fixed top-0 left-0 h-screen w-[85%] max-w-xs bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out z-[100] overflow-y-auto">
 
     <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
         <h2 class="text-lg font-semibold text-black">Boys Collection</h2>
@@ -361,11 +356,13 @@
                 Tees / Relaxed Tees
                 <i class="fas fa-chevron-down transition-transform duration-300"></i>
             </button>
-            <div class="accordion-content hidden pl-3 pb-3 space-y-2 text-sm text-gray-700">
-                <a href="#" class="block hover:text-black">Oversized Tees</a>
-                <a href="#" class="block hover:text-black">Graphic Tees</a>
-                <a href="#" class="block hover:text-black">Long Sleeves</a>
-                <a href="#" class="block hover:text-black">Tank Tops</a>
+            <div class="accordion-content hidden pl-3 pb-3 text-sm text-gray-700">
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><a href="#" class="hover:text-black">Oversized Tees</a></li>
+                    <li><a href="#" class="hover:text-black">Graphic Tees</a></li>
+                    <li><a href="#" class="hover:text-black">Long Sleeves</a></li>
+                    <li><a href="#" class="hover:text-black">Tank Tops</a></li>
+                </ul>
             </div>
         </div>
 
@@ -374,11 +371,13 @@
                 Joggers
                 <i class="fas fa-chevron-down transition-transform duration-300"></i>
             </button>
-            <div class="accordion-content hidden pl-3 pb-3 space-y-2 text-sm text-gray-700">
-                <a href="#" class="block hover:text-black">Classic Joggers</a>
-                <a href="#" class="block hover:text-black">Slim Fit Joggers</a>
-                <a href="#" class="block hover:text-black">Cargo Joggers</a>
-                <a href="#" class="block hover:text-black">Athletic Joggers</a>
+            <div class="accordion-content hidden pl-3 pb-3 text-sm text-gray-700">
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><a href="#" class="hover:text-black">Classic Joggers</a></li>
+                    <li><a href="#" class="hover:text-black">Slim Fit Joggers</a></li>
+                    <li><a href="#" class="hover:text-black">Cargo Joggers</a></li>
+                    <li><a href="#" class="hover:text-black">Athletic Joggers</a></li>
+                </ul>
             </div>
         </div>
 
@@ -387,12 +386,15 @@
                 Co-ords
                 <i class="fas fa-chevron-down transition-transform duration-300"></i>
             </button>
-            <div class="accordion-content hidden pl-3 pb-3 space-y-2 text-sm text-gray-700">
-                <a href="#" class="block hover:text-black">Casual Co-ords</a>
-                <a href="#" class="block hover:text-black">Lounge Co-ords</a>
-                <a href="#" class="block hover:text-black">Streetwear Co-ords</a>
+            <div class="accordion-content hidden pl-3 pb-3 text-sm text-gray-700">
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><a href="#" class="hover:text-black">Casual Co-ords</a></li>
+                    <li><a href="#" class="hover:text-black">Lounge Co-ords</a></li>
+                    <li><a href="#" class="hover:text-black">Streetwear Co-ords</a></li>
+                </ul>
             </div>
         </div>
+
 
         <div class="space-y-4">
             <h3 class="text-base font-semibold text-gray-900">Trending Products</h3>
@@ -401,7 +403,7 @@
                 <!-- Product 1 -->
                 <a href="products/product-details">
                     <div class="border overflow-hidden shadow-sm hover:shadow-md transition">
-                        <img src="/public/images/f5.webp" alt="Product 1" class="w-full h-28 object-cover">
+                        <img src="/public/images/f5.webp" alt="Product 1" class="w-full h-36 object-cover">
                         <div class="p-2">
                             <p class="text-sm font-medium text-gray-800 truncate">Oversized Tee</p>
                             <p class="text-xs text-gray-500">$24.99</p>
@@ -412,7 +414,7 @@
                 <!-- Product 2 -->
                 <a href="products/product-details">
                     <div class="border overflow-hidden shadow-sm hover:shadow-md transition">
-                        <img src="/public/images/f2.webp" alt="Product 2" class="w-full h-28 object-cover">
+                        <img src="/public/images/f2.webp" alt="Product 2" class="w-full h-36 object-cover">
                         <div class="p-2">
                             <p class="text-sm font-medium text-gray-800 truncate">Slim Jogger</p>
                             <p class="text-xs text-gray-500">$34.99</p>
@@ -423,7 +425,7 @@
                 <!-- Product 3 -->
                 <a href="products/product-details">
                     <div class="border overflow-hidden shadow-sm hover:shadow-md transition">
-                        <img src="/public/images/f8.webp" alt="Product 3" class="w-full h-28 object-cover">
+                        <img src="/public/images/f8.webp" alt="Product 3" class="w-full h-36 object-cover">
                         <div class="p-2">
                             <p class="text-sm font-medium text-gray-800 truncate">Streetwear Co-ord</p>
                             <p class="text-xs text-gray-500">$49.99</p>
@@ -434,7 +436,7 @@
                 <!-- Product 4 -->
                 <a href="products/product-details">
                     <div class="border overflow-hidden shadow-sm hover:shadow-md transition">
-                        <img src="/public/images/f10.webp" alt="Product 3" class="w-full h-28 object-cover">
+                        <img src="/public/images/f10.webp" alt="Product 3" class="w-full h-36 object-cover">
                         <div class="p-2">
                             <p class="text-sm font-medium text-gray-800 truncate">Co-ord</p>
                             <p class="text-xs text-gray-500">$49.99</p>
@@ -510,38 +512,85 @@
                 Unlock the <span class="text-orange-400">Spirit</span><br>
                 Conquer the <span class="text-orange-400">Style</span>
             </h2>
-            <div class="mt-10 max-md:mt-4 grid grid-cols-3 gap-6 max-md:gap-2 text-center text-sm">
-                <div>
-                    <p class="text-2xl">⭐</p>
-                    <p class="mt-2 opacity-80">1,00,000+<br>Happy Customers</p>
+            <div class="mt-10 max-md:mt-4">
+                <!-- Desktop/Tablet Grid -->
+                <div class="hidden md:grid grid-cols-3 gap-6 text-center text-sm">
+                    <div>
+                        <p class="text-2xl">⭐</p>
+                        <p class="mt-2 opacity-80">1,00,000+<br>Happy Customers</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl">⭐</p>
+                        <p class="mt-2 opacity-80">Fast<br>24hr Shipping</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl">⭐</p>
+                        <p class="mt-2 opacity-80">9,820+<br>Pincodes Reached</p>
+                    </div>
                 </div>
-                <div>
-                    <p class="text-2xl">⭐</p>
-                    <p class="mt-2 opacity-80">Fast<br>24hr Shipping</p>
-                </div>
-                <div>
-                    <p class="text-2xl">⭐</p>
-                    <p class="mt-2 opacity-80">9,820+<br>Pincodes Reached</p>
+
+                <!-- Mobile Carousel -->
+                <div class="md:hidden relative w-full overflow-hidden">
+                    <div id="mobileCarousel" class="flex transition-transform duration-700 ease-in-out">
+                        <div class="w-full flex-shrink-0 text-center text-sm">
+                            <p class="text-2xl">⭐</p>
+                            <p class="mt-2 opacity-80">1,00,000+<br>Happy Customers</p>
+                        </div>
+                        <div class="w-full flex-shrink-0 text-center text-sm">
+                            <p class="text-2xl">⭐</p>
+                            <p class="mt-2 opacity-80">Fast<br>24hr Shipping</p>
+                        </div>
+                        <div class="w-full flex-shrink-0 text-center text-sm">
+                            <p class="text-2xl">⭐</p>
+                            <p class="mt-2 opacity-80">9,820+<br>Pincodes Reached</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <script>
+                const mobileCarousel = document.getElementById("mobileCarousel");
+                const mobileSlides = mobileCarousel.children.length;
+                let mobileIndex = 0;
+
+                setInterval(() => {
+                    mobileIndex = (mobileIndex + 1) % mobileSlides;
+                    mobileCarousel.style.transform = `translateX(-${mobileIndex * 100}%)`;
+                }, 2500); // change every 2.5s
+            </script>
+
+
         </div>
 
         <div class="flex flex-col justify-center w-full md:w-[45%] bg-white p-10 max-md:p-4 relative">
-            <div
+            <!-- <div
                 class="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-tr from-yellow-400/20 to-orange-500/20 rounded-full blur-2xl">
-            </div>
+            </div> -->
 
-            <h3 class="text-2xl font-bold text-gray-900 text-center mb-8 max-md:mb-4">Start Your Style
+            <h3 class="text-2xl font-bold text-gray-900 text-center mb-6 max-md:mb-4">Start Your Style
                 Journey</h3>
 
             <form action="">
-                <div class="flex items-center border rounded-lg overflow-hidden mb-3">
+                <div class="flex items-center border rounded-lg overflow-hidden mb-4">
                     <span class="px-3 text-gray-600">+91</span> <input type="tel" placeholder="Enter mobile number"
                         class="w-full px-3 py-2 outline-none border-l">
                 </div>
 
+                <!-- <div class="flex items-center mb-6">
+                    <input type="checkbox" id="offers" class="mr-2 rounded border-gray-400 text-black focus:ring-black">
+                    <label for="offers" class="text-sm text-gray-600">Notify me with offers & updates</label>
+                </div> -->
+
+                <button
+                    class="relative w-full py-2 rounded-md font-semibold overflow-hidden group border-2 border-black">
+                    <span
+                        class="relative z-10 text-white group-hover:text-black transition-colors duration-300">Continue</span>
+                    <span
+                        class="absolute inset-0 bg-black group-hover:scale-x-0 origin-left transition-transform duration-500"></span>
+                </button>
+
                 <div>
-                    <p class="text-center text-gray-500 mb-3">or</p>
+                    <p class="text-center text-gray-500 my-3">or</p>
                 </div>
 
                 <div class="flex flex-col justify-center mb-3">
@@ -551,22 +600,9 @@
                         Continue with Google
                     </button>
                 </div>
-
-                <div class="flex items-center mb-6">
-                    <input type="checkbox" id="offers" class="mr-2 rounded border-gray-400 text-black focus:ring-black">
-                    <label for="offers" class="text-sm text-gray-600">Notify me with offers & updates</label>
-                </div>
-
-                <button
-                    class="relative w-full py-2 rounded-md font-semibold overflow-hidden group border-2 border-black">
-                    <span
-                        class="relative z-10 text-white group-hover:text-black transition-colors duration-300">Continue</span>
-                    <span
-                        class="absolute inset-0 bg-black group-hover:scale-x-0 origin-left transition-transform duration-500"></span>
-                </button>
             </form>
 
-            <p class="text-xs text-gray-500 text-center mt-6">
+            <p class="text-xs text-gray-500 text-center mt-4">
                 I accept that I have read & understood the
                 <a href="#" class="underline hover:text-black">Privacy Policy</a> and
                 <a href="#" class="underline hover:text-black">T&Cs</a>.
@@ -578,7 +614,7 @@
 <div id="searchOverlay"
     class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center transition-opacity duration-500">
     <div
-        class="bg-white w-[50%] max-md:w-[100%] h-[75vh] max-md:h-[105vh] relative p-8 shadow-lg animate-slideDown flex flex-col">
+        class="bg-white w-[50%] max-md:w-[100%] h-[75vh] max-md:h-[105vh] relative p-8 max-md:p-4 max-md:mt-8 shadow-lg animate-slideDown flex flex-col">
         <button id="closeSearch"
             class="absolute top-4 right-6 text-2xl text-gray-700 hover:text-black animate-rotate-pingpong">
             <i class="fas fa-times"></i>
@@ -681,14 +717,18 @@
 </script>
 
 <script>
-    const openSearch = document.getElementById("openSearch");
+    const openSearchButtons = document.querySelectorAll(".openSearch");
     const closeSearch = document.getElementById("closeSearch");
     const searchOverlay = document.getElementById("searchOverlay");
 
-    openSearch.addEventListener("click", () => {
-        searchOverlay.classList.remove("hidden");
+    // Add click event to all search buttons
+    openSearchButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            searchOverlay.classList.remove("hidden");
+        });
     });
 
+    // Close button
     closeSearch.addEventListener("click", () => {
         searchOverlay.classList.add("hidden");
     });
@@ -700,6 +740,7 @@
         }
     });
 </script>
+
 
 <!-- Login Script -->
 <script>

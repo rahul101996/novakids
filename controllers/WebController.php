@@ -46,7 +46,7 @@ class WebController extends LoginController
         $categories = getData("tbl_category");
         $products = getData("tbl_products");
         // printWithPre($products);
-    
+
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             require 'views/website/index.php';
@@ -457,6 +457,42 @@ class WebController extends LoginController
             require 'views/website/terms-and-conditions.php';
         }
     }
+    public function cookies()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "Cookies";
+        $pageTitle = "Cookies";
+
+        // $this->checkSession();
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/website/cookies.php';
+        }
+    }
+
+    public function sizeGuide()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "Size Guide";
+        $pageTitle = "Size Guide";
+
+        // $this->checkSession();
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/website/size-guide.php';
+        }
+    }
+
+    public function shippingInfo()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "Shipping Info";
+        $pageTitle = "Shipping Info";
+
+        // $this->checkSession();
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/website/shipping-info.php';
+        }
+    }
+
     public function faq()
     {
         $siteName = getDBObject()->getSiteName();

@@ -69,7 +69,7 @@
 
 <!-- Scroll Toggle Button -->
 <button id="scrollToggleBtn"
-    class="fixed bottom-6 right-6 z-50 bg-[#f25b21] text-white p-3 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
+    class="fixed bottom-6 right-4 max-md:bottom-4 max-md:right-4 z-50 bg-[#f25b21] text-white p-3 max-md:p-2 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
     onclick="handleScrollToggle()" title="Scroll">
     <!-- Arrow Icon -->
     <svg id="scrollIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
