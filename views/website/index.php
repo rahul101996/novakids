@@ -133,7 +133,7 @@
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
                         // printWithPre($images);
-                        ?>
+                    ?>
                         <a href="products/product-details" class="block">
                             <div
                                 class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
@@ -180,7 +180,7 @@
                     <?php } ?>
 
                     <!-- Product 4 -->
-                   
+
 
 
                 </div>
@@ -209,7 +209,7 @@
             foreach ($categories as $key => $category) {
 
 
-                ?>
+            ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
                     <img src="/<?= $category['img'] ?>" alt="Tees"
@@ -392,304 +392,68 @@
         </div>
         <div class="w-[90vw] max-md:w-[90vw] mx-auto">
             <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-                <h2 class="text-center text-3xl font-extrabold mb-3 uppercase">Featured Collection</h2>
-                <p class="text-center text-gray-600 text-lg max-md:text-base max-w-2xl mx-auto">
-                    Handpicked styles that define the season — our featured collection brings together the freshest
-                    trends, bold designs, and everyday essentials crafted to elevate your wardrobe.
-                </p>
+                <h2 class="text-center text-3xl font-extrabold mb-3 uppercase"><?= $collection['name'] ?></h2>
+                <div class="!text-center text-gray-600 text-lg max-md:text-base max-w-2xl mx-auto">
+                    <?= $collection['description'] ?>
+                </div>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-12 max-md:gap-2">
-                <a href="products/product-details" class="block">
-                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
-                            <!-- Discount badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
-                                SAVE 23%
-                            </span>
 
-                            <!-- Add to favorites Icon (top-right) -->
-                            <button
-                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-heart"></i>
-                            </button>
+                <?php
+                foreach ($collection_products as $key => $product) {
+                  
+                   $product_details =getData2("SELECT * FROM `tbl_products` WHERE `id`='$product'")[0];
+                   $images = json_decode($product_details['product_images'], true);
+                        $images = array_reverse($images);
 
-                            <!-- Add to Cart Icon -->
-                            <button
-                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                            </button>
+                ?>
+                    <a href="products/product-details" class="block">
+                        <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
+                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
+                                <!-- Discount badge -->
+                                <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
+                                    SAVE 23%
+                                </span>
 
-                            <!-- Multiple images stacked -->
-                            <img src="/public/images/f1.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
-                            <img src="/public/images/f2.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                            <img src="/public/images/f33.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+                                <!-- Add to favorites Icon (top-right) -->
+                                <button
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-heart"></i>
+                                </button>
 
-                            <!-- Dots -->
-                            <!-- <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                                <!-- Add to Cart Icon -->
+                                <button
+                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                                </button>
+
+                                <!-- Multiple images stacked -->
+                                <img src="/<?= $images[0] ?>"
+                                    class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
+                                <!-- <img src="/<?= $images[1] ?>"
+                                    class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
+                                <img src="/<?= $images[2] ?>"
+                                    class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0"> -->
+
+                                <!-- Dots -->
+                                <!-- <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
                                 <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
                                 <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
                                 <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
                             </div> -->
+                            </div>
+
+                            <!-- Product info below the images -->
+                            <div class="p-4 text-center">
+                                <h3 class="text-sm font-semibold"><?= $product_details['name'] ?></h3>
+                                <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product_details['price']) ?>.00</p>
+                            </div>
                         </div>
-
-                        <!-- Product info below the images -->
-                        <div class="p-4 text-center">
-                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
-                        </div>
-                    </div>
-                </a>
-
-
-                <a href="products/product-details" class="block">
-                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
-                            <!-- Discount badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
-                                23%</span>
-
-                            <!-- Add to favorites Icon (top-right) -->
-                            <button
-                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-heart"></i>
-                            </button>
-
-                            <!-- Add to Cart Icon -->
-                            <button
-                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                            </button>
-
-                            <!-- Multiple images stacked -->
-                            <img src="/public/images/f7.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
-                            <img src="/public/images/f8.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                            <img src="/public/images/f99.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                        </div>
-
-                        <!-- Product info below the images -->
-                        <div class="p-4 text-center">
-                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="products/product-details" class="block">
-                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
-                            <!-- Discount badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
-                                23%</span>
-
-                            <!-- Add to favorites Icon (top-right) -->
-                            <button
-                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-heart"></i>
-                            </button>
-
-                            <!-- Add to Cart Icon -->
-                            <button
-                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                            </button>
-
-                            <!-- Multiple images stacked -->
-                            <img src="/public/images/f3.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
-                            <img src="/public/images/f4.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                            <img src="/public/images/f55.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                        </div>
-
-                        <!-- Product info below the images -->
-                        <div class="p-4 text-center">
-                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="products/product-details" class="block">
-                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
-                            <!-- Discount badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
-                                23%</span>
-
-                            <!-- Add to favorites Icon (top-right) -->
-                            <button
-                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-heart"></i>
-                            </button>
-
-                            <!-- Add to Cart Icon -->
-                            <button
-                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                            </button>
-
-                            <!-- Multiple images stacked -->
-                            <img src="/public/images/f5.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
-                            <img src="/public/images/f6.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                            <img src="/public/images/f77.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                        </div>
-
-                        <!-- Product info below the images -->
-                        <div class="p-4 text-center">
-                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="products/product-details" class="block">
-                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
-                            <!-- Discount badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
-                                23%</span>
-
-                            <!-- Add to favorites Icon (top-right) -->
-                            <button
-                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-heart"></i>
-                            </button>
-
-                            <!-- Add to Cart Icon -->
-                            <button
-                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                            </button>
-
-                            <!-- Multiple images stacked -->
-
-                            <img src="/public/images/f9.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
-                            <img src="/public/images/f10.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                        </div>
-
-                        <!-- Product info below the images -->
-                        <div class="p-4 text-center">
-                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="products/product-details" class="block">
-                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
-                            <!-- Discount badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
-                                23%</span>
-
-                            <!-- Add to favorites Icon (top-right) -->
-                            <button
-                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-heart"></i>
-                            </button>
-
-                            <!-- Add to Cart Icon -->
-                            <button
-                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                            </button>
-
-                            <!-- Multiple images stacked -->
-                            <img src="/public/images/f11.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
-                            <img src="/public/images/f12.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                        </div>
-
-                        <!-- Product info below the images -->
-                        <div class="p-4 text-center">
-                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="products/product-details" class="block">
-                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
-                            <!-- Discount badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
-                                23%</span>
-
-                            <!-- Add to favorites Icon (top-right) -->
-                            <button
-                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-heart"></i>
-                            </button>
-
-                            <!-- Add to Cart Icon -->
-                            <button
-                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                            </button>
-
-                            <!-- Multiple images stacked -->
-                            <img src="/public/images/f13.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
-                            <img src="/public/images/f14.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-
-                        </div>
-
-                        <!-- Product info below the images -->
-                        <div class="p-4 text-center">
-                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="products/product-details" class="block">
-                    <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
-                            <!-- Discount badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE
-                                23%</span>
-
-                            <!-- Add to favorites Icon (top-right) -->
-                            <button
-                                class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-heart"></i>
-                            </button>
-
-                            <!-- Add to Cart Icon -->
-                            <button
-                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                            </button>
-
-                            <!-- Multiple images stacked -->
-                            <img src="/public/images/2.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
-                            <img src="/public/images/1.webp"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
-                        </div>
-
-                        <!-- Product info below the images -->
-                        <div class="p-4 text-center">
-                            <h3 class="text-sm font-semibold">SUPERMAN STRENGTH OVERSIZED T-SHIRT</h3>
-                            <p class="text-[#f25b21] font-bold">₹ 999.00</p>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </section>
@@ -1037,7 +801,7 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const modal = document.getElementById('newsletterModal');
             const closeBtn = document.getElementById('closeModal');
             const noPopupCheckbox = document.getElementById('noPopup');
@@ -1071,7 +835,7 @@
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".new-arrival-carousel").owlCarousel({
                 loop: true,
                 margin: 10,

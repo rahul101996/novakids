@@ -45,7 +45,12 @@ class WebController extends LoginController
         // $this->checkSession();
         $categories = getData("tbl_category");
         $products = getData("tbl_products");
-        // printWithPre($products);
+        $collection = getData("tbl_collection", true);
+        // printWithPre($collection);
+        $collection = array_reverse($collection)[0];
+        $collection_products = json_decode($collection['products'], true) ?? [];
+                // printWithPre($collection);
+
 
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {

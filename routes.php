@@ -33,6 +33,7 @@ $route->group(['', 'CollectionController'], function ($route) {
     $route->route('admin/add-collections', 'AddCollections');
     $route->route('/edit-collection/[i:id]', 'AddCollections');
     $route->route('/admin/add-product', 'AddProducts');
+    $route->route('/admin/products-list', 'ProductsList');
 
 
 
