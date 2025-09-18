@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/header.php'; ?>
+
+<body class="overflow-x-hidden archivo-narrow-k">
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
+    <!-- Breadcrumbs -->
+    <div class="text-sm pt-6 px-6">
+        <ol class="flex items-center space-x-2 text-gray-500">
+            <li>
+                <a href="/" class="hover:text-black">Home</a>
+            </li>
+            <li>
+                <span class="mx-1">/</span>
+            </li>
+            <li class="text-black font-semibold">Privacy Policy</li>
+        </ol>
+    </div>
+
+    <!-- Main Layout -->
+    <main class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-5 gap-10">
+
+        <!-- LEFT: Checkout Sections -->
+        <section class="md:col-span-3 space-y-6">
+            <!-- Step 1: Shipping -->
+            <div class="bg-white p-6">
+                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <span
+                        class="w-8 h-8 flex items-center justify-center bg-[#f25b21] text-white rounded-full text-sm">1</span>
+                    Shipping Information
+                </h2>
+                <form class="grid grid-cols-2 gap-4 mt-3">
+                    <input type="text" placeholder="First Name" required class="border px-3 py-2 rounded col-span-1">
+                    <input type="text" placeholder="Last Name" required class="border px-3 py-2 rounded col-span-1">
+                    <input type="email" placeholder="Email Address" class="border px-3 py-2 rounded col-span-1">
+                    <input type="text" placeholder="Phone Number" required class="border px-3 py-2 rounded col-span-1">
+                    <input type="text" placeholder="Street Address" required class="border px-3 py-2 rounded col-span-2">
+                    <div class="grid grid-cols-3 gap-4 col-span-2">
+                        <input type="text" placeholder="City" required class="border px-3 py-2 rounded ">
+
+                        <select class="border px-3 py-2 rounded w-full">
+                            <option value="" selected disabled>Select State</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="West Bengal">West Bengal</option>
+                            <option disabled>──────────</option>
+                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                            <option value="Chandigarh">Chandigarh</option>
+                            <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra & Nagar Haveli and Daman &
+                                Diu</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                            <option value="Ladakh">Ladakh</option>
+                            <option value="Lakshadweep">Lakshadweep</option>
+                            <option value="Puducherry">Puducherry</option>
+                        </select>
+
+                        <input type="text" placeholder="Pincode" required class="border px-3 py-2 rounded ">
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 2: Delivery -->
+            <div class="bg-white shadow-md rounded-2xl p-6 hidden">
+                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <span
+                        class="w-8 h-8 flex items-center justify-center bg-[#f25b21] text-white rounded-full text-sm">2</span>
+                    Delivery Options
+                </h2>
+                <div class="space-y-3">
+                    <label
+                        class="flex items-center justify-between border p-4 rounded-xl cursor-pointer hover:border-[#f25b21]">
+                        <span>🚚 Standard (4-7 days)</span>
+                        <input type="radio" name="delivery" checked>
+                    </label>
+                    <label
+                        class="flex items-center justify-between border p-4 rounded-xl cursor-pointer hover:border-[#f25b21]">
+                        <span>⚡ Express (2-4 days)</span>
+                        <input type="radio" name="delivery">
+                    </label>
+                </div>
+            </div>
+
+            <!-- Step 3: Payment -->
+            <div class="bg-white  p-6">
+                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <span
+                        class="w-8 h-8 flex items-center justify-center bg-[#f25b21] text-white rounded-full text-sm">2</span>
+                    Payment Method
+                </h2>
+                <div class="space-y-3">
+                    <!-- Credit / Debit Card -->
+                    <label
+                        class="flex items-center justify-between border p-4 rounded-md cursor-pointer hover:border-[#f25b21]">
+                        <span class="flex items-center gap-2">
+                            <i class="fas fa-credit-card text-[#f25b21]"></i>
+                            Credit / Debit Card
+                        </span>
+                        <input type="radio" name="payment" checked>
+                    </label>
+
+                    <!-- UPI / Wallet -->
+                    <label
+                        class="flex items-center justify-between border p-4 rounded-md cursor-pointer hover:border-[#f25b21]">
+                        <span class="flex items-center gap-2">
+                            <i class="fas fa-mobile-alt text-[#f25b21]"></i>
+                            UPI / Wallet
+                        </span>
+                        <input type="radio" name="payment">
+                    </label>
+
+                    <!-- Cash on Delivery -->
+                    <label
+                        class="flex items-center justify-between border p-4 rounded-md cursor-pointer hover:border-[#f25b21]">
+                        <span class="flex items-center gap-2">
+                            <i class="fas fa-money-bill-wave text-[#f25b21]"></i>
+                            Cash on Delivery
+                        </span>
+                        <input type="radio" name="payment">
+                    </label>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- RIGHT: Order Summary (Sticky) -->
+        <aside class="bg-white shadow-md rounded-2xl p-6 h-fit sticky top-28 md:col-span-2">
+            <h2 class="text-lg font-bold mb-4">Order Summary</h2>
+            <div class="space-y-4 border-b pb-4 mb-4">
+                <!-- Product 1 -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <img src="/public/images/1.webp" class="w-16 h-16 object-cover rounded-lg">
+                        <div>
+                            <p class="font-medium">Manifestor Polo</p>
+                            <p class="text-xs text-gray-500">Size: M</p>
+                        </div>
+                    </div>
+                    <p class="font-semibold">₹1,199</p>
+                </div>
+                <!-- Product 2 -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <img src="/public/images/4.webp" class="w-16 h-16 object-cover rounded-lg">
+                        <div>
+                            <p class="font-medium">Graphic Tee</p>
+                            <p class="text-xs text-gray-500">Size: L</p>
+                        </div>
+                    </div>
+                    <p class="font-semibold">₹999</p>
+                </div>
+            </div>
+
+            <!-- Totals -->
+            <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                    <span>Subtotal</span>
+                    <span>₹2,198</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Shipping</span>
+                    <span>₹79</span>
+                </div>
+                <div class="flex justify-between font-bold text-lg border-t pt-3">
+                    <span>Total</span>
+                    <span>₹2,277</span>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <button
+                class="mt-6 w-full bg-[#f25b21] hover:bg-black text-white py-2 rounded-md font-semibold text-lg transition">
+                Confirm & Place Order
+            </button>
+        </aside>
+    </main>
+
+
+    <?php
+    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/sidecart.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/footer.php";
+    ?>
+
+</body>

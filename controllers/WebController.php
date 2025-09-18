@@ -493,6 +493,19 @@ class WebController extends LoginController
         }
     }
 
+     public function checkout()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "Shipping Info";
+        $pageTitle = "Shipping Info";
+
+        // $this->checkSession();
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/website/checkout.php';
+        }
+    }
+
+
     public function faq()
     {
         $siteName = getDBObject()->getSiteName();

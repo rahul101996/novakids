@@ -163,7 +163,7 @@
                     class="absolute inset-0 bg-black scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
             </button> -->
 
-            <button
+            <button onclick="window.location.href='/checkout'"
                 class="relative w-full font-semibold py-1.5 rounded-md border-2 border-[#f25b21] overflow-hidden group">
                 <span class="relative z-10 text-white group-hover:text-[#f25b21] transition-colors duration-300">
                     Checkout

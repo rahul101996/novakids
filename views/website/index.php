@@ -773,115 +773,97 @@
     </section>
 
     <style>
-        @keyframes scroll {
-            0% {
-                transform: translateX(0%);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
+        .scroll-container,
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
         }
 
-        .marquee {
-            animation: scroll 12s linear infinite;
+        .scroll-content,
+        .marquee-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            will-change: transform;
         }
 
         .marquee-content {
-            min-width: 200%;
-        }
-
-        @media screen {
-            .marquee {
-                animation: scroll 6s linear infinite;
-            }
+            padding-left: 100%;
         }
     </style>
 
-    <!-- Marquee Section -->
-    <section class="overflow-hidden bg-gradient-to-r from-orange-50 via-transparent to-orange-50 py-2 md:my-6">
-        <div class="relative w-full group">
-            <div class="marquee flex whitespace-nowrap">
-                <div class="marquee-content flex items-center space-x-10 px-10">
-                    <!-- Repeat Content Twice for Infinite Scroll -->
-                    <template id="marquee-items">
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Streetwear</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
+    <div class="w-full overflow-hidden bg-white">
+        <div id="bottomRow" class="marquee bg-gradient-to-r from-orange-50 via-transparent to-orange-50">
+            <div class="marquee-content text-grey-700 max-md:text-sm py-1 text-nowrap">
+                <div
+                    class="flex items-center space-x-10 text-outline transition-all duration-300 text-gray-900 font-semibold text-xl max-md:text-lg cursor-pointer">
+                    <span>#</span>
+                    <span>Streetwear</span>
+                    <span>#</span>
+                    <span>Oversized Tees</span>
+                    <span>#</span>
+                    <span>Graphic Hoodies</span>
+                    <span>#</span>
+                    <span>Joggers & Co-ords</span>
+                    <span>#</span>
+                    <span>Fresh Drops Weekly</span>
+                    <span>#</span>
+                    <span>Nova Universe Exclusive</span>
+                    <span>#</span>
+                    <span>Stay Trendy</span>
+                    <span>#</span>
+                    <span>Free Shipping Over ₹999</span>
+                    <span>#</span>
+                    <span>Made for Gen Z</span>
 
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Sneakers</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
-
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Oversized Fits</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
-
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Casual Drip</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Streetwear</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
-
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Sneakers</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
-
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Oversized Fits</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
-
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Casual Drip</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
-                    </template>
-
-                    <!-- Inject Items Twice -->
-                    <div class="flex items-center space-x-10">
-                        <script>
-                            const items = document.getElementById('marquee-items').content;
-                            const container = document.currentScript.parentElement;
-                            container.appendChild(items.cloneNode(true));
-                            container.appendChild(items.cloneNode(true)); // Two copies for infinite loop
-                        </script>
-                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <script>
+        function setupScroll(elementId, direction, speed) {
+            const container = document.getElementById(elementId);
+            const content = container.querySelector('.scroll-content, .marquee-content');
+            let scrollPosition = 0;
+            let animationFrame;
+
+            function scroll() {
+                scrollPosition += direction * speed;
+
+                if (elementId === 'bottomRow') {
+                    if (scrollPosition >= content.offsetWidth / 2) {
+                        scrollPosition = 0;
+                    }
+                } else {
+                    if (scrollPosition <= -content.offsetWidth / 2) {
+                        scrollPosition = 0;
+                    }
+                }
+
+                content.style.transform = `translateX(${scrollPosition}px)`;
+                animationFrame = requestAnimationFrame(scroll);
+            }
+
+            // Clone content for seamless looping
+            content.innerHTML += content.innerHTML;
+
+            // Set initial position to start scrolling
+            if (elementId === 'bottomRow') {
+                scrollPosition = -content.offsetWidth / 2;
+            }
+
+            // Start the scrolling
+            scroll();
+
+            // Pause scrolling on hover
+            container.addEventListener('mouseenter', () => cancelAnimationFrame(animationFrame));
+            container.addEventListener('mouseleave', () => scroll());
+        }
+
+        setupScroll('bottomRow', 1, 0.7);
+    </script>
 
     <section class="pt-16 max-md:pt-8 w-full">
         <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
@@ -938,8 +920,6 @@
             }
         }
     </style>
-
-
     <style>
         .masonry-container {
             column-count: 2;

@@ -680,7 +680,7 @@
 
         </section>
 
-        <section class="bg-white py-14 w-full">
+        <section class="bg-white py-14 max-md:py-8 w-full">
             <div class="w-[90vw] max-md:w-[90vw] mx-auto">
                 <div class="flex flex-col mb-6">
                     <h3 class="text-left text-3xl font-extrabold uppercase">YOU MAY ALSO LIKE</h3>
@@ -887,6 +887,7 @@
                 </div>
             </div>
         </section>
+        
     </div>
 
     <!-- Size Modal -->
