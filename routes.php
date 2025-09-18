@@ -20,6 +20,7 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('faq', 'faq');
     $route->route('terms-and-conditions', 'termsAndConditions');
     $route->route('privacy-policy', 'privacyPolicy');
+    $route->route('/api/removeProductFromCollection', 'removeProductFromCollection');
     // $route->route('/', 'index');
 
 });

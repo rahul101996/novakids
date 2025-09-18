@@ -52,7 +52,40 @@ class WebController extends LoginController
             require 'views/website/index.php';
         }
     }
+    
+    public function removeProductFromCollection()
+    {
+       $collection = getData2("SELECT * FROM `tbl_collection` WHERE `id` = $_POST[id] ORDER BY `id` DESC LIMIT 1")[0];
+       $collection_products = json_decode($collection['products'], true) ?? [];
+       if(in_array($_POST['product_id'], $collection_products)){
+        $collection_products = array_filter($collection_products, function ($product) {
+            return $product != $_POST['product_id'];
+        });
+        $collection_products = json_encode($collection_products);
+        $data = [
+            'products' => $collection_products
+        ];
+        $update = update($data, $_POST['id'], 'tbl_collection');
+        if($update){
+            $response = [
+                "success" => true,
+                "data" => 'Product Removed Successfully'];
+            echo json_encode($response);
+        }else{
+            $response = [
+                "success" => false,
+                "data" => 'Product Remove Failed'];
+            echo json_encode($response);
+        }
+       }else{
+        $response = [
+            "success" => false,
+            "data" => 'Product Not Found'];
+        echo json_encode($response);
+       }
 
+       
+    }
     public function productDetails()
     {
 

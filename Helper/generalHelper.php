@@ -461,7 +461,7 @@ function update($data, $id, $table, $column = "id")
     $setClause = implode(", ", $setPart);
 
     $sql = "UPDATE `$table` SET " . $setClause . " WHERE $column = :id";
-    echo $sql;
+    // echo $sql;
     $stmt = $db->prepare($sql);
 
     foreach ($data as $key => $value) {

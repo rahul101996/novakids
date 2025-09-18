@@ -124,6 +124,7 @@
 
                     foreach ($products as $key => $product) {
                         $images = json_decode($product['product_images'], true);
+                        $images = array_reverse($images);
                         $SecondImage = true;
                         (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
                         $comparePrice = floatval($product['compare_price']);
@@ -177,86 +178,7 @@
                     <?php } ?>
 
                     <!-- Product 4 -->
-                    <a href="products/product-details" class="block">
-                        <div
-                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
-                            <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
-                                SAVE 14%
-                            </span>
-
-                            <!-- Product Images -->
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
-                                <!-- Default Image -->
-                                <img src="/public/images/4441.avif" alt="Product 1"
-                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-
-                                <!-- Hover Image -->
-                                <img src="/public/images/4442.avif" alt="Product 1 Hover"
-                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-
-                                <!-- Add to favorites Icon (top-right) -->
-                                <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-
-                                <!-- Add to Cart Icon -->
-                                <button
-                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                </button>
-                            </div>
-
-                            <!-- Product Details -->
-                            <div class="p-4 text-center">
-                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">₹ 1,199.00</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Product 5 -->
-                    <a href="products/product-details" class="block">
-                        <div
-                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
-                            <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
-                                SAVE 14%
-                            </span>
-
-                            <!-- Product Images -->
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
-                                <!-- Default Image -->
-                                <img src="/public/images/11.avif" alt="Product 1"
-                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-
-                                <!-- Hover Image -->
-                                <img src="/public/images/555.avif" alt="Product 1 Hover"
-                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-
-                                <!-- Add to favorites Icon (top-right) -->
-                                <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-
-                                <!-- Add to Cart Icon -->
-                                <button
-                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                </button>
-                            </div>
-
-                            <!-- Product Details -->
-                            <div class="p-4 text-center">
-                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">₹ 1,199.00</p>
-                            </div>
-                        </div>
-                    </a>
+                   
 
 
                 </div>

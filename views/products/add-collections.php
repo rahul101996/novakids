@@ -48,98 +48,59 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                             <div class="bg-white p-6 rounded-lg shadow-sm">
                                 <h2 class="text-lg font-medium">Products</h2>
-                                <div class="w-[80%] flex items-center justify-start">
+                                <div class="w-[100%] flex items-center justify-start">
                                     <select name="products[]" class="selectElement" multiple>
-                                        <option value="">-- Select a Product --</option>
-                                        <option value="1">T-Shirt</option>
-                                        <option value="2">Jeans</option>
-                                        <option value="3">Jacket</option>
-                                        <option value="4">Sweater</option>
-                                        <option value="5">Shorts</option>
-                                        <option value="6">Dress</option>
-                                        <option value="7">Skirt</option>
-                                        <option value="8">Shirt</option>
-                                        <option value="9">Blazer</option>
-                                        <option value="10">Hoodie</option>
+                                        <?php
+                                        foreach ($products as $key => $product) {
+                                            $images = json_decode($product['product_images'], true);
+                                        ?>
+                                            <option value="<?= $product['id'] ?>">
+                                                <div>
+                                                    <div class="flex items-center gap-2 justify-between">
+                                                        <img src="/<?= $images[0] ?>" alt="Product 1" class="w-12 h-12 rounded">
+                                                        <div></div>
+                                                        <p class="text-sm font-semibold text-gray-800"><?= $product['name'] ?></p>
+
+                                                    </div>
+                                                </div>
+                                            </option>
+                                        <?php }
+                                        ?>
                                     </select>
 
                                 </div>
-                                <div class="w-full flex flex-col items-center justify-center h-[25vh]">
+                                <div class="w-full flex flex-col items-center justify-start overflow-y-scroll h-[30vh] mt-3">
                                     <?php
-                                    $products = [
-                                        [
-                                            "id" => 1,
-                                            "name" => "Blue Denim Jacket",
-                                            "category" => "Clothing",
-                                            "price" => 1299,
-                                            "stock" => 25
-                                        ],
-                                        [
-                                            "id" => 2,
-                                            "name" => "Red T-Shirt",
-                                            "category" => "Clothing",
-                                            "price" => 499,
-                                            "stock" => 50
-                                        ],
-                                        [
-                                            "id" => 3,
-                                            "name" => "Black Sneakers",
-                                            "category" => "Footwear",
-                                            "price" => 2199,
-                                            "stock" => 15
-                                        ],
-                                        [
-                                            "id" => 4,
-                                            "name" => "Leather Wallet",
-                                            "category" => "Accessories",
-                                            "price" => 899,
-                                            "stock" => 40
-                                        ],
-                                    ];
 
                                     if (isset($collection)) {
 
-                                        if (isset($products) && !empty($products)) { ?>
-                                            <ul class="w-full mt-14">
+                                        if (isset($inProducts) && !empty($inProducts)) {
+                                    ?>
+                                            <ul class="w-full ">
 
                                                 <!-- Single Item -->
-                                                <li class="flex items-center justify-between border-b py-2">
-                                                    <div class="flex items-center space-x-3">
-                                                        <span class="text-gray-600 font-medium">1.</span>
-                                                        <img src="https://zenin.co.in/cdn/shop/files/IMG_7780WEB34-min.jpg?v=1743757263&width=360" alt="Classic Frost" class="w-10 h-10 rounded-md object-cover">
-                                                        <span class="text-gray-800 font-medium">Classic Frost <span class="text-gray-500">(White)</span></span>
-                                                    </div>
-                                                    <div class="flex items-center space-x-3">
-                                                        <span class="bg-green-300 text-green-600 font-semibold text-xs px-3 py-1 rounded-full">Active</span>
-                                                        <button class="text-gray-400 hover:text-red-500 text-lg">&times;</button>
-                                                    </div>
-                                                </li>
+                                                 
+                                                <?php
+                                                $sr = 1;
+                                                foreach ($inProducts as $key => $product) {
+                                                    $images = json_decode($product['product_images'], true);
+                                                    $images = array_reverse($images);   
+                                                    $active = $product['status'] == '1' ? true : false;
 
-                                                <li class="flex items-center justify-between border-b py-2">
-                                                    <div class="flex items-center space-x-3">
-                                                        <span class="text-gray-600 font-medium">2.</span>
-                                                        <img src="https://zenin.co.in/cdn/shop/files/IMG_5779WEB-min.jpg?v=1741075748&width=360" alt="Sky Vibes" class="w-10 h-10 rounded-md object-cover">
-                                                        <span class="text-gray-800 font-medium">Sky Vibes <span class="text-gray-500">(Sky Blue)</span></span>
-                                                    </div>
-                                                    <div class="flex items-center space-x-3">
-                                                        <span class="bg-green-300 text-green-600 font-semibold text-xs px-3 py-1 rounded-full">Active</span>
-                                                        <button class="text-gray-400 hover:text-red-500 text-lg">&times;</button>
-                                                    </div>
-                                                </li>
+                                                ?>
+                                                    <li class="flex items-start justify-between border-b py-2 px-2 product-card">
+                                                        <div class="flex items-center space-x-3">
+                                                            <span class="text-gray-600 font-medium"><?= $sr++ ?></span>
+                                                            <img src="/<?= $images[0] ?>" alt="Classic Frost" class="w-14 h-14 rounded-md object-cover">
+                                                            <span class="text-gray-800 font-medium"><?= $product['name'] ?></span>
+                                                        </div>
+                                                        <div class="flex items-center space-x-3">
+                                                            <span class="<?= $active ? 'text-green-600 bg-green-100' : 'text-red-600 bg-red-100' ?> font-semibold text-xs px-3 py-1 rounded-full"><?= $active ? 'Active' : 'Inactive' ?></span>
+                                                            <button type="button" onclick="RemoveProduct(<?= $collection['id'] ?>,<?= $product['id'] ?>,this)" class="text-gray-400 hover:text-red-500 text-lg">&times;</button>
+                                                        </div>
+                                                    </li>
+                                                <?php } ?>
 
-                                                <li class="flex items-center justify-between border-b py-2">
-                                                    <div class="flex items-center space-x-3">
-                                                        <span class="text-gray-600 font-medium">3.</span>
-                                                        <img src="https://zenin.co.in/cdn/shop/files/IMG_4198webnew-min.jpg?v=1712388971&width=360" alt="Sandy Soul" class="w-10 h-10 rounded-md object-cover">
-                                                        <span class="text-gray-800 font-medium">Sandy Soul <span class="text-gray-500">(Beige)</span></span>
-                                                    </div>
-                                                    <div class="flex items-center space-x-3">
-                                                        <span class="bg-green-300 text-green-600 font-semibold text-xs px-3 py-1 rounded-full">Active</span>
-                                                        <button class="text-gray-400 hover:text-red-500 text-lg">&times;</button>
-                                                    </div>
-                                                </li>
-
-                                                <!-- Repeat for all items -->
 
                                             </ul>
                                         <?php } else { ?>
@@ -161,7 +122,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     <?php } ?>
                                 </div>
                             </div>
-                            <button class="bg-black border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+                            <button class="bg-black border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" name="<?= isset($collection['id']) ? 'update' : 'add' ?>">Save</button>
                         </div>
                         <div class="space-y-8">
 
@@ -170,7 +131,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 <div class="space-y-1 text-center flex flex-col items-center border-2 border-gray-300 border-dashed rounded-lg p-8">
 
                                     <div id="imagePreview" class="<?= isset($collection['image']) ? '' : 'hidden' ?> mb-4">
-                                        <!-- <input type="hidden" name="old_vdata_image" value=""> -->
+                                        <input type="" name="old_vdata_image" value="<?= isset($collection['image']) ? $collection['image'] : '' ?>">
                                         <img src="/<?= isset($collection['image']) ? $collection['image'] : '' ?>" alt="Preview" class="mx-auto h-32 object-cover">
                                     </div>
                                     <svg class="mx-auto h-8 w-8 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
@@ -179,7 +140,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     <div class="flex text-sm text-gray-600">
                                         <label for="vdata_image" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none">
                                             <span>Upload a file</span>
-                                            <input id="vdata_image" name="collection_image" type="file" class="sr-only" accept="image/*" required>
+                                            <input id="vdata_image" name="collection_image" type="file" class="sr-only" accept="image/*" <?= isset($collection['image']) ? '' : 'required' ?>>
                                         </label>
                                         <p class="pl-1">or drag and drop</p>
                                     </div>
@@ -214,6 +175,20 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 reader.readAsDataURL(file);
             }
         });
+       async function RemoveProduct(collection_id, product_id, element) {
+           
+            const request = await axios.post("/api/removeProductFromCollection", new URLSearchParams({
+            id : collection_id,
+            product_id : product_id
+        }));
+        console.log(request.data)
+        if (request.data.success) {
+           
+            toastr.success(request.data.data);
+            // element.closest(".product-card").remove();
+            location.reload()
+        }
+    }
     </script>
 </body>
 
