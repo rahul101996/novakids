@@ -202,7 +202,7 @@
 
                 <!-- Single View Similar Button -->
                 <button id="viewSimilarBtn"
-                    class="absolute bottom-4 left-4 px-4 py-2 z-50 bg-white/80 text-black text-sm font-medium rounded-md shadow flex items-center gap-2">
+                    class="absolute bottom-4 left-4 px-4 py-2 z-40 bg-white/80 text-black text-sm font-medium rounded-md shadow flex items-center gap-2">
                     <i class="fas fa-layer-group"></i> View Similar
                 </button>
 
@@ -891,7 +891,7 @@
 
     <!-- Size Modal -->
     <div id="sizeChartModal" class="hidden fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-        <div class="bg-white shadow-lg w-[55%] max-md:w-[90%] max-h-[80vh] relative flex flex-col animate-slideDown">
+        <div class="bg-white shadow-lg w-[65%] max-md:w-[90%] max-h-[80vh] relative flex flex-col animate-slideDown">
             <!-- Close button -->
             <button onclick="document.getElementById('sizeChartModal').classList.add('hidden')"
                 class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 animate-rotate-pingpong">
@@ -971,10 +971,33 @@
                             <span class="text-gray-600">Measure from where the shoulder seam meets the collar to the
                                 hem.</span>
                         </p>
+                        <p class="mb-2">
+                            <span class="font-bold">SHOULDER</span> -
+                            <span class="text-gray-600">Measure straight across the back, from one shoulder seam to the
+                                other.</span>
+                        </p>
+
+                        <p class="mb-2">
+                            <span class="font-bold">HALF SLEEVE</span> -
+                            <span class="text-gray-600">Measure from the top of the shoulder seam to the end of the
+                                short
+                                sleeve.</span>
+                        </p>
+
+                        <p class="mb-2">
+                            <span class="font-bold">3/4 SLEEVE</span> -
+                            <span class="text-gray-600">Measure from the top of the shoulder seam to a point between the
+                                elbow and wrist (mid-forearm).</span>
+                        </p>
+
+                        <p>
+                            <span class="font-bold">FULL SLEEVE</span> -
+                            <span class="text-gray-600">Measure from the shoulder seam down to the wrist.</span>
+                        </p>
                     </div>
                     <!-- Image -->
                     <div class="w-full md:w-[40%] flex justify-center">
-                        <img src="/public/images/size.jpg" alt="How to measure T-shirt" class="h-56">
+                        <img src="/public/images/shirt-size.jpg" alt="How to measure T-shirt" class="h-72 max-md:h-64">
                     </div>
                 </div>
             </div>
