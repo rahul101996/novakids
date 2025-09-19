@@ -270,7 +270,7 @@
                     </svg>
                 </button>
             </div>
-
+            <button id="Openvariant">Open Cart</button>
             <button id="openLogin"
                 class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
                 <div class="max-md:hidden">

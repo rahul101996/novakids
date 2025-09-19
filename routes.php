@@ -23,6 +23,7 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('terms-and-conditions', 'termsAndConditions');
     $route->route('privacy-policy', 'privacyPolicy');
     $route->route('/api/removeProductFromCollection', 'removeProductFromCollection');
+    $route->route('/api/get-product-data', 'getProductData');
      $route->route('cookies', 'cookies');
     // $route->route('/', 'index');
 
