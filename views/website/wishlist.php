@@ -32,13 +32,14 @@
             </p>
 
             <button onclick="window.location.href='/shop'"
-                class="relative border-2 border-black py-2 px-5 rounded-lg overflow-hidden transition duration-300 group">
+                class="flex-1 relative rounded-md overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
                 <span
-                    class="relative z-10 text-black font-semibold group-hover:text-white transition-colors duration-300">
+                    class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
                     Return to Shop
                 </span>
                 <span
-                    class="absolute inset-0 bg-black scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+                    class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
+                </span>
             </button>
         </div>
     </div>

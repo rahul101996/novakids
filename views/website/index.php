@@ -52,11 +52,11 @@
 
         <div class="absolute bottom-20 left-10">
             <button onclick="window.location.href = 'shop'"
-                class="relative px-10 py-3 bg-transparent hover:bg-white text-white hover:text-black border border-white rounded-md font-semibold shadow-lg overflow-hidden group transition-all duration-300">
-                <span class="relative z-10 block transition-colors duration-500 group-hover:animate-glitch">SHOP
+                class="relative px-10 py-3 bg-transparent hover:bg-white text-white hover:text-black border border-white rounded-md font-semibold shadow-lg overflow-hidden group transition-all duration-700">
+                <span class="relative z-10 block transition-colors duration-300 group-hover:animate-glitch">SHOP
                     NOW</span>
                 <span
-                    class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                    class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-700 group-hover:scale-x-100"></span>
             </button>
         </div>
 
@@ -106,12 +106,12 @@
         }
     </style>
 
-    <section class="bg-white py-14 max-md:py-8 w-full">
+    <section class="bg-white pt-12 pb-6 max-md:py-8 w-full">
         <div class="w-[90vw] max-md:w-[90vw] mx-auto">
-            <div class="flex flex-col mb-4 max-md:mb-2" data-aos="fade-right" data-aos-duration="1000"
+            <div class="flex flex-col mb-4 max-md:mb-2" data-aos="fade-up" data-aos-duration="1000"
                 data-aos-delay="100">
-                <h3 class="text-left text-3xl font-extrabold mb-3 uppercase">New Arrival</h3>
-                <p class="text-left text-gray-600 text-lg max-md:text-base max-w-xl">
+                <h3 class="text-center text-3xl font-extrabold mb-3 uppercase">New Arrival</h3>
+                <p class="text-center mx-auto text-gray-600 text-lg max-md:text-base max-w-xl">
                     Be the first to explore our latest drop — fresh styles crafted for teens who love to stay ahead of
                     the trend.
                 </p>
@@ -170,10 +170,16 @@
                                 <!-- Product Details -->
                                 <div class="p-4 text-center">
                                     <h3 class="text-sm font-semibold"><?= $product['name'] ?></h3>
-                                    <p class="text-gray-500 line-through text-sm">₹
+                                    <div class="flex items-center justify-center gap-3">
+                                        <p class="text-gray-500 line-through text-sm">₹
                                         <?= formatNumber($product['compare_price']) ?>.00
                                     </p>
                                     <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?>.00</p>
+                                    </div>
+                                    <!-- reviews -->
+                                    <div class="flex items-center justify-center mt-2 space-x-1">
+                                        <span class="text-yellow-500">★★★★★</span>
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -462,11 +468,11 @@
         }
     </style>
 
-    <div class="w-full overflow-hidden bg-white">
-        <div id="bottomRow" class="marquee bg-gradient-to-r from-orange-50 via-transparent to-orange-50">
+    <div class="w-full overflow-hidden bg-white mb-8">
+        <div id="bottomRow" class="marquee bg-black">
             <div class="marquee-content text-grey-700 max-md:text-sm py-1 text-nowrap">
                 <div
-                    class="flex items-center space-x-10 text-outline transition-all duration-300 text-gray-900 font-semibold text-xl max-md:text-lg cursor-pointer">
+                    class="flex items-center space-x-10 text-outline transition-all duration-300 text-white font-semibold text-xl max-md:text-lg cursor-pointer">
                     <span>#</span>
                     <span>Streetwear</span>
                     <span>#</span>
@@ -533,39 +539,6 @@
 
         setupScroll('bottomRow', 1, 0.7);
     </script>
-
-    <section class="pt-16 max-md:pt-8 w-full">
-        <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-            <h2 class="text-center text-3xl font-extrabold mb-3 uppercase">Our Partners</h2>
-            <p class="text-center text-gray-600 text-lg max-md:text-base max-md:px-4 max-w-2xl mx-auto">
-                We’re proud to work with trusted partners who share our vision and help us create lasting impact
-                together.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-3 md:grid-cols-5 md:gap-4 w-[80vw] mx-auto max-md:w-[90vw]">
-            <div
-                class="h-36 max-md:h-24 rounded-lg overflow-hidden w-full md:p-2 border border-white hover:border hover:border-gray-300">
-                <img src="/public/images/partner1.png" alt="p1" class="w-full h-full object-contain">
-            </div>
-            <div
-                class="h-36 max-md:h-24 rounded-lg overflow-hidden w-full md:p-2 border border-white hover:border hover:border-gray-300">
-                <img src="/public/images/partner2.png" alt="p2" class="w-full h-full object-contain">
-            </div>
-            <div
-                class="h-36 max-md:h-24 rounded-lg overflow-hidden w-full md:p-2 border border-white hover:border hover:border-gray-300">
-                <img src="/public/images/partner3.png" alt="p3" class="w-full h-full object-contain">
-            </div>
-            <div
-                class="h-36 max-md:h-24 rounded-lg overflow-hidden w-full md:p-2 border border-white hover:border hover:border-gray-300">
-                <img src="/public/images/partner4.png" alt="p4" class="w-full h-full object-contain">
-            </div>
-            <div
-                class="h-36 max-md:h-24 rounded-lg overflow-hidden w-full md:p-2 border border-white hover:border hover:border-gray-300">
-                <img src="/public/images/partner5.png" alt="p5" class="w-full h-full object-contain">
-            </div>
-        </div>
-    </section>
 
     <style>
         /* Animated gradient text */
@@ -736,7 +709,7 @@
                     class="w-full border border-gray-300 rounded-md p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-black">
 
                 <button
-                    class="relative w-full font-semibold py-2 rounded-lg border-2 border-black overflow-hidden group">
+                    class="relative w-full font-semibold py-2 rounded-md border-2 border-black overflow-hidden group">
                     <!-- Text -->
                     <span class="relative z-10 text-white group-hover:text-black transition-colors duration-700">
                         Subscribe

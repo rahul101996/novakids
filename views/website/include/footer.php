@@ -115,11 +115,11 @@
                 class="flex-1 px-4 py-2 rounded-md border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 transition-all text-sm" />
             <a href="#"
                 class="relative inline-block px-6 py-2 rounded-md border border-white text-white group-hover:text-black font-semibold overflow-hidden group">
-                <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
+                <span class="relative z-10 transition-colors duration-700 group-hover:text-black">
                     Subscribe
                 </span>
                 <span
-                    class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                    class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-700 group-hover:scale-x-100"></span>
             </a>
         </div>
 
@@ -127,16 +127,14 @@
 </div>
 
 <footer class="w-full overflow-hidden">
-
     <div class="w-[90vw] mx-auto py-12">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 max-md:gap-6">
             <!-- Brand Section -->
             <div class="lg:col-span-2">
                 <div class="mb-6">
-                    <div class="w-auto h-16 flex mb-4">
-                        <img src="/public/logos/newuniverse.png" alt="Brand Logo"
-                            class="w-auto h-auto rounded-md object-cover">
-                    </div>
+
+                    <img src="/public/logos/nova.png" alt="Brand Logo" class="w-auto h-20 rounded-md object-cover mb-4">
+
                     <p class="text-gray-600 max-w-sm  leading-relaxed">
                         Authentic streetwear for the next generation. Quality pieces that speak your language and
                         match your vibe.

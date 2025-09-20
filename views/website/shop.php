@@ -82,11 +82,12 @@
                             <span class="text-gray-500 text-sm">+</span>
                         </summary>
                         <div class="mt-3 flex flex-wrap gap-2">
-                            <button class="px-3 py-1 border rounded-lg hover:bg-gray-100 text-sm">S</button>
-                            <button class="px-3 py-1 border rounded-lg hover:bg-gray-100 text-sm">M</button>
-                            <button class="px-3 py-1 border rounded-lg hover:bg-gray-100 text-sm">L</button>
-                            <button class="px-3 py-1 border rounded-lg hover:bg-gray-100 text-sm">XL</button>
-                            <button class="px-3 py-1 border rounded-lg hover:bg-gray-100 text-sm">XXL</button>
+                            <button class="px-3 py-1 border rounded-lg hover:bg-gray-100 text-sm">8-9 Years</button>
+                            <button class="px-3 py-1 border rounded-lg hover:bg-gray-100 text-sm">9-10 Years</button>
+                            <button class="px-3 py-1 border rounded-lg hover:bg-gray-100 text-sm">10-11 Years</button>
+                            <button class="px-3 py-1 border rounded-lg hover:bg-gray-100 text-sm">11-12 Years</button>
+                            <button class="px-3 py-1 border rounded-lg hover:bg-gray-100 text-sm">12-13 Years</button>
+                            <button class="px-3 py-1 border rounded-lg hover:bg-gray-100 text-sm">13-14 Years</button>
                         </div>
                     </details>
 
@@ -221,22 +222,22 @@
                         <h4 class="font-semibold mb-2">Filter by Size</h4>
                         <div class="flex flex-wrap gap-2">
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="hidden"> XS
+                                <input type="checkbox" class="hidden"> 8-9 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="hidden"> S
+                                <input type="checkbox" class="hidden"> 9-10 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="hidden"> M
+                                <input type="checkbox" class="hidden"> 10-11 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="hidden"> L
+                                <input type="checkbox" class="hidden"> 11-12 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="hidden"> XL
+                                <input type="checkbox" class="hidden"> 12-13 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="hidden"> XXL
+                                <input type="checkbox" class="hidden"> 13-14 Years
                             </label>
                         </div>
                     </div>

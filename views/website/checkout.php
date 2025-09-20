@@ -35,7 +35,8 @@
                     <input type="text" placeholder="Last Name" required class="border px-3 py-2 rounded col-span-1">
                     <input type="email" placeholder="Email Address" class="border px-3 py-2 rounded col-span-1">
                     <input type="text" placeholder="Phone Number" required class="border px-3 py-2 rounded col-span-1">
-                    <input type="text" placeholder="Street Address" required class="border px-3 py-2 rounded col-span-2">
+                    <input type="text" placeholder="Street Address" required
+                        class="border px-3 py-2 rounded col-span-2">
                     <div class="grid grid-cols-3 gap-4 col-span-2">
                         <input type="text" placeholder="City" required class="border px-3 py-2 rounded ">
 
@@ -150,13 +151,13 @@
         </section>
 
         <!-- RIGHT: Order Summary (Sticky) -->
-        <aside class="bg-white shadow-md rounded-2xl p-6 h-fit sticky top-28 md:col-span-2">
+        <aside class="bg-gray-100 shadow-md  p-6 h-fit sticky top-28 md:col-span-2">
             <h2 class="text-lg font-bold mb-4">Order Summary</h2>
             <div class="space-y-4 border-b pb-4 mb-4">
                 <!-- Product 1 -->
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-3">
-                        <img src="/public/images/1.webp" class="w-16 h-16 object-cover rounded-lg">
+                        <img src="/public/images/1.webp" class="w-16 h-16 object-cover">
                         <div>
                             <p class="font-medium">Manifestor Polo</p>
                             <p class="text-xs text-gray-500">Size: M</p>
@@ -167,7 +168,7 @@
                 <!-- Product 2 -->
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-3">
-                        <img src="/public/images/4.webp" class="w-16 h-16 object-cover rounded-lg">
+                        <img src="/public/images/4.webp" class="w-16 h-16 object-cover">
                         <div>
                             <p class="font-medium">Graphic Tee</p>
                             <p class="text-xs text-gray-500">Size: L</p>
@@ -195,8 +196,14 @@
 
             <!-- Button -->
             <button
-                class="mt-6 w-full bg-[#f25b21] hover:bg-black text-white py-2 rounded-md font-semibold text-lg transition">
-                Confirm & Place Order
+                class="relative mt-6 w-full font-semibold py-2 rounded-md border-2 border-black overflow-hidden group">
+                <!-- Text -->
+                <span class="relative z-10 text-white group-hover:text-black transition-colors duration-700">
+                    Confirm & Place Order
+                </span>
+                <!-- Animated BG -->
+                <span
+                    class="absolute inset-0 bg-black transition-transform duration-700 origin-left group-hover:scale-x-0 scale-x-100"></span>
             </button>
         </aside>
     </main>
