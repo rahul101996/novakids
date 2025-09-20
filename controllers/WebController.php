@@ -15,14 +15,50 @@ class WebController extends LoginController
     }
     public function getProductData()
     {
-        $id = $_POST['productid'];
+        $id = 6;
         $ProductData = getData2("SELECT * FROM `tbl_products` WHERE `id` = $id")[0];
         $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
         $ProductData['varients'] = $varients;
-        // return $ProductData;
-        echo json_encode($ProductData);
-        // return $data;
+
+        // Start output buffering
+        ob_start();
+        printWithPre($ProductData['varients']);
+?>
+
+        <?php
+        if (!empty($ProductData['varients'])) {
+            $images = [];
+            $options = [];
+            foreach ($ProductData['varients'] as $key => $variant) {
+                $images[] = json_decode($variant['images'], true);
+                $options[] = json_decode($variant['options'], true);
+
+        ?>
+                <!-- <div class="variant-item">
+                    <p><strong><?= htmlspecialchars($variant['name']) ?></strong></p>
+                    <p>Price: ₹<?= number_format($variant['price']) ?></p>
+                    <p>Stock: <?= htmlspecialchars($variant['stock']) ?></p>
+                </div> -->
+<?php
+            }
+            printWithPre($images);
+            printWithPre($options);
+            $opt = [];
+            foreach($options as $key => $option){
+                printWithPre($option);
+                $opt[] = json_decode($option, true);
+            }
+            printWithPre($opt);
+        } else {
+            echo "<p>No variants found</p>";
+        }
+
+        // Get the buffered content
+        $html = ob_get_clean();
+
+        echo $html;
     }
+
     public function current_url(): string
     {
         // Detect protocol
@@ -59,7 +95,7 @@ class WebController extends LoginController
         // printWithPre($collection);
         $collection = array_reverse($collection)[0];
         $collection_products = json_decode($collection['products'], true) ?? [];
-                // printWithPre($collection);
+        // printWithPre($collection);
 
 
 
@@ -67,39 +103,40 @@ class WebController extends LoginController
             require 'views/website/index.php';
         }
     }
-    
+
     public function removeProductFromCollection()
     {
-       $collection = getData2("SELECT * FROM `tbl_collection` WHERE `id` = $_POST[id] ORDER BY `id` DESC LIMIT 1")[0];
-       $collection_products = json_decode($collection['products'], true) ?? [];
-       if(in_array($_POST['product_id'], $collection_products)){
-        $collection_products = array_filter($collection_products, function ($product) {
-            return $product != $_POST['product_id'];
-        });
-        $collection_products = json_encode($collection_products);
-        $data = [
-            'products' => $collection_products
-        ];
-        $update = update($data, $_POST['id'], 'tbl_collection');
-        if($update){
-            $response = [
-                "success" => true,
-                "data" => 'Product Removed Successfully'];
-            echo json_encode($response);
-        }else{
+        $collection = getData2("SELECT * FROM `tbl_collection` WHERE `id` = $_POST[id] ORDER BY `id` DESC LIMIT 1")[0];
+        $collection_products = json_decode($collection['products'], true) ?? [];
+        if (in_array($_POST['product_id'], $collection_products)) {
+            $collection_products = array_filter($collection_products, function ($product) {
+                return $product != $_POST['product_id'];
+            });
+            $collection_products = json_encode($collection_products);
+            $data = [
+                'products' => $collection_products
+            ];
+            $update = update($data, $_POST['id'], 'tbl_collection');
+            if ($update) {
+                $response = [
+                    "success" => true,
+                    "data" => 'Product Removed Successfully'
+                ];
+                echo json_encode($response);
+            } else {
+                $response = [
+                    "success" => false,
+                    "data" => 'Product Remove Failed'
+                ];
+                echo json_encode($response);
+            }
+        } else {
             $response = [
                 "success" => false,
-                "data" => 'Product Remove Failed'];
+                "data" => 'Product Not Found'
+            ];
             echo json_encode($response);
         }
-       }else{
-        $response = [
-            "success" => false,
-            "data" => 'Product Not Found'];
-        echo json_encode($response);
-       }
-
-       
     }
     public function productDetails()
     {

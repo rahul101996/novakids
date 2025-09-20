@@ -312,7 +312,7 @@
 
             <div class="relative max-md:mr-1">
                 <button
-                    class="openCartBtn nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
+                    class=" nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95" onclick="openCart()">
                     <div class="max-md:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                             fill="#000000">

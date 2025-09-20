@@ -390,7 +390,7 @@
                     console.log(response.data)
 
                     if(response.data.varients.length > 0){
-                        // showVarients(ee.querySelector(".ProductId").value);
+                        showVarientsSidebar(response.data.varients);
                         // console.log('hello');
                         
 
@@ -407,4 +407,6 @@
             });
         }
     }
+
+    // function showVarientsSidebar
 </script>
