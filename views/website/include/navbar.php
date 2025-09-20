@@ -78,7 +78,7 @@
     </div>
 
     <div class="w-full flex items-center justify-between py-1">
-        <li class="relative group list-none max-md:hidden">
+        <li class="relative group list-none max-md:hidden hidden">
             <button
                 class="nav-text text-black relative px-6 py-3 text-lg font-semibold flex items-center gap-2 transition-all duration-300">
                 Boys Collection
@@ -233,6 +233,20 @@
             </div>
         </li>
 
+        <div class="flex items-center space-x-4 ml-8 max-md:hidden">
+            <div class="relative group">
+                <a href="/shop" class="text-gray-800 group-hover:text-black">Tees</a>
+            </div>
+
+            <div class="relative group">
+                <a href="/about" class="text-gray-800 group-hover:text-black">Joggers</a>
+            </div>
+
+            <div class="relative group">
+                <a href="/contact" class="text-gray-800 group-hover:text-black">Co-ords</a>
+            </div>
+        </div>
+
         <!-- Mobile Menu Toggle Button -->
         <div class="md:hidden flex items-center">
             <button id="menu-toggle" class="p-2">
@@ -263,7 +277,14 @@
             <div class="flex items-center max-md:hidden">
                 <button
                     class="openSearch text-black p-2 max-md:text-xs rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
-                    <svg class="svgSearch anarkali-svg-icon" width="20px" height="20px" fill="currentColor" viewBox="0 0 48 48" enable-background="new 0 0 48 48" xmlns="http://www.w3.org/2000/svg"><g><path d="m40.2850342 37.4604492-6.4862061-6.4862061c1.9657593-2.5733643 3.0438843-5.6947021 3.0443115-8.9884033 0-3.9692383-1.5458984-7.7011719-4.3530273-10.5078125-2.8066406-2.8066406-6.5380859-4.3525391-10.5078125-4.3525391-3.9692383 0-7.7011719 1.5458984-10.5078125 4.3525391-5.7939453 5.7944336-5.7939453 15.222168 0 21.015625 2.8066406 2.8071289 6.5385742 4.3530273 10.5078125 4.3530273 3.2937012-.0004272 6.4150391-1.0785522 8.9884033-3.0443115l6.4862061 6.4862061c.3901367.390625.9023438.5859375 1.4140625.5859375s1.0239258-.1953125 1.4140625-.5859375c.78125-.7807617.78125-2.0473633 0-2.828125zm-25.9824219-7.7949219c-4.234375-4.234375-4.2338867-11.1245117 0-15.359375 2.0512695-2.0507813 4.7788086-3.1806641 7.6796875-3.1806641 2.9013672 0 5.628418 1.1298828 7.6796875 3.1806641 2.0512695 2.0512695 3.1811523 4.7788086 3.1811523 7.6796875 0 2.9013672-1.1298828 5.628418-3.1811523 7.6796875s-4.7783203 3.1811523-7.6796875 3.1811523c-2.9008789.0000001-5.628418-1.1298827-7.6796875-3.1811523z"></path></g></svg>
+                    <svg class="svgSearch anarkali-svg-icon" width="20px" height="20px" fill="currentColor"
+                        viewBox="0 0 48 48" enable-background="new 0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <path
+                                d="m40.2850342 37.4604492-6.4862061-6.4862061c1.9657593-2.5733643 3.0438843-5.6947021 3.0443115-8.9884033 0-3.9692383-1.5458984-7.7011719-4.3530273-10.5078125-2.8066406-2.8066406-6.5380859-4.3525391-10.5078125-4.3525391-3.9692383 0-7.7011719 1.5458984-10.5078125 4.3525391-5.7939453 5.7944336-5.7939453 15.222168 0 21.015625 2.8066406 2.8071289 6.5385742 4.3530273 10.5078125 4.3530273 3.2937012-.0004272 6.4150391-1.0785522 8.9884033-3.0443115l6.4862061 6.4862061c.3901367.390625.9023438.5859375 1.4140625.5859375s1.0239258-.1953125 1.4140625-.5859375c.78125-.7807617.78125-2.0473633 0-2.828125zm-25.9824219-7.7949219c-4.234375-4.234375-4.2338867-11.1245117 0-15.359375 2.0512695-2.0507813 4.7788086-3.1806641 7.6796875-3.1806641 2.9013672 0 5.628418 1.1298828 7.6796875 3.1806641 2.0512695 2.0512695 3.1811523 4.7788086 3.1811523 7.6796875 0 2.9013672-1.1298828 5.628418-3.1811523 7.6796875s-4.7783203 3.1811523-7.6796875 3.1811523c-2.9008789.0000001-5.628418-1.1298827-7.6796875-3.1811523z">
+                            </path>
+                        </g>
+                    </svg>
                 </button>
             </div>
             <button id="Openvariant">Open Cart</button>
@@ -293,8 +314,6 @@
                 </div>
             </button>
 
-            
-
             <div class="flex items-center max-md:hidden">
                 <button onclick="window.location.href='/wishlist'"
                     class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
@@ -309,11 +328,15 @@
             </div>
 
             <div class="relative max-md:mr-1">
-                
                 <button
                     class="openCartBtn nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
                     <div class="max-md:hidden text-sm">
-                       <svg class="shopBag anarkali-svg-icon" width="20px" height="20px" fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="m26 8.9a1 1 0 0 0 -1-.9h-3a6 6 0 0 0 -12 0h-3a1 1 0 0 0 -1 .9l-1.78 17.8a3 3 0 0 0 .78 2.3 3 3 0 0 0 2.22 1h17.57a3 3 0 0 0 2.21-1 3 3 0 0 0 .77-2.31zm-10-4.9a4 4 0 0 1 4 4h-8a4 4 0 0 1 4-4zm9.53 23.67a1 1 0 0 1 -.74.33h-17.58a1 1 0 0 1 -.74-.33 1 1 0 0 1 -.26-.77l1.7-16.9h2.09v3a1 1 0 0 0 2 0v-3h8v3a1 1 0 0 0 2 0v-3h2.09l1.7 16.9a1 1 0 0 1 -.26.77z"></path></svg>
+                        <svg class="shopBag anarkali-svg-icon" width="20px" height="20px" fill="currentColor"
+                            viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m26 8.9a1 1 0 0 0 -1-.9h-3a6 6 0 0 0 -12 0h-3a1 1 0 0 0 -1 .9l-1.78 17.8a3 3 0 0 0 .78 2.3 3 3 0 0 0 2.22 1h17.57a3 3 0 0 0 2.21-1 3 3 0 0 0 .77-2.31zm-10-4.9a4 4 0 0 1 4 4h-8a4 4 0 0 1 4-4zm9.53 23.67a1 1 0 0 1 -.74.33h-17.58a1 1 0 0 1 -.74-.33 1 1 0 0 1 -.26-.77l1.7-16.9h2.09v3a1 1 0 0 0 2 0v-3h8v3a1 1 0 0 0 2 0v-3h2.09l1.7 16.9a1 1 0 0 1 -.26.77z">
+                            </path>
+                        </svg>
                     </div>
                     <div class="md:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="24px"

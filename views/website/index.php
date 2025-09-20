@@ -108,7 +108,7 @@
 
     <section class="bg-white py-14 max-md:py-8 w-full">
         <div class="w-[90vw] max-md:w-[90vw] mx-auto">
-            <div class="flex flex-col mb-10 max-md:mb-2" data-aos="fade-right" data-aos-duration="1000"
+            <div class="flex flex-col mb-4 max-md:mb-2" data-aos="fade-right" data-aos-duration="1000"
                 data-aos-delay="100">
                 <h3 class="text-left text-3xl font-extrabold mb-3 uppercase">New Arrival</h3>
                 <p class="text-left text-gray-600 text-lg max-md:text-base max-w-xl">
@@ -133,7 +133,7 @@
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
                         // printWithPre($images);
-                    ?>
+                        ?>
                         <a href="products/product-details" class="block">
                             <div
                                 class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
@@ -179,11 +179,6 @@
                         </a>
 
                     <?php } ?>
-
-                    <!-- Product 4 -->
-
-
-
                 </div>
             </div>
         </div>
@@ -200,7 +195,6 @@
                 Discover trendy, comfortable, and versatile outfits for teen boys — from casual wear to bold streetwear,
                 Nova Universe has it all.
             </p>
-
         </div>
 
 
@@ -210,7 +204,7 @@
             foreach ($categories as $key => $category) {
 
 
-            ?>
+                ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
                     <img src="/<?= $category['img'] ?>" alt="Tees"
@@ -391,12 +385,12 @@
 
                 <?php
                 foreach ($collection_products as $key => $product) {
-                  
-                   $product_details =getData2("SELECT * FROM `tbl_products` WHERE `id`='$product'")[0];
-                   $images = json_decode($product_details['product_images'], true);
-                        $images = array_reverse($images);
 
-                ?>
+                    $product_details = getData2("SELECT * FROM `tbl_products` WHERE `id`='$product'")[0];
+                    $images = json_decode($product_details['product_images'], true);
+                    $images = array_reverse($images);
+
+                    ?>
                     <a href="products/product-details" class="block">
                         <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
                             <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
@@ -440,7 +434,7 @@
                             </div>
                         </div>
                     </a>
-                <?php
+                    <?php
                 }
                 ?>
             </div>
@@ -770,7 +764,7 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const modal = document.getElementById('newsletterModal');
             const closeBtn = document.getElementById('closeModal');
             const noPopupCheckbox = document.getElementById('noPopup');
@@ -804,7 +798,7 @@
 
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".new-arrival-carousel").owlCarousel({
                 loop: true,
                 margin: 10,
