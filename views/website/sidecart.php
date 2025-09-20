@@ -43,7 +43,7 @@
     <div class="flex justify-between items-center p-4 border-b">
         <h2 class="text-xl font-bold">Your Cart</h2>
         <!-- Close Button -->
-        <button id="closeCart" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong">
+        <button id="closeCart" onclick="closeCartFn()" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong">
             <i class="fas fa-times"></i>
         </button>
     </div>
