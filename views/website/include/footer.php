@@ -127,7 +127,6 @@
 </div>
 
 <footer class="w-full overflow-hidden">
-
     <div class="w-[90vw] mx-auto py-12">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 max-md:gap-6">
             <!-- Brand Section -->
