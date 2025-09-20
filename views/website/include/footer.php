@@ -143,7 +143,12 @@
                     </p>
                 </div>
 
-                <div class="flex space-x-4 justify-start mb-6">
+                <div class="text-sm text-gray-600 space-y-2 mb-6">
+                    <p class="flex items-center"><i class="fas fa-envelope mr-3"></i> support@novauniverse.com</p>
+                    <p class="flex items-center"><i class="fab fa-whatsapp mr-3"></i> +1 1234567890</p>
+                </div>
+
+                <div class="flex space-x-4 justify-start ">
                     <!-- Instagram -->
                     <a href="#"
                         class="group relative w-12 h-12 md:w-10 md:h-10 flex items-center justify-center rounded-full shadow-lg transform transition-transform hover:-translate-y-2 hover:scale-110">
@@ -176,10 +181,7 @@
                     </a>
                 </div>
 
-                <div class="text-sm text-gray-600 space-y-2">
-                    <p class="flex items-center"><i class="fas fa-envelope mr-3"></i> support@novauniverse.com</p>
-                    <p class="flex items-center"><i class="fab fa-whatsapp mr-3"></i> +1 1234567890</p>
-                </div>
+
             </div>
 
             <div>
@@ -206,7 +208,8 @@
             <div>
                 <h4 class="font-bold text-black mb-6 max-md:mb-3 text-lg">About</h4>
                 <ul class="space-y-3 mb-6">
-                    <li><a href="#" class="link-hover text-gray-600">Brand Partners</a></li>
+                    <li><a href="#" class="link-hover text-gray-600">Our Story</a></li>
+                    <!-- <li><a href="#" class="link-hover text-gray-600">Brand Partners</a></li> -->
                     <li><a href="#" class="link-hover text-gray-600">Client Reviews</a></li>
                 </ul>
 

@@ -189,7 +189,7 @@
     </section>
 
     <!-- Section -->
-    <section class="md:pb-12 relative">
+    <section class="md:pb-16 relative">
         <div class="absolute -top-14 max-md:-top-16 -left-14 w-auto h-auto opacity-20">
             <img src="/public/images/naruto.webp" alt="" class="w-40 max-md:w-28 h-auto">
         </div>
@@ -229,7 +229,7 @@
         </div>
     </section>
 
-    <section class="grid grid-cols-1 md:grid-cols-2 h-[90vh] max-md:h-[150vh] mt-12">
+    <section class="grid grid-cols-1 md:grid-cols-2 h-[90vh] max-md:h-[150vh] mt-12 hidden">
         <!-- Left Image Block -->
         <div class="relative bg-cover bg-center bg-top" style="background-image: url('/public/images/f5.webp');">
             <div class="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center text-white">
@@ -371,18 +371,6 @@
                         class="w-full h-[350px] max-md:h-[250px] object-cover transform group-hover:scale-110 transition duration-700 ease-out">
                 </div>
             </a>
-        </div>
-    </section>
-
-    <section class="relative w-full h-[80vh] bg-fixed bg-center bg-cover hidden"
-        style="background-image: url('/public/images/123.avif');">
-
-        <!-- Optional overlay for readability -->
-        <div class="absolute inset-0 bg-black/30"></div>
-
-        <!-- Content on top -->
-        <div class="relative z-10 flex items-center justify-center h-full">
-            <h2 class="text-white text-4xl font-bold">Parallax Section</h2>
         </div>
     </section>
 
@@ -923,7 +911,7 @@
 
             </div>
 
-            <div class="masonry-container md:h-[180vh] max-md:h-[80vh] md:overflow-y-auto max-md:overflow-hidden"
+            <div class="masonry-container md:h-[200vh] lg:h-[180vh] max-md:h-[80vh] md:overflow-y-auto max-md:overflow-hidden"
                 id="masonryGrid">
                 <div class="masonry-item h-[360px] max-md:h-[200px]">
                     <img src="/public/images/111.avif" alt="Nature">
