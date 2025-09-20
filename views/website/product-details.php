@@ -320,9 +320,9 @@
                     <!-- Pricing -->
                     <div class="flex items-center justify-between w-full space-x-4 mb-3">
                         <div class="">
-                             <span class="text-sm text-gray-500 line-through">₹1,899.00</span>
+                            <span class="text-sm text-gray-500 line-through">₹1,899.00</span>
                             <span class="text-xl font-bold text-[#f25b21] mr-2">₹1,199.00</span>
-                           
+
                             <span
                                 class="bg-orange-100 text-[#f25b21] text-xs font-semibold px-3 py-1 rounded-full animate-bounce-gentle">34%
                                 OFF</span>
@@ -352,25 +352,28 @@
                     <div class="flex flex-wrap">
                         <button
                             class="size-option px-6 py-2 flex text-sm items-center justify-center border border-[#f25b21] bg-orange-50 text-[#f25b21] font-semibold transition-all duration-300 hover:shadow-lg">
+                            8-9 Years</button>
+                        <button
+                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
+                            9-10 Years</button>
+                        <button
+                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
+                            10-11 Years</button>
+                        <button
+                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
+                            11-12 Years</button>
+                        <button
+                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
                             12-13 Years</button>
                         <button
                             class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
                             13-14 Years</button>
-                        <button
-                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
-                            14-15 Years</button>
-                        <button
-                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
-                            15-16 Years</button>
-                        <button
-                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
-                            16-17 Years</button>
-                        <button
+                        <!-- <button
                             class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
                             17-18 Years</button>
                         <button
                             class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
-                            18-19 Years</button>
+                            18-19 Years</button> -->
                     </div>
                 </div>
 
@@ -402,9 +405,10 @@
                 <!-- Quantity and Add to Cart -->
                 <div class="space-y-4">
                     <div class="grid grid-cols-4 max-md:grid-cols-2 max-md:gap-4 sm:items-center sm:space-x-6 w-full">
-                       <div class="flex items-center border border-gray-300 rounded-md overflow-hidden max-md:order-1">
+                        <div class="flex items-center border border-gray-300 rounded-md overflow-hidden max-md:order-1">
                             <button class="px-4 py-1.5 hover:bg-gray-100 transition-colors text-xl font-bold">−</button>
-                            <input type="number" value="1" min="1" class="w-16 py-1.5 text-center border-l border-r border-gray-300 focus:outline-none">
+                            <input type="number" value="1" min="1"
+                                class="w-16 py-1.5 text-center border-l border-r border-gray-300 focus:outline-none">
                             <button class="px-4 py-1.5 hover:bg-gray-100 transition-colors text-xl font-bold">+</button>
                         </div>
 
@@ -444,15 +448,15 @@
 
                     <div class="grid grid-cols-2 gap-4">
                         <button
-                                class="openCartBtn w-full sm:flex-1 relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-[#f15b21] bg-[#f15b21] text-white">
-                                <span
-                                    class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-[#f15b21]">
-                                    <i class=""></i> Buy Now
-                                </span>
-                                <span
-                                    class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
-                                </span>
-                            </button>
+                            class="openCartBtn w-full sm:flex-1 relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-[#f15b21] bg-[#f15b21] text-white">
+                            <span
+                                class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-[#f15b21]">
+                                <i class=""></i> Buy Now
+                            </span>
+                            <span
+                                class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
+                            </span>
+                        </button>
                         <button
                             class="relative rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
                                         transition-all duration-500 hover:border-purple-500 hover:text-purple-600 hover:shadow-lg">
