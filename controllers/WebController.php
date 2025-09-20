@@ -13,6 +13,16 @@ class WebController extends LoginController
         }
         parent::__construct($this->db);
     }
+    public function getProductData()
+    {
+        $id = $_POST['productid'];
+        $ProductData = getData2("SELECT * FROM `tbl_products` WHERE `id` = $id")[0];
+        $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
+        $ProductData['varients'] = $varients;
+        // return $ProductData;
+        echo json_encode($ProductData);
+        // return $data;
+    }
     public function current_url(): string
     {
         // Detect protocol
@@ -45,7 +55,12 @@ class WebController extends LoginController
         // $this->checkSession();
         $categories = getData("tbl_category");
         $products = getData("tbl_products");
-        // printWithPre($products);
+        $collection = getData("tbl_collection", true);
+        // printWithPre($collection);
+        $collection = array_reverse($collection)[0];
+        $collection_products = json_decode($collection['products'], true) ?? [];
+                // printWithPre($collection);
+
 
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {

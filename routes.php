@@ -24,6 +24,7 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('terms-and-conditions', 'termsAndConditions');
     $route->route('privacy-policy', 'privacyPolicy');
     $route->route('/api/removeProductFromCollection', 'removeProductFromCollection');
+    $route->route('/api/get-product-data', 'getProductData');
      $route->route('cookies', 'cookies');
     // $route->route('/', 'index');
 
@@ -34,6 +35,7 @@ $route->group(['', 'CollectionController'], function ($route) {
     $route->route('admin/add-collections', 'AddCollections');
     $route->route('/edit-collection/[i:id]', 'AddCollections');
     $route->route('/admin/add-product', 'AddProducts');
+    $route->route('/admin/products-list', 'ProductsList');
 
 
 

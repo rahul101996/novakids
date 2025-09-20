@@ -107,6 +107,18 @@ class CollectionController
             }
         }
     }
+    public function ProductsList($id = null)
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageTitle = "Products List";
+        $pageModule = "Products List";
+        
+
+        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            $products = getData("tbl_products");
+            require 'views/products/products-list.php';
+        }
+    }
     public function AddProducts($id = null)
     {
         $siteName = getDBObject()->getSiteName();

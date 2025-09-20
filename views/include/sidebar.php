@@ -71,12 +71,14 @@
                         </svg>
                     </button>
                     <div x-show="open === 'products'" x-collapse class="ml-10 mt-2 space-y-1">
+                         <a href="/admin/products-list" class="block px-4 py-2 text-sm text-gray-300 hover:bg-slate-700 rounded">
+                            Products
+                        </a>
+                        
                         <a href="/admin/collections" class="block px-4 py-2 text-sm text-gray-300 hover:bg-slate-700 rounded">
                             Collections
                         </a>
-                        <a href="/admin/add-product" class="block px-4 py-2 text-sm text-gray-300 hover:bg-slate-700 rounded">
-                            Add Products
-                        </a>
+                       
                         <a href="#inventory" class="block px-4 py-2 text-sm text-gray-300 hover:bg-slate-700 rounded">
                             Inventory
                         </a>
