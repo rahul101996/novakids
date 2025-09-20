@@ -1,4 +1,8 @@
 <!-- Top Bar -->
+<?php
+$categories = getData("tbl_category");
+
+?>
 <style>
     .mega-menu {
         opacity: 0;
@@ -233,18 +237,14 @@
             </div>
         </li>
 
-        <div class="flex items-center space-x-6 ml-8 max-md:hidden">
-            <div class="relative group">
-                <a href="/shop" class="text-gray-800 font-semibold group-hover:text-black">Tees</a>
-            </div>
-
-            <div class="relative group">
-                <a href="/about" class="text-gray-800 font-semibold group-hover:text-black">Joggers</a>
-            </div>
-
-            <div class="relative group">
-                <a href="/contact" class="text-gray-800 font-semibold group-hover:text-black">Co-ords</a>
-            </div>
+        <div class="flex items-center space-x-7 ml-8 max-md:hidden">
+            <?php
+            foreach ($categories as $key => $value) {
+                ?>
+                <div class="relative group">
+                    <a href="/shop" class="text-gray-800 group-hover:text-black"><?= $value['category'] ?></a>
+                </div>
+            <?php } ?>
         </div>
 
         <!-- Mobile Menu Toggle Button -->
@@ -268,7 +268,7 @@
 
         <div class="flex items-center absolute left-1/2 transform -translate-x-1/2">
             <a href="/" class="block">
-                <img src="/public/logos/newuniverse.png" alt="Logo" class="h-12 max-md:hidden">
+                <img src="/public/logos/nova.png" alt="Logo" class="h-12 max-md:hidden">
                 <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
             </a>
         </div>
@@ -277,7 +277,7 @@
             <div class="flex items-center max-md:hidden">
                 <button
                     class="openSearch text-black p-2 max-md:text-xs rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
-                    <svg class="svgSearch anarkali-svg-icon" width="20px" height="20px" fill="currentColor"
+                    <svg class="svgSearch anarkali-svg-icon" width="24px" height="24px" fill="currentColor"
                         viewBox="0 0 48 48" enable-background="new 0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                         <g>
                             <path
@@ -287,18 +287,24 @@
                     </svg>
                 </button>
             </div>
-            <button id="Openvariant">Open Cart</button>
+            <!-- <button id="Openvariant">Open Cart</button> -->
             <button id="openLogin"
                 class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
                 <div class="max-md:hidden">
-                    <svg width="23" height="23" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        id="svgkp">
-                        <path
-                            d="M22.9129 12.935L13.7571 23.0474C13.5348 23.2929 13.1284 23.1084 13.1669 22.7794L14.0816 14.9731H10.6991C10.4034 14.9731 10.2484 14.6219 10.4478 14.4035L20.3133 3.59739C20.5589 3.32834 20.9984 3.58134 20.8891 3.92887L18.2354 12.3664H22.6607C22.9557 12.3664 23.1109 12.7163 22.9129 12.935Z"
-                            fill="#f25b21"></path>
-                        <path id="svgkp-path" fill-rule="evenodd" clip-rule="evenodd"
-                            d="M16.6079 5.35819C16.4805 5.1933 16.3421 5.03582 16.1932 4.8869C15.2702 3.96387 14.0183 3.44531 12.7129 3.44531C11.4075 3.44531 10.1556 3.96387 9.2326 4.8869C8.30957 5.80993 7.79102 7.06183 7.79102 8.36719C7.79102 9.67255 8.30957 10.9244 9.2326 11.8475C9.48368 12.0986 9.75909 12.3197 10.0533 12.5086L11.0235 11.4503C10.7335 11.2914 10.4649 11.0911 10.227 10.8531C9.56766 10.1938 9.19727 9.29959 9.19727 8.36719C9.19727 7.43479 9.56766 6.54057 10.227 5.88127C10.8863 5.22196 11.7805 4.85156 12.7129 4.85156C13.6453 4.85156 14.5395 5.22196 15.1988 5.88127C15.3636 6.04604 15.5103 6.22549 15.6377 6.41654L16.6079 5.35819ZM20.6413 18.6497L19.6746 19.7132C20.1676 20.4122 20.4473 21.2264 20.4473 22.0781V23.8359C20.4473 24.2243 20.7621 24.5391 21.1504 24.5391C21.5387 24.5391 21.8535 24.2243 21.8535 23.8359V22.0781C21.8535 20.7863 21.4016 19.6103 20.6413 18.6497ZM12.3111 17.5078H10.3026C7.27113 17.5078 4.97852 19.6394 4.97852 22.0781V23.8359C4.97852 24.2243 4.66372 24.5391 4.27539 24.5391C3.88707 24.5391 3.57227 24.2243 3.57227 23.8359V22.0781C3.57227 18.6922 6.67684 16.1016 10.3026 16.1016H12.4885L12.3111 17.5078Z"
-                            fill="currentColor" stroke="currentColor"></path>
+                    <svg class="svgUser2 anarkali-svg-icon" enable-background="new 0 0 512 512" height="24px"
+                        viewBox="0 0 512 512" width="24px" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <g>
+                                <path
+                                    d="m256 253.7c-62 0-112.4-50.4-112.4-112.4s50.4-112.4 112.4-112.4 112.4 50.4 112.4 112.4-50.4 112.4-112.4 112.4zm0-195.8c-46 0-83.4 37.4-83.4 83.4s37.4 83.4 83.4 83.4 83.4-37.4 83.4-83.4-37.4-83.4-83.4-83.4z">
+                                </path>
+                            </g>
+                            <g>
+                                <path
+                                    d="m452.1 483.2h-392.2c-8 0-14.5-6.5-14.5-14.5 0-106.9 94.5-193.9 210.6-193.9s210.6 87 210.6 193.9c0 8-6.5 14.5-14.5 14.5zm-377-29.1h361.7c-8.1-84.1-86.1-150.3-180.8-150.3s-172.7 66.2-180.9 150.3z">
+                                </path>
+                            </g>
+                        </g>
                     </svg>
                 </div>
                 <div class="md:hidden">
@@ -318,10 +324,11 @@
                 <button onclick="window.location.href='/wishlist'"
                     class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
                     <div class="max-md:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                            fill="#000000">
+                        <svg class="svgLove anarkali-svg-icon" width="24px" height="24px" fill="currentColor"
+                            viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z" />
+                                d="m29.55 6.509c-1.73-2.302-3.759-3.483-6.031-3.509h-.076c-3.29 0-6.124 2.469-7.443 3.84-1.32-1.371-4.153-3.84-7.444-3.84h-.075c-2.273.026-4.3 1.207-6.059 3.549a8.265 8.265 0 0 0 1.057 10.522l11.821 11.641a1 1 0 0 0 1.4 0l11.82-11.641a8.278 8.278 0 0 0 1.03-10.562zm-2.432 9.137-11.118 10.954-11.118-10.954a6.254 6.254 0 0 1 -.832-7.936c1.335-1.777 2.831-2.689 4.45-2.71h.058c3.48 0 6.627 3.924 6.658 3.964a1.037 1.037 0 0 0 1.57 0c.032-.04 3.2-4.052 6.716-3.964a5.723 5.723 0 0 1 4.421 2.67 6.265 6.265 0 0 1 -.805 7.976z">
+                            </path>
                         </svg>
                     </div>
                 </button>
@@ -329,10 +336,11 @@
 
             <div class="relative max-md:mr-1">
                 <button
-                    class=" nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95" onclick="openCart()">
+                    class=" nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95"
+                    onclick="openCart()">
                     <div class="max-md:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                            fill="#000000">
+                        <svg class="shopBag anarkali-svg-icon" width="24px" height="24px" fill="currentColor"
+                            viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="m26 8.9a1 1 0 0 0 -1-.9h-3a6 6 0 0 0 -12 0h-3a1 1 0 0 0 -1 .9l-1.78 17.8a3 3 0 0 0 .78 2.3 3 3 0 0 0 2.22 1h17.57a3 3 0 0 0 2.21-1 3 3 0 0 0 .77-2.31zm-10-4.9a4 4 0 0 1 4 4h-8a4 4 0 0 1 4-4zm9.53 23.67a1 1 0 0 1 -.74.33h-17.58a1 1 0 0 1 -.74-.33 1 1 0 0 1 -.26-.77l1.7-16.9h2.09v3a1 1 0 0 0 2 0v-3h8v3a1 1 0 0 0 2 0v-3h2.09l1.7 16.9a1 1 0 0 1 -.26.77z">
                             </path>
@@ -602,9 +610,9 @@
                 <button
                     class="relative w-full py-2 rounded-md font-semibold overflow-hidden group border-2 border-black">
                     <span
-                        class="relative z-10 text-white group-hover:text-black transition-colors duration-300">Continue</span>
+                        class="relative z-10 text-white group-hover:text-black transition-colors duration-1500">Continue</span>
                     <span
-                        class="absolute inset-0 bg-black group-hover:scale-x-0 origin-left transition-transform duration-500"></span>
+                        class="absolute inset-0 bg-black group-hover:scale-x-0 origin-left transition-transform duration-700"></span>
                 </button>
 
                 <div>

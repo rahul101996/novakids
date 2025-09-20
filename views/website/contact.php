@@ -6,123 +6,110 @@
 <body class="overflow-x-hidden archivo-narrow-k">
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
 
-    <!-- Add this CSS (can go in a <style> tag or your CSS file) -->
-    <style>
-        /* Hide scrollbar for Chrome, Safari and Edge */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
+    <section class="py-12 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <!-- Header -->
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-2">Get in Touch with Nova Universe!</h2>
+                <div class="w-16 h-[3px] bg-[#f25b21] mt-2 mx-auto"></div>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+                    At Nova Universe, we value every interaction with our visitors, partners, and clients.
+                    Whether you have a question, need support, want to collaborate, or just say hello, we’re here to
+                    listen and assist.
+                </p>
+            </div>
 
-        /* Hide scrollbar for Firefox */
-        .hide-scrollbar {
-            scrollbar-width: none;
-        }
-    </style>
-
-    <section class="bg-white grid grid-cols-1 md:grid-cols-5 w-full md:h-screen mx-auto">
-        <!-- Left Fixed Image -->
-        <div class="hidden md:block col-span-2 h-screen sticky top-0">
-            <img src="/public/images/contactbg.png" alt="" class="w-full h-full object-cover">
-        </div>
-
-        <!-- Right Scrollable Content -->
-        <div class="col-span-3 md:overflow-y-auto md:h-screen px-6 md:px-12 hide-scrollbar">
-            <div class="w-full mx-auto text-center flex flex-col py-12">
-
-                <!-- Heading -->
-                <h2 class="text-3xl font-extrabold text-gray-900 mb-10 tracking-wide">
-                    GET IN TOUCH
-                    <div class="w-20 h-[3px] bg-[#f25b21] mt-3 mx-auto"></div>
-                </h2>
+            <!-- Form + Contact Info -->
+            <div class="flex flex-col md:flex-row gap-12">
 
                 <!-- Contact Form -->
-                <form class="space-y-8 w-full max-w-2xl mx-auto">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="text-left">
-                            <label class="block text-sm font-medium text-gray-700">Your Name</label>
-                            <input type="text"
-                                class="w-full border-b border-gray-400 focus:border-black outline-none py-2" />
+                <div class="flex-1 bg-gray-50 p-8 rounded-xl shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">How can we help you today?</h3>
+                    <form class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" placeholder="Your Name"
+                                class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-1 focus:ring-black" />
+                            <input type="email" placeholder="Your Email"
+                                class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-1 focus:ring-black" />
                         </div>
-                        <div class="text-left">
-                            <label class="block text-sm font-medium text-gray-700">Your Email</label>
-                            <input type="email"
-                                class="w-full border-b border-gray-400 focus:border-black outline-none py-2" />
-                        </div>
-                    </div>
+                        <input type="tel" placeholder="Phone Number"
+                            class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-1 focus:ring-black" />
+                        <textarea placeholder="Your Message" rows="5"
+                            class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-1 focus:ring-black"></textarea>
 
-                    <div class="text-left">
-                        <label class="block text-sm font-medium text-gray-700">Phone Number</label>
-                        <input type="text"
-                            class="w-full border-b border-gray-400 focus:border-black outline-none py-2" />
-                    </div>
-
-                    <div class="text-left">
-                        <label class="block text-sm font-medium text-gray-700">Message</label>
-                        <textarea rows="3"
-                            class="w-full border-b border-gray-400 focus:border-black outline-none py-2"></textarea>
-                    </div>
-
-                    <button
-                        class="flex relative mx-auto overflow-hidden group transform border-2 border-black bg-transparent text-black">
-                        <span
-                            class="relative z-10 flex py-2 px-6 items-center justify-center text-center mx-auto gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
-                            Send Message
-                        </span>
-                        <span
-                            class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
-                        </span>
-                    </button>
-                </form>
+                        <button
+                            class="relative w-full rounded-md overflow-hidden group border-2 border-black bg-transparent py-2 text-black font-bold text-base">
+                            <span class="relative z-10 transition-colors duration-700 group-hover:text-white">Send
+                                Message</span>
+                            <span
+                                class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0"></span>
+                        </button>
+                    </form>
+                </div>
 
                 <!-- Contact Info -->
-                <div
-                    class="w-full mx-auto flex flex-wrap md:flex-nowrap items-center justify-center gap-12 text-center py-16">
-
-                    <!-- Call Us -->
-                    <div>
-                        <div class="flex justify-center mb-3 group">
-                            <div
-                                class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
-                                <i class="fas fa-phone text-xl group-hover:text-white"></i>
-                            </div>
-                        </div>
-                        <h3 class="text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">Call Us</h3>
-                        <p class="text-gray-900 font-medium">+1 (814) 251-9966</p>
-                    </div>
+                <div class="flex-1 flex flex-col justify-center gap-6">
 
                     <!-- Address -->
-                    <div>
-                        <div class="flex justify-center mb-3 group">
-                            <div
-                                class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
-                                <i class="fas fa-map-marker-alt text-xl group-hover:text-white"></i>
-                            </div>
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 flex items-center justify-center rounded-full bg-black text-white text-xl flex-shrink-0">
+                            <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <h3 class="text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">Address</h3>
-                        <p class="text-gray-900 font-medium">info@example.com</p>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 tracking-wide">Address</h3>
+                            <p class="text-gray-700 mt-1">Mumbai</p>
+                        </div>
+                    </div>
+
+                    <!-- Call Us -->
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 flex items-center justify-center rounded-full bg-black text-white text-xl flex-shrink-0">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 tracking-wide">Call Us</h3>
+                            <p class="text-gray-700 mt-1">+1 (814) 251-9966</p>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 flex items-center justify-center rounded-full bg-black text-white text-xl flex-shrink-0">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 tracking-wide">Email</h3>
+                            <p class="text-gray-700 mt-1">info@example.com</p>
+                        </div>
                     </div>
 
                     <!-- Social Media -->
-                    <div>
-                        <div class="flex justify-center mb-3 group">
-                            <div
-                                class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-black">
-                                <i class="fas fa-share-alt text-xl group-hover:text-white"></i>
-                            </div>
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 flex items-center justify-center rounded-full bg-black text-white text-xl flex-shrink-0">
+                            <i class="fas fa-share-alt"></i>
                         </div>
-                        <h3 class="text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">Follow Us</h3>
-                        <div class="flex justify-center space-x-5 mt-2 text-gray-600">
-                            <a href="#" class="hover:text-black"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="hover:text-black"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="hover:text-black"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="hover:text-black"><i class="fab fa-pinterest"></i></a>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 tracking-wide">Follow Us</h3>
+                            <div class="flex space-x-4 text-lg mt-2 text-gray-600">
+                                <a href="#" class="hover:text-[#f25b21]"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="hover:text-[#f25b21]"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="hover:text-[#f25b21]"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="hover:text-[#f25b21]"><i class="fab fa-pinterest"></i></a>
+                            </div>
                         </div>
                     </div>
 
                 </div>
+
             </div>
         </div>
     </section>
+
+
 
 
 

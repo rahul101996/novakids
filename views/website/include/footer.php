@@ -115,11 +115,11 @@
                 class="flex-1 px-4 py-2 rounded-md border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 transition-all text-sm" />
             <a href="#"
                 class="relative inline-block px-6 py-2 rounded-md border border-white text-white group-hover:text-black font-semibold overflow-hidden group">
-                <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
+                <span class="relative z-10 transition-colors duration-700 group-hover:text-black">
                     Subscribe
                 </span>
                 <span
-                    class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                    class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-700 group-hover:scale-x-100"></span>
             </a>
         </div>
 
