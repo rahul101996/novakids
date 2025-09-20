@@ -738,12 +738,12 @@
                 <button
                     class="relative w-full font-semibold py-2 rounded-lg border-2 border-black overflow-hidden group">
                     <!-- Text -->
-                    <span class="relative z-10 text-white group-hover:text-black transition-colors duration-300">
+                    <span class="relative z-10 text-white group-hover:text-black transition-colors duration-700">
                         Subscribe
                     </span>
                     <!-- Animated BG -->
                     <span
-                        class="absolute inset-0 bg-black transition-transform duration-300 origin-left group-hover:scale-x-0 scale-x-100"></span>
+                        class="absolute inset-0 bg-black transition-transform duration-700 origin-left group-hover:scale-x-0 scale-x-100"></span>
                 </button>
 
                 <!-- Social icons -->
