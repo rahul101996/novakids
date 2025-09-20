@@ -133,10 +133,9 @@
             <!-- Brand Section -->
             <div class="lg:col-span-2">
                 <div class="mb-6">
-                    <div class="w-auto h-16 flex mb-4">
-                        <img src="/public/logos/newuniverse.png" alt="Brand Logo"
-                            class="w-auto h-auto rounded-md object-cover">
-                    </div>
+
+                    <img src="/public/logos/nova.png" alt="Brand Logo" class="w-auto h-20 rounded-md object-cover mb-4">
+
                     <p class="text-gray-600 max-w-sm  leading-relaxed">
                         Authentic streetwear for the next generation. Quality pieces that speak your language and
                         match your vibe.
