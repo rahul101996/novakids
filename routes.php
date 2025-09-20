@@ -14,18 +14,18 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('products/product-details', 'productDetails');
     $route->route('login', 'login');
     $route->route('shop', 'shop');
-     $route->route('checkout', 'checkout');
+    $route->route('checkout', 'checkout');
     $route->route('contact', 'ContactUs');
     $route->route('wishlist', 'wishlist');
     $route->route('return-exchange', 'returnExchange');
     $route->route('size-guide', 'sizeGuide');
-     $route->route('shipping-info', 'shippingInfo');
+    $route->route('shipping-info', 'shippingInfo');
     $route->route('faq', 'faq');
     $route->route('terms-and-conditions', 'termsAndConditions');
     $route->route('privacy-policy', 'privacyPolicy');
     $route->route('/api/removeProductFromCollection', 'removeProductFromCollection');
     $route->route('/api/get-product-data', 'getProductData');
-     $route->route('cookies', 'cookies');
+    $route->route('cookies', 'cookies');
     // $route->route('/', 'index');
 
 });
@@ -34,12 +34,22 @@ $route->group(['', 'CollectionController'], function ($route) {
     $route->route('admin/collections', 'index');
     $route->route('admin/add-collections', 'AddCollections');
     $route->route('/edit-collection/[i:id]', 'AddCollections');
-    $route->route('/admin/add-product', 'AddProducts');
-    $route->route('/admin/products-list', 'ProductsList');
+
 
 
 
     // $route->route('/', 'index');
+
+});
+$route->group(['', 'ProductController'], function ($route) {
+    $route->route('/admin/add-product', 'AddProducts');
+    $route->route('/admin/products-list', 'ProductsList');
+});
+$route->group(['', 'CustomerController'], function ($route) {
+    $route->route('admin/customers-list', 'CustomersList');
+    $route->route('admin/customer-info', 'CustomersInfo');
+
+    // $route->route('/admin/products-list', 'ProductsList');
 
 });
 $route->group(['', 'CategoryController'], function ($route) {
