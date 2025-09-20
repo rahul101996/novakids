@@ -16,14 +16,18 @@ class WebController extends LoginController
 
     public function getProductData()
     {
-        $id = 18;
+        $id = $_POST['productid'];
         $ProductData = getData2("SELECT * FROM `tbl_products` WHERE `id` = $id")[0];
         $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
         $ProductData['varients'] = $varients;
 
         // Start output buffering
         ob_start();
-        printWithPre($ProductData['varients']);
+        // printWithPre($ProductData);
+        $comparePrice = floatval($ProductData['compare_price']);
+        $price = floatval($ProductData['price']);
+        $discountAmount = $comparePrice - $price;
+        $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 ?>
 
         <?php
@@ -33,23 +37,115 @@ class WebController extends LoginController
             foreach ($ProductData['varients'] as $key => $variant) {
                 $images[] = json_decode($variant['images'], true);
                 $options[] = json_decode($variant['options'], true);
-
-        ?>
-                <!-- <div class="variant-item">
-                    <p><strong><?= htmlspecialchars($variant['name']) ?></strong></p>
-                    <p>Price: ₹<?= number_format($variant['price']) ?></p>
-                    <p>Stock: <?= htmlspecialchars($variant['stock']) ?></p>
-                </div> -->
-<?php
             }
-            printWithPre($images);
-            printWithPre($options);
+            // printWithPre($images);
+            // printWithPre($options);
             $opt = [];
-            foreach($options as $key => $option){
-                printWithPre($option);
+            $img = [];
+            foreach ($options as $key => $option) {
                 $opt[] = json_decode($option, true);
             }
-            printWithPre($opt);
+            // printWithPre($opt);
+            $grouped = groupAttributes($opt);
+            // printWithPre($grouped);
+        ?>
+            <div class="w-[47%] p-3 h-full overflow-y-scroll bg-gray-200 flex flex-col items-center justify-start no-scrollbar gap-3 transform translate-x-full transition-transform duration-[0.8s] ease-in-out" id="VarImg">
+                <?php
+                foreach ($images[0] as $key => $image) {
+
+                ?>
+                    <img src="/<?= $image ?>" alt="">
+                <?php } ?>
+            </div>
+            <div class="w-[53%] h-full overflow-y-scroll flex flex-col items-start justify-start z-10 bg-white" id="VarDetails">
+                <div class="w-full flex items-center justify-between px-7 pt-7 ">
+                    <span class="uppercase ">SELECT OPTIONS</span>
+                    <button id="closeAddToCartSidebar" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong" onclick="CloseVariant()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <span class="w-full h-[1px] bg-gray-200 my-5"></span>
+                <div class="flex flex-col items-start justify-start w-full px-7">
+                    <h2 class="w-full text-[1.8rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
+                    <div class="flex items-center justify-center gap-3 mt-7">
+                        <span class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
+                        <span class="text-[#33459c] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
+                        <span class="text-xs bg-[#33459c] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
+
+                    </div>
+                    <p class=" text-xs text-gray-600 mt-1"><a href="" class="underline">shipping</a> calculated at checkout</p>
+                    <p class="text-xs mt-1">⭐⭐⭐⭐⭐ <span class="text-sm">31 reviews</span></p>
+                    <?php
+                    foreach ($grouped as $key => $value) {
+                        $key = strtolower(str_replace(' ', '', $key));
+                        // echo $key;
+                        if ($key == 'size') {
+                    ?>
+                            <div class="w-full flex items-center justify-between mt-7 text-sm">
+
+                                <p class="uppercase"><?= $key ?> : <?= $value[0] ?></p>
+                                <p class="flex gap-1 cursor-pointer">
+                                    <svg class="icon icon-accordion color-foreground-" aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20">
+                                        <path d="M18.9836 5.32852L14.6715 1.01638L1.01638 14.6715L5.32852 18.9836L18.9836 5.32852ZM15.3902 0.297691C14.9933 -0.0992303 14.3497 -0.0992303 13.9528 0.297691L0.297691 13.9528C-0.0992301 14.3497 -0.0992305 14.9932 0.297691 15.3902L4.60983 19.7023C5.00675 20.0992 5.65029 20.0992 6.04721 19.7023L19.7023 6.04721C20.0992 5.65029 20.0992 5.00675 19.7023 4.60983L15.3902 0.297691Z" fill-rule="evenodd"></path>
+                                        <path d="M11.7863 2.67056C11.9848 2.4721 12.3065 2.4721 12.505 2.67056L14.4237 4.58927C14.6222 4.78774 14.6222 5.1095 14.4237 5.30796C14.2252 5.50642 13.9035 5.50642 13.705 5.30796L11.7863 3.38925C11.5878 3.19079 11.5878 2.86902 11.7863 2.67056Z"></path>
+                                        <path d="M8.93891 5.36331C9.13737 5.16485 9.45914 5.16485 9.6576 5.36331L11.5763 7.28202C11.7748 7.48048 11.7748 7.80225 11.5763 8.00071C11.3779 8.19917 11.0561 8.19917 10.8576 8.00071L8.93891 6.082C8.74045 5.88354 8.74045 5.56177 8.93891 5.36331Z"></path>
+                                        <path d="M6.24307 8.20742C6.44153 8.00896 6.76329 8.00896 6.96175 8.20742L8.88047 10.1261C9.07893 10.3246 9.07893 10.6464 8.88047 10.8448C8.68201 11.0433 8.36024 11.0433 8.16178 10.8448L6.24307 8.92611C6.0446 8.72765 6.0446 8.40588 6.24307 8.20742Z"></path>
+                                        <path d="M3.37296 10.8776C3.57142 10.6791 3.89319 10.6791 4.09165 10.8776L6.01036 12.7963C6.20882 12.9948 6.20882 13.3165 6.01036 13.515C5.8119 13.7134 5.49013 13.7134 5.29167 13.515L3.37296 11.5963C3.1745 11.3978 3.1745 11.076 3.37296 10.8776Z"></path>
+                                    </svg> Sizing guide
+                                </p>
+                            </div>
+                            <div class="w-full flex items-center justify-start mt-3 text-sm">
+                                <?php
+                                foreach ($value as $key1 => $value1) {
+                                ?>
+                                    <div class="border border-gray-600 flex items-center justify-center h-12 w-12"><?= $value1 ?></div>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        <?php } elseif ($key == "color") { ?>
+
+                            <span class="mt-6 text-sm">COLOR :</span>
+                            <div class="w-full flex items-center justify-start mt-3 text-sm gap-2">
+                                <?php
+                                foreach ($images as $key => $image) {
+                                    // printWithPre($image[0]);
+
+                                    if ($key > 3) {
+                                        break;
+                                    }
+                                ?>
+                                    <div class="border border-gray-600 p-1 flex items-center justify-center">
+                                        <img src="/<?= $image[0] ?>" alt="" class="h-[83px] w-[58px]">
+                                    </div>
+                                <?php
+                                }
+                                ?>
+
+
+                            </div>
+                    <?php }
+                    } ?>
+                    <div class="w-full flex items-center justify-start mt-7 gap-3">
+                        <div class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg">
+                            <span class="cursor-pointer ">-</span>
+                            <span class="text-black">1</span>
+                            <span class="cursor-pointer ">+</span>
+                        </div>
+                        <div class="w-[80%] border border-gray-800 p-3 px-3 rounded-lg text-center cursor-pointer font-semibold text-base">
+                            ADD TO CART
+                        </div>
+                    </div>
+                    <div class="w-full items-center justify-center text-white text-center mt-3 bg-gray-900 p-3 px-3 rounded-lg cursor-pointer">
+                        BUY IT NOW
+                    </div>
+
+
+                </div>
+            </div>
+
+<?php
+
         } else {
             echo "<p>No variants found</p>";
         }
@@ -57,7 +153,11 @@ class WebController extends LoginController
         // Get the buffered content
         $html = ob_get_clean();
 
-        echo $html;
+        // echo $html;
+        echo json_encode([
+            'html' => $html,
+            'variants' => $varients
+        ]);
     }
 
     public function current_url(): string
@@ -90,7 +190,7 @@ class WebController extends LoginController
         //  echo "hello";
         // die();
         // $this->checkSession();
-       
+
         $products = getData("tbl_products");
         $collection = getData("tbl_collection", true);
         // printWithPre($collection);
@@ -579,7 +679,7 @@ class WebController extends LoginController
         }
     }
 
-     public function checkout()
+    public function checkout()
     {
         $siteName = getDBObject()->getSiteName();
         $pageModule = "Shipping Info";

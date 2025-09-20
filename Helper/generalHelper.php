@@ -449,6 +449,38 @@ function add($data, $table, $timestamp = true)
     // die();
     return $db->lastInsertId();
 }
+function groupAttributes(array $opt): array {
+    $result = [];
+    $seen   = [];
+
+    foreach ($opt as $row) {
+        if (!is_array($row)) continue;
+
+        foreach ($row as $key => $value) {
+            if (!isset($result[$key])) {
+                $result[$key] = [];
+                $seen[$key] = [];
+            }
+
+            $values = is_array($value) ? $value : [$value];
+
+            foreach ($values as $v) {
+                $norm = strtolower(trim((string)$v)); // normalize for uniqueness
+                if (!isset($seen[$key][$norm])) {
+                    $seen[$key][$norm] = true;
+                    $result[$key][] = trim((string)$v);
+                }
+            }
+        }
+    }
+
+    // Sort alphabetically for each attribute
+    foreach ($result as $k => &$arr) {
+        sort($arr, SORT_NATURAL | SORT_FLAG_CASE);
+    }
+
+    return $result;
+}
 
 function update($data, $id, $table, $column = "id")
 {

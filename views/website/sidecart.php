@@ -195,7 +195,7 @@
     <div class="w-[53%] h-full overflow-y-scroll flex flex-col items-start justify-start z-10 bg-white" id="VarDetails">
         <div class="w-full flex items-center justify-between px-7 pt-7 ">
             <span class="uppercase ">SELECT OPTIONS</span>
-            <button id="closeAddToCartSidebar" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong">
+            <button id="closeAddToCartSidebar" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong" onclick="CloseVariant()">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -336,8 +336,11 @@
 
     updateCart(); // initial call
     const VariantSelects = document.getElementById('AddToCartSidebar');
-    const VarImg = document.getElementById('VarImg');
-    document.getElementById('closeAddToCartSidebar').addEventListener('click', () => {
+
+   function CloseVariant() {
+        
+        let VarImg = document.getElementById('VarImg');
+
         setTimeout(() => {
             VariantSelects.classList.remove('translate-x-0');
             VariantSelects.classList.add('translate-x-full');
@@ -348,9 +351,11 @@
 
         cartOverlay.classList.remove('opacity-100');
         cartOverlay.classList.add('opacity-0', 'pointer-events-none');
-    })
+    }
 
     function Openvariant() {
+        let VarImg = document.getElementById('VarImg');
+
         VariantSelects.classList.remove('translate-x-full');
         VariantSelects.classList.add('translate-x-0');
 
@@ -367,7 +372,7 @@
         AddToCart();
     });
 
-     function AddToCart() {
+    function AddToCart() {
 
         const addToCartBtn = document.querySelectorAll('.openCartBtn');
         console.log(addToCartBtn);
@@ -379,25 +384,26 @@
                     event.stopPropagation();
                     // 
                     let ee = btn.parentElement
-                    Openvariant()
                     // showVarients(ee.querySelector(".ProductId").value);
                     console.log(ee);
                     let product_id = parseInt(ee.querySelector(".ProductId").value);
                     const response = await axios.post("/api/get-product-data", new URLSearchParams({
                         productid: product_id,
-                        
+
                     }))
                     console.log(response.data)
 
-                    if(response.data.varients.length > 0){
-                        showVarientsSidebar(response.data.varients);
+                    if (response.data.variants.length > 0) {
+
+                        showVarientsSidebar(response.data.html);
+
                         // console.log('hello');
-                        
-
-                    }else{
 
 
-                        
+                    } else {
+
+
+
                     }
 
                     // addToCartSidebar(ee.querySelector(".sideVarientId").value, ee.querySelector(".sideCategoryId").value, ee.querySelector(".sideProductId").value, btn)
@@ -408,5 +414,11 @@
         }
     }
 
-    // function showVarientsSidebar
+    function showVarientsSidebar(data) {
+        console.log(data);
+        VariantSelects.innerHTML;
+        VariantSelects.innerHTML = data;
+        Openvariant()
+
+    }
 </script>
