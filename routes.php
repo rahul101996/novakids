@@ -14,6 +14,7 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('products/product-details', 'productDetails');
     $route->route('login', 'login');
     $route->route('shop', 'shop');
+     $route->route('checkout', 'checkout');
     $route->route('contact', 'ContactUs');
     $route->route('wishlist', 'wishlist');
     $route->route('return-exchange', 'returnExchange');

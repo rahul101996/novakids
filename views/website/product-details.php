@@ -320,11 +320,12 @@
                     <!-- Pricing -->
                     <div class="flex items-center justify-between w-full space-x-4 mb-3">
                         <div class="">
+                             <span class="text-sm text-gray-500 line-through">₹1,899.00</span>
                             <span class="text-xl font-bold text-[#f25b21] mr-2">₹1,199.00</span>
-                            <span class="text-sm text-gray-500 line-through">₹1,899.00</span>
-                            <!-- <span
+                           
+                            <span
                                 class="bg-orange-100 text-[#f25b21] text-xs font-semibold px-3 py-1 rounded-full animate-bounce-gentle">34%
-                                OFF</span> -->
+                                OFF</span>
                         </div>
                         <div>
                             <span
@@ -348,17 +349,28 @@
                             <i class="fa-solid fa-ruler pr-1"></i>Sizing guide</button>
                     </div>
 
-                    <div class="flex flex-wrap gap-3">
+                    <div class="flex flex-wrap">
                         <button
-                            class="size-option h-8 w-8 flex text-sm items-center justify-center border border-[#f25b21] bg-orange-50 text-[#f25b21] font-semibold transition-all duration-300 hover:shadow-lg">XS</button>
+                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-[#f25b21] bg-orange-50 text-[#f25b21] font-semibold transition-all duration-300 hover:shadow-lg">
+                            12-13 Years</button>
                         <button
-                            class="size-option h-8 w-8 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">S</button>
+                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
+                            13-14 Years</button>
                         <button
-                            class="size-option h-8 w-8 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">M</button>
+                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
+                            14-15 Years</button>
                         <button
-                            class="size-option h-8 w-8 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">L</button>
+                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
+                            15-16 Years</button>
                         <button
-                            class="size-option h-8 w-8 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">XL</button>
+                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
+                            16-17 Years</button>
+                        <button
+                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
+                            17-18 Years</button>
+                        <button
+                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
+                            18-19 Years</button>
                     </div>
                 </div>
 
@@ -390,10 +402,9 @@
                 <!-- Quantity and Add to Cart -->
                 <div class="space-y-4">
                     <div class="grid grid-cols-4 max-md:grid-cols-2 max-md:gap-4 sm:items-center sm:space-x-6 w-full">
-                        <div class="flex items-center border border-gray-300 rounded-md overflow-hidden max-md:order-1">
+                       <div class="flex items-center border border-gray-300 rounded-md overflow-hidden max-md:order-1">
                             <button class="px-4 py-1.5 hover:bg-gray-100 transition-colors text-xl font-bold">−</button>
-                            <input type="number" value="1" min="1"
-                                class="w-16 py-1.5 text-center border-l border-r border-gray-300 focus:outline-none">
+                            <input type="number" value="1" min="1" class="w-16 py-1.5 text-center border-l border-r border-gray-300 focus:outline-none">
                             <button class="px-4 py-1.5 hover:bg-gray-100 transition-colors text-xl font-bold">+</button>
                         </div>
 
@@ -410,15 +421,16 @@
                             </button>
                         </div>
 
+
                         <div class="flex space-x-3 max-md:order-2">
-                            <button
+                            <!-- <button
                                 class="h-12 w-12 flex items-center justify-center rounded-md border hover:bg-white hover:shadow-lg transition-all duration-300 group">
                                 <svg class="w-6 h-6 text-gray-600 group-hover:text-red-500 group-hover:scale-110 transition-all"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                 </svg>
-                            </button>
+                            </button> -->
                             <button
                                 class="h-12 w-12 flex items-center justify-center rounded-md border hover:bg-white hover:shadow-lg transition-all duration-300 group">
                                 <svg class="w-6 h-6 text-gray-600 group-hover:text-[#f25b21] group-hover:scale-110 transition-all"
@@ -430,14 +442,17 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4 hidden">
+                    <div class="grid grid-cols-2 gap-4">
                         <button
-                            class="relative overflow-hidden rounded-md py-2 px-6 font-semibold flex items-center justify-center gap-2 bg-gradient-to-r from-purple-800 to-orange-700 text-white">
-                            <span class="relative z-10 flex items-center gap-2">
-                                <i class="fas fa-bolt"></i> BUY NOW
-                            </span>
-                            <span class="absolute inset-0 shimmer-overlay"></span>
-                        </button>
+                                class="openCartBtn w-full sm:flex-1 relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-[#f15b21] bg-[#f15b21] text-white">
+                                <span
+                                    class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-[#f15b21]">
+                                    <i class=""></i> Buy Now
+                                </span>
+                                <span
+                                    class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
+                                </span>
+                            </button>
                         <button
                             class="relative rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
                                         transition-all duration-500 hover:border-purple-500 hover:text-purple-600 hover:shadow-lg">
@@ -480,11 +495,14 @@
 
                         <!-- Delivery & Return Info -->
                         <div class="mt-6 space-y-3 text-gray-700">
-                            <button id="openDeliveryModal" class="cursor-pointer flex items-center gap-2">
+                            <!-- <button id="openDeliveryModal" class="cursor-pointer flex items-center gap-2">
                                 <i class="fa-solid fa-truck-fast text-gray-900"></i>
                                 <span class="font-semibold">Delivery & Return</span>
-                            </button>
-
+                            </button> -->
+                            <p>
+                                <i class="fas fa-tags mr-2 text-gray-900"></i>
+                                <span class="font-semibold">Categories:</span> Joggers
+                            </p>
                             <p>
                                 <i class="fa-regular fa-calendar-days mr-3 text-gray-900"></i><span
                                     class="font-semibold">Estimated Delivery:</span> Sep 13 - Sep 17
@@ -512,12 +530,6 @@
                             </script>
 
 
-                        </div>
-
-                        <!-- Categories, Tags, Brands -->
-                        <div class="mt-4 text-base text-gray-900 space-y-1">
-                            <p><span class="font-semibold">Categories:</span> Joggers</p>
-                            <p><span class="font-semibold">Brand:</span> Nova</p>
                         </div>
 
                         <!-- Share -->
@@ -680,7 +692,7 @@
 
         </section>
 
-        <section class="bg-white py-14 w-full">
+        <section class="bg-white py-14 max-md:py-8 w-full">
             <div class="w-[90vw] max-md:w-[90vw] mx-auto">
                 <div class="flex flex-col mb-6">
                     <h3 class="text-left text-3xl font-extrabold uppercase">YOU MAY ALSO LIKE</h3>
@@ -887,6 +899,7 @@
                 </div>
             </div>
         </section>
+
     </div>
 
     <!-- Size Modal -->

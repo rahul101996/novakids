@@ -108,7 +108,7 @@
 
     <section class="bg-white py-14 max-md:py-8 w-full">
         <div class="w-[90vw] max-md:w-[90vw] mx-auto">
-            <div class="flex flex-col mb-10 max-md:mb-2" data-aos="fade-right" data-aos-duration="1000"
+            <div class="flex flex-col mb-4 max-md:mb-2" data-aos="fade-right" data-aos-duration="1000"
                 data-aos-delay="100">
                 <h3 class="text-left text-3xl font-extrabold mb-3 uppercase">New Arrival</h3>
                 <p class="text-left text-gray-600 text-lg max-md:text-base max-w-xl">
@@ -133,7 +133,7 @@
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
                         // printWithPre($images);
-                    ?>
+                        ?>
                         <a href="products/product-details" class="block">
                             <div
                                 class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
@@ -179,18 +179,13 @@
                         </a>
 
                     <?php } ?>
-
-                    <!-- Product 4 -->
-
-
-
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Section -->
-    <section class="md:pb-12 relative">
+    <section class="md:pb-16 relative">
         <div class="absolute -top-14 max-md:-top-16 -left-14 w-auto h-auto opacity-20">
             <img src="/public/images/naruto.webp" alt="" class="w-40 max-md:w-28 h-auto">
         </div>
@@ -200,7 +195,6 @@
                 Discover trendy, comfortable, and versatile outfits for teen boys — from casual wear to bold streetwear,
                 Nova Universe has it all.
             </p>
-
         </div>
 
 
@@ -210,7 +204,7 @@
             foreach ($categories as $key => $category) {
 
 
-            ?>
+                ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
                     <img src="/<?= $category['img'] ?>" alt="Tees"
@@ -230,7 +224,7 @@
         </div>
     </section>
 
-    <section class="grid grid-cols-1 md:grid-cols-2 h-[90vh] max-md:h-[150vh] mt-12">
+    <section class="grid grid-cols-1 md:grid-cols-2 h-[90vh] max-md:h-[150vh] mt-12 hidden">
         <!-- Left Image Block -->
         <div class="relative bg-cover bg-center bg-top" style="background-image: url('/public/images/f5.webp');">
             <div class="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center text-white">
@@ -375,18 +369,6 @@
         </div>
     </section>
 
-    <section class="relative w-full h-[80vh] bg-fixed bg-center bg-cover hidden"
-        style="background-image: url('/public/images/123.avif');">
-
-        <!-- Optional overlay for readability -->
-        <div class="absolute inset-0 bg-black/30"></div>
-
-        <!-- Content on top -->
-        <div class="relative z-10 flex items-center justify-center h-full">
-            <h2 class="text-white text-4xl font-bold">Parallax Section</h2>
-        </div>
-    </section>
-
     <section class="bg-white py-14 max-md:py-8 w-full relative overflow-hidden">
         <div class="absolute -top-12 -right-14 max-md:-right-8 max-md:-top-10 w-auto h-auto opacity-20">
             <img src="/public/images/net.webp" alt="" class="w-48 max-md:w-32 h-auto">
@@ -403,12 +385,12 @@
 
                 <?php
                 foreach ($collection_products as $key => $product) {
-                  
-                   $product_details =getData2("SELECT * FROM `tbl_products` WHERE `id`='$product'")[0];
-                   $images = json_decode($product_details['product_images'], true);
-                        $images = array_reverse($images);
 
-                ?>
+                    $product_details = getData2("SELECT * FROM `tbl_products` WHERE `id`='$product'")[0];
+                    $images = json_decode($product_details['product_images'], true);
+                    $images = array_reverse($images);
+
+                    ?>
                     <a href="products/product-details" class="block">
                         <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
                             <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
@@ -452,7 +434,7 @@
                             </div>
                         </div>
                     </a>
-                <?php
+                    <?php
                 }
                 ?>
             </div>
@@ -460,115 +442,97 @@
     </section>
 
     <style>
-        @keyframes scroll {
-            0% {
-                transform: translateX(0%);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
+        .scroll-container,
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
         }
 
-        .marquee {
-            animation: scroll 12s linear infinite;
+        .scroll-content,
+        .marquee-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            will-change: transform;
         }
 
         .marquee-content {
-            min-width: 200%;
-        }
-
-        @media screen {
-            .marquee {
-                animation: scroll 6s linear infinite;
-            }
+            padding-left: 100%;
         }
     </style>
 
-    <!-- Marquee Section -->
-    <section class="overflow-hidden bg-gradient-to-r from-orange-50 via-transparent to-orange-50 py-2 md:my-6">
-        <div class="relative w-full group">
-            <div class="marquee flex whitespace-nowrap">
-                <div class="marquee-content flex items-center space-x-10 px-10">
-                    <!-- Repeat Content Twice for Infinite Scroll -->
-                    <template id="marquee-items">
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Streetwear</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
+    <div class="w-full overflow-hidden bg-white">
+        <div id="bottomRow" class="marquee bg-gradient-to-r from-orange-50 via-transparent to-orange-50">
+            <div class="marquee-content text-grey-700 max-md:text-sm py-1 text-nowrap">
+                <div
+                    class="flex items-center space-x-10 text-outline transition-all duration-300 text-gray-900 font-semibold text-xl max-md:text-lg cursor-pointer">
+                    <span>#</span>
+                    <span>Streetwear</span>
+                    <span>#</span>
+                    <span>Oversized Tees</span>
+                    <span>#</span>
+                    <span>Graphic Hoodies</span>
+                    <span>#</span>
+                    <span>Joggers & Co-ords</span>
+                    <span>#</span>
+                    <span>Fresh Drops Weekly</span>
+                    <span>#</span>
+                    <span>Nova Universe Exclusive</span>
+                    <span>#</span>
+                    <span>Stay Trendy</span>
+                    <span>#</span>
+                    <span>Free Shipping Over ₹999</span>
+                    <span>#</span>
+                    <span>Made for Gen Z</span>
 
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Sneakers</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
-
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Oversized Fits</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
-
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Casual Drip</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Streetwear</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
-
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Sneakers</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
-
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Oversized Fits</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
-
-                        <div
-                            class="flex items-center space-x-6 text-outline transition-all duration-300 text-gray-900 font-semibold text-2xl max-md:text-lg cursor-pointer">
-                            <span>Casual Drip</span>
-                            <span class="text-gray-900 text-2xl max-md:text-lg">
-                                #
-                            </span>
-                        </div>
-                    </template>
-
-                    <!-- Inject Items Twice -->
-                    <div class="flex items-center space-x-10">
-                        <script>
-                            const items = document.getElementById('marquee-items').content;
-                            const container = document.currentScript.parentElement;
-                            container.appendChild(items.cloneNode(true));
-                            container.appendChild(items.cloneNode(true)); // Two copies for infinite loop
-                        </script>
-                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <script>
+        function setupScroll(elementId, direction, speed) {
+            const container = document.getElementById(elementId);
+            const content = container.querySelector('.scroll-content, .marquee-content');
+            let scrollPosition = 0;
+            let animationFrame;
+
+            function scroll() {
+                scrollPosition += direction * speed;
+
+                if (elementId === 'bottomRow') {
+                    if (scrollPosition >= content.offsetWidth / 2) {
+                        scrollPosition = 0;
+                    }
+                } else {
+                    if (scrollPosition <= -content.offsetWidth / 2) {
+                        scrollPosition = 0;
+                    }
+                }
+
+                content.style.transform = `translateX(${scrollPosition}px)`;
+                animationFrame = requestAnimationFrame(scroll);
+            }
+
+            // Clone content for seamless looping
+            content.innerHTML += content.innerHTML;
+
+            // Set initial position to start scrolling
+            if (elementId === 'bottomRow') {
+                scrollPosition = -content.offsetWidth / 2;
+            }
+
+            // Start the scrolling
+            scroll();
+
+            // Pause scrolling on hover
+            container.addEventListener('mouseenter', () => cancelAnimationFrame(animationFrame));
+            container.addEventListener('mouseleave', () => scroll());
+        }
+
+        setupScroll('bottomRow', 1, 0.7);
+    </script>
 
     <section class="pt-16 max-md:pt-8 w-full">
         <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
@@ -625,8 +589,6 @@
             }
         }
     </style>
-
-
     <style>
         .masonry-container {
             column-count: 2;
@@ -708,7 +670,7 @@
 
             </div>
 
-            <div class="masonry-container md:h-[180vh] max-md:h-[80vh] md:overflow-y-auto max-md:overflow-hidden"
+            <div class="masonry-container md:h-[200vh] lg:h-[180vh] max-md:h-[80vh] md:overflow-y-auto max-md:overflow-hidden"
                 id="masonryGrid">
                 <div class="masonry-item h-[360px] max-md:h-[200px]">
                     <img src="/public/images/111.avif" alt="Nature">
@@ -802,7 +764,7 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const modal = document.getElementById('newsletterModal');
             const closeBtn = document.getElementById('closeModal');
             const noPopupCheckbox = document.getElementById('noPopup');
@@ -836,7 +798,7 @@
 
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".new-arrival-carousel").owlCarousel({
                 loop: true,
                 margin: 10,
