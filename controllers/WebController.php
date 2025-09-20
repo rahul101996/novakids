@@ -13,9 +13,10 @@ class WebController extends LoginController
         }
         parent::__construct($this->db);
     }
+
     public function getProductData()
     {
-        $id = 6;
+        $id = 18;
         $ProductData = getData2("SELECT * FROM `tbl_products` WHERE `id` = $id")[0];
         $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
         $ProductData['varients'] = $varients;
@@ -89,7 +90,7 @@ class WebController extends LoginController
         //  echo "hello";
         // die();
         // $this->checkSession();
-        $categories = getData("tbl_category");
+       
         $products = getData("tbl_products");
         $collection = getData("tbl_collection", true);
         // printWithPre($collection);

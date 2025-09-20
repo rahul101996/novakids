@@ -1,4 +1,8 @@
 <!-- Top Bar -->
+<?php
+$categories = getData("tbl_category");
+
+?>
 <style>
     .mega-menu {
         opacity: 0;
@@ -233,18 +237,14 @@
             </div>
         </li>
 
-        <div class="flex items-center space-x-4 ml-8 max-md:hidden">
-            <div class="relative group">
-                <a href="/shop" class="text-gray-800 group-hover:text-black">Tees</a>
-            </div>
-
-            <div class="relative group">
-                <a href="/about" class="text-gray-800 group-hover:text-black">Joggers</a>
-            </div>
-
-            <div class="relative group">
-                <a href="/contact" class="text-gray-800 group-hover:text-black">Co-ords</a>
-            </div>
+        <div class="flex items-center space-x-7 ml-8 max-md:hidden">
+            <?php
+            foreach ($categories as $key  => $value) {
+            ?>
+                <div class="relative group">
+                    <a href="/shop" class="text-gray-800 group-hover:text-black"><?= $value['category'] ?></a>
+                </div>
+            <?php } ?>
         </div>
 
         <!-- Mobile Menu Toggle Button -->

@@ -433,7 +433,7 @@ function add($data, $table, $timestamp = true)
 
     // Prepare the SQL statement
     $sql = "INSERT INTO `$table` (" . $columns . ") VALUES (" . $placeholders . ")";
-    echo $sql;
+    // echo $sql;
     $stmt = $db->prepare($sql);
 
     // Bind the values
