@@ -233,17 +233,17 @@
             </div>
         </li>
 
-        <div class="flex items-center space-x-4 ml-8 max-md:hidden">
+        <div class="flex items-center space-x-6 ml-8 max-md:hidden">
             <div class="relative group">
-                <a href="/shop" class="text-gray-800 group-hover:text-black">Tees</a>
+                <a href="/shop" class="text-gray-800 font-semibold group-hover:text-black">Tees</a>
             </div>
 
             <div class="relative group">
-                <a href="/about" class="text-gray-800 group-hover:text-black">Joggers</a>
+                <a href="/about" class="text-gray-800 font-semibold group-hover:text-black">Joggers</a>
             </div>
 
             <div class="relative group">
-                <a href="/contact" class="text-gray-800 group-hover:text-black">Co-ords</a>
+                <a href="/contact" class="text-gray-800 font-semibold group-hover:text-black">Co-ords</a>
             </div>
         </div>
 
