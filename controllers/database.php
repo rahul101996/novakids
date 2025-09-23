@@ -2,7 +2,7 @@
 
 class Database
 {
-    private $host = "localhost"; 
+    private $host = "localhost";
     private $dbname = "novakids";
     private $username = "root";
     private $password = "";
@@ -19,6 +19,8 @@ class Database
     private $siteName = "Vikas Sawants Academy";
     private $software = "https://software.teamrudra.com/";
     private $softwareid = "4";
+    private $fast2sms_api = "wzVHgpkoYJa6PFCqDevZMGu83l4LhOAtm9NQxXRdK7f0inSTEBkM6hS0CsJvGBHYZWgq4aRQ19cUxuri";
+    private $fast2sms_api_rudratech = "Y2mCHcBsfTPSnLQMx5Gwa40zE3NW6Xg9oFt18bKrZduvjiUJkDS8qzkslUI2AmRhj57aPt1MVb4OryCB";
 
     public function __construct()
     {
@@ -58,8 +60,12 @@ class Database
     {
         return  $this->software;
     }
-    public function getSoftwareId() {
+    public function getSoftwareId()
+    {
         return  $this->softwareid;
     }
-
+    public function getfast2sms_API()
+    {
+        return [$this->fast2sms_api, $this->fast2sms_api_rudratech];
+    }
 }

@@ -23,6 +23,11 @@ function getBaseUrl()
 {
     return getDBObject()->getUrl();
 }
+
+function getFast2SMS(){
+    
+    return getDBObject()->getfast2sms_API();
+}
 function getUserByUsername($db, $username)
 {
     try {

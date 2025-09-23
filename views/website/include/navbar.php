@@ -240,7 +240,7 @@ $categories = getData("tbl_category");
         <div class="flex items-center space-x-7 ml-8 max-md:hidden">
             <?php
             foreach ($categories as $key => $value) {
-                ?>
+            ?>
                 <div class="relative group">
                     <a href="/shop" class="text-gray-800 group-hover:text-black"><?= $value['category'] ?></a>
                 </div>
@@ -593,24 +593,96 @@ $categories = getData("tbl_category");
                 class="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-tr from-yellow-400/20 to-orange-500/20 rounded-full blur-2xl">
             </div> -->
 
-            <h3 class="text-2xl font-bold text-gray-900 text-center mb-6 max-md:mb-4">Start Your Style
-                Journey</h3>
+            <h3 class="text-2xl font-bold text-gray-900 text-center mb-6 max-md:mb-4">Start Your Style Journey</h3>
 
-            <form action="">
-                <div class="flex items-center border rounded-lg overflow-hidden mb-4">
-                    <span class="px-3 text-gray-600">+91</span> <input type="tel" placeholder="Enter mobile number"
+            <form action="" method="POST" id="otp-form">
+                <input type="text" placeholder="" name="username" class="hidden" id="username">
+                <input type="text" placeholder="" name="user_from" class="hidden" id="user_from" value="otp">
+                <div class="flex items-center border rounded-lg overflow-hidden mb-4" id="mobile-div">
+                    <span class="px-3 text-gray-600">+91</span> <input type="tel" placeholder="Enter mobile number" name="mobile" id="mobile"
                         class="w-full px-3 py-2 outline-none border-l">
                 </div>
+                <div class="relative font-inter antialiased hidden" id="otp-div">
 
+                    <main class="relative flex flex-col justify-center overflow-hidden">
+                        <div class="w-full max-w-6xl mx-auto">
+                            <div class="flex justify-center w-full">
+
+                                <div class="w-full mx-auto text-center bg-white  pt-10 rounded-xl">
+
+                                    <div class="flex items-center justify-between gap-3 px-10 w-full">
+                                        <input
+                                            type="text"
+                                            class="w-14  h-14 text-center text-2xl otp-input font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                                            pattern="\d*" maxlength="1" />
+                                        <input
+                                            type="text"
+                                            class="w-14 h-14 text-center text-2xl otp-input font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                                            maxlength="1" />
+                                        <input
+                                            type="text"
+                                            class="w-14 h-14 text-center text-2xl otp-input font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                                            maxlength="1" />
+                                        <input
+                                            type="text"
+                                            class="w-14 h-14 text-center text-2xl otp-input font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                                            maxlength="1" />
+                                    </div>
+                                    <div class="w-full mx-auto mt-4">
+                                        <button type="button" name="login" id="verifyOtp"
+                                            class="relative w-full py-2 rounded-md font-semibold overflow-hidden group border-2 border-black">Verify
+                                            OTP</button>
+                                    </div>
+                                    <div class="text-sm text-slate-500 mt-4">Didn't receive code? <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">Resend</a></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </main>
+
+                    <!-- Page footer -->
+
+
+                    <!-- Banner with links -->
+                    <div class="fixed bottom-0 right-0 w-full md:bottom-6 md:right-12 md:w-auto z-50"
+                        :class="bannerOpen ? '' : 'hidden'" x-data="{ bannerOpen: true }">
+                        <div class="bg-slate-800 text-sm p-3 md:rounded shadow flex justify-between">
+                            <div class="text-slate-500 inline-flex">
+                                <a class="font-medium hover:underline text-slate-300"
+                                    href="https://cruip.com/otp-form-example-made-with-tailwind-css-and-javascript/" target="_blank">
+                                    Read Tutorial
+                                </a>
+                                <span class="italic px-1.5">or</span>
+                                <a class="font-medium hover:underline text-indigo-500 flex items-center"
+                                    href="https://github.com/cruip/cruip-tutorials/blob/main/otp-form/index.html" target="_blank"
+                                    rel="noreferrer">
+                                    <span>Download</span>
+                                    <svg class="fill-indigo-400 ml-1" xmlns="http://www.w3.org/2000/svg" width="9" height="9">
+                                        <path d="m1.649 8.514-.91-.915 5.514-5.523H2.027l.01-1.258h6.388v6.394H7.158l.01-4.226z" />
+                                    </svg>
+                                </a>
+                            </div>
+                            <button class="text-slate-500 hover:text-slate-400 pl-2 ml-3 border-l border-slate-700"
+                                @click="bannerOpen = false">
+                                <span class="sr-only">Close</span>
+                                <svg class="w-4 h-4 shrink-0 fill-current" viewBox="0 0 16 16">
+                                    <path
+                                        d="M12.72 3.293a1 1 0 00-1.415 0L8.012 6.586 4.72 3.293a1 1 0 00-1.414 1.414L6.598 8l-3.293 3.293a1 1 0 101.414 1.414l3.293-3.293 3.293 3.293a1 1 0 001.414-1.414L9.426 8l3.293-3.293a1 1 0 000-1.414z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
                 <!-- <div class="flex items-center mb-6">
                     <input type="checkbox" id="offers" class="mr-2 rounded border-gray-400 text-black focus:ring-black">
                     <label for="offers" class="text-sm text-gray-600">Notify me with offers & updates</label>
                 </div> -->
 
                 <button
-                    class="relative w-full py-2 rounded-md font-semibold overflow-hidden group border-2 border-black">
+                    class="relative w-full py-2 rounded-md font-semibold overflow-hidden group border-2 border-black" id="sendOtp" type="button">
                     <span
-                        class="relative z-10 text-white group-hover:text-black transition-colors duration-1500">Continue</span>
+                        class="relative z-10 text-white group-hover:text-black transition-colors duration-1500">Send OTP</span>
                     <span
                         class="absolute inset-0 bg-black group-hover:scale-x-0 origin-left transition-transform duration-700"></span>
                 </button>
@@ -619,12 +691,10 @@ $categories = getData("tbl_category");
                     <p class="text-center text-gray-500 my-3">or</p>
                 </div>
 
-                <div class="flex flex-col justify-center mb-3">
-                    <button
-                        class="flex items-center justify-center gap-3 border border-gray-300 rounded-md py-2 text-gray-700 hover:bg-gray-50">
-                        <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google" class="w-5 h-5">
-                        Continue with Google
-                    </button>
+                <div id="g_id_onload" style="display:flex; align-items:center; justify-content:center; width:100%"
+                    data-client_id="188574937788-fn4td4evj5cqejhrgge28pf8129sa58q.apps.googleusercontent.com"
+                    data-callback="handleCredentialResponse"
+                    data-auto_select="false">
                 </div>
             </form>
 
@@ -704,8 +774,16 @@ $categories = getData("tbl_category");
         </div>
     </div>
 </div>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 
 <script>
+    google.accounts.id.initialize({
+        client_id: "188574937788-fn4td4evj5cqejhrgge28pf8129sa58q.apps.googleusercontent.com",
+        callback: handleCredentialResponse,
+        use_fedcm_for_prompt: false // 👈 fallback if FedCM is blocked
+    });
+
     const messages = [
         ' Nova Kids – Style That Moves!',
         ' Free Delivery on Orders Over Rs.2000',
@@ -788,4 +866,153 @@ $categories = getData("tbl_category");
             modal.classList.add('hidden');
         }
     });
+    const form = document.getElementById("otp-form");
+    const inputs = [...form.querySelectorAll(".otp-input")];
+    const submit = form.querySelector("button[type=button]");
+    document.addEventListener("DOMContentLoaded", () => {
+
+
+        const handleKeyDown = (e) => {
+            if (
+                !/^[0-9]{1}$/.test(e.key) &&
+                e.key !== 'Backspace' &&
+                e.key !== 'Delete' &&
+                e.key !== 'Tab' &&
+                !e.metaKey
+            ) {
+                e.preventDefault()
+            }
+
+            if (e.key === 'Delete' || e.key === 'Backspace') {
+                const index = inputs.indexOf(e.target);
+                if (index > 0) {
+                    inputs[index - 1].value = '';
+                    inputs[index - 1].focus();
+                }
+            }
+        }
+
+        const handleInput = (e) => {
+            const {
+                target
+            } = e
+            const index = inputs.indexOf(target)
+            if (target.value) {
+                if (index < inputs.length - 1) {
+                    inputs[index + 1].focus()
+                } else {
+                    submit.focus()
+                }
+            }
+        }
+
+        const handleFocus = (e) => {
+            e.target.select()
+        }
+
+        const handlePaste = (e) => {
+            e.preventDefault()
+            const text = e.clipboardData.getData('text')
+            if (!new RegExp(`^[0-9]{${inputs.length}}$`).test(text)) {
+                return
+            }
+            const digits = text.split('')
+            inputs.forEach((input, index) => input.value = digits[index])
+            submit.focus()
+        }
+
+        inputs.forEach((input) => {
+            input.addEventListener('input', handleInput)
+            input.addEventListener('keydown', handleKeyDown)
+            input.addEventListener('focus', handleFocus)
+            input.addEventListener('paste', handlePaste)
+        })
+    })
+
+    const sendOtp = document.getElementById('sendOtp');
+    const mobileInput = document.getElementById('mobile');
+    const OtpDiv = document.getElementById('otp-div');
+    const verifyOtp = document.getElementById('verifyOtp');
+    const mobileDiv = document.getElementById('mobile-div');
+    const Username = document.getElementById('username');
+    sendOtp.addEventListener('click', async () => {
+        // console.log("hiiiiiiiii")
+        if (mobileInput.value != "" && mobileInput.value.length == 10) {
+            const response = await axios.post('/api/send-otp', new URLSearchParams({
+                phone: mobileInput.value,
+            }))
+            // console.log(response.data)
+
+            if (response.data.success) {
+                console.log(response.data)
+                mobileDiv.classList.add('hidden')
+                sendOtp.classList.add('hidden');
+                OtpDiv.classList.remove('hidden');
+                verifyOtp.addEventListener('click', async () => {
+                    console.log("testing......")
+                    const otpInput = inputs.map(input => input.value).join("");
+                    console.log(otpInput, response.data.otp);
+
+                    if (response.data.otp == otpInput) {
+                        console.log("Matched")
+                        Username.value = response.data.data.username
+
+                        verifyOtp.type = "submit"
+                        verifyOtp.click();
+                    } else {
+                        toastr.error("Otp Verification Fail");
+                    }
+
+                })
+            } else {
+                toastr.error(response.data.message);
+            }
+        } else {
+            toastr.error("Please Enter Valid number");
+        }
+
+
+    })
+</script>
+<script>
+    const verifyOtp1 = document.getElementById('loginform');
+
+    function handleCredentialResponse(response) {
+        // decodeJwtResponse() is a custom function defined by you
+        // to decode the credential response.
+        const responsePayload = decodeJwtResponse(response.credential);
+        console.log(responsePayload)
+        console.log("ID: " + responsePayload.sub);
+        console.log('Full Name: ' + responsePayload.name);
+        console.log('Given Name: ' + responsePayload.given_name);
+        console.log('Family Name: ' + responsePayload.family_name);
+        console.log("Image URL: " + responsePayload.picture);
+        console.log("Email: " + responsePayload.email);
+
+        document.getElementById("passemeail").removeAttribute('required');
+        document.getElementById("password").removeAttribute('required');
+
+
+        document.getElementById("password").value = "zyxwvutsrqponmlkjihgfedcba";
+        document.getElementById("fname").value = responsePayload.given_name
+        document.getElementById("lname").value = responsePayload.family_name
+        document.getElementById("mobile").value = ""
+        document.getElementById("username").value = responsePayload.email
+        document.getElementById("from").value = "google";
+        // document.getElementById("loginform").click();
+        verifyOtp1.type = "submit"
+        verifyOtp1.click();
+
+
+    }
+
+    function decodeJwtResponse(token) {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        return JSON.parse(jsonPayload);
+    }
 </script>

@@ -1,11 +1,14 @@
 <?php
 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 require 'vendor/autoload.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . "/Helper/generalHelper.php";
 
 date_default_timezone_set('Asia/Kolkata');
-error_reporting(1);
+
 // die();
 // Load custom routing system
 require_once 'app/RouteController.php';

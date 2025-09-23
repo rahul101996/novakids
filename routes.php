@@ -26,6 +26,7 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('/api/removeProductFromCollection', 'removeProductFromCollection');
     $route->route('/api/get-product-data', 'getProductData');
     $route->route('cookies', 'cookies');
+    $route->route('/api/send-otp', 'SendOtp');
     // $route->route('/', 'index');
 
 });

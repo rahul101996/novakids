@@ -31,6 +31,8 @@ class WebController extends LoginController
 ?>
 
         <?php
+        // printWithPre($ProductData);
+
         if (!empty($ProductData['varients'])) {
             $images = [];
             $options = [];
@@ -48,10 +50,23 @@ class WebController extends LoginController
             // printWithPre($opt);
             $grouped = groupAttributes($opt);
             // printWithPre($grouped);
+
+            // Take only the last image from each images set
+            $lastImages = array_map(function ($imgSet) {
+                return end($imgSet);
+            }, $images);
+
+            // Final result
+            $finalData = [
+                'options' => $options,  // all JSON strings
+                'images'  => $lastImages
+            ];
+
+            // printWithPre($finalData);
         ?>
             <div class="w-[47%] p-3 h-full overflow-y-scroll bg-gray-200 flex flex-col items-center justify-start no-scrollbar gap-3 transform translate-x-full transition-transform duration-[0.8s] ease-in-out" id="VarImg">
                 <?php
-                foreach ($images[0] as $key => $image) {
+                foreach (array_reverse($images[0]) as $key => $image) {
 
                 ?>
                     <img src="/<?= $image ?>" alt="">
@@ -80,6 +95,7 @@ class WebController extends LoginController
                         $key = strtolower(str_replace(' ', '', $key));
                         // echo $key;
                         if ($key == 'size') {
+
                     ?>
                             <div class="w-full flex items-center justify-between mt-7 text-sm">
 
@@ -96,35 +112,17 @@ class WebController extends LoginController
                             </div>
                             <div class="w-full flex items-center justify-start mt-3 text-sm">
                                 <?php
+                                $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
+                                    // $diffcolor = $finalData['images'][$key1];
                                 ?>
-                                    <div class="border border-gray-600 flex items-center justify-center h-12 w-12"><?= $value1 ?></div>
+                                    <div class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> flex items-center justify-center h-12 w-12" size_value="<?= $value1 ?>" size_name="<?= $key ?>"><?= $value1 ?></div>
                                 <?php
                                 }
                                 ?>
                             </div>
-                        <?php } elseif ($key == "color") { ?>
-
-                            <span class="mt-6 text-sm">COLOR :</span>
-                            <div class="w-full flex items-center justify-start mt-3 text-sm gap-2">
-                                <?php
-                                foreach ($images as $key => $image) {
-                                    // printWithPre($image[0]);
-
-                                    if ($key > 3) {
-                                        break;
-                                    }
-                                ?>
-                                    <div class="border border-gray-600 p-1 flex items-center justify-center">
-                                        <img src="/<?= $image[0] ?>" alt="" class="h-[83px] w-[58px]">
-                                    </div>
-                                <?php
-                                }
-                                ?>
-
-
-                            </div>
-                    <?php }
+                    <?php
+                        }
                     } ?>
                     <div class="w-full flex items-center justify-start mt-7 gap-3">
                         <div class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg">
@@ -199,8 +197,13 @@ class WebController extends LoginController
         // printWithPre($collection);
 
 
+// echo $_SERVER['REQUEST_METHOD'];
+// printWithPre($_POST);
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/website/index.php';
 
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
             require 'views/website/index.php';
         }
     }
@@ -863,5 +866,11 @@ ORDER BY id DESC LIMIT 5");
     public function ContactMail()
     {
         require 'views/website/contact-mail.php';
+    }
+    public function SendOtp()
+    {
+        $user = $this->getUserByphone($_POST["phone"]);
+        // printWithPre($user);
+        require 'api/send-otp.php';
     }
 }

@@ -1,3 +1,176 @@
+<?php
+// echo "nnndn";
+// printWithPre($_SESSION);
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+// if (isset($_SESSION["type"]) && $_SESSION["type"] == "User" && !empty($_SESSION["username"])) {
+//     header("location:/");
+//     exit();
+// }
+if (!empty($_POST)) {
+    // printWithPre($_SESSION);
+    // exit();
+    // printWithPre($_POST);
+    // die();
+    $cartaratratartaratartrrat = false;
+    $cartaratratartaratartrrat1 = false;
+    if (isset($_POST["login"])) {
+
+
+        // Sanitize the username to prevent special characters
+        if ($_POST["from"] == "otp") {
+            // $username = htmlspecialchars(strip_tags($_POST["email"]));
+            $user = $this->getUserByphone($_POST["mobile"]);
+        } else {
+            $username = htmlspecialchars(strip_tags($_POST["username"]));
+            $user = getUserByUsername($this->db, $username);
+        }
+        // print_r($username);
+        // die();
+
+
+        // Retrieve the user by username
+
+        // printWithPre($user);
+        // die();
+
+        // if ($user['is_active'] == 1) {
+        if ($user) {
+            // User found, now verify the password
+            $proceed = false;
+            if ($user["user_from"] == "otp") {
+                // if (password_verify($_POST["password"], $user["password"])) {
+                $proceed = true;
+                // echo "Login successful!";
+            } else if ($user["user_from"] == "google") {
+                if ($_POST["password"] == "zyxwvutsrqponmlkjihgfedcba") {
+                    $proceed = true;
+                }
+            }
+
+            if ($proceed) {
+                // echo "Login successful!";
+                $_SESSION["type"] = "User";
+                $_SESSION["username"] = $user["username"];
+                $_SESSION["userid"] = $user["id"];
+                $_SESSION["fname"] = $user["fname"];
+                $_SESSION['popup'] = 'false';
+                $_SESSION["success"] = "User Login Successfully";
+
+
+                if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
+                    foreach ($_SESSION["cart"] as $key => $c) {
+                        $cartaratratartaratartrrat = true;
+                        $data = $cartController->getCartByVarientAndUserid($c["varient"], $user["id"]);
+                        if ($data) {
+
+                            $cartController->updateCart($data["id"], [
+                                "quantity" => $data["quantity"] + $c["quantity"]
+                            ]);
+                        } else {
+
+                            $cartController->insertCart([
+                                "varient" => $c["varient"],
+                                "category" => $c["category"],
+                                "product" => $c["product"],
+                                "quantity" => $c["quantity"],
+                                "userid" => $user["id"],
+                                "username" => $username,
+                            ]);
+                        }
+                    }
+                    unset($_SESSION["cart"]);
+                } else if (isset($_SESSION["FormCartData"])) {
+                    $cartaratratartaratartrrat1 = true;
+                    $_SESSION["cartData"] = $_SESSION["FormCartData"];
+                    unset($_SESSION["FormCartData"]);
+                }
+
+
+
+                // $this->updateUser($user["id"], [
+                //     "last_login" => date("Y-m-d H:i:s")
+                // ]);
+                echo "hii";
+                header("location: /");
+            } else {
+                // echo "Invalid password.";
+                $_SESSION["err"] = "Invalid Password";
+            }
+        } else {
+            if ($_POST["from"] == "google" && !empty($_POST["username"]) && !empty($_POST["fname"])) {
+                $data = [
+                    "username" => $_POST["username"],
+                    "fname" => $_POST["fname"],
+                    "lname" => (!isset($_POST["lname"]) || $_POST["lname"] == 'undefined') ? '' : $_POST["lname"],
+                    "mobile" => $_POST["mobile"],
+                    "password" => "",
+                    "user_from" => "google"
+                ];
+
+                // Insert the user into the database
+                $userid = $controller->registerOnlineUser($data);
+                if ($userid) {
+                    // echo "User registered successfully!";
+                    $_SESSION["success"] = "Register Successfully";
+                    $_SESSION["type"] = "User";
+                    $_SESSION["username"] = $_POST["username"];
+                    $_SESSION["userid"] = $userid;
+                    $_SESSION["fname"] = $_POST["fname"];
+                    $_SESSION['popup'] = 'false';
+
+                    if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
+                        foreach ($_SESSION["cart"] as $key => $c) {
+                            $cartaratratartaratartrrat = true;
+                            $data = $cartController->getCartByVarientAndUserid($c["varient"], $user["id"]);
+                            if ($data) {
+
+                                $cartController->updateCart($data["id"], [
+                                    "quantity" => $data["quantity"] + $c["quantity"]
+                                ]);
+                            } else {
+
+                                $cartController->insertCart([
+                                    "varient" => $c["varient"],
+                                    "category" => $c["category"],
+                                    "product" => $c["product"],
+                                    "quantity" => $c["quantity"],
+                                    "userid" => $userid,
+                                    "username" => $_POST["username"],
+                                ]);
+                            }
+                        }
+                        unset($_SESSION["cart"]);
+                    } else if (isset($_SESSION["FormCartData"])) {
+                        $cartaratratartaratartrrat1 = true;
+                        $_SESSION["cartData"] = $_SESSION["FormCartData"];
+                        unset($_SESSION["FormCartData"]);
+                    }
+                } else {
+                    // echo "Failed to register user.";
+                    $_SESSION["err"] = "Can't Login";
+                }
+            } else {
+                $_SESSION["err"] = "User Not Found";
+            }
+        }
+        // } else {
+        //     $_SESSION["err"] = "Your are Temperary blocked";
+        // }
+        if ($cartaratratartaratartrrat) {
+            header("location: /cart.php");
+            exit();
+        } else if ($cartaratratartaratartrrat1) {
+            header("location: /checkout.php");
+            exit();
+        }
+        // echo "gandu";
+        header("location: /");
+        exit();
+    }
+}
+?>
 <head>
     <script>
         ! function(f, b, e, v, n, t, s) {
