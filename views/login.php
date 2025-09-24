@@ -17,7 +17,7 @@ background: linear-gradient(87deg, rgba(87, 69, 143, 1) 25%, rgba(197, 86, 82, 1
                 <!-- Logo -->
                 <div class="inline-block p-3 mb-0">
                     <a href="/">
-                        <img src="/public/logos/color-logo.jpg" alt="Company Logo" class="h-20 max-md:h-14 rounded-lg">
+                        <img src="/public/logos/logo-white.png" alt="Company Logo" class="h-24 max-md:h-14 rounded-lg">
                     </a>
                 </div>
 

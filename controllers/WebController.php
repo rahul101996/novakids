@@ -242,6 +242,8 @@ class WebController extends LoginController
             echo json_encode($response);
         }
     }
+
+    
     public function productDetails()
     {
 

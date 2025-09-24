@@ -53,6 +53,15 @@ $route->group(['', 'CustomerController'], function ($route) {
     // $route->route('/admin/products-list', 'ProductsList');
 
 });
+
+$route->group(['', 'PaymentGatewayController'], function ($route) {
+    $route->route('admin/payment-gateway', 'PaymentGateway');
+        $route->route('/api/payment-gateway', 'ChangePaymentGateway');
+
+
+    // $route->route('/admin/products-list', 'ProductsList');
+
+});
 $route->group(['', 'CategoryController'], function ($route) {
 
     // $route->route('admin/add-packaging', 'AddCollections');

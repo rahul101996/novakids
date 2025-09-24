@@ -268,7 +268,7 @@ $categories = getData("tbl_category");
 
         <div class="flex items-center absolute left-1/2 transform -translate-x-1/2">
             <a href="/" class="block">
-                <img src="/public/logos/nova.png" alt="Logo" class="h-12 max-md:hidden">
+                <img src="/public/logos/nova_logo-brnd-name.png" alt="Logo" class="h-12 max-md:hidden">
                 <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
             </a>
         </div>

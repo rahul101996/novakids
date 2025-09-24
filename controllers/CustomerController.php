@@ -16,7 +16,7 @@ class CustomerController
         
 
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
-            // $products = getData("tbl_products");
+            $customers = getData("online_users", true);
             require 'views/customers/customers-list.php';
         }
     }

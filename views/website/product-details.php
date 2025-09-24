@@ -435,20 +435,20 @@
                                         d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                 </svg>
                             </button> -->
-                            <button
+                            <!-- <button
                                 class="h-12 w-12 flex items-center justify-center rounded-md border hover:bg-white hover:shadow-lg transition-all duration-300 group">
                                 <svg class="w-6 h-6 text-gray-600 group-hover:text-[#f25b21] group-hover:scale-110 transition-all"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
                                 </svg>
-                            </button>
+                            </button> -->
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="flex w-full items-center justify-start gap-4">
                         <button
-                            class="openCartBtn w-full sm:flex-1 relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-[#f15b21] bg-[#f15b21] text-white">
+                            class="openCartBtn w-[75%]  relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-[#f15b21] bg-[#f15b21] text-white">
                             <span
                                 class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-[#f15b21]">
                                 <i class=""></i> Buy Now
@@ -458,7 +458,7 @@
                             </span>
                         </button>
                         <button
-                            class="relative rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
+                            class="relative hidden rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
                                         transition-all duration-500 hover:border-purple-500 hover:text-purple-600 hover:shadow-lg">
                             <i class="fas fa-heart"></i> WISHLIST
                         </button>
@@ -559,9 +559,9 @@
             </div>
         </section>
 
-        <section class="w-[90vw] mx-auto md:mt-10 py-10 grid grid-cols-1 md:grid-cols-5 gap-10">
+        <section class="w-[90vw] mx-auto md:mt-10 py-10  gap-10">
             <!-- Left Side -->
-            <div class="md:col-span-3">
+            <div class="md:col-span-3 w-full">
                 <!-- Average Rating -->
                 <h3 class="text-2xl font-bold mb-2">Customer Reviews</h3>
 
@@ -636,7 +636,7 @@
             </div>
 
             <!-- Right Side -->
-            <div class="md:col-span-2">
+            <div class="md:col-span-2 hidden">
                 <!-- Overall Rating -->
                 <div class="flex items-center space-x-2 mb-6">
                     <div>

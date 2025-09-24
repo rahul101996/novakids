@@ -3,96 +3,6 @@
 
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
-$customers = [
-    [
-        "name" => "Manish Kukreja",
-        "email" => 'XVc8o@example.com',
-        "email_subscription" => "Not subscribed",
-        "location" => "Ulhasnagar MH, India",
-        "orders" => 2,
-        "amount_spent" => 901.25
-    ],
-    [
-        "name" => "Manish Kukreja",
-        "email" => 'XVc8o@example.com',
-        "email_subscription" => null,
-        "location" => "Ulhasnagar MH, India",
-        "orders" => 0,
-        "amount_spent" => 0.00
-    ],
-    [
-        "name" => "Kanchan Lund",
-        "email" => 'qsqsB@example.com',
-        "email_subscription" => null,
-        "location" => "Ulhasnagar MH, India",
-        "orders" => 1,
-        "amount_spent" => 775.00
-    ],
-    [
-        "name" => "raneabhi1988@gmail.com",
-        "email" => "raneabhi1988@gmail.com",
-        "email_subscription" => "Not subscribed",
-        "location" => "Ulhasnagar MH, India",
-        "orders" => 0,
-        "amount_spent" => 0.00
-    ],
-    [
-        "name" => "Bhavika Kukreja",
-        "email" => 'tVd5t@example.com',
-        "email_subscription" => null,
-        "location" => "Ulhasnagar MH, India",
-        "orders" => 1,
-        "amount_spent" => 1599.00
-    ],
-    [
-        "name" => "Test Gaurav",
-        "email" => 'tVd5t@example.com',
-        "email_subscription" => null,
-        "location" => "Ulhasnagar MH, India",
-        "orders" => 0,
-        "amount_spent" => 0.00
-    ],
-    [
-        "name" => "Test Gaurav",
-        "email" => 'tVd5t@example.com',
-        "email_subscription" => null,
-        "location" => "Ulhasnagar MH, India",
-        "orders" => 0,
-        "amount_spent" => 0.00
-    ],
-    [
-        "name" => "test gaurav",
-        "email" => 'tVd5t@example.com',
-        "email_subscription" => null,
-        "location" => "Ulhasnagar MH, India",
-        "orders" => 2,
-        "amount_spent" => 3715.82
-    ],
-    [
-        "name" => "Test Gaurav",
-        "email" => 'tVd5t@example.com',
-        "email_subscription" => null,
-        "location" => "Ulhasnagar MH, India",
-        "orders" => 1,
-        "amount_spent" => 1337.50
-    ],
-    [
-        "name" => "test gaurav",
-        "email" => 'tVd5t@example.com',
-        "email_subscription" => null,
-        "location" => "Ulhasnagar MH, India",
-        "orders" => 1,
-        "amount_spent" => 1750.00
-    ],
-    [
-        "name" => "test gaurav",
-        "email" => 'tVd5t@example.com',
-        "email_subscription" => null,
-        "location" => "Ulhasnagar MH, India",
-        "orders" => 0,
-        "amount_spent" => 0.00
-    ]
-];
 
 ?>
 
@@ -140,7 +50,7 @@ $customers = [
                 </div>
             </div>
 
-            <div class="w-full text-sm">
+            <div class="w-full text-sm overflow-x-scroll">
                 <!-- Table Header -->
                 <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,2fr)_minmax(0,3fr)_minmax(0,1fr)_minmax(0,0.5fr)_minmax(0,0.5fr)] items-center gap-4 px-4 py-2 text-gray-500">
                     <span>Sr. No</span>
@@ -149,6 +59,7 @@ $customers = [
                     <span>Address</span>
                     <span>Orders</span>
                     <span>Amount Spent</span>
+                    <span>User from</span>
                     <span>Status</span>
                 </div>
 
@@ -173,33 +84,43 @@ $customers = [
                             <!-- Customer Name -->
                             <div class="font-medium">
                                 <div class="flex items-center justify-start gap-5">
-                                    <?= $customer['name'] ?>
+                                    <?= $customer['fname'] ?> <?= $customer['lname'] ?>
                                 </div>
                             </div>
 
                             <!-- Email -->
                             <div>
-                                <span class="text-green-500 font-semibold"><?= $customer['email'] ?></span>
+                                <span class="text-green-500 font-semibold"><?= $customer['username'] ?></span>
                             </div>
 
                             <!-- Address -->
                             <div>
-                                <p class="text-gray-500 font-semibold"><?= $customer['location'] ?></p>
+                                <p class="text-gray-500 font-semibold">Ulhasnagar MH, India</p>
                             </div>
 
                             <!-- Orders -->
                             <div>
-                                <p class="text-gray-500 font-semibold"><?= $customer['orders'] ?> Orders</p>
+                                <p class="text-gray-500 font-semibold">0 Orders</p>
                             </div>
 
                             <!-- Amount Spent -->
                             <div>
-                                <p class="text-gray-500 font-semibold">₹ <?= $customer['amount_spent'] ?></p>
+                                <p class="text-gray-500 font-semibold">₹ 0.00</p>
                             </div>
-
+                            <div class="flex ">
+                            <div>
+                                <p class="text-gray-500 font-semibold"><?= $customer['user_from'] == 'otp' ? '<img class="w-8 h-8" src="/public/logos/otp.png" alt="otp">' : '<img class="w-8 h-8" src="/public/logos/google.png" alt="email">' ?></p>
+                            </div>
                             <!-- Action -->
-                            <div class="flex space-x-2">
-                                <span class="bg-green-200 text-green-600 py-1 px-2 rounded-full text-xs">Active</span>
+                            <div class="flex space-x-2 hidden">
+                                <?php if ($customer['is_active'] == 1) { ?>
+                                    <span class="bg-green-200 text-green-600 py-1 px-2 rounded-full text-xs">Active</span>
+                                <?php
+                                } else {
+                                ?>
+                                    <span class="bg-red-200 text-red-600 py-1 px-2 rounded-full text-xs">Inactive</span>
+                                <?php } ?>
+                            </div>
                             </div>
                         </div>
                     </a>
