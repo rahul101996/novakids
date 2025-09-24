@@ -45,10 +45,21 @@ $route->group(['', 'CollectionController'], function ($route) {
 $route->group(['', 'ProductController'], function ($route) {
     $route->route('/admin/add-product', 'AddProducts');
     $route->route('/admin/products-list', 'ProductsList');
+    $route->route('/admin/inventory', 'Inventory');
 });
 $route->group(['', 'CustomerController'], function ($route) {
     $route->route('admin/customers-list', 'CustomersList');
     $route->route('admin/customer-info', 'CustomersInfo');
+
+    // $route->route('/admin/products-list', 'ProductsList');
+
+});
+
+$route->group(['', 'CouponController'], function ($route) {
+    $route->route('admin/add-coupon', 'AddCoupons');
+    $route->route('admin/coupons-list', 'CouponList');
+    $route->route('/edit-coupon/[i:id]', 'AddCoupons');
+    $route->route('/delete-coupon/[i:id]', 'DeleteCoupon');
 
     // $route->route('/admin/products-list', 'ProductsList');
 

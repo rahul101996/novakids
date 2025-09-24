@@ -463,6 +463,29 @@
                             <i class="fas fa-heart"></i> WISHLIST
                         </button>
                     </div>
+                    <div class="w-[75%]  bg-gray-50 rounded-lg p-4 shadow-sm">
+                        <!-- Title -->
+                        <h3 class="font-semibold text-gray-800 mb-3">Check Delivery</h3>
+
+                        <!-- Input + Button + Icon -->
+                        <div class="flex items-center space-x-2 border-b border-gray-300 pb-2">
+                            <input
+                                type="text"
+                                value=""
+                                placeholder="Enter Pincode"
+                                class="flex-1 bg-transparent outline-none text-gray-700"
+                                 />
+                            <button class="bg-black text-white text-sm font-semibold px-3 py-1 rounded-md hover:bg-gray-800">
+                                Change
+                            </button>
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+
+                        <!-- Delivery Info -->
+                        <p class="mt-3 text-sm">
+                            <span class="text-green-600 font-semibold">Free delivery</span> | By <span class="font-semibold">Friday, 26 Sept</span>
+                        </p>
+                    </div>
 
                     <div class="flex flex-col">
                         <div class=" border rounded-md divide-y">
@@ -1120,7 +1143,7 @@
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".like-carousel").owlCarousel({
                 loop: true,
                 margin: 10,
@@ -1129,10 +1152,18 @@
                 autoplay: true,
                 autoplayTimeout: 3000,
                 responsive: {
-                    0: { items: 2 },
-                    600: { items: 2 },
-                    1000: { items: 4 },
-                    1280: { items: 4 }
+                    0: {
+                        items: 2
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 4
+                    },
+                    1280: {
+                        items: 4
+                    }
                 }
             });
         });
@@ -1156,7 +1187,7 @@
     </script> -->
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".review-carousel").owlCarousel({
                 margin: 10,
                 autoplay: true,
@@ -1168,11 +1199,21 @@
                 navText: ["‹", "›"],
                 animateOut: 'fadeOut',
                 responsive: {
-                    0: { items: 1 },     // Mobile
-                    640: { items: 1 },   // Small tablets
-                    768: { items: 2 },   // Tablets
-                    1024: { items: 2 },  // Desktops
-                    1280: { items: 2 }   // Large screens
+                    0: {
+                        items: 1
+                    }, // Mobile
+                    640: {
+                        items: 1
+                    }, // Small tablets
+                    768: {
+                        items: 2
+                    }, // Tablets
+                    1024: {
+                        items: 2
+                    }, // Desktops
+                    1280: {
+                        items: 2
+                    } // Large screens
                 }
             });
         });
@@ -1279,7 +1320,7 @@
 
         // Color selection functionality
         document.querySelectorAll('.color-option').forEach(option => {
-            option.addEventListener('click', function () {
+            option.addEventListener('click', function() {
                 // Remove ring from all options
                 document.querySelectorAll('.color-option').forEach(opt => {
                     opt.classList.remove('ring-2', 'ring-[#f25b21]', 'ring-offset-4');
@@ -1291,7 +1332,7 @@
 
         // Size selection functionality
         document.querySelectorAll('.size-option').forEach(option => {
-            option.addEventListener('click', function () {
+            option.addEventListener('click', function() {
                 // Remove selected state from all options
                 document.querySelectorAll('.size-option').forEach(opt => {
                     opt.classList.remove('border-[#f25b21]', 'bg-orange-50', 'text-[#f25b21]');
@@ -1308,7 +1349,7 @@
         const decreaseBtn = document.querySelector('button:has-text("−")');
         const increaseBtn = document.querySelector('button:has-text("+")');
 
-        document.querySelector('button').addEventListener('click', function () {
+        document.querySelector('button').addEventListener('click', function() {
             if (this.textContent === '−') {
                 const current = parseInt(quantityInput.value);
                 if (current > 1) quantityInput.value = current - 1;
@@ -1320,7 +1361,7 @@
 
         document.querySelectorAll('button').forEach(btn => {
             if (btn.textContent === '−' || btn.textContent === '+') {
-                btn.addEventListener('click', function () {
+                btn.addEventListener('click', function() {
                     const current = parseInt(quantityInput.value);
                     if (this.textContent === '−' && current > 1) {
                         quantityInput.value = current - 1;

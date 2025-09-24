@@ -1,6 +1,8 @@
 <?php
 // echo "nnndn";
 // printWithPre($_SESSION);
+// printWithPre($_POST);
+// die();
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
@@ -110,7 +112,7 @@ if (!empty($_POST)) {
                 ];
 
                 // Insert the user into the database
-                $userid = $controller->registerOnlineUser($data);
+                $userid = $this->registerOnlineUser($data);
                 if ($userid) {
                     // echo "User registered successfully!";
                     $_SESSION["success"] = "Register Successfully";
@@ -151,6 +153,25 @@ if (!empty($_POST)) {
                     // echo "Failed to register user.";
                     $_SESSION["err"] = "Can't Login";
                 }
+            } elseif ($_POST["from"] == "otp") {
+
+                $data = [
+
+                'mobile' => $_POST["mobile"],
+                ];
+                printWithPre($data);
+                // die();
+                $adduser = add($data, "online_users");
+                if ($adduser) {
+                    $_SESSION["success"] = "Register Successfully";
+                    $_SESSION["type"] = "User";
+                    $_SESSION["username"] = '';
+                    $_SESSION["userid"] = $adduser;
+                    $_SESSION["fname"] = '';
+                    $_SESSION['popup'] = 'false';
+                    header("location: /");
+                    exit();
+                }
             } else {
                 $_SESSION["err"] = "User Not Found";
             }
@@ -171,6 +192,7 @@ if (!empty($_POST)) {
     }
 }
 ?>
+
 <head>
     <script>
         ! function(f, b, e, v, n, t, s) {

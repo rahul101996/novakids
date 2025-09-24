@@ -6,13 +6,14 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
 ?>
 
-<body class="bg-gray-100">
+<body class="bg-gray-50">
 
-    <div class="flex h-screen ">
+    <div class="flex h-screen bg-gray-100">
         <?php
         include $_SERVER['DOCUMENT_ROOT'] . "/views/include/sidebar.php";
 
         $date = date('Y-m-d');
+
 
         ?>
 
@@ -21,11 +22,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
             ?>
             <div class="w-full flex items-center justify-between p-3">
-                <span class="text-xl font-semibold text-gray-800">Customers</span>
-                <div>
-                    <button class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Import</button>
-                    <button class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Export</button>
-                </div>
+                <span class="text-xl font-semibold text-gray-800">Inventory</span>
+                <!-- <a href="/admin/add-collections" class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add Collection</a> -->
             </div>
             <div class="p-3 border-b border-gray-200">
                 <div class="flex justify-between items-center">
@@ -50,23 +48,32 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 </div>
             </div>
 
-            <div class="w-full text-sm overflow-x-scroll">
+            <div class="w-full text-sm">
                 <!-- Table Header -->
-                <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,2fr)_minmax(0,3fr)_minmax(0,1fr)_minmax(0,0.5fr)_minmax(0,0.5fr)] items-center gap-4 px-4 py-2 text-gray-500">
+                <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-2 text-gray-500">
                     <span>Sr. No</span>
-                    <span>Customer Name</span>
-                    <span>E-mail</span>
-                    <span>Address</span>
-                    <span>Orders</span>
-                    <span>Amount Spent</span>
-                    <span>User from</span>
-                    <!-- <span>Status</span> -->
+                    <span>Product</span>
+                    <span>Status</span>
+                    <span>KSU</span>
+                    <span>Committed</span>
+                    <span>Available</span>
+                    <span>On Hand</span>
                 </div>
 
-                <?php foreach ($customers as $key => $customer) { ?>
-                    <a href="/admin/customer-info" class="divide-y divide-gray-200 ">
+                <?php foreach ($products as $key => $product) {
+                    $images = json_decode($product['images'], true);
+                    $variants = json_decode($product['options'], true);
+                    $variants = json_decode($variants, true);
+                    // printWithPre($variants);
+
+
+                    // printWithPre($var);
+
+                    $images = array_reverse($images);
+                ?>
+                    <div class="divide-y divide-gray-200">
                         <!-- Table Row -->
-                        <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,2fr)_minmax(0,3fr)_minmax(0,1fr)_minmax(0,0.5fr)_minmax(0,0.5fr)] items-center gap-4 px-4 py-3 hover:bg-gray-50 text-gray-800">
+                        <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-3 hover:bg-gray-50 text-gray-800">
                             <!-- Sr. No -->
                             <div class="flex items-center space-x-3">
                                 <span><?= $key + 1 ?></span>
@@ -81,53 +88,50 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 </svg>
                             </div>
 
-                            <!-- Customer Name -->
+                            <!-- Product -->
                             <div class="font-medium">
-                                <div class="flex items-center justify-start gap-5">
-                                    <?= $customer['fname'] ?> <?= $customer['lname'] ?>
+                                <div class="flex items-center justify-start gap-1">
+                                    <img src="/<?= $images[0] ?>" class="w-16 rounded" alt="">
+                                    <div class="flex flex-col gap-1">
+                                        <p class="!mb-0"><?= $product['product_name'] ?></p>
+                                        <?php
+                                        foreach ($variants as $key => $variant) {
+                                        ?>
+                                            <p class="!mb-0"><?= $key ?>: <?= $variant ?></p>
+                                        <?php } ?>
+
+                                    </div>
                                 </div>
                             </div>
 
-                            <!-- Email -->
+                            <!-- Status -->
                             <div>
-                                <span class="text-green-500 font-semibold"><?= $customer['username'] ?></span>
+
                             </div>
 
-                            <!-- Address -->
+                            <!-- Inventory -->
                             <div>
-                                <p class="text-gray-500 font-semibold">Ulhasnagar MH, India</p>
+                                <p class="text-gray-500 font-semibold"></p>
                             </div>
 
-                            <!-- Orders -->
+                            <!-- Category -->
                             <div>
-                                <p class="text-gray-500 font-semibold">0 Orders</p>
+                                <p class="text-gray-500 font-semibold">0</p>
                             </div>
 
-                            <!-- Amount Spent -->
+                            <!-- ✅ Price -->
                             <div>
-                                <p class="text-gray-500 font-semibold">₹ 0.00</p>
+                                <p class="text-gray-500 font-semibold"><?= $product['quantity'] ?></p>
                             </div>
-                            <div class="flex ">
-                            <div>
-                                <p class="text-gray-500 font-semibold"><?= $customer['user_from'] == 'otp' ? '<img class="w-8 h-8" src="/public/logos/otp.png" alt="otp">' : '<img class="w-8 h-8" src="/public/logos/google.png" alt="email">' ?></p>
-                            </div>
+
                             <!-- Action -->
-                            <div class="flex space-x-2 hidden">
-                                <?php if ($customer['is_active'] == 1) { ?>
-                                    <span class="bg-green-200 text-green-600 py-1 px-2 rounded-full text-xs">Active</span>
-                                <?php
-                                } else {
-                                ?>
-                                    <span class="bg-red-200 text-red-600 py-1 px-2 rounded-full text-xs">Inactive</span>
-                                <?php } ?>
-                            </div>
+                            <div class="flex space-x-2">
+                                <p class="text-gray-500 font-semibold"><?= $product['quantity'] ?></p>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 <?php } ?>
             </div>
-
-
 
 
 

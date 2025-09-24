@@ -7,15 +7,15 @@ class ProductController
     {
         $this->db = $db;
     }
-    
+
     public function ProductsList($id = null)
     {
         $siteName = getDBObject()->getSiteName();
         $pageTitle = "Products List";
         $pageModule = "Products List";
-        
 
-        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $products = getData("tbl_products");
             require 'views/products/products-list.php';
         }
@@ -154,5 +154,12 @@ class ProductController
                 // Optionally redirect or log error
             }
         }
+    }
+
+    public function Inventory()
+    {
+        $products = getData2("SELECT tbl_variants.* , tbl_products.name as product_name FROM `tbl_variants` LEFT JOIN tbl_products ON tbl_variants.product_id = tbl_products.id WHERE 1 ORDER BY tbl_variants.id DESC");
+        // printWithPre($products);
+        include $_SERVER['DOCUMENT_ROOT'] . "/views/products/inventory.php";
     }
 }

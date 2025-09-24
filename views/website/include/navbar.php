@@ -597,7 +597,7 @@ $categories = getData("tbl_category");
 
             <form action="" method="POST" id="otp-form">
                 <input type="text" placeholder="" name="username" class="hidden" id="username">
-                <input type="text" placeholder="" name="user_from" class="hidden" id="user_from" value="otp">
+                <input type="text" placeholder="" name="from" class="hidden" id="user_from" value="otp">
                 <div class="flex items-center border rounded-lg overflow-hidden mb-4" id="mobile-div">
                     <span class="px-3 text-gray-600">+91</span> <input type="tel" placeholder="Enter mobile number" name="mobile" id="mobile"
                         class="w-full px-3 py-2 outline-none border-l">

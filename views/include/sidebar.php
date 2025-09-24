@@ -84,7 +84,7 @@
                     Collections
                 </a>
 
-                <a href="#inventory" class="hidden px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                <a href="/admin/inventory" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     Inventory
                 </a>
                 <a href="#categories" class="hidden px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
@@ -119,7 +119,10 @@
                 <a href="/admin/packages-list" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     Add Packaging
                 </a>
-                 <a href="/admin/payment-gateway" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                <a href="/admin/coupons-list" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                    Coupon
+                </a>
+                <a href="/admin/payment-gateway" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     Payment Gateway
                 </a>
 

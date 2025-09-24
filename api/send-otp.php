@@ -28,43 +28,43 @@ if (isset($_POST["phone"])) {
 
     // printwithpre($user);
     // die();
-    if (!empty($user)) {
-        # code...
-        $otp = generateOTP();
-        $phoneNumber = strip_tags($_POST["phone"]);
-        $apikey = $fast2sms_api[1];
-        // print_r($apikey);
-        // die();
+    // if (!empty($user)) {
+    # code...
+    $otp = generateOTP();
+    $phoneNumber = strip_tags($_POST["phone"]);
+    $apikey = $fast2sms_api[1];
+    // print_r($apikey);
+    // die();
 
-        // $url = "https://www.fast2sms.com/dev/bulkV2?authorization=$apikey&route=otp&variables_values=$otp&flash=0&numbers=$phoneNumber";
-        // //  echo $url;
+    // $url = "https://www.fast2sms.com/dev/bulkV2?authorization=$apikey&route=otp&variables_values=$otp&flash=0&numbers=$phoneNumber";
+    // //  echo $url;
 
-        // $response = file_get_contents($url);
-        // // echo $url;
-        // $response = (array) json_decode($response);
-        // print_r($response);    
-        // die();
+    // $response = file_get_contents($url);
+    // // echo $url;
+    // $response = (array) json_decode($response);
+    // print_r($response);    
+    // die();
 
 
-        if (1 == 1) {
-            $data = [
-                "success" => true,
-                "message" => "Otp Sent Successfully",
-                "otp" => $otp,
-                "data" => $user,
-            ];
-        } else {
-            $data = [
-                "success" => false,
-                "message" => "Something went wrong",
-            ];
-        }
+    if (1 == 1) {
+        $data = [
+            "success" => true,
+            "message" => "Otp Sent Successfully",
+            "otp" => $otp,
+            "data" => $user,
+        ];
     } else {
         $data = [
             "success" => false,
-            "message" => "User Not Found",
+            "message" => "Something went wrong",
         ];
     }
+    // } else {
+    //     $data = [
+    //         "success" => false,
+    //         "message" => "User Not Found",
+    //     ];
+    // }
 } else {
     $data = [
         "success" => false,
