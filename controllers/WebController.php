@@ -17,7 +17,7 @@ class WebController extends LoginController
     public function getProductData()
     {
         $id = $_POST['productid'];
-        $ProductData = getData2("SELECT * FROM `tbl_products` WHERE `id` = $id")[0];
+        $ProductData = getData2("SELECT tbl_products.*, tbl_category.category as category_name FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_products.id = $id")[0];
         $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
         $ProductData['varients'] = $varients;
 
@@ -243,12 +243,46 @@ class WebController extends LoginController
     }
 
 
-    public function productDetails()
+    public function productDetails($product_name)
     {
-
+        // echo $product_name;
+        $name = str_replace('-', ' ', $product_name);
         $siteName = getDBObject()->getSiteName();
         $pageModule = "Product Page";
         $pageTitle = "Product Page";
+         $ProductData = getData2("SELECT tbl_products.*, tbl_category.category as category_name FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_products.name = '$name'")[0];
+        $id = $ProductData['id'];
+        $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
+        $ProductData['varients'] = $varients;
+        $comparePrice = floatval($ProductData['compare_price']);
+        $price = floatval($ProductData['price']);
+        $discountAmount = $comparePrice - $price;
+        $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
+
+        if (!empty($ProductData['varients'])) {
+            $images = [];
+            $options = [];
+            foreach ($ProductData['varients'] as $key => $variant) {
+                $images[] = json_decode($variant['images'], true);
+                $options[] = json_decode($variant['options'], true);
+            }
+            // printWithPre($images);
+            // printWithPre($options);
+            $opt = [];
+            $img = [];
+            foreach ($options as $key => $option) {
+                $opt[] = json_decode($option, true);
+            }
+            // printWithPre($opt);
+            $grouped = groupAttributes($opt);
+            // printWithPre($grouped);
+
+            // Take only the last image from each images set
+            $lastImages = array_map(function ($imgSet) {
+                return end($imgSet);
+            }, $images);
+        }
+        // printWithPre($ProductData);
         //  echo "hello";
         // die();
         // $this->checkSession();

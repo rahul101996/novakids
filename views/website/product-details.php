@@ -130,45 +130,27 @@
         </ol>
     </div>
 
-    <div class="w-full mx-auto max-md:mt-6">
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start w-[90vw] h-auto mx-auto relative">
-            <div class="md:h-[200vh] overflow-y-auto grid grid-cols-2 max-md:hidden gap-2">
-                <div class="bg-gray-200 overflow-hidden shadow-lg cursor-pointer">
-                    <img src="/public/images/222.avif" alt="View 1"
-                        class="w-full h-full object-cover image-hover cursor-zoom-in">
-                </div>
-                <div class="bg-gray-200 overflow-hidden shadow-lg cursor-pointer">
-                    <img src="/public/images/333.avif" alt="View 2"
-                        class="w-full h-full object-cover image-hover cursor-zoom-in">
-                </div>
-                <div class="bg-gray-200 overflow-hidden shadow-lg cursor-pointer">
-                    <img src="/public/images/444.avif" alt="View 3"
-                        class="w-full h-full object-cover image-hover cursor-zoom-in">
-                </div>
-                <div class="bg-gray-200 overflow-hidden shadow-lg cursor-pointer">
-                    <img src="/public/images/7.webp" alt="View 4"
-                        class="w-full h-full object-cover image-hover cursor-zoom-in">
-                </div>
-                <div class="bg-gray-200 overflow-hidden shadow-lg cursor-pointer">
-                    <img src="/public/images/222.avif" alt="View 1"
-                        class="w-full h-full object-cover image-hover cursor-zoom-in">
-                </div>
-                <div class="bg-gray-200 overflow-hidden shadow-lg cursor-pointer">
-                    <img src="/public/images/333.avif" alt="View 2"
-                        class="w-full h-full object-cover image-hover cursor-zoom-in">
-                </div>
-                <div class="bg-gray-200 overflow-hidden shadow-lg cursor-pointer">
-                    <img src="/public/images/444.avif" alt="View 3"
-                        class="w-full h-full object-cover image-hover cursor-zoom-in">
-                </div>
-                <div class="bg-gray-200 overflow-hidden shadow-lg cursor-pointer">
-                    <img src="/public/images/7.webp" alt="View 4"
-                        class="w-full h-full object-cover image-hover cursor-zoom-in">
+    <div class="w-full mx-auto mt-6 flex flex-col items-center justify-center">
+        <section class="flex items-start justify-center relative w-[90%] gap-5">
+
+            <div class="flex items-center justify-start max-md:hidden gap-2 w-[64%]">
+                <div class="grid grid-cols-2 gap-2 w-[96%]">
+                    <?php
+                    foreach (array_reverse($images[0]) as $key => $image) {
+
+                    ?>
+                        <div class=" overflow-hidden  cursor-pointer">
+                            <img src="/<?= $image ?>" alt="View 1"
+                                class="w-full h-full object-cover image-hover cursor-zoom-in">
+                        </div>
+                    <?php } ?>
+
                 </div>
             </div>
 
+
             <!-- Mobile Carousel -->
-            <div class="md:hidden relative">
+            <div class="md:hidden relative w-[65%]">
                 <div class="swiper">
                     <div class="swiper-wrapper">
                         <!-- Slide 1 -->
@@ -293,112 +275,75 @@
 
 
             <!-- Product Details Section -->
-            <div class="md:sticky top-32 self-start space-y-4">
+            <div class="md:sticky top-32 self-start space-y-4 w-[35%]">
                 <div class="flex flex-col">
-                    <div class="flex items-center mb-2">
-                        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">BLACK EVERYDAY JOGGERS</h1>
-                        <div class="flex space-x-3 hidden">
-                            <button
-                                class="p-3 rounded-full glass-effect hover:bg-white hover:shadow-lg transition-all duration-300 group">
-                                <svg class="w-6 h-6 text-gray-600 group-hover:text-red-500 group-hover:scale-110 transition-all"
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
-                            </button>
-                            <button
-                                class="p-3 rounded-full glass-effect hover:bg-white hover:shadow-lg transition-all duration-300 group">
-                                <svg class="w-6 h-6 text-gray-600 group-hover:text-[#f25b21] group-hover:scale-110 transition-all"
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
-                                </svg>
-                            </button>
+                    <div class="flex flex-col items-start justify-center mb-2">
+                        <h2 class="w-full text-[1.7rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
+                        <div class="flex items-center justify-center gap-3 mt-4">
+                            <span class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
+                            <span class="text-[#f25b21] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
+                            <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
+
+                        </div>
+                        <p class="text-sm text-gray-900 mt-2">Upgrade your casual wardrobe with our black sporty deconstructed loose pants. These stylish pants feature a relaxed fit and a deconstructed design for a modern and edgy look</p>
+                        <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated at checkout</p>
+
+
+                    </div>
+
+                    <!-- Size Selection -->
+                    <div class="flex flex-col mt-5">
+
+                        <div class="flex flex-wrap">
+                            <?php
+                            foreach ($grouped as $key => $value) {
+                                $key = strtolower(str_replace(' ', '', $key));
+                                // echo $key;
+                                if ($key == 'size') {
+
+                            ?>
+                                    <div class="w-full flex items-center justify-between text-sm">
+
+                                        <p class="uppercase"><?= $key ?> : <?= $value[0] ?></p>
+                                        <p class="flex text-xs gap-1 cursor-pointer text-white bg-gray-800 py-1 px-3" onclick="document.getElementById('sizeChartModal').classList.remove('hidden')">
+                                            <i class="fa-solid fa-ruler pr-1"></i> Sizing guide
+                                        </p>
+                                    </div>
+                                    <div class="w-full flex items-center justify-start mt-3 text-sm">
+                                        <?php
+                                        $diffcolor = [];
+                                        foreach ($value as $key1 => $value1) {
+                                            // $diffcolor = $finalData['images'][$key1];
+                                        ?>
+                                            <div class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> flex items-center justify-center h-10 w-20" size_value="<?= $value1 ?>" size_name="<?= $key ?>"><?= $value1 ?></div>
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
+                                <?php
+                                } elseif ($key == 'color') {
+                                ?><p class="uppercase text-sm mt-5"><?= $key ?> : <?= $value[0] ?></p>
+                                    <div class="w-full flex items-center justify-start mt-3 text-sm gap-2">
+
+                                        <?php
+                                        foreach ($lastImages as $key3 => $image) {
+                                            if ($key3 > 3) {
+                                                break; // stop after 4 images
+                                            }
+                                        ?>
+                                            <img src="/<?= $image ?>" class="h-[95px]" alt="">
+                                        <?php } ?>
+
+                                    </div>
+                            <?php
+                                }
+                            } ?>
                         </div>
                     </div>
 
-                    <!-- Pricing -->
-                    <div class="flex items-center justify-between w-full space-x-4 mb-3">
-                        <div class="">
-                            <span class="text-sm text-gray-500 line-through">₹1,899.00</span>
-                            <span class="text-xl font-bold text-[#f25b21] mr-2">₹1,199.00</span>
+                    <!-- Color Selection -->
 
-                            <span
-                                class="bg-orange-100 text-[#f25b21] text-xs font-semibold px-3 py-1 rounded-full animate-bounce-gentle">34%
-                                OFF</span>
-                        </div>
-                        <div>
-                            <span
-                                class="bg-gray-100 text-black border text-xs font-semibold px-3 py-1 rounded-full animate-bounce-gentle">Limited Stock</span>
-                        </div>
-                    </div>
-
-                    <p class="text-gray-600">Roomier than your usual hoodie, this one gives you comfort,
-                        layering options, and a streetwear vibe all at once. Style Tip: Contrast with fitted bottoms
-                        like jeans or joggers to avoid a boxy look.
-                    </p>
-                </div>
-
-                <!-- Size Selection -->
-                <div class="flex flex-col">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="text-base font-semibold text-gray-900">Size:</h3>
-                        <button onclick="document.getElementById('sizeChartModal').classList.remove('hidden')"
-                            class="text-base flex items-center text-blue-600 hover:text-blue-800 underline transition-colors">
-                            <i class="fa-solid fa-ruler pr-1"></i>Sizing guide</button>
-                    </div>
-
-                    <div class="flex flex-wrap">
-                        <button
-                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-[#f25b21] bg-orange-50 text-[#f25b21] font-semibold transition-all duration-300 hover:shadow-lg">
-                            8-9 Years</button>
-                        <button
-                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
-                            9-10 Years</button>
-                        <button
-                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
-                            10-11 Years</button>
-                        <button
-                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
-                            11-12 Years</button>
-                        <button
-                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
-                            12-13 Years</button>
-                        
-                        <!-- <button
-                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
-                            17-18 Years</button>
-                        <button
-                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
-                            18-19 Years</button> -->
-                    </div>
-                </div>
-
-                <!-- Color Selection -->
-                <div class="flex flex-col">
-                    <h3 class="text-base font-semibold text-gray-900 mb-2">Color:</h3>
-
-                    <div class="flex flex-wrap gap-4">
-                        <!-- Color Options Row 1 -->
-                        <div class="color-option w-8 h-8 cursor-pointer transition-all duration-200 overflow-hidden">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%236366f1'/%3E%3C/svg%3E"
-                                alt="Blue" class="w-full h-full object-cover">
-                        </div>
-                        <div class="color-option w-8 h-8 cursor-pointer transition-all duration-200 overflow-hidden">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2310b981'/%3E%3C/svg%3E"
-                                alt="Green" class="w-full h-full object-cover">
-                        </div>
-                        <div class="color-option w-8 h-8 cursor-pointer transition-all duration-200 overflow-hidden">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23e5e7eb'/%3E%3C/svg%3E"
-                                alt="Gray" class="w-full h-full object-cover">
-                        </div>
-                        <div class="color-option w-8 h-8 cursor-pointer transition-all duration-200 overflow-hidden">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23312e81'/%3E%3C/svg%3E"
-                                alt="Navy" class="w-full h-full object-cover">
-                        </div>
-                    </div>
-                </div>
-<div class="w-[75%]  bg-gray-50 rounded-lg p-4 shadow-sm">
+                    <div class="w-full mt-7  bg-gray-50 rounded-lg p-4 shadow-sm">
                         <!-- Title -->
                         <h3 class="font-semibold text-gray-800 mb-3">Check Delivery</h3>
 
@@ -408,8 +353,7 @@
                                 type="text"
                                 value=""
                                 placeholder="Enter Pincode"
-                                class="flex-1 bg-transparent outline-none text-gray-700"
-                                 />
+                                class="flex-1 bg-transparent outline-none text-gray-700" />
                             <button class="bg-black text-white text-sm font-semibold px-3 py-1 rounded-md hover:bg-gray-800">
                                 Change
                             </button>
@@ -421,32 +365,31 @@
                             <span class="text-green-600 font-semibold">Free delivery</span> | By <span class="font-semibold">Friday, 26 Sept</span>
                         </p>
                     </div>
-                <!-- Quantity and Add to Cart -->
-                <div class="space-y-4">
-                    <div class="w-full flex items-center justify-center space-x-4">
-                        <div class="flex items-center justify-between border border-gray-300 rounded-md overflow-hidden max-md:order-1 w-[30%]">
-                            <button class="px-4 py-1.5 hover:bg-gray-100 transition-colors text-xl font-bold">−</button>
-                            <input type="number" value="1" min="1"
-                                class="w-16 py-1.5 text-center border-l border-r border-gray-300 focus:outline-none">
-                            <button class="px-4 py-1.5 hover:bg-gray-100 transition-colors text-xl font-bold">+</button>
-                        </div>
+                    <!-- Quantity and Add to Cart -->
+                    <div class="space-y-4 mt-7">
+                        <div class="w-full flex items-center justify-center space-x-4">
+                            <div class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg">
+                                <span class="cursor-pointer ">-</span>
+                                <span class="text-black">1</span>
+                                <span class="cursor-pointer ">+</span>
+                            </div>
 
-                        <div class="col-span-2 max-md:order-3 w-[70%]">
-                            <button
-                                class="openCartBtn w-full sm:flex-1 relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
-                                <span
-                                    class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
-                                    <i class="fas fa-cart-plus"></i> Add to Cart
-                                </span>
-                                <span
-                                    class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
-                                </span>
-                            </button>
-                        </div>
+                            <div class="col-span-2 max-md:order-3 w-[70%]">
+                                <button
+                                    class="openCartBtn w-full sm:flex-1 relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black">
+                                    <span
+                                        class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
+                                        <i class="fas fa-cart-plus"></i> Add to Cart
+                                    </span>
+                                    <span
+                                        class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
+                                    </span>
+                                </button>
+                            </div>
 
 
-                        <div class="flex space-x-3 max-md:order-2">
-                            <!-- <button
+                            <div class="flex space-x-3 max-md:order-2">
+                                <!-- <button
                                 class="h-12 w-12 flex items-center justify-center rounded-md border hover:bg-white hover:shadow-lg transition-all duration-300 group">
                                 <svg class="w-6 h-6 text-gray-600 group-hover:text-red-500 group-hover:scale-110 transition-all"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -454,7 +397,7 @@
                                         d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                 </svg>
                             </button> -->
-                            <!-- <button
+                                <!-- <button
                                 class="h-12 w-12 flex items-center justify-center rounded-md border hover:bg-white hover:shadow-lg transition-all duration-300 group">
                                 <svg class="w-6 h-6 text-gray-600 group-hover:text-[#f25b21] group-hover:scale-110 transition-all"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -462,121 +405,119 @@
                                         d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
                                 </svg>
                             </button> -->
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="flex w-full items-center justify-start gap-4">
-                        <button
-                            class="openCartBtn w-full  relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-[#f15b21] bg-[#f15b21] text-white">
-                            <span
-                                class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-[#f15b21]">
-                                <i class=""></i> Buy Now
-                            </span>
-                            <span
-                                class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
-                            </span>
-                        </button>
-                        <button
-                            class="relative hidden rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
+                        <div class="flex w-full items-center justify-start gap-4">
+                            <button
+                                class="openCartBtn w-full py-1 relative rounded-lg overflow-hidden group transform  hover:shadow-xl border border-[#f15b21] bg-[#f15b21] text-white">
+                                <span
+                                    class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-[#f15b21]">
+                                    <i class=""></i> Buy Now
+                                </span>
+                                <span
+                                    class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
+                                </span>
+                            </button>
+                            <button
+                                class="relative hidden rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
                                         transition-all duration-500 hover:border-purple-500 hover:text-purple-600 hover:shadow-lg">
-                            <i class="fas fa-heart"></i> WISHLIST
-                        </button>
-                    </div>
-                    
-
-                    <div class="flex flex-col">
-                        <div class=" border rounded-md divide-y">
-
-                            <!-- Item 1 -->
-                            <div class="accordion p-4">
-                                <button class="flex justify-between items-center w-full font-semibold text-left">
-                                    <span>Description</span>
-                                    <i class="fa-solid fa-chevron-down chev"></i>
-                                </button>
-                                <div class="accordion-content">
-                                    <div class="pt-2 text-gray-600">
-                                        Roomier than your usual hoodie, this one gives you comfort, layering options,
-                                        and a streetwear vibe all at once. Style Tip: Contrast with fitted bottoms like
-                                        jeans or joggers to avoid a boxy look.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Item 2 -->
-                            <div class="accordion p-4">
-                                <button class="flex justify-between items-center w-full font-semibold text-left">
-                                    <span>Additional Information</span>
-                                    <i class="fa-solid fa-chevron-down chev"></i>
-                                </button>
-                                <div class="accordion-content">
-                                    <div class="pt-2 text-gray-600">
-                                        Extra specifications and details go here. The panel closes smoothly too.
-                                    </div>
-                                </div>
-                            </div>
-
+                                <i class="fas fa-heart"></i> WISHLIST
+                            </button>
                         </div>
 
-                        <!-- Delivery & Return Info -->
-                        <div class="mt-6 space-y-3 text-gray-700">
-                            <!-- <button id="openDeliveryModal" class="cursor-pointer flex items-center gap-2">
+
+                        <div class="flex flex-col">
+                            <div class=" border rounded-md divide-y">
+
+                                <!-- Item 1 -->
+                                <div class="accordion p-4">
+                                    <button class="flex justify-between items-center w-full font-semibold text-left">
+                                        <span>Description</span>
+                                        <i class="fa-solid fa-chevron-down chev"></i>
+                                    </button>
+                                    <div class="accordion-content">
+                                        <div class="pt-2 text-gray-600">
+                                           <?= $ProductData['description'] ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Item 2 -->
+                                <div class="accordion p-4">
+                                    <button class="flex justify-between items-center w-full font-semibold text-left">
+                                        <span>Additional Information</span>
+                                        <i class="fa-solid fa-chevron-down chev"></i>
+                                    </button>
+                                    <div class="accordion-content">
+                                        <div class="pt-2 text-gray-600">
+                                            Extra specifications and details go here. The panel closes smoothly too.
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Delivery & Return Info -->
+                            <div class="mt-6 space-y-3 text-gray-700">
+                                <!-- <button id="openDeliveryModal" class="cursor-pointer flex items-center gap-2">
                                 <i class="fa-solid fa-truck-fast text-gray-900"></i>
                                 <span class="font-semibold">Delivery & Return</span>
                             </button> -->
-                            <p>
-                                <i class="fas fa-tags mr-2 text-gray-900"></i>
-                                <span class="font-semibold">Categories:</span> Joggers
-                            </p>
-                            <p>
-                                <i class="fa-regular fa-calendar-days mr-3 text-gray-900"></i><span
-                                    class="font-semibold">Estimated Delivery:</span> Sep 13 - Sep 17
-                            </p>
-                            <p>
-                                <i class="fa-regular fa-eye mr-1 text-gray-900"></i>
-                                <span id="viewerCount" class="font-semibold"></span> people are viewing this right now
-                            </p>
+                                <p>
+                                    <i class="fas fa-tags mr-2 text-gray-900"></i>
+                                    <span class="font-semibold">Categories:</span> <?= $ProductData['category_name'] ?>
+                                </p>
+                                <p>
+                                    <i class="fa-regular fa-calendar-days mr-3 text-gray-900"></i><span
+                                        class="font-semibold">Estimated Delivery:</span> Sep 13 - Sep 17
+                                </p>
+                                <p>
+                                    <i class="fa-regular fa-eye mr-1 text-gray-900"></i>
+                                    <span id="viewerCount" class="font-semibold"></span> people are viewing this right now
+                                </p>
 
-                            <script>
-                                const viewerEl = document.getElementById("viewerCount");
+                                <script>
+                                    const viewerEl = document.getElementById("viewerCount");
 
-                                // start with 52
-                                let currentCount = 52;
-                                viewerEl.textContent = currentCount;
-
-                                function updateViewerCount() {
-                                    // random between 50–80
-                                    currentCount = Math.floor(Math.random() * (80 - 50 + 1)) + 50;
+                                    // start with 52
+                                    let currentCount = 52;
                                     viewerEl.textContent = currentCount;
-                                }
 
-                                // update every 5–6 seconds
-                                setInterval(updateViewerCount, Math.floor(Math.random() * 1000) + 5000);
-                            </script>
+                                    function updateViewerCount() {
+                                        // random between 50–80
+                                        currentCount = Math.floor(Math.random() * (80 - 50 + 1)) + 50;
+                                        viewerEl.textContent = currentCount;
+                                    }
+
+                                    // update every 5–6 seconds
+                                    setInterval(updateViewerCount, Math.floor(Math.random() * 1000) + 5000);
+                                </script>
 
 
-                        </div>
+                            </div>
 
-                        <!-- Share -->
-                        <div class="mt-4 hidden">
-                            <p class="font-semibold text-gray-700">SHARE:</p>
-                            <div class="flex space-x-4 mt-2 text-lg">
-                                <a href="#" class="text-blue-600 hover:scale-110 transition"><i
-                                        class="fab fa-facebook"></i></a>
-                                <a href="#" class="text-sky-400 hover:scale-110 transition"><i
-                                        class="fab fa-twitter"></i></a>
-                                <a href="#" class="text-red-600 hover:scale-110 transition"><i
-                                        class="fab fa-pinterest"></i></a>
-                                <a href="#" class="text-blue-700 hover:scale-110 transition"><i
-                                        class="fab fa-linkedin"></i></a>
-                                <a href="#" class="text-green-500 hover:scale-110 transition"><i
-                                        class="fab fa-whatsapp"></i></a>
-                                <a href="#" class="text-pink-600 hover:scale-110 transition"><i
-                                        class="fab fa-instagram"></i></a>
+                            <!-- Share -->
+                            <div class="mt-4 hidden">
+                                <p class="font-semibold text-gray-700">SHARE:</p>
+                                <div class="flex space-x-4 mt-2 text-lg">
+                                    <a href="#" class="text-blue-600 hover:scale-110 transition"><i
+                                            class="fab fa-facebook"></i></a>
+                                    <a href="#" class="text-sky-400 hover:scale-110 transition"><i
+                                            class="fab fa-twitter"></i></a>
+                                    <a href="#" class="text-red-600 hover:scale-110 transition"><i
+                                            class="fab fa-pinterest"></i></a>
+                                    <a href="#" class="text-blue-700 hover:scale-110 transition"><i
+                                            class="fab fa-linkedin"></i></a>
+                                    <a href="#" class="text-green-500 hover:scale-110 transition"><i
+                                            class="fab fa-whatsapp"></i></a>
+                                    <a href="#" class="text-pink-600 hover:scale-110 transition"><i
+                                            class="fab fa-instagram"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
 
         <section class="w-[90vw] mx-auto md:mt-10 py-10  gap-10">
@@ -927,7 +868,7 @@
     </div>
 
     <!-- Size Modal -->
-   
+
 
     <!-- Delivery Modal -->
     <div id="deliveryModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">

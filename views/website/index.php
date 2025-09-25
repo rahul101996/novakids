@@ -132,9 +132,11 @@
                         $discountAmount = $comparePrice - $price;
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
+                        $name = str_replace(' ', '-', $product['name']);
+
                         // printWithPre($images);
                     ?>
-                        <a href="products/product-details" class="block">
+                        <a href="products/product-details/<?= $name ?>" class="block">
                             <div
                                 class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
