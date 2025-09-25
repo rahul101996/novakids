@@ -116,7 +116,7 @@ class WebController extends LoginController
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
                                 ?>
-                                    <div class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> flex items-center justify-center h-10 w-20" size_value="<?= $value1 ?>" size_name="<?= $key ?>"><?= $value1 ?></div>
+                                    <div class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300 optionDivs"  ?> flex items-center justify-center h-10 w-20" size_value="<?= $value1 ?>" size_name="<?= $key ?>"><?= $value1 ?></div>
                                 <?php
                                 }
                                 ?>

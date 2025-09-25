@@ -512,7 +512,7 @@
                     if (response.data.variants.length > 0) {
 
                         showVarientsSidebar(response.data.html);
-
+                        
                         // console.log('hello');
 
 

@@ -718,7 +718,7 @@
                     </span>
                     <!-- Animated BG -->
                     <span
-                        class="absolute inset-0 bg-black transition-transform duration-700 origin-left scale-x-0 group-hover:scale-x-100"></span>
+                        class="absolute inset-0 bg-black transition-transform duration-[1.2s] origin-left scale-x-0 group-hover:scale-x-100"></span>
                 </button>
 
                 <!-- Social icons -->

@@ -277,18 +277,22 @@
             <!-- Product Details Section -->
             <div class="md:sticky top-32 self-start space-y-4 w-[35%]">
                 <div class="flex flex-col">
-                    <div class="flex flex-col items-start justify-center mb-2">
-                        <h2 class="w-full text-[1.7rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
-                        <div class="flex items-center justify-center gap-3 mt-4">
-                            <span class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
-                            <span class="text-[#f25b21] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
-                            <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
+                    <div class="gap-3 w-full flex items-start justify-center">
+                        <div class="flex flex-col items-start justify-center mb-2">
+                            <h2 class="w-full text-[1.7rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
+                            <div class="flex items-center justify-center gap-3 mt-4">
+                                <span class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
+                                <span class="text-[#f25b21] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
+                                <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
+
+                            </div>
+                            <p class="text-sm text-gray-900 mt-2">Upgrade your casual wardrobe with our black sporty deconstructed loose pants. These stylish pants feature a relaxed fit and a deconstructed design for a modern and edgy look</p>
+                            <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated at checkout</p>
+
 
                         </div>
-                        <p class="text-sm text-gray-900 mt-2">Upgrade your casual wardrobe with our black sporty deconstructed loose pants. These stylish pants feature a relaxed fit and a deconstructed design for a modern and edgy look</p>
-                        <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated at checkout</p>
-
-
+                        <img src="/public/icons/heart.png" class="h-7 cursor-pointer" alt="">
+                        <img src="/public/icons/share.png" class="h-7 cursor-pointer" alt="">
                     </div>
 
                     <!-- Size Selection -->
@@ -340,7 +344,36 @@
                             } ?>
                         </div>
                     </div>
+                    <div class="w-full flex items-center justify-start mt-3 text-sm relative">
+                        <p class="text-semibold">Variant not available ?</p> &ensp;<span class="text-[#f25b21] cursor-pointer underline" onclick="NotifyMe()">NOTIFY ME</span>
+                        <div class="hidden absolute border border-gray-300 top-[107%] flex flex-col items-start justify-center bg-white w-[25vw] z-50" id="NotifyMe">
+                            <div class="w-full flex items-center justify-start px-4 py-6 flex-col bg-orange-50 ">
+                                <div class="w-full flex items-center justify-between">
+                                    <p>Please select your size</p>
+                                    <i class="fa-solid fa-x cursor-pointer" onclick="document.getElementById('NotifyMe').classList.add('hidden')"></i>
+                                </div>
+                                <div class="w-full flex items-center justify-start">
+                                    <div class="w-full flex items-center justify-start mt-3 text-sm">
+                                        <div class="border border-gray-500 flex items-center justify-center h-10 w-20" size_value="8-9 Years" size_name="size">8-9 Years</div>
+                                        <div class="border border-gray-500 flex items-center justify-center h-10 w-20" size_value="9-10 Years" size_name="size">9-10 Years</div>
 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-col items-start px-4 justify-start py-5 gap-3">
+                                <p>Get notified once the product is back in stock.
+                                </p>
+                                <div class="w-full flex items-center justify-start text-sm gap-3">
+                                    <input type="text" placeholder="Enter your email" class="w-[70%] border border-gray-500 py-2 px-3"> <button class="bg-black text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-gray-800 text-no-wrap">Notify Me</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        function NotifyMe() {
+                            document.getElementById('NotifyMe').classList.remove('hidden')
+                        }
+                    </script>
                     <!-- Color Selection -->
 
                     <div class="w-full mt-7  bg-gray-50 rounded-lg p-4 shadow-sm">
@@ -382,7 +415,7 @@
                                         <i class="fas fa-cart-plus"></i> Add to Cart
                                     </span>
                                     <span
-                                        class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
+                                        class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
                                     </span>
                                 </button>
                             </div>
@@ -416,7 +449,7 @@
                                     <i class=""></i> Buy Now
                                 </span>
                                 <span
-                                    class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
+                                    class="absolute inset-0 bg-white -translate-x-full ease-in-out group-hover:translate-x-0 transition-transform duration-[1.4s]  z-0">
                                 </span>
                             </button>
                             <button
@@ -438,7 +471,7 @@
                                     </button>
                                     <div class="accordion-content">
                                         <div class="pt-2 text-gray-600">
-                                           <?= $ProductData['description'] ?>
+                                            <?= $ProductData['description'] ?>
                                         </div>
                                     </div>
                                 </div>
