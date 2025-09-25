@@ -100,7 +100,7 @@ class WebController extends LoginController
                             <div class="w-full flex items-center justify-between mt-7 text-sm">
 
                                 <p class="uppercase"><?= $key ?> : <?= $value[0] ?></p>
-                                <p class="flex gap-1 cursor-pointer">
+                                <p class="flex gap-1 cursor-pointer" onclick="document.getElementById('sizeChartModal').classList.remove('hidden')">
                                     <svg class="icon icon-accordion color-foreground-" aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20">
                                         <path d="M18.9836 5.32852L14.6715 1.01638L1.01638 14.6715L5.32852 18.9836L18.9836 5.32852ZM15.3902 0.297691C14.9933 -0.0992303 14.3497 -0.0992303 13.9528 0.297691L0.297691 13.9528C-0.0992301 14.3497 -0.0992305 14.9932 0.297691 15.3902L4.60983 19.7023C5.00675 20.0992 5.65029 20.0992 6.04721 19.7023L19.7023 6.04721C20.0992 5.65029 20.0992 5.00675 19.7023 4.60983L15.3902 0.297691Z" fill-rule="evenodd"></path>
                                         <path d="M11.7863 2.67056C11.9848 2.4721 12.3065 2.4721 12.505 2.67056L14.4237 4.58927C14.6222 4.78774 14.6222 5.1095 14.4237 5.30796C14.2252 5.50642 13.9035 5.50642 13.705 5.30796L11.7863 3.38925C11.5878 3.19079 11.5878 2.86902 11.7863 2.67056Z"></path>
@@ -116,7 +116,7 @@ class WebController extends LoginController
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
                                 ?>
-                                    <div class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> flex items-center justify-center h-12 w-12" size_value="<?= $value1 ?>" size_name="<?= $key ?>"><?= $value1 ?></div>
+                                    <div class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> flex items-center justify-center h-10 w-20" size_value="<?= $value1 ?>" size_name="<?= $key ?>"><?= $value1 ?></div>
                                 <?php
                                 }
                                 ?>
@@ -130,11 +130,11 @@ class WebController extends LoginController
                             <span class="text-black">1</span>
                             <span class="cursor-pointer ">+</span>
                         </div>
-                        <div class="w-[80%] border border-gray-800 p-3 px-3 rounded-lg text-center cursor-pointer font-semibold text-base">
+                        <div class="w-[80%] border border-gray-800 p-3 px-3 rounded-lg text-center cursor-pointer font-semibold text-base" onclick="openCart()">
                             ADD TO CART
                         </div>
                     </div>
-                    <div class="w-full items-center justify-center text-white text-center mt-3 bg-gray-900 p-3 px-3 rounded-lg cursor-pointer">
+                    <div class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">
                         BUY IT NOW
                     </div>
 
@@ -197,11 +197,10 @@ class WebController extends LoginController
         // printWithPre($collection);
 
 
-// echo $_SERVER['REQUEST_METHOD'];
-// printWithPre($_POST);
+        // echo $_SERVER['REQUEST_METHOD'];
+        // printWithPre($_POST);
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             require 'views/website/index.php';
-
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             require 'views/website/index.php';
@@ -243,7 +242,7 @@ class WebController extends LoginController
         }
     }
 
-    
+
     public function productDetails()
     {
 

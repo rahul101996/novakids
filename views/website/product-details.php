@@ -423,15 +423,15 @@
                     </div>
                 <!-- Quantity and Add to Cart -->
                 <div class="space-y-4">
-                    <div class="grid grid-cols-4 max-md:grid-cols-2 max-md:gap-4 sm:items-center sm:space-x-6 w-full">
-                        <div class="flex items-center border border-gray-300 rounded-md overflow-hidden max-md:order-1">
+                    <div class="w-full flex items-center justify-center space-x-4">
+                        <div class="flex items-center justify-between border border-gray-300 rounded-md overflow-hidden max-md:order-1 w-[30%]">
                             <button class="px-4 py-1.5 hover:bg-gray-100 transition-colors text-xl font-bold">−</button>
                             <input type="number" value="1" min="1"
                                 class="w-16 py-1.5 text-center border-l border-r border-gray-300 focus:outline-none">
                             <button class="px-4 py-1.5 hover:bg-gray-100 transition-colors text-xl font-bold">+</button>
                         </div>
 
-                        <div class="col-span-2 max-md:order-3">
+                        <div class="col-span-2 max-md:order-3 w-[70%]">
                             <button
                                 class="openCartBtn w-full sm:flex-1 relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
                                 <span
@@ -467,7 +467,7 @@
 
                     <div class="flex w-full items-center justify-start gap-4">
                         <button
-                            class="openCartBtn w-[75%]  relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-[#f15b21] bg-[#f15b21] text-white">
+                            class="openCartBtn w-full  relative rounded-lg overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-[#f15b21] bg-[#f15b21] text-white">
                             <span
                                 class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-[#f15b21]">
                                 <i class=""></i> Buy Now
@@ -927,119 +927,7 @@
     </div>
 
     <!-- Size Modal -->
-    <div id="sizeChartModal" class="hidden fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-        <div class="bg-white shadow-lg w-[65%] max-md:w-[90%] max-h-[80vh] relative flex flex-col animate-slideDown">
-            <!-- Close button -->
-            <button onclick="document.getElementById('sizeChartModal').classList.add('hidden')"
-                class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 animate-rotate-pingpong">
-                <i class="fa-solid fa-xmark text-2xl"></i>
-            </button>
-
-            <!-- Header -->
-            <div class="p-6 pb-2 flex-shrink-0">
-                <h2 class="text-2xl max-md:text-lg font-bold mb-1">SIZE CHART</h2>
-                <p class="text-sm text-gray-500">Reviews: Fits true to size</p>
-            </div>
-
-            <!-- Scrollable body -->
-            <div class="p-6 pt-0 overflow-y-auto flex-1">
-                <!-- Measuring unit toggle (hidden for now) -->
-                <div class="flex items-center gap-2 mb-6">
-                    <span class="text-gray-700 font-medium">Measuring Unit :</span>
-                    <span>Inches</span>
-                </div>
-
-                <!-- Table -->
-                <div class="overflow-x-auto">
-                    <table class="w-full border-collapse text-center text-gray-700">
-                        <thead>
-                            <tr class="bg-gray-100">
-                                <th class="p-3">Size</th>
-                                <th class="p-3">Chest</th>
-                                <th class="p-3">Length</th>
-                                <th class="p-3">Sleeve</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-t">
-                                <td class="p-3">S</td>
-                                <td class="p-3">36</td>
-                                <td class="p-3">27</td>
-                                <td class="p-3">8</td>
-                            </tr>
-                            <tr class="border-t bg-gray-50">
-                                <td class="p-3">M</td>
-                                <td class="p-3">38</td>
-                                <td class="p-3">28</td>
-                                <td class="p-3">8.5</td>
-                            </tr>
-                            <tr class="border-t">
-                                <td class="p-3">L</td>
-                                <td class="p-3">40</td>
-                                <td class="p-3">29</td>
-                                <td class="p-3">9</td>
-                            </tr>
-                            <tr class="border-t bg-gray-50">
-                                <td class="p-3">XL</td>
-                                <td class="p-3">42</td>
-                                <td class="p-3">30</td>
-                                <td class="p-3">9.5</td>
-                            </tr>
-                            <tr class="border-t">
-                                <td class="p-3">2XL</td>
-                                <td class="p-3">44</td>
-                                <td class="p-3">31</td>
-                                <td class="p-3">10</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- How to Measure Section -->
-                <div class="mt-8 border-t pt-6 flex flex-col md:flex-row items-center">
-                    <!-- Text -->
-                    <div class="w-full md:w-[60%]">
-                        <h3 class="text-lg font-bold mb-4">HOW TO MEASURE?</h3>
-                        <p class="mb-2"><span class="font-bold">CHEST</span> -
-                            <span class="text-gray-600">Measure from the stitches below the armpits on one side to
-                                another.</span>
-                        </p>
-                        <p><span class="font-bold">LENGTH</span> -
-                            <span class="text-gray-600">Measure from where the shoulder seam meets the collar to the
-                                hem.</span>
-                        </p>
-                        <p class="mb-2">
-                            <span class="font-bold">SHOULDER</span> -
-                            <span class="text-gray-600">Measure straight across the back, from one shoulder seam to the
-                                other.</span>
-                        </p>
-
-                        <p class="mb-2">
-                            <span class="font-bold">HALF SLEEVE</span> -
-                            <span class="text-gray-600">Measure from the top of the shoulder seam to the end of the
-                                short
-                                sleeve.</span>
-                        </p>
-
-                        <p class="mb-2">
-                            <span class="font-bold">3/4 SLEEVE</span> -
-                            <span class="text-gray-600">Measure from the top of the shoulder seam to a point between the
-                                elbow and wrist (mid-forearm).</span>
-                        </p>
-
-                        <p>
-                            <span class="font-bold">FULL SLEEVE</span> -
-                            <span class="text-gray-600">Measure from the shoulder seam down to the wrist.</span>
-                        </p>
-                    </div>
-                    <!-- Image -->
-                    <div class="w-full md:w-[40%] flex justify-center">
-                        <img src="/public/images/shirt-size.jpg" alt="How to measure T-shirt" class="h-72 max-md:h-64">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+   
 
     <!-- Delivery Modal -->
     <div id="deliveryModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">

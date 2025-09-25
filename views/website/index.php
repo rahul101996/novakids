@@ -177,7 +177,7 @@
                                         <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?>.00</p>
                                     </div>
                                     <!-- reviews -->
-                                    <div class="flex items-center justify-start space-x-1 ">
+                                    <div class="flex items-center justify-start space-x-1 hidden">
                                         <span class="text-yellow-500">★★★★★</span>
                                     </div>
                                 </div>

@@ -132,8 +132,11 @@
             <!-- Brand Section -->
             <div class="lg:col-span-2">
                 <div class="mb-6">
-
-                    <img src="/public/logos/nova.png" alt="Brand Logo" class="w-auto h-20 rounded-md object-cover mb-4">
+                    <div class="flex items-center gap-2">
+                        <img src="/public/logos/nova_favicon.png" alt="Brand Logo" class="w-auto h-14 rounded-md object-cover mb-4">
+                        <img src="/public/logos/nova_logo-brnd-name.png" alt="Brand Logo" class="w-auto h-14 rounded-md object-cover mb-4">
+                    </div>
+                    
 
                     <p class="text-gray-600 max-w-sm  leading-relaxed">
                         Authentic streetwear for the next generation. Quality pieces that speak your language and

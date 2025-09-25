@@ -236,19 +236,13 @@ $categories = getData("tbl_category");
                 </div>
             </div>
         </li>
-
-        <div class="flex items-center space-x-7 ml-8 max-md:hidden">
-            <?php
-            foreach ($categories as $key => $value) {
-            ?>
-                <div class="relative group">
-                    <a href="/shop" class="text-gray-800  group duration-300 cursor-pointer"><?= $value['category'] ?>
-                        <span class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
-                        <span class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
-                    </a>
-                </div>
-            <?php } ?>
+        <div class="flex items-center space-x-7 ml-8">
+            <a href="/" class="block">
+                <img src="/public/logos/brand-name.png" alt="Logo" class="h-10 max-md:hidden">
+                <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
+            </a>
         </div>
+
 
         <!-- Mobile Menu Toggle Button -->
         <div class="md:hidden flex items-center">
@@ -269,11 +263,17 @@ $categories = getData("tbl_category");
             </button>
         </div>
 
-        <div class="flex items-center absolute left-1/2 transform -translate-x-1/2">
-            <a href="/" class="block">
-                <img src="/public/logos/nova_logo-brnd-name.png" alt="Logo" class="h-12 max-md:hidden">
-                <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
-            </a>
+        <div class="flex items-center absolute left-1/2 transform -translate-x-1/2 space-x-7 max-md:hidden">
+            <?php
+            foreach ($categories as $key => $value) {
+            ?>
+                <div class="relative group">
+                    <a href="/shop" class="text-gray-800  group duration-300 cursor-pointer"><?= $value['category'] ?>
+                        <span class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                        <span class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                    </a>
+                </div>
+            <?php } ?>
         </div>
 
         <div class="flex md:gap-1 items-center ml-auto md:pr-12 max-md:pr-1 py-1.5">
@@ -649,7 +649,7 @@ $categories = getData("tbl_category");
 
 
                     <!-- Banner with links -->
-                    
+
                 </div>
                 <!-- <div class="flex items-center mb-6">
                     <input type="checkbox" id="offers" class="mr-2 rounded border-gray-400 text-black focus:ring-black">
@@ -753,14 +753,15 @@ $categories = getData("tbl_category");
 </div>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-
+<!-- 
 <script>
     google.accounts.id.initialize({
         client_id: "188574937788-fn4td4evj5cqejhrgge28pf8129sa58q.apps.googleusercontent.com",
         callback: handleCredentialResponse,
         use_fedcm_for_prompt: false // 👈 fallback if FedCM is blocked
     });
-
+</script> -->
+<script>
     const messages = [
         ' Nova Kids – Style That Moves!',
         ' Free Delivery on Orders Over Rs.2000',
@@ -774,6 +775,7 @@ $categories = getData("tbl_category");
 
     function showMessage() {
         // Fade out
+        console.log(textElement);
         textElement.classList.add("opacity-0");
 
         setTimeout(() => {

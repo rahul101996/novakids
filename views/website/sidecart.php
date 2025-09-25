@@ -253,6 +253,119 @@
         </div>
     </div>
 </div>
+<div id="sizeChartModal" class="hidden fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+    <div class="bg-white shadow-lg w-[65%] max-md:w-[90%] max-h-[80vh] relative flex flex-col animate-slideDown">
+        <!-- Close button -->
+        <button onclick="document.getElementById('sizeChartModal').classList.add('hidden')"
+            class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 animate-rotate-pingpong">
+            <i class="fa-solid fa-xmark text-2xl"></i>
+        </button>
+
+        <!-- Header -->
+        <div class="p-6 pb-2 flex-shrink-0">
+            <h2 class="text-2xl max-md:text-lg font-bold mb-1">SIZE CHART</h2>
+            <p class="text-sm text-gray-500">Reviews: Fits true to size</p>
+        </div>
+
+        <!-- Scrollable body -->
+        <div class="p-6 pt-0 overflow-y-auto flex-1">
+            <!-- Measuring unit toggle (hidden for now) -->
+            <div class="flex items-center gap-2 mb-6">
+                <span class="text-gray-700 font-medium">Measuring Unit :</span>
+                <span>Inches</span>
+            </div>
+
+            <!-- Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse text-center text-gray-700">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="p-3">Size</th>
+                            <th class="p-3">Chest</th>
+                            <th class="p-3">Length</th>
+                            <th class="p-3">Sleeve</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t">
+                            <td class="p-3">S</td>
+                            <td class="p-3">36</td>
+                            <td class="p-3">27</td>
+                            <td class="p-3">8</td>
+                        </tr>
+                        <tr class="border-t bg-gray-50">
+                            <td class="p-3">M</td>
+                            <td class="p-3">38</td>
+                            <td class="p-3">28</td>
+                            <td class="p-3">8.5</td>
+                        </tr>
+                        <tr class="border-t">
+                            <td class="p-3">L</td>
+                            <td class="p-3">40</td>
+                            <td class="p-3">29</td>
+                            <td class="p-3">9</td>
+                        </tr>
+                        <tr class="border-t bg-gray-50">
+                            <td class="p-3">XL</td>
+                            <td class="p-3">42</td>
+                            <td class="p-3">30</td>
+                            <td class="p-3">9.5</td>
+                        </tr>
+                        <tr class="border-t">
+                            <td class="p-3">2XL</td>
+                            <td class="p-3">44</td>
+                            <td class="p-3">31</td>
+                            <td class="p-3">10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- How to Measure Section -->
+            <div class="mt-8 border-t pt-6 flex flex-col md:flex-row items-center">
+                <!-- Text -->
+                <div class="w-full md:w-[60%]">
+                    <h3 class="text-lg font-bold mb-4">HOW TO MEASURE?</h3>
+                    <p class="mb-2"><span class="font-bold">CHEST</span> -
+                        <span class="text-gray-600">Measure from the stitches below the armpits on one side to
+                            another.</span>
+                    </p>
+                    <p><span class="font-bold">LENGTH</span> -
+                        <span class="text-gray-600">Measure from where the shoulder seam meets the collar to the
+                            hem.</span>
+                    </p>
+                    <p class="mb-2">
+                        <span class="font-bold">SHOULDER</span> -
+                        <span class="text-gray-600">Measure straight across the back, from one shoulder seam to the
+                            other.</span>
+                    </p>
+
+                    <p class="mb-2">
+                        <span class="font-bold">HALF SLEEVE</span> -
+                        <span class="text-gray-600">Measure from the top of the shoulder seam to the end of the
+                            short
+                            sleeve.</span>
+                    </p>
+
+                    <p class="mb-2">
+                        <span class="font-bold">3/4 SLEEVE</span> -
+                        <span class="text-gray-600">Measure from the top of the shoulder seam to a point between the
+                            elbow and wrist (mid-forearm).</span>
+                    </p>
+
+                    <p>
+                        <span class="font-bold">FULL SLEEVE</span> -
+                        <span class="text-gray-600">Measure from the shoulder seam down to the wrist.</span>
+                    </p>
+                </div>
+                <!-- Image -->
+                <div class="w-full md:w-[40%] flex justify-center">
+                    <img src="/public/images/shirt-size.jpg" alt="How to measure T-shirt" class="h-72 max-md:h-64">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     // const openCartBtns = document.querySelectorAll('.openCartBtn');
     const sideCart = document.getElementById('sideCart');
@@ -260,10 +373,13 @@
     const cartOverlay = document.getElementById('sidecartOverlay');
 
     function openCart() {
+        CloseVariant();
+         setTimeout(() => {
         sideCart.classList.remove('translate-x-full');
         sideCart.classList.add('translate-x-0');
         cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
         cartOverlay.classList.add('opacity-100');
+         }, 1000);
     }
 
     function closeCartFn() {
@@ -337,8 +453,8 @@
     updateCart(); // initial call
     const VariantSelects = document.getElementById('AddToCartSidebar');
 
-   function CloseVariant() {
-        
+    function CloseVariant() {
+
         let VarImg = document.getElementById('VarImg');
 
         setTimeout(() => {
