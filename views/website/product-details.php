@@ -329,8 +329,7 @@
                         </div>
                         <div>
                             <span
-                                class="bg-gray-100 text-black border text-xs font-semibold px-3 py-1 rounded-full animate-bounce-gentle">453
-                                in stock (can be backordered)</span>
+                                class="bg-gray-100 text-black border text-xs font-semibold px-3 py-1 rounded-full animate-bounce-gentle">Limited Stock</span>
                         </div>
                     </div>
 
@@ -365,9 +364,7 @@
                         <button
                             class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
                             12-13 Years</button>
-                        <button
-                            class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
-                            13-14 Years</button>
+                        
                         <!-- <button
                             class="size-option px-6 py-2 flex text-sm items-center justify-center border border-gray-300 font-semibold transition-all duration-300">
                             17-18 Years</button>
@@ -401,7 +398,29 @@
                         </div>
                     </div>
                 </div>
+<div class="w-[75%]  bg-gray-50 rounded-lg p-4 shadow-sm">
+                        <!-- Title -->
+                        <h3 class="font-semibold text-gray-800 mb-3">Check Delivery</h3>
 
+                        <!-- Input + Button + Icon -->
+                        <div class="flex items-center space-x-2 border-b border-gray-300 pb-2">
+                            <input
+                                type="text"
+                                value=""
+                                placeholder="Enter Pincode"
+                                class="flex-1 bg-transparent outline-none text-gray-700"
+                                 />
+                            <button class="bg-black text-white text-sm font-semibold px-3 py-1 rounded-md hover:bg-gray-800">
+                                Change
+                            </button>
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+
+                        <!-- Delivery Info -->
+                        <p class="mt-3 text-sm">
+                            <span class="text-green-600 font-semibold">Free delivery</span> | By <span class="font-semibold">Friday, 26 Sept</span>
+                        </p>
+                    </div>
                 <!-- Quantity and Add to Cart -->
                 <div class="space-y-4">
                     <div class="grid grid-cols-4 max-md:grid-cols-2 max-md:gap-4 sm:items-center sm:space-x-6 w-full">
@@ -463,29 +482,7 @@
                             <i class="fas fa-heart"></i> WISHLIST
                         </button>
                     </div>
-                    <div class="w-[75%]  bg-gray-50 rounded-lg p-4 shadow-sm">
-                        <!-- Title -->
-                        <h3 class="font-semibold text-gray-800 mb-3">Check Delivery</h3>
-
-                        <!-- Input + Button + Icon -->
-                        <div class="flex items-center space-x-2 border-b border-gray-300 pb-2">
-                            <input
-                                type="text"
-                                value=""
-                                placeholder="Enter Pincode"
-                                class="flex-1 bg-transparent outline-none text-gray-700"
-                                 />
-                            <button class="bg-black text-white text-sm font-semibold px-3 py-1 rounded-md hover:bg-gray-800">
-                                Change
-                            </button>
-                            <i class="fa-solid fa-truck-fast"></i>
-                        </div>
-
-                        <!-- Delivery Info -->
-                        <p class="mt-3 text-sm">
-                            <span class="text-green-600 font-semibold">Free delivery</span> | By <span class="font-semibold">Friday, 26 Sept</span>
-                        </p>
-                    </div>
+                    
 
                     <div class="flex flex-col">
                         <div class=" border rounded-md divide-y">

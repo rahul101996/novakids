@@ -242,7 +242,10 @@ $categories = getData("tbl_category");
             foreach ($categories as $key => $value) {
             ?>
                 <div class="relative group">
-                    <a href="/shop" class="text-gray-800 group-hover:text-black"><?= $value['category'] ?></a>
+                    <a href="/shop" class="text-gray-800  group duration-300 cursor-pointer"><?= $value['category'] ?>
+                        <span class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                        <span class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                    </a>
                 </div>
             <?php } ?>
         </div>
@@ -598,17 +601,19 @@ $categories = getData("tbl_category");
             <form action="" method="POST" id="otp-form">
                 <input type="text" placeholder="" name="username" class="hidden" id="username">
                 <input type="text" placeholder="" name="from" class="hidden" id="user_from" value="otp">
-                <div class="flex items-center border rounded-lg overflow-hidden mb-4" id="mobile-div">
-                    <span class="px-3 text-gray-600">+91</span> <input type="tel" placeholder="Enter mobile number" name="mobile" id="mobile"
+                <div class="flex items-center border rounded-lg overflow-hidden gap-2 mb-4" id="mobile-div">
+                    <img src="/public/logos/india.png" class="h-7 pl-3" alt="">
+                    <span class="pr-1 text-gray-600">+91</span> <input type="tel" placeholder="Enter mobile number" name="mobile" id="mobile"
                         class="w-full px-3 py-2 outline-none border-l">
                 </div>
-                <div class="relative font-inter antialiased hidden" id="otp-div">
-
-                    <main class="relative flex flex-col justify-center overflow-hidden">
+                <div class="relative font-inter antialiased hidden flex flex-col items-center justify-center" id="otp-div">
+                    <p>We have send verification code to </p>
+                    <div><span id="mobile-span" class="font-bold"></span> &ensp; <span class="text-xs text-green-500 p-1 px-2 border border-green-500 cursor-pointer" onclick="EditotpNumber()">Edit</span></div>
+                    <main class="relative flex flex-col justify-center mt-2 overflow-hidden">
                         <div class="w-full max-w-6xl mx-auto">
                             <div class="flex justify-center w-full">
 
-                                <div class="w-full mx-auto text-center bg-white  pt-10 rounded-xl">
+                                <div class="w-full mx-auto text-center bg-white  pt-5 rounded-xl">
 
                                     <div class="flex items-center justify-between gap-3 px-10 w-full">
                                         <input
@@ -644,35 +649,7 @@ $categories = getData("tbl_category");
 
 
                     <!-- Banner with links -->
-                    <div class="fixed bottom-0 right-0 w-full md:bottom-6 md:right-12 md:w-auto z-50"
-                        :class="bannerOpen ? '' : 'hidden'" x-data="{ bannerOpen: true }">
-                        <div class="bg-slate-800 text-sm p-3 md:rounded shadow flex justify-between">
-                            <div class="text-slate-500 inline-flex">
-                                <a class="font-medium hover:underline text-slate-300"
-                                    href="https://cruip.com/otp-form-example-made-with-tailwind-css-and-javascript/" target="_blank">
-                                    Read Tutorial
-                                </a>
-                                <span class="italic px-1.5">or</span>
-                                <a class="font-medium hover:underline text-indigo-500 flex items-center"
-                                    href="https://github.com/cruip/cruip-tutorials/blob/main/otp-form/index.html" target="_blank"
-                                    rel="noreferrer">
-                                    <span>Download</span>
-                                    <svg class="fill-indigo-400 ml-1" xmlns="http://www.w3.org/2000/svg" width="9" height="9">
-                                        <path d="m1.649 8.514-.91-.915 5.514-5.523H2.027l.01-1.258h6.388v6.394H7.158l.01-4.226z" />
-                                    </svg>
-                                </a>
-                            </div>
-                            <button class="text-slate-500 hover:text-slate-400 pl-2 ml-3 border-l border-slate-700"
-                                @click="bannerOpen = false">
-                                <span class="sr-only">Close</span>
-                                <svg class="w-4 h-4 shrink-0 fill-current" viewBox="0 0 16 16">
-                                    <path
-                                        d="M12.72 3.293a1 1 0 00-1.415 0L8.012 6.586 4.72 3.293a1 1 0 00-1.414 1.414L6.598 8l-3.293 3.293a1 1 0 101.414 1.414l3.293-3.293 3.293 3.293a1 1 0 001.414-1.414L9.426 8l3.293-3.293a1 1 0 000-1.414z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
+                    
                 </div>
                 <!-- <div class="flex items-center mb-6">
                     <input type="checkbox" id="offers" class="mr-2 rounded border-gray-400 text-black focus:ring-black">
@@ -682,9 +659,9 @@ $categories = getData("tbl_category");
                 <button
                     class="relative w-full py-2 rounded-md font-semibold overflow-hidden group border-2 border-black" id="sendOtp" type="button">
                     <span
-                        class="relative z-10 text-white group-hover:text-black transition-colors duration-1500">Send OTP</span>
+                        class="relative z-10 text-black group-hover:text-white transition-colors duration-1500">Send OTP</span>
                     <span
-                        class="absolute inset-0 bg-black group-hover:scale-x-0 origin-left transition-transform duration-700"></span>
+                        class="absolute inset-0 bg-black scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700"></span>
                 </button>
 
                 <div>
@@ -934,6 +911,7 @@ $categories = getData("tbl_category");
     const OtpDiv = document.getElementById('otp-div');
     const verifyOtp = document.getElementById('verifyOtp');
     const mobileDiv = document.getElementById('mobile-div');
+    const mobilespan = document.getElementById('mobile-span');
     const Username = document.getElementById('username');
     sendOtp.addEventListener('click', async () => {
         // console.log("hiiiiiiiii")
@@ -945,6 +923,7 @@ $categories = getData("tbl_category");
 
             if (response.data.success) {
                 console.log(response.data)
+                mobilespan.innerHTML = '+91' + ' ' + mobileInput.value
                 mobileDiv.classList.add('hidden')
                 sendOtp.classList.add('hidden');
                 OtpDiv.classList.remove('hidden');

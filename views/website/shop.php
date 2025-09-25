@@ -122,7 +122,7 @@
             </aside>
 
             <!-- Top bar -->
-            <div class="flex items-center justify-between border-b p-6 sticky top-20 h-fit bg-white z-40 w-full">
+            <div class="flex items-center justify-between border-b p-6 sticky top-16 h-fit bg-white z-40 w-full">
                 <div class="flex items-center justify-between w-[90vw] mx-auto">
                     <div class="flex max-md:flex-col items-start gap-4 text-sm">
                         <button id="filterToggle"
@@ -202,9 +202,9 @@
                     <div>
                         <h4 class="font-semibold mb-2">Product Categories</h4>
                         <ul class="space-y-2">
-                            <li><label><input type="checkbox" class="mr-2"> Tees / Relaxed Tees</label></li>
-                            <li><label><input type="checkbox" class="mr-2"> Joggers</label></li>
-                            <li><label><input type="checkbox" class="mr-2"> Co-ords</label></li>
+                            <li><label><input type="checkbox" class="mr-2 accent-[#f25b21]"> Tees / Relaxed Tees</label></li>
+                            <li><label><input type="checkbox" class="mr-2 accent-[#f25b21]"> Joggers</label></li>
+                            <li><label><input type="checkbox" class="mr-2 accent-[#f25b21]"> Co-ords</label></li>
                         </ul>
                     </div>
 
@@ -212,8 +212,8 @@
                     <div>
                         <h4 class="font-semibold mb-2">Product Status</h4>
                         <ul class="space-y-2">
-                            <li><label><input type="radio" name="stock" class="mr-2"> In Stock</label></li>
-                            <li><label><input type="radio" name="stock" class="mr-2"> On Sale</label></li>
+                            <li><label><input type="radio" name="stock" class="mr-2 accent-[#f25b21]"> In Stock</label></li>
+                            <li><label><input type="radio" name="stock" class="mr-2 accent-[#f25b21]"> On Sale</label></li>
                         </ul>
                     </div>
 
@@ -271,14 +271,14 @@
             <!-- Products Section -->
             <main class="md:col-span-3 w-[90vw] mx-auto pb-16">
                 <!-- Product Grid -->
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-md:gap-3">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 max-md:gap-3">
                     <a href="products/product-details" class="block">
-                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer transition overflow-hidden">
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
+                            <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                 <img src="/public/images/111.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
 
@@ -296,24 +296,26 @@
                                 </button>
                             </div>
 
-                            <div class="p-4 text-center">
+                            <div class="p-4 text-left">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <div class="w-full flex items-center justify-start gap-2">
                                 <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
                                 <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                </div>
                             </div>
                         </div>
                     </a>
 
                     <!-- Product 3 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
+                            <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/333.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -336,24 +338,26 @@
                             </div>
 
                             <!-- Product Details -->
-                            <div class="p-4 text-center">
+                            <div class="p-4 text-left">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <div class="w-full flex items-center justify-start gap-2">
                                 <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
                                 <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                </div>
                             </div>
                         </div>
                     </a>
 
                     <!-- Product 4 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
+                            <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/4441.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -376,24 +380,26 @@
                             </div>
 
                             <!-- Product Details -->
-                            <div class="p-4 text-center">
+                            <div class="p-4 text-left">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <div class="w-full flex items-center justify-start gap-2">
                                 <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
                                 <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                </div>
                             </div>
                         </div>
                     </a>
 
                     <!-- Product 5 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
+                            <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/11.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -416,21 +422,23 @@
                             </div>
 
                             <!-- Product Details -->
-                            <div class="p-4 text-center">
+                            <div class="pt-4 text-left">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <div class="w-full flex items-center justify-start gap-2">
                                 <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
                                 <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                </div>
                             </div>
                         </div>
                     </a>
 
                     <a href="products/product-details" class="block">
-                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer transition overflow-hidden">
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
+                            <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                 <img src="/public/images/111.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
 
@@ -448,24 +456,26 @@
                                 </button>
                             </div>
 
-                            <div class="p-4 text-center">
+                            <div class="p-4 text-left">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <div class="w-full flex items-center justify-start gap-2">
                                 <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
                                 <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                </div>
                             </div>
                         </div>
                     </a>
 
                     <!-- Product 3 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
+                            <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/333.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -488,24 +498,26 @@
                             </div>
 
                             <!-- Product Details -->
-                            <div class="p-4 text-center">
+                            <div class="p-4 text-left">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <div class="w-full flex items-center justify-start gap-2">
                                 <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
                                 <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                </div>
                             </div>
                         </div>
                     </a>
 
                     <!-- Product 4 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
+                            <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/4441.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -528,24 +540,26 @@
                             </div>
 
                             <!-- Product Details -->
-                            <div class="p-4 text-center">
+                            <div class="p-4 text-left">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <div class="w-full flex items-center justify-start gap-2">
                                 <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
                                 <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                </div>
                             </div>
                         </div>
                     </a>
 
                     <!-- Product 5 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
+                            <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/11.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -568,21 +582,23 @@
                             </div>
 
                             <!-- Product Details -->
-                            <div class="p-4 text-center">
+                            <div class="p-4 text-left">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <div class="w-full flex items-center justify-start gap-2">
                                 <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
                                 <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                </div>
                             </div>
                         </div>
                     </a>
 
                     <a href="products/product-details" class="block">
-                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer transition overflow-hidden">
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
+                            <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                 <img src="/public/images/111.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
 
@@ -600,24 +616,26 @@
                                 </button>
                             </div>
 
-                            <div class="p-4 text-center">
+                            <div class="p-4 text-left">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <div class="w-full flex items-center justify-start gap-2">
                                 <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
                                 <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                </div>
                             </div>
                         </div>
                     </a>
 
                     <!-- Product 3 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
+                            <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/333.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -640,24 +658,26 @@
                             </div>
 
                             <!-- Product Details -->
-                            <div class="p-4 text-center">
+                            <div class="p-4 text-left">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <div class="w-full flex items-center justify-start gap-2">
                                 <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
                                 <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                </div>
                             </div>
                         </div>
                     </a>
 
                     <!-- Product 4 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
+                            <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/4441.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -680,24 +700,26 @@
                             </div>
 
                             <!-- Product Details -->
-                            <div class="p-4 text-center">
+                            <div class="p-4 text-left">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <div class="w-full flex items-center justify-start gap-2">
                                 <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
                                 <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                </div>
                             </div>
                         </div>
                     </a>
 
                     <!-- Product 5 -->
                     <a href="products/product-details" class="block">
-                        <div class="group relative md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                        <div class="group relative md:p-2 cursor-pointer transition overflow-hidden">
                             <!-- Discount Badge -->
                             <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                 SAVE 14%
                             </span>
 
                             <!-- Product Images -->
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
+                            <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                 <!-- Default Image -->
                                 <img src="/public/images/11.avif" alt="Product 1"
                                     class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -720,10 +742,12 @@
                             </div>
 
                             <!-- Product Details -->
-                            <div class="p-4 text-center">
+                            <div class="p-4 text-left">
                                 <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
+                                <div class="w-full flex items-center justify-start gap-2">
                                 <p class="text-gray-500 line-through text-sm">Rs. 1,399.00</p>
                                 <p class="text-[#f25b21] font-bold">Rs. 1,199.00</p>
+                                </div>
                             </div>
                         </div>
                     </a>

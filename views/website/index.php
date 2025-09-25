@@ -133,17 +133,17 @@
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
                         // printWithPre($images);
-                        ?>
+                    ?>
                         <a href="products/product-details" class="block">
                             <div
-                                class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                                class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
                                 <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                     SAVE <?= $discountPercentage ?>%
                                 </span>
 
                                 <!-- Product Images -->
-                                <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
+                                <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                     <!-- Default Image -->
                                     <img src="<?= $images[0] ?>" alt="Product 1"
                                         class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -168,16 +168,16 @@
                                 </div>
 
                                 <!-- Product Details -->
-                                <div class="p-4 text-center">
-                                    <h3 class="text-sm font-semibold"><?= $product['name'] ?></h3>
-                                    <div class="flex items-center justify-center gap-3">
+                                <div class="pt-4 w-full ">
+                                    <h3 class="text-base font-semibold uppercase"><?= $product['name'] ?></h3>
+                                    <div class="flex items-center justify-start gap-3 w-full">
                                         <p class="text-gray-500 line-through text-sm">₹
-                                        <?= formatNumber($product['compare_price']) ?>.00
-                                    </p>
-                                    <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?>.00</p>
+                                            <?= formatNumber($product['compare_price']) ?>.00
+                                        </p>
+                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?>.00</p>
                                     </div>
                                     <!-- reviews -->
-                                    <div class="flex items-center justify-center mt-2 space-x-1">
+                                    <div class="flex items-center justify-start space-x-1 ">
                                         <span class="text-yellow-500">★★★★★</span>
                                     </div>
                                 </div>
@@ -192,7 +192,7 @@
 
     <!-- Section -->
     <section class="md:pb-16 relative">
-        <div class="absolute -top-14 max-md:-top-16 -left-14 w-auto h-auto opacity-20">
+        <div class="absolute hidden -top-14 max-md:-top-16 -left-14 w-auto h-auto opacity-20">
             <img src="/public/images/naruto.webp" alt="" class="w-40 max-md:w-28 h-auto">
         </div>
         <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
@@ -210,7 +210,7 @@
             foreach ($categories as $key => $category) {
 
 
-                ?>
+            ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
                     <img src="/<?= $category['img'] ?>" alt="Tees"
@@ -335,7 +335,7 @@
     </section>
 
     <section class="pb-12 pt-20 relative overflow-hidden hidden">
-        <div class="absolute -top-8 -right-12 w-auto h-auto opacity-20">
+        <div class="absolute hidden -top-8 -right-12 w-auto h-auto opacity-20">
             <img src="/public/images/net.webp" alt="" class="w-48 h-auto">
         </div>
         <div class="flex flex-col items-center mb-8" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
@@ -376,7 +376,7 @@
     </section>
 
     <section class="bg-white py-14 max-md:py-8 w-full relative overflow-hidden">
-        <div class="absolute -top-12 -right-14 max-md:-right-8 max-md:-top-10 w-auto h-auto opacity-20">
+        <div class="absolute hidden -top-12 -right-14 max-md:-right-8 max-md:-top-10 w-auto h-auto opacity-20">
             <img src="/public/images/net.webp" alt="" class="w-48 max-md:w-32 h-auto">
         </div>
         <div class="w-[90vw] max-md:w-[90vw] mx-auto">
@@ -396,7 +396,7 @@
                     $images = json_decode($product_details['product_images'], true);
                     $images = array_reverse($images);
 
-                    ?>
+                ?>
                     <a href="products/product-details" class="block">
                         <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
                             <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
@@ -440,7 +440,7 @@
                             </div>
                         </div>
                     </a>
-                    <?php
+                <?php
                 }
                 ?>
             </div>
@@ -711,12 +711,12 @@
                 <button
                     class="relative w-full font-semibold py-2 rounded-md border-2 border-black overflow-hidden group">
                     <!-- Text -->
-                    <span class="relative z-10 text-white group-hover:text-black transition-colors duration-700">
+                    <span class="relative z-10 text-black group-hover:text-white transition-colors duration-700">
                         Subscribe
                     </span>
                     <!-- Animated BG -->
                     <span
-                        class="absolute inset-0 bg-black transition-transform duration-700 origin-left group-hover:scale-x-0 scale-x-100"></span>
+                        class="absolute inset-0 bg-black transition-transform duration-700 origin-left scale-x-0 group-hover:scale-x-100"></span>
                 </button>
 
                 <!-- Social icons -->
@@ -737,7 +737,7 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const modal = document.getElementById('newsletterModal');
             const closeBtn = document.getElementById('closeModal');
             const noPopupCheckbox = document.getElementById('noPopup');
@@ -771,10 +771,10 @@
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".new-arrival-carousel").owlCarousel({
                 loop: true,
-                margin: 10,
+                margin: 5,
                 nav: true,
                 dots: false,
                 autoplay: false,
