@@ -50,6 +50,9 @@ $route->group(['', 'ProductController'], function ($route) {
     $route->route('/admin/add-product', 'AddProducts');
     $route->route('/admin/products-list', 'ProductsList');
     $route->route('/admin/inventory', 'Inventory');
+
+    $route->route('/admin/api/update-quantity', 'updateQuantity');
+
 });
 $route->group(['', 'CustomerController'], function ($route) {
     $route->route('admin/customers-list', 'CustomersList');

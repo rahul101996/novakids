@@ -162,4 +162,32 @@ class ProductController
         // printWithPre($products);
         include $_SERVER['DOCUMENT_ROOT'] . "/views/products/inventory.php";
     }
+
+    public function updateQuantity(){
+        // printWithPre($_POST);
+        $response = [
+            "success"=>false,
+            'message'=>"something wen't wrong"
+        ];
+        try{
+            $up = update(["$_POST[field]"=>$_POST["quantity"]],$_POST["id"],"tbl_variants");
+            if($up){
+                $response = [
+                    "success"=>true,
+                    "message"=>"Variant Updated Successfully"
+                ];
+            }else{
+                $response = [
+                    "success"=>false,
+                    'message'=>"something wen't wrong"
+                ];
+            }
+        }catch (Exception $e){
+            $response = [
+                "success"=>false,
+                'message'=>"something wen't wrong"
+            ];
+        }
+        echo json_encode($response);
+    }
 }
