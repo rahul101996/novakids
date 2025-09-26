@@ -48,6 +48,7 @@ $route->group(['', 'CollectionController'], function ($route) {
 });
 $route->group(['', 'ProductController'], function ($route) {
     $route->route('/admin/add-product', 'AddProducts');
+    $route->route('/admin/edit-product/[i:id]', 'EditProducts');
     $route->route('/admin/products-list', 'ProductsList');
     $route->route('/admin/inventory', 'Inventory');
 
