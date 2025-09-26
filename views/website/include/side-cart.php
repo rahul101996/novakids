@@ -228,7 +228,7 @@
             toastr.success(request.data.message);
         }
     }
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
 
         AddToCart();
     });
@@ -238,8 +238,8 @@
         const addToCartBtn = document.querySelectorAll('.addToCartBtn');
         console.log(addToCartBtn);
         if (addToCartBtn) {
-            addToCartBtn.forEach(function (btn) {
-                btn.addEventListener('click', function (event) {
+            addToCartBtn.forEach(function(btn) {
+                btn.addEventListener('click', function(event) {
                     let ee = btn.parentElement
                     console.log(ee);
                     addToCartSidebar(ee.querySelector(".sideProductId").value, btn)
@@ -249,5 +249,4 @@
             });
         }
     }
-
 </script>

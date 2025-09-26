@@ -75,56 +75,34 @@
 
 
         <!-- Cart item -->
-        <div class="flex items-center gap-4 border-b py-2">
-            <!-- Product image -->
-            <img src="/public/images/111.avif" alt="Product" class="w-16 h-20 object-cover">
+        <div class="flex items-start w-full justify-start flex-col" id="cartItems">
+            <div class="flex items-center gap-4 border-b py-2">
+                <!-- Product image -->
+                <img src="/public/images/111.avif" alt="Product" class="w-16 h-20 object-cover">
 
-            <!-- Product details -->
-            <div class="flex-1">
-                <h3 class="font-semibold text-base">The Great Manifestor Polo</h3>
-                <p class="text-sm text-gray-500 flex gap-3">
-                    <span>Size: L</span>
-                    <span class="font-bold text-[#f25b21]">₹<span id="cartTotal">1199</span></span>
-                </p>
+                <!-- Product details -->
+                <div class="flex-1">
+                    <h3 class="font-semibold text-base">The Great Manifestor Polo</h3>
+                    <p class="text-sm text-gray-500 flex gap-3">
+                        <span>Size: L</span>
+                        <span class="font-bold text-[#f25b21]">₹<span id="cartTotal">1199</span></span>
+                    </p>
 
-                <!-- Quantity controls -->
-                <div class="flex items-center mt-2">
-                    <button id="qtyMinus" class="px-3 border rounded-l hover:bg-gray-100">-</button>
-                    <span id="qtyDisplay" class="px-4 border-t border-b">1</span>
-                    <button id="qtyPlus" class="px-3 border rounded-r hover:bg-gray-100">+</button>
+                    <!-- Quantity controls -->
+                    <div class="flex items-center mt-2">
+                        <button id="qtyMinus" class="px-3 border rounded-l hover:bg-gray-100">-</button>
+                        <span id="qtyDisplay" class="px-4 border-t border-b">1</span>
+                        <button id="qtyPlus" class="px-3 border rounded-r hover:bg-gray-100">+</button>
+                    </div>
                 </div>
+
+                <!-- Delete button -->
+                <button class="text-gray-500 hover:text-red-600">
+                    <i class="fas fa-trash"></i>
+                </button>
             </div>
-
-            <!-- Delete button -->
-            <button class="text-gray-500 hover:text-red-600">
-                <i class="fas fa-trash"></i>
-            </button>
         </div>
-        <div class="flex items-center gap-4 border-b py-2">
-            <!-- Product image -->
-            <img src="/public/images/f5.webp" alt="Product" class="w-16 h-20 object-cover">
 
-            <!-- Product details -->
-            <div class="flex-1">
-                <h3 class="font-semibold text-base">The Great Manifestor Polo</h3>
-                <p class="text-sm text-gray-500 flex gap-3">
-                    <span>Size: L</span>
-                    <span class="font-bold text-[#f25b21]">₹<span id="cartTotal">1199</span></span>
-                </p>
-
-                <!-- Quantity controls -->
-                <div class="flex items-center mt-2">
-                    <button id="qtyMinus" class="px-3 border rounded-l hover:bg-gray-100">-</button>
-                    <span id="qtyDisplay" class="px-4 border-t border-b">1</span>
-                    <button id="qtyPlus" class="px-3 border rounded-r hover:bg-gray-100">+</button>
-                </div>
-            </div>
-
-            <!-- Delete button -->
-            <button class="text-gray-500 hover:text-red-600">
-                <i class="fas fa-trash"></i>
-            </button>
-        </div>
 
         <div class="md:border-t md:border-gray-200 md:pt-3 md:mt-16">
             <p class="text-center mt-2 max-md:mt-5 mb-1">Don't Miss Out Of These😍!</p>
@@ -369,17 +347,18 @@
 <script>
     // const openCartBtns = document.querySelectorAll('.openCartBtn');
     const sideCart = document.getElementById('sideCart');
+    const cartItems = document.getElementById('cartItems');
     const closeCart = document.getElementById('closeCart');
     const cartOverlay = document.getElementById('sidecartOverlay');
 
     function openCart() {
         CloseVariant();
-         setTimeout(() => {
-        sideCart.classList.remove('translate-x-full');
-        sideCart.classList.add('translate-x-0');
-        cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
-        cartOverlay.classList.add('opacity-100');
-         }, 1000);
+        setTimeout(() => {
+            sideCart.classList.remove('translate-x-full');
+            sideCart.classList.add('translate-x-0');
+            cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
+            cartOverlay.classList.add('opacity-100');
+        }, 1000);
     }
 
     function closeCartFn() {
@@ -501,19 +480,41 @@
                     // 
                     let ee = btn.parentElement
                     // showVarients(ee.querySelector(".ProductId").value);
-                    console.log(ee);
+                    // console.log(ee);
                     let product_id = parseInt(ee.querySelector(".ProductId").value);
                     const response = await axios.post("/api/get-product-data", new URLSearchParams({
                         productid: product_id,
 
                     }))
-                    console.log(response.data)
+                    // console.log(response.data)
 
                     if (response.data.variants.length > 0) {
 
                         showVarientsSidebar(response.data.html);
-                        
-                        // console.log('hello');
+
+                        let options = document.querySelectorAll('.optionDivs');
+
+                        // console.log(options);
+
+                        let FirstOption = options[0];
+
+                        // console.log(FirstOption);
+                        let OptionName = FirstOption.getAttribute('option_name');
+                        let OptionValue = FirstOption.getAttribute('option_value');
+                        let product_id = FirstOption.getAttribute('product_id');
+                        console.log(OptionName, OptionValue, product_id);
+                        const response2 = await axios.post("/api/get-variant-data", new URLSearchParams({
+                            productid: product_id,
+                            option_name: OptionName,
+                            option_value: OptionValue
+
+                        }))
+                        // console.log(response2.data)
+                        const ColorDiv = document.getElementById('ColorDiv');
+                        if (ColorDiv) {
+                            ColorDiv.innerHTML = response2.data.html;
+
+                        }
 
 
                     } else {
@@ -530,11 +531,76 @@
         }
     }
 
+    function AddToCartslider(btn) {
+        // 
+        let ee = btn.parentElement
+        // showVarients(ee.querySelector(".sideProductId").value)
+        addToCartSidebar(ee.querySelector(".sideVarientId").value, ee.querySelector(".sideCategoryId").value, ee.querySelector(".sideProductId").value, btn)
+
+    }
+
+    async function addToCartSidebar(varient_id, category_id, product_id, ele, quantity = 1) {
+
+        // console.log("hello")
+        const request = await axios.post("/api/add-to-cart", new URLSearchParams({
+            varient_id: varient_id,
+            category_id: category_id,
+            product_id: product_id,
+            quantity: quantity
+        }));
+
+
+
+
+
+
+
+
+
+        console.log(request.data)
+        cartItems.innerHTML = '';
+        cartItems.innerHTML = request.data.cart_div;
+        document.getElementById('cart-count').innerText = request.data.cart_count;
+        openCart();
+        // if (request.data.success) {
+        //     // window.location.href="cart.php";?
+        //     openCart();
+        //     toastr.options = {
+        //         "toastClass": "bg-pink-toast",
+        //         "progressBar": true,
+        //         "positionClass": "toast-bottom-right" // Add a custom class
+        //     };
+
+        //     toastr.success(request.data.message);
+        // }
+    }
+
     function showVarientsSidebar(data) {
-        console.log(data);
+        // console.log(data);
         VariantSelects.innerHTML;
         VariantSelects.innerHTML = data;
         Openvariant()
 
+    }
+
+    async function minusQuantity(ele, varient_id, category_id, product_id) {
+        const row = ele.parentElement;
+        const current = row.querySelector(".quantity");
+        if (parseInt(current.innerText) > 1) {
+            current.innerText = parseInt(current.innerText) - 1;
+            await addToCartSidebar(varient_id, category_id, product_id, ele)
+
+        }
+    }
+   
+    async function plusQuantity(ele, varient_id, category_id, product_id) {
+        const row = ele.parentElement;
+        const max = 10;
+        const current = row.querySelector(".quantity");
+        if (parseInt(current.innerText) < max) {
+            current.innerText = parseInt(current.innerText) + 1;
+            await addToCartSidebar(varient_id, category_id, product_id, ele)
+           
+        }
     }
 </script>

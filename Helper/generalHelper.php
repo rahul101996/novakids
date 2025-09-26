@@ -454,6 +454,18 @@ function add($data, $table, $timestamp = true)
     // die();
     return $db->lastInsertId();
 }
+function checkExisteingCartSession($varient)
+{
+    if (isset($_SESSION["cart"])) {
+        $cart = $_SESSION["cart"];
+        foreach ($cart as $key => $c) {
+            if ($c["varient"] == $varient) {
+                return [$key, $c];
+            }
+        }
+    }
+    return false;
+}
 function groupAttributes(array $opt): array {
     $result = [];
     $seen   = [];

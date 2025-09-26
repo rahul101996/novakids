@@ -82,16 +82,18 @@ class WebController extends LoginController
                 <span class="w-full h-[1px] bg-gray-200 my-5"></span>
                 <div class="flex flex-col items-start justify-start w-full px-7">
                     <h2 class="w-full text-[1.8rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
-                    <div class="flex items-center justify-center gap-3 mt-7">
+                    <div class="flex items-center justify-center gap-3 mt-1">
                         <span class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
                         <span class="text-[#33459c] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
                         <span class="text-xs bg-[#33459c] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
 
                     </div>
+                    <p class="text-sm text-gray-900 mt-2">Upgrade your casual wardrobe with our black sporty deconstructed loose pants. These stylish pants feature a relaxed fit and a deconstructed design for a modern and edgy look</p>
                     <p class=" text-xs text-gray-600 mt-1"><a href="" class="underline">shipping</a> calculated at checkout</p>
                     <p class="text-xs mt-1">⭐⭐⭐⭐⭐ <span class="text-sm">31 reviews</span></p>
                     <?php
                     foreach ($grouped as $key => $value) {
+                        $ogkey = $key;
                         $key = strtolower(str_replace(' ', '', $key));
                         // echo $key;
                         if ($key == 'size') {
@@ -110,13 +112,34 @@ class WebController extends LoginController
                                     </svg> Sizing guide
                                 </p>
                             </div>
+                            <div class="w-full flex items-center justify-start mt-3 text-sm" id="SizeDiv">
+                                <?php
+                                $diffcolor = [];
+                                foreach ($value as $key1 => $value1) {
+                                    // $diffcolor = $finalData['images'][$key1];
+                                ?>
+                                    <div class="border <?= $key1 == 0 ? "border-gray-900 selected-size" : "border-gray-300"  ?>  optionDivs cursor-pointer flex items-center justify-center h-10 w-20" option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?></div>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        <?php
+                        } elseif ($key == 'color') {
+                        ?>
+                            <p class="uppercase text-sm mt-5"><?= $key ?> : <?= $value[0] ?></p>
+                            <div class="w-full flex items-center justify-start mt-3 text-sm gap-2" id="ColorDiv">
+
+                            </div>
+
+                        <?php } else { ?>
+                            <p class="uppercase"><?= $key ?> : <?= $value[0] ?></p>
                             <div class="w-full flex items-center justify-start mt-3 text-sm">
                                 <?php
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
                                 ?>
-                                    <div class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300 optionDivs"  ?> flex items-center justify-center h-10 w-20" size_value="<?= $value1 ?>" size_name="<?= $key ?>"><?= $value1 ?></div>
+                                    <div class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300"  ?> cursor-pointer flex items-center justify-center h-10 w-20" option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?></div>
                                 <?php
                                 }
                                 ?>
@@ -125,14 +148,23 @@ class WebController extends LoginController
                         }
                     } ?>
                     <div class="w-full flex items-center justify-start mt-7 gap-3">
-                        <div class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg">
-                            <span class="cursor-pointer ">-</span>
-                            <span class="text-black">1</span>
-                            <span class="cursor-pointer ">+</span>
+                        <div class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg quantityDiv">
+                            <div class="cursor-pointer minus" onclick="minusQuantity(this,'<?= $ProductData['varients'][0]['id'] ?>','<?= $id ?>','<?= $ProductData['category'] ?>')">
+                                <i class="fa-solid fa-minus text-sm"></i>
+                            </div>
+                            <span class="text-black quantity">1</span>
+                            <div class="cursor-pointer plus" onclick="plusQuantity(this,'<?= $ProductData['varients'][0]['id'] ?>','<?= $id ?>','<?= $ProductData['category'] ?>')">
+                                <i class="fa-solid fa-plus text-sm"></i>
+                            </div>
                         </div>
-                        <div class="w-[80%] border border-gray-800 p-3 px-3 rounded-lg text-center cursor-pointer font-semibold text-base" onclick="openCart()">
+                        <div class="w-[80%] border border-gray-800 p-3 px-3 rounded-lg text-center cursor-pointer font-semibold text-base" onclick="AddToCartslider(this)">
                             ADD TO CART
                         </div>
+                        <input type="text" value="<?= $ProductData['varients'][0]['id'] ?>" class="sideVarientId hidden">
+                        <input type="text" value="<?= $id ?>" class="sideProductId hidden">
+                        <input type="text" value="<?= $ProductData['category'] ?>" class="sideCategoryId hidden">
+
+
                     </div>
                     <div class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">
                         BUY IT NOW
@@ -142,7 +174,7 @@ class WebController extends LoginController
                 </div>
             </div>
 
-<?php
+        <?php
 
         } else {
             echo "<p>No variants found</p>";
@@ -157,6 +189,178 @@ class WebController extends LoginController
             'variants' => $varients
         ]);
     }
+
+    public function getVariantData()
+    {
+        $id = $_POST['productid'];
+        $option_name = $_POST['option_name'];   // e.g. "Size"
+        $option_value = $_POST['option_value']; // e.g. "8-9 Years"
+
+        $variants = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
+
+        $optionsArray = [];
+        $matchedVariants = []; // store multiple
+
+        foreach ($variants as $variant) {
+            $opts = json_decode($variant['options'], true);
+
+            // fix: handle double-encoded JSON
+            if (is_string($opts)) {
+                $opts = json_decode($opts, true);
+            }
+
+            if (is_array($opts)) {
+                // build available options
+                foreach ($opts as $key => $val) {
+                    $optionsArray[$key][] = $val;
+                }
+
+                // check for match
+                if (isset($opts[$option_name]) && $opts[$option_name] == $option_value) {
+                    $matchedVariants[] = $variant; // push instead of overwrite
+                }
+            }
+        }
+
+        // remove duplicates in options
+        foreach ($optionsArray as $key => $values) {
+            $optionsArray[$key] = array_values(array_unique($values));
+        }
+
+        // printWithPre([
+        //     'all_options'      => $optionsArray,
+        //     'matched_variants' => $matchedVariants
+        // ]);
+        ob_start();
+
+        if (!empty($matchedVariants)) {
+        ?>
+            <?php
+            foreach ($matchedVariants as $key => $value) {
+                $images = array_reverse(json_decode($value['images']));
+            ?>
+                <div class="h-[95px] flex items-center justify-start mt-3 text-sm gap-2 p-1 cursor-pointer <?= $key == 0 ? "border border-gray-900 selected-color" : ""  ?>"
+                    option_name="<?= $optionsArray[1] ?>" option_value="<?= $optionsArray[1][$key] ?>" product_id="<?= $id ?>">
+
+                    <img src="/<?= $images[0] ?>" class="h-full" alt="">
+
+
+                </div>
+
+
+            <?php
+
+            }
+        }
+
+        $html = ob_get_clean();
+
+        // echo $html;
+        echo json_encode([
+            'html' => $html,
+        ]);
+    }
+
+    public function addToCart()
+    {
+        // printWithPre($_POST);
+        // printWithPre($_SESSION);
+
+        if (isset($_SESSION["userid"])  && !empty($_SESSION["userid"])) {
+            // $cartData = $cartController->getAllCartsByUserId($_SESSION["userid"]);
+            // printWithPre($cartData);
+            $id = $_SESSION["userid"];
+
+
+            // echo $sql;
+
+        } else {
+            ob_start();
+            $data = checkExisteingCartSession($_POST["varient_id"]);
+            if ($data) {
+                $_SESSION["cart"][$data[0]]["quantity"] = $_SESSION["cart"][$data[0]]["quantity"] + $_POST["quantity"];
+            } else {
+                $_SESSION["cart"][] = [
+                    "varient" => $_POST["varient_id"],
+                    "category" => $_POST["category_id"],
+                    "product" => $_POST["product_id"],
+                    "quantity" => $_POST["quantity"],
+
+                ];
+            }
+            ?>
+
+            <?php
+            foreach ($_SESSION["cart"] as $key => $c) {
+                $id = $c["product"];
+                $variant_id = $c['varient'];
+                $quantity = $c['quantity'];
+                $vdata = getData2("SELECT tbl_variants.* , tbl_products.name as product_name FROM `tbl_variants` LEFT JOIN tbl_products ON tbl_variants.product_id = tbl_products.id WHERE tbl_variants.id = '$variant_id'")[0];
+                // echo $vdata['image'];
+                $images = array_reverse(json_decode($vdata['images'], true));
+                $variants = json_decode($vdata['options'], true);
+                $variants = json_decode($variants, true);
+                $totalprice = $vdata['price'] * $quantity;
+            ?>
+
+                <div class="flex items-center gap-4 border-b py-2 w-full">
+                    <!-- Product image -->
+                    <img src="/<?= $images[0] ?>" alt="Product" class="w-16 h-20 object-cover">
+
+                    <!-- Product details -->
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-base"><?= $vdata['product_name'] ?></h3>
+                        <p class="text-sm text-gray-500 flex gap-3">
+                            <?php
+                            foreach ($variants as $key => $variant) {
+                            ?>
+                        <p class="!mb-0"><?= $key ?>: <?= $variant ?></p>
+                    <?php } ?>
+                    <span class="font-bold text-[#f25b21]">₹<span id="cartTotal"><?= $totalprice ?></span></span>
+                    </p>
+
+                    <!-- Quantity controls -->
+                    <div class="flex items-center mt-2">
+                        <button id="qtyMinus" class="px-3 border rounded-l hover:bg-gray-100">-</button>
+                        <span id="qtyDisplay" class="px-4 border-t border-b"><?= $quantity ?></span>
+                        <button id="qtyPlus" class="px-3 border rounded-r hover:bg-gray-100">+</button>
+                    </div>
+                    </div>
+
+                    <!-- Delete button -->
+                    <button class="text-gray-500 hover:text-red-600">
+                        <i class="fas fa-trash" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+            <?php
+
+
+            }
+            ?>
+
+
+<?php
+            $cartHtml = ob_get_clean(); // Capture the buffer and clean it
+
+            echo json_encode([
+                'cart_div' => $cartHtml,
+                'success' => true,
+                'message' => 'Product added to cart',
+                'cart_count' => count($_SESSION['cart']),
+            ]);
+
+            // }else{
+            //     echo json_encode([
+            //         "success"=>false,
+            //         "message"=>"Server Error2",
+            //     ]);
+            // }
+
+        }
+    }
+
+
 
     public function current_url(): string
     {

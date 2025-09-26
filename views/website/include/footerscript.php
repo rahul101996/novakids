@@ -28,6 +28,7 @@
     });
 </script>
 <script>
+    
     function OpenAccordian(el) {
         const content = el.querySelector('.accordion-content');
         const icon = el.querySelector('.icon-wrapper');

@@ -27,6 +27,9 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('privacy-policy', 'privacyPolicy');
     $route->route('/api/removeProductFromCollection', 'removeProductFromCollection');
     $route->route('/api/get-product-data', 'getProductData');
+    $route->route('/api/get-variant-data', 'getVariantData');
+    $route->route('/api/add-to-cart', 'addToCart');
+
     $route->route('cookies', 'cookies');
     $route->route('/api/send-otp', 'SendOtp');
     $route->route('category/[:category_name]', 'Category');

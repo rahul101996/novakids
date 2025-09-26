@@ -359,8 +359,8 @@ $categories = getData("tbl_category");
                     </div>
                 </button>
                 <span
-                    class="absolute -top-1 max-md:-top-2 -right-3 max-md:right-0 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md">
-                    0
+                    class="absolute -top-1 max-md:-top-2 -right-3 max-md:right-0 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md" id="cart-count">
+                    <?= isset($_SESSION['cart']) && !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ?>
                 </span>
             </div>
 
@@ -776,7 +776,7 @@ $categories = getData("tbl_category");
 
     function showMessage() {
         // Fade out
-        console.log(textElement);
+        // console.log(textElement);
         textElement.classList.add("opacity-0");
 
         setTimeout(() => {
