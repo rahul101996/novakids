@@ -397,14 +397,18 @@
                     $product_details = getData2("SELECT * FROM `tbl_products` WHERE `id`='$product'")[0];
                     $images = json_decode($product_details['product_images'], true);
                     $images = array_reverse($images);
-
+                    $name = str_replace(' ', '-', $product_details['name']);
+                    $comparePrice = floatval($product_details['compare_price']);
+                    $price = floatval($product_details['price']);
+                    $discountAmount = $comparePrice - $price;
+                    $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
                 ?>
-                    <a href="products/product-details" class="block">
+                    <a href="products/product-details/<?= $name ?>" class="block">
                         <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                            <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden">
+                            <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden">
                                 <!-- Discount badge -->
                                 <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
-                                    SAVE 23%
+                                    SAVE <?= $discountPercentage ?>%
                                 </span>
 
                                 <!-- Add to favorites Icon (top-right) -->
@@ -418,7 +422,7 @@
                                     class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                                 </button>
-
+                                <input type="text" value="<?= $product_details['id'] ?>" class="ProductId">
                                 <!-- Multiple images stacked -->
                                 <img src="/<?= $images[0] ?>"
                                     class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
@@ -436,9 +440,14 @@
                             </div>
 
                             <!-- Product info below the images -->
-                            <div class="p-4 text-center">
-                                <h3 class="text-sm font-semibold"><?= $product_details['name'] ?></h3>
-                                <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product_details['price']) ?>.00</p>
+                            <div class="pt-4 text-left">
+                                <h3 class="text-base font-semibold"><?= $product_details['name'] ?></h3>
+                                <div class="flex items-center justify-start gap-3 w-full">
+                                    <p class="text-gray-500 line-through text-sm">₹
+                                        <?= formatNumber($product_details['compare_price']) ?>.00
+                                    </p>
+                                    <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product_details['price']) ?>.00</p>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -474,8 +483,77 @@
         <div id="bottomRow" class="marquee bg-black">
             <div class="marquee-content text-grey-700 max-md:text-sm py-1 text-nowrap">
                 <div
-                    class="flex items-center space-x-10 text-outline transition-all duration-300 text-white font-semibold text-xl max-md:text-lg cursor-pointer">
+                    class="flex items-center space-x-10 text-outline transition-all duration-700 text-white font-semibold text-xl max-md:text-lg cursor-pointer">
                     <span>#</span>
+                    <span>Streetwear</span>
+                    <span>#</span>
+                    <span>Oversized Tees</span>
+                    <span>#</span>
+                    <span>Graphic Hoodies</span>
+                    <span>#</span>
+                    <span>Joggers & Co-ords</span>
+                    <span>#</span>
+                    <span>Fresh Drops Weekly</span>
+                    <span>#</span>
+                    <span>Nova Universe Exclusive</span>
+                    <span>#</span>
+                    <span>Stay Trendy</span>
+                    <span>#</span>
+                    <span>Free Shipping Over ₹999</span>
+                    <span>#</span>
+                    <span>Made for Gen Z</span>
+                    <span>#</span>
+                    <span>Streetwear</span>
+                    <span>#</span>
+                    <span>Oversized Tees</span>
+                    <span>#</span>
+                    <span>Graphic Hoodies</span>
+                    <span>#</span>
+                    <span>Joggers & Co-ords</span>
+                    <span>#</span>
+                    <span>Fresh Drops Weekly</span>
+                    <span>#</span>
+                    <span>Nova Universe Exclusive</span>
+                    <span>#</span>
+                    <span>Stay Trendy</span>
+                    <span>#</span>
+                    <span>Free Shipping Over ₹999</span>
+                    <span>#</span>
+                    <span>Made for Gen Z</span><span>#</span>
+                    <span>Streetwear</span>
+                    <span>#</span>
+                    <span>Oversized Tees</span>
+                    <span>#</span>
+                    <span>Graphic Hoodies</span>
+                    <span>#</span>
+                    <span>Joggers & Co-ords</span>
+                    <span>#</span>
+                    <span>Fresh Drops Weekly</span>
+                    <span>#</span>
+                    <span>Nova Universe Exclusive</span>
+                    <span>#</span>
+                    <span>Stay Trendy</span>
+                    <span>#</span>
+                    <span>Free Shipping Over ₹999</span>
+                    <span>#</span>
+                    <span>Made for Gen Z</span><span>#</span>
+                    <span>Streetwear</span>
+                    <span>#</span>
+                    <span>Oversized Tees</span>
+                    <span>#</span>
+                    <span>Graphic Hoodies</span>
+                    <span>#</span>
+                    <span>Joggers & Co-ords</span>
+                    <span>#</span>
+                    <span>Fresh Drops Weekly</span>
+                    <span>#</span>
+                    <span>Nova Universe Exclusive</span>
+                    <span>#</span>
+                    <span>Stay Trendy</span>
+                    <span>#</span>
+                    <span>Free Shipping Over ₹999</span>
+                    <span>#</span>
+                    <span>Made for Gen Z</span><span>#</span>
                     <span>Streetwear</span>
                     <span>#</span>
                     <span>Oversized Tees</span>
@@ -539,7 +617,7 @@
             container.addEventListener('mouseleave', () => scroll());
         }
 
-        setupScroll('bottomRow', 1, 0.7);
+        setupScroll('bottomRow', 1, 0.4);
     </script>
 
     <style>

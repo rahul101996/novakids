@@ -243,10 +243,23 @@ class WebController extends LoginController
     }
 
 
-    public function productDetails($product_name)
+    public function productDetails($product_name = null)
     {
-        // echo $product_name;
-        $name = str_replace('-', ' ', $product_name);
+       
+        
+        // printWithPre($ProductData);  
+        //  echo "hello";
+        // die();
+        // $this->checkSession();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            //  echo $product_name;
+        if($product_name == null){
+            require 'views/website/product-details1.php';
+
+            
+        }else{
+            $name = str_replace('-', ' ', $product_name);
         $siteName = getDBObject()->getSiteName();
         $pageModule = "Product Page";
         $pageTitle = "Product Page";
@@ -282,13 +295,8 @@ class WebController extends LoginController
                 return end($imgSet);
             }, $images);
         }
-        // printWithPre($ProductData);
-        //  echo "hello";
-        // die();
-        // $this->checkSession();
-
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             require 'views/website/product-details.php';
+        }
         }
     }
 

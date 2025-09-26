@@ -12,6 +12,8 @@ $route->group(['', 'LoginController'], function ($route) {
 $route->group(['', 'WebController'], function ($route) {
     $route->route('', 'index');
     $route->route('products/product-details/[:product_name]', 'productDetails');
+        $route->route('products/product-details', 'productDetails');
+
     $route->route('login', 'login');
     $route->route('shop', 'shop');
     $route->route('checkout', 'checkout');
