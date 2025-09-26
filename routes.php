@@ -12,7 +12,7 @@ $route->group(['', 'LoginController'], function ($route) {
 $route->group(['', 'WebController'], function ($route) {
     $route->route('', 'index');
     $route->route('products/product-details/[:product_name]', 'productDetails');
-        $route->route('products/product-details', 'productDetails');
+    $route->route('products/product-details', 'productDetails');
 
     $route->route('login', 'login');
     $route->route('shop', 'shop');
@@ -29,6 +29,8 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('/api/get-product-data', 'getProductData');
     $route->route('cookies', 'cookies');
     $route->route('/api/send-otp', 'SendOtp');
+    $route->route('category/[:category_name]', 'Category');
+
     // $route->route('/', 'index');
 
 });
@@ -69,7 +71,7 @@ $route->group(['', 'CouponController'], function ($route) {
 
 $route->group(['', 'PaymentGatewayController'], function ($route) {
     $route->route('admin/payment-gateway', 'PaymentGateway');
-        $route->route('/api/payment-gateway', 'ChangePaymentGateway');
+    $route->route('/api/payment-gateway', 'ChangePaymentGateway');
 
 
     // $route->route('/admin/products-list', 'ProductsList');

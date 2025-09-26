@@ -136,7 +136,7 @@
 
                         // printWithPre($images);
                     ?>
-                        <a href="products/product-details/<?= $name ?>" class="block">
+                        <a href="/products/product-details/<?= $name ?>" class="block">
                             <div
                                 class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
@@ -147,12 +147,12 @@
                                 <!-- Product Images -->
                                 <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                     <!-- Default Image -->
-                                    <img src="<?= $images[0] ?>" alt="Product 1"
+                                    <img src="/<?= $images[0] ?>" alt="Product 1"
                                         class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
 
                                     <!-- Hover Image -->
 
-                                    <img src="<?= $SecondImage ?>" alt="Product 1 Hover"
+                                    <img src="/<?= $SecondImage ?>" alt="Product 1 Hover"
                                         class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
 
                                     <!-- Add to favorites Icon (top-right) -->

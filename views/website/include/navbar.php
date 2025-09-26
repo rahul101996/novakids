@@ -266,9 +266,10 @@ $categories = getData("tbl_category");
         <div class="flex items-center absolute left-1/2 transform -translate-x-1/2 space-x-7 max-md:hidden">
             <?php
             foreach ($categories as $key => $value) {
+                $category = strtolower(str_replace(" ", "-", $value['category']));
             ?>
                 <div class="relative group">
-                    <a href="/shop" class="text-gray-800  group duration-300 cursor-pointer"><?= $value['category'] ?>
+                    <a href="/category/<?= $category ?>" class="text-gray-800  group duration-300 cursor-pointer"><?= $value['category'] ?>
                         <span class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
                         <span class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
                     </a>
