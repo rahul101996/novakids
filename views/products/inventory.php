@@ -50,11 +50,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
             <div class="w-full text-sm">
                 <!-- Table Header -->
-                <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-2 text-gray-500">
+                <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-2 text-gray-500">
                     <span>Sr. No</span>
                     <span>Product</span>
                     <span>Status</span>
                     <span>KSU</span>
+                    <span>Unavailable</span>
                     <span>Committed</span>
                     <span>Available</span>
                     <span>On Hand</span>
@@ -73,7 +74,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 ?>
                     <div class="divide-y divide-gray-200">
                         <!-- Table Row -->
-                        <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-3 hover:bg-gray-50 text-gray-800">
+                        <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-3 hover:bg-gray-50 text-gray-800">
                             <!-- Sr. No -->
                             <div class="flex items-center space-x-3">
                                 <span><?= $key + 1 ?></span>
@@ -114,19 +115,38 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 <p class="text-gray-500 font-semibold"></p>
                             </div>
 
+                            <div>
+                                <input 
+                                    type="number" 
+                                    value="<?= $product['unavailable'] ?>" 
+                                    class="border rounded px-2 py-1 w-20 text-gray-700"
+                                    oninput="updateQuantity(<?= $product['id'] ?>, this.value, 'unavailable')"
+                                >
+                            </div>
+
                             <!-- Category -->
                             <div>
-                                <p class="text-gray-500 font-semibold">0</p>
+                                <p class="text-gray-500 font-semibold"><?=$product["committed"]?></p>
                             </div>
 
                             <!-- ✅ Price -->
                             <div>
-                                <p class="text-gray-500 font-semibold"><?= $product['quantity'] ?></p>
+                                <input 
+                                    type="number" 
+                                    value="<?= $product['quantity'] ?>" 
+                                    class="border rounded px-2 py-1 w-20 text-gray-700"
+                                    oninput="updateQuantity(<?= $product['id'] ?>, this.value, 'quantity')"
+                                >
                             </div>
 
-                            <!-- Action -->
-                            <div class="flex space-x-2">
-                                <p class="text-gray-500 font-semibold"><?= $product['quantity'] ?></p>
+                            <!-- ✅ On Hand -->
+                            <div>
+                                <input 
+                                    type="number" 
+                                    value="<?= $product['on_hand'] ?>" 
+                                    class="border rounded px-2 py-1 w-20 text-gray-700"
+                                    oninput="updateQuantity(<?= $product['id'] ?>, this.value, 'on_hand')"
+                                >
                             </div>
                         </div>
                     </div>
@@ -141,6 +161,36 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/views/include/footer.php";
     ?>
+    <script>
+        async function updateQuantity(productId, value, type) {
+            try {
+                let formData = new FormData();
+                formData.append("id",productId);
+                formData.append("quantity",value);
+                formData.append("field",type);
+
+                let response = await fetch("/admin/api/update-quantity", {
+                    method: "POST",
+                    body: formData
+                });
+
+
+                let data = await response.json();
+
+                if (data.success) {
+                    // console.log("Updated successfully");
+                    toastr.success("Updated successfully");
+                    
+                } else {
+                    // console.error("Update failed:", data.message);
+                    toastr.error("Something wen't wrong");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+    </script>
+
 </body>
 
 </html>

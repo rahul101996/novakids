@@ -115,7 +115,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                             <!-- Action -->
                             <div class="flex space-x-2">
-                                <a href="/edit-collection/<?= $product['id'] ?>" class="text-blue-500 hover:text-blue-600"><i class="fa-solid fa-pen"></i></a>
+                                <a href="/admin/edit-product/<?= $product['id'] ?>" class="text-blue-500 hover:text-blue-600"><i class="fa-solid fa-pen"></i></a>
                                 <a href="/delete-collection/<?= $product['id'] ?>" class="text-red-500 hover:text-red-600"><i class="fa-solid fa-trash"></i></a>
                             </div>
                         </div>

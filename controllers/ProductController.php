@@ -156,10 +156,55 @@ class ProductController
         }
     }
 
+    public function EditProducts($id = null)
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageTitle = "Add Collection";
+        $pageModule = "Add Collection";
+
+        $db = getDBCon(); // PDO instance
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $categories = getData("tbl_category");
+            $packages = getData("tbl_packaging");
+            $productData = getData2("SELECT * from tbl_products where id='$id'")[0];
+            // printWithPre($productData);
+            require 'views/products/edit-products.php';
+        }
+    }
+
     public function Inventory()
     {
         $products = getData2("SELECT tbl_variants.* , tbl_products.name as product_name FROM `tbl_variants` LEFT JOIN tbl_products ON tbl_variants.product_id = tbl_products.id WHERE 1 ORDER BY tbl_variants.id DESC");
         // printWithPre($products);
         include $_SERVER['DOCUMENT_ROOT'] . "/views/products/inventory.php";
+    }
+
+    public function updateQuantity(){
+        // printWithPre($_POST);
+        $response = [
+            "success"=>false,
+            'message'=>"something wen't wrong"
+        ];
+        try{
+            $up = update(["$_POST[field]"=>$_POST["quantity"]],$_POST["id"],"tbl_variants");
+            if($up){
+                $response = [
+                    "success"=>true,
+                    "message"=>"Variant Updated Successfully"
+                ];
+            }else{
+                $response = [
+                    "success"=>false,
+                    'message'=>"something wen't wrong"
+                ];
+            }
+        }catch (Exception $e){
+            $response = [
+                "success"=>false,
+                'message'=>"something wen't wrong"
+            ];
+        }
+        echo json_encode($response);
     }
 }
