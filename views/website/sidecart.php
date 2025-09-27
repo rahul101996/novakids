@@ -38,111 +38,111 @@
 <!-- Side Cart -->
 <div id="sideCart"
     class="fixed top-0 right-0 w-[32vw] max-md:w-full h-full bg-white shadow-xl transform translate-x-full transition-transform duration-500 ease-in-out z-50 flex flex-col">
-
-    <!-- Header -->
-    <div class="flex justify-between items-center p-4 border-b">
-        <h2 class="text-xl font-bold">Your Cart</h2>
-        <!-- Close Button -->
-        <button id="closeCart" onclick="closeCartFn()" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-
-    <!-- Cart Items -->
-    <div class="flex-1 overflow-y-auto p-4">
-        <!-- Free shipping message + progress bar -->
-        <div id="shippingMessage" class="mb-4">
-            <p id="remainingText" class="text-sm">
-                Buy <span id="remainingAmount" class="text-[#f25b21] font-semibold">₹261.00</span> more to enjoy
-                <span class="font-semibold">FREE Shipping</span>
-            </p>
-            <p id="congratsMessage" class="text-sm font-semibold text-green-600 hidden">
-                🎉 Congrats! You are eligible for FREE Shipping
-            </p>
-            <div class="relative w-[90%] h-2 bg-gray-200 rounded-full mt-6">
-                <!-- progress fill -->
-                <div id="progressBar" class="h-2 bg-[#f25b21] rounded-full" style="width: 0%;"></div>
-
-                <!-- truck icon -->
-                <div id="truckIcon" class="absolute -top-3" style="left: 0%;">
-                    <span
-                        class="flex items-center justify-center w-7 h-7 rounded-full border border-[#f25b21] bg-white">
-                        <i class="fas fa-truck text-[#f25b21] text-sm"></i>
-                    </span>
-                </div>
-            </div>
+    <form action="/checkout-cart" class="w-full h-full overflow-y-scroll" method="post">
+        <!-- Header -->
+        <div class="flex justify-between items-center p-4 border-b">
+            <h2 class="text-xl font-bold">Your Cart</h2>
+            <!-- Close Button -->
+            <button id="closeCart" onclick="closeCartFn()" type="button" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
 
+        <!-- Cart Items -->
+        <div class="flex-1 overflow-y-auto p-4">
+            <!-- Free shipping message + progress bar -->
+            <div id="shippingMessage" class="mb-4">
+                <p id="remainingText" class="text-sm">
+                    Buy <span id="remainingAmount" class="text-[#f25b21] font-semibold">₹261.00</span> more to enjoy
+                    <span class="font-semibold">FREE Shipping</span>
+                </p>
+                <p id="congratsMessage" class="text-sm font-semibold text-green-600 hidden">
+                    🎉 Congrats! You are eligible for FREE Shipping
+                </p>
+                <div class="relative w-[90%] h-2 bg-gray-200 rounded-full mt-6">
+                    <!-- progress fill -->
+                    <div id="progressBar" class="h-2 bg-[#f25b21] rounded-full" style="width: 0%;"></div>
 
-        <!-- Cart item -->
-        <div class="flex items-start w-full justify-start flex-col" id="cartItems">
-            <div class="flex items-center gap-4 border-b py-2">
-                <!-- Product image -->
-                <img src="/public/images/111.avif" alt="Product" class="w-16 h-20 object-cover">
-
-                <!-- Product details -->
-                <div class="flex-1">
-                    <h3 class="font-semibold text-base">The Great Manifestor Polo</h3>
-                    <p class="text-sm text-gray-500 flex gap-3">
-                        <span>Size: L</span>
-                        <span class="font-bold text-[#f25b21]">₹<span id="cartTotal">1199</span></span>
-                    </p>
-
-                    <!-- Quantity controls -->
-                    <div class="flex items-center mt-2">
-                        <button id="qtyMinus" class="px-3 border rounded-l hover:bg-gray-100">-</button>
-                        <span id="qtyDisplay" class="px-4 border-t border-b">1</span>
-                        <button id="qtyPlus" class="px-3 border rounded-r hover:bg-gray-100">+</button>
+                    <!-- truck icon -->
+                    <div id="truckIcon" class="absolute -top-3" style="left: 0%;">
+                        <span
+                            class="flex items-center justify-center w-7 h-7 rounded-full border border-[#f25b21] bg-white">
+                            <i class="fas fa-truck text-[#f25b21] text-sm"></i>
+                        </span>
                     </div>
                 </div>
-
-                <!-- Delete button -->
-                <button class="text-gray-500 hover:text-red-600">
-                    <i class="fas fa-trash"></i>
-                </button>
             </div>
-        </div>
 
 
-        <div class="md:border-t md:border-gray-200 md:pt-3 md:mt-16">
-            <p class="text-center mt-2 max-md:mt-5 mb-1">Don't Miss Out Of These😍!</p>
+            <!-- Cart item -->
+            <div class="flex items-start w-full justify-start flex-col" id="cartItems">
+                <div class="flex items-center gap-4 border-b py-2">
+                    <!-- Product image -->
+                    <img src="/public/images/111.avif" alt="Product" class="w-16 h-20 object-cover">
 
-            <div class="grid grid-cols-1 gap-4 mb-2">
-                <div class="flex items-center gap-4 p-2 bg-gray-100 border border-gray-200">
-                    <img src="/public/images/f11.webp" alt="Product" class="w-16 h-16 object-cover">
+                    <!-- Product details -->
                     <div class="flex-1">
                         <h3 class="font-semibold text-base">The Great Manifestor Polo</h3>
-                        <p class="font-bold text-[#f25b21]">₹<span id="cartTotal">1199</span></p>
+                        <p class="text-sm text-gray-500 flex gap-3">
+                            <span>Size: L</span>
+                            <span class="font-bold text-[#f25b21]">₹<span id="cartTotal">1199</span></span>
+                        </p>
+
+                        <!-- Quantity controls -->
+                        <div class="flex items-center mt-2">
+                            <button id="qtyMinus" type="button" class="px-3 border rounded-l hover:bg-gray-100">-</button>
+                            <span id="qtyDisplay" class="px-4 border-t border-b">1</span>
+                            <button id="qtyPlus" type="button" class="px-3 border rounded-r hover:bg-gray-100">+</button>
+                        </div>
                     </div>
-                    <button
-                        class="relative inline-block text-sm px-2 py-1 rounded-md border border-[#f25b21] text-[#f25b21] font-semibold overflow-hidden group">
-                        <i class="fas fa-plus"></i> Add
-                    </button>
-                </div>
-                <div class="flex items-center gap-4 p-2 bg-gray-100 border border-gray-200">
-                    <img src="/public/images/f13.webp" alt="Product" class="w-16 h-16 object-cover">
-                    <div class="flex-1">
-                        <h3 class="font-semibold text-base">The Great Manifestor Polo</h3>
-                        <p class="font-bold text-[#f25b21]">₹<span id="cartTotal">1199</span></p>
-                    </div>
-                    <button
-                        class="relative inline-block text-sm px-2 py-1 rounded-md border border-[#f25b21] text-[#f25b21] font-semibold overflow-hidden group">
-                        <i class="fas fa-plus"></i> Add
+
+                    <!-- Delete button -->
+                    <button class="text-gray-500 hover:text-red-600" type="button">
+                        <i class="fas fa-trash"></i>
                     </button>
                 </div>
             </div>
-        </div>
-    </div>
 
 
-    <!-- Footer -->
-    <div class="px-6 py-2 border-t">
-        <div class="flex justify-between font-bold text-xl mb-2">
-            <span>Total</span>
-            <span>₹1,199</span>
+            <div class="md:border-t md:border-gray-200 md:pt-3 md:mt-16">
+                <p class="text-center mt-2 max-md:mt-5 mb-1">Don't Miss Out Of These😍!</p>
+
+                <div class="grid grid-cols-1 gap-4 mb-2">
+                    <div class="flex items-center gap-4 p-2 bg-gray-100 border border-gray-200">
+                        <img src="/public/images/f11.webp" alt="Product" class="w-16 h-16 object-cover">
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-base">The Great Manifestor Polo</h3>
+                            <p class="font-bold text-[#f25b21]">₹<span id="cartTotal">1199</span></p>
+                        </div>
+                        <button type="button"
+                            class="relative inline-block text-sm px-2 py-1 rounded-md border border-[#f25b21] text-[#f25b21] font-semibold overflow-hidden group">
+                            <i class="fas fa-plus"></i> Add
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-4 p-2 bg-gray-100 border border-gray-200">
+                        <img src="/public/images/f13.webp" alt="Product" class="w-16 h-16 object-cover">
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-base">The Great Manifestor Polo</h3>
+                            <p class="font-bold text-[#f25b21]">₹<span id="cartTotal">1199</span></p>
+                        </div>
+                        <button type="button"
+                            class="relative inline-block text-sm px-2 py-1 rounded-md border border-[#f25b21] text-[#f25b21] font-semibold overflow-hidden group">
+                            <i class="fas fa-plus"></i> Add
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="flex gap-6">
-            <!-- <button
+
+
+        <!-- Footer -->
+        <div class="px-6 py-2 border-t">
+            <div class="flex justify-between font-bold text-xl mb-2">
+                <span>Total</span>
+                <span id="All_Side_Total"></span>
+            </div>
+            <div class="flex gap-6">
+                <!-- <button
                 class="relative w-full border-2 border-black py-2 rounded-lg overflow-hidden transition duration-300 group">
                 <span
                     class="relative z-10 text-black font-semibold group-hover:text-white transition-colors duration-300">
@@ -151,18 +151,33 @@
                 <span
                     class="absolute inset-0 bg-black scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
             </button> -->
+                <?php
+                if (isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type'] == "User") {            ?>
+                    <input type="hidden" name="myForm" id="">
 
-            <button onclick="window.location.href='/checkout'"
-                class="relative w-full font-semibold py-1.5 rounded-md border-2 border-[#f25b21] overflow-hidden group">
-                <span class="relative z-10 text-white group-hover:text-[#f25b21] transition-colors duration-700">
-                    Checkout
-                </span>
-                <span
-                    class="absolute inset-0 bg-[#f25b21] transition-transform duration-700 origin-left group-hover:scale-x-0 scale-x-100"></span>
-            </button>
-
+                    <button  type="submit"
+                        class="relative w-full font-semibold py-1.5 rounded-md border-2 border-[#f25b21] overflow-hidden group">
+                        <span class="relative z-10 text-white group-hover:text-[#f25b21] transition-colors duration-700">
+                            Checkout
+                        </span>
+                        <span
+                            class="absolute inset-0 bg-[#f25b21] transition-transform duration-700 origin-left group-hover:scale-x-0 scale-x-100"></span>
+                    </button>
+                <?php
+                } else {
+                ?>
+                    <button onclick="modal.classList.remove('hidden')" type="button"
+                        class="relative w-full font-semibold py-1.5 rounded-md border-2 border-[#f25b21] overflow-hidden group">
+                        <span class="relative z-10 text-white group-hover:text-[#f25b21] transition-colors duration-700">
+                            Checkout
+                        </span>
+                        <span
+                            class="absolute inset-0 bg-[#f25b21] transition-transform duration-700 origin-left group-hover:scale-x-0 scale-x-100"></span>
+                    </button>
+                <?php } ?>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 <div class="h-[100vh] w-[59%] z-[50] fixed top-0 right-0 w-full flex items-center justify-center transform translate-x-full transition-transform duration-[0.6s] ease-in-out" id="AddToCartSidebar">
     <div class="w-[47%] p-3 h-full overflow-y-scroll bg-gray-200 flex flex-col items-center justify-start no-scrollbar gap-3 transform translate-x-full transition-transform duration-[0.8s] ease-in-out" id="VarImg">
@@ -351,14 +366,22 @@
     const closeCart = document.getElementById('closeCart');
     const cartOverlay = document.getElementById('sidecartOverlay');
 
-    function openCart() {
-        CloseVariant();
-        setTimeout(() => {
-            sideCart.classList.remove('translate-x-full');
-            sideCart.classList.add('translate-x-0');
-            cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
-            cartOverlay.classList.add('opacity-100');
-        }, 1000);
+    async function openCart() {
+
+        sideCart.classList.remove('translate-x-full');
+        sideCart.classList.add('translate-x-0');
+        cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
+        cartOverlay.classList.add('opacity-100');
+        const request = await axios.post("/api/get-cart-data", new URLSearchParams({
+            'getdata': 1
+        }));
+        console.log(request.data)
+        if (request.data.success) {
+            cartItems.innerHTML = '';
+            cartItems.innerHTML = request.data.cart_div;
+            setTotal();
+        }
+
     }
 
     function closeCartFn() {
@@ -448,6 +471,7 @@
         cartOverlay.classList.add('opacity-0', 'pointer-events-none');
     }
 
+
     function Openvariant() {
         let VarImg = document.getElementById('VarImg');
 
@@ -470,7 +494,7 @@
     function AddToCart() {
 
         const addToCartBtn = document.querySelectorAll('.openCartBtn');
-        console.log(addToCartBtn);
+        // console.log(addToCartBtn);
         if (addToCartBtn) {
             addToCartBtn.forEach(function(btn) {
                 btn.addEventListener('click', async function(event) {
@@ -531,16 +555,19 @@
         }
     }
 
-    function AddToCartslider(btn) {
+    function AddToCartslider(btn, sidecart = false) {
         // 
         let ee = btn.parentElement
         // showVarients(ee.querySelector(".sideProductId").value)
-        addToCartSidebar(ee.querySelector(".sideVarientId").value, ee.querySelector(".sideCategoryId").value, ee.querySelector(".sideProductId").value, btn)
+        addToCartSidebar(ee.querySelector(".sideVarientId").value, ee.querySelector(".sideCategoryId").value, ee.querySelector(".sideProductId").value, btn, 1, sidecart)
 
     }
 
-    async function addToCartSidebar(varient_id, category_id, product_id, ele, quantity = 1) {
+    async function addToCartSidebar(varient_id, category_id, product_id, ele, quantity = 1, sidecart = false) {
 
+        if (sidecart) {
+            quantity = parseInt(ele.parentElement.querySelector('.quantity').innerText);
+        }
         // console.log("hello")
         const request = await axios.post("/api/add-to-cart", new URLSearchParams({
             varient_id: varient_id,
@@ -548,31 +575,30 @@
             product_id: product_id,
             quantity: quantity
         }));
-
-
-
-
-
-
-
-
-
         console.log(request.data)
-        cartItems.innerHTML = '';
-        cartItems.innerHTML = request.data.cart_div;
-        document.getElementById('cart-count').innerText = request.data.cart_count;
-        openCart();
-        // if (request.data.success) {
-        //     // window.location.href="cart.php";?
-        //     openCart();
-        //     toastr.options = {
-        //         "toastClass": "bg-pink-toast",
-        //         "progressBar": true,
-        //         "positionClass": "toast-bottom-right" // Add a custom class
-        //     };
+        if (request.data.success) {
+            // window.location.href="cart.php";?
 
-        //     toastr.success(request.data.message);
-        // }
+            toastr.options = {
+                "toastClass": "bg-pink-toast",
+                "progressBar": true,
+                "positionClass": "toast-bottom-right" // Add a custom class
+            };
+
+            toastr.success(request.data.message);
+        }
+        document.getElementById('cart-count').innerText = request.data.cart_count;
+        if (sidecart) {
+            CloseVariant();
+            setTimeout(() => {
+                openCart();
+            }, 1000);
+
+        } else {
+            openCart();
+        }
+
+
     }
 
     function showVarientsSidebar(data) {
@@ -588,11 +614,12 @@
         const current = row.querySelector(".quantity");
         if (parseInt(current.innerText) > 1) {
             current.innerText = parseInt(current.innerText) - 1;
-            await addToCartSidebar(varient_id, category_id, product_id, ele)
+            await addToCartSidebar(varient_id, category_id, product_id, ele, -1)
 
         }
     }
-   
+
+
     async function plusQuantity(ele, varient_id, category_id, product_id) {
         const row = ele.parentElement;
         const max = 10;
@@ -600,7 +627,66 @@
         if (parseInt(current.innerText) < max) {
             current.innerText = parseInt(current.innerText) + 1;
             await addToCartSidebar(varient_id, category_id, product_id, ele)
-           
+
         }
+    }
+
+
+    function minus(ele) {
+        const row = ele.parentElement;
+        const current = row.querySelector(".quantity");
+        if (parseInt(current.innerText) > 1) {
+            current.innerText = parseInt(current.innerText) - 1;
+        }
+    }
+
+    function plus(ele) {
+        const row = ele.parentElement;
+        const max = 10;
+        const current = row.querySelector(".quantity");
+        if (parseInt(current.innerText) < max) {
+            current.innerText = parseInt(current.innerText) + 1;
+        }
+    }
+
+
+    async function deleteCart(ele, cartid) {
+        const response = await axios.post("/api/delete-cart", new URLSearchParams({
+            cartid: cartid,
+            "deleteMe": ""
+        }))
+        // console.log(response.data)
+        if (response.data.success) {
+            // console.log(ele, ele.parentElement)
+            ele.parentElement.remove();
+
+            toastr.options = {
+                "toastClass": "bg-pink-toast",
+                "progressBar": true,
+                "positionClass": "toast-bottom-right" // Position the toast at the bottom right
+            };
+
+            toastr.success("Product removed from Cart");
+
+            openCart();
+            document.getElementById('cart-count').innerText = response.data.totalcart;
+            // document.getElementById("myTbody").removeChild
+        }
+    }
+
+    function setTotal() {
+        // console.log("grande")
+        const totalarray = sideCart.querySelectorAll(".total")
+        // console.log(totalarray)
+        let total = 0;
+
+        totalarray.forEach(element => {
+            let amount = element.innerText
+            amount = amount.replace('<?= $currency ?>', '')
+            total += parseInt(amount)
+        });
+
+        document.getElementById("All_Side_Total").innerText = '<?= $currency ?>' + total
+        return total
     }
 </script>

@@ -1,3 +1,6 @@
+<?php
+// printWithPre($_SESSION);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,10 +34,10 @@
                     Shipping Information
                 </h2>
                 <form class="grid grid-cols-2 gap-4 mt-3">
-                    <input type="text" placeholder="First Name" required class="border px-3 py-2 rounded col-span-1">
-                    <input type="text" placeholder="Last Name" required class="border px-3 py-2 rounded col-span-1">
-                    <input type="email" placeholder="Email Address" class="border px-3 py-2 rounded col-span-1">
-                    <input type="text" placeholder="Phone Number" required class="border px-3 py-2 rounded col-span-1">
+                    <input type="text" placeholder="First Name" required class="border px-3 py-2 rounded col-span-1" value="<?= $userData['fname'] ?>">
+                    <input type="text" placeholder="Last Name" required class="border px-3 py-2 rounded col-span-1" value="<?= $userData['lname'] ?>">
+                    <input type="email" placeholder="Email Address" class="border px-3 py-2 rounded col-span-1" value="<?= $userData['username'] ?>">
+                    <input type="text" placeholder="Phone Number" required class="border px-3 py-2 rounded col-span-1" value="<?= $userData['mobile'] ?>">
                     <input type="text" placeholder="Street Address" required
                         class="border px-3 py-2 rounded col-span-2">
                     <div class="grid grid-cols-3 gap-4 col-span-2">
@@ -155,42 +158,55 @@
             <h2 class="text-lg font-bold mb-4">Order Summary</h2>
             <div class="space-y-4 border-b pb-4 mb-4">
                 <!-- Product 1 -->
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <img src="/public/images/1.webp" class="w-16 h-16 object-cover">
-                        <div>
-                            <p class="font-medium">Manifestor Polo</p>
-                            <p class="text-xs text-gray-500">Size: M</p>
+                <?php
+                $totalAmount = 0;
+
+                foreach ($cartData["cartid"] as $key => $cid) {
+                    $id = $cartData["product"][$key];
+                    $variant_id = $cartData['varient'][$key];
+                    $quantity = $cartData['quantity'][$key];
+                    $vdata = getData2("SELECT tbl_variants.* , tbl_products.name as product_name, tbl_products.id as product_id, tbl_products.category as category FROM `tbl_variants` LEFT JOIN tbl_products ON tbl_variants.product_id = tbl_products.id WHERE tbl_variants.id = '$variant_id'")[0];
+                    // echo $vdata['image'];
+                    $images = array_reverse(json_decode($vdata['images'], true));
+                    $variants = json_decode($vdata['options'], true);
+                    $variants = json_decode($variants, true);
+                    $totalprice = $vdata['price'] * $quantity;
+                    $totalAmount += $totalprice;
+                ?>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="/<?= $images[0] ?>" class="w-16 h-20 object-cover">
+                            <div>
+                                <h3 class="font-semibold text-base"><?= $vdata['product_name'] ?> x <span class="text-xs  px-3 bg-black text-white rounded-lg"> <?= $quantity ?></span></h3>
+                                <div class="flex gap-3 flex-wrap items-center justify-start">
+                                    <?php
+                                    foreach ($variants as $key => $variant) {
+                                    ?>
+                                        <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
+                                    <?php } ?>
+                                </div>
+                            </div>
                         </div>
+                        <p class="font-semibold">₹<?= $totalprice ?></p>
                     </div>
-                    <p class="font-semibold">₹1,199</p>
-                </div>
+                <?php } ?>
                 <!-- Product 2 -->
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <img src="/public/images/4.webp" class="w-16 h-16 object-cover">
-                        <div>
-                            <p class="font-medium">Graphic Tee</p>
-                            <p class="text-xs text-gray-500">Size: L</p>
-                        </div>
-                    </div>
-                    <p class="font-semibold">₹999</p>
-                </div>
+
             </div>
 
             <!-- Totals -->
             <div class="space-y-2 text-sm">
                 <div class="flex justify-between">
                     <span>Subtotal</span>
-                    <span>₹2,198</span>
+                    <span>₹<?=$totalAmount ?></span>
                 </div>
                 <div class="flex justify-between">
                     <span>Shipping</span>
-                    <span>₹79</span>
+                    <span>₹0</span>
                 </div>
                 <div class="flex justify-between font-bold text-lg border-t pt-3">
                     <span>Total</span>
-                    <span>₹2,277</span>
+                    <span>₹<?= $totalAmount ?></span>
                 </div>
             </div>
 

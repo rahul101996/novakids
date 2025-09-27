@@ -24,8 +24,9 @@ function getBaseUrl()
     return getDBObject()->getUrl();
 }
 
-function getFast2SMS(){
-    
+function getFast2SMS()
+{
+
     return getDBObject()->getfast2sms_API();
 }
 function getUserByUsername($db, $username)
@@ -466,7 +467,8 @@ function checkExisteingCartSession($varient)
     }
     return false;
 }
-function groupAttributes(array $opt): array {
+function groupAttributes(array $opt): array
+{
     $result = [];
     $seen   = [];
 
@@ -551,7 +553,7 @@ function delete($id, $table, $column = "id")
 
     $sql = "DELETE FROM `$table` WHERE $column = :id";
     $stmt = $db->prepare($sql);
-    echo $sql;
+    // echo $sql;
     // Bind the id parameter
     $stmt->bindValue(':id', $id);
 

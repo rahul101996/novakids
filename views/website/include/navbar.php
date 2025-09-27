@@ -1,5 +1,15 @@
 <!-- Top Bar -->
 <?php
+// printWithPre($_SESSION);
+if(isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type'] == "User"){
+    $count = 0;
+    $count = count(getData2("SELECT * FROM `tbl_cart` WHERE `userid` = " . $_SESSION['userid']));
+}else{
+
+    $count = isset($_SESSION['cart']) && !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ;
+     
+}
+$currency = '₹';
 $categories = getData("tbl_category");
 
 ?>
@@ -360,7 +370,7 @@ $categories = getData("tbl_category");
                 </button>
                 <span
                     class="absolute -top-1 max-md:-top-2 -right-3 max-md:right-0 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md" id="cart-count">
-                    <?= isset($_SESSION['cart']) && !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ?>
+                    <?= $count ?>
                 </span>
             </div>
 
@@ -523,7 +533,7 @@ $categories = getData("tbl_category");
     });
 </script>
 
-<div id="loginModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center hidden z-50">
+<div id="loginModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center hidden z-[9999]">
     <div
         class="relative flex flex-col md:flex-row w-[90%] md:w-[70%] max-w-5xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] animate-fade-in">
 
@@ -599,7 +609,7 @@ $categories = getData("tbl_category");
 
             <h3 class="text-2xl font-bold text-gray-900 text-center mb-6 max-md:mb-4">Start Your Style Journey</h3>
 
-            <form action="" method="POST" id="otp-form">
+            <form action="/" method="POST" id="otp-form">
                 <input type="text" placeholder="" name="username" class="hidden" id="username">
                 <input type="text" placeholder="" name="from" class="hidden" id="user_from" value="otp">
                 <div class="flex items-center border rounded-lg overflow-hidden gap-2 mb-4" id="mobile-div">

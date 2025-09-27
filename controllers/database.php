@@ -2,7 +2,7 @@
 
 class Database
 {
-    private $host = "localhost:3310";
+    private $host = "localhost";
     private $dbname = "novakids";
     private $username = "root";
     private $password = "";

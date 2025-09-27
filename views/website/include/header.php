@@ -64,22 +64,24 @@ if (!empty($_POST)) {
                 if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
                     foreach ($_SESSION["cart"] as $key => $c) {
                         $cartaratratartaratartrrat = true;
-                        $data = $cartController->getCartByVarientAndUserid($c["varient"], $user["id"]);
+
+                        $data = getData2("SELECT * FROM `tbl_cart` WHERE `varient` = $c[varient] AND `userid` = $user[id] ORDER BY `id` DESC LIMIT 1")[0];
                         if ($data) {
 
-                            $cartController->updateCart($data["id"], [
+                            update([
                                 "quantity" => $data["quantity"] + $c["quantity"]
-                            ]);
+                            ],  $data["id"], "tbl_cart");
                         } else {
 
-                            $cartController->insertCart([
+                            $cartdata = [
                                 "varient" => $c["varient"],
                                 "category" => $c["category"],
                                 "product" => $c["product"],
                                 "quantity" => $c["quantity"],
                                 "userid" => $user["id"],
                                 "username" => $username,
-                            ]);
+                            ];
+                            add($cartdata, "tbl_cart");
                         }
                     }
                     unset($_SESSION["cart"]);
@@ -94,8 +96,9 @@ if (!empty($_POST)) {
                 // $this->updateUser($user["id"], [
                 //     "last_login" => date("Y-m-d H:i:s")
                 // ]);
-                echo "hii";
+                // echo "hii";
                 header("location: /");
+                exit();
             } else {
                 // echo "Invalid password.";
                 $_SESSION["err"] = "Invalid Password";
@@ -157,9 +160,9 @@ if (!empty($_POST)) {
 
                 $data = [
 
-                'mobile' => $_POST["mobile"],
+                    'mobile' => $_POST["mobile"],
                 ];
-                printWithPre($data);
+                // printWithPre($data);
                 // die();
                 $adduser = add($data, "online_users");
                 if ($adduser) {
@@ -180,7 +183,7 @@ if (!empty($_POST)) {
         //     $_SESSION["err"] = "Your are Temperary blocked";
         // }
         if ($cartaratratartaratartrrat) {
-            header("location: /cart.php");
+            header("location: /");
             exit();
         } else if ($cartaratratartaratartrrat1) {
             header("location: /checkout.php");

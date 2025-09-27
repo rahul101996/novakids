@@ -29,6 +29,9 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('/api/get-product-data', 'getProductData');
     $route->route('/api/get-variant-data', 'getVariantData');
     $route->route('/api/add-to-cart', 'addToCart');
+    $route->route('/api/delete-cart', 'deleteCart');
+    $route->route('/api/get-cart-data', 'getCartData');
+    $route->route('/checkout-cart', 'checkoutCart');
 
     $route->route('cookies', 'cookies');
     $route->route('/api/send-otp', 'SendOtp');

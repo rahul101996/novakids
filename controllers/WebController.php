@@ -149,15 +149,15 @@ class WebController extends LoginController
                     } ?>
                     <div class="w-full flex items-center justify-start mt-7 gap-3">
                         <div class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg quantityDiv">
-                            <div class="cursor-pointer minus" onclick="minusQuantity(this,'<?= $ProductData['varients'][0]['id'] ?>','<?= $id ?>','<?= $ProductData['category'] ?>')">
+                            <div class="cursor-pointer minus" onclick="minus(this)">
                                 <i class="fa-solid fa-minus text-sm"></i>
                             </div>
                             <span class="text-black quantity">1</span>
-                            <div class="cursor-pointer plus" onclick="plusQuantity(this,'<?= $ProductData['varients'][0]['id'] ?>','<?= $id ?>','<?= $ProductData['category'] ?>')">
+                            <div class="cursor-pointer plus" onclick="plus(this)">
                                 <i class="fa-solid fa-plus text-sm"></i>
                             </div>
                         </div>
-                        <div class="w-[80%] border border-gray-800 p-3 px-3 rounded-lg text-center cursor-pointer font-semibold text-base" onclick="AddToCartslider(this)">
+                        <div class="w-[80%] border border-gray-800 p-3 px-3 rounded-lg text-center cursor-pointer font-semibold text-base" onclick="AddToCartslider(this, true)">
                             ADD TO CART
                         </div>
                         <input type="text" value="<?= $ProductData['varients'][0]['id'] ?>" class="sideVarientId hidden">
@@ -248,7 +248,7 @@ class WebController extends LoginController
                 </div>
 
 
-            <?php
+                <?php
 
             }
         }
@@ -267,15 +267,36 @@ class WebController extends LoginController
         // printWithPre($_SESSION);
 
         if (isset($_SESSION["userid"])  && !empty($_SESSION["userid"])) {
-            // $cartData = $cartController->getAllCartsByUserId($_SESSION["userid"]);
-            // printWithPre($cartData);
+
             $id = $_SESSION["userid"];
+            $variant_id = $_POST["varient_id"];
+            $quantity = $_POST["quantity"];
+            $data = getData2("SELECT * FROM `tbl_cart` WHERE `varient` = '$variant_id' AND `userid` = '$id' ORDER BY `id` DESC LIMIT 1")[0];
+            // $count = count($data);
+            // echo $count;
+            if ($data) {
 
-
-            // echo $sql;
-
+                update([
+                    "quantity" => $data["quantity"] + $quantity
+                ],  $data["id"], "tbl_cart");
+            } else {
+                $cartdata = [
+                    "varient" => $_POST["varient_id"],
+                    "category" => $_POST["category_id"],
+                    "product" => $_POST["product_id"],
+                    "quantity" => $_POST["quantity"],
+                    "userid" => $id,
+                    "username" => $_SESSION['username'],
+                ];
+                add($cartdata, "tbl_cart");
+            }
+            $count = count(getData2("SELECT * FROM `tbl_cart` WHERE `userid` = '$id'"));
+            echo json_encode([
+                'success' => true,
+                'message' => 'Product added to cart',
+                'cart_count' => $count,
+            ]);
         } else {
-            ob_start();
             $data = checkExisteingCartSession($_POST["varient_id"]);
             if ($data) {
                 $_SESSION["cart"][$data[0]]["quantity"] = $_SESSION["cart"][$data[0]]["quantity"] + $_POST["quantity"];
@@ -288,54 +309,171 @@ class WebController extends LoginController
 
                 ];
             }
-            ?>
 
-            <?php
-            foreach ($_SESSION["cart"] as $key => $c) {
-                $id = $c["product"];
-                $variant_id = $c['varient'];
-                $quantity = $c['quantity'];
-                $vdata = getData2("SELECT tbl_variants.* , tbl_products.name as product_name FROM `tbl_variants` LEFT JOIN tbl_products ON tbl_variants.product_id = tbl_products.id WHERE tbl_variants.id = '$variant_id'")[0];
-                // echo $vdata['image'];
-                $images = array_reverse(json_decode($vdata['images'], true));
-                $variants = json_decode($vdata['options'], true);
-                $variants = json_decode($variants, true);
-                $totalprice = $vdata['price'] * $quantity;
-            ?>
 
-                <div class="flex items-center gap-4 border-b py-2 w-full">
-                    <!-- Product image -->
-                    <img src="/<?= $images[0] ?>" alt="Product" class="w-16 h-20 object-cover">
+            echo json_encode([
+                'success' => true,
+                'message' => 'Product added to cart',
+                'cart_count' => count($_SESSION['cart']),
+            ]);
+        }
+    }
 
-                    <!-- Product details -->
-                    <div class="flex-1">
-                        <h3 class="font-semibold text-base"><?= $vdata['product_name'] ?></h3>
-                        <p class="text-sm text-gray-500 flex gap-3">
-                            <?php
-                            foreach ($variants as $key => $variant) {
-                            ?>
-                        <p class="!mb-0"><?= $key ?>: <?= $variant ?></p>
-                    <?php } ?>
-                    <span class="font-bold text-[#f25b21]">₹<span id="cartTotal"><?= $totalprice ?></span></span>
+    public function getCartData()
+    {
+
+        if (isset($_SESSION["userid"])  && !empty($_SESSION["userid"])) {
+            // $cartData = $cartController->getAllCartsByUserId($_SESSION["userid"]);
+            // printWithPre($cartData);
+            ob_start();
+
+            $id = $_SESSION["userid"];
+            $cartproducts = getData2("SELECT * FROM `tbl_cart` WHERE `userid` = " . $_SESSION['userid']);
+            // printWithPre($cartproducts);
+            if (!empty($cartproducts)) {
+
+                foreach ($cartproducts as $key1 => $c) {
+                    $id = $c["product"];
+                    $variant_id = $c['varient'];
+                    $quantity = $c['quantity'];
+                    $vdata = getData2("SELECT tbl_variants.* , tbl_products.name as product_name, tbl_products.id as product_id, tbl_products.category as category FROM `tbl_variants` LEFT JOIN tbl_products ON tbl_variants.product_id = tbl_products.id WHERE tbl_variants.id = '$variant_id'")[0];
+                    // echo $vdata['image'];
+                    $images = array_reverse(json_decode($vdata['images'], true));
+                    $variants = json_decode($vdata['options'], true);
+                    $variants = json_decode($variants, true);
+                    $totalprice = $vdata['price'] * $quantity;
+                ?>
+
+                    <div class="flex items-center gap-4 border-b py-2 w-full">
+                        <!-- Product image -->
+                        <img src="/<?= $images[0] ?>" alt="Product" class="w-16 h-20 object-cover">
+
+                        <!-- Product details -->
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-base"><?= $vdata['product_name'] ?></h3>
+                            <div class="flex gap-3 flex-wrap items-center justify-start">
+                                <?php
+                                foreach ($variants as $key => $variant) {
+                                ?>
+                                    <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
+                                <?php } ?>
+                            </div>
+                            <span class="font-bold text-[#f25b21] total">₹<span><?= $totalprice ?></span></span>
+
+                            <!-- Quantity controls -->
+                            <div class="flex items-center mt-2 border w-fit">
+                                <input type="hidden" name="cartid[]" class="cartid" value="<?= $c['id'] ?>">
+                                <input type="hidden" name="varient[]" class="varient" value="<?= $variant_id ?>">
+                                <input type="hidden" name="category[]" class="category"
+                                    value="<?= $vdata['category'] ?>">
+                                <input type="hidden" name="product[]" class="product" value="<?= $id ?>">
+                                <input type="hidden" class="selling_price" name="price[]"
+                                    value="<?= $vdata['price'] ?>">
+
+                                <input type="hidden" class="quantityo" name="quantity[]"
+                                    value="<?= $quantity ?>">
+                                <button type="button" class="px-3  rounded-l hover:bg-gray-100 py-1" onclick="minusQuantity(this,'<?= $vdata['id'] ?>','<?= $vdata['product_id'] ?>','<?= $vdata['category'] ?>')">-</button>
+                                <span class="px-4   quantity py-1"><?= $quantity ?></span>
+                                <button type="button" class="px-3  rounded-r hover:bg-gray-100 py-1" onclick="plusQuantity(this,'<?= $vdata['id'] ?>','<?= $vdata['product_id'] ?>','<?= $vdata['category'] ?>')">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Delete button -->
+                        <button type="button" class="text-gray-500 hover:text-red-600" onclick="deleteCart(this, <?= $c['id'] ?>)">
+                            <i class="fas fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                <?php
+                }
+            } else {
+                ?>
+                <div class="flex flex-col items-center justify-center w-full h-[60vh]">
+                    <i class="fa-solid fa-bag-shopping text-8xl text-gray-200" aria-hidden="true"></i>
+
+                    <p class="w-full text-center text-slate-500 font-semibold text-lg h-16 flex flex-col items-center justify-center">
+                        No Products in the cart.
                     </p>
-
-                    <!-- Quantity controls -->
-                    <div class="flex items-center mt-2">
-                        <button id="qtyMinus" class="px-3 border rounded-l hover:bg-gray-100">-</button>
-                        <span id="qtyDisplay" class="px-4 border-t border-b"><?= $quantity ?></span>
-                        <button id="qtyPlus" class="px-3 border rounded-r hover:bg-gray-100">+</button>
-                    </div>
-                    </div>
-
-                    <!-- Delete button -->
-                    <button class="text-gray-500 hover:text-red-600">
-                        <i class="fas fa-trash" aria-hidden="true"></i>
-                    </button>
                 </div>
+            <?php
+            }
+            ?>
+
 
             <?php
+            $cartHtml = ob_get_clean(); // Capture the buffer and clean it
+
+            echo json_encode([
+                'cart_div' => $cartHtml,
+                'success' => true,
+            ]);
 
 
+
+            // echo $sql;
+
+        } else {
+            ob_start();
+            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+
+
+                foreach ($_SESSION["cart"] as $key1 => $c) {
+                    $id = $c["product"];
+                    $variant_id = $c['varient'];
+                    $quantity = $c['quantity'];
+                    $vdata = getData2("SELECT tbl_variants.* , tbl_products.name as product_name, tbl_products.id as product_id, tbl_products.category as category FROM `tbl_variants` LEFT JOIN tbl_products ON tbl_variants.product_id = tbl_products.id WHERE tbl_variants.id = '$variant_id'")[0];
+                    // echo $vdata['image'];
+                    $images = array_reverse(json_decode($vdata['images'], true));
+                    $variants = json_decode($vdata['options'], true);
+                    $variants = json_decode($variants, true);
+                    $totalprice = $vdata['price'] * $quantity;
+            ?>
+
+                    <div class="flex items-center gap-4 border-b py-2 w-full">
+                        <!-- Product image -->
+                        <img src="/<?= $images[0] ?>" alt="Product" class="w-16 h-20 object-cover">
+
+                        <!-- Product details -->
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-base"><?= $vdata['product_name'] ?></h3>
+                            <div class="flex gap-3 flex-wrap items-center justify-start">
+                                <?php
+                                foreach ($variants as $key => $variant) {
+                                ?>
+                                    <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
+                                <?php } ?>
+                            </div>
+                            <span class="font-bold text-[#f25b21] total">₹<span><?= $totalprice ?></span></span>
+
+                            <!-- Quantity controls -->
+                            <div class="flex items-center mt-2 border w-fit">
+                                <button type="button" class="px-3  rounded-l hover:bg-gray-100 py-1" onclick="minusQuantity(this,'<?= $vdata['id'] ?>','<?= $vdata['product_id'] ?>','<?= $vdata['category'] ?>')">-</button>
+                                <span class="px-4   quantity py-1"><?= $quantity ?></span>
+                                <button type="button" class="px-3  rounded-r hover:bg-gray-100 py-1" onclick="plusQuantity(this,'<?= $vdata['id'] ?>','<?= $vdata['product_id'] ?>','<?= $vdata['category'] ?>')">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Delete button -->
+                        <button type="button" class="text-gray-500 hover:text-red-600" onclick="deleteCart(this, <?= $key1 ?>)">
+                            <i class="fas fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                <?php
+
+
+                }
+            } else {
+
+                ?>
+                <div class="flex flex-col items-center justify-center w-full h-[60vh]">
+                    <i class="fa-solid fa-bag-shopping text-8xl text-gray-200" aria-hidden="true"></i>
+
+                    <p class="w-full text-center text-slate-500 font-semibold text-lg h-16 flex flex-col items-center justify-center">
+                        No Products in the cart.
+                    </p>
+                </div>
+            <?php
             }
             ?>
 
@@ -346,8 +484,6 @@ class WebController extends LoginController
             echo json_encode([
                 'cart_div' => $cartHtml,
                 'success' => true,
-                'message' => 'Product added to cart',
-                'cart_count' => count($_SESSION['cart']),
             ]);
 
             // }else{
@@ -360,7 +496,58 @@ class WebController extends LoginController
         }
     }
 
+    public function deleteCart()
+    {
 
+        if (!empty($_POST)) {
+            // printWithPre($_POST);
+            // die();
+            if (isset($_POST["deleteMe"])) {
+                if (isset($_SESSION["type"]) && $_SESSION["type"] == "User" && !empty($_SESSION["username"])) {
+
+                    $delete = delete($_POST["cartid"], "tbl_cart", "id");
+                    $count = count(getData2("SELECT * FROM `tbl_cart` WHERE `userid` = " . $_SESSION['userid']));
+                    echo json_encode([
+                        "success" => true,
+                        "message" => "Item Cart Deleted",
+                        "totalcart" => $count
+                    ]);
+                } else {
+                    unset($_SESSION["cart"][$_POST["cartid"]]);
+                    $totalcart = count($_SESSION["cart"]);
+                    if (empty($_SESSION["cart"])) {
+                        unset($_SESSION["cart"]);
+                    }
+                    // $totalcart = count($_SESSION["cart"]);
+                    echo json_encode([
+                        "success" => true,
+                        "message" => "Item Cart Updated",
+                        "totalcart" => $totalcart
+                    ]);
+                }
+            }
+            exit();
+        }
+    }
+
+    public function checkoutCart()
+    {
+        if (isset($_POST["myForm"])) {
+            if (empty($_POST["cartid"])) {
+                $_SESSION["err"] = "Please Select Atleast One Item";
+                header("Location:cart.php");
+            } else {
+                $_SESSION["cartData"] = $_POST;
+                $_SESSION["weight"] = $_POST["totalweight"];
+                $_SESSION["totalprice"] = $_POST["totalprice"];
+                $_SESSION['sampleproductid'] = $_POST['sampleproductid'];
+                $_SESSION['sampleproductquantity'] = $_POST['sampleproductquantity'];
+                header("Location: /checkout");
+            }
+        }
+
+        exit();
+    }
 
     public function current_url(): string
     {
@@ -543,249 +730,7 @@ class WebController extends LoginController
         }
     }
 
-    public function sbiClerk()
-    {
 
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "SBI Clerk";
-        $pageTitle = "SBI Clerk";
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        // printWithPre($course);
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'sbi-clerk' ORDER BY `id` DESC LIMIT 1")[0];
-            // printWithPre($course);
-            require 'views/website/sbi-clerk.php';
-        }
-    }
-    public function sbiPo()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "SBI PO";
-        $pageTitle = "SBI PO";
-        $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'sbi-po' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/sbi-po.php';
-        }
-    }
-    public function IbpsClerk()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "IBPS Clerk";
-        $pageTitle = "IBPS Clerk";
-        $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'ibps-clerk' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/ibps-clerk.php';
-        }
-    }
-    public function IbpsPO()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "IBPS PO";
-        $pageTitle = "IBPS PO";
-        $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'ibps-po' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/ibps-po.php';
-        }
-    }
-    public function RBI()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "RBI";
-        $pageTitle = "RBI";
-        $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'rbi' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/rbi.php';
-        }
-    }
-    public function MH_CET()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "MH CET";
-        $pageTitle = "MH CET";
-        $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'mh-cet' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/mh-cet.php';
-        }
-    }
-    public function CMAT()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "CMAT";
-        $pageTitle = "CMAT";
-        $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'cmat' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/cmat.php';
-        }
-    }
-
-    public function CAT()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "CAT";
-        $pageTitle = "CAT";
-        $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'cat' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/cat.php';
-        }
-    }
-
-    public function CGL()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "CGL";
-        $pageTitle = "CGL";
-        $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'cgl' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/cgl.php';
-        }
-    }
-    public function MTS()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "MTS";
-        $pageTitle = "MTS";
-        $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'mts' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/mts.php';
-        }
-    }
-    public function CHSL()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "CHSL";
-        $pageTitle = "CHSL";
-        $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'chsl' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/chsl.php';
-        }
-    }
-    public function Railways()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "Railways";
-        $pageTitle = "Railways";
-
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/railways.php';
-        }
-    }
-    public function MPSC()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "MPSC";
-        $pageTitle = "MPSC";
-        $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'mpsc' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/mpsc.php';
-        }
-    }
-    public function OnlineVedicMath()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "Online Vedic Maths";
-        $pageTitle = "Online Vedic Maths";
-        $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'online-vedic-math' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/online-vedic-maths.php';
-        }
-    }
-    public function VedicMathsTeacher()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "Vedic Maths Teacher";
-        $pageTitle = "Vedic Maths Teacher";
-        $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'vedic-maths-teacher' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/vedic-maths-teacher-training-programme.php';
-        }
-    }
-    public function UPSC()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "UPSC";
-        $pageTitle = "UPSC";
-        $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'upsc' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/upsc.php';
-        }
-    }
-    public function CSAT()
-    {
-        $url = $this->current_url();
-        // echo $url;
-        $banner = getData2("SELECT * FROM `tbl_home_banner` WHERE `link` = '$url' ORDER BY `id` DESC LIMIT 1")[0];
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "CSAT";
-        $pageTitle = "CSAT";
-        $course = getData2("SELECT * FROM `all_courses` WHERE `course` = 'csat' ORDER BY `id` DESC LIMIT 1")[0];
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/csat.php';
-        }
-    }
     public function ContactUs()
     {
         $siteName = getDBObject()->getSiteName();
@@ -943,9 +888,12 @@ class WebController extends LoginController
         $siteName = getDBObject()->getSiteName();
         $pageModule = "Shipping Info";
         $pageTitle = "Shipping Info";
+        $cartData = $_SESSION["cartData"];
+        $userData = getData2("SELECT * FROM `online_users` WHERE `id` = $_SESSION[userid]")[0];
 
         // $this->checkSession();
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
             require 'views/website/checkout.php';
         }
     }
