@@ -1,10 +1,33 @@
 <?php
 // printWithPre($_SESSION);
+$allstates = getData("indian_states");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/header.php'; ?>
+<style>
+    .modal {
+        transition: all 0.3s ease-in-out;
+        transform: translateY(-100%);
+    }
+
+    .modal.show {
+        transform: translateY(0);
+    }
+
+    .modal-backdrop {
+        transition: all 0.3s ease-in-out;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .modal-backdrop.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+</style>
 
 <body class="overflow-x-hidden archivo-narrow-k">
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
@@ -28,68 +51,125 @@
         <section class="md:col-span-3 space-y-6">
             <!-- Step 1: Shipping -->
             <div class="bg-white p-6">
-                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                <button onclick="openModal1()" class="bg-black text-white flex py-2 px-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                                Add New Address
+                            </button>
+                <h2 class="text-xl font-bold mb-4 flex items-center gap-2 mt-4">
                     <span
                         class="w-8 h-8 flex items-center justify-center bg-[#f25b21] text-white rounded-full text-sm">1</span>
                     Shipping Information
                 </h2>
                 <form class="grid grid-cols-2 gap-4 mt-3">
-                    <input type="text" placeholder="First Name" required class="border px-3 py-2 rounded col-span-1" value="<?= $userData['fname'] ?>">
-                    <input type="text" placeholder="Last Name" required class="border px-3 py-2 rounded col-span-1" value="<?= $userData['lname'] ?>">
-                    <input type="email" placeholder="Email Address" class="border px-3 py-2 rounded col-span-1" value="<?= $userData['username'] ?>">
-                    <input type="text" placeholder="Phone Number" required class="border px-3 py-2 rounded col-span-1" value="<?= $userData['mobile'] ?>">
+                    <input type="text" placeholder="First Name" required class="border px-3 py-2 rounded col-span-1" value="<?= $userData['fname'] ?>" name="fname">
+                    <input type="text" placeholder="Last Name" required class="border px-3 py-2 rounded col-span-1" value="<?= $userData['lname'] ?>" name="lname">
+                    <input type="email" placeholder="Email Address" class="border px-3 py-2 rounded col-span-1" value="<?= $userData['username'] ?>" name="email">
+                    <input type="text" placeholder="Phone Number" required class="border px-3 py-2 rounded col-span-1" value="<?= $userData['mobile'] ?>" name="mobile">
+                    <input type="text" id="address2" placeholder="Apartment, Floor No, suite, etc." required class="border px-3 py-2 rounded col-span-2" name="address_line2" value="<?= $address[0]['address_line2'] ?>">
                     <input type="text" placeholder="Street Address" required
-                        class="border px-3 py-2 rounded col-span-2">
+                        class="border px-3 py-2 rounded col-span-2" id="address1" value="<?= $address[0]['address_line1'] ?>" name="address_line1">
                     <div class="grid grid-cols-3 gap-4 col-span-2">
-                        <input type="text" placeholder="City" required class="border px-3 py-2 rounded ">
+                        <input type="text" placeholder="City" id="city" value="<?= $address[0]['city'] ?>" name="city" required class="border px-3 py-2 rounded ">
 
-                        <select class="border px-3 py-2 rounded w-full">
-                            <option value="" selected disabled>Select State</option>
-                            <option value="Andhra Pradesh">Andhra Pradesh</option>
-                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                            <option value="Assam">Assam</option>
-                            <option value="Bihar">Bihar</option>
-                            <option value="Chhattisgarh">Chhattisgarh</option>
-                            <option value="Goa">Goa</option>
-                            <option value="Gujarat">Gujarat</option>
-                            <option value="Haryana">Haryana</option>
-                            <option value="Himachal Pradesh">Himachal Pradesh</option>
-                            <option value="Jharkhand">Jharkhand</option>
-                            <option value="Karnataka">Karnataka</option>
-                            <option value="Kerala">Kerala</option>
-                            <option value="Madhya Pradesh">Madhya Pradesh</option>
-                            <option value="Maharashtra">Maharashtra</option>
-                            <option value="Manipur">Manipur</option>
-                            <option value="Meghalaya">Meghalaya</option>
-                            <option value="Mizoram">Mizoram</option>
-                            <option value="Nagaland">Nagaland</option>
-                            <option value="Odisha">Odisha</option>
-                            <option value="Punjab">Punjab</option>
-                            <option value="Rajasthan">Rajasthan</option>
-                            <option value="Sikkim">Sikkim</option>
-                            <option value="Tamil Nadu">Tamil Nadu</option>
-                            <option value="Telangana">Telangana</option>
-                            <option value="Tripura">Tripura</option>
-                            <option value="Uttar Pradesh">Uttar Pradesh</option>
-                            <option value="Uttarakhand">Uttarakhand</option>
-                            <option value="West Bengal">West Bengal</option>
-                            <option disabled>──────────</option>
-                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                            <option value="Chandigarh">Chandigarh</option>
-                            <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra & Nagar Haveli and Daman &
-                                Diu</option>
-                            <option value="Delhi">Delhi</option>
-                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                            <option value="Ladakh">Ladakh</option>
-                            <option value="Lakshadweep">Lakshadweep</option>
-                            <option value="Puducherry">Puducherry</option>
+                        <select class="border px-3 py-2 rounded w-full" id="state" name="state">
+                            <?php foreach ($allstates as $key => $state) {  ?>
+
+                                <option value="<?= $state['id'] ?>" <?= (isset($address) && $address[0]['state'] == $state['id']) ? 'selected' : '' ?>><?= $state['name'] ?></option>
+
+                            <?php  } ?>
                         </select>
 
-                        <input type="text" placeholder="Pincode" required class="border px-3 py-2 rounded ">
+                        <input type="text" placeholder="Pincode" id="pinTest" name="pin_code" value="<?= $address[0]['pincode'] ?>" required class="border px-3 py-2 rounded ">
                     </div>
                 </form>
             </div>
+            <div class="bg-white p-4 sm:p-8 w-full  shadow-md border border-gray-100">
+                <!-- Header Section -->
+                <div class="title mb-4 sm:mb-6 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <div class="w-1 h-6 bg-[#1d9267] rounded-full"></div>
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-800">Saved Addresses</h2>
+                    </div>
+                </div>
 
+
+                <!-- Replace the Address List div with this conditional structure -->
+                <div class="min-h-[30vh] max-md:h-[40vh] overflow-y-auto space-y-3 pr-2">
+                    <?php if (empty($address)) { ?>
+                        <!-- Empty State -->
+                        <div class="h-full flex flex-col items-center justify-center text-center max-md:p-2">
+                            <div class="w-24 h-24 mb-2 max-md:w-16 max-md:h-16">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-full h-full text-gray-300">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">No Addresses Saved</h3>
+                            <p class="text-gray-500 mb-6 max-w-sm max-md:text-xs">Add your delivery addresses to make checkout faster and easier</p>
+                            <button onclick="openModal1()" class="bg-black text-white flex py-2 px-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                                Add New Address
+                            </button>
+                        </div>
+                    <?php } else { ?>
+                        <?php foreach ($address as $key => $value) { ?>
+                            <div class="relative">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-5 bg-white  border border-gray-200 hover:border-pink-200 hover:shadow-md cursor-pointer transition-all duration-200" onclick="selectAddress(this)">
+                                    <!-- Radio and Type Badge -->
+                                    <div class="flex items-center gap-3 sm:gap-4 relative mb-3 sm:mb-0">
+                                        <input
+                                            type="radio"
+                                            name="selectAddress"
+                                            class="w-4 h-4 accent-[#1d9267] cursor-pointer shrink-0"
+                                            value="<?= $value['id'] ?>"
+                                            <?= ($key == 0) ? 'checked' : '' ?>>
+
+                                        
+                                    </div>
+
+                                    <!-- Address Details -->
+                                    <div class="flex-1 sm:pl-4">
+                                        <div class="flex flex-col">
+                                            <span class="selectedAddress1 font-medium text-gray-900 leading-tight max-md:text-sm">
+                                                <?= $value['address_line1'] ?>
+                                            </span>
+                                            <span class="selectedAddress2 text-sm text-gray-500 mt-0.5 mb-2 sm:mb-0">
+                                                <?= $value['address_line2'] ?>
+                                            </span>
+
+                                            <!-- City, State, Pincode -->
+                                            <div class="mt-2 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm">
+                                                <div class="flex items-center gap-1.5">
+                                                    <span class="text-gray-500 w-16 sm:w-auto">City:</span>
+                                                    <span class="selectedCity font-medium text-gray-700"><?= $value['city'] ?></span>
+                                                </div>
+
+                                                <div class="hidden sm:block w-1 h-1 bg-gray-300 rounded-full"></div>
+
+                                                <div class="flex items-center gap-1.5">
+                                                    <span class="text-gray-500 w-16 sm:w-auto">State:</span>
+                                                    <span class="selectedState font-medium text-gray-700"><?= $value['state'] ?></span>
+                                                </div>
+
+                                                <div class="hidden sm:block w-1 h-1 bg-gray-300 rounded-full"></div>
+
+                                                <div class="flex items-center gap-1.5">
+                                                    <span class="text-gray-500 w-16 sm:w-auto">Pincode:</span>
+                                                    <span class="selectedPincode font-medium text-gray-700"><?= $value['pincode'] ?></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+            </div>
             <!-- Step 2: Delivery -->
             <div class="bg-white shadow-md rounded-2xl p-6 hidden">
                 <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
@@ -124,19 +204,14 @@
                         class="flex items-center justify-between border p-4 rounded-md cursor-pointer hover:border-[#f25b21]">
                         <span class="flex items-center gap-2">
                             <i class="fas fa-credit-card text-[#f25b21]"></i>
-                            Credit / Debit Card
-                        </span>
-                        <input type="radio" name="payment" checked>
-                    </label>
+                            Credit / Debit Card / UPI / Wallet
 
-                    <!-- UPI / Wallet -->
-                    <label
-                        class="flex items-center justify-between border p-4 rounded-md cursor-pointer hover:border-[#f25b21]">
-                        <span class="flex items-center gap-2">
-                            <i class="fas fa-mobile-alt text-[#f25b21]"></i>
-                            UPI / Wallet
+                            <img src="/public/logos/images (3).png" alt="UPI" class="h-5 mx-1 max-md:h-2">
+                            <img src="/public/logos/visa.png" alt="VISA" class="h-5 mx-1 max-md:h-2">
+                            <img src="/public/logos/mastercard.png" alt="Mastercard" class="h-5 mx-1 max-md:h-2">
+                            <img src="/public/logos/rupay.png" alt="RuPay" class="h-5 mx-1 max-md:h-2">
                         </span>
-                        <input type="radio" name="payment">
+                        <input type="radio" name="payment" value="cashfree" checked>
                     </label>
 
                     <!-- Cash on Delivery -->
@@ -146,7 +221,7 @@
                             <i class="fas fa-money-bill-wave text-[#f25b21]"></i>
                             Cash on Delivery
                         </span>
-                        <input type="radio" name="payment">
+                        <input type="radio" name="payment" value="cod">
                     </label>
                 </div>
 
@@ -198,7 +273,7 @@
             <div class="space-y-2 text-sm">
                 <div class="flex justify-between">
                     <span>Subtotal</span>
-                    <span>₹<?=$totalAmount ?></span>
+                    <span>₹<?= $totalAmount ?></span>
                 </div>
                 <div class="flex justify-between">
                     <span>Shipping</span>
@@ -223,11 +298,191 @@
             </button>
         </aside>
     </main>
+    <div id="addressModal" class=" h-full w-full fixed inset-0 top-1/2 transform -translate-y-1/2 z-[9999]  overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center   items-center justify-center hidden">
+        <div class="bg-white shadow-lg mx-auto w-[30%]">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold">Update Delivery Address</h3>
+                    <button onclick="closeModal1()" type="button" class="text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Address Line 1</label>
+                        <input type="text" name="addressInput1" id="addressInput1" value=""
+                            class="mt-1 block w-full border border-gray-300  shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Address Line 2</label>
+                        <input type="text" name="addressInput2" id="addressInput2" value=""
+                            class="mt-1 block w-full border border-gray-300  shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">City</label>
+                        <input type="text" name="cityInput" value="" id="cityInput"
+                            class="mt-1 block w-full border border-gray-300  shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">State</label>
+                        
+                            <select class="border px-3 py-2 rounded w-full" id="stateInput" name="stateInput">
+                            <?php foreach ($allstates as $key => $state) {  ?>
 
+                                <option value="<?= $state['id'] ?>"><?= $state['name'] ?></option>
+
+                            <?php  } ?>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Zip Code</label>
+                        <input type="text" name="pincodeInput" value="" id="pincodeInput"
+                            class="mt-1 block w-full border border-gray-300  shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div class="flex justify-between space-x-3 pt-4">
+                        
+                        <div>
+                            <button type="button" onclick="closeModal1()"
+                                class="px-4 py-2 border border-gray-300  text-sm text-white    font-medium bg-gray-600 hover:bg-gray-700 shadow-lg">
+                                Cancel
+                            </button>
+                            <button type="button" name="sumbit" onclick="updateAddress()"
+                                class="px-4 py-2 border border-transparent  shadow-sm text-sm font-medium text-white bg-[#1d9267] ">
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modalBackdrop" class="modal-backdrop hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/views/website/sidecart.php";
     include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/footer.php";
     ?>
+    <script>
+        const addressmodal = document.getElementById('addressModal');
+        const backdrop = document.getElementById('modalBackdrop');
+        const addressInput1 = document.getElementById('addressInput1');
+        const addressInput2 = document.getElementById('addressInput2');
+        const cityInput = document.getElementById('cityInput');
+        const stateInput = document.getElementById('stateInput');
+        const pincodeInput = document.getElementById('pincodeInput');
+        const userid = document.getElementById('userid');
+        // const home = document.getElementById('home');
+        // const work = document.getElementById('work');
+        const pinTest = document.getElementById('pinTest');
+        // const productweight = document.querySelectorAll('.productweight');
 
+
+        function openModal1() {
+            console.log("hello");
+            addressmodal.classList.add('show');
+            addressmodal.classList.remove('hidden');
+
+            console.log(addressmodal);
+
+            // modal.style.display = 'block';
+            backdrop.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal1() {
+            addressmodal.classList.remove('show');
+            addressmodal.classList.add('hidden');
+
+            // modal.style.display = 'none';
+            backdrop.classList.remove('show');
+            // document.body.style.overflow = '';
+        }
+
+        async function applyCoupon() {
+            // Get the coupon text
+            const couponSecret = document.getElementById('newDiscount').value;
+
+            const result = await axios.post('', new URLSearchParams({
+                couponSecret: couponSecret
+            }));
+
+            console.log(result);
+
+            if (result.data.success) {
+                toastr.success(result.data.message);
+
+                document.getElementById('coupenDiscount').value = result.data.discount;
+                document.getElementById('coupenDiscountSpan').innerText = result.data.discount;
+                let subtotal = document.getElementById('subTotal').innerText;
+                console.log(subtotal);
+                console.log(result.data.discount);
+                let allTotal = document.getElementById('allTotal').value = parseFloat(subtotal) - parseFloat(result.data.discount) + parseFloat(document.getElementById("deliveryCharges").value);
+                console.log(allTotal);
+                document.getElementById('allTotalSpan').innerText = allTotal;
+
+
+            } else {
+                toastr.error(result.data.message);
+
+            }
+
+        }
+        async function updateAddress() {
+            // displayAddress.textContent = addressInput.value;
+            console.log(addressInput1.value)
+            console.log(addressInput2.value)
+            console.log(cityInput.value)
+            console.log(stateInput.value)
+            console.log(pincodeInput.value)
+            let delivery = '';
+           
+            console.log('this is delevry value' + delivery)
+
+            const response = await axios.post("/user-address", new URLSearchParams({
+                address_line1: addressInput1.value,
+                address_line2: addressInput2.value,
+                city: cityInput.value,
+                state: stateInput.value,
+                pincode: pincodeInput.value,
+                userid: '<?php echo $_SESSION['userid']; ?>',
+                created_by: '<?php echo $_SESSION['userid']; ?>',
+
+            }))
+
+            console.log(response);
+            if (response.data.success) {
+                
+                window.location.reload();
+            } else {
+                toastr.error(response.data.message);
+            }
+
+            closeModal1();
+        }
+
+        function selectAddress(div) {
+            const address = div.querySelector(".selectedAddress1").innerText;
+            const address2 = div.querySelector(".selectedAddress2").innerText;
+            const city = div.querySelector(".selectedCity").innerText;
+            const state = div.querySelector(".selectedState").innerText;
+            const pincode = div.querySelector(".selectedPincode").innerText;
+            // const delivery = div.querySelector(".selecteddelivery").innerText;
+
+            console.log(address);
+            console.log(address2);
+            console.log(city);
+            console.log(state);
+            console.log(pincode);
+            // console.log(delivery);
+
+            document.getElementById("address1").value = address;
+            document.getElementById("address2").value = address2;
+            document.getElementById("city").value = city;
+            // document.getElementById("state").value = state;
+            document.getElementById("pinTest").value = pincode;
+        }
+
+        // Close modal when clicking outside
+        backdrop.addEventListener('click', closeModal1);
+    </script>
 </body>

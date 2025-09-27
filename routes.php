@@ -32,7 +32,7 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('/api/delete-cart', 'deleteCart');
     $route->route('/api/get-cart-data', 'getCartData');
     $route->route('/checkout-cart', 'checkoutCart');
-
+    $route->route('/user-address', 'userAddress');
     $route->route('cookies', 'cookies');
     $route->route('/api/send-otp', 'SendOtp');
     $route->route('category/[:category_name]', 'Category');

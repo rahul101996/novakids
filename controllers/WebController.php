@@ -496,6 +496,27 @@ class WebController extends LoginController
         }
     }
 
+    public function userAddress()
+    {
+        $userid = $_SESSION['userid'];
+        // printWithPre($_POST);
+        $address = add($_POST, "tbl_user_address");
+        if ($address) {
+            $_SESSION['success'] = "Address Added Successfully";
+            echo json_encode([
+                "success" => true,
+                "address" => $address
+            ]);
+        } else {
+
+            echo json_encode([
+                "success" => false,
+                "message" => "Server Error"
+            ]);
+        }
+        exit();
+    }
+
     public function deleteCart()
     {
 
@@ -890,6 +911,7 @@ class WebController extends LoginController
         $pageTitle = "Shipping Info";
         $cartData = $_SESSION["cartData"];
         $userData = getData2("SELECT * FROM `online_users` WHERE `id` = $_SESSION[userid]")[0];
+        $address = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $_SESSION[userid] ORDER BY `id` DESC ");
 
         // $this->checkSession();
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
