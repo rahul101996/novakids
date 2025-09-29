@@ -180,6 +180,15 @@ $allstates = getData("indian_states");
                         Payment Method
                     </h2>
                     <div class="space-y-3">
+                        <!-- Cash on Delivery -->
+                        <label
+                            class="flex items-center justify-between border p-4 rounded-md cursor-pointer hover:border-[#f25b21]">
+                            <span class="flex items-center gap-2">
+                                <i class="fas fa-money-bill-wave text-[#f25b21]"></i>
+                                Cash on Delivery
+                            </span>
+                            <input type="radio" name="payment_mode" value="COD" checked>
+                        </label>
                         <!-- Credit / Debit Card -->
                         <label
                             class="flex items-center justify-between border p-4 rounded-md cursor-pointer hover:border-[#f25b21]">
@@ -192,18 +201,11 @@ $allstates = getData("indian_states");
                                 <img src="/public/logos/mastercard.png" alt="Mastercard" class="h-5 mx-1 max-md:h-2">
                                 <img src="/public/logos/rupay.png" alt="RuPay" class="h-5 mx-1 max-md:h-2">
                             </span>
-                            <input type="radio" name="payment_mode" value="Prepaid" checked>
+                            <input type="radio" name="payment_mode" value="Prepaid" >
                         </label>
 
-                        <!-- Cash on Delivery -->
-                        <label
-                            class="flex items-center justify-between border p-4 rounded-md cursor-pointer hover:border-[#f25b21]">
-                            <span class="flex items-center gap-2">
-                                <i class="fas fa-money-bill-wave text-[#f25b21]"></i>
-                                Cash on Delivery
-                            </span>
-                            <input type="radio" name="payment_mode" value="COD">
-                        </label>
+                        
+                        
                     </div>
 
                 </div>

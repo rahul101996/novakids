@@ -311,4 +311,8 @@
     // Check visibility on page load and on scroll
     document.addEventListener("DOMContentLoaded", checkVisibility);
     document.addEventListener("scroll", checkVisibility);
+
+
+    
+
 </script>

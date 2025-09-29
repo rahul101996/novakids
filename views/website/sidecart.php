@@ -375,7 +375,7 @@
         const request = await axios.post("/api/get-cart-data", new URLSearchParams({
             'getdata': 1
         }));
-        console.log(request.data)
+        // console.log(request.data)
         if (request.data.success) {
             cartItems.innerHTML = '';
             cartItems.innerHTML = request.data.cart_div;
@@ -412,6 +412,11 @@
 
     const qtyMinus = document.getElementById("qtyMinus");
     const qtyPlus = document.getElementById("qtyPlus");
+
+    const GLOBAL_VARIANT = {
+        variants : {},
+        selected : {}
+    };
 
     function updateCart() {
         const subtotal = itemPrice * quantity;
@@ -510,19 +515,32 @@
                         productid: product_id,
 
                     }))
-                    // console.log(response.data)
+                    console.log(response.data)
+                    GLOBAL_VARIANT.variants = response.data.variants;
+                    let firstValues = {};
+                    let dict = response.data.grouped
+                    for (let key in dict) {
+                        if (Array.isArray(dict[key]) && dict[key].length > 0) {
+                            firstValues[key] = dict[key][0];
+                        }
+                    }
+
+                    console.log(firstValues);
+                    GLOBAL_VARIANT.selected = firstValues
 
                     if (response.data.variants.length > 0) {
 
-                        showVarientsSidebar(response.data.html);
-
+                        // showVarientsSidebar(response.data.html);
+                        // VariantSelects.innerHTML;
+                        VariantSelects.innerHTML = response.data.html;
+                        Openvariant()
                         let options = document.querySelectorAll('.optionDivs');
 
-                        // console.log(options);
+                        console.log("options",options);
 
                         let FirstOption = options[0];
 
-                        // console.log(FirstOption);
+                        // // console.log(FirstOption);
                         let OptionName = FirstOption.getAttribute('option_name');
                         let OptionValue = FirstOption.getAttribute('option_value');
                         let product_id = FirstOption.getAttribute('product_id');
@@ -533,7 +551,7 @@
                             option_value: OptionValue
 
                         }))
-                        // console.log(response2.data)
+                        // console.log("response2.data",response2.data)
                         const ColorDiv = document.getElementById('ColorDiv');
                         if (ColorDiv) {
                             ColorDiv.innerHTML = response2.data.html;
@@ -553,6 +571,28 @@
                 });
             });
         }
+    }
+
+    function updateKey(dict, key, value) {
+        let foundKey = Object.keys(dict).find(k => k.toLowerCase() === key.toLowerCase());
+        if (foundKey) {
+            dict[foundKey] = value; // update existing
+        } else {
+            dict[key] = value; // add new
+        }
+    }
+
+    function changeSideVariant(ele,tp,value,key1){
+        console.log("parent",ele.parentElement,key1)
+        updateKey(GLOBAL_VARIANT.selected,tp,value);
+        let divs = ele.parentElement.querySelectorAll("div")
+        divs.forEach(div => {
+        div.classList.remove("border-gray-900");
+        });
+        // console.log(divs[key1])
+        divs[key1].classList.add("border-gray-900");
+        console.log("GLOBAL_VARIANT",GLOBAL_VARIANT)
+        
     }
 
     function AddToCartslider(btn, sidecart = false) {
@@ -601,13 +641,11 @@
 
     }
 
-    function showVarientsSidebar(data) {
-        // console.log(data);
-        VariantSelects.innerHTML;
-        VariantSelects.innerHTML = data;
-        Openvariant()
+    // function showVarientsSidebar(data) {
+    //     // console.log(data);
+        
 
-    }
+    // }
 
     async function minusQuantity(ele, varient_id, category_id, product_id) {
         const row = ele.parentElement;
