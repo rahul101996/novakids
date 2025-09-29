@@ -117,7 +117,7 @@ if (!empty($_POST)) {
                 ];
 
                 // Insert the user into the database
-                $userid = $this->registerOnlineUser($data);
+                $userid = add($data, "online_users");
                 if ($userid) {
                     // echo "User registered successfully!";
                     $_SESSION["success"] = "Register Successfully";
@@ -131,24 +131,17 @@ if (!empty($_POST)) {
 
                     if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
                         foreach ($_SESSION["cart"] as $key => $c) {
-                            $cartaratratartaratartrrat = true;
-                            $data = $cartController->getCartByVarientAndUserid($c["varient"], $user["id"]);
-                            if ($data) {
 
-                                $cartController->updateCart($data["id"], [
-                                    "quantity" => $data["quantity"] + $c["quantity"]
-                                ]);
-                            } else {
-
-                                $cartController->insertCart([
+                                $cartdata = [
                                     "varient" => $c["varient"],
                                     "category" => $c["category"],
                                     "product" => $c["product"],
                                     "quantity" => $c["quantity"],
                                     "userid" => $userid,
                                     "username" => $_POST["username"],
-                                ]);
-                            }
+                                ];
+                                add($cartdata, "tbl_cart");
+                            
                         }
                         unset($_SESSION["cart"]);
                     } else if (isset($_SESSION["FormCartData"])) {
@@ -281,6 +274,15 @@ if (!empty($_POST)) {
             font-weight: <weight>;
             font-style: normal;
         }
+
+         .S9gUrf-YoZ4jf{
+
+        display:flex ! important;
+    }
+    .g_id_signin {
+        display:flex ! important;
+        justify-content: center ! important;
+    }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
@@ -328,4 +330,5 @@ if (!empty($_POST)) {
             path.setAttribute("d", "M19 9l-7 7-7-7");
         }
     });
+   
 </script>
