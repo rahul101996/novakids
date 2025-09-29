@@ -38,6 +38,8 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('category/[:category_name]', 'Category');
     $route->route('thank-you', 'thankYou');
 
+    $route->route('api/search-product', 'searchProduct');
+
     // $route->route('/', 'index');
 
 });

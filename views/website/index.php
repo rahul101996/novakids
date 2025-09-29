@@ -135,10 +135,9 @@
                         $name = str_replace(' ', '-', $product['name']);
 
                         // printWithPre($images);
-                    ?>
+                        ?>
                         <a href="/products/product-details/<?= $name ?>" class="block">
-                            <div
-                                class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
+                            <div class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
                                 <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                     SAVE <?= $discountPercentage ?>%
@@ -212,7 +211,7 @@
             foreach ($categories as $key => $category) {
 
 
-            ?>
+                ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
                     <img src="/<?= $category['img'] ?>" alt="Tees"
@@ -402,7 +401,7 @@
                     $price = floatval($product_details['price']);
                     $discountAmount = $comparePrice - $price;
                     $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
-                ?>
+                    ?>
                     <a href="products/product-details/<?= $name ?>" class="block">
                         <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
                             <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden">
@@ -446,12 +445,13 @@
                                     <p class="text-gray-500 line-through text-sm">₹
                                         <?= formatNumber($product_details['compare_price']) ?>.00
                                     </p>
-                                    <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product_details['price']) ?>.00</p>
+                                    <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product_details['price']) ?>.00
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </a>
-                <?php
+                    <?php
                 }
                 ?>
             </div>
@@ -817,13 +817,13 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const modal = document.getElementById('newsletterModal');
             const closeBtn = document.getElementById('closeModal');
             const noPopupCheckbox = document.getElementById('noPopup');
 
-            // Show modal after 5s unless "Don't show again" is checked
-            if (!localStorage.getItem('hideNewsletterModal')) {
+            // Show modal after 3s unless "Don't show again" is checked for this session
+            if (!sessionStorage.getItem('hideNewsletterModal')) {
                 setTimeout(() => {
                     modal.classList.remove('hidden');
                 }, 3000);
@@ -833,7 +833,7 @@
             closeBtn.addEventListener('click', () => {
                 modal.classList.add('hidden');
                 if (noPopupCheckbox.checked) {
-                    localStorage.setItem('hideNewsletterModal', 'true');
+                    sessionStorage.setItem('hideNewsletterModal', 'true');
                 }
             });
 
@@ -842,7 +842,7 @@
                 if (e.target === modal) {
                     modal.classList.add('hidden');
                     if (noPopupCheckbox.checked) {
-                        localStorage.setItem('hideNewsletterModal', 'true');
+                        sessionStorage.setItem('hideNewsletterModal', 'true');
                     }
                 }
             });
@@ -851,7 +851,7 @@
 
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".new-arrival-carousel").owlCarousel({
                 loop: true,
                 margin: 5,

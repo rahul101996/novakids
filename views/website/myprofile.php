@@ -608,7 +608,7 @@ if (!empty($_POST)) {
                             
                             <td class="px-4 py-2 border">${ele['quantity']}</td>
                             <td class="px-4 py-2 border">₹${extractGst(ele['amount']).base_price}</td>
-<td class="px-4 py-2 border">₹${extractGst(total_amount).base_price}</td>
+                            <td class="px-4 py-2 border">₹${extractGst(total_amount).base_price}</td>
 
                         </tr>`;
 

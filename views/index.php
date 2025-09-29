@@ -14,13 +14,14 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
         $date = date('Y-m-d');
 
-
         ?>
 
         <main class="flex-1 md:ml-60">
+            
             <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
             ?>
+
             <div class="p-6 md:p-8">
                 <div class="flex flex-wrap items-center gap-2 mb-6">
                     <button class="bg-white border rounded-md px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
