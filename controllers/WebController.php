@@ -92,6 +92,7 @@ class WebController extends LoginController
                     <p class=" text-xs text-gray-600 mt-1"><a href="" class="underline">shipping</a> calculated at checkout</p>
                     <p class="text-xs mt-1">⭐⭐⭐⭐⭐ <span class="text-sm">31 reviews</span></p>
                     <?php
+                    printWithPre($grouped);
                     foreach ($grouped as $key => $value) {
                         $ogkey = $key;
                         $key = strtolower(str_replace(' ', '', $key));
@@ -118,7 +119,7 @@ class WebController extends LoginController
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
                                 ?>
-                                    <div class="border <?= $key1 == 0 ? "border-gray-900 selected-size" : "border-gray-300"  ?>  optionDivs cursor-pointer flex items-center justify-center h-10 w-20" option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?></div>
+                                    <div onclick='changeSideVariant(this,"<?=$key?>","<?=$value1?>",<?=$key1?>)' class="border <?= $key1 == 0 ? "border-gray-900 selected-size" : "border-gray-300"  ?>  optionDivs cursor-pointer flex items-center justify-center h-10 w-20" option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>" onclick=""><?= $value1 ?></div>
                                 <?php
                                 }
                                 ?>
@@ -126,7 +127,7 @@ class WebController extends LoginController
                         <?php
                         } elseif ($key == 'color') {
                         ?>
-                            <p class="uppercase text-sm mt-5"><?= $key ?> : <?= $value[0] ?></p>
+                            <p class="uppercase" ><?= $key ?> : <?= $value[0] ?></p>
                             <div class="w-full flex items-center justify-start mt-3 text-sm gap-2" id="ColorDiv">
 
                             </div>
@@ -139,7 +140,7 @@ class WebController extends LoginController
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
                                 ?>
-                                    <div class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300"  ?> cursor-pointer flex items-center justify-center h-10 w-20" option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?></div>
+                                    <div onclick='changeSideVariant(this,"<?=$key?>","<?=$value1?>",<?=$key1?>)' class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300"  ?> cursor-pointer flex items-center justify-center h-10 w-20" option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?></div>
                                 <?php
                                 }
                                 ?>
@@ -186,7 +187,8 @@ class WebController extends LoginController
         // echo $html;
         echo json_encode([
             'html' => $html,
-            'variants' => $varients
+            'variants' => $varients,
+            "grouped"=>$grouped,
         ]);
     }
 
@@ -609,9 +611,6 @@ class WebController extends LoginController
         $siteName = getDBObject()->getSiteName();
         $pageModule = "Home Page";
         $pageTitle = "Home Page";
-        //  echo "hello";
-        // die();
-        // $this->checkSession();
 
         $products = getData("tbl_products");
         $collection = getData("tbl_collection", true);
