@@ -1,11 +1,3 @@
-<?php
-
-printWithPre($_SESSION);
-
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
