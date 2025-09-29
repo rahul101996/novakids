@@ -8,6 +8,7 @@ class Database
     private $password = "";
 
     // private $host = "localhost"; 
+    
     // private $dbname = "u597096203_novakids";
     // private $username = "u597096203_novakids";
     // private $password = "f[A7m9pbh";
