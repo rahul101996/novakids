@@ -1,13 +1,13 @@
 <!-- Top Bar -->
 <?php
 // printWithPre($_SESSION);
-if(isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type'] == "User"){
+if (isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type'] == "User") {
     $count = 0;
     $count = count(getData2("SELECT * FROM `tbl_cart` WHERE `userid` = " . $_SESSION['userid']));
-}else{
+} else {
 
-    $count = isset($_SESSION['cart']) && !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ;
-     
+    $count = isset($_SESSION['cart']) && !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
+
 }
 $currency = '₹';
 $categories = getData("tbl_category");
@@ -64,6 +64,24 @@ $categories = getData("tbl_category");
 
     .animate-slideDown {
         animation: slideDown 0.4s ease-out;
+    }
+
+
+
+    .loader-pulse {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(59, 130, 246, 0.3);
+        border-radius: 50%;
+        border-top-color: #3b82f6;
+        animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
     }
 </style>
 
@@ -246,6 +264,7 @@ $categories = getData("tbl_category");
                 </div>
             </div>
         </li>
+
         <div class="flex items-center space-x-7 ml-8">
             <a href="/" class="block">
                 <img src="/public/logos/brand-name.png" alt="Logo" class="h-10 max-md:hidden">
@@ -277,11 +296,14 @@ $categories = getData("tbl_category");
             <?php
             foreach ($categories as $key => $value) {
                 $category = strtolower(str_replace(" ", "-", $value['category']));
-            ?>
+                ?>
                 <div class="relative group">
-                    <a href="/category/<?= $category ?>" class="text-gray-800  group duration-300 cursor-pointer"><?= $value['category'] ?>
-                        <span class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
-                        <span class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                    <a href="/category/<?= $category ?>"
+                        class="text-gray-800  group duration-300 cursor-pointer"><?= $value['category'] ?>
+                        <span
+                            class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                        <span
+                            class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
                     </a>
                 </div>
             <?php } ?>
@@ -369,7 +391,8 @@ $categories = getData("tbl_category");
                     </div>
                 </button>
                 <span
-                    class="absolute -top-1 max-md:-top-2 -right-3 max-md:right-0 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md" id="cart-count">
+                    class="absolute -top-1 max-md:-top-2 -right-3 max-md:right-0 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md"
+                    id="cart-count">
                     <?= $count ?>
                 </span>
             </div>
@@ -533,7 +556,8 @@ $categories = getData("tbl_category");
     });
 </script>
 
-<div id="loginModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center hidden z-[9999]">
+<div id="loginModal"
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center hidden z-[9999]">
     <div
         class="relative flex flex-col md:flex-row w-[90%] md:w-[70%] max-w-5xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] animate-fade-in">
 
@@ -614,12 +638,15 @@ $categories = getData("tbl_category");
                 <input type="text" placeholder="" name="from" class="hidden" id="user_from" value="otp">
                 <div class="flex items-center border rounded-lg overflow-hidden gap-2 mb-4" id="mobile-div">
                     <img src="/public/logos/india.png" class="h-7 pl-3" alt="">
-                    <span class="pr-1 text-gray-600">+91</span> <input type="tel" placeholder="Enter mobile number" name="mobile" id="mobile"
-                        class="w-full px-3 py-2 outline-none border-l">
+                    <span class="pr-1 text-gray-600">+91</span> <input type="tel" placeholder="Enter mobile number"
+                        name="mobile" id="mobile" class="w-full px-3 py-2 outline-none border-l">
                 </div>
-                <div class="relative font-inter antialiased hidden flex flex-col items-center justify-center" id="otp-div">
+                <div class="relative font-inter antialiased hidden flex flex-col items-center justify-center"
+                    id="otp-div">
                     <p>We have send verification code to </p>
-                    <div><span id="mobile-span" class="font-bold"></span> &ensp; <span class="text-xs text-green-500 p-1 px-2 border border-green-500 cursor-pointer" onclick="EditotpNumber()">Edit</span></div>
+                    <div><span id="mobile-span" class="font-bold"></span> &ensp; <span
+                            class="text-xs text-green-500 p-1 px-2 border border-green-500 cursor-pointer"
+                            onclick="EditotpNumber()">Edit</span></div>
                     <main class="relative flex flex-col justify-center mt-2 overflow-hidden">
                         <div class="w-full max-w-6xl mx-auto">
                             <div class="flex justify-center w-full">
@@ -627,20 +654,16 @@ $categories = getData("tbl_category");
                                 <div class="w-full mx-auto text-center bg-white  pt-5 rounded-xl">
 
                                     <div class="flex items-center justify-between gap-3 px-10 w-full">
-                                        <input
-                                            type="text"
+                                        <input type="text"
                                             class="w-14  h-14 text-center text-2xl otp-input font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                                             pattern="\d*" maxlength="1" />
-                                        <input
-                                            type="text"
+                                        <input type="text"
                                             class="w-14 h-14 text-center text-2xl otp-input font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                                             maxlength="1" />
-                                        <input
-                                            type="text"
+                                        <input type="text"
                                             class="w-14 h-14 text-center text-2xl otp-input font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                                             maxlength="1" />
-                                        <input
-                                            type="text"
+                                        <input type="text"
                                             class="w-14 h-14 text-center text-2xl otp-input font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                                             maxlength="1" />
                                     </div>
@@ -649,7 +672,9 @@ $categories = getData("tbl_category");
                                             class="relative w-full py-2 rounded-md font-semibold overflow-hidden group border-2 border-black">Verify
                                             OTP</button>
                                     </div>
-                                    <div class="text-sm text-slate-500 mt-4">Didn't receive code? <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">Resend</a></div>
+                                    <div class="text-sm text-slate-500 mt-4">Didn't receive code? <a
+                                            class="font-medium text-indigo-500 hover:text-indigo-600"
+                                            href="#0">Resend</a></div>
                                 </div>
 
                             </div>
@@ -668,9 +693,10 @@ $categories = getData("tbl_category");
                 </div> -->
 
                 <button
-                    class="relative w-full py-2 rounded-md font-semibold overflow-hidden group border-2 border-black" id="sendOtp" type="button">
-                    <span
-                        class="relative z-10 text-black group-hover:text-white transition-colors duration-1500">Send OTP</span>
+                    class="relative w-full py-2 rounded-md font-semibold overflow-hidden group border-2 border-black"
+                    id="sendOtp" type="button">
+                    <span class="relative z-10 text-black group-hover:text-white transition-colors duration-1500">Send
+                        OTP</span>
                     <span
                         class="absolute inset-0 bg-black scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700"></span>
                 </button>
@@ -681,8 +707,7 @@ $categories = getData("tbl_category");
 
                 <div id="g_id_onload" style="display:flex; align-items:center; justify-content:center; width:100%"
                     data-client_id="188574937788-fn4td4evj5cqejhrgge28pf8129sa58q.apps.googleusercontent.com"
-                    data-callback="handleCredentialResponse"
-                    data-auto_select="false">
+                    data-callback="handleCredentialResponse" data-auto_select="false">
                 </div>
             </form>
 
@@ -708,8 +733,10 @@ $categories = getData("tbl_category");
             <h2 class="text-2xl font-semibold text-center mb-6">What are you looking for</h2>
             <div class="w-full max-w-2xl mx-auto mb-6">
                 <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
-                    <input type="text" placeholder="Search our store"
+                    <input type="text" oninput="searchProducts(this)" placeholder="Search our store"
                         class="w-full px-4 py-2 outline-none text-gray-700">
+
+                    <!-- <div id="searchResults" class="grid grid-cols-2 gap-4 mt-4"></div> -->
                     <button class="px-4 text-gray-500 hover:text-black">
                         <i class="fas fa-search"></i>
                     </button>
@@ -718,8 +745,19 @@ $categories = getData("tbl_category");
         </div>
 
         <div class="flex-1 overflow-y-auto pr-2">
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <div class="border overflow-hidden hover:shadow-md transition">
+
+            <!-- Loader -->
+            <div id="loader" class="hidden flex justify-center items-center py-8">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                <span class="ml-2 text-gray-600">Searching...</span>
+            </div>
+
+            <!-- Search Results -->
+            <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+                <!-- Results will be populated here -->
+            </div>
+
+            <!-- <div class="border overflow-hidden hover:shadow-md transition">
                     <img src="/public/images/f1.webp" alt="Product 1" class="w-full h-40 object-cover">
                     <div class="p-2">
                         <h3 class="font-semibold text-sm">Classic T-Shirt</h3>
@@ -757,11 +795,12 @@ $categories = getData("tbl_category");
                         <h3 class="font-semibold text-sm">Hoodie</h3>
                         <p class="text-gray-500 text-sm">₹1,299</p>
                     </div>
-                </div>
-            </div>
+                </div> -->
         </div>
     </div>
 </div>
+
+
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <!-- 
@@ -1001,10 +1040,87 @@ $categories = getData("tbl_category");
     function decodeJwtResponse(token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
 
         return JSON.parse(jsonPayload);
+    }
+</script>
+
+<script>
+    let debounceTimer;
+
+    async function searchProducts(ele) {
+        clearTimeout(debounceTimer);
+
+        let search = ele.value.trim();
+
+        // if search empty, clear results and hide loader
+        if (search === "") {
+            document.getElementById("searchResults").innerHTML = "";
+            document.getElementById("loader").classList.add("hidden");
+            return;
+        }
+
+        // show loader immediately when user starts typing
+        document.getElementById("loader").classList.remove("hidden");
+        document.getElementById("searchResults").innerHTML = "";
+
+        debounceTimer = setTimeout(async () => {
+
+            try {
+                let res = await fetch("/api/search-product", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ search })
+                });
+
+                let data = await res.json();
+                console.log(data);
+
+                if (data.success) {
+                    let html = ``;
+
+                    data.data.forEach(product => {
+                        let parsed = JSON.parse(product.product_images);
+
+                        html += `
+                    <div class="border overflow-hidden hover:shadow-md transition">
+                        <img src="/${parsed[0]}" alt="${product.name}" class="w-full h-40 object-cover">
+                        <div class="p-2">
+                            <h3 class="font-semibold text-sm">${product.name}</h3>
+                            <p class="text-gray-500 text-sm">₹${product.cost_per_item}</p>
+                        </div>
+                    </div>
+                `;
+                    });
+
+                    document.getElementById("searchResults").innerHTML = html;
+                } else {
+                    // Handle no results case
+                    document.getElementById("searchResults").innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <p>No products found for "${search}"</p>
+                    </div>
+                `;
+                }
+
+            } catch (err) {
+                console.error("Error:", err);
+                // Show error message
+                document.getElementById("searchResults").innerHTML = `
+                <div class="text-center py-8 text-red-500">
+                    <p>Error loading results. Please try again.</p>
+                </div>
+            `;
+            } finally {
+                // hide loader
+                document.getElementById("loader").classList.add("hidden");
+            }
+
+        }, 500); // 500ms debounce
     }
 </script>

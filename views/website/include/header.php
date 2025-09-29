@@ -72,7 +72,7 @@ if (!empty($_POST)) {
 
                             update([
                                 "quantity" => $data["quantity"] + $c["quantity"]
-                            ],  $data["id"], "tbl_cart");
+                            ], $data["id"], "tbl_cart");
                         } else {
 
                             $cartdata = [
@@ -205,9 +205,9 @@ if (!empty($_POST)) {
 
 <head>
     <script>
-        ! function(f, b, e, v, n, t, s) {
+        ! function (f, b, e, v, n, t, s) {
             if (f.fbq) return;
-            n = f.fbq = function() {
+            n = f.fbq = function () {
                 n.callMethod ?
                     n.callMethod.apply(n, arguments) : n.queue.push(arguments)
             };
@@ -230,7 +230,7 @@ if (!empty($_POST)) {
             src="https://www.facebook.com/tr?id=1525213108842821&ev=PageView&noscript=1" /></noscript>
     <!-- Google Tag Manager -->
     <script>
-        (function(w, d, s, l, i) {
+        (function (w, d, s, l, i) {
             w[l] = w[l] || [];
             w[l].push({
                 'gtm.start': new Date().getTime(),
@@ -284,6 +284,9 @@ if (!empty($_POST)) {
     </style>
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
+        integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 
