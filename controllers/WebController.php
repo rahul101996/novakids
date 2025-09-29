@@ -92,7 +92,7 @@ class WebController extends LoginController
                     <p class=" text-xs text-gray-600 mt-1"><a href="" class="underline">shipping</a> calculated at checkout</p>
                     <p class="text-xs mt-1">⭐⭐⭐⭐⭐ <span class="text-sm">31 reviews</span></p>
                     <?php
-                    printWithPre($grouped);
+                    // printWithPre($grouped);
                     foreach ($grouped as $key => $value) {
                         $ogkey = $key;
                         $key = strtolower(str_replace(' ', '', $key));
