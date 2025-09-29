@@ -57,7 +57,9 @@ if (!empty($_POST)) {
                 $_SESSION["username"] = $user["username"];
                 $_SESSION["userid"] = $user["id"];
                 $_SESSION["fname"] = $user["fname"];
+                $_SESSION["lname"] = $user["lname"];
                 $_SESSION['popup'] = 'false';
+                $_SESSION['mobile'] = $user['mobile'];
                 $_SESSION["success"] = "User Login Successfully";
 
 
@@ -123,7 +125,9 @@ if (!empty($_POST)) {
                     $_SESSION["username"] = $_POST["username"];
                     $_SESSION["userid"] = $userid;
                     $_SESSION["fname"] = $_POST["fname"];
+                    $_SESSION["lname"] = (!isset($_POST["lname"]) || $_POST["lname"] == 'undefined') ? '' : $_POST["lname"];
                     $_SESSION['popup'] = 'false';
+                    $_SESSION['mobile'] = $_POST['mobile'];
 
                     if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
                         foreach ($_SESSION["cart"] as $key => $c) {
@@ -171,7 +175,10 @@ if (!empty($_POST)) {
                     $_SESSION["username"] = '';
                     $_SESSION["userid"] = $adduser;
                     $_SESSION["fname"] = '';
+                    $_SESSION["lname"] = '';
                     $_SESSION['popup'] = 'false';
+                    $_SESSION['mobile'] = $user['mobile'];
+
                     header("location: /");
                     exit();
                 }

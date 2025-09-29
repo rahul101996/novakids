@@ -517,6 +517,18 @@ class WebController extends LoginController
         exit();
     }
 
+    public function thankYou()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "Thank You";
+        $pageTitle = "Thank You";
+        $OrderData = getData2("SELECT * FROM `tbl_purchase` WHERE `orderid` = " . $_SESSION['order_id'] . " ORDER BY `id` DESC LIMIT 1")[0];
+        $PurchaseItems = getData2("SELECT * FROM `tbl_purchase_item` WHERE `purchase_id` = " . $OrderData['id']);
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/website/thankyou.php';
+        }
+    }
+
     public function deleteCart()
     {
 
@@ -916,6 +928,89 @@ class WebController extends LoginController
         // $this->checkSession();
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
+            require 'views/website/checkout.php';
+        } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // printWithPre($_POST);
+            // die();
+            $id = $_SESSION["userid"];
+            $mode =  $_POST["payment_mode"];
+            $order_id = generateRandomString(16) . time();
+
+            if ($mode == "COD") {
+                // printWithPre($_POST);
+                // die();
+                $purchaseid = [
+                    "userid" => $_SESSION["userid"],
+                    "username" => $_SESSION["username"],
+                    "payment_mode" => $mode,
+                    "payment_status" => "Pending",
+                    "orderid" => $order_id,
+                    "status" => "Processing",
+                    "total_amount" => $_POST["allTotal"],
+                    "address_line1" => $_POST["address_line1"],
+                    "address_line2" => $_POST["address_line2"],
+                    "city" => $_POST["city"],
+                    "state" => $_POST["state"],
+                    "country" => "India",
+                    "pincode" => $_POST["pin_code"],
+                    // "latitude" => $_POST["latitude"],
+                    // "logitude" => $_POST["logitude"],
+                    "mobile" => $_POST["mobile"],
+                    "email" => $_POST["email"],
+                    "fname" => $_POST["fname"],
+                    "lname" => $_POST["lname"],
+                    "created_by" => $_SESSION["userid"],
+                    // "coupon_discount" => $_POST["coupenDiscount"],
+                    // "coupon_secret" => $_POST["newDiscount"],
+                    // "delivery_charges" => $_POST["deliveryCharges"],
+                    // "courier_company" => $_POST["deliveryCompany"],
+                    // "courier_company_id" => $_POST["shippingCheckbox"],
+                    // "expected_date" => $_POST["deliveryDate"],
+
+                ];
+
+                $purchaseid = add($purchaseid, "tbl_purchase");
+
+                // printWithPre($purchaseid);
+                // die();
+                if ($purchaseid) {
+                    // echo "Success";
+                    foreach ($_SESSION["cartData"]["varient"] as $key => $varient) {
+                        $insertData = [
+                            "purchase_id" => $purchaseid,
+                            "varient" => $varient,
+                            "product" => $_SESSION["cartData"]["product"][$key],
+                            "category" => $_SESSION["cartData"]["category"][$key],
+                            "quantity" => $_SESSION["cartData"]["quantity"][$key],
+                            "amount" => $_SESSION["cartData"]["price"][$key],
+                            "total_amount" => $_SESSION["cartData"]["quantity"][$key] * $_SESSION["cartData"]["price"][$key],
+                            "userid" => $_SESSION["userid"],
+                            "username" => $_SESSION["username"],
+                            "status" => "Processing",
+                            "created_date" => date("Y-m-d"),
+                            "created_time" => date("H:i:s"),
+                            "created_at" => date("Y-m-d H:i"),
+                            "created_by" => $_SESSION["userid"],
+                        ];
+                        add($insertData, "tbl_purchase_item");
+                    }
+                    // echo $purchaseid[1];
+                    delete($id, "tbl_cart", "userid");
+                    // printWithPre($purchaseid);
+                    // die();
+                    $_SESSION["new_order"] = $purchaseid[0];
+                    $_SESSION['order_id'] = $order_id;
+                    $_SESSION["success"] = "Order Placed Successfully";
+                    unset($_SESSION["cartData"]);
+                    header("Location: /thank-you");
+                    // printWithPre($purchaseid);
+                    exit();
+                } else {
+                    // echo "Failed";
+                    // die();
+                    $_SESSION["err"] = "Can't Place Order";
+                }
+            }
             require 'views/website/checkout.php';
         }
     }

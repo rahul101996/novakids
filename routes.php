@@ -36,6 +36,7 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('cookies', 'cookies');
     $route->route('/api/send-otp', 'SendOtp');
     $route->route('category/[:category_name]', 'Category');
+    $route->route('thank-you', 'thankYou');
 
     // $route->route('/', 'index');
 

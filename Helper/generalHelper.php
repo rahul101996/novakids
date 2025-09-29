@@ -563,6 +563,11 @@ function delete($id, $table, $column = "id")
     return $stmt->rowCount() > 0;
 }
 
+function generateRandomString($length = 16)
+{
+    return random_int(100, 999);
+}
+
 function deleteSQL($table, $sql)
 {
     $db = getDBCon();
