@@ -28,7 +28,7 @@ class WebController extends LoginController
         $price = floatval($ProductData['price']);
         $discountAmount = $comparePrice - $price;
         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
-        ?>
+?>
 
         <?php
         // printWithPre($ProductData);
@@ -63,13 +63,13 @@ class WebController extends LoginController
             ];
 
             // printWithPre($finalData);
-            ?>
+        ?>
             <div class="w-[47%] p-3 h-full overflow-y-scroll bg-gray-200 flex flex-col items-center justify-start no-scrollbar gap-3 transform translate-x-full transition-transform duration-[0.8s] ease-in-out"
                 id="VarImg">
                 <?php
                 foreach (array_reverse($images[0]) as $key => $image) {
 
-                    ?>
+                ?>
                     <img src="/<?= $image ?>" alt="">
                 <?php } ?>
             </div>
@@ -103,7 +103,7 @@ class WebController extends LoginController
                         // echo $key;
                         if ($key == 'size') {
 
-                            ?>
+                    ?>
                             <div class="w-full flex items-center justify-between mt-7 text-sm">
 
                                 <p class="uppercase"><?= $key ?></p>
@@ -135,15 +135,15 @@ class WebController extends LoginController
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
                                 ?>
-                                    <div onclick='changeSideVariant(this,"<?=$key?>","<?=$value1?>",<?=$key1?>)' class="border <?= $key1 == 0 ? "border-gray-900 selected-size" : "border-gray-300"  ?>  optionDivs cursor-pointer flex items-center justify-center h-10 w-20" option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>" onclick=""><?= $value1 ?></div>
+                                    <div onclick='changeSideVariant(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>)' class="border <?= $key1 == 0 ? "border-gray-900 selected-size" : "border-gray-300"  ?>  optionDivs cursor-pointer flex items-center justify-center h-10 w-20" option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>" onclick=""><?= $value1 ?></div>
                                 <?php
                                 }
                                 ?>
                             </div>
-                            <?php
+                        <?php
                         } elseif ($key == 'color') {
                         ?>
-                            <p class="uppercase" ><?= $key ?></p>
+                            <p class="uppercase"><?= $key ?></p>
                             <div class="w-full flex items-center justify-start mt-3 text-sm gap-2" id="ColorDiv">
 
                             </div>
@@ -155,13 +155,13 @@ class WebController extends LoginController
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
-                                    ?>
-                                    <div onclick='changeSideVariant(this,"<?=$key?>","<?=$value1?>",<?=$key1?>)' class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300"  ?> cursor-pointer flex items-center justify-center h-10 w-20" option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?></div>
-                                    <?php
+                                ?>
+                                    <div onclick='changeSideVariant(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>)' class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300"  ?> cursor-pointer flex items-center justify-center h-10 w-20" option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?></div>
+                                <?php
                                 }
                                 ?>
                             </div>
-                            <?php
+                    <?php
                         }
                     } ?>
                     <div class="w-full flex items-center justify-start mt-7 gap-3">
@@ -194,7 +194,7 @@ class WebController extends LoginController
                 </div>
             </div>
 
-            <?php
+        <?php
 
         } else {
             echo "<p>No variants found</p>";
@@ -207,7 +207,7 @@ class WebController extends LoginController
         echo json_encode([
             'html' => $html,
             'variants' => $varients,
-            "grouped"=>$grouped,
+            "grouped" => $grouped,
         ]);
     }
 
@@ -218,37 +218,37 @@ class WebController extends LoginController
         $vv = groupOptions($variants);
         // printWithPre($vv);
         $co = [];
-        foreach($vv["Color"] as $color){
+        foreach ($vv["Color"] as $color) {
             // if(array_key_exists($color, $co)){
 
             // }else{
-                $ar = [];
-                foreach($variants as $var){
-                    $varOp = parse_variant_options($var["options"])["Color"];
-                    if($varOp == $color){
-                        $ar[] = json_decode($var["images"]);
-                    }
+            $ar = [];
+            foreach ($variants as $var) {
+                $varOp = parse_variant_options($var["options"])["Color"];
+                if ($varOp == $color) {
+                    $ar[] = json_decode($var["images"]);
                 }
-                $co[$color] = $ar;
+            }
+            $co[$color] = $ar;
             // }
         }
-        
+
         ob_start();
         $i = 0;
-        foreach($co as $color=>$images){
+        foreach ($co as $color => $images) {
             // printWithPre($images);
-            
+
         ?>
-            <div onclick='changeSideVariant(this,"color","<?= $color ?>",<?=$i?>)' class=" h-[95px] flex items-center justify-start mt-3 text-sm gap-2 p-1 cursor-pointer border <?= $i == 0 ? " border-gray-900 selected-color" : "" ?>"
-                    option_name="color" option_value="" product_id="<?= $id ?>">
+            <div onclick='changeSideVariant(this,"color","<?= $color ?>",<?= $i ?>)' class=" h-[95px] flex items-center justify-start mt-3 text-sm gap-2 p-1 cursor-pointer border <?= $i == 0 ? " border-gray-900 selected-color" : "" ?>"
+                option_name="color" option_value="" product_id="<?= $id ?>">
 
-                    <img src="/<?= $images[0][0] ?>" class="h-full" alt="" class="optionDivs">
+                <img src="/<?= $images[0][0] ?>" class="h-full" alt="" class="optionDivs">
 
 
-                </div>
+            </div>
 
         <?php
-        $i ++;
+            $i++;
         }
 
         $html = ob_get_clean();
@@ -307,13 +307,13 @@ class WebController extends LoginController
         ob_start();
 
         if (!empty($matchedVariants)) {
-            ?>
+        ?>
             <?php
             foreach ($matchedVariants as $key => $value) {
                 $images = array_reverse(json_decode($value['images']));
-                
-                ?>
-                <div onclick='changeSideVariant(this,"color","<?= parse_variant_options(($value["options"]))["Color"] ?>",<?=$key?>)' class=" h-[95px] flex items-center justify-start mt-3 text-sm gap-2 p-1 cursor-pointer border <?= $key == 0 ? " border-gray-900 selected-color" : "" ?>"
+
+            ?>
+                <div onclick='changeSideVariant(this,"color","<?= parse_variant_options(($value["options"]))["Color"] ?>",<?= $key ?>)' class=" h-[95px] flex items-center justify-start mt-3 text-sm gap-2 p-1 cursor-pointer border <?= $key == 0 ? " border-gray-900 selected-color" : "" ?>"
                     option_name="color" option_value="" product_id="<?= $id ?>">
 
                     <img src="/<?= $images[0] ?>" class="h-full" alt="" class="optionDivs">
@@ -420,7 +420,7 @@ class WebController extends LoginController
                     $variants = json_decode($vdata['options'], true);
                     $variants = json_decode($variants, true);
                     $totalprice = $vdata['price'] * $quantity;
-                    ?>
+                ?>
 
                     <div class="flex items-center gap-4 border-b py-2 w-full">
                         <!-- Product image -->
@@ -432,7 +432,7 @@ class WebController extends LoginController
                             <div class="flex gap-3 flex-wrap items-center justify-start">
                                 <?php
                                 foreach ($variants as $key => $variant) {
-                                    ?>
+                                ?>
                                     <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
                                 <?php } ?>
                             </div>
@@ -461,7 +461,7 @@ class WebController extends LoginController
                         </button>
                     </div>
 
-                    <?php
+                <?php
                 }
             } else {
                 ?>
@@ -472,7 +472,7 @@ class WebController extends LoginController
                         No Products in the cart.
                     </p>
                 </div>
-                <?php
+            <?php
             }
             ?>
 
@@ -504,7 +504,7 @@ class WebController extends LoginController
                     $variants = json_decode($vdata['options'], true);
                     $variants = json_decode($variants, true);
                     $totalprice = $vdata['price'] * $quantity;
-                    ?>
+            ?>
 
                     <div class="flex items-center gap-4 border-b py-2 w-full">
                         <!-- Product image -->
@@ -516,7 +516,7 @@ class WebController extends LoginController
                             <div class="flex gap-3 flex-wrap items-center justify-start">
                                 <?php
                                 foreach ($variants as $key => $variant) {
-                                    ?>
+                                ?>
                                     <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
                                 <?php } ?>
                             </div>
@@ -538,7 +538,7 @@ class WebController extends LoginController
                         </button>
                     </div>
 
-                    <?php
+                <?php
 
 
                 }
@@ -552,7 +552,7 @@ class WebController extends LoginController
                         No Products in the cart.
                     </p>
                 </div>
-                <?php
+            <?php
             }
             ?>
 
@@ -992,6 +992,8 @@ class WebController extends LoginController
         }
     }
 
+
+
     public function checkout()
     {
         $siteName = getDBObject()->getSiteName();
@@ -1000,6 +1002,8 @@ class WebController extends LoginController
         $cartData = $_SESSION["cartData"];
         $userData = getData2("SELECT * FROM `online_users` WHERE `id` = $_SESSION[userid]")[0];
         $address = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $_SESSION[userid] ORDER BY `id` DESC ");
+
+        $PaymentGateWay = getData2("SELECT * FROM `payment_gateway` WHERE `status` = 1 ORDER BY `id` ASC")[0];
 
         // $this->checkSession();
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -1029,8 +1033,6 @@ class WebController extends LoginController
                     "state" => $_POST["state"],
                     "country" => "India",
                     "pincode" => $_POST["pin_code"],
-                    // "latitude" => $_POST["latitude"],
-                    // "logitude" => $_POST["logitude"],
                     "mobile" => $_POST["mobile"],
                     "email" => $_POST["email"],
                     "fname" => $_POST["fname"],
@@ -1086,11 +1088,353 @@ class WebController extends LoginController
                     // die();
                     $_SESSION["err"] = "Can't Place Order";
                 }
+            } elseif ($mode = "Prepaid") {
+
+                if ($PaymentGateWay['name'] == "razorpay") {
+
+                    // print_r("mode ".$mode);
+                    // die();
+
+                    if (1 == 1) {
+                        $orderId = $this->insertOnlineOrder([
+                            "cartData" => json_encode($_SESSION["cartData"]),
+                            "checkoutData" => json_encode($_POST),
+                            "status" => "Processing",
+                            "payment_mode" => $mode,
+                            "userid" => $_SESSION["userid"],
+                            "username" => $_SESSION["username"],
+                            "amount" => $_POST["allTotal"],
+
+                        ]);
+
+                        if ($orderId) {
+                            // $keyapi = "rzp_live_JdPrOFrNVQV4gM";
+                            $keyapi = $PaymentGateWay['keyid'];
+
+            ?>
+
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+                            <form action="/razorpay" method="POST">
+                                <script
+                                    src="https://checkout.razorpay.com/v1/checkout.js"
+                                    data-key="<?= $keyapi ?>"
+                                    data-amount="<?= $_POST["allTotal"] * 100 ?>"
+                                    data-currency="INR"
+                                    data-id="<?= $orderId ?>"
+                                    data-buttontext="Pay with Razorpay"
+                                    data-name="Nova Kids"
+                                    data-description="Authentic streetwear for the next generation. Quality pieces that speak your language and match your vibe."
+                                    data-image="https://nova.bloomcrm.in/public/logos/nova_logo.png"
+                                    data-prefill.name="<?= $_POST["lname"] . " " . $_POST["fname"] ?>"
+                                    data-prefill.contact="<?= $_POST["mobile"] ?>"
+                                    data-theme.color="#1774ff"></script>
+                                <input type="hidden" custom="Hidden Element" name="order_id" value="<?= $orderId ?>" />
+                            </form>
+
+                            <style>
+                                .razorpay-payment-button {
+                                    display: none;
+                                }
+                            </style>
+
+                            <script>
+                                $(document).ready(function() {
+                                    $('.razorpay-payment-button').click();
+                                });
+                            </script>
+<?php
+                            exit();
+                        }
+                    } else {
+                        $_SESSION["err"] = "Enter Your Mobile Number in Profile";
+                        header("Location: checkout.php");
+                        exit();
+                    }
+                }
             }
             require 'views/website/checkout.php';
         }
     }
+    public function getOnlineOrderById($id)
+    {
+        try {
+            $sql = "SELECT * FROM online_order WHERE orderid = :id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+    public function insertPurchase(array $data)
+    {
+        try {
 
+            if (!isset($data['orderid']) && empty($data['orderid'])) {
+
+                $data["orderid"] = generateRandomString(16) . time();;
+                // echo $data["orderid"];
+                // die();
+            }
+
+
+            $purchaseid = add($data, "tbl_purchase");
+
+            foreach ($_SESSION["cartData"]["varient"] as $key => $varient) {
+                $insertData = [
+                    "purchase_id" => $purchaseid,
+                    "varient" => $varient,
+                    "product" => $_SESSION["cartData"]["product"][$key],
+                    "category" => $_SESSION["cartData"]["category"][$key],
+                    "quantity" => $_SESSION["cartData"]["quantity"][$key],
+                    "amount" => $_SESSION["cartData"]["price"][$key],
+                    "total_amount" => $_SESSION["cartData"]["quantity"][$key] * $_SESSION["cartData"]["price"][$key],
+                    "userid" => $_SESSION["userid"],
+                    "username" => $_SESSION["username"],
+                    "status" => "Processing",
+                    "created_date" => date("Y-m-d"),
+                    "created_time" => date("H:i:s"),
+                    "created_at" => date("Y-m-d H:i"),
+                    "created_by" => $_SESSION["userid"],
+                ];
+                add($insertData, "tbl_purchase_item");
+            }
+
+            return [$purchaseid];
+        } catch (\PDOException $e) {
+            // Roll back the transaction if something failed
+            echo $e->getMessage();
+
+            return false;
+        }
+    }
+    public function Razorpay()
+    {
+        // printWithPre($_POST);
+        // die();
+        if (!empty($_POST['razorpay_payment_id']) && !empty($_POST['order_id'])) {
+
+            $id = $_SESSION["userid"];
+
+            $order_data = $this->getOnlineOrderById($_POST['order_id']);
+            // printWithPre($order_data);
+            $order = json_decode($order_data['checkoutData']);
+            $checkoutdata = (array)$order;
+            // printWithPre($checkoutdata);
+            // printWithPre($_SESSION);
+            // die();
+
+            $purchaseid = $this->insertPurchase([
+                "userid" => $_SESSION["userid"],
+                "username" => $_SESSION["username"],
+                "payment_mode" => $order_data['payment_mode'],
+                "payment_status" => "Completed",
+                "razorpay_payment_id" => $_POST['razorpay_payment_id'],
+                "orderid" => $order_data["orderid"],
+                "status" => "Processing",
+                "total_amount" => $checkoutdata["allTotal"],
+                "address_line1" => $checkoutdata["address_line1"],
+                "address_line2" => $checkoutdata["address_line2"],
+                "city" => $checkoutdata["city"],
+                "state" => $checkoutdata["state"],
+                "country" => $checkoutdata["country"],
+                "pincode" => $checkoutdata["pin_code"],
+                "mobile" => $checkoutdata["mobile"],
+                "email" => $checkoutdata["email"],
+                "fname" => $checkoutdata["fname"],
+                "lname" => $checkoutdata["lname"],
+                "additional" => $checkoutdata["additional"],
+                "coupon_discount" => $checkoutdata["coupenDiscount"],
+                "coupon_secret" => $checkoutdata["newDiscount"],
+                "delivery_charges" => $checkoutdata["deliveryCharges"],
+                "courier_company" => $_POST["deliveryCompany"],
+                "courier_company_id" => $_POST["shippingCheckbox"],
+                "expected_date" => $_POST["deliveryDate"],
+                "created_by" => $_SESSION["userid"],
+
+            ]);
+
+            // printWithPre($purchaseid);
+            // die();
+
+            if ($purchaseid) {
+                // echo "Success";
+                delete($id, "tbl_cart", "userid");
+                // printWithPre($purchaseid);
+                // die();
+                $_SESSION["new_order"] = $purchaseid[0];
+                $_SESSION['order_id'] = $order_data["orderid"];
+                $_SESSION["success"] = "Order Placed Successfully";
+                unset($_SESSION["cartData"]);
+                header("Location: /thank-you");
+                // printWithPre($purchaseid);
+                exit();
+            } else {
+                // echo "Failed";
+                // die();
+                $_SESSION["err"] = "Can't Place Order";
+                header("Location: checkout.php");
+                exit();
+            }
+        } else {
+            // Reject this call
+            // echo "not done";
+            $_SESSION["err"] = "Payment Failed. Can't Place Order";
+            header("Location: checkout.php");
+            exit();
+        }
+    }
+    public function AddToWishlist()
+    {
+        function checkExisteingCartSession($varient)
+        {
+            if (isset($_SESSION["wishlist"])) {
+                $cart = $_SESSION["wishlist"];
+                foreach ($cart as $key => $c) {
+                    if ($c["varient"] == $varient) {
+                        return [$key, $c];
+                    }
+                }
+            }
+            return false;
+        }
+
+        if (!empty($_POST)) {
+            if (isset($_POST["deleteWishlist"])) {
+                // printWithPre($_POST);
+                // die();
+                if (isset($_SESSION["type"]) && $_SESSION["type"] == "User" && !empty($_SESSION["username"])) {
+                    if (
+                        $cartController->DeleteWishlist($_POST["varient_id"], $_SESSION["userid"])
+                    ) {
+                        $wishlistLength = count($cartController->getAllWishlistByUserId($_SESSION["userid"]));
+                        echo json_encode([
+                            "success" => true,
+                            "message" => "Remove From wishlist Successfully",
+                            "totalwishlist" => $wishlistLength,
+                        ]);
+                    } else {
+                        echo json_encode([
+                            "success" => false,
+                            "message" => "Server Error",
+                        ]);
+                    }
+                } else {
+                    unset($_SESSION["wishlist"][$_POST["varient_id"]]);
+                    if (empty($_SESSION["wishlist"])) {
+                        unset($_SESSION["wishlist"]);
+                    }
+                    echo json_encode([
+                        "success" => true,
+                        "message" => "Remove From wishlist Successfully",
+                    ]);
+                }
+            }
+            if (isset($_POST["varient_id"])) {
+                // printWithPre($_POST);
+                if (isset($_SESSION["type"]) && $_SESSION["type"] == "User" && !empty($_SESSION["userid"])) {
+                    // echo "lere";
+                    $data = $cartController->getWishlistByVarientAndUserid($_POST["product_id"], $_SESSION["userid"]);
+                    if ($data) {
+                        if (
+                            $cartController->DeleteWishlist($_POST["varient_id"], $_SESSION["userid"])
+                        ) {
+                            $wishlistLength = count($cartController->getAllWishlistByUserId($_SESSION["userid"]));
+
+                            echo json_encode([
+                                "success" => true,
+                                "message" => "Remove From wishlist Successfully",
+                                "data" => $data,
+                                "totalwishlist" => $wishlistLength,
+                            ]);
+                        } else {
+                            echo json_encode([
+                                "success" => false,
+                                "message" => "Server Error",
+                            ]);
+                        }
+                    } else {
+                        if (
+                            $cartController->insertWishlist([
+                                "varient" => $_POST["varient_id"],
+                                "category" => $_POST["category_id"],
+                                "product" => $_POST["product_id"],
+                                "quantity" => $_POST["quantity"],
+                                "userid" => $_SESSION["userid"],
+                                "username" => $_SESSION["username"],
+                            ])
+                        ) {
+                            $wishlistLength = count($cartController->getAllWishlistByUserId($_SESSION["userid"]));
+
+                            echo json_encode([
+                                "success" => true,
+                                "message" => "Add To wishlist Successfully",
+                                "totalwishlist" => $wishlistLength,
+                                "data" => $data,
+                            ]);
+                        } else {
+                            echo json_encode([
+                                "success" => false,
+                                "message" => "Server Error",
+                            ]);
+                        }
+                    }
+                } else {
+                    $data = checkExisteingCartSession($_POST["varient_id"]);
+                    if ($data) {
+                        unset($_SESSION["wishlist"][$data[0]]);
+                        $wishlistLength = count($_SESSION['wishlist']);
+                        echo json_encode([
+                            "success" => true,
+                            "data" => $data,
+                            "totalwishlist" => $wishlistLength,
+                            "message" => "Remove From wishlist Successfully",
+                        ]);
+                    } else {
+                        $_SESSION["wishlist"][] = [
+                            "varient" => $_POST["varient_id"],
+                            "category" => $_POST["category_id"],
+                            "product" => $_POST["product_id"],
+
+
+                        ];
+                        $wishlistLength = count($_SESSION['wishlist']);
+                        echo json_encode([
+                            "success" => true,
+                            "totalwishlist" => $wishlistLength,
+                            "message" => "Add To wishlist Successfully",
+                        ]);
+                    }
+                }
+            }
+            exit();
+        }
+    }
+    public function insertOnlineOrder(array $data)
+    {
+
+        $data["created_date"] = date("Y-m-d");
+        $data["created_time"] = date("H:i:s");
+        $data["created_at"] = date("Y-m-d H:i");
+        $data["orderid"] = generateRandomString(16) . time();
+        // echo $data["orderid"];
+        // die();
+        $columns = implode(", ", array_keys($data));
+        $placeholders = ':' . implode(', :', array_keys($data));
+
+        $sql = "INSERT INTO online_order (" . $columns . ") VALUES (" . $placeholders . ")";
+        $stmt = $this->db->prepare($sql);
+
+        foreach ($data as $key => $value) {
+            $stmt->bindValue(":$key", $value);
+        }
+
+        $stmt->execute();
+        // $orderId = $this->db->lastInsertId();
+        return $data["orderid"];
+    }
 
     public function faq()
     {
@@ -1213,16 +1557,6 @@ ORDER BY id DESC LIMIT 5");
         }
     }
 
-    public function Razorpay()
-    {
-
-        require 'views/website/razorpay.php';
-    }
-    public function CoursePayment()
-    {
-
-        require 'views/website/coursepayment.php';
-    }
     public function MyProfile()
     {
 
@@ -1291,7 +1625,7 @@ ORDER BY id DESC LIMIT 5");
             $_POST = json_decode(file_get_contents('php://input'), true);
 
             // printWithPre($_POST);
-            
+
             $search = $_POST['search'];
             $products = getData2("SELECT * FROM `tbl_products` WHERE `name` LIKE '%$search%'");
 
@@ -1308,7 +1642,6 @@ ORDER BY id DESC LIMIT 5");
                     "message" => "No Product Found"
                 ];
             }
-
         } catch (Exception $e) {
 
             $response = [

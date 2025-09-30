@@ -155,7 +155,7 @@
                 if (isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type'] == "User") {            ?>
                     <input type="hidden" name="myForm" id="">
 
-                    <button  type="submit"
+                    <button type="submit"
                         class="relative w-full font-semibold py-1.5 rounded-md border-2 border-[#f25b21] overflow-hidden group">
                         <span class="relative z-10 text-white group-hover:text-[#f25b21] transition-colors duration-700">
                             Checkout
@@ -319,6 +319,70 @@
         }
 
     }
+    document.addEventListener('DOMContentLoaded', function() {
+        AddToWishlist();
+    });
+
+    function AddToWishlist() {
+        const addToWishlistBtn = document.querySelectorAll('.addToWishlistBtn');
+        if (addToWishlistBtn) {
+            addToWishlistBtn.forEach(function(btn) {
+                btn.addEventListener('click', function(event) {
+                    // console.log("hello");
+                    event.preventDefault();
+                    event.stopPropagation();
+                    // 
+                    let ee = btn.parentElement.parentElement
+                    console.log(ee)
+                    //    console.log(ee.querySelector(".sideVarientId").value); 
+                    addToWishlistSidebar(ee.querySelector(".ProductId").value, btn)
+                    console.log(btn)
+
+                });
+            });
+        }
+
+    }
+    async function addToWishlistSidebar(product_id, ele) {
+
+        try {
+            const request = await axios.post("/add-to-wishlist", new URLSearchParams({
+                product_id: product_id
+            }));
+            console.log(request);
+            if (request.data.success) {
+                // Update wishlist count
+                console.log(request.data, request.data.message == "Add To wishlist Successfully");
+                document.getElementById("wishlist-count").innerText = request.data.totalwishlist;
+
+                // Change the SVG in the button
+
+                if (request.data.message == "Add To wishlist Successfully") {
+
+                    toastr.options = {
+                        "toastClass": "bg-pink-toast",
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right" // Position the toast at the bottom right
+                    };
+
+                    toastr.success(request.data.message);
+
+                } else {
+
+                    toastr.options = {
+                        "toastClass": "bg-pink-toast",
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right" // Position the toast at the bottom right
+                    };
+
+                    toastr.success(request.data.message);
+
+                }
+            }
+        } catch (error) {
+            console.error("Error adding to wishlist:", error);
+        }
+    }
 
     function closeCartFn() {
         console.log("closing cart")
@@ -352,8 +416,8 @@
     const qtyPlus = document.getElementById("qtyPlus");
 
     const GLOBAL_VARIANT = {
-        variants : {},
-        selected : {}
+        variants: {},
+        selected: {}
     };
 
     function updateCart() {
@@ -472,7 +536,29 @@
                         // VariantSelects.innerHTML;
                         VariantSelects.innerHTML = response.data.html;
                         Openvariant()
-                        changeCartSidebarImage()
+                        let options = document.querySelectorAll('.optionDivs');
+
+                        console.log("options",options);
+
+                        let FirstOption = options[0];
+
+                        // // console.log(FirstOption);
+                        let OptionName = FirstOption.getAttribute('option_name');
+                        let OptionValue = FirstOption.getAttribute('option_value');
+                        let product_id = FirstOption.getAttribute('product_id');
+                        console.log(OptionName, OptionValue, product_id);
+                        const response2 = await axios.post("/api/get-variant-data", new URLSearchParams({
+                            productid: product_id,
+                            option_name: OptionName,
+                            option_value: OptionValue
+
+                        }))
+                        // console.log("response2.data",response2.data)
+                        const ColorDiv = document.getElementById('ColorDiv');
+                        if (ColorDiv) {
+                            ColorDiv.innerHTML = response2.data.html;
+
+                        }
 
 
                     } else {
@@ -608,7 +694,7 @@
 
     // function showVarientsSidebar(data) {
     //     // console.log(data);
-        
+
 
     // }
 

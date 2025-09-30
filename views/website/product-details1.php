@@ -1572,7 +1572,7 @@
                                 </span>
                             </button>
                             <button
-                                class="relative hidden rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
+                                class="addToWishlistBtn relative hidden rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
                                         transition-all duration-500 hover:border-purple-500 hover:text-purple-600 hover:shadow-lg">
                                 <i class="fas fa-heart"></i> WISHLIST
                             </button>
