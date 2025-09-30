@@ -68,7 +68,8 @@ $page = 'Wishlist';
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
                         $name = str_replace(' ', '-', $product['name']);
-                        
+                        $name = str_replace("'", '', $name);
+
 
                         // printWithPre($images);
                     ?>
@@ -175,6 +176,7 @@ $page = 'Wishlist';
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
                         $name = str_replace(' ', '-', $product['name']);
+                        $name = str_replace("'", '', $name); 
 
                         // printWithPre($images);
                     ?>
@@ -198,7 +200,7 @@ $page = 'Wishlist';
                                         class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
 
                                     <!-- Add to favorites Icon (top-right) -->
-                                     <button
+                                    <button
                                         class="addToWishlistBtn absolute top-2 right-3 bg-[#f25b21] text-white h-10 w-10 rounded-full  group-hover:opacity-100 z-20 stop-link">
                                         <i class="fas fa-heart"></i>
                                     </button>

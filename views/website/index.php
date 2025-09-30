@@ -57,7 +57,7 @@
         </h2>
 
         <div class="absolute bottom-20 left-10">
-            <button onclick="window.location.href = 'shop'"
+            <button onclick="window.location.href = '/category/tees'"
                 class="relative px-10 py-3 bg-transparent hover:bg-white text-white hover:text-black border border-white rounded-md font-semibold shadow-lg overflow-hidden group transition-all duration-700">
                 <span class="relative z-10 block transition-colors duration-300 group-hover:animate-glitch">SHOP
                     NOW</span>
@@ -139,6 +139,7 @@
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
                         $name = str_replace(' ', '-', $product['name']);
+                        $name = str_replace("'", '', $name); 
                         if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 

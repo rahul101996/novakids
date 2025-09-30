@@ -36,12 +36,12 @@ if (isset($_POST["phone"])) {
     // print_r($apikey);
     // die();
 
-    // $url = "https://www.fast2sms.com/dev/bulkV2?authorization=$apikey&route=otp&variables_values=$otp&flash=0&numbers=$phoneNumber";
+    $url = "https://www.fast2sms.com/dev/bulkV2?authorization=$apikey&route=otp&variables_values=$otp&flash=0&numbers=$phoneNumber";
     // //  echo $url;
 
-    // $response = file_get_contents($url);
+    $response = file_get_contents($url);
     // // echo $url;
-    // $response = (array) json_decode($response);
+    $response = (array) json_decode($response);
     // print_r($response);    
     // die();
 
