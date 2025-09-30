@@ -155,7 +155,7 @@
                 if (isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type'] == "User") {            ?>
                     <input type="hidden" name="myForm" id="">
 
-                    <button  type="submit"
+                    <button type="submit"
                         class="relative w-full font-semibold py-1.5 rounded-md border-2 border-[#f25b21] overflow-hidden group">
                         <span class="relative z-10 text-white group-hover:text-[#f25b21] transition-colors duration-700">
                             Checkout
@@ -383,6 +383,70 @@
         }
 
     }
+    document.addEventListener('DOMContentLoaded', function() {
+        AddToWishlist();
+    });
+
+    function AddToWishlist() {
+        const addToWishlistBtn = document.querySelectorAll('.addToWishlistBtn');
+        if (addToWishlistBtn) {
+            addToWishlistBtn.forEach(function(btn) {
+                btn.addEventListener('click', function(event) {
+                    // console.log("hello");
+                    event.preventDefault();
+                    event.stopPropagation();
+                    // 
+                    let ee = btn.parentElement.parentElement
+                    console.log(ee)
+                    //    console.log(ee.querySelector(".sideVarientId").value); 
+                    addToWishlistSidebar(ee.querySelector(".ProductId").value, btn)
+                    console.log(btn)
+
+                });
+            });
+        }
+
+    }
+    async function addToWishlistSidebar(product_id, ele) {
+
+        try {
+            const request = await axios.post("/add-to-wishlist", new URLSearchParams({
+                product_id: product_id
+            }));
+            console.log(request);
+            if (request.data.success) {
+                // Update wishlist count
+                console.log(request.data, request.data.message == "Add To wishlist Successfully");
+                document.getElementById("wishlist-count").innerText = request.data.totalwishlist;
+
+                // Change the SVG in the button
+
+                if (request.data.message == "Add To wishlist Successfully") {
+
+                    toastr.options = {
+                        "toastClass": "bg-pink-toast",
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right" // Position the toast at the bottom right
+                    };
+
+                    toastr.success(request.data.message);
+
+                } else {
+
+                    toastr.options = {
+                        "toastClass": "bg-pink-toast",
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right" // Position the toast at the bottom right
+                    };
+
+                    toastr.success(request.data.message);
+
+                }
+            }
+        } catch (error) {
+            console.error("Error adding to wishlist:", error);
+        }
+    }
 
     function closeCartFn() {
         sideCart.classList.remove('translate-x-0');
@@ -414,8 +478,8 @@
     const qtyPlus = document.getElementById("qtyPlus");
 
     const GLOBAL_VARIANT = {
-        variants : {},
-        selected : {}
+        variants: {},
+        selected: {}
     };
 
     function updateCart() {
@@ -536,7 +600,7 @@
                         Openvariant()
                         let options = document.querySelectorAll('.optionDivs');
 
-                        console.log("options",options);
+                        console.log("options", options);
 
                         let FirstOption = options[0];
 
@@ -582,17 +646,17 @@
         }
     }
 
-    function changeSideVariant(ele,tp,value,key1){
-        console.log("parent",ele.parentElement,key1)
-        updateKey(GLOBAL_VARIANT.selected,tp,value);
+    function changeSideVariant(ele, tp, value, key1) {
+        console.log("parent", ele.parentElement, key1)
+        updateKey(GLOBAL_VARIANT.selected, tp, value);
         let divs = ele.parentElement.querySelectorAll("div")
         divs.forEach(div => {
-        div.classList.remove("border-gray-900");
+            div.classList.remove("border-gray-900");
         });
         // console.log(divs[key1])
         divs[key1].classList.add("border-gray-900");
-        console.log("GLOBAL_VARIANT",GLOBAL_VARIANT)
-        
+        console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
+
     }
 
     function AddToCartslider(btn, sidecart = false) {
@@ -643,7 +707,7 @@
 
     // function showVarientsSidebar(data) {
     //     // console.log(data);
-        
+
 
     // }
 

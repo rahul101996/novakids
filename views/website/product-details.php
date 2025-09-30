@@ -453,7 +453,7 @@
                                 </span>
                             </button>
                             <button
-                                class="relative hidden rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
+                                class="addToWishlistBtn relative hidden rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
                                         transition-all duration-500 hover:border-purple-500 hover:text-purple-600 hover:shadow-lg">
                                 <i class="fas fa-heart"></i> WISHLIST
                             </button>
@@ -719,7 +719,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-heart"></i>
                                 </button>
 
@@ -758,7 +758,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-heart"></i>
                                 </button>
 
@@ -797,7 +797,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-heart"></i>
                                 </button>
 
@@ -836,7 +836,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-heart"></i>
                                 </button>
 
@@ -875,7 +875,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-heart"></i>
                                 </button>
 

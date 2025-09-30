@@ -37,6 +37,8 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('/api/send-otp', 'SendOtp');
     $route->route('category/[:category_name]', 'Category');
     $route->route('thank-you', 'thankYou');
+    $route->route('/razorpay', 'Razorpay');
+    $route->route('add-to-wishlist', 'AddToWishlist');
 
     $route->route('api/search-product', 'searchProduct');
 

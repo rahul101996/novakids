@@ -125,6 +125,7 @@ $allstates = getData("indian_states");
                                             <input
                                                 type="radio"
                                                 class="w-4 h-4 accent-[#1d9267] cursor-pointer shrink-0"
+                                                name="selectAddress"
                                                 value="<?= $value['id'] ?>"
                                                 <?= ($key == 0) ? 'checked' : '' ?>>
 
