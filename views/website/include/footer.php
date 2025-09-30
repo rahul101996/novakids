@@ -188,10 +188,12 @@
             <div>
                 <h4 class="font-bold text-black mb-6 max-md:mb-3 text-lg">Shop</h4>
                 <ul class="space-y-3">
-                    <li><a href="#" class="link-hover text-gray-600">New Arrivals</a></li>
-                    <li><a href="#" class="link-hover text-gray-600">Bestsellers</a></li>
-                    <li><a href="#" class="link-hover text-gray-600">T-Shirts</a></li>
-                    <li><a href="#" class="link-hover text-gray-600">Bottoms</a></li>
+                    <?php
+            foreach ($categories as $key => $value) {
+                $category = strtolower(str_replace(" ", "-", $value['category']));
+            ?>
+                    <li><a href="/category/<?= $category ?>"><?= $value['category'] ?></a></li>
+                    <?php } ?> 
                 </ul>
             </div>
 
