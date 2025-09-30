@@ -185,10 +185,26 @@ class WebController extends LoginController
 
 
                     </div>
-                    <div
-                        class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">
-                        BUY IT NOW
-                    </div>
+                    <?php
+                    if(!empty($_SESSION["userid"])){
+                        ?>
+                        <form method="POST" action="/checkout-cart"
+                           class="w-full" >
+                                <input type="hidden" name="varient[]" value="<?= $ProductData['varients'][0]["id"] ?>">
+                                <input type="hidden" name="category[]" value="<?= $ProductData['category'] ?>">
+                                <input type="hidden" name="product[]" value="<?= $ProductData['id'] ?>">
+                                <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
+                                <input type="hidden" name="quantity[]" id="product_buy_count1" value="1">
+                                <input type="hidden" name="cartid[]" value="">
+                                <button name="myForm" class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">BUY IT NOW</button>
+                        </form>
+                        <?php
+                    }else{
+                        ?>
+                        <button onclick="openLogin()" class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">BUY IT NOW</button>
+                        <?php
+                    }
+                    ?>
 
 
                 </div>
