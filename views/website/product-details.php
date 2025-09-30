@@ -448,8 +448,10 @@
                             <input type="hidden" name="product[]" value="<?=$ProductData['id']?>">
                             <input type="hidden" name="price[]" value="<?=$ProductData['varients'][0]["price"]?>">
                             <input type="hidden" name="quantity[]" value="1">
+                            <input type="hidden" name="cartid[]" value="">
 
-                            <button
+
+                            <button name="myForm"
                                 class="w-full py-1 relative rounded-lg overflow-hidden group transform  hover:shadow-xl border border-[#f15b21] bg-[#f15b21] text-white">
                                 <span
                                     class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-[#f15b21]">
