@@ -1290,12 +1290,12 @@ class WebController extends LoginController
     }
     public function AddToWishlist()
     {
-        function checkExisteingCartSession($varient)
+        function checkExisteingWishlistSession($varient)
         {
             if (isset($_SESSION["wishlist"])) {
                 $cart = $_SESSION["wishlist"];
                 foreach ($cart as $key => $c) {
-                    if ($c["varient"] == $varient) {
+                    if ($c["product"] == $varient) {
                         return [$key, $c];
                     }
                 }
@@ -1304,46 +1304,16 @@ class WebController extends LoginController
         }
 
         if (!empty($_POST)) {
-            if (isset($_POST["deleteWishlist"])) {
-                // printWithPre($_POST);
-                // die();
-                if (isset($_SESSION["type"]) && $_SESSION["type"] == "User" && !empty($_SESSION["username"])) {
-                    if (
-                        $cartController->DeleteWishlist($_POST["varient_id"], $_SESSION["userid"])
-                    ) {
-                        $wishlistLength = count($cartController->getAllWishlistByUserId($_SESSION["userid"]));
-                        echo json_encode([
-                            "success" => true,
-                            "message" => "Remove From wishlist Successfully",
-                            "totalwishlist" => $wishlistLength,
-                        ]);
-                    } else {
-                        echo json_encode([
-                            "success" => false,
-                            "message" => "Server Error",
-                        ]);
-                    }
-                } else {
-                    unset($_SESSION["wishlist"][$_POST["varient_id"]]);
-                    if (empty($_SESSION["wishlist"])) {
-                        unset($_SESSION["wishlist"]);
-                    }
-                    echo json_encode([
-                        "success" => true,
-                        "message" => "Remove From wishlist Successfully",
-                    ]);
-                }
-            }
-            if (isset($_POST["varient_id"])) {
+            if (isset($_POST["product_id"])) {
                 // printWithPre($_POST);
                 if (isset($_SESSION["type"]) && $_SESSION["type"] == "User" && !empty($_SESSION["userid"])) {
                     // echo "lere";
-                    $data = $cartController->getWishlistByVarientAndUserid($_POST["product_id"], $_SESSION["userid"]);
+                    $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $_POST["product_id"] . " AND `userid` = " . $_SESSION["userid"])[0];
                     if ($data) {
                         if (
-                            $cartController->DeleteWishlist($_POST["varient_id"], $_SESSION["userid"])
+                            delete($data["id"], "tbl_wishlist", "id")
                         ) {
-                            $wishlistLength = count($cartController->getAllWishlistByUserId($_SESSION["userid"]));
+                            $wishlistLength = count(getData2("SELECT * FROM `tbl_wishlist` WHERE `userid` = " . $_SESSION["userid"]));
 
                             echo json_encode([
                                 "success" => true,
@@ -1359,16 +1329,13 @@ class WebController extends LoginController
                         }
                     } else {
                         if (
-                            $cartController->insertWishlist([
-                                "varient" => $_POST["varient_id"],
-                                "category" => $_POST["category_id"],
+                            add([
                                 "product" => $_POST["product_id"],
-                                "quantity" => $_POST["quantity"],
                                 "userid" => $_SESSION["userid"],
                                 "username" => $_SESSION["username"],
-                            ])
+                            ], "tbl_wishlist", false)
                         ) {
-                            $wishlistLength = count($cartController->getAllWishlistByUserId($_SESSION["userid"]));
+                            $wishlistLength = count(getData2("SELECT * FROM `tbl_wishlist` WHERE `userid` = " . $_SESSION["userid"]));
 
                             echo json_encode([
                                 "success" => true,
@@ -1384,7 +1351,7 @@ class WebController extends LoginController
                         }
                     }
                 } else {
-                    $data = checkExisteingCartSession($_POST["varient_id"]);
+                    $data = checkExisteingWishlistSession($_POST["product_id"]);
                     if ($data) {
                         unset($_SESSION["wishlist"][$data[0]]);
                         $wishlistLength = count($_SESSION['wishlist']);
@@ -1396,11 +1363,7 @@ class WebController extends LoginController
                         ]);
                     } else {
                         $_SESSION["wishlist"][] = [
-                            "varient" => $_POST["varient_id"],
-                            "category" => $_POST["category_id"],
                             "product" => $_POST["product_id"],
-
-
                         ];
                         $wishlistLength = count($_SESSION['wishlist']);
                         echo json_encode([
@@ -1562,20 +1525,33 @@ ORDER BY id DESC LIMIT 5");
     public function MyProfile()
     {
 
-        // echo "hello";
+        if (!isset($_SESSION['userid']) && empty($_SESSION['userid'])) {
+            header('Location:/');
+            exit();
+        }
 
         $siteName = getDBObject()->getSiteName();
         $pageTitle = "My Profile";
-        // $Districts = getData2("SELECT * FROM `tbl_district`");
-        $userData = getData2("SELECT online_users.*, tbl_district.district_name_en, tbl_state.state_name FROM `online_users` LEFT JOIN tbl_district ON online_users.district = tbl_district.id
-        LEFT JOIN tbl_state ON online_users.state = tbl_state.id
-         WHERE online_users.id = " . $_SESSION['userid'])[0];
-        //  printWithPre($userData);
-        $Districts = $this->getData2("SELECT * FROM `tbl_district`");
-        $states = $this->getData2("SELECT * FROM `tbl_state`");
-        $Enrolled_courses = $this->getData2("SELECT * FROM `course_payment` WHERE `user_id` = " . $_SESSION['userid']);
-        // printWithPre($Enrolled_courses);
 
+        // echo "SELECT ous.*, tua.address_line1, tua.address_line2, tua.city, tua.state, tua.pincode FROM `online_users` ous LEFT JOIN `tbl_user_address` tua ON ous.id = tua.userid WHERE ous.id = " . $_SESSION['userid'] . " AND tua.status = 1";
+        $userData = getData2("SELECT
+                                        ous.*,
+                                        tua.address_line1,
+                                        tua.address_line2,
+                                        tua.city,
+                                        tua.state,
+                                        ts.state_name,
+                                        tua.pincode
+                                    FROM
+                                        `online_users` ous
+                                    LEFT JOIN `tbl_user_address` tua ON
+                                        ous.id = tua.userid
+                                    LEFT JOIN `tbl_state` ts ON
+                                        tua.state = ts.id
+                                    WHERE
+                                        ous.id = " . $_SESSION['userid'] . " AND tua.status = 1")[0];
+
+        // printWithPre($userData);
 
 
         require 'views/website/myprofile.php';
@@ -1629,7 +1605,12 @@ ORDER BY id DESC LIMIT 5");
             // printWithPre($_POST);
 
             $search = $_POST['search'];
-            $products = getData2("SELECT * FROM `tbl_products` WHERE `name` LIKE '%$search%'");
+
+            if (empty($search)) {
+                $products = getData2("SELECT * FROM `tbl_products`");
+            } else {
+                $products = getData2("SELECT * FROM `tbl_products` WHERE `name` LIKE '%$search%'");
+            }
 
             // printWithPre($products);
 

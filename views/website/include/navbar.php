@@ -10,6 +10,14 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type
 
     $count = isset($_SESSION['cart']) && !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
 }
+if (isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type'] == "User") {
+    $wishlistcount = 0;
+    $wishlistcount = count(getData2("SELECT * FROM `tbl_wishlist` WHERE `userid` = " . $_SESSION["userid"]));
+} else {
+
+
+    $wishlistcount = isset($_SESSION['wishlist']) && !empty($_SESSION['wishlist']) ? count($_SESSION['wishlist']) : 0;
+}
 $currency = '₹';
 $categories = getData("tbl_category");
 
@@ -297,7 +305,7 @@ $categories = getData("tbl_category");
             <?php
             foreach ($categories as $key => $value) {
                 $category = strtolower(str_replace(" ", "-", $value['category']));
-                ?>
+            ?>
                 <div class="relative group">
                     <a href="/category/<?= $category ?>"
                         class="text-gray-800  group duration-300 cursor-pointer"><?= $value['category'] ?>
@@ -325,7 +333,7 @@ $categories = getData("tbl_category");
                 </button>
             </div>
             <!-- <button id="Openvariant">Open Cart</button> -->
-            <button id="openLogin"
+            <button <?= isset($_SESSION['userid']) && !empty($_SESSION['userid']) ? 'onclick="window.location.href=\'/profile\'"' : 'id="openLogin"' ?>
                 class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
                 <div class="max-md:hidden">
                     <svg class="svgUser2 anarkali-svg-icon" enable-background="new 0 0 512 512" height="24px"
@@ -357,7 +365,7 @@ $categories = getData("tbl_category");
                 </div>
             </button>
 
-            <div class="flex items-center max-md:hidden">
+            <div class="flex items-center max-md:hidden relative">
                 <button onclick="window.location.href='/wishlist'"
                     class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
                     <div class="max-md:hidden">
@@ -369,6 +377,9 @@ $categories = getData("tbl_category");
                         </svg>
                     </div>
                 </button>
+                <span class="absolute -top-1 max-md:-top-2 -right-3 max-md:right-0 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md" id="wishlist-count">
+                    <?= $wishlistcount ?>
+                </span>
             </div>
 
             <div class="relative max-md:mr-1">
@@ -739,7 +750,7 @@ $categories = getData("tbl_category");
             <h2 class="text-2xl font-semibold text-center mb-6">What are you looking for</h2>
             <div class="w-full max-w-2xl mx-auto mb-6">
                 <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
-                    <input type="text" oninput="searchProducts(this)" placeholder="Search our store"
+                    <input type="text" id="searchInput" oninput="searchProducts(this)" placeholder="Search our store"
                         class="w-full px-4 py-2 outline-none text-gray-700">
 
                     <!-- <div id="searchResults" class="grid grid-cols-2 gap-4 mt-4"></div> -->
@@ -1010,11 +1021,12 @@ $categories = getData("tbl_category");
 
 
     })
+
     function EditotpNumber() {
-        
-         mobileDiv.classList.remove('hidden')
-                sendOtp.classList.remove('hidden');
-                OtpDiv.classList.add('hidden');
+
+        mobileDiv.classList.remove('hidden')
+        sendOtp.classList.remove('hidden');
+        OtpDiv.classList.add('hidden');
     }
     async function ResendOtp() {
         if (mobileInput.value != "" && mobileInput.value.length == 10) {
@@ -1088,7 +1100,7 @@ $categories = getData("tbl_category");
     function decodeJwtResponse(token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
 
@@ -1099,7 +1111,8 @@ $categories = getData("tbl_category");
 <script>
     let debounceTimer;
 
-    async function searchProducts(ele) {
+    async function searchProducts() {
+        let ele = document.getElementById("searchInput");
         clearTimeout(debounceTimer);
 
         let search = ele.value.trim();
@@ -1123,7 +1136,9 @@ $categories = getData("tbl_category");
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ search })
+                    body: JSON.stringify({
+                        search
+                    })
                 });
 
                 let data = await res.json();
@@ -1171,4 +1186,6 @@ $categories = getData("tbl_category");
 
         }, 500); // 500ms debounce
     }
+
+    // searchProducts();
 </script>

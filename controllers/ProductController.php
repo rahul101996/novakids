@@ -207,4 +207,17 @@ class ProductController
         }
         echo json_encode($response);
     }
+
+
+
+    public function OrderList()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageTitle = "Order List";
+        $pageModule = "Order List";
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/products/order-list.php';
+        }
+    }
 }
