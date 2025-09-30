@@ -725,7 +725,7 @@
                         <?php foreach ($uniqueProducts as $key => $value) {
 
                             $Allimages = json_decode($value['product_images'], true);
-                            $firstImage = !empty($images) ? $images : null;
+                            $firstImage = !empty($Allimages) ? $Allimages : null;
                             ?>
                             <div
                                 class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
@@ -741,7 +741,7 @@
                                         class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
 
                                     <!-- Hover Image -->
-                                    <img src="/<?= $firstImage[1] ?>" alt="Product 1 Hover"
+                                    <img src="/<?= empty($firstImage[1]) ? $firstImage[0] : $firstImage[1] ?>" alt="Product 1 Hover"
                                         class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
 
                                     <!-- Add to favorites Icon (top-right) -->
