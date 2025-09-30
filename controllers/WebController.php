@@ -644,17 +644,19 @@ class WebController extends LoginController
 
     public function checkoutCart()
     {
+        printWithPre($_POST);
         if (isset($_POST["myForm"])) {
             if (empty($_POST["cartid"])) {
                 $_SESSION["err"] = "Please Select Atleast One Item";
                 header("Location:cart.php");
             } else {
-                $_SESSION["cartData"] = $_POST;
-                $_SESSION["weight"] = $_POST["totalweight"];
-                $_SESSION["totalprice"] = $_POST["totalprice"];
-                $_SESSION['sampleproductid'] = $_POST['sampleproductid'];
-                $_SESSION['sampleproductquantity'] = $_POST['sampleproductquantity'];
-                header("Location: /checkout");
+                printWithPre($_POST);
+                // $_SESSION["cartData"] = $_POST;
+                // $_SESSION["weight"] = $_POST["totalweight"];
+                // $_SESSION["totalprice"] = $_POST["totalprice"];
+                // $_SESSION['sampleproductid'] = $_POST['sampleproductid'];
+                // $_SESSION['sampleproductquantity'] = $_POST['sampleproductquantity'];
+                // header("Location: /checkout");
             }
         }
 
