@@ -87,8 +87,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         <?= $key + 1 ?> <a
                                             class="block px-4 py-2 text-md font-bol hover:bg-gray-200 hover:text-blue-600 transition-colors duration-200 text-center"
                                             href="?orderid=<?= $value['id'] ?>" data-toggle="modal" data-target="#infoModal"
-                                            data-order-id="<?= $value['orderid'] ?>" onclick="getbillproduct('50')" id="viewproduct"><i
-                                                class="fa-solid fa-eye"></i>
+                                            data-order-id="<?= $value['orderid'] ?>" onclick="getbillproduct('50')"
+                                            id="viewproduct"><i class="fa-solid fa-eye"></i>
                                         </a>
                                         <span onclick="printMeYo('50')"><i class="fa-solid fa-print"></i></span>
                                     </div>
@@ -103,16 +103,19 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         <?= $value['address_line1'] ?> <br>
                                         State : <?= $value['state'] ?><br>
                                         City : <?= $value['city'] ?><br>
-                                        Pincode : <?= $value['pincode'] ?> </div>
+                                        Pincode : <?= $value['pincode'] ?>
+                                    </div>
                                 </td>
 
                                 <td>
                                     0 </td>
                                 <td>
-                                    <?= $value['payment_mode'] ?> </td>
+                                    <?= $value['payment_mode'] ?>
+                                </td>
                                 <td style="white-space: nowrap">
                                     <?= $value['payment_status'] ?><br>
-                                    Payment ID: <?= $value['razorpay_payment_id'] ?> </td>
+                                    Payment ID: <?= $value['razorpay_payment_id'] ?>
+                                </td>
                                 <td hidden="">
                                     Coupon Discount: <br>
                                     Total Amount:309 </td>
@@ -130,10 +133,14 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     <form action="" method="post">
                                         <select name="order_status" id="" class="form-control w-52">
                                             <!-- <option value="Pending" class="text-md">Pending</option> -->
-                                            <option value="Processing" selected="" class="text-md" <?= $value['status']  == 'Processing' ?>>Processing</option>
-                                            <option value="Shipped" class="text-md" <?= $value['status']  == 'Shipped' ?>>Shipped</option>
-                                            <option value="Cancelled" class="text-md" <?= $value['status']  == 'Cancelled' ?>>Cancelled</option>
-                                            <option value="Complete" class="text-md" <?= $value['status']  == 'Complete' ?>>Complete</option>
+                                            <option value="Processing" selected="" class="text-md"
+                                                <?= $value['status'] == 'Processing' ?>>Processing</option>
+                                            <option value="Shipped" class="text-md" <?= $value['status'] == 'Shipped' ?>>
+                                                Shipped</option>
+                                            <option value="Cancelled" class="text-md" <?= $value['status'] == 'Cancelled' ?>>
+                                                Cancelled</option>
+                                            <option value="Complete" class="text-md" <?= $value['status'] == 'Complete' ?>>
+                                                Complete</option>
                                         </select>
                                         <input type="hidden" name="purchase_id" value="50">
                                         <input type="hidden" name="orderid" value="5431758386371">
@@ -175,11 +182,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                 <th>Price</th>
                                                 <!-- <th>Discount</th> -->
                                                 <th>Total</th>
-                                                <!-- Add more columns as needed -->
                                             </tr>
                                         </thead>
                                         <tbody id="productTable">
-                                            <!-- Data will be populated here via AJAX -->
                                         </tbody>
                                         <tbody>
                                             <tr>
@@ -216,6 +221,132 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/views/include/footer.php";
     ?>
+
+    <script>
+        async function getbillproduct(orderid) {
+            // cdata = JSON.parse(cdata)
+            console.log(orderid);
+            const result = await axios.post('', new URLSearchParams({
+                order_id: orderid,
+            }));
+            console.log("result_data", result.data)
+            let tr = ``;
+            let count = 1;
+            let t = 0;
+            result.data[0].forEach((ele, i) => {
+                // console.log(ele);
+                total_amount = parseInt(ele["amount"]) * parseInt(ele["quantity"]);
+                t = t + parseInt(total_amount)
+                tr += ` <tr>
+                            <td class="px-4 py-2 border">${count++}</td>
+                            <td class="px-4 py-2 border">
+                                <div class="w-[125px] overflow-hidden">
+                                    <img src="/admin/${ele['varient_images'][0]}" class="w-full h-full object-cover" alt="">
+                                </div>
+                            </td>
+                            <td class="px-4 py-2 border">${ele['product']}</td>
+                            <td class="px-4 py-2 border">
+                                <div class="text-center mt-3">
+                                    <span style="font-weight: bold;">Weight: ${ele['size']}</span>
+                                   
+                                </div>
+                            </td>
+                            <td class="px-4 py-2 border">${ele['quantity']}</td>
+                            <td class="px-4 py-2 border">₹${ele['amount']}</td>
+                            <td class="px-4 py-2 border">₹${total_amount}</td>
+                        </tr>`;
+
+                if (ele.coupon_secret != '') {
+                    document.getElementById("coupon_secret").innerHTML = '(' + ele.coupon_secret + ')';
+                    document.getElementById("discount").innerHTML = '- ' + ele.coupon_discount;
+                    document.getElementById("discountRow").hidden = false;
+                } else {
+                    document.getElementById("discountRow").hidden = true;
+                }
+
+                document.getElementById("total").innerHTML = ele.total_amount;
+                // let subtotal = ele.total_amount += ele.total_amount
+            })
+            if (result.data[2].length > 0) {
+
+                tr += ` <tr>
+                            <td colspan="7" class="bg-[#4c2e90]" class="text-white text-lg font-semibold w-full text-center items-center">
+                            <div class="w-full flex items-center justify-center">
+                            
+                            <p class="text-white w-full text-center" style="text-align: center">Sample Products 🎁</p>
+                            </div>
+                            </td>
+                        </tr>`;
+                result.data[2].forEach((ele, i) => {
+                    console.log(ele);
+                    total_amount = parseInt(ele["selling_price"]) * parseInt(ele["sample_quantity"]);
+
+                    tr += ` <tr>
+                            <td class="px-4 py-2 border">${count++}</td>
+                            <td class="px-4 py-2 border">
+                                <div class="h-40 w-[125px] overflow-hidden">
+                                    <img src="/admin/${ele['varient_images'][0]}" class="w-full h-full object-cover" alt="">
+                                </div>
+                            </td>
+                            <td class="px-4 py-2 border">${ele['product']}
+                            </td>
+                            <td class="px-4 py-2 border">
+                                <div class="">
+                                    <span style="font-weight: bold;">Weight: ${ele['size']}</span>
+                                    
+                                </div>
+                            </td>
+                            <td class="px-4 py-2 border">${ele['sample_quantity']}</td>
+                            <td class="px-4 py-2 border"><div class="flex gap-2 bg-green-200 rounded-md px-3 py-1">
+                                    <h3 class="text-sm font-semibold  text-nowrap flex gap-3"> <span class=" text-[10px] line-through text-green-400">₹ ${ele['selling_price']}</span><span class="text-green-600 text-xs">FREE</span></h3>
+                                </div></td>
+                            <td class="px-4 py-2 border">
+                            <div class="flex gap-2 bg-green-200 rounded-md px-3 py-1">
+                                    <h3 class="text-sm font-semibold  text-nowrap flex gap-3"> <span class=" text-[10px] line-through text-green-400">₹ ${total_amount}</span><span class="text-green-600 text-xs">Saved</span></h3>
+                                </div>
+                            </td>
+                        </tr>`;
+
+
+
+                    // let subtotal = ele.total_amount += ele.total_amount
+                })
+            }
+
+            let productDetailDiv = `
+                <span style="font-weight: bold; font-size: 1.5em;">${result.data[1].fname} ${result.data[1].lname}</span>
+                <br>
+                <span>
+                    <span style="font-weight: bold;">Address</span>: ${result.data[1].address_line1} ${result.data[1].address_line2}
+                </span>
+                <br>
+                <span>
+                    <span style="font-weight: bold;">State</span>: ${result.data[1].state_name}
+                </span>
+                <br>
+                <span>
+                    <span style="font-weight: bold;">City</span>: ${result.data[1].city}
+                </span>
+                <br>
+                <span>
+                    <span style="font-weight: bold;">Pincode</span>: ${result.data[1].pincode}
+                </span>
+                <br>
+                <span>
+                    <span style="font-weight: bold;">Mobile</span>: ${result.data[1].mobile}
+                </span>
+
+            `
+
+            document.getElementById("sub_total").innerHTML = t;
+            document.getElementById("delivery").innerText = "₹" + result.data[0][0].delivery_charges
+            document.getElementById("productTable").innerHTML = tr;
+            document.getElementById("productDetailDiv").innerHTML = productDetailDiv
+
+        }
+f
+    </script>
+
 </body>
 
 </html>
