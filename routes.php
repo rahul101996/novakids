@@ -65,6 +65,9 @@ $route->group(['', 'ProductController'], function ($route) {
 
     $route->route('/admin/api/update-quantity', 'updateQuantity');
 
+
+    $route->route('/admin/orders', 'OrderList');
+
 });
 $route->group(['', 'CustomerController'], function ($route) {
     $route->route('admin/customers-list', 'CustomersList');

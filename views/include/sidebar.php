@@ -46,7 +46,7 @@
                 </svg>
             </button>
             <div x-show="open === 'orders'" x-collapse class="ml-10 mt-2 space-y-1">
-                <a href="#all-orders" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                <a href="/admin/orders" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     All Orders
                 </a>
                 <a href="#cancel-orders" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
