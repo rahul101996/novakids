@@ -138,7 +138,7 @@
                     <?php
                     foreach (array_reverse($images[0]) as $key => $image) {
 
-                    ?>
+                        ?>
                         <div class=" overflow-hidden  cursor-pointer">
                             <img src="/<?= $image ?>" alt="View 1"
                                 class="w-full h-full object-cover image-hover cursor-zoom-in">
@@ -276,23 +276,29 @@
 
             <!-- Product Details Section -->
             <div class="md:sticky top-32 self-start space-y-4 w-[35%]">
-                <div class="flex flex-col">
+                <form method="POST" action="/checkout-cart" class="flex flex-col">
                     <div class="gap-3 w-full flex items-start justify-center">
                         <div class="flex flex-col items-start justify-center mb-2">
                             <h2 class="w-full text-[1.7rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
                             <div class="flex items-center justify-center gap-3 mt-4">
-                                <span class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
-                                <span class="text-[#f25b21] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
-                                <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
+                                <span
+                                    class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
+                                <span
+                                    class="text-[#f25b21] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
+                                <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg">SAVE
+                                    <?= $discountPercentage ?>%</span>
 
                             </div>
-                            <p class="text-sm text-gray-900 mt-2">Upgrade your casual wardrobe with our black sporty deconstructed loose pants. These stylish pants feature a relaxed fit and a deconstructed design for a modern and edgy look</p>
-                            <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated at checkout</p>
+                            <p class="text-sm text-gray-900 mt-2">Upgrade your casual wardrobe with our black sporty
+                                deconstructed loose pants. These stylish pants feature a relaxed fit and a deconstructed
+                                design for a modern and edgy look</p>
+                            <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated
+                                at checkout</p>
 
 
                         </div>
                         <img src="/public/icons/heart.png" class="h-7 cursor-pointer" alt="">
-                        <img src="/public/icons/share.png" class="h-7 cursor-pointer" alt="">
+                        <img src="/public/icons/share.png" onclick="shareProduct()" class="h-7 cursor-pointer" alt="">
                     </div>
 
                     <!-- Size Selection -->
@@ -305,11 +311,12 @@
                                 // echo $key;
                                 if ($key == 'size') {
 
-                            ?>
+                                    ?>
                                     <div class="w-full flex items-center justify-between text-sm">
 
                                         <p class="uppercase"><?= $key ?> : <?= $value[0] ?></p>
-                                        <p class="flex text-xs gap-1 cursor-pointer text-white bg-gray-800 py-1 px-3" onclick="document.getElementById('sizeChartModal').classList.remove('hidden')">
+                                        <p class="flex text-xs gap-1 cursor-pointer text-white bg-gray-800 py-1 px-3"
+                                            onclick="document.getElementById('sizeChartModal').classList.remove('hidden')">
                                             <i class="fa-solid fa-ruler pr-1"></i> Sizing guide
                                         </p>
                                     </div>
@@ -318,15 +325,17 @@
                                         $diffcolor = [];
                                         foreach ($value as $key1 => $value1) {
                                             // $diffcolor = $finalData['images'][$key1];
-                                        ?>
-                                            <div class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> flex items-center justify-center h-10 w-20" size_value="<?= $value1 ?>" size_name="<?= $key ?>"><?= $value1 ?></div>
-                                        <?php
+                                            ?>
+                                            <div class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> flex items-center justify-center h-10 w-20"
+                                                size_value="<?= $value1 ?>" size_name="<?= $key ?>"><?= $value1 ?></div>
+                                            <?php
                                         }
                                         ?>
                                     </div>
-                                <?php
+                                    <?php
                                 } elseif ($key == 'color') {
-                                ?><p class="uppercase text-sm mt-5"><?= $key ?> : <?= $value[0] ?></p>
+                                    ?>
+                                    <p class="uppercase text-sm mt-5"><?= $key ?> : <?= $value[0] ?></p>
                                     <div class="w-full flex items-center justify-start mt-3 text-sm gap-2">
 
                                         <?php
@@ -334,28 +343,33 @@
                                             if ($key3 > 3) {
                                                 break; // stop after 4 images
                                             }
-                                        ?>
+                                            ?>
                                             <img src="/<?= $image ?>" class="h-[95px]" alt="">
                                         <?php } ?>
 
                                     </div>
-                            <?php
+                                    <?php
                                 }
                             } ?>
                         </div>
                     </div>
                     <div class="w-full flex items-center justify-start mt-3 text-sm relative">
-                        <p class="text-semibold">Variant not available ?</p> &ensp;<span class="text-[#f25b21] cursor-pointer underline" onclick="NotifyMe()">NOTIFY ME</span>
-                        <div class="hidden absolute border border-gray-300 top-[107%] flex flex-col items-start justify-center bg-white w-[25vw] z-50" id="NotifyMe">
+                        <p class="text-semibold">Variant not available ?</p> &ensp;<span
+                            class="text-[#f25b21] cursor-pointer underline" onclick="NotifyMe()">NOTIFY ME</span>
+                        <div class="hidden absolute border border-gray-300 top-[107%] flex flex-col items-start justify-center bg-white w-[25vw] z-50"
+                            id="NotifyMe">
                             <div class="w-full flex items-center justify-start px-4 py-6 flex-col bg-orange-50 ">
                                 <div class="w-full flex items-center justify-between">
                                     <p>Please select your size</p>
-                                    <i class="fa-solid fa-x cursor-pointer" onclick="document.getElementById('NotifyMe').classList.add('hidden')"></i>
+                                    <i class="fa-solid fa-x cursor-pointer"
+                                        onclick="document.getElementById('NotifyMe').classList.add('hidden')"></i>
                                 </div>
                                 <div class="w-full flex items-center justify-start">
                                     <div class="w-full flex items-center justify-start mt-3 text-sm">
-                                        <div class="border border-gray-500 flex items-center justify-center h-10 w-20" size_value="8-9 Years" size_name="size">8-9 Years</div>
-                                        <div class="border border-gray-500 flex items-center justify-center h-10 w-20" size_value="9-10 Years" size_name="size">9-10 Years</div>
+                                        <div class="border border-gray-500 flex items-center justify-center h-10 w-20"
+                                            size_value="8-9 Years" size_name="size">8-9 Years</div>
+                                        <div class="border border-gray-500 flex items-center justify-center h-10 w-20"
+                                            size_value="9-10 Years" size_name="size">9-10 Years</div>
 
                                     </div>
                                 </div>
@@ -364,7 +378,10 @@
                                 <p>Get notified once the product is back in stock.
                                 </p>
                                 <div class="w-full flex items-center justify-start text-sm gap-3">
-                                    <input type="text" placeholder="Enter your email" class="w-[70%] border border-gray-500 py-2 px-3"> <button class="bg-black text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-gray-800 text-no-wrap">Notify Me</button>
+                                    <input type="text" placeholder="Enter your email"
+                                        class="w-[70%] border border-gray-500 py-2 px-3"> <button
+                                        class="bg-black text-white text-sm font-semibold px-3 py-2 rounded-md hover:bg-gray-800 text-no-wrap">Notify
+                                        Me</button>
                                 </div>
                             </div>
                         </div>
@@ -382,26 +399,25 @@
 
                         <!-- Input + Button + Icon -->
                         <div class="flex items-center space-x-2 border-b border-gray-300 pb-2">
-                            <input
-                                type="text"
-                                value=""
-                                placeholder="Enter Pincode"
-                                class="flex-1 bg-transparent outline-none text-gray-700" />
-                            <button class="bg-black text-white text-sm font-semibold px-3 py-1 rounded-md hover:bg-gray-800">
-                                Change
-                            </button>
+                            <input type="text" id="pincode" maxlength="6" value="" placeholder="Enter Pincode"
+                                oninput="checkMaharashtraPincode()" class="flex-1 bg-transparent outline-none text-gray-700" />
+                            <!-- <button type="button"
+                                class="bg-black text-white text-sm font-semibold px-3 py-1 rounded-md hover:bg-gray-800">
+                                check
+                            </button> -->
                             <i class="fa-solid fa-truck-fast"></i>
                         </div>
 
                         <!-- Delivery Info -->
                         <p class="mt-3 text-sm">
-                            <span class="text-green-600 font-semibold">Free delivery</span> | By <span class="font-semibold">Friday, 26 Sept</span>
+                            <span class="font-semibold" id="deliveryStatus"></span>
                         </p>
                     </div>
                     <!-- Quantity and Add to Cart -->
                     <div class="space-y-4 mt-7">
                         <div class="w-full flex items-center justify-center space-x-4">
-                            <div class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg">
+                            <div
+                                class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg">
                                 <span class="cursor-pointer ">-</span>
                                 <span class="text-black">1</span>
                                 <span class="cursor-pointer ">+</span>
@@ -409,7 +425,7 @@
 
                             <div class="col-span-2 max-md:order-3 w-[70%]">
                                 <button
-                                    class="openCartBtn w-full sm:flex-1 relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black">
+                                    class=" w-full sm:flex-1 relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black">
                                     <span
                                         class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
                                         <i class="fas fa-cart-plus"></i> Add Product to Cart
@@ -418,7 +434,7 @@
                                         class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
                                     </span>
                                 </button>
-                                <input type="hidden" value="<?=$ProductData["id"]?>" class="ProductId">
+                                <input type="hidden" value="<?= $ProductData["id"] ?>" class="ProductId">
                             </div>
 
 
@@ -443,8 +459,16 @@
                         </div>
 
                         <div class="flex w-full items-center justify-start gap-4">
-                            <button
-                                class="openCartBtn w-full py-1 relative rounded-lg overflow-hidden group transform  hover:shadow-xl border border-[#f15b21] bg-[#f15b21] text-white">
+                            <input type="hidden" name="varient[]" value="<?= $ProductData['varients'][0]["id"] ?>">
+                            <input type="hidden" name="category[]" value="<?= $ProductData['category'] ?>">
+                            <input type="hidden" name="product[]" value="<?= $ProductData['id'] ?>">
+                            <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
+                            <input type="hidden" name="quantity[]" value="1">
+                            <input type="hidden" name="cartid[]" value="">
+
+
+                            <button name="myForm"
+                                class="w-full py-1 relative rounded-lg overflow-hidden group transform  hover:shadow-xl border border-[#f15b21] bg-[#f15b21] text-white">
                                 <span
                                     class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-[#f15b21]">
                                     <i class=""></i> Buy Now
@@ -454,7 +478,7 @@
                                 </span>
                             </button>
                             <button
-                                class="addToWishlistBtn relative hidden rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
+                                class="relative hidden rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
                                         transition-all duration-500 hover:border-purple-500 hover:text-purple-600 hover:shadow-lg">
                                 <i class="fas fa-heart"></i> WISHLIST
                             </button>
@@ -508,7 +532,8 @@
                                 </p>
                                 <p>
                                     <i class="fa-regular fa-eye mr-1 text-gray-900"></i>
-                                    <span id="viewerCount" class="font-semibold"></span> people are viewing this right now
+                                    <span id="viewerCount" class="font-semibold"></span> people are viewing this right
+                                    now
                                 </p>
 
                                 <script>
@@ -551,7 +576,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
+            </div>
         </section>
 
         <section class="w-[90vw] mx-auto md:mt-10 py-10  gap-10">
@@ -720,7 +746,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-heart"></i>
                                 </button>
 
@@ -759,7 +785,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-heart"></i>
                                 </button>
 
@@ -798,7 +824,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-heart"></i>
                                 </button>
 
@@ -837,7 +863,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-heart"></i>
                                 </button>
 
@@ -876,7 +902,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-heart"></i>
                                 </button>
 
@@ -997,13 +1023,72 @@
                 strip.classList.add("hidden");
             }
         });
+
+        function shareProduct() {
+            const url = window.location.href;
+            const encodedUrl = encodeURIComponent(url);
+            const shareUrl = `https://wa.me/?text=${encodedUrl}`;
+            window.open(shareUrl, "_blank");
+        }
+
+        async function checkMaharashtraPincode() {
+            const el = document.getElementById('pincode');
+            const deliveryStatus = document.getElementById('deliveryStatus');
+            const pin = el.value.trim();
+
+            // validate length
+            if (pin.length !== 6 || !/^\d{6}$/.test(pin)) {
+                // alert('Please enter a valid 6-digit PIN code.');
+                // el.value = '';
+                el.focus();
+                return;
+            }
+
+            try {
+                const res = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
+                const data = await res.json();
+
+                if (!Array.isArray(data) || data[0].Status !== 'Success' || !data[0].PostOffice) {
+                    deliveryStatus.innerText = 'Invalid PIN code.';
+                    deliveryStatus.classList.add('text-red-500');
+                    el.value = '';
+                    el.focus();
+                    return;
+                }
+
+                const isMaharashtra = data[0].PostOffice.some(po =>
+                    (po.State || '').toLowerCase().includes('maharashtra')
+                );
+
+                if (isMaharashtra) {
+                    // alert('✅ PIN code belongs to Maharashtra.');
+                    // toastr.success('✅ PIN code belongs to Maharashtra.');
+                    deliveryStatus.innerText = '✅ Delivery available.';
+                    deliveryStatus.classList.remove('text-red-500');
+                    deliveryStatus.classList.add('text-green-500');
+                } else {
+                    // alert('❌ This PIN code is not from Maharashtra.');
+                    // toastr.error('❌ This PIN code is not from Maharashtra.');
+                    deliveryStatus.innerText = '❌ Delivery not available.';
+                    deliveryStatus.classList.remove('text-green-500');
+                    deliveryStatus.classList.add('text-red-500');
+                    el.value = '';
+                    el.focus();
+                }
+            } catch (e) {
+                console.error(e);
+                alert('Could not verify PIN code. Please try again.');
+                el.value = '';
+                el.focus();
+            }
+        }
     </script>
 
 
 
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".like-carousel").owlCarousel({
                 loop: true,
                 margin: 10,
@@ -1047,7 +1132,7 @@
     </script> -->
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".review-carousel").owlCarousel({
                 margin: 10,
                 autoplay: true,
@@ -1180,7 +1265,7 @@
 
         // Color selection functionality
         document.querySelectorAll('.color-option').forEach(option => {
-            option.addEventListener('click', function() {
+            option.addEventListener('click', function () {
                 // Remove ring from all options
                 document.querySelectorAll('.color-option').forEach(opt => {
                     opt.classList.remove('ring-2', 'ring-[#f25b21]', 'ring-offset-4');
@@ -1192,7 +1277,7 @@
 
         // Size selection functionality
         document.querySelectorAll('.size-option').forEach(option => {
-            option.addEventListener('click', function() {
+            option.addEventListener('click', function () {
                 // Remove selected state from all options
                 document.querySelectorAll('.size-option').forEach(opt => {
                     opt.classList.remove('border-[#f25b21]', 'bg-orange-50', 'text-[#f25b21]');
@@ -1209,7 +1294,7 @@
         const decreaseBtn = document.querySelector('button:has-text("−")');
         const increaseBtn = document.querySelector('button:has-text("+")');
 
-        document.querySelector('button').addEventListener('click', function() {
+        document.querySelector('button').addEventListener('click', function () {
             if (this.textContent === '−') {
                 const current = parseInt(quantityInput.value);
                 if (current > 1) quantityInput.value = current - 1;
@@ -1221,7 +1306,7 @@
 
         document.querySelectorAll('button').forEach(btn => {
             if (btn.textContent === '−' || btn.textContent === '+') {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     const current = parseInt(quantityInput.value);
                     if (this.textContent === '−' && current > 1) {
                         quantityInput.value = current - 1;
@@ -1231,6 +1316,7 @@
                 });
             }
         });
+
     </script>
 
 

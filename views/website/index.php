@@ -232,18 +232,21 @@
             ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
-                    <img src="/<?= $category['img'] ?>" alt="Tees"
-                        class="w-full h-[380px] max-md:h-[200px] object-cover object-top transform group-hover:scale-110 transition duration-700 ease-out">
-                    <!-- Overlay -->
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
-                    </div>
-                    <!-- Text -->
-                    <div
-                        class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl max-md:text-base tracking-wide w-full text-center">
-                        <span
-                            class="group-hover:text-[#f25b21] transition-colors duration-300 uppercase text-center "><?= $category['category'] ?></span>
-                    </div>
+                    <a href="/category/<?= strtolower(str_replace(' ', '-', $category['category'])) ?>">
+
+                        <img src="/<?= $category['img'] ?>" alt="Tees"
+                            class="w-full h-[380px] max-md:h-[200px] object-cover object-top transform group-hover:scale-110 transition duration-700 ease-out">
+                        <!-- Overlay -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
+                        </div>
+                        <!-- Text -->
+                        <div
+                            class="absolute bottom-6 pb-5 left-1/2 transform -translate-x-1/2 translate-y-6 group-hover:translate-y-0 transition-all duration-500 ease-out text-white font-extrabold text-3xl max-md:text-base tracking-wide w-full text-center">
+                            <span
+                                class="group-hover:text-[#f25b21] transition-colors duration-300 uppercase text-center "><?= $category['category'] ?></span>
+                        </div>
+                    </a>
                 </div>
             <?php } ?>
         </div>
