@@ -1063,7 +1063,7 @@
                 if (isMaharashtra) {
                     // alert('✅ PIN code belongs to Maharashtra.');
                     // toastr.success('✅ PIN code belongs to Maharashtra.');
-                    deliveryStatus.innerText = '✅ Delivery available.';
+                    deliveryStatus.innerText = 'Delivery in 5-6 days';
                     deliveryStatus.classList.remove('text-red-500');
                     deliveryStatus.classList.add('text-green-500');
                 } else {
