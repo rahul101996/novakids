@@ -279,7 +279,10 @@ if (isset($_POST['update_profile'])) {
                         <div class="w-full grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6">
                             <!-- Order Card -->
 
-                            <?php foreach (getData2("SELECT tpi.*, tp.name AS product_name, tp.price, tp.product_images FROM tbl_purchase_item tpi LEFT JOIN tbl_products tp ON tp.id = tpi.product WHERE tpi.userid = '$userData[id]' ORDER BY tpi.id DESC") as $key => $order) { 
+                            <?php 
+                            // echo "SELECT tpi.*, tp.name AS product_name, tp.price, tp.product_images FROM tbl_purchase_item tpi LEFT JOIN tbl_products tp ON tp.id = tpi.product WHERE tpi.userid = '$_SESSION[id]' ORDER BY tpi.id DESC";
+                            // printWithPre($_SESSION);
+                            foreach (getData2("SELECT tpi.*, tp.name AS product_name, tp.price, tp.product_images FROM tbl_purchase_item tpi LEFT JOIN tbl_products tp ON tp.id = tpi.product WHERE tpi.userid = '$_SESSION[userid]' ORDER BY tpi.id DESC") as $key => $order) { 
 
                                 // Decode JSON into array
                                 $images = json_decode($order['product_images'], true);

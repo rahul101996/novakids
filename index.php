@@ -1,13 +1,13 @@
 <?php
 
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
 require 'vendor/autoload.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . "/Helper/generalHelper.php";
-
+//  printWithPre($_SESSION);
 date_default_timezone_set('Asia/Kolkata');
 
 // die();
