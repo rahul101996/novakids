@@ -139,9 +139,21 @@
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
                         $name = str_replace(' ', '-', $product['name']);
+                        if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
+
+                            $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $product['id'] . " AND `userid` = " . $_SESSION["userid"])[0];
+                        } else {
+
+                            $data = checkExisteingWishlistSession($product['id']);
+                            if ($data) {
+                                $data = ['id' => $data];
+                            } else {
+                                $data = [];
+                            }
+                        }
                         // printWithPre($images);
-                        ?>
+                    ?>
                         <a href="/products/product-details/<?= $name ?>" class="block">
                             <div class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
@@ -162,8 +174,7 @@
 
                                     <!-- Add to favorites Icon (top-right) -->
                                     <button
-                                        class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-
+                                        class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
                                         <i class="fas fa-heart"></i>
                                     </button>
 
@@ -218,7 +229,7 @@
             foreach ($categories as $key => $category) {
 
 
-                ?>
+            ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
                     <a href="/category/<?= strtolower(str_replace(' ', '-', $category['category'])) ?>">
@@ -411,7 +422,21 @@
                     $price = floatval($product_details['price']);
                     $discountAmount = $comparePrice - $price;
                     $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
-                    ?>
+                    if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
+
+
+                        $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $product . " AND `userid` = " . $_SESSION["userid"])[0];
+                    } else {
+
+                        $data = checkExisteingWishlistSession($product);
+                        if ($data) {
+                            $data = ['id' => $data];
+                        } else {
+                            $data = [];
+                        }
+                    }
+
+                ?>
                     <a href="products/product-details/<?= $name ?>" class="block">
                         <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
                             <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden">
@@ -422,7 +447,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
                                     <i class="fas fa-heart"></i>
                                 </button>
 
@@ -461,7 +486,7 @@
                             </div>
                         </div>
                     </a>
-                    <?php
+                <?php
                 }
                 ?>
             </div>
@@ -827,7 +852,7 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const modal = document.getElementById('newsletterModal');
             const closeBtn = document.getElementById('closeModal');
             const noPopupCheckbox = document.getElementById('noPopup');
@@ -861,7 +886,7 @@
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".new-arrival-carousel").owlCarousel({
                 loop: true,
                 margin: 5,

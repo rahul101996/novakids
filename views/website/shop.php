@@ -285,7 +285,19 @@
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
                         $name = str_replace(' ', '-', $product['name']);
+                        if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
+
+                            $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $product['id'] . " AND `userid` = " . $_SESSION["userid"])[0];
+                        } else {
+
+                            $data = checkExisteingWishlistSession($product['id']);
+                            if ($data) {
+                                $data = ['id' => $data];
+                            } else {
+                                $data = [];
+                            }
+                        }
                         // printWithPre($images);
                     ?>
                         <a href="/products/product-details/<?= $name ?>" class="block">
@@ -309,7 +321,7 @@
 
                                     <!-- Add to favorites Icon (top-right) -->
                                     <button
-                                        class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                        class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
                                         <i class="fas fa-heart"></i>
                                     </button>
 
@@ -340,7 +352,7 @@
 
                     <?php } ?>
 
-                   
+
                 </div>
             </main>
         </div>

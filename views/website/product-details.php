@@ -399,19 +399,18 @@
 
                         <!-- Input + Button + Icon -->
                         <div class="flex items-center space-x-2 border-b border-gray-300 pb-2">
-                            <input type="text" value="" placeholder="Enter Pincode"
-                                class="flex-1 bg-transparent outline-none text-gray-700" />
-                            <button
+                            <input type="text" id="pincode" maxlength="6" value="" placeholder="Enter Pincode"
+                                oninput="checkMaharashtraPincode()" class="flex-1 bg-transparent outline-none text-gray-700" />
+                            <!-- <button type="button"
                                 class="bg-black text-white text-sm font-semibold px-3 py-1 rounded-md hover:bg-gray-800">
-                                Change
-                            </button>
+                                check
+                            </button> -->
                             <i class="fa-solid fa-truck-fast"></i>
                         </div>
 
                         <!-- Delivery Info -->
                         <p class="mt-3 text-sm">
-                            <span class="text-green-600 font-semibold">Free delivery</span> | By <span
-                                class="font-semibold">Friday, 26 Sept</span>
+                            <span class="font-semibold" id="deliveryStatus"></span>
                         </p>
                     </div>
                     <!-- Quantity and Add to Cart -->
@@ -461,10 +460,10 @@
                         </div>
 
                         <div class="flex w-full items-center justify-start gap-4">
-                            <input type="hidden" name="varient[]" value="<?=$ProductData['varients'][0]["id"]?>">
-                            <input type="hidden" name="category[]" value="<?=$ProductData['category']?>">
-                            <input type="hidden" name="product[]" value="<?=$ProductData['id']?>">
-                            <input type="hidden" name="price[]" value="<?=$ProductData['varients'][0]["price"]?>">
+                            <input type="hidden" name="varient[]" value="<?= $ProductData['varients'][0]["id"] ?>">
+                            <input type="hidden" name="category[]" value="<?= $ProductData['category'] ?>">
+                            <input type="hidden" name="product[]" value="<?= $ProductData['id'] ?>">
+                            <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
                             <input type="hidden" name="quantity[]" value="1">
                             <input type="hidden" name="cartid[]" value="">
 
@@ -1033,6 +1032,57 @@
             window.open(shareUrl, "_blank");
         }
 
+        async function checkMaharashtraPincode() {
+            const el = document.getElementById('pincode');
+            const deliveryStatus = document.getElementById('deliveryStatus');
+            const pin = el.value.trim();
+
+            // validate length
+            if (pin.length !== 6 || !/^\d{6}$/.test(pin)) {
+                // alert('Please enter a valid 6-digit PIN code.');
+                // el.value = '';
+                el.focus();
+                return;
+            }
+
+            try {
+                const res = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
+                const data = await res.json();
+
+                if (!Array.isArray(data) || data[0].Status !== 'Success' || !data[0].PostOffice) {
+                    deliveryStatus.innerText = 'Invalid PIN code.';
+                    deliveryStatus.classList.add('text-red-500');
+                    el.value = '';
+                    el.focus();
+                    return;
+                }
+
+                const isMaharashtra = data[0].PostOffice.some(po =>
+                    (po.State || '').toLowerCase().includes('maharashtra')
+                );
+
+                if (isMaharashtra) {
+                    // alert('✅ PIN code belongs to Maharashtra.');
+                    // toastr.success('✅ PIN code belongs to Maharashtra.');
+                    deliveryStatus.innerText = '✅ Delivery available.';
+                    deliveryStatus.classList.remove('text-red-500');
+                    deliveryStatus.classList.add('text-green-500');
+                } else {
+                    // alert('❌ This PIN code is not from Maharashtra.');
+                    // toastr.error('❌ This PIN code is not from Maharashtra.');
+                    deliveryStatus.innerText = '❌ Delivery not available.';
+                    deliveryStatus.classList.remove('text-green-500');
+                    deliveryStatus.classList.add('text-red-500');
+                    el.value = '';
+                    el.focus();
+                }
+            } catch (e) {
+                console.error(e);
+                alert('Could not verify PIN code. Please try again.');
+                el.value = '';
+                el.focus();
+            }
+        }
     </script>
 
 
