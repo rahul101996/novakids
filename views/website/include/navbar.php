@@ -324,7 +324,7 @@ $categories = getData("tbl_category");
                 </button>
             </div>
             <!-- <button id="Openvariant">Open Cart</button> -->
-            <button id="openLogin"
+            <button <?= isset($_SESSION['userid']) && !empty($_SESSION['userid']) ? 'onclick="window.location.href=\'/profile\'"' : 'id="openLogin"' ?>
                 class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
                 <div class="max-md:hidden">
                     <svg class="svgUser2 anarkali-svg-icon" enable-background="new 0 0 512 512" height="24px"
@@ -733,7 +733,7 @@ $categories = getData("tbl_category");
             <h2 class="text-2xl font-semibold text-center mb-6">What are you looking for</h2>
             <div class="w-full max-w-2xl mx-auto mb-6">
                 <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
-                    <input type="text" oninput="searchProducts(this)" placeholder="Search our store"
+                    <input type="text" id="searchInput" oninput="searchProducts(this)" placeholder="Search our store"
                         class="w-full px-4 py-2 outline-none text-gray-700">
 
                     <!-- <div id="searchResults" class="grid grid-cols-2 gap-4 mt-4"></div> -->
@@ -1051,7 +1051,8 @@ $categories = getData("tbl_category");
 <script>
     let debounceTimer;
 
-    async function searchProducts(ele) {
+    async function searchProducts() {
+        let ele = document.getElementById("searchInput");
         clearTimeout(debounceTimer);
 
         let search = ele.value.trim();
@@ -1123,4 +1124,6 @@ $categories = getData("tbl_category");
 
         }, 500); // 500ms debounce
     }
+
+    // searchProducts();
 </script>
