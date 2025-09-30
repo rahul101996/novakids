@@ -2,6 +2,13 @@
 <?php
 // printWithPre($_SESSION);
 
+$uniqueProducts = getData2("SELECT *
+                                FROM `tbl_products`
+                                ORDER BY RAND()
+                                LIMIT 10;");
+
+// printWithPre($uniqueProducts);
+
 if (isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type'] == "User") {
     $count = 0;
     $count = count(getData2("SELECT * FROM `tbl_cart` WHERE `userid` = " . $_SESSION['userid']));
@@ -305,7 +312,7 @@ $categories = getData("tbl_category");
             <?php
             foreach ($categories as $key => $value) {
                 $category = strtolower(str_replace(" ", "-", $value['category']));
-            ?>
+                ?>
                 <div class="relative group">
                     <a href="/category/<?= $category ?>"
                         class="text-gray-800  group duration-300 cursor-pointer"><?= $value['category'] ?>
@@ -377,7 +384,9 @@ $categories = getData("tbl_category");
                         </svg>
                     </div>
                 </button>
-                <span class="absolute -top-1 max-md:-top-2 -right-3 max-md:right-0 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md" id="wishlist-count">
+                <span
+                    class="absolute -top-1 max-md:-top-2 -right-3 max-md:right-0 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md"
+                    id="wishlist-count">
                     <?= $wishlistcount ?>
                 </span>
             </div>
@@ -684,7 +693,9 @@ $categories = getData("tbl_category");
                                             class="relative w-full py-2 rounded-md font-semibold overflow-hidden group border-2 border-black">Verify
                                             OTP</button>
                                     </div>
-                                    <div class="text-sm text-slate-500 mt-4">Didn't receive code? <button type="button" class="font-medium text-indigo-500 hover:text-indigo-600" onclick="ResendOtp()">Resend</button></div>
+                                    <div class="text-sm text-slate-500 mt-4">Didn't receive code? <button type="button"
+                                            class="font-medium text-indigo-500 hover:text-indigo-600"
+                                            onclick="ResendOtp()">Resend</button></div>
                                 </div>
 
                             </div>
@@ -771,48 +782,26 @@ $categories = getData("tbl_category");
 
             <!-- Search Results -->
             <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-                <!-- Results will be populated here -->
+
+                <?php for ($i=0; $i < 5; $i++) {
+                    $value = $uniqueProducts[$i];
+
+                    $images = json_decode($value['product_images'], true);
+                    $firstImage = !empty($images) ? $images[0] : null;
+
+                    ?>
+                    <div class="border overflow-hidden hover:shadow-md transition">
+                        <img src="/<?= $firstImage ?>" alt="<?= $value['name'] ?>" class="w-full h-40 object-cover">
+                        <div class="p-2">
+                            <h3 class="font-semibold text-sm"><?= $value['name'] ?></h3>
+                            <p class="text-gray-500 text-sm">₹<?= $value['cost_per_item'] ?></p>
+                        </div>
+                    </div>
+                <?php } ?>
+
             </div>
 
-            <!-- <div class="border overflow-hidden hover:shadow-md transition">
-                    <img src="/public/images/f1.webp" alt="Product 1" class="w-full h-40 object-cover">
-                    <div class="p-2">
-                        <h3 class="font-semibold text-sm">Classic T-Shirt</h3>
-                        <p class="text-gray-500 text-sm">₹799</p>
-                    </div>
-                </div>
 
-                <div class="border overflow-hidden hover:shadow-md transition">
-                    <img src="/public/images/f2.webp" alt="Product 2" class="w-full h-40 object-cover">
-                    <div class="p-2">
-                        <h3 class="font-semibold text-sm">Casual Polo</h3>
-                        <p class="text-gray-500 text-sm">₹1,099</p>
-                    </div>
-                </div>
-
-                <div class="border overflow-hidden hover:shadow-md transition">
-                    <img src="/public/images/f3.webp" alt="Product 3" class="w-full h-40 object-cover">
-                    <div class="p-2">
-                        <h3 class="font-semibold text-sm">Denim Jacket</h3>
-                        <p class="text-gray-500 text-sm">₹1,899</p>
-                    </div>
-                </div>
-
-                <div class="border overflow-hidden hover:shadow-md transition">
-                    <img src="/public/images/f4.webp" alt="Product 4" class="w-full h-40 object-cover">
-                    <div class="p-2">
-                        <h3 class="font-semibold text-sm">Summer Dress</h3>
-                        <p class="text-gray-500 text-sm">₹1,499</p>
-                    </div>
-                </div>
-
-                <div class="border overflow-hidden hover:shadow-md transition">
-                    <img src="/public/images/f5.webp" alt="Product 5" class="w-full h-40 object-cover">
-                    <div class="p-2">
-                        <h3 class="font-semibold text-sm">Hoodie</h3>
-                        <p class="text-gray-500 text-sm">₹1,299</p>
-                    </div>
-                </div> -->
         </div>
     </div>
 </div>
@@ -901,6 +890,9 @@ $categories = getData("tbl_category");
     openBtn.addEventListener('click', () => {
         modal.classList.remove('hidden');
     });
+    function openLogin(){
+        modal.classList.remove('hidden');
+    }
 
     closeBtn.addEventListener('click', () => {
         modal.classList.add('hidden');
@@ -1100,7 +1092,7 @@ $categories = getData("tbl_category");
     function decodeJwtResponse(token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
 
@@ -1118,7 +1110,7 @@ $categories = getData("tbl_category");
         let search = ele.value.trim();
 
         // if search empty, clear results and hide loader
-        if (search === "") {
+        if (search == "") {
             document.getElementById("searchResults").innerHTML = "";
             document.getElementById("loader").classList.add("hidden");
             return;

@@ -423,13 +423,13 @@
                             <div
                                 class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg">
                                 <span class="cursor-pointer " onclick="countMe(this,'-')">-</span>
-                                <span class="text-black">1</span>
+                                <span class="text-black counter">1</span>
                                 <span class="cursor-pointer" onclick="countMe(this,'+')">+</span>
                                 
                             </div>
 
                             <div class="col-span-2 max-md:order-3 w-[70%]">
-                                <button
+                                <button type="button"
                                     class=" w-full sm:flex-1 relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black">
                                     <span
                                         class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
@@ -468,7 +468,7 @@
                             <input type="hidden" name="category[]" value="<?= $ProductData['category'] ?>">
                             <input type="hidden" name="product[]" value="<?= $ProductData['id'] ?>">
                             <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
-                            <input type="hidden" name="quantity[]" value="1">
+                            <input type="hidden" name="quantity[]" id="product_buy_count" value="1">
                             <input type="hidden" name="cartid[]" value="">
 
 
@@ -1321,6 +1321,22 @@
                 });
             }
         });
+
+        function countMe(ele, process) {
+            let counterEl = ele.parentElement.querySelector(".counter");
+            let current = parseInt(counterEl.textContent);
+
+            if (process === "+") {
+                current++;
+            } else if (process === "-" && current > 1) {
+                current--;
+            }
+
+            counterEl.textContent = current;
+            document.getElementById("product_buy_count").value=current
+        }
+                
+
     </script>
 
 
