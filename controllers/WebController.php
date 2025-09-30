@@ -1290,18 +1290,7 @@ class WebController extends LoginController
     }
     public function AddToWishlist()
     {
-        function checkExisteingWishlistSession($varient)
-        {
-            if (isset($_SESSION["wishlist"])) {
-                $cart = $_SESSION["wishlist"];
-                foreach ($cart as $key => $c) {
-                    if ($c["product"] == $varient) {
-                        return [$key, $c];
-                    }
-                }
-            }
-            return false;
-        }
+        
 
         if (!empty($_POST)) {
             if (isset($_POST["product_id"])) {

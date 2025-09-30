@@ -180,7 +180,7 @@
     </form>
 </div>
 <div class="h-[100vh] w-[59%] z-[50] fixed top-0 right-0 w-full flex items-center justify-center transform translate-x-full transition-transform duration-[0.6s] ease-in-out" id="AddToCartSidebar">
-    
+
 </div>
 <div id="sizeChartModal" class="hidden fixed inset-0 flex items-center justify-center bg-black/50 z-50">
     <div class="bg-white shadow-lg w-[65%] max-md:w-[90%] max-h-[80vh] relative flex flex-col animate-slideDown">
@@ -358,7 +358,8 @@
                 // Change the SVG in the button
 
                 if (request.data.message == "Add To wishlist Successfully") {
-
+                    ele.classList.remove('bg-black/70');
+                    ele.classList.add('bg-[#f25b21]');
                     toastr.options = {
                         "toastClass": "bg-pink-toast",
                         "progressBar": true,
@@ -368,7 +369,16 @@
                     toastr.success(request.data.message);
 
                 } else {
-
+                    <?php
+                    if(isset($page) && $page == "Wishlist"){
+                        
+                    ?>
+                    location.reload();
+                    <?php
+                    }
+                    ?>
+                    ele.classList.add('bg-black/70');
+                    ele.classList.remove('bg-[#f25b21]');
                     toastr.options = {
                         "toastClass": "bg-pink-toast",
                         "progressBar": true,
@@ -476,7 +486,7 @@
 
         cartOverlay.classList.remove('opacity-100');
         cartOverlay.classList.add('opacity-0', 'pointer-events-none');
-        document.getElementById("AddToCartSidebar").innerHTML=""
+        document.getElementById("AddToCartSidebar").innerHTML = ""
     }
 
 
@@ -538,7 +548,7 @@
                         Openvariant()
                         let options = document.querySelectorAll('.optionDivs');
 
-                        console.log("options",options);
+                        console.log("options", options);
 
                         let FirstOption = options[0];
 
@@ -575,10 +585,10 @@
         }
     }
 
-    async function changeCartSidebarImage( i=0){
+    async function changeCartSidebarImage(i = 0) {
         let options = document.querySelectorAll('.optionDivs');
 
-        console.log("options",options,i);
+        console.log("options", options, i);
 
         let FirstOption = options[0];
 
@@ -610,40 +620,40 @@
         }
     }
 
-    function changeSideVariant(ele,tp,value,key1){
-        console.log(ele,tp,value,key1)
-        updateKey(GLOBAL_VARIANT.selected,tp,value);
+    function changeSideVariant(ele, tp, value, key1) {
+        console.log(ele, tp, value, key1)
+        updateKey(GLOBAL_VARIANT.selected, tp, value);
         let divs = ele.parentElement.querySelectorAll("div")
         divs.forEach(div => {
             div.classList.remove("border-gray-900");
         });
         // console.log(divs[key1])
         divs[key1].classList.add("border-gray-900");
-        console.log("GLOBAL_VARIANT",GLOBAL_VARIANT)
+        console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
         let selectedId = "";
-        GLOBAL_VARIANT.variants.forEach(async (ar,i)=>{
+        GLOBAL_VARIANT.variants.forEach(async (ar, i) => {
 
-            if(deepEqualCaseInsensitive(JSON.parse(JSON.parse(ar.options)),GLOBAL_VARIANT.selected)){
+            if (deepEqualCaseInsensitive(JSON.parse(JSON.parse(ar.options)), GLOBAL_VARIANT.selected)) {
                 // console.log("matched",JSON.parse(JSON.parse(ar.options)),GLOBAL_VARIANT.selected)
 
                 // await changeCartSidebarImage(i)
 
                 selectedId = ar.id
                 ele.parentElement.parentElement.querySelector(".sideVarientId").value = selectedId
-                ele.parentElement.parentElement.querySelector(".prices").innerHTML =  `
+                ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
                     <span class="text-[#33459c] text-xl">Rs. ${ar.price}.00</span>
                 `
                 console.log(JSON.parse(ar.images))
                 let imgHtml = ""
-                JSON.parse(ar.images).forEach((imgh)=>{
-                    imgHtml = imgHtml+`
+                JSON.parse(ar.images).forEach((imgh) => {
+                    imgHtml = imgHtml + `
                         <img src="/${imgh}" alt="">
                     `
                 })
                 document.getElementById("VarImg").innerHTML = imgHtml
             }
         })
-        
+
     }
 
     function AddToCartslider(btn, sidecart = false) {

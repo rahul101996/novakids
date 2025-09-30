@@ -1,5 +1,6 @@
 <?php
 // printWithPre($_SESSION);
+$page = 'Wishlist';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +40,7 @@
                     <p class="text-gray-500 text-sm mb-8">Click the <i class="fa-regular fa-heart"></i> icons to add products
                     </p>
 
-                    <button onclick="window.location.href='/shop'"
+                    <button onclick="window.location.href='/'"
                         class="flex-1 relative rounded-md overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
                         <span
                             class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
@@ -92,7 +93,7 @@
 
                                     <!-- Add to favorites Icon (top-right) -->
                                     <button
-                                        class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                        class="addToWishlistBtn absolute top-2 right-3 bg-[#f25b21] text-white h-10 w-10 rounded-full  group-hover:opacity-100 z-20 stop-link">
                                         <i class="fas fa-heart"></i>
                                     </button>
 
@@ -144,7 +145,7 @@
                     <p class="text-gray-500 text-sm mb-8">Click the <i class="fa-regular fa-heart"></i> icons to add products
                     </p>
 
-                    <button onclick="window.location.href='/shop'"
+                    <button onclick="window.location.href='/'"
                         class="flex-1 relative rounded-md overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
                         <span
                             class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
@@ -197,8 +198,8 @@
                                         class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
 
                                     <!-- Add to favorites Icon (top-right) -->
-                                    <button
-                                        class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                     <button
+                                        class="addToWishlistBtn absolute top-2 right-3 bg-[#f25b21] text-white h-10 w-10 rounded-full  group-hover:opacity-100 z-20 stop-link">
                                         <i class="fas fa-heart"></i>
                                     </button>
 

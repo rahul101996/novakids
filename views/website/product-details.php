@@ -418,9 +418,10 @@
                         <div class="w-full flex items-center justify-center space-x-4">
                             <div
                                 class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg">
-                                <span class="cursor-pointer ">-</span>
+                                <span class="cursor-pointer " onclick="countMe(this,'-')">-</span>
                                 <span class="text-black">1</span>
-                                <span class="cursor-pointer ">+</span>
+                                <span class="cursor-pointer" onclick="countMe(this,'+')">+</span>
+                                
                             </div>
 
                             <div class="col-span-2 max-md:order-3 w-[70%]">
