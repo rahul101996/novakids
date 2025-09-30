@@ -122,6 +122,10 @@ $route->group(['', 'DashboardController', 'auth'], function ($route) {
     $route->route('dashboard', 'index');
 });
 
+$route->group(['', 'WebsettingController', 'auth'], function ($route) {
+    $route->route('admin/websetting/home', 'home');
+});
+
 $route->group(['master', 'MasterController', 'auth'], function ($route) {
     $route->route('company', 'index');
     $route->route('charges', 'charges');
