@@ -180,71 +180,7 @@
     </form>
 </div>
 <div class="h-[100vh] w-[59%] z-[50] fixed top-0 right-0 w-full flex items-center justify-center transform translate-x-full transition-transform duration-[0.6s] ease-in-out" id="AddToCartSidebar">
-    <div class="w-[47%] p-3 h-full overflow-y-scroll bg-gray-200 flex flex-col items-center justify-start no-scrollbar gap-3 transform translate-x-full transition-transform duration-[0.8s] ease-in-out" id="VarImg">
-        <img src="https://www.bonkerscorner.com/cdn/shop/files/SlipstreamOversizedT-shirt_1_640x_crop_center.jpg?v=1754902583" alt="">
-        <img src="https://www.bonkerscorner.com/cdn/shop/files/SlipstreamOversizedT-shirt_2_640x_crop_center.jpg?v=1754902583" alt="">
-        <img src="https://www.bonkerscorner.com/cdn/shop/files/SlipstreamOversizedT-shirt_6_640x_crop_center.jpg?v=1754902583" alt="">
-    </div>
-    <div class="w-[53%] h-full overflow-y-scroll flex flex-col items-start justify-start z-10 bg-white" id="VarDetails">
-        <div class="w-full flex items-center justify-between px-7 pt-7 ">
-            <span class="uppercase ">SELECT OPTIONS</span>
-            <button id="closeAddToCartSidebar" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong" onclick="CloseVariant()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <span class="w-full h-[1px] bg-gray-200 my-5"></span>
-        <div class="flex flex-col items-start justify-start w-full px-7">
-            <h2 class="w-full text-[1.8rem] leading-[2rem] uppercase">Black Sporty Deconstructed Loose Pants</h2>
-            <div class="flex items-center justify-center gap-3 mt-7">
-                <span class="text-gray-300 text-xl line-through">Rs.1,499.00</span>
-                <span class="text-[#33459c] text-xl">Rs.1,199.00</span>
-                <span class="text-xs bg-[#33459c] text-white py-1 px-2 rounded-lg">SAVE 20%</span>
-
-            </div>
-            <p class=" text-xs text-gray-600 mt-1"><a href="" class="underline">shipping</a> calculated at checkout</p>
-            <p class="text-xs mt-1">⭐⭐⭐⭐⭐ <span class="text-sm">31 reviews</span></p>
-            <div class="w-full flex items-center justify-between mt-7 text-sm">
-                <p>SIZE : M</p>
-                <p class="flex gap-1 cursor-pointer"><svg class="icon icon-accordion color-foreground-" aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20">
-                        <path d="M18.9836 5.32852L14.6715 1.01638L1.01638 14.6715L5.32852 18.9836L18.9836 5.32852ZM15.3902 0.297691C14.9933 -0.0992303 14.3497 -0.0992303 13.9528 0.297691L0.297691 13.9528C-0.0992301 14.3497 -0.0992305 14.9932 0.297691 15.3902L4.60983 19.7023C5.00675 20.0992 5.65029 20.0992 6.04721 19.7023L19.7023 6.04721C20.0992 5.65029 20.0992 5.00675 19.7023 4.60983L15.3902 0.297691Z" fill-rule="evenodd"></path>
-                        <path d="M11.7863 2.67056C11.9848 2.4721 12.3065 2.4721 12.505 2.67056L14.4237 4.58927C14.6222 4.78774 14.6222 5.1095 14.4237 5.30796C14.2252 5.50642 13.9035 5.50642 13.705 5.30796L11.7863 3.38925C11.5878 3.19079 11.5878 2.86902 11.7863 2.67056Z"></path>
-                        <path d="M8.93891 5.36331C9.13737 5.16485 9.45914 5.16485 9.6576 5.36331L11.5763 7.28202C11.7748 7.48048 11.7748 7.80225 11.5763 8.00071C11.3779 8.19917 11.0561 8.19917 10.8576 8.00071L8.93891 6.082C8.74045 5.88354 8.74045 5.56177 8.93891 5.36331Z"></path>
-                        <path d="M6.24307 8.20742C6.44153 8.00896 6.76329 8.00896 6.96175 8.20742L8.88047 10.1261C9.07893 10.3246 9.07893 10.6464 8.88047 10.8448C8.68201 11.0433 8.36024 11.0433 8.16178 10.8448L6.24307 8.92611C6.0446 8.72765 6.0446 8.40588 6.24307 8.20742Z"></path>
-                        <path d="M3.37296 10.8776C3.57142 10.6791 3.89319 10.6791 4.09165 10.8776L6.01036 12.7963C6.20882 12.9948 6.20882 13.3165 6.01036 13.515C5.8119 13.7134 5.49013 13.7134 5.29167 13.515L3.37296 11.5963C3.1745 11.3978 3.1745 11.076 3.37296 10.8776Z"></path>
-                    </svg> Sizing guide</p>
-            </div>
-            <div class="w-full flex items-center justify-start mt-3 text-sm">
-                <div class="border border-gray-600 flex items-center justify-center h-12 w-12">XS</div>
-                <div class="border border-gray-200 flex items-center justify-center h-12 w-12">S</div>
-                <div class="border border-gray-200 flex items-center justify-center h-12 w-12">M</div>
-                <div class="border border-gray-200 flex items-center justify-center h-12 w-12">L</div>
-                <div class="border border-gray-200 flex items-center justify-center h-12 w-12">XL</div>
-                <div class="border border-gray-200 flex items-center justify-center h-12 w-12">XXL</div>
-            </div>
-            <span class="mt-6 text-sm">COLOR :</span>
-            <div class="w-full flex items-center justify-start mt-3 text-sm gap-2">
-                <div class="border border-gray-600 p-1 flex items-center justify-center "><img src="https://www.bonkerscorner.com/cdn/shop/files/black-sporty-deconstructed-loose-pants-xs-bonkerscorner-store-34403286876260.jpg?v=1728981039" alt="" class="h-[83px] w-[58px]"></div>
-                <div class=" flex items-center justify-center "><img src="https://www.bonkerscorner.com/cdn/shop/files/white-sporty-deconstructed-loose-pants-xs-bonkerscorner-store-34410824138852.jpg?v=1728981030" alt="" class="h-[83px] w-[58px]"></div>
-                <div class=" flex items-center justify-center"><img src="https://www.bonkerscorner.com/cdn/shop/files/navy-blue-sporty-deconstructed-loose-pants-xs-bonkerscorner-store-34410889838692.jpg?v=1728983441" alt="" class="h-[83px] w-[58px]"></div>
-
-            </div>
-            <div class="w-full flex items-center justify-start mt-7 gap-3">
-                <div class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg">
-                    <span class="cursor-pointer ">-</span>
-                    <span class="text-black">1</span>
-                    <span class="cursor-pointer ">+</span>
-                </div>
-                <div class="w-[80%] border border-gray-800 p-3 px-3 rounded-lg text-center cursor-pointer font-semibold text-base">
-                    ADD TO CART
-                </div>
-            </div>
-            <div class="w-full items-center justify-center text-white text-center mt-3 bg-gray-900 p-3 px-3 rounded-lg cursor-pointer">
-                BUY IT NOW
-            </div>
-
-
-        </div>
-    </div>
+    
 </div>
 <div id="sizeChartModal" class="hidden fixed inset-0 flex items-center justify-center bg-black/50 z-50">
     <div class="bg-white shadow-lg w-[65%] max-md:w-[90%] max-h-[80vh] relative flex flex-col animate-slideDown">
@@ -385,10 +321,12 @@
     }
 
     function closeCartFn() {
+        console.log("closing cart")
         sideCart.classList.remove('translate-x-0');
         sideCart.classList.add('translate-x-full');
         cartOverlay.classList.remove('opacity-100');
         cartOverlay.classList.add('opacity-0', 'pointer-events-none');
+        // document.getElementById("AddToCartSidebar").innerHTML=""
     }
 
     openCartBtns.forEach(btn => btn.addEventListener('click', openCart));
@@ -461,7 +399,7 @@
     const VariantSelects = document.getElementById('AddToCartSidebar');
 
     function CloseVariant() {
-
+        // console.log("hello this is close cart")
         let VarImg = document.getElementById('VarImg');
 
         setTimeout(() => {
@@ -474,6 +412,7 @@
 
         cartOverlay.classList.remove('opacity-100');
         cartOverlay.classList.add('opacity-0', 'pointer-events-none');
+        document.getElementById("AddToCartSidebar").innerHTML=""
     }
 
 
