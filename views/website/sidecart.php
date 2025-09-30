@@ -556,7 +556,6 @@
         cartOverlay.classList.add('opacity-100');
     }
     document.addEventListener('DOMContentLoaded', function() {
-
         AddToCart();
     });
 
@@ -600,7 +599,7 @@
                         Openvariant()
                         let options = document.querySelectorAll('.optionDivs');
 
-                        console.log("options", options);
+                        console.log("options",options);
 
                         let FirstOption = options[0];
 
@@ -637,6 +636,32 @@
         }
     }
 
+    async function changeCartSidebarImage( i=0){
+        let options = document.querySelectorAll('.optionDivs');
+
+        console.log("options",options,i);
+
+        let FirstOption = options[0];
+
+        // // console.log(FirstOption);
+        // let OptionName = FirstOption.getAttribute('option_name');
+        // let OptionValue = FirstOption.getAttribute('option_value');
+        let product_id = FirstOption.getAttribute('product_id');
+        // console.log(OptionName, OptionValue, product_id);
+        const response2 = await axios.post("/api/get-variant-data", new URLSearchParams({
+            productid: product_id,
+            // option_name: "color",
+            // option_value: OptionValue
+
+        }))
+
+        const ColorDiv = document.getElementById('ColorDiv');
+        if (ColorDiv) {
+            ColorDiv.innerHTML = response2.data.html;
+
+        }
+    }
+
     function updateKey(dict, key, value) {
         let foundKey = Object.keys(dict).find(k => k.toLowerCase() === key.toLowerCase());
         if (foundKey) {
@@ -646,17 +671,40 @@
         }
     }
 
-    function changeSideVariant(ele, tp, value, key1) {
-        console.log("parent", ele.parentElement, key1)
-        updateKey(GLOBAL_VARIANT.selected, tp, value);
+    function changeSideVariant(ele,tp,value,key1){
+        console.log(ele,tp,value,key1)
+        updateKey(GLOBAL_VARIANT.selected,tp,value);
         let divs = ele.parentElement.querySelectorAll("div")
         divs.forEach(div => {
             div.classList.remove("border-gray-900");
         });
         // console.log(divs[key1])
         divs[key1].classList.add("border-gray-900");
-        console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
+        console.log("GLOBAL_VARIANT",GLOBAL_VARIANT)
+        let selectedId = "";
+        GLOBAL_VARIANT.variants.forEach(async (ar,i)=>{
 
+            if(deepEqualCaseInsensitive(JSON.parse(JSON.parse(ar.options)),GLOBAL_VARIANT.selected)){
+                // console.log("matched",JSON.parse(JSON.parse(ar.options)),GLOBAL_VARIANT.selected)
+
+                // await changeCartSidebarImage(i)
+
+                selectedId = ar.id
+                ele.parentElement.parentElement.querySelector(".sideVarientId").value = selectedId
+                ele.parentElement.parentElement.querySelector(".prices").innerHTML =  `
+                    <span class="text-[#33459c] text-xl">Rs. ${ar.price}.00</span>
+                `
+                console.log(JSON.parse(ar.images))
+                let imgHtml = ""
+                JSON.parse(ar.images).forEach((imgh)=>{
+                    imgHtml = imgHtml+`
+                        <img src="/${imgh}" alt="">
+                    `
+                })
+                document.getElementById("VarImg").innerHTML = imgHtml
+            }
+        })
+        
     }
 
     function AddToCartslider(btn, sidecart = false) {
