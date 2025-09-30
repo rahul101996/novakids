@@ -185,10 +185,26 @@ class WebController extends LoginController
 
 
                     </div>
-                    <div
-                        class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">
-                        BUY IT NOW
-                    </div>
+                    <?php
+                    if(!empty($_SESSION["userid"])){
+                        ?>
+                        <form method="POST" action="/checkout-cart"
+                           class="w-full" >
+                                <input type="hidden" name="varient[]" value="<?= $ProductData['varients'][0]["id"] ?>">
+                                <input type="hidden" name="category[]" value="<?= $ProductData['category'] ?>">
+                                <input type="hidden" name="product[]" value="<?= $ProductData['id'] ?>">
+                                <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
+                                <input type="hidden" name="quantity[]" id="product_buy_count1" value="1">
+                                <input type="hidden" name="cartid[]" value="">
+                                <button name="myForm" class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">BUY IT NOW</button>
+                        </form>
+                        <?php
+                    }else{
+                        ?>
+                        <button onclick="openLogin()" class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">BUY IT NOW</button>
+                        <?php
+                    }
+                    ?>
 
 
                 </div>
@@ -774,7 +790,16 @@ class WebController extends LoginController
                 $siteName = getDBObject()->getSiteName();
                 $pageModule = "Product Page";
                 $pageTitle = "Product Page";
-                $ProductData = getData2("SELECT tbl_products.*, tbl_category.category as category_name FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_products.name = '$name'")[0];
+                $ProductData = getData2("
+    SELECT 
+        tbl_products.*, 
+        tbl_category.category AS category_name 
+    FROM tbl_products 
+    LEFT JOIN tbl_category 
+        ON tbl_products.category = tbl_category.id 
+    WHERE REPLACE(tbl_products.name, \"'\", '') = REPLACE('$name', \"'\", '')
+")[0];
+
                 $id = $ProductData['id'];
                 $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
                 $ProductData['varients'] = $varients;
@@ -1290,7 +1315,7 @@ class WebController extends LoginController
     }
     public function AddToWishlist()
     {
-        
+
 
         if (!empty($_POST)) {
             if (isset($_POST["product_id"])) {

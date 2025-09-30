@@ -890,6 +890,9 @@ $categories = getData("tbl_category");
     openBtn.addEventListener('click', () => {
         modal.classList.remove('hidden');
     });
+    function openLogin(){
+        modal.classList.remove('hidden');
+    }
 
     closeBtn.addEventListener('click', () => {
         modal.classList.add('hidden');
