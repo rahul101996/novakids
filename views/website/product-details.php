@@ -136,15 +136,15 @@
             <div class="flex items-center justify-start max-md:hidden gap-2 w-[64%]">
                 <div class="grid grid-cols-2 gap-2 w-[96%]">
                     <?php
-                    if(is_array($ppimages[0])){
+                    if (is_array($ppimages[0])) {
                         foreach (array_reverse($ppimages[0]) as $key => $image) {
 
-                    ?>
-                        <div class=" overflow-hidden  cursor-pointer">
-                            <img src="/<?= $image ?>" alt="View 1"
-                                class="w-full h-full object-cover image-hover cursor-zoom-in">
-                        </div>
-                    <?php }
+                            ?>
+                            <div class=" overflow-hidden  cursor-pointer">
+                                <img src="/<?= $image ?>" alt="View 1"
+                                    class="w-full h-full object-cover image-hover cursor-zoom-in">
+                            </div>
+                        <?php }
                     } ?>
 
                 </div>
@@ -291,22 +291,27 @@
                                     <?= $discountPercentage ?>%</span>
 
                             </div>
-                            
+
 
 
                         </div>
                         <div class="flex items-center justify-center gap-3">
-                        <button class="addToWishlistBtn  h-10 w-10 rounded-full transition-all duration-500 px-3  bg-black/70 text-white  hover:bg-[#f25b21]">
-                            <i class="fas fa-heart" aria-hidden="true"></i>
-                        </button>
-                        <input type="hidden" value="<?= $ProductData['id'] ?>" class="ProductId">
+                            <button
+                                class="addToWishlistBtn  h-10 w-10 rounded-full transition-all duration-500 px-3  bg-black/70 text-white  hover:bg-[#f25b21]">
+                                <i class="fas fa-heart" aria-hidden="true"></i>
+                            </button>
+                            <input type="hidden" value="<?= $ProductData['id'] ?>" class="ProductId">
 
-                        <img src="/public/icons/share.png" onclick="shareProduct()" class="h-7 cursor-pointer mt-1" alt="">
+                            <img src="/public/icons/share.png" onclick="shareProduct()" class="h-7 cursor-pointer mt-1"
+                                alt="">
                         </div>
                     </div>
-<p class="text-sm text-gray-900 mt-2 text-justify">Upgrade your casual wardrobe with our black sporty deconstructed loose pants, the perfect blend of comfort and style. Designed with a relaxed fit, these pants allow for effortless movement, while the deconstructed detailing adds a modern, edgy vibe that sets you apart.</p>
-                            <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated
-                                at checkout</p>
+                    <p class="text-sm text-gray-900 mt-2 text-justify">Upgrade your casual wardrobe with our black
+                        sporty deconstructed loose pants, the perfect blend of comfort and style. Designed with a
+                        relaxed fit, these pants allow for effortless movement, while the deconstructed detailing adds a
+                        modern, edgy vibe that sets you apart.</p>
+                    <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated
+                        at checkout</p>
                     <!-- Size Selection -->
                     <div class="flex flex-col mt-5">
 
@@ -317,7 +322,7 @@
                                 // echo $key;
                                 if ($key == 'size') {
 
-                            ?>
+                                    ?>
                                     <div class="w-full flex items-center justify-between text-sm">
 
                                         <p class="uppercase"><?= $key ?> : <?= $value[0] ?></p>
@@ -331,16 +336,16 @@
                                         $diffcolor = [];
                                         foreach ($value as $key1 => $value1) {
                                             // $diffcolor = $finalData['images'][$key1];
-                                        ?>
+                                            ?>
                                             <div class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> flex items-center justify-center h-10 w-20"
                                                 size_value="<?= $value1 ?>" size_name="<?= $key ?>"><?= $value1 ?></div>
-                                        <?php
+                                            <?php
                                         }
                                         ?>
                                     </div>
-                                <?php
+                                    <?php
                                 } elseif ($key == 'color') {
-                                ?>
+                                    ?>
                                     <p class="uppercase text-sm mt-5"><?= $key ?> : <?= $value[0] ?></p>
                                     <div class="w-full flex items-center justify-start mt-3 text-sm gap-2">
 
@@ -349,12 +354,12 @@
                                             if ($key3 > 3) {
                                                 break; // stop after 4 images
                                             }
-                                        ?>
+                                            ?>
                                             <img src="/<?= $image ?>" class="h-[95px]" alt="">
                                         <?php } ?>
 
                                     </div>
-                            <?php
+                                    <?php
                                 }
                             } ?>
                         </div>
@@ -406,7 +411,8 @@
                         <!-- Input + Button + Icon -->
                         <div class="flex items-center space-x-2 border-b border-gray-300 pb-2">
                             <input type="text" id="pincode" maxlength="6" value="" placeholder="Enter Pincode"
-                                oninput="checkMaharashtraPincode()" class="flex-1 bg-transparent outline-none text-gray-700" />
+                                oninput="checkMaharashtraPincode()"
+                                class="flex-1 bg-transparent outline-none text-gray-700" />
                             <!-- <button type="button"
                                 class="bg-black text-white text-sm font-semibold px-3 py-1 rounded-md hover:bg-gray-800">
                                 check
@@ -427,7 +433,7 @@
                                 <span class="cursor-pointer " onclick="countMe(this,'-')">-</span>
                                 <span class="text-black counter">1</span>
                                 <span class="cursor-pointer" onclick="countMe(this,'+')">+</span>
-                                
+
                             </div>
 
                             <div class="col-span-2 max-md:order-3 w-[70%]">
@@ -445,7 +451,7 @@
                             </div>
 
 
-                            
+
                         </div>
 
                         <div class="flex w-full items-center justify-start gap-4">
@@ -716,232 +722,58 @@
                 <div class="relative">
                     <div class="owl-carousel owl-theme like-carousel">
 
-                        <!-- Product Card -->
-                        <div
-                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
-                            <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-20">
-                                SAVE 14%
-                            </span>
+                        <?php foreach ($uniqueProducts as $key => $value) {
 
-                            <!-- Product Images -->
-                            <div class="relative w-full h-[300px] max-md:h-[250px] overflow-hidden">
-                                <!-- Default Image -->
-                                <img src="/public/images/1.webp" alt="Product 1"
-                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+                            $Allimages = json_decode($value['product_images'], true);
+                            $firstImage = !empty($images) ? $images : null;
+                            ?>
+                            <div
+                                class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
+                                <!-- Discount Badge -->
+                                <!-- <span class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-20">
+                                    SAVE 14%
+                                </span> -->
 
-                                <!-- Hover Image -->
-                                <img src="/public/images/2.webp" alt="Product 1 Hover"
-                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                                <!-- Product Images -->
+                                <div class="relative w-full h-[300px] max-md:h-[250px] overflow-hidden">
+                                    <!-- Default Image -->
+                                    <img src="/<?= $firstImage[0] ?>" alt="Product 1"
+                                        class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
 
-                                <!-- Add to favorites Icon (top-right) -->
-                                <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-heart"></i>
-                                </button>
+                                    <!-- Hover Image -->
+                                    <img src="/<?= $firstImage[1] ?>" alt="Product 1 Hover"
+                                        class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
 
-                                <!-- Add to Cart Icon -->
-                                <button
-                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                </button>
-                            </div>
+                                    <!-- Add to favorites Icon (top-right) -->
+                                    <button
+                                        class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
 
-                            <!-- Product Details -->
-                            <div class="p-4 text-center">
-                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
-                                <p class="text-red-600 font-bold">₹ 1,199.00</p>
-                            </div>
-                        </div>
+                                    <!-- Add to Cart Icon -->
+                                    <button
+                                        class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                        <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                                    </button>
+                                </div>
 
-                        <!-- Product 2 -->
-                        <div
-                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
-                            <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-20">
-                                SAVE 14%
-                            </span>
-
-                            <!-- Product Images -->
-                            <div class="relative w-full h-[300px] max-md:h-[250px] overflow-hidden">
-                                <!-- Default Image -->
-                                <img src="/public/images/4.webp" alt="Product 1"
-                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-
-                                <!-- Hover Image -->
-                                <img src="/public/images/5.webp" alt="Product 1 Hover"
-                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-
-                                <!-- Add to favorites Icon (top-right) -->
-                                <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-
-                                <!-- Add to Cart Icon -->
-                                <button
-                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                </button>
-                            </div>
-
-                            <!-- Product Details -->
-                           <div class="pt-4 w-full ">
-                                    <h3 class="text-base font-semibold uppercase">Nomad: Brown</h3>
+                                <!-- Product Details -->
+                                <div class="pt-4 w-full ">
+                                    <h3 class="text-base font-semibold uppercase"><?= $value['name'] ?></h3>
                                     <div class="flex items-center justify-start gap-3 w-full">
-                                        <p class="text-gray-500 line-through text-sm">₹
+                                        <!-- <p class="text-gray-500 line-through text-sm">₹
                                             2,499.0.00
-                                        </p>
-                                        <p class="text-[#f25b21] font-bold">₹ 1,999.0.00</p>
+                                        </p> -->
+                                        <p class="text-[#f25b21] font-bold">₹ <?= $value['price'] ?></p>
                                     </div>
                                     <!-- reviews -->
                                     <div class="flex items-center justify-start space-x-1 hidden">
                                         <span class="text-yellow-500">★★★★★</span>
                                     </div>
                                 </div>
-                        </div>
-
-                        <!-- Product 3 -->
-                        <div
-                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
-                            <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-20">
-                                SAVE 14%
-                            </span>
-
-                            <!-- Product Images -->
-                            <div class="relative w-full h-[300px] max-md:h-[250px] overflow-hidden">
-                                <!-- Default Image -->
-                                <img src="/public/images/6.webp" alt="Product 1"
-                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-
-                                <!-- Hover Image -->
-                                <img src="/public/images/7.webp" alt="Product 1 Hover"
-                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-
-                                <!-- Add to favorites Icon (top-right) -->
-                                <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-
-                                <!-- Add to Cart Icon -->
-                                <button
-                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                </button>
                             </div>
+                        <?php } ?>
 
-                            <!-- Product Details -->
-                            <div class="pt-4 w-full ">
-                                    <h3 class="text-base font-semibold uppercase">Nomad: Brown</h3>
-                                    <div class="flex items-center justify-start gap-3 w-full">
-                                        <p class="text-gray-500 line-through text-sm">₹
-                                            2,499.0.00
-                                        </p>
-                                        <p class="text-[#f25b21] font-bold">₹ 1,999.0.00</p>
-                                    </div>
-                                    <!-- reviews -->
-                                    <div class="flex items-center justify-start space-x-1 hidden">
-                                        <span class="text-yellow-500">★★★★★</span>
-                                    </div>
-                                </div>
-                        </div>
-
-                        <!-- Product 4 -->
-                        <div
-                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
-                            <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-20">
-                                SAVE 14%
-                            </span>
-
-                            <!-- Product Images -->
-                            <div class="relative w-full h-[300px] max-md:h-[250px] overflow-hidden">
-                                <!-- Default Image -->
-                                <img src="/public/images/2.webp" alt="Product 1"
-                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-
-                                <!-- Hover Image -->
-                                <img src="/public/images/1.webp" alt="Product 1 Hover"
-                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-
-                                <!-- Add to favorites Icon (top-right) -->
-                                <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-
-                                <!-- Add to Cart Icon -->
-                                <button
-                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                </button>
-                            </div>
-
-                            <!-- Product Details -->
-                           <div class="pt-4 w-full ">
-                                    <h3 class="text-base font-semibold uppercase">Nomad: Brown</h3>
-                                    <div class="flex items-center justify-start gap-3 w-full">
-                                        <p class="text-gray-500 line-through text-sm">₹
-                                            2,499.0.00
-                                        </p>
-                                        <p class="text-[#f25b21] font-bold">₹ 1,999.0.00</p>
-                                    </div>
-                                    <!-- reviews -->
-                                    <div class="flex items-center justify-start space-x-1 hidden">
-                                        <span class="text-yellow-500">★★★★★</span>
-                                    </div>
-                                </div>
-                        </div>
-
-                        <!-- Product 5 -->
-                        <div
-                            class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
-                            <!-- Discount Badge -->
-                            <span class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-20">
-                                SAVE 14%
-                            </span>
-
-                            <!-- Product Images -->
-                            <div class="relative w-full h-[300px] max-md:h-[250px] overflow-hidden">
-                                <!-- Default Image -->
-                                <img src="/public/images/1.webp" alt="Product 1"
-                                    class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-
-                                <!-- Hover Image -->
-                                <img src="/public/images/2.webp" alt="Product 1 Hover"
-                                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-
-                                <!-- Add to favorites Icon (top-right) -->
-                                <button
-                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-
-                                <!-- Add to Cart Icon -->
-                                <button
-                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                </button>
-                            </div>
-
-                            <!-- Product Details -->
-                           <div class="pt-4 w-full ">
-                                    <h3 class="text-base font-semibold uppercase">Nomad: Brown</h3>
-                                    <div class="flex items-center justify-start gap-3 w-full">
-                                        <p class="text-gray-500 line-through text-sm">₹
-                                            2,499.0.00
-                                        </p>
-                                        <p class="text-[#f25b21] font-bold">₹ 1,999.0.00</p>
-                                    </div>
-                                    <!-- reviews -->
-                                    <div class="flex items-center justify-start space-x-1 hidden">
-                                        <span class="text-yellow-500">★★★★★</span>
-                                    </div>
-                                </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1110,7 +942,7 @@
 
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".like-carousel").owlCarousel({
                 loop: true,
                 margin: 10,
@@ -1154,7 +986,7 @@
     </script> -->
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".review-carousel").owlCarousel({
                 margin: 10,
                 autoplay: true,
@@ -1287,7 +1119,7 @@
 
         // Color selection functionality
         document.querySelectorAll('.color-option').forEach(option => {
-            option.addEventListener('click', function() {
+            option.addEventListener('click', function () {
                 // Remove ring from all options
                 document.querySelectorAll('.color-option').forEach(opt => {
                     opt.classList.remove('ring-2', 'ring-[#f25b21]', 'ring-offset-4');
@@ -1299,7 +1131,7 @@
 
         // Size selection functionality
         document.querySelectorAll('.size-option').forEach(option => {
-            option.addEventListener('click', function() {
+            option.addEventListener('click', function () {
                 // Remove selected state from all options
                 document.querySelectorAll('.size-option').forEach(opt => {
                     opt.classList.remove('border-[#f25b21]', 'bg-orange-50', 'text-[#f25b21]');
@@ -1316,7 +1148,7 @@
         const decreaseBtn = document.querySelector('button:has-text("−")');
         const increaseBtn = document.querySelector('button:has-text("+")');
 
-        document.querySelector('button').addEventListener('click', function() {
+        document.querySelector('button').addEventListener('click', function () {
             if (this.textContent === '−') {
                 const current = parseInt(quantityInput.value);
                 if (current > 1) quantityInput.value = current - 1;
@@ -1328,7 +1160,7 @@
 
         document.querySelectorAll('button').forEach(btn => {
             if (btn.textContent === '−' || btn.textContent === '+') {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     const current = parseInt(quantityInput.value);
                     if (this.textContent === '−' && current > 1) {
                         quantityInput.value = current - 1;
@@ -1350,9 +1182,9 @@
             }
 
             counterEl.textContent = current;
-            document.getElementById("product_buy_count").value=current
+            document.getElementById("product_buy_count").value = current
         }
-                
+
 
     </script>
 
