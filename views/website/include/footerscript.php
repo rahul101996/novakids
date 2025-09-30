@@ -28,7 +28,6 @@
     });
 </script>
 <script>
-    
     function OpenAccordian(el) {
         const content = el.querySelector('.accordion-content');
         const icon = el.querySelector('.icon-wrapper');
@@ -60,12 +59,12 @@
     <?php endif; ?>
     <?php if (isset($_SESSION['success']) && !empty($_SESSION['success'])): ?>
         console.log("Success: <?= $_SESSION['success'] ?>");
-        $(document).ready(function () {
+        $(document).ready(function() {
             toastr.success("<?= $_SESSION['success'] ?>");
         });
         <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.home-banner-slider').owlCarousel({
             loop: true,
             items: 1, // Fade effect works best with a single item
@@ -77,7 +76,7 @@
             nav: false
         });
     });
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.testimonial').owlCarousel({
             loop: true,
             items: 1, // Fade effect works best with a single item
@@ -87,7 +86,7 @@
             nav: false
         });
     });
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.testimonial-video').owlCarousel({
             loop: true,
             items: 2, // Fade effect works best with a single item
@@ -112,7 +111,7 @@
             }
         });
     });
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.PastQuiz').owlCarousel({
             loop: true,
             margin: 15,
@@ -165,7 +164,7 @@
             console.error("Banner slider not found");
         }
     }
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         const counters = document.querySelectorAll(".count-up");
 
         const observer = new IntersectionObserver(
@@ -185,8 +184,8 @@
                     }
                 });
             }, {
-            threshold: 0.5
-        }
+                threshold: 0.5
+            }
         );
 
         counters.forEach((counter) => observer.observe(counter));
@@ -313,6 +312,32 @@
     document.addEventListener("scroll", checkVisibility);
 
 
-    
+    function normalizeKeys(obj) {
+        let normalized = {};
+        for (let key in obj) {
+            normalized[key.toLowerCase()] = obj[key];
+        }
+        return normalized;
+    }
 
+    function deepEqualCaseInsensitive(obj1, obj2) {
+        return deepEqual(normalizeKeys(obj1), normalizeKeys(obj2));
+    }
+
+    // Deep comparison function (same as before)
+    function deepEqual(a, b) {
+        if (a === b) return true;
+        if (typeof a !== "object" || a === null || typeof b !== "object" || b === null) return false;
+
+        let keysA = Object.keys(a);
+        let keysB = Object.keys(b);
+        if (keysA.length !== keysB.length) return false;
+
+        for (let key of keysA) {
+            if (!keysB.includes(key) || !deepEqual(a[key], b[key])) {
+                return false;
+            }
+        }
+        return true;
+    }
 </script>

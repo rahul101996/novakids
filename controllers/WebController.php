@@ -84,7 +84,7 @@ class WebController extends LoginController
                 <span class="w-full h-[1px] bg-gray-200 my-5"></span>
                 <div class="flex flex-col items-start justify-start w-full px-7">
                     <h2 class="w-full text-[1.8rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
-                    <div class="flex items-center justify-center gap-3 mt-1">
+                    <div class="flex items-center justify-center gap-3 mt-1 prices">
                         <span
                             class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
                         <span class="text-[#33459c] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
@@ -106,7 +106,7 @@ class WebController extends LoginController
                             ?>
                             <div class="w-full flex items-center justify-between mt-7 text-sm">
 
-                                <p class="uppercase"><?= $key ?> : <?= $value[0] ?></p>
+                                <p class="uppercase"><?= $key ?></p>
                                 <p class="flex gap-1 cursor-pointer"
                                     onclick="document.getElementById('sizeChartModal').classList.remove('hidden')">
                                     <svg class="icon icon-accordion color-foreground-" aria-hidden="true" focusable="false"
@@ -143,21 +143,21 @@ class WebController extends LoginController
                             <?php
                         } elseif ($key == 'color') {
                         ?>
-                            <p class="uppercase" ><?= $key ?> : <?= $value[0] ?></p>
+                            <p class="uppercase" ><?= $key ?></p>
                             <div class="w-full flex items-center justify-start mt-3 text-sm gap-2" id="ColorDiv">
 
                             </div>
 
                         <?php } else { ?>
-                            <p class="uppercase"><?= $key ?> : <?= $value[0] ?></p>
+                            <p class="uppercase"><?= $key ?></p>
                             <div class="w-full flex items-center justify-start mt-3 text-sm">
                                 <?php
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
-                                ?>
+                                    ?>
                                     <div onclick='changeSideVariant(this,"<?=$key?>","<?=$value1?>",<?=$key1?>)' class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300"  ?> cursor-pointer flex items-center justify-center h-10 w-20" option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?></div>
-                                <?php
+                                    <?php
                                 }
                                 ?>
                             </div>
@@ -214,6 +214,58 @@ class WebController extends LoginController
     public function getVariantData()
     {
         $id = $_POST['productid'];
+        $variants = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
+        $vv = groupOptions($variants);
+        // printWithPre($vv);
+        $co = [];
+        foreach($vv["Color"] as $color){
+            // if(array_key_exists($color, $co)){
+
+            // }else{
+                $ar = [];
+                foreach($variants as $var){
+                    $varOp = parse_variant_options($var["options"])["Color"];
+                    if($varOp == $color){
+                        $ar[] = json_decode($var["images"]);
+                    }
+                }
+                $co[$color] = $ar;
+            // }
+        }
+        
+        ob_start();
+        $i = 0;
+        foreach($co as $color=>$images){
+            // printWithPre($images);
+            
+        ?>
+            <div onclick='changeSideVariant(this,"color","<?= $color ?>",<?=$i?>)' class=" h-[95px] flex items-center justify-start mt-3 text-sm gap-2 p-1 cursor-pointer border <?= $i == 0 ? " border-gray-900 selected-color" : "" ?>"
+                    option_name="color" option_value="" product_id="<?= $id ?>">
+
+                    <img src="/<?= $images[0][0] ?>" class="h-full" alt="" class="optionDivs">
+
+
+                </div>
+
+        <?php
+        $i ++;
+        }
+
+        $html = ob_get_clean();
+
+
+
+        // echo $html;
+        echo json_encode([
+            'html' => $html
+        ]);
+        // printWithPre($co);
+
+    }
+
+    public function getVariantData1()
+    {
+        $id = $_POST['productid'];
         $option_name = $_POST['option_name'];   // e.g. "Size"
         $option_value = $_POST['option_value']; // e.g. "8-9 Years"
 
@@ -259,11 +311,12 @@ class WebController extends LoginController
             <?php
             foreach ($matchedVariants as $key => $value) {
                 $images = array_reverse(json_decode($value['images']));
+                
                 ?>
-                <div class="h-[95px] flex items-center justify-start mt-3 text-sm gap-2 p-1 cursor-pointer <?= $key == 0 ? "border border-gray-900 selected-color" : "" ?>"
-                    option_name="<?= $optionsArray[1] ?>" option_value="<?= $optionsArray[1][$key] ?>" product_id="<?= $id ?>">
+                <div onclick='changeSideVariant(this,"color","<?= parse_variant_options(($value["options"]))["Color"] ?>",<?=$key?>)' class=" h-[95px] flex items-center justify-start mt-3 text-sm gap-2 p-1 cursor-pointer border <?= $key == 0 ? " border-gray-900 selected-color" : "" ?>"
+                    option_name="color" option_value="" product_id="<?= $id ?>">
 
-                    <img src="/<?= $images[0] ?>" class="h-full" alt="">
+                    <img src="/<?= $images[0] ?>" class="h-full" alt="" class="optionDivs">
 
 
                 </div>
@@ -276,9 +329,13 @@ class WebController extends LoginController
 
         $html = ob_get_clean();
 
+
+
         // echo $html;
         echo json_encode([
             'html' => $html,
+            '$matchedVariants' => $matchedVariants,
+            '$optionsArray' => $optionsArray
         ]);
     }
 
