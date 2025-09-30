@@ -423,6 +423,20 @@ function checkActiveModule($page, $module)
     return false;
 }
 
+
+function checkExisteingWishlistSession($varient)
+        {
+            if (isset($_SESSION["wishlist"])) {
+                $cart = $_SESSION["wishlist"];
+                foreach ($cart as $key => $c) {
+                    if ($c["product"] == $varient) {
+                        return [$key, $c];
+                    }
+                }
+            }
+            return false;
+        }
+
 function add($data, $table, $timestamp = true)
 {
     $db = getDBCon();

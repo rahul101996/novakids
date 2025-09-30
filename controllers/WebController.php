@@ -1288,12 +1288,12 @@ class WebController extends LoginController
     }
     public function AddToWishlist()
     {
-        function checkExisteingCartSession($varient)
+        function checkExisteingWishlistSession($varient)
         {
             if (isset($_SESSION["wishlist"])) {
                 $cart = $_SESSION["wishlist"];
                 foreach ($cart as $key => $c) {
-                    if ($c["varient"] == $varient) {
+                    if ($c["product"] == $varient) {
                         return [$key, $c];
                     }
                 }
@@ -1302,46 +1302,16 @@ class WebController extends LoginController
         }
 
         if (!empty($_POST)) {
-            if (isset($_POST["deleteWishlist"])) {
-                // printWithPre($_POST);
-                // die();
-                if (isset($_SESSION["type"]) && $_SESSION["type"] == "User" && !empty($_SESSION["username"])) {
-                    if (
-                        $cartController->DeleteWishlist($_POST["varient_id"], $_SESSION["userid"])
-                    ) {
-                        $wishlistLength = count($cartController->getAllWishlistByUserId($_SESSION["userid"]));
-                        echo json_encode([
-                            "success" => true,
-                            "message" => "Remove From wishlist Successfully",
-                            "totalwishlist" => $wishlistLength,
-                        ]);
-                    } else {
-                        echo json_encode([
-                            "success" => false,
-                            "message" => "Server Error",
-                        ]);
-                    }
-                } else {
-                    unset($_SESSION["wishlist"][$_POST["varient_id"]]);
-                    if (empty($_SESSION["wishlist"])) {
-                        unset($_SESSION["wishlist"]);
-                    }
-                    echo json_encode([
-                        "success" => true,
-                        "message" => "Remove From wishlist Successfully",
-                    ]);
-                }
-            }
-            if (isset($_POST["varient_id"])) {
+            if (isset($_POST["product_id"])) {
                 // printWithPre($_POST);
                 if (isset($_SESSION["type"]) && $_SESSION["type"] == "User" && !empty($_SESSION["userid"])) {
                     // echo "lere";
-                    $data = $cartController->getWishlistByVarientAndUserid($_POST["product_id"], $_SESSION["userid"]);
+                    $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $_POST["product_id"] . " AND `userid` = " . $_SESSION["userid"])[0];
                     if ($data) {
                         if (
-                            $cartController->DeleteWishlist($_POST["varient_id"], $_SESSION["userid"])
+                            delete($data["id"], "tbl_wishlist", "id")
                         ) {
-                            $wishlistLength = count($cartController->getAllWishlistByUserId($_SESSION["userid"]));
+                            $wishlistLength = count(getData2("SELECT * FROM `tbl_wishlist` WHERE `userid` = " . $_SESSION["userid"]));
 
                             echo json_encode([
                                 "success" => true,
@@ -1357,16 +1327,13 @@ class WebController extends LoginController
                         }
                     } else {
                         if (
-                            $cartController->insertWishlist([
-                                "varient" => $_POST["varient_id"],
-                                "category" => $_POST["category_id"],
+                            add([
                                 "product" => $_POST["product_id"],
-                                "quantity" => $_POST["quantity"],
                                 "userid" => $_SESSION["userid"],
                                 "username" => $_SESSION["username"],
-                            ])
+                            ], "tbl_wishlist", false)
                         ) {
-                            $wishlistLength = count($cartController->getAllWishlistByUserId($_SESSION["userid"]));
+                            $wishlistLength = count(getData2("SELECT * FROM `tbl_wishlist` WHERE `userid` = " . $_SESSION["userid"]));
 
                             echo json_encode([
                                 "success" => true,
@@ -1382,7 +1349,7 @@ class WebController extends LoginController
                         }
                     }
                 } else {
-                    $data = checkExisteingCartSession($_POST["varient_id"]);
+                    $data = checkExisteingWishlistSession($_POST["product_id"]);
                     if ($data) {
                         unset($_SESSION["wishlist"][$data[0]]);
                         $wishlistLength = count($_SESSION['wishlist']);
@@ -1394,11 +1361,7 @@ class WebController extends LoginController
                         ]);
                     } else {
                         $_SESSION["wishlist"][] = [
-                            "varient" => $_POST["varient_id"],
-                            "category" => $_POST["category_id"],
                             "product" => $_POST["product_id"],
-
-
                         ];
                         $wishlistLength = count($_SESSION['wishlist']);
                         echo json_encode([
