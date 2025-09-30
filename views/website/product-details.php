@@ -138,7 +138,7 @@
                     <?php
                     foreach (array_reverse($images[0]) as $key => $image) {
 
-                        ?>
+                    ?>
                         <div class=" overflow-hidden  cursor-pointer">
                             <img src="/<?= $image ?>" alt="View 1"
                                 class="w-full h-full object-cover image-hover cursor-zoom-in">
@@ -297,8 +297,12 @@
 
 
                         </div>
-                        <img src="/public/icons/heart.png" class="h-7 cursor-pointer" alt="">
-                        <img src="/public/icons/share.png" onclick="shareProduct()" class="h-7 cursor-pointer" alt="">
+                        <button class="addToWishlistBtn  h-10 w-10 rounded-full transition-all duration-500 px-3  bg-black/70 text-white  hover:bg-[#f25b21]">
+                            <i class="fas fa-heart" aria-hidden="true"></i>
+                        </button>
+                        <input type="hidden" value="<?= $ProductData['id'] ?>" class="ProductId">
+
+                        <img src="/public/icons/share.png" onclick="shareProduct()" class="h-7 cursor-pointer mt-1" alt="">
                     </div>
 
                     <!-- Size Selection -->
@@ -311,7 +315,7 @@
                                 // echo $key;
                                 if ($key == 'size') {
 
-                                    ?>
+                            ?>
                                     <div class="w-full flex items-center justify-between text-sm">
 
                                         <p class="uppercase"><?= $key ?> : <?= $value[0] ?></p>
@@ -325,16 +329,16 @@
                                         $diffcolor = [];
                                         foreach ($value as $key1 => $value1) {
                                             // $diffcolor = $finalData['images'][$key1];
-                                            ?>
+                                        ?>
                                             <div class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> flex items-center justify-center h-10 w-20"
                                                 size_value="<?= $value1 ?>" size_name="<?= $key ?>"><?= $value1 ?></div>
-                                            <?php
+                                        <?php
                                         }
                                         ?>
                                     </div>
-                                    <?php
+                                <?php
                                 } elseif ($key == 'color') {
-                                    ?>
+                                ?>
                                     <p class="uppercase text-sm mt-5"><?= $key ?> : <?= $value[0] ?></p>
                                     <div class="w-full flex items-center justify-start mt-3 text-sm gap-2">
 
@@ -343,12 +347,12 @@
                                             if ($key3 > 3) {
                                                 break; // stop after 4 images
                                             }
-                                            ?>
+                                        ?>
                                             <img src="/<?= $image ?>" class="h-[95px]" alt="">
                                         <?php } ?>
 
                                     </div>
-                                    <?php
+                            <?php
                                 }
                             } ?>
                         </div>
@@ -1088,7 +1092,7 @@
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".like-carousel").owlCarousel({
                 loop: true,
                 margin: 10,
@@ -1132,7 +1136,7 @@
     </script> -->
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".review-carousel").owlCarousel({
                 margin: 10,
                 autoplay: true,
@@ -1265,7 +1269,7 @@
 
         // Color selection functionality
         document.querySelectorAll('.color-option').forEach(option => {
-            option.addEventListener('click', function () {
+            option.addEventListener('click', function() {
                 // Remove ring from all options
                 document.querySelectorAll('.color-option').forEach(opt => {
                     opt.classList.remove('ring-2', 'ring-[#f25b21]', 'ring-offset-4');
@@ -1277,7 +1281,7 @@
 
         // Size selection functionality
         document.querySelectorAll('.size-option').forEach(option => {
-            option.addEventListener('click', function () {
+            option.addEventListener('click', function() {
                 // Remove selected state from all options
                 document.querySelectorAll('.size-option').forEach(opt => {
                     opt.classList.remove('border-[#f25b21]', 'bg-orange-50', 'text-[#f25b21]');
@@ -1294,7 +1298,7 @@
         const decreaseBtn = document.querySelector('button:has-text("−")');
         const increaseBtn = document.querySelector('button:has-text("+")');
 
-        document.querySelector('button').addEventListener('click', function () {
+        document.querySelector('button').addEventListener('click', function() {
             if (this.textContent === '−') {
                 const current = parseInt(quantityInput.value);
                 if (current > 1) quantityInput.value = current - 1;
@@ -1306,7 +1310,7 @@
 
         document.querySelectorAll('button').forEach(btn => {
             if (btn.textContent === '−' || btn.textContent === '+') {
-                btn.addEventListener('click', function () {
+                btn.addEventListener('click', function() {
                     const current = parseInt(quantityInput.value);
                     if (this.textContent === '−' && current > 1) {
                         quantityInput.value = current - 1;
@@ -1316,7 +1320,6 @@
                 });
             }
         });
-
     </script>
 
 
