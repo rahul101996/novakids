@@ -276,7 +276,7 @@
 
             <!-- Product Details Section -->
             <div class="md:sticky top-32 self-start space-y-4 w-[35%]">
-                <div class="flex flex-col">
+                <form method="POST" action="/checkout-cart" class="flex flex-col">
                     <div class="gap-3 w-full flex items-start justify-center">
                         <div class="flex flex-col items-start justify-center mb-2">
                             <h2 class="w-full text-[1.7rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
@@ -409,7 +409,7 @@
 
                             <div class="col-span-2 max-md:order-3 w-[70%]">
                                 <button
-                                    class="openCartBtn w-full sm:flex-1 relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black">
+                                    class=" w-full sm:flex-1 relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black">
                                     <span
                                         class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
                                         <i class="fas fa-cart-plus"></i> Add Product to Cart
@@ -443,8 +443,14 @@
                         </div>
 
                         <div class="flex w-full items-center justify-start gap-4">
+                            <input type="hidden" name="varient[]" value="<?=$ProductData['varients'][0]["id"]?>">
+                            <input type="hidden" name="category[]" value="<?=$ProductData['category']?>">
+                            <input type="hidden" name="product[]" value="<?=$ProductData['id']?>">
+                            <input type="hidden" name="price[]" value="<?=$ProductData['varients'][0]["price"]?>">
+                            <input type="hidden" name="quantity[]" value="1">
+
                             <button
-                                class="openCartBtn w-full py-1 relative rounded-lg overflow-hidden group transform  hover:shadow-xl border border-[#f15b21] bg-[#f15b21] text-white">
+                                class="w-full py-1 relative rounded-lg overflow-hidden group transform  hover:shadow-xl border border-[#f15b21] bg-[#f15b21] text-white">
                                 <span
                                     class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-[#f15b21]">
                                     <i class=""></i> Buy Now
@@ -454,7 +460,7 @@
                                 </span>
                             </button>
                             <button
-                                class="addToWishlistBtn relative hidden rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
+                                class="relative hidden rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
                                         transition-all duration-500 hover:border-purple-500 hover:text-purple-600 hover:shadow-lg">
                                 <i class="fas fa-heart"></i> WISHLIST
                             </button>
@@ -551,7 +557,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
+            </div>
         </section>
 
         <section class="w-[90vw] mx-auto md:mt-10 py-10  gap-10">
@@ -720,7 +727,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-heart"></i>
                                 </button>
 
@@ -759,7 +766,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-heart"></i>
                                 </button>
 
@@ -798,7 +805,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-heart"></i>
                                 </button>
 
@@ -837,7 +844,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-heart"></i>
                                 </button>
 
@@ -876,7 +883,7 @@
 
                                 <!-- Add to favorites Icon (top-right) -->
                                 <button
-                                    class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                    class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-heart"></i>
                                 </button>
 
@@ -1231,6 +1238,7 @@
                 });
             }
         });
+
     </script>
 
 
