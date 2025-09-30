@@ -309,7 +309,7 @@
 
                                     <!-- Add to favorites Icon (top-right) -->
                                     <button
-                                        class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
+                                        class="addToWishlistBtn absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
                                         <i class="fas fa-heart"></i>
                                     </button>
 

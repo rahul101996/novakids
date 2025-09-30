@@ -1,13 +1,14 @@
 <!-- Top Bar -->
 <?php
 // printWithPre($_SESSION);
+
 if (isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type'] == "User") {
     $count = 0;
     $count = count(getData2("SELECT * FROM `tbl_cart` WHERE `userid` = " . $_SESSION['userid']));
 } else {
 
-    $count = isset($_SESSION['cart']) && !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
 
+    $count = isset($_SESSION['cart']) && !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
 }
 $currency = '₹';
 $categories = getData("tbl_category");
@@ -635,7 +636,7 @@ $categories = getData("tbl_category");
 
             <form action="/" method="POST" id="otp-form">
                 <input type="text" placeholder="" name="username" class="hidden" id="username">
-                <input type="text" placeholder="" name="from" class="hidden" id="user_from" value="otp">
+                <!-- <input type="text" placeholder="" name="from" class="hidden" id="user_from" value="otp"> -->
                 <div class="flex items-center border rounded-lg overflow-hidden gap-2 mb-4" id="mobile-div">
                     <img src="/public/logos/india.png" class="h-7 pl-3" alt="">
                     <span class="pr-1 text-gray-600">+91</span> <input type="tel" placeholder="Enter mobile number"
@@ -672,9 +673,7 @@ $categories = getData("tbl_category");
                                             class="relative w-full py-2 rounded-md font-semibold overflow-hidden group border-2 border-black">Verify
                                             OTP</button>
                                     </div>
-                                    <div class="text-sm text-slate-500 mt-4">Didn't receive code? <a
-                                            class="font-medium text-indigo-500 hover:text-indigo-600"
-                                            href="#0">Resend</a></div>
+                                    <div class="text-sm text-slate-500 mt-4">Didn't receive code? <button type="button" class="font-medium text-indigo-500 hover:text-indigo-600" onclick="ResendOtp()">Resend</button></div>
                                 </div>
 
                             </div>
@@ -705,10 +704,17 @@ $categories = getData("tbl_category");
                     <p class="text-center text-gray-500 my-3">or</p>
                 </div>
 
-                <div id="g_id_onload" style="display:flex; align-items:center; justify-content:center; width:100%"
+                <div id="g_id_onload" style="display:flex; align-items:center; justify-content:center"
                     data-client_id="188574937788-fn4td4evj5cqejhrgge28pf8129sa58q.apps.googleusercontent.com"
                     data-callback="handleCredentialResponse" data-auto_select="false">
                 </div>
+                <div class="g_id_signin max-md:mt-[-4%]" data-type="standard"></div>
+                <input type="hidden" id="password" name="password" value="">
+                <input type="hidden" id="from" name="from" value="otp">
+                <!-- <input type="" id="username" name="username" value=""> -->
+                <input type="hidden" id="fname" name="fname" value="">
+                <input type="hidden" id="lname" name="lname" value="">
+                <input type="hidden" value="">
             </form>
 
             <p class="text-xs text-gray-500 text-center mt-4">
@@ -1004,6 +1010,48 @@ $categories = getData("tbl_category");
 
 
     })
+    function EditotpNumber() {
+        
+         mobileDiv.classList.remove('hidden')
+                sendOtp.classList.remove('hidden');
+                OtpDiv.classList.add('hidden');
+    }
+    async function ResendOtp() {
+        if (mobileInput.value != "" && mobileInput.value.length == 10) {
+            const response = await axios.post('/api/send-otp', new URLSearchParams({
+                phone: mobileInput.value,
+            }))
+            // console.log(response.data)
+
+            if (response.data.success) {
+                console.log(response.data)
+                mobilespan.innerHTML = '+91' + ' ' + mobileInput.value
+                mobileDiv.classList.add('hidden')
+                sendOtp.classList.add('hidden');
+                OtpDiv.classList.remove('hidden');
+                verifyOtp.addEventListener('click', async () => {
+                    console.log("testing......")
+                    const otpInput = inputs.map(input => input.value).join("");
+                    console.log(otpInput, response.data.otp);
+
+                    if (response.data.otp == otpInput) {
+                        console.log("Matched")
+                        Username.value = response.data.data.username
+
+                        verifyOtp.type = "submit"
+                        verifyOtp.click();
+                    } else {
+                        toastr.error("Otp Verification Fail");
+                    }
+
+                })
+            } else {
+                toastr.error(response.data.message);
+            }
+        } else {
+            toastr.error("Please Enter Valid number");
+        }
+    }
 </script>
 <script>
     const verifyOtp1 = document.getElementById('loginform');
@@ -1020,8 +1068,8 @@ $categories = getData("tbl_category");
         console.log("Image URL: " + responsePayload.picture);
         console.log("Email: " + responsePayload.email);
 
-        document.getElementById("passemeail").removeAttribute('required');
-        document.getElementById("password").removeAttribute('required');
+        // document.getElementById("passemeail").removeAttribute('required');
+        // document.getElementById("password").removeAttribute('required');
 
 
         document.getElementById("password").value = "zyxwvutsrqponmlkjihgfedcba";
@@ -1031,8 +1079,8 @@ $categories = getData("tbl_category");
         document.getElementById("username").value = responsePayload.email
         document.getElementById("from").value = "google";
         // document.getElementById("loginform").click();
-        verifyOtp1.type = "submit"
-        verifyOtp1.click();
+        verifyOtp.type = "submit"
+        verifyOtp.click();
 
 
     }

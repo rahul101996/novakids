@@ -155,7 +155,7 @@
                 if (isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type'] == "User") {            ?>
                     <input type="hidden" name="myForm" id="">
 
-                    <button  type="submit"
+                    <button type="submit"
                         class="relative w-full font-semibold py-1.5 rounded-md border-2 border-[#f25b21] overflow-hidden group">
                         <span class="relative z-10 text-white group-hover:text-[#f25b21] transition-colors duration-700">
                             Checkout
@@ -180,71 +180,7 @@
     </form>
 </div>
 <div class="h-[100vh] w-[59%] z-[50] fixed top-0 right-0 w-full flex items-center justify-center transform translate-x-full transition-transform duration-[0.6s] ease-in-out" id="AddToCartSidebar">
-    <div class="w-[47%] p-3 h-full overflow-y-scroll bg-gray-200 flex flex-col items-center justify-start no-scrollbar gap-3 transform translate-x-full transition-transform duration-[0.8s] ease-in-out" id="VarImg">
-        <img src="https://www.bonkerscorner.com/cdn/shop/files/SlipstreamOversizedT-shirt_1_640x_crop_center.jpg?v=1754902583" alt="">
-        <img src="https://www.bonkerscorner.com/cdn/shop/files/SlipstreamOversizedT-shirt_2_640x_crop_center.jpg?v=1754902583" alt="">
-        <img src="https://www.bonkerscorner.com/cdn/shop/files/SlipstreamOversizedT-shirt_6_640x_crop_center.jpg?v=1754902583" alt="">
-    </div>
-    <div class="w-[53%] h-full overflow-y-scroll flex flex-col items-start justify-start z-10 bg-white" id="VarDetails">
-        <div class="w-full flex items-center justify-between px-7 pt-7 ">
-            <span class="uppercase ">SELECT OPTIONS</span>
-            <button id="closeAddToCartSidebar" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong" onclick="CloseVariant()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <span class="w-full h-[1px] bg-gray-200 my-5"></span>
-        <div class="flex flex-col items-start justify-start w-full px-7">
-            <h2 class="w-full text-[1.8rem] leading-[2rem] uppercase">Black Sporty Deconstructed Loose Pants</h2>
-            <div class="flex items-center justify-center gap-3 mt-7">
-                <span class="text-gray-300 text-xl line-through">Rs.1,499.00</span>
-                <span class="text-[#33459c] text-xl">Rs.1,199.00</span>
-                <span class="text-xs bg-[#33459c] text-white py-1 px-2 rounded-lg">SAVE 20%</span>
-
-            </div>
-            <p class=" text-xs text-gray-600 mt-1"><a href="" class="underline">shipping</a> calculated at checkout</p>
-            <p class="text-xs mt-1">⭐⭐⭐⭐⭐ <span class="text-sm">31 reviews</span></p>
-            <div class="w-full flex items-center justify-between mt-7 text-sm">
-                <p>SIZE : M</p>
-                <p class="flex gap-1 cursor-pointer"><svg class="icon icon-accordion color-foreground-" aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20">
-                        <path d="M18.9836 5.32852L14.6715 1.01638L1.01638 14.6715L5.32852 18.9836L18.9836 5.32852ZM15.3902 0.297691C14.9933 -0.0992303 14.3497 -0.0992303 13.9528 0.297691L0.297691 13.9528C-0.0992301 14.3497 -0.0992305 14.9932 0.297691 15.3902L4.60983 19.7023C5.00675 20.0992 5.65029 20.0992 6.04721 19.7023L19.7023 6.04721C20.0992 5.65029 20.0992 5.00675 19.7023 4.60983L15.3902 0.297691Z" fill-rule="evenodd"></path>
-                        <path d="M11.7863 2.67056C11.9848 2.4721 12.3065 2.4721 12.505 2.67056L14.4237 4.58927C14.6222 4.78774 14.6222 5.1095 14.4237 5.30796C14.2252 5.50642 13.9035 5.50642 13.705 5.30796L11.7863 3.38925C11.5878 3.19079 11.5878 2.86902 11.7863 2.67056Z"></path>
-                        <path d="M8.93891 5.36331C9.13737 5.16485 9.45914 5.16485 9.6576 5.36331L11.5763 7.28202C11.7748 7.48048 11.7748 7.80225 11.5763 8.00071C11.3779 8.19917 11.0561 8.19917 10.8576 8.00071L8.93891 6.082C8.74045 5.88354 8.74045 5.56177 8.93891 5.36331Z"></path>
-                        <path d="M6.24307 8.20742C6.44153 8.00896 6.76329 8.00896 6.96175 8.20742L8.88047 10.1261C9.07893 10.3246 9.07893 10.6464 8.88047 10.8448C8.68201 11.0433 8.36024 11.0433 8.16178 10.8448L6.24307 8.92611C6.0446 8.72765 6.0446 8.40588 6.24307 8.20742Z"></path>
-                        <path d="M3.37296 10.8776C3.57142 10.6791 3.89319 10.6791 4.09165 10.8776L6.01036 12.7963C6.20882 12.9948 6.20882 13.3165 6.01036 13.515C5.8119 13.7134 5.49013 13.7134 5.29167 13.515L3.37296 11.5963C3.1745 11.3978 3.1745 11.076 3.37296 10.8776Z"></path>
-                    </svg> Sizing guide</p>
-            </div>
-            <div class="w-full flex items-center justify-start mt-3 text-sm">
-                <div class="border border-gray-600 flex items-center justify-center h-12 w-12">XS</div>
-                <div class="border border-gray-200 flex items-center justify-center h-12 w-12">S</div>
-                <div class="border border-gray-200 flex items-center justify-center h-12 w-12">M</div>
-                <div class="border border-gray-200 flex items-center justify-center h-12 w-12">L</div>
-                <div class="border border-gray-200 flex items-center justify-center h-12 w-12">XL</div>
-                <div class="border border-gray-200 flex items-center justify-center h-12 w-12">XXL</div>
-            </div>
-            <span class="mt-6 text-sm">COLOR :</span>
-            <div class="w-full flex items-center justify-start mt-3 text-sm gap-2">
-                <div class="border border-gray-600 p-1 flex items-center justify-center "><img src="https://www.bonkerscorner.com/cdn/shop/files/black-sporty-deconstructed-loose-pants-xs-bonkerscorner-store-34403286876260.jpg?v=1728981039" alt="" class="h-[83px] w-[58px]"></div>
-                <div class=" flex items-center justify-center "><img src="https://www.bonkerscorner.com/cdn/shop/files/white-sporty-deconstructed-loose-pants-xs-bonkerscorner-store-34410824138852.jpg?v=1728981030" alt="" class="h-[83px] w-[58px]"></div>
-                <div class=" flex items-center justify-center"><img src="https://www.bonkerscorner.com/cdn/shop/files/navy-blue-sporty-deconstructed-loose-pants-xs-bonkerscorner-store-34410889838692.jpg?v=1728983441" alt="" class="h-[83px] w-[58px]"></div>
-
-            </div>
-            <div class="w-full flex items-center justify-start mt-7 gap-3">
-                <div class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg">
-                    <span class="cursor-pointer ">-</span>
-                    <span class="text-black">1</span>
-                    <span class="cursor-pointer ">+</span>
-                </div>
-                <div class="w-[80%] border border-gray-800 p-3 px-3 rounded-lg text-center cursor-pointer font-semibold text-base">
-                    ADD TO CART
-                </div>
-            </div>
-            <div class="w-full items-center justify-center text-white text-center mt-3 bg-gray-900 p-3 px-3 rounded-lg cursor-pointer">
-                BUY IT NOW
-            </div>
-
-
-        </div>
-    </div>
+    
 </div>
 <div id="sizeChartModal" class="hidden fixed inset-0 flex items-center justify-center bg-black/50 z-50">
     <div class="bg-white shadow-lg w-[65%] max-md:w-[90%] max-h-[80vh] relative flex flex-col animate-slideDown">
@@ -375,7 +311,7 @@
         const request = await axios.post("/api/get-cart-data", new URLSearchParams({
             'getdata': 1
         }));
-        console.log(request.data)
+        // console.log(request.data)
         if (request.data.success) {
             cartItems.innerHTML = '';
             cartItems.innerHTML = request.data.cart_div;
@@ -383,12 +319,78 @@
         }
 
     }
+    document.addEventListener('DOMContentLoaded', function() {
+        AddToWishlist();
+    });
+
+    function AddToWishlist() {
+        const addToWishlistBtn = document.querySelectorAll('.addToWishlistBtn');
+        if (addToWishlistBtn) {
+            addToWishlistBtn.forEach(function(btn) {
+                btn.addEventListener('click', function(event) {
+                    // console.log("hello");
+                    event.preventDefault();
+                    event.stopPropagation();
+                    // 
+                    let ee = btn.parentElement.parentElement
+                    console.log(ee)
+                    //    console.log(ee.querySelector(".sideVarientId").value); 
+                    addToWishlistSidebar(ee.querySelector(".ProductId").value, btn)
+                    console.log(btn)
+
+                });
+            });
+        }
+
+    }
+    async function addToWishlistSidebar(product_id, ele) {
+
+        try {
+            const request = await axios.post("/add-to-wishlist", new URLSearchParams({
+                product_id: product_id
+            }));
+            console.log(request);
+            if (request.data.success) {
+                // Update wishlist count
+                console.log(request.data, request.data.message == "Add To wishlist Successfully");
+                document.getElementById("wishlist-count").innerText = request.data.totalwishlist;
+
+                // Change the SVG in the button
+
+                if (request.data.message == "Add To wishlist Successfully") {
+
+                    toastr.options = {
+                        "toastClass": "bg-pink-toast",
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right" // Position the toast at the bottom right
+                    };
+
+                    toastr.success(request.data.message);
+
+                } else {
+
+                    toastr.options = {
+                        "toastClass": "bg-pink-toast",
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right" // Position the toast at the bottom right
+                    };
+
+                    toastr.success(request.data.message);
+
+                }
+            }
+        } catch (error) {
+            console.error("Error adding to wishlist:", error);
+        }
+    }
 
     function closeCartFn() {
+        console.log("closing cart")
         sideCart.classList.remove('translate-x-0');
         sideCart.classList.add('translate-x-full');
         cartOverlay.classList.remove('opacity-100');
         cartOverlay.classList.add('opacity-0', 'pointer-events-none');
+        // document.getElementById("AddToCartSidebar").innerHTML=""
     }
 
     openCartBtns.forEach(btn => btn.addEventListener('click', openCart));
@@ -412,6 +414,11 @@
 
     const qtyMinus = document.getElementById("qtyMinus");
     const qtyPlus = document.getElementById("qtyPlus");
+
+    const GLOBAL_VARIANT = {
+        variants: {},
+        selected: {}
+    };
 
     function updateCart() {
         const subtotal = itemPrice * quantity;
@@ -456,7 +463,7 @@
     const VariantSelects = document.getElementById('AddToCartSidebar');
 
     function CloseVariant() {
-
+        // console.log("hello this is close cart")
         let VarImg = document.getElementById('VarImg');
 
         setTimeout(() => {
@@ -469,6 +476,7 @@
 
         cartOverlay.classList.remove('opacity-100');
         cartOverlay.classList.add('opacity-0', 'pointer-events-none');
+        document.getElementById("AddToCartSidebar").innerHTML=""
     }
 
 
@@ -487,7 +495,6 @@
         cartOverlay.classList.add('opacity-100');
     }
     document.addEventListener('DOMContentLoaded', function() {
-
         AddToCart();
     });
 
@@ -510,19 +517,32 @@
                         productid: product_id,
 
                     }))
-                    // console.log(response.data)
+                    console.log(response.data)
+                    GLOBAL_VARIANT.variants = response.data.variants;
+                    let firstValues = {};
+                    let dict = response.data.grouped
+                    for (let key in dict) {
+                        if (Array.isArray(dict[key]) && dict[key].length > 0) {
+                            firstValues[key] = dict[key][0];
+                        }
+                    }
+
+                    console.log(firstValues);
+                    GLOBAL_VARIANT.selected = firstValues
 
                     if (response.data.variants.length > 0) {
 
-                        showVarientsSidebar(response.data.html);
-
+                        // showVarientsSidebar(response.data.html);
+                        // VariantSelects.innerHTML;
+                        VariantSelects.innerHTML = response.data.html;
+                        Openvariant()
                         let options = document.querySelectorAll('.optionDivs');
 
-                        // console.log(options);
+                        console.log("options",options);
 
                         let FirstOption = options[0];
 
-                        // console.log(FirstOption);
+                        // // console.log(FirstOption);
                         let OptionName = FirstOption.getAttribute('option_name');
                         let OptionValue = FirstOption.getAttribute('option_value');
                         let product_id = FirstOption.getAttribute('product_id');
@@ -533,7 +553,7 @@
                             option_value: OptionValue
 
                         }))
-                        // console.log(response2.data)
+                        // console.log("response2.data",response2.data)
                         const ColorDiv = document.getElementById('ColorDiv');
                         if (ColorDiv) {
                             ColorDiv.innerHTML = response2.data.html;
@@ -553,6 +573,77 @@
                 });
             });
         }
+    }
+
+    async function changeCartSidebarImage( i=0){
+        let options = document.querySelectorAll('.optionDivs');
+
+        console.log("options",options,i);
+
+        let FirstOption = options[0];
+
+        // // console.log(FirstOption);
+        // let OptionName = FirstOption.getAttribute('option_name');
+        // let OptionValue = FirstOption.getAttribute('option_value');
+        let product_id = FirstOption.getAttribute('product_id');
+        // console.log(OptionName, OptionValue, product_id);
+        const response2 = await axios.post("/api/get-variant-data", new URLSearchParams({
+            productid: product_id,
+            // option_name: "color",
+            // option_value: OptionValue
+
+        }))
+
+        const ColorDiv = document.getElementById('ColorDiv');
+        if (ColorDiv) {
+            ColorDiv.innerHTML = response2.data.html;
+
+        }
+    }
+
+    function updateKey(dict, key, value) {
+        let foundKey = Object.keys(dict).find(k => k.toLowerCase() === key.toLowerCase());
+        if (foundKey) {
+            dict[foundKey] = value; // update existing
+        } else {
+            dict[key] = value; // add new
+        }
+    }
+
+    function changeSideVariant(ele,tp,value,key1){
+        console.log(ele,tp,value,key1)
+        updateKey(GLOBAL_VARIANT.selected,tp,value);
+        let divs = ele.parentElement.querySelectorAll("div")
+        divs.forEach(div => {
+            div.classList.remove("border-gray-900");
+        });
+        // console.log(divs[key1])
+        divs[key1].classList.add("border-gray-900");
+        console.log("GLOBAL_VARIANT",GLOBAL_VARIANT)
+        let selectedId = "";
+        GLOBAL_VARIANT.variants.forEach(async (ar,i)=>{
+
+            if(deepEqualCaseInsensitive(JSON.parse(JSON.parse(ar.options)),GLOBAL_VARIANT.selected)){
+                // console.log("matched",JSON.parse(JSON.parse(ar.options)),GLOBAL_VARIANT.selected)
+
+                // await changeCartSidebarImage(i)
+
+                selectedId = ar.id
+                ele.parentElement.parentElement.querySelector(".sideVarientId").value = selectedId
+                ele.parentElement.parentElement.querySelector(".prices").innerHTML =  `
+                    <span class="text-[#33459c] text-xl">Rs. ${ar.price}.00</span>
+                `
+                console.log(JSON.parse(ar.images))
+                let imgHtml = ""
+                JSON.parse(ar.images).forEach((imgh)=>{
+                    imgHtml = imgHtml+`
+                        <img src="/${imgh}" alt="">
+                    `
+                })
+                document.getElementById("VarImg").innerHTML = imgHtml
+            }
+        })
+        
     }
 
     function AddToCartslider(btn, sidecart = false) {
@@ -601,13 +692,11 @@
 
     }
 
-    function showVarientsSidebar(data) {
-        // console.log(data);
-        VariantSelects.innerHTML;
-        VariantSelects.innerHTML = data;
-        Openvariant()
+    // function showVarientsSidebar(data) {
+    //     // console.log(data);
 
-    }
+
+    // }
 
     async function minusQuantity(ele, varient_id, category_id, product_id) {
         const row = ele.parentElement;

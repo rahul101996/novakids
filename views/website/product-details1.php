@@ -1536,6 +1536,7 @@
                                         class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
                                     </span>
                                 </button>
+                                <input type="text" value="24" class="ProductId">
                             </div>
 
 
@@ -1571,7 +1572,7 @@
                                 </span>
                             </button>
                             <button
-                                class="relative hidden rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
+                                class="addToWishlistBtn relative hidden rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
                                         transition-all duration-500 hover:border-purple-500 hover:text-purple-600 hover:shadow-lg">
                                 <i class="fas fa-heart"></i> WISHLIST
                             </button>
