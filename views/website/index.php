@@ -139,6 +139,7 @@
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
                         $name = str_replace(' ', '-', $product['name']);
+                        $name = str_replace("'", '', $name); 
                         if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
