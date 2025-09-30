@@ -40,10 +40,10 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('/razorpay', 'Razorpay');
     $route->route('add-to-wishlist', 'AddToWishlist');
 
+    $route->route('profile', 'MyProfile');
     $route->route('api/search-product', 'searchProduct');
 
     // $route->route('/', 'index');
-
 });
 
 $route->group(['', 'CollectionController'], function ($route) {
@@ -64,6 +64,9 @@ $route->group(['', 'ProductController'], function ($route) {
     $route->route('/admin/inventory', 'Inventory');
 
     $route->route('/admin/api/update-quantity', 'updateQuantity');
+
+
+    $route->route('/admin/orders', 'OrderList');
 
 });
 $route->group(['', 'CustomerController'], function ($route) {
@@ -122,6 +125,10 @@ $route->group(['', 'PackageController'], function ($route) {
 });
 $route->group(['', 'DashboardController', 'auth'], function ($route) {
     $route->route('dashboard', 'index');
+});
+
+$route->group(['', 'WebsettingController', 'auth'], function ($route) {
+    $route->route('admin/websetting/home', 'home');
 });
 
 $route->group(['master', 'MasterController', 'auth'], function ($route) {

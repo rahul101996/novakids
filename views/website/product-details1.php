@@ -1536,6 +1536,7 @@
                                         class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
                                     </span>
                                 </button>
+                                <input type="text" value="24" class="ProductId">
                             </div>
 
 

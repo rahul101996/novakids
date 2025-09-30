@@ -412,12 +412,13 @@
                                     class="openCartBtn w-full sm:flex-1 relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black">
                                     <span
                                         class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
-                                        <i class="fas fa-cart-plus"></i> Add to Cart
+                                        <i class="fas fa-cart-plus"></i> Add Product to Cart
                                     </span>
                                     <span
                                         class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
                                     </span>
                                 </button>
+                                <input type="hidden" value="<?=$ProductData["id"]?>" class="ProductId">
                             </div>
 
 

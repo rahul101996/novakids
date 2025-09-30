@@ -46,7 +46,7 @@
                 </svg>
             </button>
             <div x-show="open === 'orders'" x-collapse class="ml-10 mt-2 space-y-1">
-                <a href="#all-orders" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                <a href="/admin/orders" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     All Orders
                 </a>
                 <a href="#cancel-orders" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
@@ -90,6 +90,37 @@
                 <a href="#categories" class="hidden px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     Categories
                 </a>
+            </div>
+        </div>
+
+        <div>
+            <button @click="open === 'websetting' ? open = null : open = 'websetting'"
+                class="w-full flex items-center justify-between px-4 py-2 hover:bg-slate-700 rounded-lg">
+                <span class="flex items-center">
+                    <i class="fas fa-gears mr-3"></i>
+                    Web Setting
+                </span>
+                <svg :class="{'rotate-180': open === 'websetting'}"
+                    class="h-4 w-4 transform transition-transform"
+                    xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+            <div x-show="open === 'websetting'" x-collapse class="ml-10 mt-2 space-y-1">
+                <a href="/admin/websetting/home" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                    Home
+                </a>
+                <!-- <a href="/admin/collections" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                    Collections
+                </a>
+                <a href="/admin/inventory" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                    Inventory
+                </a>
+                <a href="#categories" class="hidden px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                    Categories
+                </a> -->
             </div>
         </div>
 
