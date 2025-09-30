@@ -831,6 +831,8 @@ class WebController extends LoginController
                         return end($imgSet);
                     }, $images);
                 }
+                                $ppimages = $images;
+
                 require 'views/website/product-details.php';
             }
         }

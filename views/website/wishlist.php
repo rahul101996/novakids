@@ -24,6 +24,7 @@ $page = 'Wishlist';
         <!-- Wishlist Content -->
         <?php
         if (isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type'] == "User") {
+                    $wishlists = getData2("SELECT * FROM `tbl_wishlist` WHERE `userid` = " . $_SESSION["userid"]);
 
             if (empty($wishlists)) {
         ?>

@@ -136,14 +136,16 @@
             <div class="flex items-center justify-start max-md:hidden gap-2 w-[64%]">
                 <div class="grid grid-cols-2 gap-2 w-[96%]">
                     <?php
-                    foreach (array_reverse($images[0]) as $key => $image) {
+                    if(is_array($ppimages[0])){
+                        foreach (array_reverse($ppimages[0]) as $key => $image) {
 
                     ?>
                         <div class=" overflow-hidden  cursor-pointer">
                             <img src="/<?= $image ?>" alt="View 1"
                                 class="w-full h-full object-cover image-hover cursor-zoom-in">
                         </div>
-                    <?php } ?>
+                    <?php }
+                    } ?>
 
                 </div>
             </div>
@@ -277,7 +279,7 @@
             <!-- Product Details Section -->
             <div class="md:sticky top-32 self-start space-y-4 w-[35%]">
                 <form method="POST" action="/checkout-cart" class="flex flex-col">
-                    <div class="gap-3 w-full flex items-start justify-center">
+                    <div class="gap-3 w-full flex items-start justify-between">
                         <div class="flex flex-col items-start justify-center mb-2">
                             <h2 class="w-full text-[1.7rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
                             <div class="flex items-center justify-center gap-3 mt-4">
@@ -289,22 +291,22 @@
                                     <?= $discountPercentage ?>%</span>
 
                             </div>
-                            <p class="text-sm text-gray-900 mt-2">Upgrade your casual wardrobe with our black sporty
-                                deconstructed loose pants. These stylish pants feature a relaxed fit and a deconstructed
-                                design for a modern and edgy look</p>
-                            <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated
-                                at checkout</p>
+                            
 
 
                         </div>
+                        <div class="flex items-center justify-center gap-3">
                         <button class="addToWishlistBtn  h-10 w-10 rounded-full transition-all duration-500 px-3  bg-black/70 text-white  hover:bg-[#f25b21]">
                             <i class="fas fa-heart" aria-hidden="true"></i>
                         </button>
                         <input type="hidden" value="<?= $ProductData['id'] ?>" class="ProductId">
 
                         <img src="/public/icons/share.png" onclick="shareProduct()" class="h-7 cursor-pointer mt-1" alt="">
+                        </div>
                     </div>
-
+<p class="text-sm text-gray-900 mt-2 text-justify">Upgrade your casual wardrobe with our black sporty deconstructed loose pants, the perfect blend of comfort and style. Designed with a relaxed fit, these pants allow for effortless movement, while the deconstructed detailing adds a modern, edgy vibe that sets you apart.</p>
+                            <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated
+                                at checkout</p>
                     <!-- Size Selection -->
                     <div class="flex flex-col mt-5">
 
@@ -433,7 +435,7 @@
                                     class=" w-full sm:flex-1 relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black">
                                     <span
                                         class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
-                                        <i class="fas fa-cart-plus"></i> Add Product to Cart
+                                        <i class="fas fa-cart-plus"></i> Add to Cart
                                     </span>
                                     <span
                                         class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
@@ -443,24 +445,7 @@
                             </div>
 
 
-                            <div class="flex space-x-3 max-md:order-2">
-                                <!-- <button
-                                class="h-12 w-12 flex items-center justify-center rounded-md border hover:bg-white hover:shadow-lg transition-all duration-300 group">
-                                <svg class="w-6 h-6 text-gray-600 group-hover:text-red-500 group-hover:scale-110 transition-all"
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
-                            </button> -->
-                                <!-- <button
-                                class="h-12 w-12 flex items-center justify-center rounded-md border hover:bg-white hover:shadow-lg transition-all duration-300 group">
-                                <svg class="w-6 h-6 text-gray-600 group-hover:text-[#f25b21] group-hover:scale-110 transition-all"
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
-                                </svg>
-                            </button> -->
-                            </div>
+                            
                         </div>
 
                         <div class="flex w-full items-center justify-start gap-4">
@@ -802,11 +787,19 @@
                             </div>
 
                             <!-- Product Details -->
-                            <div class="p-4 text-center">
-                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
-                                <p class="text-red-600 font-bold">₹ 1,199.00</p>
-                            </div>
+                           <div class="pt-4 w-full ">
+                                    <h3 class="text-base font-semibold uppercase">Nomad: Brown</h3>
+                                    <div class="flex items-center justify-start gap-3 w-full">
+                                        <p class="text-gray-500 line-through text-sm">₹
+                                            2,499.0.00
+                                        </p>
+                                        <p class="text-[#f25b21] font-bold">₹ 1,999.0.00</p>
+                                    </div>
+                                    <!-- reviews -->
+                                    <div class="flex items-center justify-start space-x-1 hidden">
+                                        <span class="text-yellow-500">★★★★★</span>
+                                    </div>
+                                </div>
                         </div>
 
                         <!-- Product 3 -->
@@ -841,11 +834,19 @@
                             </div>
 
                             <!-- Product Details -->
-                            <div class="p-4 text-center">
-                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
-                                <p class="text-red-600 font-bold">₹ 1,199.00</p>
-                            </div>
+                            <div class="pt-4 w-full ">
+                                    <h3 class="text-base font-semibold uppercase">Nomad: Brown</h3>
+                                    <div class="flex items-center justify-start gap-3 w-full">
+                                        <p class="text-gray-500 line-through text-sm">₹
+                                            2,499.0.00
+                                        </p>
+                                        <p class="text-[#f25b21] font-bold">₹ 1,999.0.00</p>
+                                    </div>
+                                    <!-- reviews -->
+                                    <div class="flex items-center justify-start space-x-1 hidden">
+                                        <span class="text-yellow-500">★★★★★</span>
+                                    </div>
+                                </div>
                         </div>
 
                         <!-- Product 4 -->
@@ -880,11 +881,19 @@
                             </div>
 
                             <!-- Product Details -->
-                            <div class="p-4 text-center">
-                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
-                                <p class="text-[#f25b21] font-bold">₹ 1,199.00</p>
-                            </div>
+                           <div class="pt-4 w-full ">
+                                    <h3 class="text-base font-semibold uppercase">Nomad: Brown</h3>
+                                    <div class="flex items-center justify-start gap-3 w-full">
+                                        <p class="text-gray-500 line-through text-sm">₹
+                                            2,499.0.00
+                                        </p>
+                                        <p class="text-[#f25b21] font-bold">₹ 1,999.0.00</p>
+                                    </div>
+                                    <!-- reviews -->
+                                    <div class="flex items-center justify-start space-x-1 hidden">
+                                        <span class="text-yellow-500">★★★★★</span>
+                                    </div>
+                                </div>
                         </div>
 
                         <!-- Product 5 -->
@@ -919,11 +928,19 @@
                             </div>
 
                             <!-- Product Details -->
-                            <div class="p-4 text-center">
-                                <h3 class="text-sm font-semibold">GREAT MANIFESTOR POLO</h3>
-                                <p class="text-gray-500 line-through text-sm">₹ 1,399.00</p>
-                                <p class="text-red-600 font-bold">₹ 1,199.00</p>
-                            </div>
+                           <div class="pt-4 w-full ">
+                                    <h3 class="text-base font-semibold uppercase">Nomad: Brown</h3>
+                                    <div class="flex items-center justify-start gap-3 w-full">
+                                        <p class="text-gray-500 line-through text-sm">₹
+                                            2,499.0.00
+                                        </p>
+                                        <p class="text-[#f25b21] font-bold">₹ 1,999.0.00</p>
+                                    </div>
+                                    <!-- reviews -->
+                                    <div class="flex items-center justify-start space-x-1 hidden">
+                                        <span class="text-yellow-500">★★★★★</span>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>
