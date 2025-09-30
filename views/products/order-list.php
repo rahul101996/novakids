@@ -79,69 +79,71 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <div class="flex">
-                                    1. <a
-                                        class="block px-4 py-2 text-md font-bol hover:bg-gray-200 hover:text-blue-600 transition-colors duration-200 text-center"
-                                        href="?orderid=50" data-toggle="modal" data-target="#infoModal"
-                                        data-order-id="5431758386371" onclick="getbillproduct('50')" id="viewproduct"><i
-                                            class="fa-solid fa-eye"></i>
-                                    </a>
-                                    <span onclick="printMeYo('50')"><i class="fa-solid fa-print"></i></span>
-                                </div>
-                            </td>
-                            <td>5431758386371</td>
-                            <td>20 September 25 10:10:00 PM</td>
-                            <!-- <td>Bhavna  Sodi</td> -->
-                            <td>bhavnasodi@gmail.com</td>
-                            <td>9860309292</td>
-                            <td>
-                                <div class="w-[250px]">
-                                    Near Shah International school D-92, First floor LIC Colony Paschim vihar <br>
-                                    State : Delhi<br>
-                                    City : Delhi<br>
-                                    Pincode : 110087 </div>
-                            </td>
 
-                            <td>
-                                0 </td>
-                            <td>
-                                cashfree </td>
-                            <td style="white-space: nowrap">
-                                Completed<br>
-                                Payment ID: 4367788431 </td>
-                            <td hidden="">
-                                Coupon Discount: <br>
-                                Total Amount:309 </td>
-                            <td class="hidden">
-                                <span class="w-40 flex">Order ID: </span>
-                                <span class="w-40 flex">Shipment ID: </span>
-                                <span class="w-40 flex">Courier: </span>
-                                <span class="w-40 flex">Expected Date: </span>
-                            </td>
-                            <td>
-                                <span class="text-green-600">
-                                    PROCESSING </span>
-                            </td>
-                            <td>
-                                <form action="" method="post">
-                                    <select name="order_status" id="" class="form-control w-52">
-                                        <!-- <option value="Pending" class="text-md">Pending</option> -->
-                                        <option value="Processing" selected="" class="text-md">Processing</option>
-                                        <option value="Shipped" class="text-md">Shipped</option>
-                                        <option value="Cancelled" class="text-md">Cancelled</option>
-                                        <option value="Complete" class="text-md">Complete</option>
-                                    </select>
-                                    <input type="hidden" name="purchase_id" value="50">
-                                    <input type="hidden" name="orderid" value="5431758386371">
-                                    <input type="hidden" name="shipment_order_id" value="">
-                                    <input type="hidden" name="shipment_id" value="">
-                                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
-                                </form>
-                            </td>
+                        <?php foreach (getData2("Select * FROM `tbl_purchase` ORDER BY id desc") as $key => $value) { ?>
+                            <tr>
+                                <td>
+                                    <div class="flex">
+                                        <?= $key + 1 ?> <a
+                                            class="block px-4 py-2 text-md font-bol hover:bg-gray-200 hover:text-blue-600 transition-colors duration-200 text-center"
+                                            href="?orderid=<?= $value['id'] ?>" data-toggle="modal" data-target="#infoModal"
+                                            data-order-id="<?= $value['orderid'] ?>" onclick="getbillproduct('50')" id="viewproduct"><i
+                                                class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <span onclick="printMeYo('50')"><i class="fa-solid fa-print"></i></span>
+                                    </div>
+                                </td>
+                                <td><?= $value['orderid'] ?></td>
+                                <td><?= formatDate($value['created_date']) ?></td>
+                                <!-- <td>Bhavna  Sodi</td> -->
+                                <td><?= $value['email'] ?></td>
+                                <td><?= $value['mobile'] ?></td>
+                                <td>
+                                    <div class="w-[250px]">
+                                        <?= $value['address_line1'] ?> <br>
+                                        State : <?= $value['state'] ?><br>
+                                        City : <?= $value['city'] ?><br>
+                                        Pincode : <?= $value['pincode'] ?> </div>
+                                </td>
 
-                        </tr>
+                                <td>
+                                    0 </td>
+                                <td>
+                                    <?= $value['payment_mode'] ?> </td>
+                                <td style="white-space: nowrap">
+                                    <?= $value['payment_status'] ?><br>
+                                    Payment ID: <?= $value['razorpay_payment_id'] ?> </td>
+                                <td hidden="">
+                                    Coupon Discount: <br>
+                                    Total Amount:309 </td>
+                                <td class="hidden">
+                                    <span class="w-40 flex">Order ID: </span>
+                                    <span class="w-40 flex">Shipment ID: </span>
+                                    <span class="w-40 flex">Courier: </span>
+                                    <span class="w-40 flex">Expected Date: </span>
+                                </td>
+                                <td>
+                                    <span class="text-green-600">
+                                        <?= $value['status'] ?> </span>
+                                </td>
+                                <td>
+                                    <form action="" method="post">
+                                        <select name="order_status" id="" class="form-control w-52">
+                                            <!-- <option value="Pending" class="text-md">Pending</option> -->
+                                            <option value="Processing" selected="" class="text-md" <?= $value['status']  == 'Processing' ?>>Processing</option>
+                                            <option value="Shipped" class="text-md" <?= $value['status']  == 'Shipped' ?>>Shipped</option>
+                                            <option value="Cancelled" class="text-md" <?= $value['status']  == 'Cancelled' ?>>Cancelled</option>
+                                            <option value="Complete" class="text-md" <?= $value['status']  == 'Complete' ?>>Complete</option>
+                                        </select>
+                                        <input type="hidden" name="purchase_id" value="50">
+                                        <input type="hidden" name="orderid" value="5431758386371">
+                                        <input type="hidden" name="shipment_order_id" value="">
+                                        <input type="hidden" name="shipment_id" value="">
+                                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
 
