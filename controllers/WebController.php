@@ -64,37 +64,59 @@ class WebController extends LoginController
 
             // printWithPre($finalData);
         ?>
-            <div class="w-[47%] p-3 h-full overflow-y-scroll bg-gray-200 flex flex-col items-center justify-start no-scrollbar gap-3 transform translate-x-full transition-transform duration-[0.8s] ease-in-out"
-                id="VarImg">
-                <?php
-                foreach (array_reverse($images[0]) as $key => $image) {
+            <?php
+            if (!isset($_POST["product_details"])) {
+            ?>
+                <div class="w-[47%] p-3 h-full overflow-y-scroll bg-gray-200 flex flex-col items-center justify-start no-scrollbar gap-3 transform translate-x-full transition-transform duration-[0.8s] ease-in-out"
+                    id="VarImg">
+                    <?php
+                    foreach (array_reverse($images[0]) as $key => $image) {
 
-                ?>
-                    <img src="/<?= $image ?>" alt="">
-                <?php } ?>
-            </div>
-            <div class="w-[53%] h-full overflow-y-scroll flex flex-col items-start justify-start z-10 bg-white" id="VarDetails">
-                <div class="w-full flex items-center justify-between px-7 pt-7 ">
-                    <span class="uppercase ">SELECT OPTIONS</span>
-                    <button id="closeAddToCartSidebar" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong"
-                        onclick="CloseVariant()">
-                        <i class="fas fa-times"></i>
-                    </button>
+                    ?>
+                        <img src="/<?= $image ?>" alt="">
+                    <?php } ?>
                 </div>
-                <span class="w-full h-[1px] bg-gray-200 my-5"></span>
-                <div class="flex flex-col items-start justify-start w-full px-7">
-                    <h2 class="w-full text-[1.8rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
-                    <div class="flex items-center justify-center gap-3 mt-1 prices">
-                        <span
-                            class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
-                        <span class="text-[#33459c] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
-                        <span class="text-xs bg-[#33459c] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
+            <?php
+            }
+            ?>
+            <div class=" h-full <?= !isset($_POST["product_details"]) ? " w-[53%] overflow-y-scroll" : "" ?> flex flex-col items-start justify-start z-10 bg-white" id="VarDetails">
 
+
+                <?php
+                if (!isset($_POST["product_details"])) {
+                ?>
+                    <div class="w-full flex items-center justify-between px-7 pt-7 ">
+                        <span class="uppercase ">SELECT OPTIONS</span>
+                        <button id="closeAddToCartSidebar" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong"
+                            onclick="CloseVariant()">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
-                    <p class="text-sm text-gray-900 mt-2">Upgrade your casual wardrobe with our black sporty deconstructed loose
-                        pants. These stylish pants feature a relaxed fit and a deconstructed design for a modern and edgy look</p>
-                    <p class=" text-xs text-gray-600 mt-1"><a href="" class="underline">shipping</a> calculated at checkout</p>
-                    <p class="text-xs mt-1">⭐⭐⭐⭐⭐ <span class="text-sm">31 reviews</span></p>
+                    <span class="w-full h-[1px] bg-gray-200 my-5"></span>
+                <?php
+                }
+                ?>
+
+                <div class="flex flex-col items-start justify-start w-full <?= !isset($_POST["product_details"]) ? "px-7" : "" ?>">
+                    <?php
+                    if (!isset($_POST["product_details"])) {
+                    ?>
+                        <h2 class="w-full text-[1.8rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
+                        <div class="flex items-center justify-center gap-3 mt-1 prices">
+                            <span
+                                class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
+                            <span class="text-[#33459c] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
+                            <span class="text-xs bg-[#33459c] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
+
+                        </div>
+                        <p class="text-sm text-gray-900 mt-2">Upgrade your casual wardrobe with our black sporty deconstructed loose
+                            pants. These stylish pants feature a relaxed fit and a deconstructed design for a modern and edgy look</p>
+                        <p class=" text-xs text-gray-600 mt-1"><a href="" class="underline">shipping</a> calculated at checkout</p>
+                        <p class="text-xs mt-1">⭐⭐⭐⭐⭐ <span class="text-sm">31 reviews</span></p>
+                    <?php
+                    }
+                    ?>
+
                     <?php
                     // printWithPre($grouped);
                     foreach ($grouped as $key => $value) {
@@ -135,7 +157,7 @@ class WebController extends LoginController
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
                                 ?>
-                                    <div onclick='changeSideVariant(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>)' class="border <?= $key1 == 0 ? "border-gray-900 selected-size" : "border-gray-300"  ?>  optionDivs cursor-pointer flex items-center justify-center h-10 w-20" option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>" onclick=""><?= $value1 ?></div>
+                                    <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>)' class="border <?= $key1 == 0 ? "border-gray-900 selected-size" : "border-gray-300"  ?>  optionDivs cursor-pointer flex items-center justify-center h-10 w-20" option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>" onclick=""><?= $value1 ?></div>
                                 <?php
                                 }
                                 ?>
@@ -144,7 +166,7 @@ class WebController extends LoginController
                         } elseif ($key == 'color') {
                         ?>
                             <p class="uppercase"><?= $key ?></p>
-                            <div class="w-full flex items-center justify-start mt-3 text-sm gap-2" id="ColorDiv">
+                            <div class="w-full flex items-center justify-start mt-3 text-sm gap-2" id="<?= !isset($_POST["product_details"]) ? "ColorDiv" : "ColorDetailsDiv" ?>">
 
                             </div>
 
@@ -156,55 +178,70 @@ class WebController extends LoginController
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
                                 ?>
-                                    <div onclick='changeSideVariant(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>)' class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300"  ?> cursor-pointer flex items-center justify-center h-10 w-20" option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?></div>
+                                    <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>)' class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300"  ?> cursor-pointer flex items-center justify-center h-10 w-20" option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?></div>
                                 <?php
                                 }
                                 ?>
                             </div>
-                    <?php
+                        <?php
                         }
-                    } ?>
-                    <div class="w-full flex items-center justify-start mt-7 gap-3">
-                        <div
-                            class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg quantityDiv">
-                            <div class="cursor-pointer minus" onclick="minus(this)">
-                                <i class="fa-solid fa-minus text-sm"></i>
-                            </div>
-                            <span class="text-black quantity">1</span>
-                            <div class="cursor-pointer plus" onclick="plus(this)">
-                                <i class="fa-solid fa-plus text-sm"></i>
-                            </div>
-                        </div>
-                        <div class="w-[80%] border border-gray-800 p-3 px-3 rounded-lg text-center cursor-pointer font-semibold text-base"
-                            onclick="AddToCartslider(this, true)">
-                            ADD TO CART
-                        </div>
-                        <input type="text" value="<?= $ProductData['varients'][0]['id'] ?>" class="sideVarientId hidden">
-                        <input type="text" value="<?= $id ?>" class="sideProductId hidden">
-                        <input type="text" value="<?= $ProductData['category'] ?>" class="sideCategoryId hidden">
-
-
-                    </div>
-                    <?php
-                    if(!empty($_SESSION["userid"])){
+                    }
+                    if (!isset($_POST["product_details"])) {
                         ?>
-                        <form method="POST" action="/checkout-cart"
-                           class="w-full" >
+                        <div class="w-full">
+                            <div class="w-full flex items-center justify-start mt-7 gap-3">
+                                <div
+                                class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg quantityDiv">
+                                <div class="cursor-pointer minus" onclick="minus(this)">
+                                    <i class="fa-solid fa-minus text-sm"></i>
+                                </div>
+                                <span class="text-black quantity">1</span>
+                                <div class="cursor-pointer plus" onclick="plus(this)">
+                                    <i class="fa-solid fa-plus text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="w-[80%] border border-gray-800 p-3 px-3 rounded-lg text-center cursor-pointer font-semibold text-base"
+                                onclick="AddToCartslider(this, true)">
+                                ADD TO CART
+                            </div>
+                            </div>
+                            
+
+                            <?php
+                            if (!empty($_SESSION["userid"])) {
+                            ?>
+                                <form method="POST" action="/checkout-cart"
+                                    class="w-full">
+                                    <input type="hidden" name="varient[]" class="sideVarientId" value="<?= $ProductData['varients'][0]["id"] ?>">
+                                    <input type="hidden" name="category[]" class="sideCategoryId" value="<?= $ProductData['category'] ?>">
+                                    <input type="hidden" name="product[]" class="sideProductId" value="<?= $ProductData['id'] ?>">
+                                    <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
+                                    <input type="hidden" name="quantity[]" id="product_buy_count1" value="1">
+                                    <input type="hidden" name="cartid[]" value="">
+                                    <button name="myForm" class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">BUY IT NOW</button>
+                                </form>
+                            <?php
+                            } else {
+                            ?>
                                 <input type="hidden" name="varient[]" value="<?= $ProductData['varients'][0]["id"] ?>">
                                 <input type="hidden" name="category[]" value="<?= $ProductData['category'] ?>">
                                 <input type="hidden" name="product[]" value="<?= $ProductData['id'] ?>">
                                 <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
                                 <input type="hidden" name="quantity[]" id="product_buy_count1" value="1">
                                 <input type="hidden" name="cartid[]" value="">
-                                <button name="myForm" class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">BUY IT NOW</button>
-                        </form>
-                        <?php
-                    }else{
-                        ?>
-                        <button onclick="openLogin()" class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">BUY IT NOW</button>
-                        <?php
+                                <button onclick="openLogin()" class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">BUY IT NOW</button>
+                            <?php
+                            }
+                            ?>
+
+                        </div>
+
+
+                    <?php
                     }
+
                     ?>
+
 
 
                 </div>
@@ -255,7 +292,7 @@ class WebController extends LoginController
             // printWithPre($images);
 
         ?>
-            <div onclick='changeSideVariant(this,"color","<?= $color ?>",<?= $i ?>)' class=" h-[95px] flex items-center justify-start mt-3 text-sm gap-2 p-1 cursor-pointer border <?= $i == 0 ? " border-gray-900 selected-color" : "" ?>"
+            <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"color","<?= $color ?>",<?= $i ?>)' class=" h-[95px] flex items-center justify-start mt-3 text-sm gap-2 p-1 cursor-pointer border <?= $i == 0 ? " border-gray-900 selected-color" : "" ?>"
                 option_name="color" option_value="" product_id="<?= $id ?>">
 
                 <img src="/<?= $images[0][0] ?>" class="h-full" alt="" class="optionDivs">
@@ -831,7 +868,7 @@ class WebController extends LoginController
                         return end($imgSet);
                     }, $images);
                 }
-                                $ppimages = $images;
+                $ppimages = $images;
 
                 require 'views/website/product-details.php';
             }
