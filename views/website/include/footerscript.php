@@ -11,6 +11,9 @@
 <!-- Include AOS JS -->
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
+
+
 <script>
     AOS.init({
         once: true, // Ensures the animation runs only once
@@ -32,14 +35,6 @@
         const content = el.querySelector('.accordion-content');
         const icon = el.querySelector('.icon-wrapper');
 
-        // First close all other accordions if needed (optional: uncomment below if you want to allow only one open at a time)
-        // document.querySelectorAll('.accordion-item').forEach(item => {
-        //     if (item !== el) {
-        //         item.querySelector('.accordion-content').classList.add('max-h-0');
-        //         item.querySelector('.icon-wrapper').classList.remove('rotate-90');
-        //     }
-        // });
-
         if (content.classList.contains('max-h-0')) {
             content.classList.remove('max-h-0');
             content.classList.add('max-h-[1000px]'); // Adjust as needed
@@ -50,6 +45,7 @@
             icon.classList.remove('-rotate-90');
         }
     }
+
     <?php if (isset($_SESSION['err']) && !empty($_SESSION['err'])): ?>
         console.log("Error: <?= $_SESSION['err'] ?>");
         $(document).ready(function onDocumentReady() {
@@ -57,6 +53,7 @@
         });
         <?php unset($_SESSION['err']); ?>
     <?php endif; ?>
+    
     <?php if (isset($_SESSION['success']) && !empty($_SESSION['success'])): ?>
         console.log("Success: <?= $_SESSION['success'] ?>");
         $(document).ready(function() {
@@ -64,6 +61,8 @@
         });
         <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
+
+
     $(document).ready(function() {
         $('.home-banner-slider').owlCarousel({
             loop: true,

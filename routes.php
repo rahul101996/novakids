@@ -57,6 +57,7 @@ $route->group(['', 'CollectionController'], function ($route) {
     // $route->route('/', 'index');
 
 });
+
 $route->group(['', 'ProductController'], function ($route) {
     $route->route('/admin/add-product', 'AddProducts');
     $route->route('/admin/edit-product/[i:id]', 'EditProducts');
@@ -69,6 +70,7 @@ $route->group(['', 'ProductController'], function ($route) {
     $route->route('/admin/orders', 'OrderList');
 
 });
+
 $route->group(['', 'CustomerController'], function ($route) {
     $route->route('admin/customers-list', 'CustomersList');
     $route->route('admin/customer-info', 'CustomersInfo');
@@ -95,6 +97,7 @@ $route->group(['', 'PaymentGatewayController'], function ($route) {
     // $route->route('/admin/products-list', 'ProductsList');
 
 });
+
 $route->group(['', 'CategoryController'], function ($route) {
 
     // $route->route('admin/add-packaging', 'AddCollections');
@@ -109,6 +112,7 @@ $route->group(['', 'CategoryController'], function ($route) {
     // $route->route('/', 'index');
 
 });
+
 $route->group(['', 'PackageController'], function ($route) {
 
     // $route->route('admin/add-packaging', 'AddCollections');
@@ -123,12 +127,19 @@ $route->group(['', 'PackageController'], function ($route) {
     // $route->route('/', 'index');
 
 });
+
 $route->group(['', 'DashboardController', 'auth'], function ($route) {
     $route->route('dashboard', 'index');
 });
 
 $route->group(['', 'WebsettingController', 'auth'], function ($route) {
-    $route->route('admin/websetting/home', 'home');
+    $route->route('admin/front-cms/nav-heading', 'navbar_heading');
+    $route->route('admin/front-cms/nav-heading/edit/[i:id]', 'navbar_heading');
+    $route->route('admin/front-cms/nav-heading/delete/[i:id]', 'navbar_heading_delete');
+
+    $route->route('/admin/front-cms/offer-heading', 'offer_heading');
+    $route->route('/admin/front-cms/offer-heading/edit/[i:id]', 'offer_heading');
+    $route->route('/admin/front-cms/offer-heading/delete/[i:id]', 'offer_heading_delete');
 });
 
 $route->group(['master', 'MasterController', 'auth'], function ($route) {
