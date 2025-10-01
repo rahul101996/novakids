@@ -42,6 +42,7 @@ $route->group(['', 'WebController'], function ($route) {
 
     $route->route('profile', 'MyProfile');
     $route->route('api/search-product', 'searchProduct');
+    $route->route("new-arrivals", "NewArrivals");
 
     // $route->route('/', 'index');
 });

@@ -283,10 +283,10 @@ $categories = getData("tbl_category");
 
         <div class="flex items-center space-x-7 ml-8">
             <a href="/" class="block">
-<div class="flex items-center gap-1">
-                        <img src="/public/logos/nova_favicon.png" alt="Brand Logo" class="w-auto h-14 rounded-md object-cover my-2 ml-10">
-                        <img src="/public/logos/brand-name.png" alt="Brand Logo" class="w-auto h-12 rounded-md object-cover my-2">
-                    </div>                <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
+                <div class="flex items-center gap-1">
+                    <img src="/public/logos/nova_favicon.png" alt="Brand Logo" class="w-auto h-14 rounded-md object-cover my-2 ">
+                    <img src="/public/logos/brand-name.png" alt="Brand Logo" class="w-auto h-12 rounded-md object-cover my-2">
+                </div> <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
             </a>
         </div>
 
@@ -311,10 +311,19 @@ $categories = getData("tbl_category");
         </div>
 
         <div class="flex items-center absolute left-1/2 transform -translate-x-1/2 space-x-7 max-md:hidden">
+            <div class="relative group">
+                <a href="/new-arrivals"
+                    class="text-gray-800  group duration-300 cursor-pointer">NEW ARRIVALS
+                    <span
+                        class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                    <span
+                        class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                </a>
+            </div>
             <?php
             foreach ($categories as $key => $value) {
                 $category = strtolower(str_replace(" ", "-", $value['category']));
-                ?>
+            ?>
                 <div class="relative group">
                     <a href="/category/<?= $category ?>"
                         class="text-gray-800  group duration-300 cursor-pointer"><?= $value['category'] ?>
@@ -785,13 +794,13 @@ $categories = getData("tbl_category");
             <!-- Search Results -->
             <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
 
-                <?php for ($i=0; $i < 5; $i++) {
+                <?php for ($i = 0; $i < 5; $i++) {
                     $value = $uniqueProducts[$i];
 
                     $images = json_decode($value['product_images'], true);
                     $firstImage = !empty($images) ? $images[0] : null;
 
-                    ?>
+                ?>
                     <div class="border overflow-hidden hover:shadow-md transition">
                         <img src="/<?= $firstImage ?>" alt="<?= $value['name'] ?>" class="w-full h-40 object-cover">
                         <div class="p-2">
@@ -892,7 +901,8 @@ $categories = getData("tbl_category");
     openBtn.addEventListener('click', () => {
         modal.classList.remove('hidden');
     });
-    function openLogin(){
+
+    function openLogin() {
         modal.classList.remove('hidden');
     }
 
@@ -1094,7 +1104,7 @@ $categories = getData("tbl_category");
     function decodeJwtResponse(token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
 

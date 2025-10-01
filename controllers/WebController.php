@@ -148,7 +148,7 @@ class WebController extends LoginController
                                         <path
                                             d="M3.37296 10.8776C3.57142 10.6791 3.89319 10.6791 4.09165 10.8776L6.01036 12.7963C6.20882 12.9948 6.20882 13.3165 6.01036 13.515C5.8119 13.7134 5.49013 13.7134 5.29167 13.515L3.37296 11.5963C3.1745 11.3978 3.1745 11.076 3.37296 10.8776Z">
                                         </path>
-                                    </svg> Sizing guide
+                                    </svg> Size guide
                                 </p>
                             </div>
                             <div class="w-full flex items-center justify-start mt-3 text-sm" id="SizeDiv">
@@ -191,21 +191,27 @@ class WebController extends LoginController
                         <div class="w-full">
                             <div class="w-full flex items-center justify-start mt-7 gap-3">
                                 <div
-                                class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg quantityDiv">
-                                <div class="cursor-pointer minus" onclick="minus(this)">
-                                    <i class="fa-solid fa-minus text-sm"></i>
+                                    class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg quantityDiv">
+                                    <div class="cursor-pointer minus" onclick="minus(this)">
+                                        <i class="fa-solid fa-minus text-sm"></i>
+                                    </div>
+                                    <span class="text-black quantity">1</span>
+                                    <div class="cursor-pointer plus" onclick="plus(this)">
+                                        <i class="fa-solid fa-plus text-sm"></i>
+                                    </div>
                                 </div>
-                                <span class="text-black quantity">1</span>
-                                <div class="cursor-pointer plus" onclick="plus(this)">
-                                    <i class="fa-solid fa-plus text-sm"></i>
+
+                                <div class="w-[80%] relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black"
+                                    onclick="AddToCartslider(this, true)">
+                                    <span
+                                        class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
+                                        <i class="fas fa-cart-plus"></i> Add to Cart
+                                    </span> <span
+                                        class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
+                                    </span>
                                 </div>
                             </div>
-                            <div class="w-[80%] border border-gray-800 p-3 px-3 rounded-lg text-center cursor-pointer font-semibold text-base"
-                                onclick="AddToCartslider(this, true)">
-                                ADD TO CART
-                            </div>
-                            </div>
-                            
+
 
                             <?php
                             if (!empty($_SESSION["userid"])) {
@@ -218,7 +224,14 @@ class WebController extends LoginController
                                     <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
                                     <input type="hidden" name="quantity[]" id="product_buy_count1" value="1">
                                     <input type="hidden" name="cartid[]" value="">
-                                    <button name="myForm" class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">BUY IT NOW</button>
+                                    <button name="myForm" class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-4 hover:border hover:border-[#f25b21] transition-all duration-700"><span
+                                            class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
+                                            Buy It Now
+                                        </span> <span
+                                            class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
+                                        </span>
+
+                                    </button>
                                 </form>
                             <?php
                             } else {
@@ -229,7 +242,14 @@ class WebController extends LoginController
                                 <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
                                 <input type="hidden" name="quantity[]" id="product_buy_count1" value="1">
                                 <input type="hidden" name="cartid[]" value="">
-                                <button onclick="openLogin()" class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">BUY IT NOW</button>
+                                <button onclick="openLogin()" class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black"><span
+                                        class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
+                                        <i class="fas fa-cart-plus"></i> Buy It Now
+                                    </span> <span
+                                        class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
+                                    </span>
+
+                                </button>
                             <?php
                             }
                             ?>
@@ -263,7 +283,16 @@ class WebController extends LoginController
             "grouped" => $grouped,
         ]);
     }
+    public function NewArrivals()
+    {
+        // echo $category;
+        $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id");
+        // printWithPre($products); 
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
+            require 'views/website/shop.php';
+        }
+    }
     public function getVariantData()
     {
         $id = $_POST['productid'];

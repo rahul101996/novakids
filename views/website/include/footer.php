@@ -136,7 +136,7 @@
                         <img src="/public/logos/nova_favicon.png" alt="Brand Logo" class="w-auto h-14 rounded-md object-cover mb-4">
                         <img src="/public/logos/nova_logo-brnd-name.png" alt="Brand Logo" class="w-auto h-14 rounded-md object-cover mb-4">
                     </div>
-                    
+
 
                     <p class="text-gray-600 max-w-sm  leading-relaxed">
                         Authentic streetwear for the next generation. Quality pieces that speak your language and
@@ -188,12 +188,13 @@
             <div>
                 <h4 class="font-bold text-black mb-6 max-md:mb-3 text-lg">Shop</h4>
                 <ul class="space-y-3">
+                    <li><a href="/new-arrivals" class="link-hover">NEW ARRIVALS</a></li>
                     <?php
-            foreach ($categories as $key => $value) {
-                $category = strtolower(str_replace(" ", "-", $value['category']));
-            ?>
-                    <li><a href="/category/<?= $category ?>"><?= $value['category'] ?></a></li>
-                    <?php } ?> 
+                    foreach ($categories as $key => $value) {
+                        $category = strtolower(str_replace(" ", "-", $value['category']));
+                    ?>
+                        <li><a href="/category/<?= $category ?>" class="link-hover"><?= $value['category'] ?></a></li>
+                    <?php } ?>
                 </ul>
             </div>
 

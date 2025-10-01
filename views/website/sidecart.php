@@ -649,7 +649,7 @@
                 ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
                     <span class="text-[#33459c] text-xl">Rs. ${ar.price}.00</span>
                 `
-                console.log("ar",ar,ele.parentElement.parentElement.querySelector(".sideVarientId"))
+                console.log("ar", ar, ele.parentElement.parentElement.querySelector(".sideVarientId"))
                 let imgHtml = ""
                 JSON.parse(ar.images).forEach((imgh) => {
                     imgHtml = imgHtml + `

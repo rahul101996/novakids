@@ -332,7 +332,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     <!-- Size Selection -->
                     <div class="flex flex-col mt-5" id="productDetailsVariants">
 
-                         
+
                     </div>
                     <div class="w-full flex items-center justify-start mt-3 text-sm relative">
                         <p class="text-semibold">Variant not available ?</p> &ensp;<span
@@ -434,24 +434,30 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
                             <?php
-                            if(!empty($_SESSION["userid"])){
-                                ?>
+                            if (!empty($_SESSION["userid"])) {
+                            ?>
                                 <button name="myForm"
-                                    class="w-full py-1 relative rounded-lg overflow-hidden group transform  hover:shadow-xl border border-[#f15b21] bg-[#f15b21] text-white">
-                                    <span
-                                        class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-[#f15b21]">
-                                        <i class=""></i> Buy Now
+                                    class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-4 hover:border hover:border-[#f25b21] transition-all duration-700"><span
+                                        class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
+                                        Buy It Now
+                                    </span> <span
+                                        class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
                                     </span>
-                                    <span
-                                        class="absolute inset-0 bg-white -translate-x-full ease-in-out group-hover:translate-x-0 transition-transform duration-[1.4s]  z-0">
-                                    </span>
+
                                 </button>
-                                <?php
-                            }else{
-                                ?>
-                                <button type="button" onclick="openLogin()" class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">BUY IT NOW</button>
-                                
-                                <?php
+                            <?php
+                            } else {
+                            ?>
+                                <button type="button" onclick="openLogin()" class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-4 hover:border hover:border-[#f25b21] transition-all duration-700"><span
+                                        class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
+                                        Buy It Now
+                                    </span> <span
+                                        class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
+                                    </span>
+
+                                </button>
+
+                            <?php
                             }
                             ?>
                             <button
@@ -1099,8 +1105,6 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 clickable: true,
             },
         });
-
-
     </script>
 
 
@@ -1205,11 +1209,11 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             counterEl.textContent = current;
             document.getElementById("product_buy_count").value = current
         }
-         
-        async function getVariants(){
+
+        async function getVariants() {
             const response = await axios.post("/api/get-product-data", new URLSearchParams({
                 productid: product_id,
-                "product_details":true
+                "product_details": true
             }))
             console.log(response.data)
             GLOBAL_product_VARIANT.variants = response.data.variants;
@@ -1225,17 +1229,17 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             GLOBAL_product_VARIANT.selected = firstValues
 
             if (response.data.variants.length > 0) {
-                document.getElementById("productDetailsVariants").innerHTML = response.data.html; 
+                document.getElementById("productDetailsVariants").innerHTML = response.data.html;
                 const response2 = await axios.post("/api/get-variant-data", new URLSearchParams({
                     productid: product_id,
-                    "product_details":true
+                    "product_details": true
                 }))
 
                 const ColorDiv = document.getElementById('ColorDetailsDiv');
-                    if (ColorDiv) {
-                        ColorDiv.innerHTML = response2.data.html;
+                if (ColorDiv) {
+                    ColorDiv.innerHTML = response2.data.html;
 
-                    }
+                }
             }
         }
 
@@ -1281,5 +1285,5 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         getVariants();
         cnosole.log("hello")
     </script>
-  
+
 </body>
