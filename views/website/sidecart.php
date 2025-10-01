@@ -358,8 +358,12 @@
                 // Change the SVG in the button
 
                 if (request.data.message == "Add To wishlist Successfully") {
-                    ele.classList.remove('bg-black/70');
-                    ele.classList.add('bg-[#f25b21]');
+                    if ($page = "product-details") {
+                        ele.querySelector("img").src = "/public/icons/heart-orange.png";
+                    } else {
+                        ele.classList.remove('bg-black/70');
+                        ele.classList.add('bg-[#f25b21]');
+                    }
                     toastr.options = {
                         "toastClass": "bg-pink-toast",
                         "progressBar": true,
@@ -370,15 +374,19 @@
 
                 } else {
                     <?php
-                    if(isset($page) && $page == "Wishlist"){
-                        
+                    if (isset($page) && $page == "Wishlist") {
+
                     ?>
-                    location.reload();
+                        location.reload();
                     <?php
                     }
                     ?>
-                    ele.classList.add('bg-black/70');
-                    ele.classList.remove('bg-[#f25b21]');
+                    if ($page = "product-details") {
+                        ele.querySelector("img").src = "/public/icons/heart-black.png";
+                    } else {
+                        ele.classList.add('bg-black/70');
+                        ele.classList.remove('bg-[#f25b21]');
+                    }
                     toastr.options = {
                         "toastClass": "bg-pink-toast",
                         "progressBar": true,

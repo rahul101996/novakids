@@ -1,3 +1,20 @@
+<?php
+
+$page = "product-details";
+if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
+
+
+    $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $ProductData['id'] . " AND `userid` = " . $_SESSION["userid"])[0];
+} else {
+
+    $data = checkExisteingWishlistSession($ProductData['id']);
+    if ($data) {
+        $data = ['id' => $data];
+    } else {
+        $data = [];
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -139,12 +156,12 @@
                     if (is_array($ppimages[0])) {
                         foreach (array_reverse($ppimages[0]) as $key => $image) {
 
-                            ?>
+                    ?>
                             <div class=" overflow-hidden  cursor-pointer">
                                 <img src="/<?= $image ?>" alt="View 1"
                                     class="w-full h-full object-cover image-hover cursor-zoom-in">
                             </div>
-                        <?php }
+                    <?php }
                     } ?>
 
                 </div>
@@ -295,14 +312,14 @@
 
 
                         </div>
-                        <div class="flex items-center justify-center gap-3">
+                        <div class="flex items-center justify-center">
                             <button
-                                class="addToWishlistBtn  h-10 w-10 rounded-full transition-all duration-500 px-3  bg-black/70 text-white  hover:bg-[#f25b21]">
-                                <i class="fas fa-heart" aria-hidden="true"></i>
+                                class="addToWishlistBtn  rounded-full transition-all duration-500 px-3  ">
+                                <img src="/public/icons/<?= !empty($data) ? 'heart-orange.png' : 'heart-black.png' ?>" class="cursor-pointer mt-1  h-8 w-8" alt="">
                             </button>
                             <input type="hidden" value="<?= $ProductData['id'] ?>" class="ProductId">
 
-                            <img src="/public/icons/share.png" onclick="shareProduct()" class="h-7 cursor-pointer mt-1"
+                            <img src="/public/icons/share-black.png" onclick="shareProduct()" class="h-8 cursor-pointer mt-1"
                                 alt="">
                         </div>
                     </div>
@@ -322,13 +339,13 @@
                                 // echo $key;
                                 if ($key == 'size') {
 
-                                    ?>
+                            ?>
                                     <div class="w-full flex items-center justify-between text-sm">
 
                                         <p class="uppercase"><?= $key ?> : <?= $value[0] ?></p>
                                         <p class="flex text-xs gap-1 cursor-pointer text-white bg-gray-800 py-1 px-3"
                                             onclick="document.getElementById('sizeChartModal').classList.remove('hidden')">
-                                            <i class="fa-solid fa-ruler pr-1"></i> Sizing guide
+                                            <i class="fa-solid fa-ruler pr-1"></i> Size guide
                                         </p>
                                     </div>
                                     <div class="w-full flex items-center justify-start mt-3 text-sm">
@@ -336,16 +353,16 @@
                                         $diffcolor = [];
                                         foreach ($value as $key1 => $value1) {
                                             // $diffcolor = $finalData['images'][$key1];
-                                            ?>
+                                        ?>
                                             <div class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> flex items-center justify-center h-10 w-20"
                                                 size_value="<?= $value1 ?>" size_name="<?= $key ?>"><?= $value1 ?></div>
-                                            <?php
+                                        <?php
                                         }
                                         ?>
                                     </div>
-                                    <?php
+                                <?php
                                 } elseif ($key == 'color') {
-                                    ?>
+                                ?>
                                     <p class="uppercase text-sm mt-5"><?= $key ?> : <?= $value[0] ?></p>
                                     <div class="w-full flex items-center justify-start mt-3 text-sm gap-2">
 
@@ -354,12 +371,12 @@
                                             if ($key3 > 3) {
                                                 break; // stop after 4 images
                                             }
-                                            ?>
+                                        ?>
                                             <img src="/<?= $image ?>" class="h-[95px]" alt="">
                                         <?php } ?>
 
                                     </div>
-                                    <?php
+                            <?php
                                 }
                             } ?>
                         </div>
@@ -429,10 +446,10 @@
                     <div class="space-y-4 mt-7">
                         <div class="w-full flex items-center justify-center space-x-4">
                             <div
-                                class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg">
-                                <span class="cursor-pointer " onclick="countMe(this,'-')">-</span>
+                                class="  flex items-center justify-center gap-7 border border-gray-800 rounded-lg py-1">
+                                <span class="cursor-pointer border-r border-gray-800 px-4 py-2" onclick="countMe(this,'-')">-</span>
                                 <span class="text-black counter">1</span>
-                                <span class="cursor-pointer" onclick="countMe(this,'+')">+</span>
+                                <span class="cursor-pointer border-l border-gray-800 px-4 py-2" onclick="countMe(this,'+')">+</span>
 
                             </div>
 
@@ -520,7 +537,7 @@
                             </button> -->
                                 <p>
                                     <i class="fas fa-tags mr-2 text-gray-900"></i>
-                                    <span class="font-semibold">Categories:</span> <?= $ProductData['category_name'] ?>
+                                    <span class="font-semibold">Category:</span> <?= $ProductData['category_name'] ?>
                                 </p>
                                 <p>
                                     <i class="fa-regular fa-calendar-days mr-3 text-gray-900"></i><span
@@ -722,56 +739,83 @@
                 <div class="relative">
                     <div class="owl-carousel owl-theme like-carousel">
 
-                        <?php foreach ($uniqueProducts as $key => $value) {
+                        <?php foreach ($uniqueProducts as $key => $product) {
+                            $images = json_decode($product['product_images'], true);
+                            $images = array_reverse($images);
+                            $SecondImage = true;
+                            (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
+                            $comparePrice = floatval($product['compare_price']);
+                            $price = floatval($product['price']);
+                            $discountAmount = $comparePrice - $price;
+                            $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
-                            $Allimages = json_decode($value['product_images'], true);
-                            $firstImage = !empty($Allimages) ? $Allimages : null;
-                            ?>
-                            <div
-                                class="group relative md:m-2 md:p-2 cursor-pointer hover:shadow-md transition overflow-hidden">
-                                <!-- Discount Badge -->
-                                <!-- <span class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-20">
-                                    SAVE 14%
-                                </span> -->
+                            $name = str_replace(' ', '-', $product['name']);
+                            $name = str_replace("'", '', $name);
+                            if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
-                                <!-- Product Images -->
-                                <div class="relative w-full h-[300px] max-md:h-[250px] overflow-hidden">
-                                    <!-- Default Image -->
-                                    <img src="/<?= $firstImage[0] ?>" alt="Product 1"
-                                        class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
 
-                                    <!-- Hover Image -->
-                                    <img src="/<?= empty($firstImage[1]) ? $firstImage[0] : $firstImage[1] ?>" alt="Product 1 Hover"
-                                        class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                                $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $product['id'] . " AND `userid` = " . $_SESSION["userid"])[0];
+                            } else {
 
-                                    <!-- Add to favorites Icon (top-right) -->
-                                    <button
-                                        class="absolute top-2 right-3 bg-black/70 text-white h-10 w-10 rounded-full opacity-0 translate-x-5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hover:bg-[#f25b21] z-20 stop-link">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
+                                $data = checkExisteingWishlistSession($product['id']);
+                                if ($data) {
+                                    $data = ['id' => $data];
+                                } else {
+                                    $data = [];
+                                }
+                            }
+                            // printWithPre($images);
+                        ?>
+                            <a href="/products/product-details/<?= $name ?>" class="block">
+                                <div
+                                    class="group relative  cursor-pointer transition overflow-hidden">
+                                    <!-- Discount Badge -->
+                                    <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
+                                        SAVE <?= $discountPercentage ?>%
+                                    </span>
 
-                                    <!-- Add to Cart Icon -->
-                                    <button
-                                        class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                        <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                    </button>
-                                </div>
+                                    <!-- Product Images -->
+                                    <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
+                                        <!-- Default Image -->
+                                        <img src="/<?= $images[0] ?>" alt="Product 1"
+                                            class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
 
-                                <!-- Product Details -->
-                                <div class="pt-4 w-full ">
-                                    <h3 class="text-base font-semibold uppercase"><?= $value['name'] ?></h3>
-                                    <div class="flex items-center justify-start gap-3 w-full">
-                                        <!-- <p class="text-gray-500 line-through text-sm">₹
-                                            2,499.0.00
-                                        </p> -->
-                                        <p class="text-[#f25b21] font-bold">₹ <?= $value['price'] ?></p>
+                                        <!-- Hover Image -->
+
+                                        <img src="/<?= $SecondImage ?>" alt="Product 1 Hover"
+                                            class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+
+                                        <!-- Add to favorites Icon (top-right) -->
+                                        <button
+                                            class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+
+                                        <!-- Add to Cart Icon -->
+                                        <button
+                                            class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                            <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                                        </button>
+                                        <input type="text" value="<?= $product['id'] ?>" class="ProductId">
                                     </div>
-                                    <!-- reviews -->
-                                    <div class="flex items-center justify-start space-x-1 hidden">
-                                        <span class="text-yellow-500">★★★★★</span>
+
+                                    <!-- Product Details -->
+                                    <div class="pt-4 w-full ">
+                                        <h3 class="text-base font-semibold uppercase"><?= $product['name'] ?></h3>
+                                        <div class="flex items-center justify-start gap-3 w-full">
+                                            <p class="text-gray-500 line-through text-sm">₹
+                                                <?= formatNumber($product['compare_price']) ?>.00
+                                            </p>
+                                            <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?>.00</p>
+                                        </div>
+                                        <!-- reviews -->
+                                        <div class="flex items-center justify-start space-x-1 hidden">
+                                            <span class="text-yellow-500">★★★★★</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
+
                         <?php } ?>
 
                     </div>
@@ -942,7 +986,7 @@
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".like-carousel").owlCarousel({
                 loop: true,
                 margin: 10,
@@ -986,7 +1030,7 @@
     </script> -->
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".review-carousel").owlCarousel({
                 margin: 10,
                 autoplay: true,
@@ -1005,13 +1049,13 @@
                         items: 1
                     }, // Small tablets
                     768: {
-                        items: 2
+                        items: 3
                     }, // Tablets
                     1024: {
-                        items: 2
+                        items: 3
                     }, // Desktops
                     1280: {
-                        items: 2
+                        items: 3
                     } // Large screens
                 }
             });
@@ -1119,7 +1163,7 @@
 
         // Color selection functionality
         document.querySelectorAll('.color-option').forEach(option => {
-            option.addEventListener('click', function () {
+            option.addEventListener('click', function() {
                 // Remove ring from all options
                 document.querySelectorAll('.color-option').forEach(opt => {
                     opt.classList.remove('ring-2', 'ring-[#f25b21]', 'ring-offset-4');
@@ -1131,7 +1175,7 @@
 
         // Size selection functionality
         document.querySelectorAll('.size-option').forEach(option => {
-            option.addEventListener('click', function () {
+            option.addEventListener('click', function() {
                 // Remove selected state from all options
                 document.querySelectorAll('.size-option').forEach(opt => {
                     opt.classList.remove('border-[#f25b21]', 'bg-orange-50', 'text-[#f25b21]');
@@ -1148,7 +1192,7 @@
         const decreaseBtn = document.querySelector('button:has-text("−")');
         const increaseBtn = document.querySelector('button:has-text("+")');
 
-        document.querySelector('button').addEventListener('click', function () {
+        document.querySelector('button').addEventListener('click', function() {
             if (this.textContent === '−') {
                 const current = parseInt(quantityInput.value);
                 if (current > 1) quantityInput.value = current - 1;
@@ -1160,7 +1204,7 @@
 
         document.querySelectorAll('button').forEach(btn => {
             if (btn.textContent === '−' || btn.textContent === '+') {
-                btn.addEventListener('click', function () {
+                btn.addEventListener('click', function() {
                     const current = parseInt(quantityInput.value);
                     if (this.textContent === '−' && current > 1) {
                         quantityInput.value = current - 1;
@@ -1184,8 +1228,6 @@
             counterEl.textContent = current;
             document.getElementById("product_buy_count").value = current
         }
-
-
     </script>
 
 
