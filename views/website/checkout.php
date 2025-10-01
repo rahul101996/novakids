@@ -226,6 +226,7 @@ $allstates = getData("indian_states");
                         $quantity = $cartData['quantity'][$key];
                         $vdata = getData2("SELECT tbl_variants.* , tbl_products.name as product_name, tbl_products.id as product_id, tbl_products.category as category FROM `tbl_variants` LEFT JOIN tbl_products ON tbl_variants.product_id = tbl_products.id WHERE tbl_variants.id = '$variant_id'")[0];
                         // echo $vdata['image'];
+                        // printWithPre($vdata);
                         $images = array_reverse(json_decode($vdata['images'], true));
                         $variants = json_decode($vdata['options'], true);
                         $variants = json_decode($variants, true);

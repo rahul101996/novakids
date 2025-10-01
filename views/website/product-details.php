@@ -313,56 +313,9 @@
                     <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated
                         at checkout</p>
                     <!-- Size Selection -->
-                    <div class="flex flex-col mt-5">
+                    <div class="flex flex-col mt-5" id="productDetailsVariants">
 
-                        <div class="flex flex-wrap">
-                            <?php
-                            foreach ($grouped as $key => $value) {
-                                $key = strtolower(str_replace(' ', '', $key));
-                                // echo $key;
-                                if ($key == 'size') {
-
-                                    ?>
-                                    <div class="w-full flex items-center justify-between text-sm">
-
-                                        <p class="uppercase"><?= $key ?> : <?= $value[0] ?></p>
-                                        <p class="flex text-xs gap-1 cursor-pointer text-white bg-gray-800 py-1 px-3"
-                                            onclick="document.getElementById('sizeChartModal').classList.remove('hidden')">
-                                            <i class="fa-solid fa-ruler pr-1"></i> Sizing guide
-                                        </p>
-                                    </div>
-                                    <div class="w-full flex items-center justify-start mt-3 text-sm">
-                                        <?php
-                                        $diffcolor = [];
-                                        foreach ($value as $key1 => $value1) {
-                                            // $diffcolor = $finalData['images'][$key1];
-                                            ?>
-                                            <div class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> flex items-center justify-center h-10 w-20"
-                                                size_value="<?= $value1 ?>" size_name="<?= $key ?>"><?= $value1 ?></div>
-                                            <?php
-                                        }
-                                        ?>
-                                    </div>
-                                    <?php
-                                } elseif ($key == 'color') {
-                                    ?>
-                                    <p class="uppercase text-sm mt-5"><?= $key ?> : <?= $value[0] ?></p>
-                                    <div class="w-full flex items-center justify-start mt-3 text-sm gap-2">
-
-                                        <?php
-                                        foreach ($lastImages as $key3 => $image) {
-                                            if ($key3 > 3) {
-                                                break; // stop after 4 images
-                                            }
-                                            ?>
-                                            <img src="/<?= $image ?>" class="h-[95px]" alt="">
-                                        <?php } ?>
-
-                                    </div>
-                                    <?php
-                                }
-                            } ?>
-                        </div>
+                         
                     </div>
                     <div class="w-full flex items-center justify-start mt-3 text-sm relative">
                         <p class="text-semibold">Variant not available ?</p> &ensp;<span
@@ -463,16 +416,27 @@
                             <input type="hidden" name="cartid[]" value="">
 
 
-                            <button name="myForm"
-                                class="w-full py-1 relative rounded-lg overflow-hidden group transform  hover:shadow-xl border border-[#f15b21] bg-[#f15b21] text-white">
-                                <span
-                                    class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-[#f15b21]">
-                                    <i class=""></i> Buy Now
-                                </span>
-                                <span
-                                    class="absolute inset-0 bg-white -translate-x-full ease-in-out group-hover:translate-x-0 transition-transform duration-[1.4s]  z-0">
-                                </span>
-                            </button>
+                            <?php
+                            if(!empty($_SESSION["userid"])){
+                                ?>
+                                <button name="myForm"
+                                    class="w-full py-1 relative rounded-lg overflow-hidden group transform  hover:shadow-xl border border-[#f15b21] bg-[#f15b21] text-white">
+                                    <span
+                                        class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-[#f15b21]">
+                                        <i class=""></i> Buy Now
+                                    </span>
+                                    <span
+                                        class="absolute inset-0 bg-white -translate-x-full ease-in-out group-hover:translate-x-0 transition-transform duration-[1.4s]  z-0">
+                                    </span>
+                                </button>
+                                <?php
+                            }else{
+                                ?>
+                                <button type="button" onclick="openLogin()" class="w-full items-center justify-center text-white text-center mt-3 bg-[#f25b21] p-3 px-3 rounded-lg cursor-pointer">BUY IT NOW</button>
+                                
+                                <?php
+                            }
+                            ?>
                             <button
                                 class="relative hidden rounded-md border-2 border-gray-400 py-2 px-6 font-semibold flex items-center justify-center gap-2 text-gray-700 
                                         transition-all duration-500 hover:border-purple-500 hover:text-purple-600 hover:shadow-lg">
@@ -1091,9 +1055,22 @@
                 clickable: true,
             },
         });
+
+
     </script>
 
+
+    <?php
+    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/sidecart.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/specifications.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/footer.php"; ?>
+
     <script>
+        const GLOBAL_product_VARIANT = {
+            variants: {},
+            selected: {}
+        };
+        const product_id = "<?= $ProductData['id'] ?>"
         // Smooth animations on scroll
         const observerOptions = {
             threshold: 0.1,
@@ -1118,58 +1095,58 @@
         });
 
         // Color selection functionality
-        document.querySelectorAll('.color-option').forEach(option => {
-            option.addEventListener('click', function () {
-                // Remove ring from all options
-                document.querySelectorAll('.color-option').forEach(opt => {
-                    opt.classList.remove('ring-2', 'ring-[#f25b21]', 'ring-offset-4');
-                });
-                // Add ring to selected option
-                this.classList.add('ring-2', 'ring-[#f25b21]', 'ring-offset-4');
-            });
-        });
+        // document.querySelectorAll('.color-option').forEach(option => {
+        //     option.addEventListener('click', function () {
+        //         // Remove ring from all options
+        //         document.querySelectorAll('.color-option').forEach(opt => {
+        //             opt.classList.remove('ring-2', 'ring-[#f25b21]', 'ring-offset-4');
+        //         });
+        //         // Add ring to selected option
+        //         this.classList.add('ring-2', 'ring-[#f25b21]', 'ring-offset-4');
+        //     });
+        // });
 
-        // Size selection functionality
-        document.querySelectorAll('.size-option').forEach(option => {
-            option.addEventListener('click', function () {
-                // Remove selected state from all options
-                document.querySelectorAll('.size-option').forEach(opt => {
-                    opt.classList.remove('border-[#f25b21]', 'bg-orange-50', 'text-[#f25b21]');
-                    opt.classList.add('border-gray-300');
-                });
-                // Add selected state to clicked option
-                this.classList.remove('border-gray-300');
-                this.classList.add('border-[#f25b21]', 'bg-orange-50', 'text-[#f25b21]');
-            });
-        });
+        // // Size selection functionality
+        // document.querySelectorAll('.size-option').forEach(option => {
+        //     option.addEventListener('click', function () {
+        //         // Remove selected state from all options
+        //         document.querySelectorAll('.size-option').forEach(opt => {
+        //             opt.classList.remove('border-[#f25b21]', 'bg-orange-50', 'text-[#f25b21]');
+        //             opt.classList.add('border-gray-300');
+        //         });
+        //         // Add selected state to clicked option
+        //         this.classList.remove('border-gray-300');
+        //         this.classList.add('border-[#f25b21]', 'bg-orange-50', 'text-[#f25b21]');
+        //     });
+        // });
 
         // Quantity controls
-        const quantityInput = document.querySelector('input[type="number"]');
-        const decreaseBtn = document.querySelector('button:has-text("−")');
-        const increaseBtn = document.querySelector('button:has-text("+")');
+        // const quantityInput = document.querySelector('input[type="number"]');
+        // const decreaseBtn = document.querySelector('button:has-text("−")');
+        // const increaseBtn = document.querySelector('button:has-text("+")');
 
-        document.querySelector('button').addEventListener('click', function () {
-            if (this.textContent === '−') {
-                const current = parseInt(quantityInput.value);
-                if (current > 1) quantityInput.value = current - 1;
-            } else if (this.textContent === '+') {
-                const current = parseInt(quantityInput.value);
-                quantityInput.value = current + 1;
-            }
-        });
+        // document.querySelector('button').addEventListener('click', function () {
+        //     if (this.textContent === '−') {
+        //         const current = parseInt(quantityInput.value);
+        //         if (current > 1) quantityInput.value = current - 1;
+        //     } else if (this.textContent === '+') {
+        //         const current = parseInt(quantityInput.value);
+        //         quantityInput.value = current + 1;
+        //     }
+        // });
 
-        document.querySelectorAll('button').forEach(btn => {
-            if (btn.textContent === '−' || btn.textContent === '+') {
-                btn.addEventListener('click', function () {
-                    const current = parseInt(quantityInput.value);
-                    if (this.textContent === '−' && current > 1) {
-                        quantityInput.value = current - 1;
-                    } else if (this.textContent === '+') {
-                        quantityInput.value = current + 1;
-                    }
-                });
-            }
-        });
+        // document.querySelectorAll('button').forEach(btn => {
+        //     if (btn.textContent === '−' || btn.textContent === '+') {
+        //         btn.addEventListener('click', function () {
+        //             const current = parseInt(quantityInput.value);
+        //             if (this.textContent === '−' && current > 1) {
+        //                 quantityInput.value = current - 1;
+        //             } else if (this.textContent === '+') {
+        //                 quantityInput.value = current + 1;
+        //             }
+        //         });
+        //     }
+        // });
 
         function countMe(ele, process) {
             let counterEl = ele.parentElement.querySelector(".counter");
@@ -1184,13 +1161,81 @@
             counterEl.textContent = current;
             document.getElementById("product_buy_count").value = current
         }
+         
+        async function getVariants(){
+            const response = await axios.post("/api/get-product-data", new URLSearchParams({
+                productid: product_id,
+                "product_details":true
+            }))
+            console.log(response.data)
+            GLOBAL_product_VARIANT.variants = response.data.variants;
+            let firstValues = {};
+            let dict = response.data.grouped
+            for (let key in dict) {
+                if (Array.isArray(dict[key]) && dict[key].length > 0) {
+                    firstValues[key] = dict[key][0];
+                }
+            }
 
+            console.log(firstValues);
+            GLOBAL_product_VARIANT.selected = firstValues
 
+            if (response.data.variants.length > 0) {
+                document.getElementById("productDetailsVariants").innerHTML = response.data.html; 
+                const response2 = await axios.post("/api/get-variant-data", new URLSearchParams({
+                    productid: product_id,
+                    "product_details":true
+                }))
+
+                const ColorDiv = document.getElementById('ColorDetailsDiv');
+                    if (ColorDiv) {
+                        ColorDiv.innerHTML = response2.data.html;
+
+                    }
+            }
+        }
+
+        // function changeDetailVariant(){
+
+        // }
+
+        function changeDetailVariant(ele, tp, value, key1) {
+            console.log(ele, tp, value, key1)
+            updateKey(GLOBAL_product_VARIANT.selected, tp, value);
+            let divs = ele.parentElement.querySelectorAll("div")
+            divs.forEach(div => {
+                div.classList.remove("border-gray-900");
+            });
+            // console.log(divs[key1])
+            divs[key1].classList.add("border-gray-900");
+            console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
+            let selectedId = "";
+            GLOBAL_product_VARIANT.variants.forEach(async (ar, i) => {
+
+                if (deepEqualCaseInsensitive(JSON.parse(JSON.parse(ar.options)), GLOBAL_product_VARIANT.selected)) {
+                    // console.log("matched",JSON.parse(JSON.parse(ar.options)),GLOBAL_VARIANT.selected)
+
+                    // await changeCartSidebarImage(i)
+
+                    selectedId = ar.id
+                    ele.parentElement.parentElement.querySelector(".sideVarientId").value = selectedId
+                    ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
+                        <span class="text-[#33459c] text-xl">Rs. ${ar.price}.00</span>
+                    `
+                    console.log(JSON.parse(ar.images))
+                    let imgHtml = ""
+                    JSON.parse(ar.images).forEach((imgh) => {
+                        imgHtml = imgHtml + `
+                            <img src="/${imgh}" alt="">
+                        `
+                    })
+                    document.getElementById("VarImg").innerHTML = imgHtml
+                }
+            })
+
+        }
+        getVariants();
+        cnosole.log("hello")
     </script>
-
-
-    <?php
-    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/sidecart.php";
-    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/specifications.php";
-    include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/footer.php"; ?>
+  
 </body>

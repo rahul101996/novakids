@@ -542,13 +542,11 @@
 
                     if (response.data.variants.length > 0) {
 
-                        // showVarientsSidebar(response.data.html);
-                        // VariantSelects.innerHTML;
                         VariantSelects.innerHTML = response.data.html;
                         Openvariant()
                         let options = document.querySelectorAll('.optionDivs');
 
-                        console.log("options", options);
+                        // console.log("options", options);
 
                         let FirstOption = options[0];
 
@@ -643,7 +641,7 @@
                 ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
                     <span class="text-[#33459c] text-xl">Rs. ${ar.price}.00</span>
                 `
-                console.log(JSON.parse(ar.images))
+                console.log("ar",ar,ele.parentElement.parentElement.querySelector(".sideVarientId"))
                 let imgHtml = ""
                 JSON.parse(ar.images).forEach((imgh) => {
                     imgHtml = imgHtml + `
