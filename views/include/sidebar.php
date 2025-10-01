@@ -93,7 +93,7 @@
             </div>
         </div>
 
-        <div>
+        <!-- <div>
             <button @click="open === 'websetting' ? open = null : open = 'websetting'"
                 class="w-full flex items-center justify-between px-4 py-2 hover:bg-slate-700 rounded-lg">
                 <span class="flex items-center">
@@ -112,17 +112,8 @@
                 <a href="/admin/websetting/home" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     Home
                 </a>
-                <!-- <a href="/admin/collections" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
-                    Collections
-                </a>
-                <a href="/admin/inventory" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
-                    Inventory
-                </a>
-                <a href="#categories" class="hidden px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
-                    Categories
-                </a> -->
             </div>
-        </div>
+        </div> -->
         <div>
             <button @click="open === 'front_cms' ? open = null : open = 'front_cms'"
                 class="w-full flex items-center justify-between px-4 py-2 hover:bg-slate-700 rounded-lg">
@@ -143,13 +134,12 @@
                 </svg>
             </button>
             <div x-show="open === 'front_cms'" x-collapse class="ml-10 mt-2 space-y-1">
-                <a href="/admin/category-list" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                <a href="/admin/front-cms/nav-heading" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     Navbar Heading
                 </a>
-                <a href="/admin/packages-list" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                <a href="/admin/front-cms/offer-heading" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     Offer Heading
                 </a>
-
             </div>
         </div>
         <div>

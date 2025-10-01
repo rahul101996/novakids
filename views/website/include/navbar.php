@@ -7,6 +7,8 @@ $uniqueProducts = getData2("SELECT *
                                 ORDER BY RAND()
                                 LIMIT 10;");
 
+$navbar_heading = getData2("SELECT * FROM `tbl_nav_heading` ");
+
 // printWithPre($uniqueProducts);
 
 if (isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type'] == "User") {
@@ -795,6 +797,7 @@ $categories = getData("tbl_category");
             <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
 
                 <?php for ($i = 0; $i < 5; $i++) {
+                <?php for ($i = 0; $i < 5; $i++) {
                     $value = $uniqueProducts[$i];
 
                     $images = json_decode($value['product_images'], true);
@@ -829,41 +832,41 @@ $categories = getData("tbl_category");
     });
 </script> -->
 <script>
-    const messages = [
-        ' Nova Kids – Style That Moves!',
-        ' Free Delivery on Orders Over Rs.2000',
-        ' Trendy Threads for Legends!',
-        ' Cool Clothes for Cool Boys!',
-        ' Gear Up for Adventures in Style!'
-    ];
+    // const messages = [
+    //     ' Nova Kids – Style That Moves!',
+    //     ' Free Delivery on Orders Over Rs.2000',
+    //     ' Trendy Threads for Legends!',
+    //     ' Cool Clothes for Cool Boys!',
+    //     ' Gear Up for Adventures in Style!'
+    // ];
+
+    const messages = <?= json_encode($navbar_heading) ?>;
 
     let index = 0;
     const textElement = document.getElementById("rotating-text1");
 
     function showMessage() {
-        // Fade out
-        // console.log(textElement);
         textElement.classList.add("opacity-0");
 
         setTimeout(() => {
-            // Change text
-            textElement.textContent = messages[index];
-            // Fade in
+            // ✅ use the `heading` property from object
+            textElement.textContent = messages[index].title;
             textElement.classList.remove("opacity-0");
         }, 500);
 
         index = (index + 1) % messages.length;
     }
 
-    // Initial text
-    textElement.textContent = messages[index];
+    // ✅ initial text
+    textElement.textContent = messages[index].title;
     index++;
 
     // Smooth transition class
     textElement.classList.add("transition-opacity", "duration-700", "opacity-100");
 
-    // Rotate every 3s
+    // Rotate every 2s
     setInterval(showMessage, 2000);
+
 </script>
 
 <script>

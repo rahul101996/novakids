@@ -1241,11 +1241,12 @@ class WebController extends LoginController
 <?php
                             exit();
                         }
-                    } else {
-                        $_SESSION["err"] = "Enter Your Mobile Number in Profile";
-                        header("Location: checkout.php");
-                        exit();
-                    }
+                    } 
+                    // else {
+                    //     $_SESSION["err"] = "Enter Your Mobile Number in Profile";
+                    //     header("Location: checkout.php");
+                    //     exit();
+                    // }
                 }
             }
             require 'views/website/checkout.php';

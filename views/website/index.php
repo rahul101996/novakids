@@ -139,7 +139,7 @@
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
                         $name = str_replace(' ', '-', $product['name']);
-                        $name = str_replace("'", '', $name); 
+                        $name = str_replace("'", '', $name);
                         if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
@@ -154,7 +154,7 @@
                             }
                         }
                         // printWithPre($images);
-                    ?>
+                        ?>
                         <a href="/products/product-details/<?= $name ?>" class="block">
                             <div class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
@@ -230,7 +230,7 @@
             foreach ($categories as $key => $category) {
 
 
-            ?>
+                ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
                     <a href="/category/<?= strtolower(str_replace(' ', '-', $category['category'])) ?>">
@@ -437,7 +437,7 @@
                         }
                     }
 
-                ?>
+                    ?>
                     <a href="products/product-details/<?= $name ?>" class="block">
                         <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
                             <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden">
@@ -487,7 +487,7 @@
                             </div>
                         </div>
                     </a>
-                <?php
+                    <?php
                 }
                 ?>
             </div>
@@ -515,12 +515,25 @@
         }
     </style>
 
+    <?php
+    $offerheading = getData2("SELECT * FROM `tbl_offer_heading` WHERE 1");
+    // printWithPre($offerheading);
+    // die();
+    ?>
+
     <div class="w-full overflow-hidden bg-white mb-8">
         <div id="bottomRow" class="marquee bg-black">
             <div class="marquee-content text-grey-700 max-md:text-sm py-1 text-nowrap">
                 <div
                     class="flex items-center space-x-10 text-outline transition-all duration-700 text-white font-semibold text-xl max-md:text-lg cursor-pointer">
-                    <span>#</span>
+
+                    <?php foreach ($offerheading as $key => $value) { ?>
+                        <span>#</span>
+                        <span><?= $value['title'] ?></span>
+                    <?php } ?>
+
+
+                    <!-- <span>#</span>
                     <span>Streetwear</span>
                     <span>#</span>
                     <span>Oversized Tees</span>
@@ -606,7 +619,7 @@
                     <span>#</span>
                     <span>Free Shipping Over ₹999</span>
                     <span>#</span>
-                    <span>Made for Gen Z</span>
+                    <span>Made for Gen Z</span> -->
 
                 </div>
             </div>
@@ -853,7 +866,7 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const modal = document.getElementById('newsletterModal');
             const closeBtn = document.getElementById('closeModal');
             const noPopupCheckbox = document.getElementById('noPopup');
@@ -887,7 +900,7 @@
 
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".new-arrival-carousel").owlCarousel({
                 loop: true,
                 margin: 5,

@@ -132,16 +132,16 @@ if (!empty($_POST)) {
                     if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
                         foreach ($_SESSION["cart"] as $key => $c) {
 
-                                $cartdata = [
-                                    "varient" => $c["varient"],
-                                    "category" => $c["category"],
-                                    "product" => $c["product"],
-                                    "quantity" => $c["quantity"],
-                                    "userid" => $userid,
-                                    "username" => $_POST["username"],
-                                ];
-                                add($cartdata, "tbl_cart");
-                            
+                            $cartdata = [
+                                "varient" => $c["varient"],
+                                "category" => $c["category"],
+                                "product" => $c["product"],
+                                "quantity" => $c["quantity"],
+                                "userid" => $userid,
+                                "username" => $_POST["username"],
+                            ];
+                            add($cartdata, "tbl_cart");
+
                         }
                         unset($_SESSION["cart"]);
                     } else if (isset($_SESSION["FormCartData"])) {
@@ -259,13 +259,23 @@ if (!empty($_POST)) {
         href="https://fonts.googleapis.com/css2?family=Birthstone+Bounce:wght@400;500&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jost:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Oswald:wght@200..700&family=Satisfy&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <!-- Toastr CSS (load after Tailwind/Bootstrap) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 
     <style>
         .archivo-narrow-k {
@@ -275,14 +285,15 @@ if (!empty($_POST)) {
             font-style: normal;
         }
 
-         .S9gUrf-YoZ4jf{
+        .S9gUrf-YoZ4jf {
 
-        display:flex ! important;
-    }
-    .g_id_signin {
-        display:flex ! important;
-        justify-content: center ! important;
-    }
+            display: flex ! important;
+        }
+
+        .g_id_signin {
+            display: flex ! important;
+            justify-content: center ! important;
+        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
@@ -333,5 +344,5 @@ if (!empty($_POST)) {
             path.setAttribute("d", "M19 9l-7 7-7-7");
         }
     });
-   
+
 </script>

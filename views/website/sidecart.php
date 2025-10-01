@@ -32,7 +32,8 @@
 
 
 <!-- Overlay -->
-<div id="sidecartOverlay" class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-500 z-50">
+<div id="sidecartOverlay"
+    class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-500 z-50">
 </div>
 
 <!-- Side Cart -->
@@ -43,7 +44,8 @@
         <div class="flex justify-between items-center p-4 border-b">
             <h2 class="text-xl font-bold">Your Cart</h2>
             <!-- Close Button -->
-            <button id="closeCart" onclick="closeCartFn()" type="button" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong">
+            <button id="closeCart" onclick="closeCartFn()" type="button"
+                class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -90,9 +92,11 @@
 
                         <!-- Quantity controls -->
                         <div class="flex items-center mt-2">
-                            <button id="qtyMinus" type="button" class="px-3 border rounded-l hover:bg-gray-100">-</button>
+                            <button id="qtyMinus" type="button"
+                                class="px-3 border rounded-l hover:bg-gray-100">-</button>
                             <span id="qtyDisplay" class="px-4 border-t border-b">1</span>
-                            <button id="qtyPlus" type="button" class="px-3 border rounded-r hover:bg-gray-100">+</button>
+                            <button id="qtyPlus" type="button"
+                                class="px-3 border rounded-r hover:bg-gray-100">+</button>
                         </div>
                     </div>
 
@@ -152,7 +156,7 @@
                     class="absolute inset-0 bg-black scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
             </button> -->
                 <?php
-                if (isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type'] == "User") {            ?>
+                if (isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type'] == "User") { ?>
                     <input type="hidden" name="myForm" id="">
 
                     <button type="submit"
@@ -163,9 +167,9 @@
                         <span
                             class="absolute inset-0 bg-[#f25b21] transition-transform duration-700 origin-left group-hover:scale-x-0 scale-x-100"></span>
                     </button>
-                <?php
+                    <?php
                 } else {
-                ?>
+                    ?>
                     <button onclick="modal.classList.remove('hidden')" type="button"
                         class="relative w-full font-semibold py-1.5 rounded-md border-2 border-[#f25b21] overflow-hidden group">
                         <span class="relative z-10 text-white group-hover:text-[#f25b21] transition-colors duration-700">
@@ -179,7 +183,8 @@
         </div>
     </form>
 </div>
-<div class="h-[100vh] w-[59%] z-[50] fixed top-0 right-0 w-full flex items-center justify-center transform translate-x-full transition-transform duration-[0.6s] ease-in-out" id="AddToCartSidebar">
+<div class="h-[100vh] w-[59%] z-[50] fixed top-0 right-0 w-full flex items-center justify-center transform translate-x-full transition-transform duration-[0.6s] ease-in-out"
+    id="AddToCartSidebar">
 
 </div>
 <div id="sizeChartModal" class="hidden fixed inset-0 flex items-center justify-center bg-black/50 z-50">
@@ -319,15 +324,15 @@
         }
 
     }
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         AddToWishlist();
     });
 
     function AddToWishlist() {
         const addToWishlistBtn = document.querySelectorAll('.addToWishlistBtn');
         if (addToWishlistBtn) {
-            addToWishlistBtn.forEach(function(btn) {
-                btn.addEventListener('click', function(event) {
+            addToWishlistBtn.forEach(function (btn) {
+                btn.addEventListener('click', function (event) {
                     // console.log("hello");
                     event.preventDefault();
                     event.stopPropagation();
@@ -376,9 +381,9 @@
                     <?php
                     if (isset($page) && $page == "Wishlist") {
 
-                    ?>
+                        ?>
                         location.reload();
-                    <?php
+                        <?php
                     }
                     ?>
                     if ($page = "product-details") {
@@ -512,7 +517,7 @@
         cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
         cartOverlay.classList.add('opacity-100');
     }
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         AddToCart();
     });
 
@@ -521,8 +526,8 @@
         const addToCartBtn = document.querySelectorAll('.openCartBtn');
         // console.log(addToCartBtn);
         if (addToCartBtn) {
-            addToCartBtn.forEach(function(btn) {
-                btn.addEventListener('click', async function(event) {
+            addToCartBtn.forEach(function (btn) {
+                btn.addEventListener('click', async function (event) {
                     console.log("hello");
                     event.preventDefault();
                     event.stopPropagation();
@@ -645,7 +650,14 @@
                 // await changeCartSidebarImage(i)
 
                 selectedId = ar.id
-                ele.parentElement.parentElement.querySelector(".sideVarientId").value = selectedId
+                // console.log("selectedId", selectedId)
+                const sideVariantInput = ele.parentElement.parentElement.querySelector(".sideVarientId");
+                if (sideVariantInput) {
+                    sideVariantInput.value = selectedId;
+                } else {
+                    console.warn("No .sideVarientId element found inside:", ele.parentElement.parentElement);
+                }
+
                 ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
                     <span class="text-[#33459c] text-xl">Rs. ${ar.price}.00</span>
                 `

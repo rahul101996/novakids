@@ -718,109 +718,108 @@ function sendOfficialMail($toEmail, $toName, $subject, $body, $attachments = [],
         error_log("Mail Error: {$mail->ErrorInfo}");
         return false;
     }
-    function current_url(): string
-    {
-        // Detect protocol
-        $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-            || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
-        $scheme = $https ? 'https' : 'http';
+}
 
-        // Detect host (respect proxy header if present)
-        $host = $_SERVER['HTTP_X_FORWARDED_HOST'] ?? $_SERVER['HTTP_HOST'];
+function current_url(): string
+{
+    // Detect protocol
+    $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
+    $scheme = $https ? 'https' : 'http';
 
-        // Non‑standard port (e.g. :8080)
-        $port = $_SERVER['SERVER_PORT'];
-        $showPort = ($https && $port != 443) || (!$https && $port != 80);
-        $portPart = $showPort ? ':' . $port : '';
+    // Detect host (respect proxy header if present)
+    $host = $_SERVER['HTTP_X_FORWARDED_HOST'] ?? $_SERVER['HTTP_HOST'];
 
-        // Path + query string
-        $requestUri = $_SERVER['REQUEST_URI']; // already contains the query part
+    // Non‑standard port (e.g. :8080)
+    $port = $_SERVER['SERVER_PORT'];
+    $showPort = ($https && $port != 443) || (!$https && $port != 80);
+    $portPart = $showPort ? ':' . $port : '';
 
-        return $scheme . '://' . $host . $portPart . $requestUri;
-    }
+    // Path + query string
+    $requestUri = $_SERVER['REQUEST_URI']; // already contains the query part
+
+    return $scheme . '://' . $host . $portPart . $requestUri;
 }
 
 
 function parse_variant_options($options)
-                                        {
-                                            // already decoded
-                                            if (is_array($options)) {
-                                                return $options;
-                                            }
+{
+    // already decoded
+    if (is_array($options)) {
+        return $options;
+    }
 
-                                            // object -> cast to array
-                                            if (is_object($options)) {
-                                                return (array) $options;
-                                            }
+    // object -> cast to array
+    if (is_object($options)) {
+        return (array) $options;
+    }
 
-                                            // not a string -> bail
-                                            if (!is_string($options) || $options === '') {
-                                                return [];
-                                            }
+    // not a string -> bail
+    if (!is_string($options) || $options === '') {
+        return [];
+    }
 
-                                            // Try 1: normal json_decode
-                                            $decoded = json_decode($options, true);
-                                            if (json_last_error() === JSON_ERROR_NONE) {
-                                                if (is_array($decoded)) {
-                                                    return $decoded;
-                                                }
-                                                // possible double-encoded: json_decode returned a string like '{"Size":"S",...}'
-                                                if (is_string($decoded)) {
-                                                    $decoded2 = json_decode($decoded, true);
-                                                    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded2)) {
-                                                        return $decoded2;
-                                                    }
-                                                }
-                                            }
+    // Try 1: normal json_decode
+    $decoded = json_decode($options, true);
+    if (json_last_error() === JSON_ERROR_NONE) {
+        if (is_array($decoded)) {
+            return $decoded;
+        }
+        // possible double-encoded: json_decode returned a string like '{"Size":"S",...}'
+        if (is_string($decoded)) {
+            $decoded2 = json_decode($decoded, true);
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded2)) {
+                return $decoded2;
+            }
+        }
+    }
 
-                                            // Try 2: remove escaping (stripslashes) then decode
-                                            $clean = stripslashes($options);
-                                            $decoded = json_decode($clean, true);
-                                            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
-                                                return $decoded;
-                                            }
+    // Try 2: remove escaping (stripslashes) then decode
+    $clean = stripslashes($options);
+    $decoded = json_decode($clean, true);
+    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+        return $decoded;
+    }
 
-                                            // Try 3: trim surrounding quotes and decode
-                                            $trimmed = trim($options, "\"'");
-                                            $decoded = json_decode($trimmed, true);
-                                            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
-                                                return $decoded;
-                                            }
+    // Try 3: trim surrounding quotes and decode
+    $trimmed = trim($options, "\"'");
+    $decoded = json_decode($trimmed, true);
+    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+        return $decoded;
+    }
 
-                                            // Try 4: fallback regex parse for "key":"value" pairs
-                                            $pairs = [];
-                                            if (preg_match_all('/"([^"]+)"\s*:\s*"([^"]+)"/', $options, $matches, PREG_SET_ORDER)) {
-                                                foreach ($matches as $m) {
-                                                    $pairs[$m[1]] = $m[2];
-                                                }
-                                                if (!empty($pairs)) {
-                                                    return $pairs;
-                                                }
-                                            }
+    // Try 4: fallback regex parse for "key":"value" pairs
+    $pairs = [];
+    if (preg_match_all('/"([^"]+)"\s*:\s*"([^"]+)"/', $options, $matches, PREG_SET_ORDER)) {
+        foreach ($matches as $m) {
+            $pairs[$m[1]] = $m[2];
+        }
+        if (!empty($pairs)) {
+            return $pairs;
+        }
+    }
 
-                                            // give up
-                                            return [];
-                                        }
+    // give up
+    return [];
+}
 
-                                        /**
-                                         * Example grouping function that uses the parser above.
-                                         */
-                                        function groupOptions(array $variants)
-                                        {
-                                            $grouped = [];
 
-                                            foreach ($variants as $variant) {
-                                                $options = parse_variant_options($variant['options']);
+function groupOptions(array $variants)
+{
+    $grouped = [];
 
-                                                foreach ($options as $key => $value) {
-                                                    if (!isset($grouped[$key])) {
-                                                        $grouped[$key] = [];
-                                                    }
-                                                    if (!in_array($value, $grouped[$key], true)) {
-                                                        $grouped[$key][] = $value;
-                                                    }
-                                                }
-                                            }
+    foreach ($variants as $variant) {
+        $options = parse_variant_options($variant['options']);
 
-                                            return $grouped;
-                                        }
+        foreach ($options as $key => $value) {
+            if (!isset($grouped[$key])) {
+                $grouped[$key] = [];
+            }
+            if (!in_array($value, $grouped[$key], true)) {
+                $grouped[$key][] = $value;
+            }
+        }
+    }
+
+    return $grouped;
+}

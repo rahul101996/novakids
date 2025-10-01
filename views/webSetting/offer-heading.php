@@ -93,7 +93,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             </thead>
                             <tbody>
                                 <?php
-                                foreach (getData2("SELECT * FROM tbl_nav_heading ORDER BY id DESC") as $key => $value) {
+                                foreach (getData2("SELECT * FROM tbl_offer_heading ORDER BY id DESC") as $key => $value) {
                                     ?>
                                     <tr class="border border-gray-300">
                                         <td class="px-6 py-2 text-sm border border-gray-300"><?= $key + 1 ?></td>
@@ -102,12 +102,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         </td>
                                         <td class="px-6 py-2 text-sm border border-gray-300">
                                             <div class="flex space-x-2">
-                                                <a href="/admin/front-cms/nav-heading/edit/<?= $value["id"] ?>"
+                                                <a href="/admin/front-cms/offer-heading/edit/<?= $value["id"] ?>"
                                                     class="bg-sky-500 hover:bg-sky-600 px-3 py-2 rounded text-white">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <a onclick="return confirm('Are you sure?')"
-                                                    href="/admin/front-cms/nav-heading/delete/<?= $value["id"] ?>"
+                                                    href="/admin/front-cms/offer-heading/delete/<?= $value["id"] ?>"
                                                     class="bg-red-500 hover:bg-red-600 px-3 py-2 rounded text-white">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
