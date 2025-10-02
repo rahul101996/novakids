@@ -1,30 +1,5 @@
 <?php
-
-// printWithPre($_SESSION);
-// if (isset($_POST['update_password'])) {
-//     unset($_POST['update_password']);
-//     if (password_verify($_POST['current_password'], $userData['password'])) {
-//         // echo "Password Match";
-//         $data = [
-//             'password' => password_hash($_POST['new_password'], PASSWORD_DEFAULT)
-//         ];
-//         // die();
-//         $userData = update($data, $_SESSION['userid'], "online_users");
-//         if ($userData) {
-//             $_SESSION['success'] = "Password Updated Successfully";
-//             header('Location:/profile');
-//             exit();
-//         } else {
-//             $_SESSION['err'] = "Failed to update password";
-//             header('Location:/profile');
-//             exit();
-//         }
-//     } else {
-//         $_SESSION['err'] = "Password Not Match";
-//         header('Location:/profile');
-//         exit();
-//     }
-// }
+$allstates = getData("indian_states");
 
 if (isset($_POST['update_profile'])) {
     unset($_POST['update_profile']);
@@ -183,6 +158,13 @@ if (isset($_POST['update_profile'])) {
                             </svg></div>
                         <span>Settings</span>
                     </div>
+                    <div onclick="showPart('Addresses',this)"
+                        class="flex items-center gap-3 px-1 py-2 hover:bg-gray-100 rounded-lg sidenav">
+                        <div class="text-2xl">
+                            <img src="/public/icons/address.png" class="h-[24px] " alt="">
+                        </div>
+                        <span>Addresses</span>
+                    </div>
 
                     <a href="/logout" class="flex items-center gap-3 px-1 py-1 hover:bg-gray-100 rounded-lg py-2 px-1">
                         <div class="text-2xl">
@@ -205,6 +187,7 @@ if (isset($_POST['update_profile'])) {
                     </svg>
                 </button>
             </div>
+
 
             <!-- Mobile Bottom Sidebar -->
             <div id="mobileSidebarBottom"
@@ -275,13 +258,16 @@ if (isset($_POST['update_profile'])) {
                                     <td class="px-6 py-4 max-lg:px-4 max-lg:py-3 "><?= $userData['mobile'] ?></td>
                                 </tr>
 
-                                <tr>
-                                    <td class="bg-gray-50 font-medium px-6 py-4 max-lg:px-4 max-lg:py-3">State</td>
-                                    <td class="px-6 py-4 max-lg:px-4 max-lg:py-3 "><?= $userData['state_name'] ?></td>
-                                </tr>
+
                                 <tr>
                                     <td class="bg-gray-50 font-medium px-6 py-4 max-lg:px-4 max-lg:py-3">Address</td>
-                                    <td class="px-6 py-4 max-lg:px-4 max-lg:py-3 "><?= $userData['address_line1'] ?>
+                                    <td class="px-6 py-4 max-lg:px-4 max-lg:py-3 ">
+                                        <div class="flex items-start justify-start flex-col">
+                                            <p><?= $ActiveuserAddress['address_line1'] ?> <?= $ActiveuserAddress['address_line2'] ?></p>
+                                            <p><?= $ActiveuserAddress['city'] ?> -- <?= $ActiveuserAddress['pincode'] ?></p>
+                                            <p class="mt-2"><?= $ActiveuserAddress['state_name'] ?></p>
+
+                                        </div>
                                     </td>
                                 </tr>
 
@@ -290,7 +276,81 @@ if (isset($_POST['update_profile'])) {
                     </div>
 
                 </div>
+                <div class="showpart Addresses flex flex-col items-center justify-center w-full hidden">
+                    <div class="w-full flex items-center justify-between">
+                        <h2 class="text-2xl">Saved Addresses</h2>
+                        <button class="bg-gray-900 text-white py-2 px-4" onclick="openModal1()">Add New Address</button>
+                    </div>
+                    <div class="w-full flex flex-col items-center justify-center">
+                        <?php
+                        foreach ($userAddress as $address) {
 
+
+
+                        ?>
+                            <div class="w-full flex flex-col border border-gray-300 mt-6 ">
+                                <div class="w-full flex items-start justify-between p-4">
+                                    <div class="flex items-start justify-start flex-col text-gray-500">
+                                        <p><?= $address['address_line1'] ?> <?= $address['address_line2'] ?></p>
+                                        <p><?= $address['city'] ?> -- <?= $address['pincode'] ?></p>
+                                        <p class="mt-2"><?= $address['state_name'] ?></p>
+
+                                    </div>
+                                    <?php
+                                    if ($address['status'] == 1) {
+
+
+                                    ?>
+                                        <div class="flex items-center justify-center">
+                                            <span class="text-sm text-white bg-black px-2">Default</span>
+                                        </div>
+                                    <?php } ?>
+
+                                </div>
+                                <div class="w-full py-2 flex items-center justify-center border-t border-gray-300 px-4">
+                                    <div class="w-full flex items-center justify-center border-r border-gray-300 cursor-pointer" onclick="EditAddress(<?= $address['id'] ?>)">
+                                        <span class="text-sm text-gray-500">EDIT</span>
+                                    </div>
+                                    <div class="w-full flex items-center justify-center cursor-pointer" onclick="removeAddress(<?= $address['id'] ?>)">
+                                        <span class="text-sm text-red-500">REMOVE</span>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+
+                </div>
+                <script>
+                    async function removeAddress(id) {
+                        const request = await axios.post("/delete-address", new URLSearchParams({
+                            delete_id: id
+                        }));
+                        console.log(request);
+                        if (request.data.success) {
+                            location.reload();
+                        } else {
+                            alert("Deletion Failed");
+                        }
+                    }
+                    async function EditAddress(id) {
+                        const request = await axios.post("/edit-address", new URLSearchParams({
+                            address_id: id
+                        }))
+                        console.log(request);
+                        // console.log(request.data.address.address_line1);
+                        if (request.data.success) {
+                            // location.reload();
+                            addressInput1.value = request.data.address.address_line1;
+                            addressInput2.value = request.data.address.address_line2;
+                            cityInput.value = request.data.address.city;
+                            // document.getElementById("state").value = state;
+                            stateInput.value = request.data.address.state;
+                            pincodeInput.value = request.data.address.pincode;
+                            buttonValue.value = request.data.address.id;
+                            openModal1();
+                        }
+                    }
+                </script>
                 <div class="showpart myorders flex flex-col items-center justify-center w-full hidden">
                     <div class="flex justify-between items-center mb-6 w-full">
                         <h1 class="text-2xl font-bold">My Orders</h1>
@@ -343,31 +403,8 @@ if (isset($_POST['update_profile'])) {
                             </div>
                         <?php } ?>
 
-                        <!-- Another Order Example -->
-                        <!-- <div class="bg-white shadow-md rounded-lg overflow-hidden border hover:shadow-lg transition">
-                                <div class="flex items-center justify-between bg-gray-50 px-4 py-2 border-b">
-                                    <span class="text-sm text-gray-600">Order #12346</span>
-                                    <span
-                                        class="text-xs px-2 py-1 rounded-full bg-yellow-100 text-yellow-700">Processing</span>
-                                </div>
-                                <div class="flex items-center gap-4 p-4">
-                                    <div class="w-20 h-20 rounded overflow-hidden border">
-                                        <img src="/public/images/sample-product-2.jpg" alt="Product"
-                                            class="w-full h-full object-cover" />
-                                    </div>
-                                    <div>
-                                        <h3 class="font-semibold text-gray-800">Smart Watch</h3>
-                                        <p class="text-sm text-gray-500">Quantity: 2</p>
-                                        <p class="text-sm font-semibold text-gray-700">₹2,999</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between px-4 py-2 border-t bg-gray-50">
-                                    <span class="text-xs text-gray-500">Ordered on: Sep 25, 2025</span>
-                                    <button class="text-sm font-medium text-[#f25b21] hover:underline">Track Order</button>
-                                </div>
-                            </div> -->
+
                     </div>
-                    <!-- </div> -->
                 </div>
 
 
@@ -498,71 +535,137 @@ if (isset($_POST['update_profile'])) {
                 </div>
             </main>
         </div>
+        <div id="addressModal" class=" h-full w-full fixed inset-0 top-1/2 transform -translate-y-1/2 z-[9999]  overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center   items-center justify-center hidden">
+            <div class="bg-white shadow-lg mx-auto w-[30%]">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">Update Delivery Address</h3>
+                        <button onclick="closeModal1()" type="button" class="text-gray-400 hover:text-gray-500">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Address Line 1</label>
+                            <input type="text" name="addressInput1" id="addressInput1" value=""
+                                class="mt-1 block w-full border border-gray-300  shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Address Line 2</label>
+                            <input type="text" name="addressInput2" id="addressInput2" value=""
+                                class="mt-1 block w-full border border-gray-300  shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">City</label>
+                            <input type="text" name="cityInput" value="" id="cityInput"
+                                class="mt-1 block w-full border border-gray-300  shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">State</label>
 
+                            <select class="border px-3 py-2 rounded w-full" id="stateInput" name="stateInput">
+                                <?php foreach ($allstates as $key => $state) {  ?>
+
+                                    <option value="<?= $state['id'] ?>"><?= $state['name'] ?></option>
+
+                                <?php  } ?>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Zip Code</label>
+                            <input type="text" name="pincodeInput" value="" id="pincodeInput"
+                                class="mt-1 block w-full border border-gray-300  shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="flex justify-between space-x-3 pt-4">
+
+                            <div>
+                                <button type="button" onclick="closeModal1()"
+                                    class="px-4 py-2 border border-gray-300  text-sm text-white    font-medium bg-gray-600 hover:bg-gray-700 shadow-lg">
+                                    Cancel
+                                </button>
+                                <button type="button" name="submit" id="Process" value="add" onclick="updateAddress()"
+                                    class="px-4 py-2 border border-transparent  shadow-sm text-sm font-medium text-white bg-[#1d9267] ">
+                                    Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modalBackdrop" class="modal-backdrop hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/footer.php'; ?>
-
         <script>
-            // async function getbillproduct(Order_Id) {
-            //     console.log("Order ID is :" + Order_Id); // Debugging to check Order_Id
-            //     try {
-            //         const result = await axios.post('', new URLSearchParams({
-            //             order_id: Order_Id, // Order ID is passed in the request body
-            //         }));
-
-            //         console.log(result); // Debugging to check the response data
-            //         let tr = '';
-            //         let count = 1;
-            //         let t = 0;
-            //         // Loop through the result data and create table rows dynamically
-            //         result.data.products.forEach((ele, i) => {
-            //             console.log(ele);
-            //             total_amount = parseInt(ele["amount"]) * parseInt(ele["quantity"]);
-            //             t = t + parseInt(total_amount)
-            //             tr += ` <tr>
-            //                 <td class="px-4 py-2 border">${count++}</td>
-            //                 <td class="px-4 py-2 border">
-            //                     <div class="h-40 w-[125px] overflow-hidden">
-            //                         <img src="/${ele['image']}" class="w-full h-full object-cover" alt="">
-            //                     </div>
-            //                 </td>
-            //                 <td class="px-4 py-2 border">${ele['title']}
-            //                 </td>
-
-            //                 <td class="px-4 py-2 border">${ele['quantity']}</td>
-            //                 <td class="px-4 py-2 border">₹${extractGst(ele['amount']).base_price}</td>
-            //                 <td class="px-4 py-2 border">₹${extractGst(total_amount).base_price}</td>
-
-            //             </tr>`;
+            const addressmodal = document.getElementById('addressModal');
+            const buttonValue = document.getElementById('Process');
+            const backdrop = document.getElementById('modalBackdrop');
+            const addressInput1 = document.getElementById('addressInput1');
+            const addressInput2 = document.getElementById('addressInput2');
+            const cityInput = document.getElementById('cityInput');
+            const stateInput = document.getElementById('stateInput');
+            const pincodeInput = document.getElementById('pincodeInput');
+            const userid = document.getElementById('userid');
+            // const home = document.getElementById('home');
+            // const work = document.getElementById('work');
+            const pinTest = document.getElementById('pinTest');
+            // const productweight = document.querySelectorAll('.productweight');
 
 
-            //             if (ele.coupon_secret != '') {
-            //                 document.getElementById("coupon_secret").innerHTML = '(' + ele.coupon_secret + ')';
-            //                 document.getElementById("discount").innerHTML = '- ' + ele.coupon_discount;
-            //                 document.getElementById("discountRow").hidden = false;
-            //             } else {
-            //                 document.getElementById("discountRow").hidden = true;
-            //             }
+            function openModal1() {
+                console.log("hello");
+                addressmodal.classList.add('show');
+                addressmodal.classList.remove('hidden');
 
+                console.log(addressmodal);
 
-            //             document.getElementById("delivery").innerHTML = '+ ' + ele.delivery_charges;
+                // modal.style.display = 'block';
+                backdrop.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
 
+            function closeModal1() {
+                addressmodal.classList.remove('show');
+                addressmodal.classList.add('hidden');
 
-            //             document.getElementById("total").innerHTML = ele.total_amount;
-            //             // let subtotal = ele.total_amount += ele.total_amount
-            //         })
+                // modal.style.display = 'none';
+                backdrop.classList.remove('show');
+                // document.body.style.overflow = '';
+            }
+            async function updateAddress() {
+                // displayAddress.textContent = addressInput.value;
+                console.log(addressInput1.value)
+                console.log(addressInput2.value)
+                console.log(cityInput.value)
+                console.log(stateInput.value)
+                console.log(pincodeInput.value)
+                let delivery = '';
 
-            //         document.getElementById("sub_total").innerHTML = extractGst(t)['base_price'];
-            //         document.getElementById("gst_inc").innerHTML = extractGst(t)['gst_amount'];
+                console.log('this is delevry value' + delivery)
 
+                const response = await axios.post("/user-address", new URLSearchParams({
+                    process: buttonValue.value,
+                    address_line1: addressInput1.value,
+                    address_line2: addressInput2.value,
+                    city: cityInput.value,
+                    state: stateInput.value,
+                    pincode: pincodeInput.value,
+                    userid: '<?php echo $_SESSION['userid']; ?>',
+                    created_by: '<?php echo $_SESSION['userid']; ?>',
 
+                }))
 
-            //         // Insert the generated rows into the table body
-            //         document.getElementById("productTable").innerHTML = tr;
-            //     } catch (error) {
-            //         console.error("Error fetching product data:", error);
-            //     }
-            // }
+                console.log(response);
+                if (response.data.success) {
 
+                    window.location.reload();
+                } else {
+                    toastr.error(response.data.message);
+                }
+
+                closeModal1();
+            }
+        </script>
+        <script>
             let AllshowItems = document.querySelectorAll('.showpart');
             let sideNavItems = document.querySelectorAll('.sidenav');
 
