@@ -243,7 +243,7 @@
                     </div>
 
                     <!-- Color -->
-                    <div>
+                    <!-- <div>
                         <h4 class="font-semibold mb-2">Filter by Color</h4>
                         <div class="flex items-center gap-3">
 
@@ -264,7 +264,7 @@
                             </label>
 
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
