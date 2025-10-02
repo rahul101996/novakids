@@ -661,7 +661,40 @@ class WebController extends LoginController
     {
         $userid = $_SESSION['userid'];
         // printWithPre($_POST);
-        $address = add($_POST, "tbl_user_address");
+        if ($_POST['process'] == 'add') {
+            unset($_POST['process']);
+            $address = add($_POST, "tbl_user_address");
+            if ($address) {
+                $_SESSION['success'] = "Address Added Successfully";
+                echo json_encode([
+                    "success" => true,
+                    "address" => $address
+                ]);
+            } else {
+
+                echo json_encode([
+                    "success" => false,
+                    "message" => "Server Error"
+                ]);
+            }
+        } else {
+            $id = $_POST['process'];
+            unset($_POST['process']);
+            $address = update($_POST, $id, "tbl_user_address");
+            if ($address) {
+                $_SESSION['success'] = "Address Update Successfully";
+                echo json_encode([
+                    "success" => true,
+                    "address" => $address
+                ]);
+            } else {
+
+                echo json_encode([
+                    "success" => false,
+                    "message" => "Server Error"
+                ]);
+            }
+        }
         if ($address) {
             $_SESSION['success'] = "Address Added Successfully";
             echo json_encode([
@@ -1241,7 +1274,7 @@ class WebController extends LoginController
 <?php
                             exit();
                         }
-                    } 
+                    }
                     // else {
                     //     $_SESSION["err"] = "Enter Your Mobile Number in Profile";
                     //     header("Location: checkout.php");
@@ -1617,27 +1650,34 @@ ORDER BY id DESC LIMIT 5");
         $pageTitle = "My Profile";
 
         // echo "SELECT ous.*, tua.address_line1, tua.address_line2, tua.city, tua.state, tua.pincode FROM `online_users` ous LEFT JOIN `tbl_user_address` tua ON ous.id = tua.userid WHERE ous.id = " . $_SESSION['userid'] . " AND tua.status = 1";
-        $userData = getData2("SELECT
-                                        ous.*,
-                                        tua.address_line1,
-                                        tua.address_line2,
-                                        tua.city,
-                                        tua.state,
-                                        ts.state_name,
-                                        tua.pincode
-                                    FROM
-                                        `online_users` ous
-                                    LEFT JOIN `tbl_user_address` tua ON
-                                        ous.id = tua.userid
-                                    LEFT JOIN `tbl_state` ts ON
-                                        tua.state = ts.id
-                                    WHERE
-                                        ous.id = " . $_SESSION['userid'] . " AND tua.status = 1")[0];
-
+        $userData = getData2("SELECT * FROM online_users WHERE id = " . $_SESSION['userid'] . "")[0];
+        $userAddress = getData2("SELECT tbl_user_address.*, indian_states.name AS state_name FROM tbl_user_address LEFT JOIN indian_states ON tbl_user_address.state = indian_states.id WHERE userid = " . $_SESSION['userid'] . "");
+        $ActiveuserAddress = getData2("SELECT tbl_user_address.*, indian_states.name AS state_name FROM tbl_user_address LEFT JOIN indian_states ON tbl_user_address.state = indian_states.id WHERE userid = " . $_SESSION['userid'] . " AND tbl_user_address.status = 1 ORDER BY id DESC LIMIT 1")[0];
+        // "SELECT * FROM online_users WHERE id = " . $_SESSION['userid'];
         // printWithPre($userData);
+        // printWithPre($ActiveuserAddress);
 
 
         require 'views/website/myprofile.php';
+    }
+    public function DeleteAddress()
+    {
+
+        $id = $_POST['delete_id'];
+        $delete = delete($id, 'tbl_user_address');
+        if ($delete) {
+            $_SESSION['success'] = "Address Deleted Successfully";
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Update failed']);
+        }
+    }
+    public function EditAddress()
+    {
+        $id = $_POST['address_id'];
+        $address = getData2("SELECT * FROM tbl_user_address WHERE id = $id")[0];
+        // echo json_encode($address);
+        echo json_encode(['success' => true, 'address' => $address]);
     }
     public function VSAProfile()
     {

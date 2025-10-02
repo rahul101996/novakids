@@ -333,7 +333,7 @@ $allstates = getData("indian_states");
                                 class="px-4 py-2 border border-gray-300  text-sm text-white    font-medium bg-gray-600 hover:bg-gray-700 shadow-lg">
                                 Cancel
                             </button>
-                            <button type="button" name="sumbit" onclick="updateAddress()"
+                            <button type="button" name="submit" id="Process" value="add" onclick="updateAddress()"
                                 class="px-4 py-2 border border-transparent  shadow-sm text-sm font-medium text-white bg-[#1d9267] ">
                                 Save Changes
                             </button>
@@ -351,6 +351,7 @@ $allstates = getData("indian_states");
     ?>
     <script>
         const addressmodal = document.getElementById('addressModal');
+        const buttonValue = document.getElementById('Process');
         const backdrop = document.getElementById('modalBackdrop');
         const addressInput1 = document.getElementById('addressInput1');
         const addressInput2 = document.getElementById('addressInput2');
@@ -426,6 +427,7 @@ $allstates = getData("indian_states");
             console.log('this is delevry value' + delivery)
 
             const response = await axios.post("/user-address", new URLSearchParams({
+                process : buttonValue.value,
                 address_line1: addressInput1.value,
                 address_line2: addressInput2.value,
                 city: cityInput.value,

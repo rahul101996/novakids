@@ -797,7 +797,6 @@ $categories = getData("tbl_category");
             <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
 
                 <?php for ($i = 0; $i < 5; $i++) {
-                <?php for ($i = 0; $i < 5; $i++) {
                     $value = $uniqueProducts[$i];
 
                     $images = json_decode($value['product_images'], true);
