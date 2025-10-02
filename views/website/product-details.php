@@ -151,7 +151,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         <section class="flex items-start justify-center relative w-[90%] gap-5">
 
             <div class="flex items-center justify-start max-md:hidden gap-2 w-[64%]">
-                <div class="grid grid-cols-2 gap-2 w-[96%]">
+                <div class="grid grid-cols-2 gap-2 w-[96%]" id="ProductDetailImg">
                     <?php
                     if (is_array($ppimages[0])) {
                         foreach (array_reverse($ppimages[0]) as $key => $image) {
@@ -295,11 +295,11 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
             <!-- Product Details Section -->
             <div class="md:sticky top-32 self-start space-y-4 w-[35%]">
-                <form method="POST" action="/checkout-cart" class="flex flex-col">
+                <form method="POST" action="/checkout-cart" class="flex flex-col" id="productDetailForm">
                     <div class="gap-3 w-full flex items-start justify-between">
                         <div class="flex flex-col items-start justify-center mb-2">
                             <h2 class="w-full text-[1.7rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
-                            <div class="flex items-center justify-center gap-3 mt-4">
+                            <div class="flex items-center justify-center gap-3 mt-4 prices">
                                 <span
                                     class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
                                 <span
@@ -425,17 +425,18 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         </div>
 
                         <div class="flex w-full items-center justify-start gap-4">
-                            <input type="hidden" name="varient[]" value="<?= $ProductData['varients'][0]["id"] ?>">
-                            <input type="hidden" name="category[]" value="<?= $ProductData['category'] ?>">
-                            <input type="hidden" name="product[]" value="<?= $ProductData['id'] ?>">
-                            <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
-                            <input type="hidden" name="quantity[]" id="product_buy_count" value="1">
-                            <input type="hidden" name="cartid[]" value="">
+                            
 
 
                             <?php
                             if (!empty($_SESSION["userid"])) {
                             ?>
+                                <input type="hidden" name="varient[]" class="sideVarientId" value="<?= $ProductData['varients'][0]["id"] ?>">
+                                <input type="hidden" name="category[]" class="sideCategoryId" value="<?= $ProductData['category'] ?>">
+                                <input type="hidden" name="product[]" class="sideProductId" value="<?= $ProductData['id'] ?>">
+                                <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
+                                <input type="hidden" name="quantity[]" id="product_buy_count" value="1">
+                                <input type="hidden" name="cartid[]" value="">
                                 <button name="myForm"
                                     class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-4 hover:border hover:border-[#f25b21] transition-all duration-700"><span
                                         class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
@@ -448,6 +449,12 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             <?php
                             } else {
                             ?>
+                                <input type="hidden" name="varient[]" value="<?= $ProductData['varients'][0]["id"] ?>">
+                                <input type="hidden" name="category[]" value="<?= $ProductData['category'] ?>">
+                                <input type="hidden" name="product[]" value="<?= $ProductData['id'] ?>">
+                                <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
+                                <input type="hidden" name="quantity[]" id="product_buy_count1" value="1">
+                                <input type="hidden" name="cartid[]" value="">
                                 <button type="button" onclick="openLogin()" class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-4 hover:border hover:border-[#f25b21] transition-all duration-700"><span
                                         class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
                                         Buy It Now
@@ -1266,18 +1273,30 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     // await changeCartSidebarImage(i)
 
                     selectedId = ar.id
-                    ele.parentElement.parentElement.querySelector(".sideVarientId").value = selectedId
-                    ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
+                    // console.log()
+                    let eleForm = document.getElementById("productDetailForm")
+                    // eleForm.querySelector(".sideVarientId").value = selectedId
+
+                    if (eleForm.querySelector(".sideVarientId")) {
+                    eleForm.querySelector(".sideVarientId").value = selectedId;
+                    } else {
+                        console.warn("No .sideVarientId element found inside:", ele.parentElement.parentElement);
+                    }
+                    eleForm.querySelector(".prices").innerHTML = `
                         <span class="text-[#33459c] text-xl">Rs. ${ar.price}.00</span>
                     `
                     console.log(JSON.parse(ar.images))
                     let imgHtml = ""
                     JSON.parse(ar.images).forEach((imgh) => {
                         imgHtml = imgHtml + `
-                            <img src="/${imgh}" alt="">
+
+                            <div class=" overflow-hidden  cursor-pointer">
+                                <img src="/${imgh}" alt="View 1"
+                                    class="w-full h-full object-cover image-hover cursor-zoom-in">
+                            </div>
                         `
                     })
-                    document.getElementById("VarImg").innerHTML = imgHtml
+                    document.getElementById("ProductDetailImg").innerHTML = imgHtml
                 }
             })
 
