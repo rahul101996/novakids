@@ -811,10 +811,7 @@ $categories = getData("tbl_category");
                         </div>
                     </div>
                 <?php } ?>
-
             </div>
-
-
         </div>
     </div>
 </div>
