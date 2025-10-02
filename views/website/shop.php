@@ -222,28 +222,28 @@
                         <h4 class="font-semibold mb-2">Filter by Size</h4>
                         <div class="flex flex-wrap gap-2">
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="hidden"> 8-9 Years
+                                <input type="checkbox" class="mx-2"> 08-09 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="hidden"> 9-10 Years
+                                <input type="checkbox" class="mx-2"> 9-10 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="hidden"> 10-11 Years
+                                <input type="checkbox" class="mx-2"> 10-11 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="hidden"> 11-12 Years
+                                <input type="checkbox" class="mx-2"> 11-12 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="hidden"> 12-13 Years
+                                <input type="checkbox" class="mx-2"> 12-13 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="hidden"> 13-14 Years
+                                <input type="checkbox" class="mx-2"> 13-14 Years
                             </label>
                         </div>
                     </div>
 
                     <!-- Color -->
-                    <div>
+                    <!-- <div>
                         <h4 class="font-semibold mb-2">Filter by Color</h4>
                         <div class="flex items-center gap-3">
 
@@ -264,7 +264,7 @@
                             </label>
 
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -273,7 +273,7 @@
                 <!-- Product Grid -->
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 max-md:gap-3">
                     <?php
-
+                    // $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_category.category = '$category'");
                     foreach ($products as $key => $product) {
                         $images = json_decode($product['product_images'], true);
                         $images = array_reverse($images);
