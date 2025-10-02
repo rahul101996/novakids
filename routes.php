@@ -45,6 +45,7 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route("new-arrivals", "NewArrivals");
     $route->route('delete-address', 'DeleteAddress');
     $route->route('edit-address', 'EditAddress');
+    $route->route('/order-details/[i:id]', 'OrderDetails');
 
     // $route->route('/', 'index');
 });
