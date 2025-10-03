@@ -64,7 +64,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 </div>
 
                 <?php foreach ($customers as $key => $customer) { ?>
-                    <a href="/admin/customer-info" class="divide-y divide-gray-200 ">
+                    <a href="/admin/customer-info/<?= $customer['id'] ?>" class="divide-y divide-gray-200 ">
                         <!-- Table Row -->
                         <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,2fr)_minmax(0,3fr)_minmax(0,1fr)_minmax(0,0.5fr)_minmax(0,0.5fr)] items-center gap-4 px-4 py-3 hover:bg-gray-50 text-gray-800">
                             <!-- Sr. No -->

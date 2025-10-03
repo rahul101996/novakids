@@ -84,7 +84,7 @@ $route->group(['', 'ProductController'], function ($route) {
 
 $route->group(['', 'CustomerController'], function ($route) {
     $route->route('admin/customers-list', 'CustomersList');
-    $route->route('admin/customer-info', 'CustomersInfo');
+    $route->route('admin/customer-info/[i:id]', 'CustomersInfo');
 
     // $route->route('/admin/products-list', 'ProductsList');
 

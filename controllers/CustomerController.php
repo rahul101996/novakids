@@ -7,15 +7,15 @@ class CustomerController
     {
         $this->db = $db;
     }
-    
+
     public function CustomersList($id = null)
     {
         $siteName = getDBObject()->getSiteName();
         $pageTitle = "Products List";
         $pageModule = "Products List";
-        
 
-        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $customers = getData("online_users", true);
             require 'views/customers/customers-list.php';
         }
@@ -23,12 +23,43 @@ class CustomerController
     public function CustomersInfo($id = null)
     {
         $siteName = getDBObject()->getSiteName();
-        $pageTitle = "Products List";
-        $pageModule = "Products List";
-        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+        $pageTitle = "Customers Info";
+        $pageModule = "Customers Info";
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             // $products = getData("tbl_products");
+            $UserData = getData2("SELECT * FROM online_users WHERE id = " . $id . "")[0];
+            // printWithPre($UserData);
+            $PurchaseData = getData2("SELECT * FROM `tbl_purchase` WHERE `userid` = $id ORDER BY `id` DESC ");
+            // printWithPre($PurchaseData);
+
+
+            $totalPurchase = array_sum(array_column($PurchaseData, 'total_amount'));
+            $totalOrders = count($PurchaseData);
+            // $totalActiveTime  = 
+            $created_date = $UserData["created_at"];
+            $today = date("Y-m-d"); // current date
+
+            $date1 = new DateTime($created_date);
+            $date2 = new DateTime($today);
+
+            $diff = $date1->diff($date2);
+
+            $parts = [];
+            if ($diff->m > 0) {
+                $parts[] = $diff->m . " Month" . ($diff->m > 1 ? "s" : "");
+            }
+            if ($diff->d > 0) {
+                $parts[] = $diff->d . " Day" . ($diff->d > 1 ? "s" : "");
+            }
+
+            $LastOrder = $PurchaseData[0];
+            $LastOrderid = $LastOrder["id"];
+            $products = getData2("SELECT tbl_purchase_item.*, tbl_products.name as product_name,
+            tbl_variants.images as variant_images, tbl_variants.options as variant_options, tbl_variants.price as variant_price FROM `tbl_purchase_item` LEFT JOIN tbl_products ON tbl_purchase_item.product = tbl_products.id LEFT JOIN tbl_variants ON tbl_purchase_item.varient = tbl_variants.id WHERE tbl_purchase_item.purchase_id = $LastOrderid ORDER BY tbl_purchase_item.id DESC");
+            // printWithPre($LastOrder);
+            
+            $defaultAddress = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $id AND `status` = 1 ORDER BY `id` DESC ")[0];
             require 'views/customers/customer-info.php';
         }
     }
-   
 }

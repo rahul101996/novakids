@@ -79,10 +79,10 @@
                         </div>
                         <div class="flex flex-col items-start justify-center">
                             <h3 class="font-semibold"><?= $product['product_name'] ?></h3>
-                            <p class="!mb-0 text-sm text-gray-600">Size: S  &ensp; 1 x ₹2,499.0</p>
+                            <p class="!mb-0 text-sm text-gray-600">Size: S &ensp; 1 x ₹2,499.0</p>
                             <!-- <h3 class="text-sm text-gray-600 mt-3"> </h3> -->
-                             <span class="font-semibold text-sm mt-3">Your return request is approved <span class="text-gray-500 font-normal text-xs">(Request on Sep 12th 2025)</span></span>
-                             <span class="text-sm text-blue-600">View Return Item</span>
+                            <span class="font-semibold text-sm mt-3">Your return request is approved <span class="text-gray-500 font-normal text-xs">(Request on Sep 12th 2025)</span></span>
+                            <span class="text-sm text-blue-600">View Return Item</span>
 
                         </div>
                     </div>
