@@ -236,9 +236,9 @@ class WebController extends LoginController
                             <?php
                             } else {
                             ?>
-                                <input type="hidden" name="varient[]" value="<?= $ProductData['varients'][0]["id"] ?>">
-                                <input type="hidden" name="category[]" value="<?= $ProductData['category'] ?>">
-                                <input type="hidden" name="product[]" value="<?= $ProductData['id'] ?>">
+                                <input type="hidden" name="varient[]" class="sideVarientId" value="<?= $ProductData['varients'][0]["id"] ?>">
+                                <input type="hidden" name="category[]" class="sideCategoryId" value="<?= $ProductData['category'] ?>">
+                                <input type="hidden" name="product[]" class="sideProductId" value="<?= $ProductData['id'] ?>">
                                 <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
                                 <input type="hidden" name="quantity[]" id="product_buy_count1" value="1">
                                 <input type="hidden" name="cartid[]" value="">
@@ -657,6 +657,24 @@ class WebController extends LoginController
         }
     }
 
+    public function OrderDetails($id = null)
+    {
+        if ($id == null) {
+
+            header("Location: /profile");
+            exit();
+        } else {
+
+            $products = getData2("SELECT tbl_purchase_item.*, tbl_products.name as product_name,
+            tbl_variants.images as variant_images, tbl_variants.options as variant_options, tbl_variants.price as variant_price FROM `tbl_purchase_item` LEFT JOIN tbl_products ON tbl_purchase_item.product = tbl_products.id LEFT JOIN tbl_variants ON tbl_purchase_item.varient = tbl_variants.id WHERE tbl_purchase_item.purchase_id = $id ORDER BY tbl_purchase_item.id DESC");
+            // printWithPre($products);
+            require 'views/website/order-details.php';
+        }
+    }
+    public function OrderConfirmMail()
+    {
+        require 'views/website/order-confermation-mail.php';
+    }
     public function userAddress()
     {
         $userid = $_SESSION['userid'];
@@ -864,7 +882,7 @@ class WebController extends LoginController
 
         // $category = str_replace('-', ' ', $category_name);
         // echo $category;
-        // $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_category.category = '$category'");
+        $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_category.category = '$category'");
         // printWithPre($products); 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
@@ -1162,7 +1180,7 @@ class WebController extends LoginController
 
         // $this->checkSession();
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-
+            printWithPre($_SESSION);
             require 'views/website/checkout.php';
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // printWithPre($_POST);
@@ -1174,6 +1192,8 @@ class WebController extends LoginController
             if ($mode == "COD") {
                 // printWithPre($_POST);
                 // die();
+                $db = getDBCon(); // PDO instance
+                $db->beginTransaction();
                 $purchaseid = [
                     "userid" => $_SESSION["userid"],
                     "username" => $_SESSION["username"],
@@ -1209,39 +1229,65 @@ class WebController extends LoginController
                 if ($purchaseid) {
                     // echo "Success";
                     foreach ($_SESSION["cartData"]["varient"] as $key => $varient) {
-                        $insertData = [
-                            "purchase_id" => $purchaseid,
-                            "varient" => $varient,
-                            "product" => $_SESSION["cartData"]["product"][$key],
-                            "category" => $_SESSION["cartData"]["category"][$key],
-                            "quantity" => $_SESSION["cartData"]["quantity"][$key],
-                            "amount" => $_SESSION["cartData"]["price"][$key],
-                            "total_amount" => $_SESSION["cartData"]["quantity"][$key] * $_SESSION["cartData"]["price"][$key],
-                            "userid" => $_SESSION["userid"],
-                            "username" => $_SESSION["username"],
-                            "status" => "Processing",
-                            "created_date" => date("Y-m-d"),
-                            "created_time" => date("H:i:s"),
-                            "created_at" => date("Y-m-d H:i"),
-                            "created_by" => $_SESSION["userid"],
-                        ];
-                        add($insertData, "tbl_purchase_item");
+                       
+                        $quantity = getData2("SELECT * FROM tbl_variants where id='$varient'")[0]["quantity"];
+                        if($quantity>=$_SESSION["cartData"]["quantity"][$key]){
+                            update(["quantity"=>$quantity-$_SESSION["cartData"]["quantity"][$key]],$varient,"tbl_variants");
+                             $insertData = [
+                                "purchase_id" => $purchaseid,
+                                "varient" => $varient,
+                                "product" => $_SESSION["cartData"]["product"][$key],
+                                "category" => $_SESSION["cartData"]["category"][$key],
+                                "quantity" => $_SESSION["cartData"]["quantity"][$key],
+                                "amount" => $_SESSION["cartData"]["price"][$key],
+                                "total_amount" => $_SESSION["cartData"]["quantity"][$key] * $_SESSION["cartData"]["price"][$key],
+                                "userid" => $_SESSION["userid"],
+                                "username" => $_SESSION["username"],
+                                "status" => "Processing",
+                                "created_date" => date("Y-m-d"),
+                                "created_time" => date("H:i:s"),
+                                "created_at" => date("Y-m-d H:i"),
+                                "created_by" => $_SESSION["userid"],
+                            ];
+                            add($insertData, "tbl_purchase_item");
+                        }else{
+                            $db->rollBack();
+                            $_SESSION["err"] = "Product Out Of Stock";
+                            header("Location: /checkout");
+                            exit();
+                            break;
+                        }
                     }
+
+
+
                     // echo $purchaseid[1];
                     delete($id, "tbl_cart", "userid");
                     // printWithPre($purchaseid);
                     // die();
                     $_SESSION["new_order"] = $purchaseid[0];
                     $_SESSION['order_id'] = $order_id;
-                    $_SESSION["success"] = "Order Placed Successfully";
-                    unset($_SESSION["cartData"]);
-                    header("Location: /thank-you");
-                    // printWithPre($purchaseid);
+                    $token = $this->validshiprockettoken();
+                    echo $token;
+
+                    $placeordershiprocket = $this->placeordershiprocket($token, $order_id);
+                    $placeordershiprocket = (array)$placeordershiprocket;
+
+                    printWithPre($placeordershiprocket);
+                    // die();
+                    // $_SESSION["success"] = "Order Placed Successfully";
+                    // $db->commit();
+                    // unset($_SESSION["cartData"]);
+                    // header("Location: /thank-you");
                     exit();
                 } else {
                     // echo "Failed";
                     // die();
                     $_SESSION["err"] = "Can't Place Order";
+                    header("Location: /checkout");
+                    // printWithPre($purchaseid);
+                    exit();
+                    
                 }
             } elseif ($mode = "Prepaid") {
 
@@ -1309,6 +1355,7 @@ class WebController extends LoginController
                     // }
                 }
             }
+            
             require 'views/website/checkout.php';
         }
     }

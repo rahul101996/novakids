@@ -38,19 +38,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             <body class="bg-gray-50">
                 <!-- Header -->
                 <div class="bg-white border-b px-6 py-4 flex items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                        <i class="fas fa-user text-gray-600"></i>
+                    <div class="flex items-center space-x-3 justify-center">
+                        <i class="fas fa-user text-gray-600 text-xl"></i>
                         <h1 class="text-xl font-semibold text-gray-900">Manish Kukreja</h1>
                     </div>
-                    <div class="flex items-center space-x-2">
-                        <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 flex items-center space-x-2">
-                            <span>More actions</span>
-                            <i class="fas fa-chevron-down text-xs"></i>
-                        </button>
-                        <button class="p-2 text-gray-400 hover:text-gray-600">
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                    </div>
+                    
                 </div>
 
                 <div class="max-w-7xl mx-auto p-6">
