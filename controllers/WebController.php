@@ -236,9 +236,9 @@ class WebController extends LoginController
                             <?php
                             } else {
                             ?>
-                                <input type="hidden" name="varient[]" value="<?= $ProductData['varients'][0]["id"] ?>">
-                                <input type="hidden" name="category[]" value="<?= $ProductData['category'] ?>">
-                                <input type="hidden" name="product[]" value="<?= $ProductData['id'] ?>">
+                                <input type="hidden" name="varient[]" class="sideVarientId" value="<?= $ProductData['varients'][0]["id"] ?>">
+                                <input type="hidden" name="category[]" class="sideCategoryId" value="<?= $ProductData['category'] ?>">
+                                <input type="hidden" name="product[]" class="sideProductId" value="<?= $ProductData['id'] ?>">
                                 <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
                                 <input type="hidden" name="quantity[]" id="product_buy_count1" value="1">
                                 <input type="hidden" name="cartid[]" value="">
@@ -862,9 +862,10 @@ class WebController extends LoginController
     public function Category($category_name)
     {
 
-        $category = str_replace('-', ' ', $category_name);
+       $category = strtolower($category_name);
         // echo $category;
-        $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_category.category = '$category'");
+        // echo "SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE LOWER(tbl_category.category) = '$category'";
+        $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE LOWER(tbl_category.category) = '$category'");
         // printWithPre($products); 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
