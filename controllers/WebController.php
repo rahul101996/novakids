@@ -880,16 +880,42 @@ class WebController extends LoginController
     public function Category($category_name)
     {
 
-       $category = strtolower($category_name);
+        // $category = str_replace('-', ' ', $category_name);
         // echo $category;
-        // echo "SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE LOWER(tbl_category.category) = '$category'";
-        $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE LOWER(tbl_category.category) = '$category'");
+        $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_category.category = '$category'");
         // printWithPre($products); 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             require 'views/website/shop.php';
         }
     }
+
+    public function getFilteredProducts($category_name)
+    {
+        $response = [
+            "success" => false,
+            "message" => "No Product Found"
+        ];
+        
+       
+        $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_category.category = '$category_name'");
+
+        foreach ($products as $key => $value) {
+            $variants = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = '$value[id]'");
+            $products[$key]['variants'] = $variants;
+        }
+
+        if (count($products) > 0) {
+            $response = [
+                "success" => true,
+                "message" => "Product Found",
+                "data" => $products
+            ];
+        }
+
+        echo json_encode($response);
+    }
+
     public function productDetails($product_name = null)
     {
 
@@ -909,14 +935,14 @@ class WebController extends LoginController
                 $pageModule = "Product Page";
                 $pageTitle = "Product Page";
                 $ProductData = getData2("
-    SELECT 
-        tbl_products.*, 
-        tbl_category.category AS category_name 
-    FROM tbl_products 
-    LEFT JOIN tbl_category 
-        ON tbl_products.category = tbl_category.id 
-    WHERE REPLACE(tbl_products.name, \"'\", '') = REPLACE('$name', \"'\", '')
-")[0];
+                                                    SELECT 
+                                                        tbl_products.*, 
+                                                        tbl_category.category AS category_name 
+                                                    FROM tbl_products 
+                                                    LEFT JOIN tbl_category 
+                                                        ON tbl_products.category = tbl_category.id 
+                                                    WHERE REPLACE(tbl_products.name, \"'\", '') = REPLACE('$name', \"'\", '')
+                                                ")[0];
 
                 $id = $ProductData['id'];
                 $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");

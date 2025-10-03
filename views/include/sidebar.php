@@ -27,7 +27,7 @@
         </a>
         <!-- Orders Dropdown -->
         <div>
-            <button @click="open === 'orders' ? open = null : open = 'orders'"
+            <button @click="open === 'Order List' ? open = null : open = 'Order List'"
                 class="w-full flex items-center justify-between px-4 py-2 hover:bg-slate-700 rounded-lg">
                 <span class="flex items-center">
                     <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -37,7 +37,7 @@
                     </svg>
                     Orders
                 </span>
-                <svg :class="{'rotate-180': open === 'orders'}"
+                <svg :class="{'rotate-180': open === 'Order List'}"
                     class="h-4 w-4 transform transition-transform"
                     xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
@@ -45,11 +45,11 @@
                         d="M19 9l-7 7-7-7" />
                 </svg>
             </button>
-            <div x-show="open === 'orders'" x-collapse class="ml-10 mt-2 space-y-1">
+            <div x-show="open === 'Order List'" x-collapse class="ml-10 mt-2 space-y-1">
                 <a href="/admin/orders" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     All Orders
                 </a>
-                <a href="#cancel-orders" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                <a href="/admin/cancel-orders" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     Cancel Orders
                 </a>
             </div>

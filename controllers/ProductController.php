@@ -180,29 +180,30 @@ class ProductController
         include $_SERVER['DOCUMENT_ROOT'] . "/views/products/inventory.php";
     }
 
-    public function updateQuantity(){
+    public function updateQuantity()
+    {
         // printWithPre($_POST);
         $response = [
-            "success"=>false,
-            'message'=>"something wen't wrong"
+            "success" => false,
+            'message' => "something wen't wrong"
         ];
-        try{
-            $up = update(["$_POST[field]"=>$_POST["quantity"]],$_POST["id"],"tbl_variants");
-            if($up){
+        try {
+            $up = update(["$_POST[field]" => $_POST["quantity"]], $_POST["id"], "tbl_variants");
+            if ($up) {
                 $response = [
-                    "success"=>true,
-                    "message"=>"Variant Updated Successfully"
+                    "success" => true,
+                    "message" => "Variant Updated Successfully"
                 ];
-            }else{
+            } else {
                 $response = [
-                    "success"=>false,
-                    'message'=>"something wen't wrong"
+                    "success" => false,
+                    'message' => "something wen't wrong"
                 ];
             }
-        }catch (Exception $e){
+        } catch (Exception $e) {
             $response = [
-                "success"=>false,
-                'message'=>"something wen't wrong"
+                "success" => false,
+                'message' => "something wen't wrong"
             ];
         }
         echo json_encode($response);
@@ -220,4 +221,40 @@ class ProductController
             require 'views/products/order-list.php';
         }
     }
+
+    public function OrderDetails($order_id = null)
+    {
+        $response = [
+            "success" => false,
+            "message" => "Order Not Found"
+        ];
+
+        $data = getData2("SELECT * FROM `tbl_purchase` WHERE `orderid` = $order_id");
+
+        foreach ($data as $key => $value) {
+            $data[$key] = $value;
+            $data[$key]['items'] = getData2("SELECT tpi.*, tp.*, tv.* FROM `tbl_purchase_item` tpi LEFT JOIN tbl_products tp ON tpi.product = tp.id LEFT JOIN tbl_variants tv ON tpi.varient = tv.id WHERE tpi.purchase_id = " . $value['id']);
+        }
+
+        if (!empty($data)) {
+            $response = [
+                "success" => true,
+                "message" => "Order Found",
+                "data" => $data
+            ];
+        }
+
+        echo json_encode($response);
+    }
+
+    public function CancelOrderList()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageTitle = "Cancel Order List";
+        $pageModule = "Cancel Order List";
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/products/cancel-order-list.php';
+        }
+    } 
 }

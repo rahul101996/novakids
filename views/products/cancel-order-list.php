@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<?php
+include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
+
+?>
+
+<body class="bg-gray-100">
+
+    <div class="flex h-screen">
+        <?php
+        include $_SERVER['DOCUMENT_ROOT'] . "/views/include/sidebar.php";
+
+        $date = date('Y-m-d');
+
+
+        ?>
+
+        <main class="flex-1 md:ml-60">
+            <?php
+            include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
+            ?>
+
+            <div class="p-6">
+
+                <div class="w-full flex items-center justify-between mb-4">
+                    <span class="text-xl font-semibold text-gray-800"><?= $pageTitle ?></span>
+                    <!-- <a href="/admin/add-product"
+                    class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add Product</a> -->
+                </div>
+                <!-- <div class="p-3 border-b border-gray-200">
+                        <div class="flex justify-between items-center">
+
+                            <div class="flex items-center space-x-1">
+                                <button
+                                    class="bg-gray-200 text-gray-800 px-3 py-1.5 rounded-md text-sm font-medium">All</button>
+
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <button class="text-gray-500 hover:bg-gray-100 p-2 rounded-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </button>
+                                <button class="text-gray-500 hover:bg-gray-100 p-2 rounded-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M3 8h18M3 12h18M3 16h18"
+                                            stroke-opacity="0.5" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M3 8h12M3 12h6" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+
+                <div class="table-responsive">
+                    <table class="w-full table-auto border border-gray-300 shadow-md rounded-lg">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Sr no.</th>
+                                <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Purchase
+                                    <br> Date</th>
+                                <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Product
+                                </th>
+                                <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">User</th>
+                                <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Email</th>
+                                <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Mobile</th>
+                                <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">
+                                    Delivery<br>Address</th>
+
+
+
+                                <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Total</th>
+                                <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Payment By
+                                </th>
+                                <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Payment
+                                    Status</th>
+                                <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Payment
+                                    Return</th>
+                                <!-- <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Action</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr class="bg-red-100">
+                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">1</td>
+                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                    <div class="w-[150px]">
+                                        13 September 25 10:59:00 AM </div>
+                                </td>
+                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                    <div class="flex">
+                                        <a class="block px-4 py-2 text-md font-bol hover:bg-gray-200 hover:text-blue-600 transition-colors duration-200 text-center"
+                                            href="?orderid=49" data-toggle="modal" data-target="#infoModal"
+                                            data-order-id="8811757741294" onclick="getbillproduct('8811759139105')"
+                                            id="viewproduct"><i class="fa-solid fa-eye"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">Meena Pahlajani</td>
+                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                    meenwabackup@gmail.com</td>
+                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">9969596816</td>
+                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                    <div class="w-[250px]">
+                                        Dharave Village, Nerul, Navi Mumbai 400706 Flat no 1302, B Wing, Majestic
+                                        Hights, Sector 23,Dharave Village <br>
+                                        State : Maharashtra<br>
+                                        City : Navi Mumbai <br>
+                                        Pincode : 400706
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                    ₹1,016 </td>
+                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                    Prepaid </td>
+                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                    Completed </td>
+                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                    <div class="relative inline-block w-14 mr-2 align-middle select-none">
+                                        <input type="checkbox" id="togglr_1" onchange="updateStatus(this, 0)"
+                                            class="sr-only peer">
+
+                                        <label for="togglr_1"
+                                            class="block overflow-hidden h-7 rounded-full bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out peer-checked:bg-gray-100 before:content-[''] before:absolute before:top-0.5 before:left-0.5 before:bg-white before:border-2 before:border-gray-300 before:h-6 before:w-6 before:rounded-full before:transition-all before:duration-300 before:shadow-md peer-checked:before:translate-x-7 peer-checked:before:border-gray-100">
+                                            <span
+                                                class="absolute inset-y-0 left-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-sky-50 peer-checked:translate-x-7">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                                    viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </span>
+                                            <span
+                                                class="absolute inset-y-0 right-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-white">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                                    viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Modal HTML -->
+                <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="infoModalLabel">Product Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="infoModalOrderBody">
+                                <div class="w-full p-[10px] flex flex-col justify-start" id="productDetailDiv">
+
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr No.</th>
+                                                <th>Image</th>
+                                                <th>Product</th>
+                                                <th>Variant</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="productTable">
+                                        </tbody>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="6" class="text-right">Sub Total:</td>
+                                                <td id="sub_total"></td>
+                                            </tr>
+                                            <tr id="discountRow" hidden="">
+                                                <td colspan="6" class="text-right">Discount:<span
+                                                        id="coupon_secret"></span></td>
+                                                <td id="discount"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6" class="text-right">Delivery Charge:</td>
+                                                <td id="delivery"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6" class="text-right text-bold">Total:</td>
+                                                <td id="total" class="text-bold"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <!-- <button type="button" class="btn btn-primary" onclick="printMeYo()">Print</button> -->
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <?php
+    include $_SERVER['DOCUMENT_ROOT'] . "/views/include/footer.php";
+    ?>
+
+    <script>
+        async function getbillproduct(orderid) {
+            try {
+                const result = await fetch("/admin/get-order-details/" + orderid);
+                const data = await result.json(); // read raw response
+
+                // console.log(data);
+
+                let html = "";
+                let count = 0;
+                let subtotal = 0;
+                let delivery = data.data[0].delivery_charge || 0;
+                if (data.success) {
+                    // console.log(data.data);
+
+                    data.data[0].items.forEach(product => {
+
+                        let images = JSON.parse(product.images || "[]");
+                        images = images[0];
+
+                        // console.log(images);
+
+                        let size = JSON.parse(product.size || "[]");
+                        size = size["Size"] || "";
+
+                        html += `<tr>
+                                    <td>${++count}</td>
+                                    <td>
+                                        <img src="/${images}" alt="" class="w-[50px] h-[50px]"></td>
+                                    <td>${product.name}</td>
+                                    <td>${size}</td>
+                                    <td>${product.quantity}</td>
+                                    <td>${product.price}</td>
+                                    <td>${product.total_amount}</td>
+                                </tr>`;
+
+                        subtotal += parseFloat(product.total_amount);
+                    });
+
+                    document.getElementById("productTable").innerHTML = html;
+                    document.getElementById("sub_total").innerHTML = subtotal;
+                    // document.getElementById("discount").innerHTML = data.data.discount;
+                    document.getElementById("delivery").innerHTML = delivery;
+                    document.getElementById("total").innerHTML = parseFloat(delivery) + parseFloat(subtotal);
+
+                } else {
+                    alert(data.message);
+                }
+            } catch (e) {
+                console.error("Error:", e);
+            }
+        }
+
+        async function updateStatus(ele, id) {
+            let data = {
+                id,
+                status: ele.checked ? "1" : "0"
+            };
+
+            ele.disabled = true;
+            const label = ele.nextElementSibling;
+            label.classList.add('opacity-70');
+
+            try {
+                // let res = await fetch('/api/employee/status', {
+                //     method: "POST",
+                //     headers: { "Content-Type": "application/json" },
+                //     body: JSON.stringify(data),
+                // });
+
+                // let response = await res.json();
+
+                // if (response.success) {
+                //     toastr.success(response.message);
+                // } else {
+                //     ele.checked = !ele.checked; // revert state
+                //     toastr.error(response.message);
+                // }
+            } catch (e) {
+                ele.checked = !ele.checked; // revert state on error
+                toastr.error("Something went wrong!");
+            } finally {
+                ele.disabled = false;
+                label.classList.remove('opacity-70');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
