@@ -657,6 +657,19 @@ class WebController extends LoginController
         }
     }
 
+    public function OrderDetails($id = null)
+    {
+        if ($id == null) {
+
+            header("Location: /profile");
+            exit();
+        } else {
+            
+            $products = getData2("SELECT * FROM `tbl_purchase_item` WHERE `purchase_id` = $id ORDER BY `id` DESC");
+            // printWithPre($products);
+            require 'views/website/order-details.php';
+        }
+    }
     public function userAddress()
     {
         $userid = $_SESSION['userid'];

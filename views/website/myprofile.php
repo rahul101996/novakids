@@ -353,7 +353,7 @@ if (isset($_POST['update_profile'])) {
                 </script>
                 <div class="showpart myorders flex flex-col items-center justify-center w-full hidden">
                     <div class="flex justify-between items-center mb-6 w-full">
-                        <h1 class="text-2xl font-bold">My Orders</h1>
+                        <h1 class="text-2xl">My Orders</h1>
                     </div>
 
                     <!-- <div class="bg-white p-6 rounded w-full"> -->
@@ -364,40 +364,37 @@ if (isset($_POST['update_profile'])) {
                         <?php
                         // echo "SELECT tpi.*, tp.name AS product_name, tp.price, tp.product_images FROM tbl_purchase_item tpi LEFT JOIN tbl_products tp ON tp.id = tpi.product WHERE tpi.userid = '$_SESSION[id]' ORDER BY tpi.id DESC";
                         // printWithPre($_SESSION);
-                        foreach (getData2("SELECT tpi.*, tp.name AS product_name, tp.price, tp.product_images FROM tbl_purchase_item tpi LEFT JOIN tbl_products tp ON tp.id = tpi.product WHERE tpi.userid = '$_SESSION[userid]' ORDER BY tpi.id DESC") as $key => $order) {
+                        foreach (getData2("SELECT tbl_purchase.*, indian_states.name AS state_name FROM tbl_purchase LEFT JOIN  indian_states ON tbl_purchase.state = indian_states.id WHERE tbl_purchase.userid = '$_SESSION[userid]' ORDER BY tbl_purchase.id DESC") as $key => $order) {
 
-                            // Decode JSON into array
-                            $images = json_decode($order['product_images'], true);
-
-                            // Get first image if available
-                            $firstImage = !empty($images) ? $images[0] : null;
-
-                            $purchaseData = getData2("SELECT * FROM tbl_purchase WHERE id = '$order[purchase_id]'")[0];
                         ?>
-                            <div class="bg-white shadow-md rounded-lg overflow-hidden border hover:shadow-lg transition">
+                            <div class="bg-white  rounded-lg overflow-hidden border hover:shadow-md transition">
                                 <!-- Order Header -->
                                 <div class="flex items-center justify-between bg-gray-50 px-4 py-2 border-b">
-                                    <span class="text-sm text-gray-600">Order #<?= $purchaseData['orderid'] ?></span>
+                                    <div></div>
+                                    <span class="text-sm text-gray-600">Order #<?= $order['orderid'] ?></span>
                                     <span
                                         class="text-xs px-2 py-1 rounded-full bg-green-100 text-green-700"><?= $order['status'] ?></span>
                                 </div>
 
                                 <!-- Product Preview -->
-                                <div class="flex items-center gap-4 p-4">
-                                    <div class="w-20 h-20 rounded overflow-hidden border">
-                                        <img src="/<?= $firstImage ?>" alt="Product"
-                                            class="w-full h-full object-cover" />
+                                <div class="flex items-start p-4 justify-start flex-col">
+                                    <div class="w-full flex items-center justify-between">
+                                        <div>
+                                            <span><?= $order['fname'] ?> <?= $order['lname'] ?></span>
+                                        </div>
+                                        <!-- <div></div> -->
+                                            <span>₹<?= formatNumber($order['total_amount']) ?></span>
                                     </div>
-                                    <div>
-                                        <h3 class="font-semibold text-gray-800"><?= $order['product_name'] ?></h3>
-                                        <p class="text-sm text-gray-500">Quantity: <?= $order['quantity'] ?></p>
-                                        <p class="text-sm font-semibold text-gray-700">₹<?= $order['price'] ?></p>
-                                    </div>
+                                    <p class="text-gray-500 mt-2"><?= $order['address_line2'] ?> <?= $order['address_line1'] ?></p>
+                                    <p class="text-gray-500"><?= $order['city'] ?> -- <?= $order['pincode'] ?></p>
+                                    <p class="text-gray-500"><?= $order['state_name'] ?></p>
+                                    <p class="mt-2">Mobile : <?= $order['mobile'] ?></p>
+                                    <a href="/order-details/<?= $order['id'] ?>" class="text-sm bg-gray-800 text-white px-2 py-1 rounded mt-2">Order Details</a>
                                 </div>
 
                                 <!-- Order Footer -->
                                 <div class="flex items-center justify-between px-4 py-2 border-t bg-gray-50">
-                                    <span class="text-xs text-gray-500">Ordered on: <?= formatDate($purchaseData['created_at']) ?></span>
+                                    <span class="text-xs text-gray-500">Ordered on: <?= formatDate($order['created_at']) ?></span>
                                     <!-- <button class="text-sm font-medium text-[#f25b21] hover:underline">View Details</button> -->
                                 </div>
                             </div>
