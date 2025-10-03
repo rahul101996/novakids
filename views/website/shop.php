@@ -1,7 +1,7 @@
 <?php
 
 // $byCategory = str_replace('-', ' ', $category_name);
-$byCategory = $category_name;
+$byCategory = $category_name ?? 'tees';
 
 ?>
 
