@@ -882,7 +882,7 @@ class WebController extends LoginController
 
         // $category = str_replace('-', ' ', $category_name);
         // echo $category;
-        $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_category.category = '$category'");
+        // $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_category.category = '$category'");
         // printWithPre($products); 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
@@ -1255,7 +1255,6 @@ class WebController extends LoginController
                             $_SESSION["err"] = "Product Out Of Stock";
                             header("Location: /checkout");
                             exit();
-                            break;
                         }
                     }
 
