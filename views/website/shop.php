@@ -207,16 +207,16 @@ $byCategory = $category_name;
                         <h4 class="font-semibold mb-2">Product Categories</h4>
                         <ul class="space-y-2">
                             <li>
-                                <label><input type="radio" <?= $byCategory == 'tees' ? 'checked' : '' ?> name="category"
+                                <label><input type="radio" onclick="window.location.href='/category/tees'" <?= $byCategory == 'tees' ? 'checked' : '' ?> name="category"
                                         class="mr-2 accent-[#f25b21]"> Tees / Relaxed
                                     Tees</label>
                             </li>
                             <li>
-                                <label><input type="radio" <?= $byCategory == 'joggers' ? 'checked' : '' ?> name="category"
+                                <label><input type="radio" onclick="window.location.href='/category/joggers'" <?= $byCategory == 'joggers' ? 'checked' : '' ?> name="category"
                                         class="mr-2 accent-[#f25b21]">Joggers</label>
                             </li>
                             <li>
-                                <label><input type="radio" <?= $byCategory == 'co-ords' ? 'checked' : '' ?> name="category"
+                                <label><input type="radio" onclick="window.location.href='/category/co-ords'" <?= $byCategory == 'co-ords' ? 'checked' : '' ?> name="category"
                                         class="mr-2 accent-[#f25b21]">Co-ords</label>
                             </li>
                         </ul>
@@ -238,22 +238,22 @@ $byCategory = $category_name;
                         <h4 class="font-semibold mb-2">Filter by Size</h4>
                         <div class="flex flex-wrap gap-2">
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2"> 08-09 Years
+                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2 accent-[#f25b21]"> 08-09 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2"> 09-10 Years
+                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2 accent-[#f25b21]"> 09-10 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2"> 10-11 Years
+                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2 accent-[#f25b21]"> 10-11 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2"> 11-12 Years
+                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2 accent-[#f25b21]"> 11-12 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2"> 12-13 Years
+                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2 accent-[#f25b21]"> 12-13 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2"> 13-14 Years
+                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2 accent-[#f25b21]"> 13-14 Years
                             </label>
                         </div>
                     </div>
@@ -427,11 +427,8 @@ $byCategory = $category_name;
             return new Intl.NumberFormat("en-IN").format(num);
         }
 
-
         setProducts()
     </script>
-
-
 
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/views/website/sidecart.php";
