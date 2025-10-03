@@ -75,6 +75,8 @@ $route->group(['', 'ProductController'], function ($route) {
 
 
     $route->route('/admin/orders', 'OrderList');
+    $route->route('/admin/cancel-orders', 'CancelOrderList');
+    $route->route('/admin/get-order-details/[i:order_id]', 'OrderDetails');
 
 });
 
