@@ -1,5 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+
+// $byCategory = str_replace('-', ' ', $category_name);
+$byCategory = $category_name;
+
+?>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/header.php'; ?>
 
@@ -202,42 +206,54 @@
                     <div>
                         <h4 class="font-semibold mb-2">Product Categories</h4>
                         <ul class="space-y-2">
-                            <li><label><input type="checkbox" class="mr-2 accent-[#f25b21]"> Tees / Relaxed Tees</label></li>
-                            <li><label><input type="checkbox" class="mr-2 accent-[#f25b21]"> Joggers</label></li>
-                            <li><label><input type="checkbox" class="mr-2 accent-[#f25b21]"> Co-ords</label></li>
+                            <li>
+                                <label><input type="radio" <?= $byCategory == 'tees' ? 'checked' : '' ?> name="category"
+                                        class="mr-2 accent-[#f25b21]"> Tees / Relaxed
+                                    Tees</label>
+                            </li>
+                            <li>
+                                <label><input type="radio" <?= $byCategory == 'joggers' ? 'checked' : '' ?> name="category"
+                                        class="mr-2 accent-[#f25b21]">Joggers</label>
+                            </li>
+                            <li>
+                                <label><input type="radio" <?= $byCategory == 'co-ords' ? 'checked' : '' ?> name="category"
+                                        class="mr-2 accent-[#f25b21]">Co-ords</label>
+                            </li>
                         </ul>
                     </div>
 
                     <!-- Stock -->
-                    <div>
+                    <!-- <div>
                         <h4 class="font-semibold mb-2">Product Status</h4>
                         <ul class="space-y-2">
-                            <li><label><input type="radio" name="stock" class="mr-2 accent-[#f25b21]"> In Stock</label></li>
-                            <li><label><input type="radio" name="stock" class="mr-2 accent-[#f25b21]"> On Sale</label></li>
+                            <li><label><input type="radio" name="stock" class="mr-2 accent-[#f25b21]"> In Stock</label>
+                            </li>
+                            <li><label><input type="radio" name="stock" onclick="setProducts()" class="mr-2 accent-[#f25b21]"> On Sale</label>
+                            </li>
                         </ul>
-                    </div>
+                    </div> -->
 
                     <!-- Size -->
                     <div>
                         <h4 class="font-semibold mb-2">Filter by Size</h4>
                         <div class="flex flex-wrap gap-2">
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="mx-2"> 08-09 Years
+                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2"> 08-09 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="mx-2"> 9-10 Years
+                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2"> 09-10 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="mx-2"> 10-11 Years
+                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2"> 10-11 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="mx-2"> 11-12 Years
+                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2"> 11-12 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="mx-2"> 12-13 Years
+                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2"> 12-13 Years
                             </label>
                             <label class="px-3 py-1 border rounded cursor-pointer hover:bg-gray-100">
-                                <input type="checkbox" class="mx-2"> 13-14 Years
+                                <input type="checkbox" name="size[]" value="" onclick="setProducts()" class="mx-2"> 13-14 Years
                             </label>
                         </div>
                     </div>
@@ -271,89 +287,8 @@
             <!-- Products Section -->
             <main class="md:col-span-3 w-[90vw] mx-auto pb-16">
                 <!-- Product Grid -->
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 max-md:gap-3">
-                    <?php
-                    // $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_category.category = '$category'");
-                    foreach ($products as $key => $product) {
-                        $images = json_decode($product['product_images'], true);
-                        $images = array_reverse($images);
-                        $SecondImage = true;
-                        (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
-                        $comparePrice = floatval($product['compare_price']);
-                        $price = floatval($product['price']);
-                        $discountAmount = $comparePrice - $price;
-                        $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
-
-                        $name = str_replace(' ', '-', $product['name']);
-                        $name = str_replace("'", '', $name);
-                        if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
-
-
-                            $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $product['id'] . " AND `userid` = " . $_SESSION["userid"])[0];
-                        } else {
-
-                            $data = checkExisteingWishlistSession($product['id']);
-                            if ($data) {
-                                $data = ['id' => $data];
-                            } else {
-                                $data = [];
-                            }
-                        }
-                        // printWithPre($images);
-                    ?>
-                        <a href="/products/product-details/<?= $name ?>" class="block">
-                            <div
-                                class="group relative  cursor-pointer transition overflow-hidden">
-                                <!-- Discount Badge -->
-                                <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
-                                    SAVE <?= $discountPercentage ?>%
-                                </span>
-
-                                <!-- Product Images -->
-                                <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
-                                    <!-- Default Image -->
-                                    <img src="/<?= $images[0] ?>" alt="Product 1"
-                                        class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-
-                                    <!-- Hover Image -->
-
-                                    <img src="/<?= $SecondImage ?>" alt="Product 1 Hover"
-                                        class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-
-                                    <!-- Add to favorites Icon (top-right) -->
-                                    <button
-                                        class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-
-                                    <!-- Add to Cart Icon -->
-                                    <button
-                                        class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                        <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                    </button>
-                                    <input type="text" value="<?= $product['id'] ?>" class="ProductId">
-                                </div>
-
-                                <!-- Product Details -->
-                                <div class="pt-4 w-full ">
-                                    <h3 class="text-base font-semibold uppercase"><?= $product['name'] ?></h3>
-                                    <div class="flex items-center justify-start gap-3 w-full">
-                                        <p class="text-gray-500 line-through text-sm">₹
-                                            <?= formatNumber($product['compare_price']) ?>.00
-                                        </p>
-                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?>.00</p>
-                                    </div>
-                                    <!-- reviews -->
-                                    <div class="flex items-center justify-start space-x-1 hidden">
-                                        <span class="text-yellow-500">★★★★★</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                    <?php } ?>
-
-
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 max-md:gap-3" id="product-grid">
+                   
                 </div>
             </main>
         </div>
@@ -384,6 +319,116 @@
                 });
             }
         });
+
+
+        async function setProducts() {
+            let productsContainer = document.getElementById("product-grid");
+            let cat = '<?= $byCategory ?>';
+
+            let sizes = document.querySelectorAll('input[name="size[]"]');
+            let size = [];
+            sizes.forEach((s) => {
+                if (s.checked) {
+                    size.push(s.value);
+                }
+            });
+
+            // console.log("size", size);
+
+            let res = await fetch("/api/get-products/" + cat, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    size: size
+                })
+            });
+            let data = await res.json();
+
+            console.log(data);
+
+            let html = '';
+            if (data.success) {
+                data.data.forEach(product => {
+                    let images = JSON.parse(product.product_images || "[]");
+                    images = images.reverse();
+
+                    let SecondImage = images[1] ? images[1] : images[0];
+
+                    let comparePrice = parseFloat(product.compare_price) || 0;
+                    let price = parseFloat(product.price) || 0;
+                    let discountAmount = comparePrice - price;
+                    let discountPercentage = comparePrice > 0 ? Math.round((discountAmount / comparePrice) * 100) : 0;
+
+                    let name = product.name.replace(/ /g, "-").replace(/'/g, "");
+
+                    // Wishlist status (this must come from API or session in JS)
+                    let inWishlist = product.wishlist_id ? true : false;
+
+                    html += `
+                                <a href="/products/product-details/${name}" class="block">
+                                    <div class="group relative cursor-pointer transition overflow-hidden">
+                                        
+                                        <!-- Discount Badge -->
+                                        <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
+                                            SAVE ${discountPercentage}%
+                                        </span>
+
+                                        <!-- Product Images -->
+                                        <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
+                                            <!-- Default Image -->
+                                            <img src="/${images[0]}" alt="${product.name}"
+                                                class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+
+                                            <!-- Hover Image -->
+                                            <img src="/${SecondImage}" alt="${product.name} Hover"
+                                                class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+
+                                            <!-- Add to favorites Icon -->
+                                            <button
+                                                class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500 z-20 stop-link 
+                                                ${inWishlist ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white hover:bg-[#f25b21]'}">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+
+                                            <!-- Add to Cart Icon -->
+                                            <button
+                                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 
+                                                group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                                            </button>
+                                            <input type="hidden" value="${product.id}" class="ProductId">
+                                        </div>
+
+                                        <!-- Product Details -->
+                                        <div class="pt-4 w-full">
+                                            <h3 class="text-base font-semibold uppercase">${product.name}</h3>
+                                            <div class="flex items-center justify-start gap-3 w-full">
+                                                <p class="text-gray-500 line-through text-sm">₹ ${formatNumber(product.compare_price)}.00</p>
+                                                <p class="text-[#f25b21] font-bold">₹ ${formatNumber(product.price)}.00</p>
+                                            </div>
+                                            <!-- reviews -->
+                                            <div class="flex items-center justify-start space-x-1 hidden">
+                                                <span class="text-yellow-500">★★★★★</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            `;
+                });
+
+                productsContainer.innerHTML = html;
+            }
+        }
+
+        // Helper function like your PHP formatNumber
+        function formatNumber(num) {
+            return new Intl.NumberFormat("en-IN").format(num);
+        }
+
+
+        setProducts()
     </script>
 
 
