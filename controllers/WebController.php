@@ -664,11 +664,16 @@ class WebController extends LoginController
             header("Location: /profile");
             exit();
         } else {
-            
-            $products = getData2("SELECT * FROM `tbl_purchase_item` WHERE `purchase_id` = $id ORDER BY `id` DESC");
+
+            $products = getData2("SELECT tbl_purchase_item.*, tbl_products.name as product_name,
+            tbl_variants.images as variant_images, tbl_variants.options as variant_options, tbl_variants.price as variant_price FROM `tbl_purchase_item` LEFT JOIN tbl_products ON tbl_purchase_item.product = tbl_products.id LEFT JOIN tbl_variants ON tbl_purchase_item.varient = tbl_variants.id WHERE tbl_purchase_item.purchase_id = $id ORDER BY tbl_purchase_item.id DESC");
             // printWithPre($products);
             require 'views/website/order-details.php';
         }
+    }
+    public function OrderConfirmMail()
+    {
+        require 'views/website/order-confermation-mail.php';
     }
     public function userAddress()
     {
