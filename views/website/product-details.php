@@ -407,8 +407,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </div>
 
                             <div class="col-span-2 max-md:order-3 w-[70%]">
-                                <button type="button"
-                                    class=" w-full sm:flex-1 relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black">
+                                <button type="button" onclick="ohmygod()"
+                                    class="w-full sm:flex-1 relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black">
                                     <span
                                         class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
                                         <i class="fas fa-cart-plus"></i> Add to Cart
@@ -1287,7 +1287,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     `
                     console.log(JSON.parse(ar.images))
                     let imgHtml = ""
-                    JSON.parse(ar.images).forEach((imgh) => {
+                    JSON.parse(ar.images).reverse().forEach((imgh) => {
                         imgHtml = imgHtml + `
 
                             <div class=" overflow-hidden  cursor-pointer">
@@ -1300,6 +1300,11 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 }
             })
 
+        }
+
+        function ohmygod(){
+            let eleForm = document.getElementById("productDetailForm")
+            addToCartSidebar(eleForm.querySelector(".sideVarientId").value, eleForm.querySelector(".sideCategoryId").value, eleForm.querySelector(".sideProductId").value, btn, 1, false)
         }
         getVariants();
         cnosole.log("hello")

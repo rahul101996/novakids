@@ -676,7 +676,8 @@
 
     function AddToCartslider(btn, sidecart = false) {
         // 
-        let ee = btn.parentElement
+        let ee = btn.parentElement.parentElement
+        console.log(ee)
         // showVarients(ee.querySelector(".sideProductId").value)
         addToCartSidebar(ee.querySelector(".sideVarientId").value, ee.querySelector(".sideCategoryId").value, ee.querySelector(".sideProductId").value, btn, 1, sidecart)
 
