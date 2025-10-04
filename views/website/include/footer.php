@@ -133,8 +133,8 @@
             <div class="lg:col-span-2">
                 <div class="mb-6">
                     <div class="flex items-center gap-2">
-                        <img src="/public/logos/nova_favicon.png" alt="Brand Logo" class="w-auto h-14 rounded-md object-cover mb-4">
-                        <img src="/public/logos/nova_logo-brnd-name.png" alt="Brand Logo" class="w-auto h-14 rounded-md object-cover mb-4">
+                        <img src="/public/logos/nova_favicon.png" alt="Brand Logo" class="w-auto h-8 rounded-md object-cover mb-4">
+                        <img src="/public/logos/nova_logo-brnd-name.png" alt="Brand Logo" class="w-auto h-8 rounded-md object-cover mb-4">
                     </div>
 
 

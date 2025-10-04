@@ -127,7 +127,7 @@ $categories = getData("tbl_category");
         <p id="rotating-text1" class="text-sm max-md:text-xs text-white font-medium tracking-wide"></p>
     </div>
 
-    <div class="w-full flex items-center justify-between py-1">
+    <div class="w-full flex items-center justify-between hidden">
         <li class="relative group list-none max-md:hidden hidden">
             <button
                 class="nav-text text-black relative px-6 py-3 text-lg font-semibold flex items-center gap-2 transition-all duration-300">
@@ -283,13 +283,13 @@ $categories = getData("tbl_category");
             </div>
         </li>
 
-        <div class="flex items-center space-x-7 ml-8">
+        <div class="flex items-center space-x-7 ml-5">
             <a href="/" class="block">
                 <div class="flex items-center gap-1 py-2">
                     <img src="/public/logos/nova_favicon.png" alt="Brand Logo"
-                        class="w-auto h-9 rounded-md object-cover my-2 ">
+                        class="w-auto h-8 rounded-md object-cover my-2 ">
                     <img src="/public/logos/nova_logo-brnd-name.png" alt="Brand Logo"
-                        class="w-auto h-9 rounded-md object-cover my-2">
+                        class="w-auto h-8 rounded-md object-cover my-2">
                 </div> <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
             </a>
         </div>
@@ -436,7 +436,7 @@ $categories = getData("tbl_category");
         </div>
     </div>
 
-    <div class="w-full flex items-center justify-between py-1 hidden">
+    <div class="w-full flex items-center justify-between hidden">
         <li class="relative group list-none max-md:hidden hidden">
             <button
                 class="nav-text text-black relative px-6 py-3 text-lg font-semibold flex items-center gap-2 transition-all duration-300">
@@ -592,13 +592,13 @@ $categories = getData("tbl_category");
             </div>
         </li>
 
-        <div class="flex items-center space-x-7 ml-8">
+        <div class="flex items-center space-x-7 ml-5">
             <a href="/" class="block">
                 <div class="flex items-center gap-1 py-2">
                     <img src="/public/logos/nova_favicon.png" alt="Brand Logo"
-                        class="w-auto h-9 rounded-md object-cover my-2 ">
+                        class="w-auto h-8 rounded-md object-cover my-2 ">
                     <img src="/public/logos/brand-name.png" alt="Brand Logo"
-                        class="w-auto h-9 rounded-md object-cover my-2">
+                        class="w-auto h-8 rounded-md object-cover my-2">
                 </div> <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
             </a>
         </div>
@@ -745,7 +745,7 @@ $categories = getData("tbl_category");
         </div>
     </div>
 
-    <div class="w-full flex items-center justify-between py-1 hidden">
+    <div class="w-full flex items-center justify-between hidden">
         <li class="relative group list-none max-md:hidden hidden">
             <button
                 class="nav-text text-black relative px-6 py-3 text-lg font-semibold flex items-center gap-2 transition-all duration-300">
@@ -901,12 +901,12 @@ $categories = getData("tbl_category");
             </div>
         </li>
 
-        <div class="flex items-center space-x-7 ml-8">
+        <div class="flex items-center space-x-7 ml-5">
             <a href="/" class="block">
                 <div class="flex items-center gap-1 py-2">
                     <!-- <img src="/public/logos/nova_favicon.png" alt="Brand Logo" class="w-auto h-14 rounded-md object-cover my-2 "> -->
                     <img src="/public/logos/brand-name.png" alt="Brand Logo"
-                        class="w-auto h-9 rounded-md object-cover my-2">
+                        class="w-auto h-8 rounded-md object-cover my-2">
                 </div> <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
             </a>
         </div>
@@ -1053,7 +1053,7 @@ $categories = getData("tbl_category");
         </div>
     </div>
 
-    <div class="w-full flex items-center justify-between py-1 hidden">
+    <div class="w-full flex items-center justify-between ">
         <li class="relative group list-none max-md:hidden hidden">
             <button
                 class="nav-text text-black relative px-6 py-3 text-lg font-semibold flex items-center gap-2 transition-all duration-300">
@@ -1209,11 +1209,11 @@ $categories = getData("tbl_category");
             </div>
         </li>
 
-        <div class="flex items-center space-x-7 ml-8">
+        <div class="flex items-center space-x-7 ml-5">
             <a href="/" class="block">
                 <div class="flex items-center gap-1 py-2">
                     <img src="/public/logos/nova_favicon.png" alt="Brand Logo"
-                        class="w-auto h-9 rounded-md object-cover my-2 ">
+                        class="w-auto h-8 rounded-md object-cover my-2 ">
                     <!-- <img src="/public/logos/brand-name.png" alt="Brand Logo" class="w-auto h-9 rounded-md object-cover my-2"> -->
                 </div> <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
             </a>
