@@ -627,7 +627,6 @@ $categories = getData("tbl_category");
                     </div>
                 </div>
 
-                <!-- Mobile Carousel -->
                 <div class="md:hidden relative w-full overflow-hidden">
                     <div id="mobileCarousel" class="flex transition-transform duration-700 ease-in-out">
                         <div class="w-full flex-shrink-0 text-center text-sm">

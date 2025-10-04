@@ -117,11 +117,7 @@ $route->group(['', 'CategoryController', 'auth'], function ($route) {
     $route->route('/edit-category/[i:id]', 'index');
     $route->route('/delete-category/[i:id]', 'DeleteCategory');
 
-
-
-
     // $route->route('/', 'index');
-
 });
 
 $route->group(['', 'PackageController', 'auth'], function ($route) {
