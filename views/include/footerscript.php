@@ -12,6 +12,57 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs4.min.js"></script>
 <!-- Bootstrap (required by Summernote) -->
 
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+    import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-messaging.js";
+
+    // 🔹 Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBKFZfyRAX-2lR4RaK0Zflh4kL-1eIVpEc",
+      authDomain: "nova-7626d.firebaseapp.com",
+      projectId: "nova-7626d",
+      storageBucket: "nova-7626d.firebasestorage.app",
+      messagingSenderId: "1575656461",
+      appId: "1:1575656461:web:668bc868a97b44675a4944",
+      measurementId: "G-SXCMSPKFWJ"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const messaging = getMessaging(app);
+
+    // const log = (msg) => {
+    //   document.getElementById("log").innerText += msg + "\n";
+    //   console.log(msg);
+    // };
+
+    // 🔹 Register the service worker (classic, not module)
+    navigator.serviceWorker.register("firebase-messaging-sw.js")
+      .then((registration) => {
+        log("Service Worker registered");
+
+        // Get FCM token
+        return getToken(messaging, {
+          vapidKey: "BK7NN3eBAn6jhm8398O5hW4E9nT_WmayntD04VyR_p_pNY7_vPno4u1qenRkDKVWMDHiu_UeLo8CS_sa7m6WE-s" // 👉 From Firebase Console → Project Settings → Cloud Messaging → Web Push Certificates
+        });
+      })
+      .then((token) => {
+        if (token) {
+            console.log(tokan)
+        //   log("FCM Token: " + token);
+        //   document.getElementById("tokenBox").value = token;
+        } else {
+        //   log("No registration token available. Request permission first.");
+        }
+      })
+      .catch((err) => log("Error: " + err));
+
+    // 🔹 Foreground messages
+    onMessage(messaging, (payload) => {
+    //   log("Message Received: " + JSON.stringify(payload));
+      alert("New Notification: " + payload.notification.title);
+    });
+  </script>
 
 <script>
     $(document).ready(function() {
