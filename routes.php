@@ -36,6 +36,10 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('cookies', 'cookies');
     $route->route('/api/send-otp', 'SendOtp');
     $route->route('category/[:category_name]', 'Category');
+
+    $route->route('api/get-products/[:category_name]', 'getFilteredProducts');
+
+
     $route->route('thank-you', 'thankYou');
     $route->route('/razorpay', 'Razorpay');
     $route->route('add-to-wishlist', 'AddToWishlist');
@@ -46,11 +50,12 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('delete-address', 'DeleteAddress');
     $route->route('edit-address', 'EditAddress');
     $route->route('/order-details/[i:id]', 'OrderDetails');
+    $route->route('order-confirm-mail', 'OrderConfirmMail');
 
     // $route->route('/', 'index');
 });
 
-$route->group(['', 'CollectionController'], function ($route) {
+$route->group(['', 'CollectionController', 'auth'], function ($route) {
     $route->route('admin/collections', 'index');
     $route->route('admin/add-collections', 'AddCollections');
     $route->route('/edit-collection/[i:id]', 'AddCollections');
@@ -62,7 +67,7 @@ $route->group(['', 'CollectionController'], function ($route) {
 
 });
 
-$route->group(['', 'ProductController'], function ($route) {
+$route->group(['', 'ProductController', 'auth'], function ($route) {
     $route->route('/admin/add-product', 'AddProducts');
     $route->route('/admin/edit-product/[i:id]', 'EditProducts');
     $route->route('/admin/products-list', 'ProductsList');
@@ -72,18 +77,20 @@ $route->group(['', 'ProductController'], function ($route) {
 
 
     $route->route('/admin/orders', 'OrderList');
+    $route->route('/admin/cancel-orders', 'CancelOrderList');
+    $route->route('/admin/get-order-details/[i:order_id]', 'OrderDetails');
 
 });
 
-$route->group(['', 'CustomerController'], function ($route) {
+$route->group(['', 'CustomerController', 'auth'], function ($route) {
     $route->route('admin/customers-list', 'CustomersList');
-    $route->route('admin/customer-info', 'CustomersInfo');
+    $route->route('admin/customer-info/[i:id]', 'CustomersInfo');
 
     // $route->route('/admin/products-list', 'ProductsList');
 
 });
 
-$route->group(['', 'CouponController'], function ($route) {
+$route->group(['', 'CouponController', 'auth'], function ($route) {
     $route->route('admin/add-coupon', 'AddCoupons');
     $route->route('admin/coupons-list', 'CouponList');
     $route->route('/edit-coupon/[i:id]', 'AddCoupons');
@@ -93,7 +100,7 @@ $route->group(['', 'CouponController'], function ($route) {
 
 });
 
-$route->group(['', 'PaymentGatewayController'], function ($route) {
+$route->group(['', 'PaymentGatewayController', 'auth'], function ($route) {
     $route->route('admin/payment-gateway', 'PaymentGateway');
     $route->route('/api/payment-gateway', 'ChangePaymentGateway');
 
@@ -102,7 +109,7 @@ $route->group(['', 'PaymentGatewayController'], function ($route) {
 
 });
 
-$route->group(['', 'CategoryController'], function ($route) {
+$route->group(['', 'CategoryController', 'auth'], function ($route) {
 
     // $route->route('admin/add-packaging', 'AddCollections');
     $route->route('/admin/add-category', 'index');
@@ -110,25 +117,16 @@ $route->group(['', 'CategoryController'], function ($route) {
     $route->route('/edit-category/[i:id]', 'index');
     $route->route('/delete-category/[i:id]', 'DeleteCategory');
 
-
-
-
     // $route->route('/', 'index');
-
 });
 
-$route->group(['', 'PackageController'], function ($route) {
+$route->group(['', 'PackageController', 'auth'], function ($route) {
 
     // $route->route('admin/add-packaging', 'AddCollections');
     $route->route('/admin/add-packaging', 'index');
     $route->route('/admin/packages-list', 'PackageList');
     $route->route('/edit-package/[i:id]', 'index');
     $route->route('/delete-package/[i:id]', 'DeleteCategory');
-
-
-
-
-    // $route->route('/', 'index');
 
 });
 

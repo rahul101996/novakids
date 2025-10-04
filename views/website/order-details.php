@@ -17,19 +17,28 @@
                 <h1>Returnable/Exchangeable Products</h1>
             </div>
             <?php
-            foreach ($products as $product) {
+            foreach ($products as $key => $product) {
+                $images = json_decode($product['variant_images'], true);
+                $variants = json_decode($product['variant_options'], true);
+                $variants = json_decode($variants, true);
 
-
+                $images = array_reverse($images);
 
             ?>
                 <div class="w-full border border-gray-300 flex flex-col items-center">
                     <div class="w-full p-5 flex items-center justify-between">
                         <div class="w-[80%] flex items-start justify-start">
-                            <img src="/public/uploads/category/68d4df5947a16_olive-faded-loose-fit-pants-xs-bonkerscorner-store-33693672439908_960x_crop_center.webp" class="h-24" alt="">
+                            <img src="/<?= $images[0] ?>" class="h-24" alt="">
                             <div class="flex flex-col items-start justify-center ml-5">
-                                <h3 class="font-semibold">Olive Faded Loose Fit Pants</h3>
-                                <h3 class="text-sm text-gray-600">Size : XS</h3>
-                                <h3 class="text-sm text-gray-600 mt-3"> 1 x ₹1,999</h3>
+                                <h3 class="font-semibold"><?= $product['product_name'] ?></h3>
+                                <?php
+                                foreach ($variants as $key => $variant) {
+                                ?>
+                                    <p class="!mb-0 text-sm text-gray-600"><?= $key ?>: <?= $variant ?></p>
+
+                                <?php } ?>
+                                <!-- <h3 class="text-sm text-gray-600">Size : XS</h3> -->
+                                <h3 class="text-sm text-gray-600 mt-3"> <?= $product['quantity'] ?> x ₹<?= formatNumber($product['amount']) ?></h3>
 
                             </div>
                         </div>
@@ -57,6 +66,32 @@
                     </div>
                 </div>
             <?php } ?>
+
+            <div class="py-5 px-3 w-full border border-gray-300 mt-10">
+                <h1>Returnable/Exchangeable Products</h1>
+            </div>
+            <div class="w-full border border-gray-300 flex flex-col items-center">
+                <div class="w-full p-5 flex items-center justify-between">
+                    <div class="w-[80%] flex flex-col items-start justify-start">
+                        <div class="flex items-center justify-start gap-5">
+                            <span class="text-sm text-gray-500">#RET135315</span>
+                            <span class="text-xs bg-yellow-100 py-1 px-2 rounded-lg">Pending Inspection</span>
+                        </div>
+                        <div class="flex flex-col items-start justify-center">
+                            <h3 class="font-semibold"><?= $product['product_name'] ?></h3>
+                            <p class="!mb-0 text-sm text-gray-600">Size: S &ensp; 1 x ₹2,499.0</p>
+                            <!-- <h3 class="text-sm text-gray-600 mt-3"> </h3> -->
+                            <span class="font-semibold text-sm mt-3">Your return request is approved <span class="text-gray-500 font-normal text-xs">(Request on Sep 12th 2025)</span></span>
+                            <span class="text-sm text-blue-600">View Return Item</span>
+
+                        </div>
+                    </div>
+                    <div class="w-[20%] flex items-center justify-center flex-col gap-2">
+                        <img src="/public/uploads/product-images/68cabe12e6a6e_1744389529_7123437.avif" class="h-24" alt="">
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 

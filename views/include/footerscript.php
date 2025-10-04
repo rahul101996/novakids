@@ -27,9 +27,6 @@
                 ['height', ['height']],
                 ['fontname', ['fontname']],
                 ['fontsize', ['fontsize']],
-                
-
-
             ]
         });
     });

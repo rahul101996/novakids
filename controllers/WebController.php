@@ -242,11 +242,11 @@ class WebController extends LoginController
                                 <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
                                 <input type="hidden" name="quantity[]" id="product_buy_count1" value="1">
                                 <input type="hidden" name="cartid[]" value="">
-                                <button onclick="openLogin()" class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black"><span
-                                        class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
-                                        <i class="fas fa-cart-plus"></i> Buy It Now
-                                    </span> <span
-                                        class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
+                                <button onclick="openLogin()" class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-4 hover:border hover:border-[#f25b21] transition-all duration-700"><span
+                                            class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
+                                            Buy It Now
+                                             </span> <span
+                                            class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
                                     </span>
 
                                 </button>
@@ -664,11 +664,16 @@ class WebController extends LoginController
             header("Location: /profile");
             exit();
         } else {
-            
-            $products = getData2("SELECT * FROM `tbl_purchase_item` WHERE `purchase_id` = $id ORDER BY `id` DESC");
+
+            $products = getData2("SELECT tbl_purchase_item.*, tbl_products.name as product_name,
+            tbl_variants.images as variant_images, tbl_variants.options as variant_options, tbl_variants.price as variant_price FROM `tbl_purchase_item` LEFT JOIN tbl_products ON tbl_purchase_item.product = tbl_products.id LEFT JOIN tbl_variants ON tbl_purchase_item.varient = tbl_variants.id WHERE tbl_purchase_item.purchase_id = $id ORDER BY tbl_purchase_item.id DESC");
             // printWithPre($products);
             require 'views/website/order-details.php';
         }
+    }
+    public function OrderConfirmMail()
+    {
+        require 'views/website/order-confermation-mail.php';
     }
     public function userAddress()
     {
@@ -875,16 +880,42 @@ class WebController extends LoginController
     public function Category($category_name)
     {
 
-       $category = strtolower($category_name);
+        // $category = str_replace('-', ' ', $category_name);
         // echo $category;
-        // echo "SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE LOWER(tbl_category.category) = '$category'";
-        $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE LOWER(tbl_category.category) = '$category'");
+        // $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_category.category = '$category'");
         // printWithPre($products); 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             require 'views/website/shop.php';
         }
     }
+
+    public function getFilteredProducts($category_name)
+    {
+        $response = [
+            "success" => false,
+            "message" => "No Product Found"
+        ];
+        
+       
+        $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_category.category = '$category_name'");
+
+        foreach ($products as $key => $value) {
+            $variants = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = '$value[id]'");
+            $products[$key]['variants'] = $variants;
+        }
+
+        if (count($products) > 0) {
+            $response = [
+                "success" => true,
+                "message" => "Product Found",
+                "data" => $products
+            ];
+        }
+
+        echo json_encode($response);
+    }
+
     public function productDetails($product_name = null)
     {
 
@@ -904,14 +935,14 @@ class WebController extends LoginController
                 $pageModule = "Product Page";
                 $pageTitle = "Product Page";
                 $ProductData = getData2("
-    SELECT 
-        tbl_products.*, 
-        tbl_category.category AS category_name 
-    FROM tbl_products 
-    LEFT JOIN tbl_category 
-        ON tbl_products.category = tbl_category.id 
-    WHERE REPLACE(tbl_products.name, \"'\", '') = REPLACE('$name', \"'\", '')
-")[0];
+                                                    SELECT 
+                                                        tbl_products.*, 
+                                                        tbl_category.category AS category_name 
+                                                    FROM tbl_products 
+                                                    LEFT JOIN tbl_category 
+                                                        ON tbl_products.category = tbl_category.id 
+                                                    WHERE REPLACE(tbl_products.name, \"'\", '') = REPLACE('$name', \"'\", '')
+                                                ")[0];
 
                 $id = $ProductData['id'];
                 $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
@@ -1224,7 +1255,6 @@ class WebController extends LoginController
                             $_SESSION["err"] = "Product Out Of Stock";
                             header("Location: /checkout");
                             exit();
-                            break;
                         }
                     }
 

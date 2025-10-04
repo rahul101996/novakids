@@ -527,99 +527,102 @@
                 <div
                     class="flex items-center space-x-10 text-outline transition-all duration-700 text-white font-semibold text-xl max-md:text-lg cursor-pointer">
 
-                    <?php foreach ($offerheading as $key => $value) { ?>
-                        <span>#</span>
-                        <span><?= $value['title'] ?></span>
-                    <?php } ?>
+                    <?php
+                    for ($i = 0; $i < 10; $i++) {
+                        foreach ($offerheading as $key => $value) { ?>
+                            <span>#</span>
+                            <span><?= $value['title'] ?></span>
+                        <?php }
+                    } ?>
 
 
                     <!-- <span>#</span>
-                    <span>Streetwear</span>
-                    <span>#</span>
-                    <span>Oversized Tees</span>
-                    <span>#</span>
-                    <span>Graphic Hoodies</span>
-                    <span>#</span>
-                    <span>Joggers & Co-ords</span>
-                    <span>#</span>
-                    <span>Fresh Drops Weekly</span>
-                    <span>#</span>
-                    <span>Nova Universe Exclusive</span>
-                    <span>#</span>
-                    <span>Stay Trendy</span>
-                    <span>#</span>
-                    <span>Free Shipping Over ₹999</span>
-                    <span>#</span>
-                    <span>Made for Gen Z</span>
-                    <span>#</span>
-                    <span>Streetwear</span>
-                    <span>#</span>
-                    <span>Oversized Tees</span>
-                    <span>#</span>
-                    <span>Graphic Hoodies</span>
-                    <span>#</span>
-                    <span>Joggers & Co-ords</span>
-                    <span>#</span>
-                    <span>Fresh Drops Weekly</span>
-                    <span>#</span>
-                    <span>Nova Universe Exclusive</span>
-                    <span>#</span>
-                    <span>Stay Trendy</span>
-                    <span>#</span>
-                    <span>Free Shipping Over ₹999</span>
-                    <span>#</span>
-                    <span>Made for Gen Z</span><span>#</span>
-                    <span>Streetwear</span>
-                    <span>#</span>
-                    <span>Oversized Tees</span>
-                    <span>#</span>
-                    <span>Graphic Hoodies</span>
-                    <span>#</span>
-                    <span>Joggers & Co-ords</span>
-                    <span>#</span>
-                    <span>Fresh Drops Weekly</span>
-                    <span>#</span>
-                    <span>Nova Universe Exclusive</span>
-                    <span>#</span>
-                    <span>Stay Trendy</span>
-                    <span>#</span>
-                    <span>Free Shipping Over ₹999</span>
-                    <span>#</span>
-                    <span>Made for Gen Z</span><span>#</span>
-                    <span>Streetwear</span>
-                    <span>#</span>
-                    <span>Oversized Tees</span>
-                    <span>#</span>
-                    <span>Graphic Hoodies</span>
-                    <span>#</span>
-                    <span>Joggers & Co-ords</span>
-                    <span>#</span>
-                    <span>Fresh Drops Weekly</span>
-                    <span>#</span>
-                    <span>Nova Universe Exclusive</span>
-                    <span>#</span>
-                    <span>Stay Trendy</span>
-                    <span>#</span>
-                    <span>Free Shipping Over ₹999</span>
-                    <span>#</span>
-                    <span>Made for Gen Z</span><span>#</span>
-                    <span>Streetwear</span>
-                    <span>#</span>
-                    <span>Oversized Tees</span>
-                    <span>#</span>
-                    <span>Graphic Hoodies</span>
-                    <span>#</span>
-                    <span>Joggers & Co-ords</span>
-                    <span>#</span>
-                    <span>Fresh Drops Weekly</span>
-                    <span>#</span>
-                    <span>Nova Universe Exclusive</span>
-                    <span>#</span>
-                    <span>Stay Trendy</span>
-                    <span>#</span>
-                    <span>Free Shipping Over ₹999</span>
-                    <span>#</span>
-                    <span>Made for Gen Z</span> -->
+                            <span>Streetwear</span>
+                            <span>#</span>
+                            <span>Oversized Tees</span>
+                            <span>#</span>
+                            <span>Graphic Hoodies</span>
+                            <span>#</span>
+                            <span>Joggers & Co-ords</span>
+                            <span>#</span>
+                            <span>Fresh Drops Weekly</span>
+                            <span>#</span>
+                            <span>Nova Universe Exclusive</span>
+                            <span>#</span>
+                            <span>Stay Trendy</span>
+                            <span>#</span>
+                            <span>Free Shipping Over ₹999</span>
+                            <span>#</span>
+                            <span>Made for Gen Z</span>
+                            <span>#</span>
+                            <span>Streetwear</span>
+                            <span>#</span>
+                            <span>Oversized Tees</span>
+                            <span>#</span>
+                            <span>Graphic Hoodies</span>
+                            <span>#</span>
+                            <span>Joggers & Co-ords</span>
+                            <span>#</span>
+                            <span>Fresh Drops Weekly</span>
+                            <span>#</span>
+                            <span>Nova Universe Exclusive</span>
+                            <span>#</span>
+                            <span>Stay Trendy</span>
+                            <span>#</span>
+                            <span>Free Shipping Over ₹999</span>
+                            <span>#</span>
+                            <span>Made for Gen Z</span><span>#</span>
+                            <span>Streetwear</span>
+                            <span>#</span>
+                            <span>Oversized Tees</span>
+                            <span>#</span>
+                            <span>Graphic Hoodies</span>
+                            <span>#</span>
+                            <span>Joggers & Co-ords</span>
+                            <span>#</span>
+                            <span>Fresh Drops Weekly</span>
+                            <span>#</span>
+                            <span>Nova Universe Exclusive</span>
+                            <span>#</span>
+                            <span>Stay Trendy</span>
+                            <span>#</span>
+                            <span>Free Shipping Over ₹999</span>
+                            <span>#</span>
+                            <span>Made for Gen Z</span><span>#</span>
+                            <span>Streetwear</span>
+                            <span>#</span>
+                            <span>Oversized Tees</span>
+                            <span>#</span>
+                            <span>Graphic Hoodies</span>
+                            <span>#</span>
+                            <span>Joggers & Co-ords</span>
+                            <span>#</span>
+                            <span>Fresh Drops Weekly</span>
+                            <span>#</span>
+                            <span>Nova Universe Exclusive</span>
+                            <span>#</span>
+                            <span>Stay Trendy</span>
+                            <span>#</span>
+                            <span>Free Shipping Over ₹999</span>
+                            <span>#</span>
+                            <span>Made for Gen Z</span><span>#</span>
+                            <span>Streetwear</span>
+                            <span>#</span>
+                            <span>Oversized Tees</span>
+                            <span>#</span>
+                            <span>Graphic Hoodies</span>
+                            <span>#</span>
+                            <span>Joggers & Co-ords</span>
+                            <span>#</span>
+                            <span>Fresh Drops Weekly</span>
+                            <span>#</span>
+                            <span>Nova Universe Exclusive</span>
+                            <span>#</span>
+                            <span>Stay Trendy</span>
+                            <span>#</span>
+                            <span>Free Shipping Over ₹999</span>
+                            <span>#</span>
+                            <span>Made for Gen Z</span> -->
 
                 </div>
             </div>
