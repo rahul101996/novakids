@@ -242,11 +242,11 @@ class WebController extends LoginController
                                 <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
                                 <input type="hidden" name="quantity[]" id="product_buy_count1" value="1">
                                 <input type="hidden" name="cartid[]" value="">
-                                <button onclick="openLogin()" class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black"><span
-                                        class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
-                                        <i class="fas fa-cart-plus"></i> Buy It Now
-                                    </span> <span
-                                        class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
+                                <button onclick="openLogin()" class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-4 hover:border hover:border-[#f25b21] transition-all duration-700"><span
+                                            class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
+                                            Buy It Now
+                                             </span> <span
+                                            class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
                                     </span>
 
                                 </button>

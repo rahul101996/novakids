@@ -61,7 +61,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <div class="text-lg font-semibold"><?= implode(" ", $parts); ?></div>
                         </div>
                         <div class="bg-white p-4 rounded-lg border">
-                            <div class="text-sm text-gray-600 mb-1">RFM group</div>
+                            <div class="text-sm text-gray-600 mb-1">Status</div>
                             <div class="text-lg font-semibold">Active</div>
                         </div>
                     </div>
@@ -117,10 +117,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                     </div>
                                                 </div>
                                                 <div class="w-[20%] flex items-center justify-center flex-col gap-2 font-semibold">
-                                                   ₹<?= formatNumber($product['total_amount']) ?>
+                                                    ₹<?= formatNumber($product['total_amount']) ?>
                                                 </div>
                                             </div>
-                                           
+
                                         </div>
                                     <?php } ?>
 
@@ -135,13 +135,13 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             </div>
 
                             <!-- Timeline -->
-                            <div class="bg-white rounded-lg border hidden">
+                            <div class="bg-white rounded-lg border">
                                 <div class="p-4 border-b">
                                     <h2 class="font-semibold text-gray-900">Timeline</h2>
                                 </div>
                                 <div class="p-4">
                                     <!-- Comment Input -->
-                                    <div class="flex space-x-3 mb-4">
+                                    <div class="flex space-x-3 mb-4 hidden">
                                         <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
                                             UC
                                         </div>
@@ -165,70 +165,47 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     <!-- Timeline Items -->
                                     <div class="space-y-6">
                                         <!-- June 18 -->
-                                        <div class="text-sm font-medium text-gray-900 mb-3">June 18</div>
 
-                                        <div class="flex space-x-3">
-                                            <div class="w-2 h-2 bg-gray-400 rounded-full mt-2"></div>
-                                            <div class="flex-1">
-                                                <div class="text-sm text-gray-900 mb-1">
-                                                    Order Confirmation email for order <span class="font-medium">#USTITCH1014</span> sent to this customer (manish291082@yahoo.in).
-                                                </div>
-                                                <div class="flex items-center space-x-3">
-                                                    <button class="text-sm text-blue-600 hover:underline">View email</button>
-                                                    <span class="text-xs text-gray-500">6:57 PM</span>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="flex space-x-3">
-                                            <div class="w-2 h-2 bg-gray-400 rounded-full mt-2"></div>
-                                            <div class="flex-1">
-                                                <div class="text-sm text-gray-900 mb-1">
-                                                    This customer placed order <span class="font-medium">#USTITCH1014</span> on Online Store (checkout #639171168833316).
-                                                </div>
-                                                <div class="text-xs text-gray-500">6:57 PM</div>
-                                            </div>
-                                        </div>
+
 
                                         <!-- June 15 -->
-                                        <div class="text-sm font-medium text-gray-900 mb-3">June 15</div>
+                                        <?php
+                                        foreach ($TimelineData as $key => $timeline) {
 
-                                        <div class="flex space-x-3">
-                                            <div class="w-2 h-2 bg-gray-400 rounded-full mt-2"></div>
-                                            <div class="flex-1">
-                                                <div class="text-sm text-gray-900 mb-1">
-                                                    Order Confirmation email for order <span class="font-medium">#USTITCH1006</span> sent to this customer (manish291082@yahoo.in).
-                                                </div>
-                                                <div class="flex items-center space-x-3">
-                                                    <button class="text-sm text-blue-600 hover:underline">View email</button>
-                                                    <span class="text-xs text-gray-500">11:18 AM</span>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="flex space-x-3">
-                                            <div class="w-2 h-2 bg-gray-400 rounded-full mt-2"></div>
-                                            <div class="flex-1">
-                                                <div class="text-sm text-gray-900 mb-1">
-                                                    This customer placed order <span class="font-medium">#USTITCH1006</span> on Online Store (checkout #639102077579).
-                                                </div>
-                                                <div class="text-xs text-gray-500">11:18 AM</div>
-                                            </div>
-                                        </div>
+                                        ?>
+                                            <div class="text-sm font-medium text-gray-900 mb-3"><?= formatDate($timeline[0]['created_date']) ?></div>
+                                            <?php
+                                            foreach ($timeline as $key => $value) {
+                                                if ($value['source'] == 'tbl_purchase') {
+                                            ?>
+                                                    <div class="flex space-x-3">
+                                                        <div class="w-2 h-2 bg-gray-400 rounded-full mt-2"></div>
+                                                        <div class="flex-1">
+                                                            <div class="text-sm text-gray-900 mb-1">
+                                                                This customer placed order <span class="font-medium">#<?= $value['orderid'] ?></span> on Online Store.
+                                                            </div>
+                                                            <div class="text-xs text-gray-500"><?= formatTime($value['created_time']) ?></div>
+                                                        </div>
+                                                    </div>
+                                                <?php } else { ?>
+                                                    <div class="flex space-x-3">
+                                                        <div class="w-2 h-2 bg-gray-400 rounded-full mt-2"></div>
+                                                        <div class="flex-1">
+                                                            <div class="text-sm text-gray-900 mb-1">
+                                                                This Customer Created the Account on
+                                                            </div>
+                                                            <div class="text-xs text-gray-500"><?= formatTime($value['created_time']) ?></div>
+                                                        </div>
+                                                    </div>
 
+                                                <?php } ?>
+                                            <?php
+                                            }
+                                            ?>
+                                        <?php } ?>
                                         <!-- June 14 -->
-                                        <div class="text-sm font-medium text-gray-900 mb-3">June 14</div>
-
-                                        <div class="flex space-x-3">
-                                            <div class="w-2 h-2 bg-gray-400 rounded-full mt-2"></div>
-                                            <div class="flex-1">
-                                                <div class="text-sm text-gray-900 flex items-center space-x-2">
-                                                    <i class="fas fa-store text-green-600"></i>
-                                                    <span>Online Store created this customer.</span>
-                                                </div>
-                                                <div class="text-xs text-gray-500 mt-1">7:31 PM</div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -259,11 +236,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     <div>
                                         <h3 class="text-xl font-medium text-gray-900 mb-2">Default address</h3>
                                         <div class="text-sm text-gray-600 leading-relaxed">
-                                           <p class="text-sm text-gray-600 leading-relaxed"><?= $defaultAddress['address_line1'] ?>, <?= $defaultAddress['address_line2'] ?></p>
+                                            <p class="text-sm text-gray-600 leading-relaxed"><?= $defaultAddress['address_line1'] ?>, <?= $defaultAddress['address_line2'] ?></p>
                                         </div>
                                     </div>
 
-                                    
+
                                 </div>
                             </div>
 

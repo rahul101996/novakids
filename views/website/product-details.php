@@ -323,6 +323,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 alt="">
                         </div>
                     </div>
+                    <span class="text-xs text-white bg-gray-700 py-1 px-3 w-fit"><?= $ProductData['product_tag'] ?></span>
                     <p class="text-sm text-gray-900 mt-2 text-justify">Upgrade your casual wardrobe with our black
                         sporty deconstructed loose pants, the perfect blend of comfort and style. Designed with a
                         relaxed fit, these pants allow for effortless movement, while the deconstructed detailing adds a
