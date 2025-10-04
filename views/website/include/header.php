@@ -150,18 +150,48 @@ if (!empty($_POST)) {
                     $_SESSION['mobile'] = $_POST['mobile'];
 
                     if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
+                        $checkout = [];
                         foreach ($_SESSION["cart"] as $key => $c) {
+                            $cartaratratartaratartrrat = true;
 
-                            $cartdata = [
-                                "varient" => $c["varient"],
-                                "category" => $c["category"],
-                                "product" => $c["product"],
-                                "quantity" => $c["quantity"],
-                                "userid" => $userid,
-                                "username" => $_POST["username"],
-                            ];
-                            add($cartdata, "tbl_cart");
+                            $data = getData2("SELECT * FROM `tbl_cart` WHERE `varient` = {$c['varient']} AND `userid` = {$userid} ORDER BY `id` DESC LIMIT 1")[0];
+                            $variant = getData2("SELECT * FROM `tbl_variants` WHERE `id` = {$c['varient']}")[0];
+
+                            if ($data) {
+                                update([
+                                    "quantity" => $data["quantity"] + $c["quantity"]
+                                ], $data["id"], "tbl_cart");
+
+                                $cartid = $data["id"]; // use existing cart id
+                                $finalQty = $data["quantity"] + $c["quantity"];
+                            } else {
+                                $cartdata = [
+                                    "varient" => $c["varient"],
+                                    "category" => $c["category"],
+                                    "product" => $c["product"],
+                                    "quantity" => $c["quantity"],
+                                    "userid" => $userid,
+                                    "username" => $username,
+                                ];
+                                $cartid = add($cartdata, "tbl_cart");
+                                $finalQty = $c["quantity"];
+                            }
+
+                            // Always push into checkout
+                            $checkout['varient'][$key]   = $c["varient"];
+                            $checkout['category'][$key]  = $c["category"];
+                            $checkout['product'][$key]   = $c["product"];
+                            $checkout['quantity'][$key]  = $finalQty;
+                            $checkout['userid'][$key]    = $userid;
+                            $checkout['username'][$key]  = $username;
+                            $checkout['price'][$key]     = $variant['price'];
+                            $checkout['cartid'][$key]    = $cartid;
                         }
+
+                        // printWithPre($checkout);
+                        // echo "onuwbnweb";
+                        // die();
+                        $_SESSION["cartData"] = $checkout;
                         unset($_SESSION["cart"]);
                     } else if (isset($_SESSION["FormCartData"])) {
                         $cartaratratartaratartrrat1 = true;
@@ -193,18 +223,47 @@ if (!empty($_POST)) {
 
 
                     if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
+                        $checkout = [];
                         foreach ($_SESSION["cart"] as $key => $c) {
+                            $cartaratratartaratartrrat = true;
 
-                            $cartdata = [
-                                "varient" => $c["varient"],
-                                "category" => $c["category"],
-                                "product" => $c["product"],
-                                "quantity" => $c["quantity"],
-                                "userid" => $userid,
-                                "username" => $_POST["username"],
-                            ];
-                            add($cartdata, "tbl_cart");
+                            $data = getData2("SELECT * FROM `tbl_cart` WHERE `varient` = {$c['varient']} AND `userid` = {$userid} ORDER BY `id` DESC LIMIT 1")[0];
+                            $variant = getData2("SELECT * FROM `tbl_variants` WHERE `id` = {$c['varient']}")[0];
+
+                            if ($data) {
+                                update([
+                                    "quantity" => $data["quantity"] + $c["quantity"]
+                                ], $data["id"], "tbl_cart");
+
+                                $cartid = $data["id"]; // use existing cart id
+                                $finalQty = $data["quantity"] + $c["quantity"];
+                            } else {
+                                $cartdata = [
+                                    "varient" => $c["varient"],
+                                    "category" => $c["category"],
+                                    "product" => $c["product"],
+                                    "quantity" => $c["quantity"],
+                                    "userid" => $userid,
+                                ];
+                                $cartid = add($cartdata, "tbl_cart");
+                                $finalQty = $c["quantity"];
+                            }
+
+                            // Always push into checkout
+                            $checkout['varient'][$key]   = $c["varient"];
+                            $checkout['category'][$key]  = $c["category"];
+                            $checkout['product'][$key]   = $c["product"];
+                            $checkout['quantity'][$key]  = $finalQty;
+                            $checkout['userid'][$key]    = $userid;
+                            $checkout['username'][$key]  = $username;
+                            $checkout['price'][$key]     = $variant['price'];
+                            $checkout['cartid'][$key]    = $cartid;
                         }
+
+                        // printWithPre($checkout);
+                        // echo "onuwbnweb";
+                        // die();
+                        $_SESSION["cartData"] = $checkout;
                         unset($_SESSION["cart"]);
                     } else if (isset($_SESSION["FormCartData"])) {
                         $cartaratratartaratartrrat1 = true;

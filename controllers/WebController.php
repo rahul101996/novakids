@@ -243,10 +243,10 @@ class WebController extends LoginController
                                 <input type="hidden" name="quantity[]" id="product_buy_count1" value="1">
                                 <input type="hidden" name="cartid[]" value="">
                                 <button onclick="openLogin()" class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-4 hover:border hover:border-[#f25b21] transition-all duration-700"><span
-                                            class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
-                                            Buy It Now
-                                             </span> <span
-                                            class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
+                                        class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
+                                        Buy It Now
+                                    </span> <span
+                                        class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
                                     </span>
 
                                 </button>
@@ -695,6 +695,7 @@ class WebController extends LoginController
                     "message" => "Server Error"
                 ]);
             }
+            exit();
         } else {
             $id = $_POST['process'];
             unset($_POST['process']);
@@ -712,21 +713,9 @@ class WebController extends LoginController
                     "message" => "Server Error"
                 ]);
             }
+            exit();
         }
-        if ($address) {
-            $_SESSION['success'] = "Address Added Successfully";
-            echo json_encode([
-                "success" => true,
-                "address" => $address
-            ]);
-        } else {
-
-            echo json_encode([
-                "success" => false,
-                "message" => "Server Error"
-            ]);
-        }
-        exit();
+       
     }
 
     public function thankYou()
@@ -896,8 +885,8 @@ class WebController extends LoginController
             "success" => false,
             "message" => "No Product Found"
         ];
-        
-       
+
+
         $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_category.category = '$category_name'");
 
         foreach ($products as $key => $value) {
@@ -1229,11 +1218,11 @@ class WebController extends LoginController
                 if ($purchaseid) {
                     // echo "Success";
                     foreach ($_SESSION["cartData"]["varient"] as $key => $varient) {
-                       
+
                         $quantity = getData2("SELECT * FROM tbl_variants where id='$varient'")[0]["quantity"];
-                        if($quantity>=$_SESSION["cartData"]["quantity"][$key]){
-                            update(["quantity"=>$quantity-$_SESSION["cartData"]["quantity"][$key]],$varient,"tbl_variants");
-                             $insertData = [
+                        if ($quantity >= $_SESSION["cartData"]["quantity"][$key]) {
+                            update(["quantity" => $quantity - $_SESSION["cartData"]["quantity"][$key]], $varient, "tbl_variants");
+                            $insertData = [
                                 "purchase_id" => $purchaseid,
                                 "varient" => $varient,
                                 "product" => $_SESSION["cartData"]["product"][$key],
@@ -1250,7 +1239,7 @@ class WebController extends LoginController
                                 "created_by" => $_SESSION["userid"],
                             ];
                             add($insertData, "tbl_purchase_item");
-                        }else{
+                        } else {
                             $db->rollBack();
                             $_SESSION["err"] = "Product Out Of Stock";
                             header("Location: /checkout");
@@ -1267,7 +1256,7 @@ class WebController extends LoginController
                     $_SESSION["new_order"] = $purchaseid[0];
                     $_SESSION['order_id'] = $order_id;
                     $token = $this->validshiprockettoken();
-                    echo $token;
+                    // echo $token;
 
                     // $placeordershiprocket = $this->placeordershiprocket($token, $order_id);
                     // $placeordershiprocket = (array)$placeordershiprocket;
@@ -1286,7 +1275,6 @@ class WebController extends LoginController
                     header("Location: /checkout");
                     // printWithPre($purchaseid);
                     exit();
-                    
                 }
             } elseif ($mode = "Prepaid") {
 
@@ -1354,7 +1342,7 @@ class WebController extends LoginController
                     // }
                 }
             }
-            
+
             require 'views/website/checkout.php';
         }
     }
