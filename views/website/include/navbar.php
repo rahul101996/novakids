@@ -127,7 +127,7 @@ $categories = getData("tbl_category");
         <p id="rotating-text1" class="text-sm max-md:text-xs text-white font-medium tracking-wide"></p>
     </div>
 
-    <div class="w-full flex items-center justify-between py-1">
+    <div class="w-full flex items-center justify-between ">
         <li class="relative group list-none max-md:hidden hidden">
             <button
                 class="nav-text text-black relative px-6 py-3 text-lg font-semibold flex items-center gap-2 transition-all duration-300">
@@ -283,12 +283,14 @@ $categories = getData("tbl_category");
             </div>
         </li>
 
-        <div class="flex items-center space-x-7 ml-8">
+        <div class="flex items-center space-x-7 ml-5">
             <a href="/" class="block">
-                <div class="flex items-center gap-1">
-                    <img src="/public/logos/nova_favicon.png" alt="Brand Logo" class="w-auto h-10 rounded-md object-cover my-2 ">
-                    <img src="/public/logos/brand-name.png" alt="Brand Logo" class="w-auto h-8 rounded-md object-cover my-2">
-                </div> <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-8 md:hidden">
+                <div class="flex items-center gap-1 py-2">
+                    <img src="/public/logos/nova_favicon.png" alt="Brand Logo"
+                        class="w-auto h-8 rounded-md object-cover my-2 ">
+                    <img src="/public/logos/nova_logo-brnd-name.png" alt="Brand Logo"
+                        class="w-auto h-8 rounded-md object-cover my-2">
+                </div> <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
             </a>
         </div>
 
@@ -314,8 +316,7 @@ $categories = getData("tbl_category");
 
         <div class="flex items-center absolute left-1/2 transform -translate-x-1/2 space-x-7 max-md:hidden">
             <div class="relative group">
-                <a href="/new-arrivals"
-                    class="text-gray-800  group duration-300 cursor-pointer">NEW ARRIVALS
+                <a href="/new-arrivals" class="text-gray-800  group duration-300 cursor-pointer">NEW ARRIVALS
                     <span
                         class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
                     <span
@@ -325,7 +326,7 @@ $categories = getData("tbl_category");
             <?php
             foreach ($categories as $key => $value) {
                 $category = strtolower(str_replace(" ", "-", $value['category']));
-            ?>
+                ?>
                 <div class="relative group">
                     <a href="/category/<?= $category ?>"
                         class="text-gray-800  group duration-300 cursor-pointer"><?= $value['category'] ?>
@@ -434,6 +435,932 @@ $categories = getData("tbl_category");
 
         </div>
     </div>
+
+    <div class="w-full flex items-center justify-between hidden">
+        <li class="relative group list-none max-md:hidden hidden">
+            <button
+                class="nav-text text-black relative px-6 py-3 text-lg font-semibold flex items-center gap-2 transition-all duration-300">
+                Boys Collection
+                <i class="fas fa-chevron-down text-sm group-hover:rotate-180 transition-transform duration-300"></i>
+            </button>
+            <!-- Mega Menu -->
+            <div
+                class="mega-menu absolute left-0 top-full w-screen bg-white py-8 px-8 grid grid-cols-5 gap-10 z-50 shadow-xl">
+                <div class="relative overflow-hidden h-[400px] bg-gray-900">
+                    <img src="/public/images/333.avif" alt="Streetwear Collection"
+                        class="w-full h-full object-cover opacity-80">
+
+                    <div class="absolute bottom-3 left-6 text-white">
+                        <p class="text-base font-medium mb-3">Trending Now</p>
+                        <a href="/shop"
+                            class="relative inline-block px-6 py-2 rounded-lg border border-white text-white font-semibold overflow-hidden group">
+                            <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
+                                Shop Now
+                            </span>
+                            <span
+                                class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden h-[400px] bg-gray-900">
+                    <img src="/public/images/444.avif" alt="Streetwear Collection"
+                        class="w-full h-full object-cover opacity-80 ">
+                    <div class="absolute bottom-3 left-6 text-white">
+                        <p class="text-base font-medium mb-3">Trending Now</p>
+                        <a href="/shop"
+                            class="relative inline-block px-6 py-2 rounded-lg border border-white text-white font-semibold overflow-hidden group">
+                            <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
+                                Shop Now
+                            </span>
+                            <span
+                                class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-lg text-black border-b border-gray-200 pb-2">Tees / Relaxed Tees
+                    </h4>
+
+                    <div class="space-y-3">
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class=" text-gray-800 group-hover:text-black">Oversized Tees</span>
+
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Relaxed fit, street ready</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class=" text-gray-800 group-hover:text-black">Graphic Tees</span>
+
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Bold prints, statement pieces</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class=" text-gray-800 group-hover:text-black">Long Sleeves</span>
+
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Layering essentials</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class=" text-gray-800 group-hover:text-black">Tank Tops</span>
+
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Summer vibes</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-lg text-black border-b border-gray-200 pb-2">Joggers</h4>
+
+                    <div class="space-y-3">
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Classic Joggers</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Everyday comfort wear</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Slim Fit Joggers</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Modern tapered look</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Cargo Joggers</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Utility meets style</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Athletic Joggers</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Performance-ready fit</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-lg text-black border-b border-gray-200 pb-2">Co-ords</h4>
+
+                    <div class="space-y-3">
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Casual Co-ords</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Everyday comfort sets</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Lounge Co-ords</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Relaxed & cozy vibes</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Streetwear Co-ords</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Bold styles for the city</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <div class="flex items-center space-x-7 ml-5">
+            <a href="/" class="block">
+                <div class="flex items-center gap-1 py-2">
+                    <img src="/public/logos/nova_favicon.png" alt="Brand Logo"
+                        class="w-auto h-8 rounded-md object-cover my-2 ">
+                    <img src="/public/logos/brand-name.png" alt="Brand Logo"
+                        class="w-auto h-8 rounded-md object-cover my-2">
+                </div> <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
+            </a>
+        </div>
+
+
+        <!-- Mobile Menu Toggle Button -->
+        <div class="md:hidden flex items-center">
+            <button id="menu-toggle" class="p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px"
+                    fill="#4b4b4bff">
+                    <path
+                        d="M120-240v-80h520v80H120Zm664-40L584-480l200-200 56 56-144 144 144 144-56 56ZM120-440v-80h400v80H120Zm0-200v-80h520v80H120Z" />
+                </svg>
+            </button>
+
+            <button class="openSearch">
+                <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="24px"
+                    fill="#4b4b4bff">
+                    <path
+                        d="M400-320q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70Zm-42-98 226-227-57-57-169 170-85-84-57 56 142 142Zm42 178q-134 0-227-93T80-560q0-134 93-227t227-93q134 0 227 93t93 227q0 56-17.5 105.5T653-364l227 228-56 56-228-227q-41 32-90.5 49.5T400-240Zm0-320Z" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="flex items-center absolute left-1/2 transform -translate-x-1/2 space-x-7 max-md:hidden">
+            <div class="relative group">
+                <a href="/new-arrivals" class="text-gray-800  group duration-300 cursor-pointer">NEW ARRIVALS
+                    <span
+                        class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                    <span
+                        class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                </a>
+            </div>
+            <?php
+            foreach ($categories as $key => $value) {
+                $category = strtolower(str_replace(" ", "-", $value['category']));
+                ?>
+                <div class="relative group">
+                    <a href="/category/<?= $category ?>"
+                        class="text-gray-800  group duration-300 cursor-pointer"><?= $value['category'] ?>
+                        <span
+                            class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                        <span
+                            class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                    </a>
+                </div>
+            <?php } ?>
+        </div>
+
+        <div class="flex md:gap-1 items-center ml-auto md:pr-12 max-md:pr-1 py-1.5">
+            <div class="flex items-center max-md:hidden">
+                <button
+                    class="openSearch text-black p-2 max-md:text-xs rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
+                    <svg class="svgSearch anarkali-svg-icon" width="24px" height="24px" fill="currentColor"
+                        viewBox="0 0 48 48" enable-background="new 0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <path
+                                d="m40.2850342 37.4604492-6.4862061-6.4862061c1.9657593-2.5733643 3.0438843-5.6947021 3.0443115-8.9884033 0-3.9692383-1.5458984-7.7011719-4.3530273-10.5078125-2.8066406-2.8066406-6.5380859-4.3525391-10.5078125-4.3525391-3.9692383 0-7.7011719 1.5458984-10.5078125 4.3525391-5.7939453 5.7944336-5.7939453 15.222168 0 21.015625 2.8066406 2.8071289 6.5385742 4.3530273 10.5078125 4.3530273 3.2937012-.0004272 6.4150391-1.0785522 8.9884033-3.0443115l6.4862061 6.4862061c.3901367.390625.9023438.5859375 1.4140625.5859375s1.0239258-.1953125 1.4140625-.5859375c.78125-.7807617.78125-2.0473633 0-2.828125zm-25.9824219-7.7949219c-4.234375-4.234375-4.2338867-11.1245117 0-15.359375 2.0512695-2.0507813 4.7788086-3.1806641 7.6796875-3.1806641 2.9013672 0 5.628418 1.1298828 7.6796875 3.1806641 2.0512695 2.0512695 3.1811523 4.7788086 3.1811523 7.6796875 0 2.9013672-1.1298828 5.628418-3.1811523 7.6796875s-4.7783203 3.1811523-7.6796875 3.1811523c-2.9008789.0000001-5.628418-1.1298827-7.6796875-3.1811523z">
+                            </path>
+                        </g>
+                    </svg>
+                </button>
+            </div>
+            <!-- <button id="Openvariant">Open Cart</button> -->
+            <button <?= isset($_SESSION['userid']) && !empty($_SESSION['userid']) ? 'onclick="window.location.href=\'/profile\'"' : 'id="openLogin"' ?>
+                class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
+                <div class="max-md:hidden">
+                    <svg class="svgUser2 anarkali-svg-icon" enable-background="new 0 0 512 512" height="24px"
+                        viewBox="0 0 512 512" width="24px" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <g>
+                                <path
+                                    d="m256 253.7c-62 0-112.4-50.4-112.4-112.4s50.4-112.4 112.4-112.4 112.4 50.4 112.4 112.4-50.4 112.4-112.4 112.4zm0-195.8c-46 0-83.4 37.4-83.4 83.4s37.4 83.4 83.4 83.4 83.4-37.4 83.4-83.4-37.4-83.4-83.4-83.4z">
+                                </path>
+                            </g>
+                            <g>
+                                <path
+                                    d="m452.1 483.2h-392.2c-8 0-14.5-6.5-14.5-14.5 0-106.9 94.5-193.9 210.6-193.9s210.6 87 210.6 193.9c0 8-6.5 14.5-14.5 14.5zm-377-29.1h361.7c-8.1-84.1-86.1-150.3-180.8-150.3s-172.7 66.2-180.9 150.3z">
+                                </path>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div class="md:hidden">
+                    <svg width="22" height="22" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        id="svgkp">
+                        <path
+                            d="M22.9129 12.935L13.7571 23.0474C13.5348 23.2929 13.1284 23.1084 13.1669 22.7794L14.0816 14.9731H10.6991C10.4034 14.9731 10.2484 14.6219 10.4478 14.4035L20.3133 3.59739C20.5589 3.32834 20.9984 3.58134 20.8891 3.92887L18.2354 12.3664H22.6607C22.9557 12.3664 23.1109 12.7163 22.9129 12.935Z"
+                            fill="#f25b21"></path>
+                        <path id="svgkp-path" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M16.6079 5.35819C16.4805 5.1933 16.3421 5.03582 16.1932 4.8869C15.2702 3.96387 14.0183 3.44531 12.7129 3.44531C11.4075 3.44531 10.1556 3.96387 9.2326 4.8869C8.30957 5.80993 7.79102 7.06183 7.79102 8.36719C7.79102 9.67255 8.30957 10.9244 9.2326 11.8475C9.48368 12.0986 9.75909 12.3197 10.0533 12.5086L11.0235 11.4503C10.7335 11.2914 10.4649 11.0911 10.227 10.8531C9.56766 10.1938 9.19727 9.29959 9.19727 8.36719C9.19727 7.43479 9.56766 6.54057 10.227 5.88127C10.8863 5.22196 11.7805 4.85156 12.7129 4.85156C13.6453 4.85156 14.5395 5.22196 15.1988 5.88127C15.3636 6.04604 15.5103 6.22549 15.6377 6.41654L16.6079 5.35819ZM20.6413 18.6497L19.6746 19.7132C20.1676 20.4122 20.4473 21.2264 20.4473 22.0781V23.8359C20.4473 24.2243 20.7621 24.5391 21.1504 24.5391C21.5387 24.5391 21.8535 24.2243 21.8535 23.8359V22.0781C21.8535 20.7863 21.4016 19.6103 20.6413 18.6497ZM12.3111 17.5078H10.3026C7.27113 17.5078 4.97852 19.6394 4.97852 22.0781V23.8359C4.97852 24.2243 4.66372 24.5391 4.27539 24.5391C3.88707 24.5391 3.57227 24.2243 3.57227 23.8359V22.0781C3.57227 18.6922 6.67684 16.1016 10.3026 16.1016H12.4885L12.3111 17.5078Z"
+                            fill="currentColor" stroke="currentColor"></path>
+                    </svg>
+                </div>
+            </button>
+
+            <div class="flex items-center max-md:hidden relative">
+                <button onclick="window.location.href='/wishlist'"
+                    class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
+                    <div class="max-md:hidden">
+                        <svg class="svgLove anarkali-svg-icon" width="24px" height="24px" fill="currentColor"
+                            viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m29.55 6.509c-1.73-2.302-3.759-3.483-6.031-3.509h-.076c-3.29 0-6.124 2.469-7.443 3.84-1.32-1.371-4.153-3.84-7.444-3.84h-.075c-2.273.026-4.3 1.207-6.059 3.549a8.265 8.265 0 0 0 1.057 10.522l11.821 11.641a1 1 0 0 0 1.4 0l11.82-11.641a8.278 8.278 0 0 0 1.03-10.562zm-2.432 9.137-11.118 10.954-11.118-10.954a6.254 6.254 0 0 1 -.832-7.936c1.335-1.777 2.831-2.689 4.45-2.71h.058c3.48 0 6.627 3.924 6.658 3.964a1.037 1.037 0 0 0 1.57 0c.032-.04 3.2-4.052 6.716-3.964a5.723 5.723 0 0 1 4.421 2.67 6.265 6.265 0 0 1 -.805 7.976z">
+                            </path>
+                        </svg>
+                    </div>
+                </button>
+                <span
+                    class="absolute -top-1 max-md:-top-2 -right-3 max-md:right-0 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md"
+                    id="wishlist-count">
+                    <?= $wishlistcount ?>
+                </span>
+            </div>
+
+            <div class="relative max-md:mr-1">
+                <button
+                    class=" nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95"
+                    onclick="openCart()">
+                    <div class="max-md:hidden">
+                        <svg class="shopBag anarkali-svg-icon" width="24px" height="24px" fill="currentColor"
+                            viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m26 8.9a1 1 0 0 0 -1-.9h-3a6 6 0 0 0 -12 0h-3a1 1 0 0 0 -1 .9l-1.78 17.8a3 3 0 0 0 .78 2.3 3 3 0 0 0 2.22 1h17.57a3 3 0 0 0 2.21-1 3 3 0 0 0 .77-2.31zm-10-4.9a4 4 0 0 1 4 4h-8a4 4 0 0 1 4-4zm9.53 23.67a1 1 0 0 1 -.74.33h-17.58a1 1 0 0 1 -.74-.33 1 1 0 0 1 -.26-.77l1.7-16.9h2.09v3a1 1 0 0 0 2 0v-3h8v3a1 1 0 0 0 2 0v-3h2.09l1.7 16.9a1 1 0 0 1 -.26.77z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="md:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="24px"
+                            fill="#4b4b4bff">
+                            <path
+                                d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </button>
+                <span
+                    class="absolute -top-1 max-md:-top-2 -right-3 max-md:right-0 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md"
+                    id="cart-count">
+                    <?= $count ?>
+                </span>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="w-full flex items-center justify-between hidden">
+        <li class="relative group list-none max-md:hidden hidden">
+            <button
+                class="nav-text text-black relative px-6 py-3 text-lg font-semibold flex items-center gap-2 transition-all duration-300">
+                Boys Collection
+                <i class="fas fa-chevron-down text-sm group-hover:rotate-180 transition-transform duration-300"></i>
+            </button>
+            <!-- Mega Menu -->
+            <div
+                class="mega-menu absolute left-0 top-full w-screen bg-white py-8 px-8 grid grid-cols-5 gap-10 z-50 shadow-xl">
+                <div class="relative overflow-hidden h-[400px] bg-gray-900">
+                    <img src="/public/images/333.avif" alt="Streetwear Collection"
+                        class="w-full h-full object-cover opacity-80">
+
+                    <div class="absolute bottom-3 left-6 text-white">
+                        <p class="text-base font-medium mb-3">Trending Now</p>
+                        <a href="/shop"
+                            class="relative inline-block px-6 py-2 rounded-lg border border-white text-white font-semibold overflow-hidden group">
+                            <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
+                                Shop Now
+                            </span>
+                            <span
+                                class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden h-[400px] bg-gray-900">
+                    <img src="/public/images/444.avif" alt="Streetwear Collection"
+                        class="w-full h-full object-cover opacity-80 ">
+                    <div class="absolute bottom-3 left-6 text-white">
+                        <p class="text-base font-medium mb-3">Trending Now</p>
+                        <a href="/shop"
+                            class="relative inline-block px-6 py-2 rounded-lg border border-white text-white font-semibold overflow-hidden group">
+                            <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
+                                Shop Now
+                            </span>
+                            <span
+                                class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-lg text-black border-b border-gray-200 pb-2">Tees / Relaxed Tees
+                    </h4>
+
+                    <div class="space-y-3">
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class=" text-gray-800 group-hover:text-black">Oversized Tees</span>
+
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Relaxed fit, street ready</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class=" text-gray-800 group-hover:text-black">Graphic Tees</span>
+
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Bold prints, statement pieces</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class=" text-gray-800 group-hover:text-black">Long Sleeves</span>
+
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Layering essentials</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class=" text-gray-800 group-hover:text-black">Tank Tops</span>
+
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Summer vibes</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-lg text-black border-b border-gray-200 pb-2">Joggers</h4>
+
+                    <div class="space-y-3">
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Classic Joggers</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Everyday comfort wear</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Slim Fit Joggers</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Modern tapered look</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Cargo Joggers</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Utility meets style</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Athletic Joggers</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Performance-ready fit</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-lg text-black border-b border-gray-200 pb-2">Co-ords</h4>
+
+                    <div class="space-y-3">
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Casual Co-ords</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Everyday comfort sets</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Lounge Co-ords</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Relaxed & cozy vibes</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Streetwear Co-ords</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Bold styles for the city</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <div class="flex items-center space-x-7 ml-5">
+            <a href="/" class="block">
+                <div class="flex items-center gap-1 py-2">
+                    <!-- <img src="/public/logos/nova_favicon.png" alt="Brand Logo" class="w-auto h-14 rounded-md object-cover my-2 "> -->
+                    <img src="/public/logos/brand-name.png" alt="Brand Logo"
+                        class="w-auto h-8 rounded-md object-cover my-2">
+                </div> <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
+            </a>
+        </div>
+
+
+        <!-- Mobile Menu Toggle Button -->
+        <div class="md:hidden flex items-center">
+            <button id="menu-toggle" class="p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px"
+                    fill="#4b4b4bff">
+                    <path
+                        d="M120-240v-80h520v80H120Zm664-40L584-480l200-200 56 56-144 144 144 144-56 56ZM120-440v-80h400v80H120Zm0-200v-80h520v80H120Z" />
+                </svg>
+            </button>
+
+            <button class="openSearch">
+                <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="24px"
+                    fill="#4b4b4bff">
+                    <path
+                        d="M400-320q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70Zm-42-98 226-227-57-57-169 170-85-84-57 56 142 142Zm42 178q-134 0-227-93T80-560q0-134 93-227t227-93q134 0 227 93t93 227q0 56-17.5 105.5T653-364l227 228-56 56-228-227q-41 32-90.5 49.5T400-240Zm0-320Z" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="flex items-center absolute left-1/2 transform -translate-x-1/2 space-x-7 max-md:hidden">
+            <div class="relative group">
+                <a href="/new-arrivals" class="text-gray-800  group duration-300 cursor-pointer">NEW ARRIVALS
+                    <span
+                        class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                    <span
+                        class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                </a>
+            </div>
+            <?php
+            foreach ($categories as $key => $value) {
+                $category = strtolower(str_replace(" ", "-", $value['category']));
+                ?>
+                <div class="relative group">
+                    <a href="/category/<?= $category ?>"
+                        class="text-gray-800  group duration-300 cursor-pointer"><?= $value['category'] ?>
+                        <span
+                            class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                        <span
+                            class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                    </a>
+                </div>
+            <?php } ?>
+        </div>
+
+        <div class="flex md:gap-1 items-center ml-auto md:pr-12 max-md:pr-1 py-1.5">
+            <div class="flex items-center max-md:hidden">
+                <button
+                    class="openSearch text-black p-2 max-md:text-xs rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
+                    <svg class="svgSearch anarkali-svg-icon" width="24px" height="24px" fill="currentColor"
+                        viewBox="0 0 48 48" enable-background="new 0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <path
+                                d="m40.2850342 37.4604492-6.4862061-6.4862061c1.9657593-2.5733643 3.0438843-5.6947021 3.0443115-8.9884033 0-3.9692383-1.5458984-7.7011719-4.3530273-10.5078125-2.8066406-2.8066406-6.5380859-4.3525391-10.5078125-4.3525391-3.9692383 0-7.7011719 1.5458984-10.5078125 4.3525391-5.7939453 5.7944336-5.7939453 15.222168 0 21.015625 2.8066406 2.8071289 6.5385742 4.3530273 10.5078125 4.3530273 3.2937012-.0004272 6.4150391-1.0785522 8.9884033-3.0443115l6.4862061 6.4862061c.3901367.390625.9023438.5859375 1.4140625.5859375s1.0239258-.1953125 1.4140625-.5859375c.78125-.7807617.78125-2.0473633 0-2.828125zm-25.9824219-7.7949219c-4.234375-4.234375-4.2338867-11.1245117 0-15.359375 2.0512695-2.0507813 4.7788086-3.1806641 7.6796875-3.1806641 2.9013672 0 5.628418 1.1298828 7.6796875 3.1806641 2.0512695 2.0512695 3.1811523 4.7788086 3.1811523 7.6796875 0 2.9013672-1.1298828 5.628418-3.1811523 7.6796875s-4.7783203 3.1811523-7.6796875 3.1811523c-2.9008789.0000001-5.628418-1.1298827-7.6796875-3.1811523z">
+                            </path>
+                        </g>
+                    </svg>
+                </button>
+            </div>
+            <!-- <button id="Openvariant">Open Cart</button> -->
+            <button <?= isset($_SESSION['userid']) && !empty($_SESSION['userid']) ? 'onclick="window.location.href=\'/profile\'"' : 'id="openLogin"' ?>
+                class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
+                <div class="max-md:hidden">
+                    <svg class="svgUser2 anarkali-svg-icon" enable-background="new 0 0 512 512" height="24px"
+                        viewBox="0 0 512 512" width="24px" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <g>
+                                <path
+                                    d="m256 253.7c-62 0-112.4-50.4-112.4-112.4s50.4-112.4 112.4-112.4 112.4 50.4 112.4 112.4-50.4 112.4-112.4 112.4zm0-195.8c-46 0-83.4 37.4-83.4 83.4s37.4 83.4 83.4 83.4 83.4-37.4 83.4-83.4-37.4-83.4-83.4-83.4z">
+                                </path>
+                            </g>
+                            <g>
+                                <path
+                                    d="m452.1 483.2h-392.2c-8 0-14.5-6.5-14.5-14.5 0-106.9 94.5-193.9 210.6-193.9s210.6 87 210.6 193.9c0 8-6.5 14.5-14.5 14.5zm-377-29.1h361.7c-8.1-84.1-86.1-150.3-180.8-150.3s-172.7 66.2-180.9 150.3z">
+                                </path>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div class="md:hidden">
+                    <svg width="22" height="22" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        id="svgkp">
+                        <path
+                            d="M22.9129 12.935L13.7571 23.0474C13.5348 23.2929 13.1284 23.1084 13.1669 22.7794L14.0816 14.9731H10.6991C10.4034 14.9731 10.2484 14.6219 10.4478 14.4035L20.3133 3.59739C20.5589 3.32834 20.9984 3.58134 20.8891 3.92887L18.2354 12.3664H22.6607C22.9557 12.3664 23.1109 12.7163 22.9129 12.935Z"
+                            fill="#f25b21"></path>
+                        <path id="svgkp-path" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M16.6079 5.35819C16.4805 5.1933 16.3421 5.03582 16.1932 4.8869C15.2702 3.96387 14.0183 3.44531 12.7129 3.44531C11.4075 3.44531 10.1556 3.96387 9.2326 4.8869C8.30957 5.80993 7.79102 7.06183 7.79102 8.36719C7.79102 9.67255 8.30957 10.9244 9.2326 11.8475C9.48368 12.0986 9.75909 12.3197 10.0533 12.5086L11.0235 11.4503C10.7335 11.2914 10.4649 11.0911 10.227 10.8531C9.56766 10.1938 9.19727 9.29959 9.19727 8.36719C9.19727 7.43479 9.56766 6.54057 10.227 5.88127C10.8863 5.22196 11.7805 4.85156 12.7129 4.85156C13.6453 4.85156 14.5395 5.22196 15.1988 5.88127C15.3636 6.04604 15.5103 6.22549 15.6377 6.41654L16.6079 5.35819ZM20.6413 18.6497L19.6746 19.7132C20.1676 20.4122 20.4473 21.2264 20.4473 22.0781V23.8359C20.4473 24.2243 20.7621 24.5391 21.1504 24.5391C21.5387 24.5391 21.8535 24.2243 21.8535 23.8359V22.0781C21.8535 20.7863 21.4016 19.6103 20.6413 18.6497ZM12.3111 17.5078H10.3026C7.27113 17.5078 4.97852 19.6394 4.97852 22.0781V23.8359C4.97852 24.2243 4.66372 24.5391 4.27539 24.5391C3.88707 24.5391 3.57227 24.2243 3.57227 23.8359V22.0781C3.57227 18.6922 6.67684 16.1016 10.3026 16.1016H12.4885L12.3111 17.5078Z"
+                            fill="currentColor" stroke="currentColor"></path>
+                    </svg>
+                </div>
+            </button>
+
+            <div class="flex items-center max-md:hidden relative">
+                <button onclick="window.location.href='/wishlist'"
+                    class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
+                    <div class="max-md:hidden">
+                        <svg class="svgLove anarkali-svg-icon" width="24px" height="24px" fill="currentColor"
+                            viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m29.55 6.509c-1.73-2.302-3.759-3.483-6.031-3.509h-.076c-3.29 0-6.124 2.469-7.443 3.84-1.32-1.371-4.153-3.84-7.444-3.84h-.075c-2.273.026-4.3 1.207-6.059 3.549a8.265 8.265 0 0 0 1.057 10.522l11.821 11.641a1 1 0 0 0 1.4 0l11.82-11.641a8.278 8.278 0 0 0 1.03-10.562zm-2.432 9.137-11.118 10.954-11.118-10.954a6.254 6.254 0 0 1 -.832-7.936c1.335-1.777 2.831-2.689 4.45-2.71h.058c3.48 0 6.627 3.924 6.658 3.964a1.037 1.037 0 0 0 1.57 0c.032-.04 3.2-4.052 6.716-3.964a5.723 5.723 0 0 1 4.421 2.67 6.265 6.265 0 0 1 -.805 7.976z">
+                            </path>
+                        </svg>
+                    </div>
+                </button>
+                <span
+                    class="absolute -top-1 max-md:-top-2 -right-3 max-md:right-0 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md"
+                    id="wishlist-count">
+                    <?= $wishlistcount ?>
+                </span>
+            </div>
+
+            <div class="relative max-md:mr-1">
+                <button
+                    class=" nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95"
+                    onclick="openCart()">
+                    <div class="max-md:hidden">
+                        <svg class="shopBag anarkali-svg-icon" width="24px" height="24px" fill="currentColor"
+                            viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m26 8.9a1 1 0 0 0 -1-.9h-3a6 6 0 0 0 -12 0h-3a1 1 0 0 0 -1 .9l-1.78 17.8a3 3 0 0 0 .78 2.3 3 3 0 0 0 2.22 1h17.57a3 3 0 0 0 2.21-1 3 3 0 0 0 .77-2.31zm-10-4.9a4 4 0 0 1 4 4h-8a4 4 0 0 1 4-4zm9.53 23.67a1 1 0 0 1 -.74.33h-17.58a1 1 0 0 1 -.74-.33 1 1 0 0 1 -.26-.77l1.7-16.9h2.09v3a1 1 0 0 0 2 0v-3h8v3a1 1 0 0 0 2 0v-3h2.09l1.7 16.9a1 1 0 0 1 -.26.77z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="md:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="24px"
+                            fill="#4b4b4bff">
+                            <path
+                                d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </button>
+                <span
+                    class="absolute -top-1 max-md:-top-2 -right-3 max-md:right-0 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md"
+                    id="cart-count">
+                    <?= $count ?>
+                </span>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="w-full flex items-center justify-between hidden">
+        <li class="relative group list-none max-md:hidden hidden">
+            <button
+                class="nav-text text-black relative px-6 py-3 text-lg font-semibold flex items-center gap-2 transition-all duration-300">
+                Boys Collection
+                <i class="fas fa-chevron-down text-sm group-hover:rotate-180 transition-transform duration-300"></i>
+            </button>
+            <!-- Mega Menu -->
+            <div
+                class="mega-menu absolute left-0 top-full w-screen bg-white py-8 px-8 grid grid-cols-5 gap-10 z-50 shadow-xl">
+                <div class="relative overflow-hidden h-[400px] bg-gray-900">
+                    <img src="/public/images/333.avif" alt="Streetwear Collection"
+                        class="w-full h-full object-cover opacity-80">
+
+                    <div class="absolute bottom-3 left-6 text-white">
+                        <p class="text-base font-medium mb-3">Trending Now</p>
+                        <a href="/shop"
+                            class="relative inline-block px-6 py-2 rounded-lg border border-white text-white font-semibold overflow-hidden group">
+                            <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
+                                Shop Now
+                            </span>
+                            <span
+                                class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden h-[400px] bg-gray-900">
+                    <img src="/public/images/444.avif" alt="Streetwear Collection"
+                        class="w-full h-full object-cover opacity-80 ">
+                    <div class="absolute bottom-3 left-6 text-white">
+                        <p class="text-base font-medium mb-3">Trending Now</p>
+                        <a href="/shop"
+                            class="relative inline-block px-6 py-2 rounded-lg border border-white text-white font-semibold overflow-hidden group">
+                            <span class="relative z-10 transition-colors duration-500 group-hover:text-black">
+                                Shop Now
+                            </span>
+                            <span
+                                class="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-lg text-black border-b border-gray-200 pb-2">Tees / Relaxed Tees
+                    </h4>
+
+                    <div class="space-y-3">
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class=" text-gray-800 group-hover:text-black">Oversized Tees</span>
+
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Relaxed fit, street ready</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class=" text-gray-800 group-hover:text-black">Graphic Tees</span>
+
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Bold prints, statement pieces</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class=" text-gray-800 group-hover:text-black">Long Sleeves</span>
+
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Layering essentials</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class=" text-gray-800 group-hover:text-black">Tank Tops</span>
+
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Summer vibes</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-lg text-black border-b border-gray-200 pb-2">Joggers</h4>
+
+                    <div class="space-y-3">
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Classic Joggers</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Everyday comfort wear</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Slim Fit Joggers</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Modern tapered look</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Cargo Joggers</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Utility meets style</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Athletic Joggers</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Performance-ready fit</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-lg text-black border-b border-gray-200 pb-2">Co-ords</h4>
+
+                    <div class="space-y-3">
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Casual Co-ords</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Everyday comfort sets</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Lounge Co-ords</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Relaxed & cozy vibes</p>
+                        </a>
+
+                        <a href="#"
+                            class="block p-3 rounded category-hover border border-transparent transition-all group">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-800 group-hover:text-black">Streetwear Co-ords</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Bold styles for the city</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <div class="flex items-center space-x-7 ml-5">
+            <a href="/" class="block">
+                <div class="flex items-center gap-1 py-2">
+                    <img src="/public/logos/nova_favicon.png" alt="Brand Logo"
+                        class="w-auto h-8 rounded-md object-cover my-2 ">
+                    <!-- <img src="/public/logos/brand-name.png" alt="Brand Logo" class="w-auto h-9 rounded-md object-cover my-2"> -->
+                </div> <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
+            </a>
+        </div>
+
+
+        <!-- Mobile Menu Toggle Button -->
+        <div class="md:hidden flex items-center">
+            <button id="menu-toggle" class="p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px"
+                    fill="#4b4b4bff">
+                    <path
+                        d="M120-240v-80h520v80H120Zm664-40L584-480l200-200 56 56-144 144 144 144-56 56ZM120-440v-80h400v80H120Zm0-200v-80h520v80H120Z" />
+                </svg>
+            </button>
+
+            <button class="openSearch">
+                <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="24px"
+                    fill="#4b4b4bff">
+                    <path
+                        d="M400-320q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70Zm-42-98 226-227-57-57-169 170-85-84-57 56 142 142Zm42 178q-134 0-227-93T80-560q0-134 93-227t227-93q134 0 227 93t93 227q0 56-17.5 105.5T653-364l227 228-56 56-228-227q-41 32-90.5 49.5T400-240Zm0-320Z" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="flex items-center absolute left-1/2 transform -translate-x-1/2 space-x-7 max-md:hidden">
+            <div class="relative group">
+                <a href="/new-arrivals" class="text-gray-800  group duration-300 cursor-pointer">NEW ARRIVALS
+                    <span
+                        class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                    <span
+                        class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                </a>
+            </div>
+            <?php
+            foreach ($categories as $key => $value) {
+                $category = strtolower(str_replace(" ", "-", $value['category']));
+                ?>
+                <div class="relative group">
+                    <a href="/category/<?= $category ?>"
+                        class="text-gray-800  group duration-300 cursor-pointer"><?= $value['category'] ?>
+                        <span
+                            class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                        <span
+                            class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                    </a>
+                </div>
+            <?php } ?>
+        </div>
+
+        <div class="flex md:gap-1 items-center ml-auto md:pr-12 max-md:pr-1 py-1.5">
+            <div class="flex items-center max-md:hidden">
+                <button
+                    class="openSearch text-black p-2 max-md:text-xs rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
+                    <svg class="svgSearch anarkali-svg-icon" width="24px" height="24px" fill="currentColor"
+                        viewBox="0 0 48 48" enable-background="new 0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <path
+                                d="m40.2850342 37.4604492-6.4862061-6.4862061c1.9657593-2.5733643 3.0438843-5.6947021 3.0443115-8.9884033 0-3.9692383-1.5458984-7.7011719-4.3530273-10.5078125-2.8066406-2.8066406-6.5380859-4.3525391-10.5078125-4.3525391-3.9692383 0-7.7011719 1.5458984-10.5078125 4.3525391-5.7939453 5.7944336-5.7939453 15.222168 0 21.015625 2.8066406 2.8071289 6.5385742 4.3530273 10.5078125 4.3530273 3.2937012-.0004272 6.4150391-1.0785522 8.9884033-3.0443115l6.4862061 6.4862061c.3901367.390625.9023438.5859375 1.4140625.5859375s1.0239258-.1953125 1.4140625-.5859375c.78125-.7807617.78125-2.0473633 0-2.828125zm-25.9824219-7.7949219c-4.234375-4.234375-4.2338867-11.1245117 0-15.359375 2.0512695-2.0507813 4.7788086-3.1806641 7.6796875-3.1806641 2.9013672 0 5.628418 1.1298828 7.6796875 3.1806641 2.0512695 2.0512695 3.1811523 4.7788086 3.1811523 7.6796875 0 2.9013672-1.1298828 5.628418-3.1811523 7.6796875s-4.7783203 3.1811523-7.6796875 3.1811523c-2.9008789.0000001-5.628418-1.1298827-7.6796875-3.1811523z">
+                            </path>
+                        </g>
+                    </svg>
+                </button>
+            </div>
+            <!-- <button id="Openvariant">Open Cart</button> -->
+            <button <?= isset($_SESSION['userid']) && !empty($_SESSION['userid']) ? 'onclick="window.location.href=\'/profile\'"' : 'id="openLogin"' ?>
+                class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
+                <div class="max-md:hidden">
+                    <svg class="svgUser2 anarkali-svg-icon" enable-background="new 0 0 512 512" height="24px"
+                        viewBox="0 0 512 512" width="24px" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <g>
+                                <path
+                                    d="m256 253.7c-62 0-112.4-50.4-112.4-112.4s50.4-112.4 112.4-112.4 112.4 50.4 112.4 112.4-50.4 112.4-112.4 112.4zm0-195.8c-46 0-83.4 37.4-83.4 83.4s37.4 83.4 83.4 83.4 83.4-37.4 83.4-83.4-37.4-83.4-83.4-83.4z">
+                                </path>
+                            </g>
+                            <g>
+                                <path
+                                    d="m452.1 483.2h-392.2c-8 0-14.5-6.5-14.5-14.5 0-106.9 94.5-193.9 210.6-193.9s210.6 87 210.6 193.9c0 8-6.5 14.5-14.5 14.5zm-377-29.1h361.7c-8.1-84.1-86.1-150.3-180.8-150.3s-172.7 66.2-180.9 150.3z">
+                                </path>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div class="md:hidden">
+                    <svg width="22" height="22" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        id="svgkp">
+                        <path
+                            d="M22.9129 12.935L13.7571 23.0474C13.5348 23.2929 13.1284 23.1084 13.1669 22.7794L14.0816 14.9731H10.6991C10.4034 14.9731 10.2484 14.6219 10.4478 14.4035L20.3133 3.59739C20.5589 3.32834 20.9984 3.58134 20.8891 3.92887L18.2354 12.3664H22.6607C22.9557 12.3664 23.1109 12.7163 22.9129 12.935Z"
+                            fill="#f25b21"></path>
+                        <path id="svgkp-path" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M16.6079 5.35819C16.4805 5.1933 16.3421 5.03582 16.1932 4.8869C15.2702 3.96387 14.0183 3.44531 12.7129 3.44531C11.4075 3.44531 10.1556 3.96387 9.2326 4.8869C8.30957 5.80993 7.79102 7.06183 7.79102 8.36719C7.79102 9.67255 8.30957 10.9244 9.2326 11.8475C9.48368 12.0986 9.75909 12.3197 10.0533 12.5086L11.0235 11.4503C10.7335 11.2914 10.4649 11.0911 10.227 10.8531C9.56766 10.1938 9.19727 9.29959 9.19727 8.36719C9.19727 7.43479 9.56766 6.54057 10.227 5.88127C10.8863 5.22196 11.7805 4.85156 12.7129 4.85156C13.6453 4.85156 14.5395 5.22196 15.1988 5.88127C15.3636 6.04604 15.5103 6.22549 15.6377 6.41654L16.6079 5.35819ZM20.6413 18.6497L19.6746 19.7132C20.1676 20.4122 20.4473 21.2264 20.4473 22.0781V23.8359C20.4473 24.2243 20.7621 24.5391 21.1504 24.5391C21.5387 24.5391 21.8535 24.2243 21.8535 23.8359V22.0781C21.8535 20.7863 21.4016 19.6103 20.6413 18.6497ZM12.3111 17.5078H10.3026C7.27113 17.5078 4.97852 19.6394 4.97852 22.0781V23.8359C4.97852 24.2243 4.66372 24.5391 4.27539 24.5391C3.88707 24.5391 3.57227 24.2243 3.57227 23.8359V22.0781C3.57227 18.6922 6.67684 16.1016 10.3026 16.1016H12.4885L12.3111 17.5078Z"
+                            fill="currentColor" stroke="currentColor"></path>
+                    </svg>
+                </div>
+            </button>
+
+            <div class="flex items-center max-md:hidden relative">
+                <button onclick="window.location.href='/wishlist'"
+                    class="nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
+                    <div class="max-md:hidden">
+                        <svg class="svgLove anarkali-svg-icon" width="24px" height="24px" fill="currentColor"
+                            viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m29.55 6.509c-1.73-2.302-3.759-3.483-6.031-3.509h-.076c-3.29 0-6.124 2.469-7.443 3.84-1.32-1.371-4.153-3.84-7.444-3.84h-.075c-2.273.026-4.3 1.207-6.059 3.549a8.265 8.265 0 0 0 1.057 10.522l11.821 11.641a1 1 0 0 0 1.4 0l11.82-11.641a8.278 8.278 0 0 0 1.03-10.562zm-2.432 9.137-11.118 10.954-11.118-10.954a6.254 6.254 0 0 1 -.832-7.936c1.335-1.777 2.831-2.689 4.45-2.71h.058c3.48 0 6.627 3.924 6.658 3.964a1.037 1.037 0 0 0 1.57 0c.032-.04 3.2-4.052 6.716-3.964a5.723 5.723 0 0 1 4.421 2.67 6.265 6.265 0 0 1 -.805 7.976z">
+                            </path>
+                        </svg>
+                    </div>
+                </button>
+                <span
+                    class="absolute -top-1 max-md:-top-2 -right-3 max-md:right-0 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md"
+                    id="wishlist-count">
+                    <?= $wishlistcount ?>
+                </span>
+            </div>
+
+            <div class="relative max-md:mr-1">
+                <button
+                    class=" nav-text text-black p-2 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95"
+                    onclick="openCart()">
+                    <div class="max-md:hidden">
+                        <svg class="shopBag anarkali-svg-icon" width="24px" height="24px" fill="currentColor"
+                            viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m26 8.9a1 1 0 0 0 -1-.9h-3a6 6 0 0 0 -12 0h-3a1 1 0 0 0 -1 .9l-1.78 17.8a3 3 0 0 0 .78 2.3 3 3 0 0 0 2.22 1h17.57a3 3 0 0 0 2.21-1 3 3 0 0 0 .77-2.31zm-10-4.9a4 4 0 0 1 4 4h-8a4 4 0 0 1 4-4zm9.53 23.67a1 1 0 0 1 -.74.33h-17.58a1 1 0 0 1 -.74-.33 1 1 0 0 1 -.26-.77l1.7-16.9h2.09v3a1 1 0 0 0 2 0v-3h8v3a1 1 0 0 0 2 0v-3h2.09l1.7 16.9a1 1 0 0 1 -.26.77z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="md:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="24px"
+                            fill="#4b4b4bff">
+                            <path
+                                d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                        </svg>
+                    </div>
+                </button>
+                <span
+                    class="absolute -top-1 max-md:-top-2 -right-3 max-md:right-0 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md"
+                    id="cart-count">
+                    <?= $count ?>
+                </span>
+            </div>
+
+
+        </div>
+    </div>
+
 </nav>
 
 <!-- Sidebar (Mobile) -->
@@ -801,7 +1728,7 @@ $categories = getData("tbl_category");
                     $images = json_decode($value['product_images'], true);
                     $firstImage = !empty($images) ? $images[0] : null;
 
-                ?>
+                    ?>
                     <div class="border overflow-hidden hover:shadow-md transition">
                         <img src="/<?= $firstImage ?>" alt="<?= $value['name'] ?>" class="w-full h-40 object-cover">
                         <div class="p-2">
@@ -818,14 +1745,15 @@ $categories = getData("tbl_category");
 
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<!-- 
-<script>
+
+<!-- <script>
     google.accounts.id.initialize({
         client_id: "188574937788-fn4td4evj5cqejhrgge28pf8129sa58q.apps.googleusercontent.com",
         callback: handleCredentialResponse,
         use_fedcm_for_prompt: false // 👈 fallback if FedCM is blocked
     });
 </script> -->
+
 <script>
     // const messages = [
     //     ' Nova Kids – Style That Moves!',
@@ -1102,7 +2030,7 @@ $categories = getData("tbl_category");
     function decodeJwtResponse(token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
 
