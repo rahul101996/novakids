@@ -286,9 +286,9 @@ $categories = getData("tbl_category");
         <div class="flex items-center space-x-7 ml-8">
             <a href="/" class="block">
                 <div class="flex items-center gap-1">
-                    <img src="/public/logos/nova_favicon.png" alt="Brand Logo" class="w-auto h-14 rounded-md object-cover my-2 ">
-                    <img src="/public/logos/brand-name.png" alt="Brand Logo" class="w-auto h-12 rounded-md object-cover my-2">
-                </div> <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
+                    <img src="/public/logos/nova_favicon.png" alt="Brand Logo" class="w-auto h-10 rounded-md object-cover my-2 ">
+                    <img src="/public/logos/brand-name.png" alt="Brand Logo" class="w-auto h-8 rounded-md object-cover my-2">
+                </div> <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-8 md:hidden">
             </a>
         </div>
 

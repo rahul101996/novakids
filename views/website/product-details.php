@@ -297,7 +297,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             <div class="md:sticky top-32 self-start space-y-4 w-[35%]">
                 <form method="POST" action="/checkout-cart" class="flex flex-col" id="productDetailForm">
                     <div class="gap-3 w-full flex items-start justify-between">
-                        <div class="flex flex-col items-start justify-center mb-2">
+                        <div class="flex flex-col items-start justify-center mb-2 w-[75%]">
                             <h2 class="w-full text-[1.7rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
                             <div class="flex items-center justify-center gap-3 mt-4 prices">
                                 <span
@@ -312,9 +312,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
                         </div>
-                        <div class="flex items-center justify-center">
+                        <div class="flex items-center justify-end gap-2 w-[25%]">
                             <button
-                                class="addToWishlistBtn  rounded-full transition-all duration-500 px-3  ">
+                                class="addToWishlistBtn  rounded-full transition-all duration-500  ">
                                 <img src="/public/icons/<?= !empty($data) ? 'heart-orange.png' : 'heart-black.png' ?>" class="cursor-pointer mt-1  h-8 w-8" alt="">
                             </button>
                             <input type="hidden" value="<?= $ProductData['id'] ?>" class="ProductId">
@@ -323,7 +323,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 alt="">
                         </div>
                     </div>
-                    <span class="text-xs text-white bg-gray-700 py-1 px-3 w-fit"><?= $ProductData['product_tag'] ?></span>
+
                     <p class="text-sm text-gray-900 mt-2 text-justify">Upgrade your casual wardrobe with our black
                         sporty deconstructed loose pants, the perfect blend of comfort and style. Designed with a
                         relaxed fit, these pants allow for effortless movement, while the deconstructed detailing adds a
@@ -398,7 +398,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     </div>
                     <!-- Quantity and Add to Cart -->
                     <div class="space-y-4 mt-7">
-                        <div class="w-full flex items-center justify-center space-x-4">
+                        <div class="w-full flex items-center justify-between space-x-4">
                             <div
                                 class="  flex items-center justify-center gap-7 border border-gray-800 rounded-lg py-1">
                                 <span class="cursor-pointer border-r border-gray-800 px-4 py-2" onclick="countMe(this,'-')">-</span>
@@ -426,7 +426,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         </div>
 
                         <div class="flex w-full items-center justify-start gap-4">
-                            
+
 
 
                             <?php
@@ -481,7 +481,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                                 <!-- Item 1 -->
                                 <div class="accordion p-4">
-                                    <button class="flex justify-between items-center w-full font-semibold text-left">
+                                    <button type="button" class="flex justify-between items-center w-full font-semibold text-left">
                                         <span>Description</span>
                                         <i class="fa-solid fa-chevron-down chev"></i>
                                     </button>
@@ -494,7 +494,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                                 <!-- Item 2 -->
                                 <div class="accordion p-4">
-                                    <button class="flex justify-between items-center w-full font-semibold text-left">
+                                    <button type="button" class="flex justify-between items-center w-full font-semibold text-left">
                                         <span>Additional Information</span>
                                         <i class="fa-solid fa-chevron-down chev"></i>
                                     </button>
@@ -570,143 +570,374 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 </form>
             </div>
         </section>
+        <div class="w-full flex items-center justify-center mt-10">
+            <div class="flex items-start justify-center flex-row-reverse relative w-[90%] gap-5">
+                <div class="w-[35%] h-[28vh] max-w-5xl mx-auto bg-white rounded-lg shadow-md border border-gray-300 px-8 py-6">
+                    <div class="text-center font-semibold text-lg mb-4">Customer Reviews</div>
+                    <div class="flex items-center justify-center gap-8">
 
-        <section class="w-[90vw] mx-auto md:mt-10 py-10  gap-10">
-            <!-- Left Side -->
-            <div class="md:col-span-3 w-full">
-                <!-- Average Rating -->
-                <h3 class="text-2xl font-bold mb-2">Customer Reviews</h3>
+                        <!-- Left: Stars + text -->
+                        <div class="flex flex-col items-center">
+                            <div class="flex text-yellow-400 mb-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                </svg>
+                            </div>
+                            <span class="text-sm text-gray-600">Be the first to write a review</span>
+                        </div>
 
-                <!-- Scrolling Reviews (Owl Carousel) -->
-                <div class="owl-carousel owl-theme review-carousel">
-                    <!-- Review 1 -->
-                    <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                        <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                            <span> ★★★★★</span>
-                            <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                "Amazing quality and fast delivery! The packaging was premium and the product
-                                feels
-                                luxurious."
-                            </p>
-                        </div>
-                        <!-- Reviewer Info -->
-                        <div class="flex gap-4 items-center w-full">
-                            <div class="flex items-center w-10 h-10">
-                                <img src="/public/images/dp.png" alt="John D."
-                                    class="w-full h-full rounded-full object-cover border mr-3">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-gray-800">John D.</p>
-                                <!-- <p class="text-xs text-gray-500">Verified Buyer</p> -->
-                            </div>
-                        </div>
+                        <!-- Divider -->
+                        <div class="h-12 w-px bg-gray-300"></div>
+
+                        <!-- Right: Button -->
+                        <button class="bg-black text-white font-semibold px-6 py-2 rounded-full hover:bg-gray-800 transition">
+                            Write a review
+                        </button>
+
                     </div>
+                </div>
 
-                    <!-- Review 2 -->
-                    <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                        <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                            <span> ★★★★★</span>
-                            <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                "Loved the fabric and the trendy style! Feels super comfortable and stylish at the same
-                                time."
-                            </p>
-                        </div>
-                        <div class="flex gap-4 items-center">
-                            <div class="flex items-center w-10 h-10">
-                                <img src="/public/images/dp.png" alt="John D."
-                                    class="w-full h-full rounded-full object-cover border mr-3">
+                <div class="w-[64%] flex items-center justify-center">
+                    <div class="owl-carousel owl-theme review-carousel w-full">
+                        <!-- Review 1 -->
+                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                <span> ★★★★★</span>
+                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                    "Amazing quality and fast delivery! The packaging was premium and the product
+                                    feels
+                                    luxurious."
+                                </p>
                             </div>
-                            <div>
-                                <p class="font-semibold text-gray-800">Sarah M.</p>
-                                <!-- <p class="text-xs text-gray-500">Fashion Enthusiast</p> -->
+                            <!-- Reviewer Info -->
+                            <div class="flex gap-4 items-center w-full">
+                                <div class="flex items-center w-10 h-10">
+                                    <img src="/public/images/dp.png" alt="John D."
+                                        class="w-full h-full rounded-full object-cover border mr-3">
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">John D.</p>
+                                    <!-- <p class="text-xs text-gray-500">Verified Buyer</p> -->
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Review 3 -->
-                    <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                        <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                            <span> ★★★★★</span>
-                            <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                "Great fit and excellent customer service. They really care about their customers and it
-                                shows!"
-                            </p>
                         </div>
 
-                        <div class="flex gap-4 items-center">
-                            <div class="flex items-center w-10 h-10">
-                                <img src="/public/images/dp.png" alt="John D."
-                                    class="w-full h-full rounded-full object-cover border mr-3">
+                        <!-- Review 2 -->
+                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                <span> ★★★★★</span>
+                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                    "Loved the fabric and the trendy style! Feels super comfortable and stylish at the same
+                                    time."
+                                </p>
                             </div>
-                            <div>
-                                <p class="font-semibold text-gray-800">Alex P.</p>
-                                <!-- <p class="text-xs text-gray-500">Loyal Customer</p> -->
+                            <div class="flex gap-4 items-center">
+                                <div class="flex items-center w-10 h-10">
+                                    <img src="/public/images/dp.png" alt="John D."
+                                        class="w-full h-full rounded-full object-cover border mr-3">
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Sarah M.</p>
+                                    <!-- <p class="text-xs text-gray-500">Fashion Enthusiast</p> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 3 -->
+                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                <span> ★★★★★</span>
+                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                    "Great fit and excellent customer service. They really care about their customers and it
+                                    shows!"
+                                </p>
+                            </div>
+
+                            <div class="flex gap-4 items-center">
+                                <div class="flex items-center w-10 h-10">
+                                    <img src="/public/images/dp.png" alt="John D."
+                                        class="w-full h-full rounded-full object-cover border mr-3">
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Alex P.</p>
+                                    <!-- <p class="text-xs text-gray-500">Loyal Customer</p> -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="w-full flex items-center justify-center mt-10">
+            <div class="flex items-start justify-center flex-row-reverse relative w-[90%] gap-5">
+                <div class="w-[35%] h-[28vh] max-w-5xl mx-auto bg-white rounded-lg shadow-md border border-gray-300 px-8 py-6">
+                    <div class="text-center font-semibold text-lg mb-4">Customer Reviews</div>
+                    <div class="flex items-center justify-center gap-8">
 
-            <!-- Right Side -->
-            <div class="md:col-span-2 hidden">
-                <!-- Overall Rating -->
-                <div class="flex items-center space-x-2 mb-6">
-                    <div>
-                        <span class="text-2xl text-orange-500">★★★★★</span>
-                    </div>
-                    <div>
-                        <p class="font-semibold">4.7 out of 5</p>
-                        <p class="text-sm text-gray-500">Based on 37 reviews ✅</p>
+                        <!-- Left: Stars + text -->
+                        <div class="flex flex-col items-center">
+                            <div class="flex text-yellow-400 mb-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                </svg>
+                            </div>
+                            <span class="text-sm text-gray-600">Be the first to write a review</span>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="h-12 w-px bg-gray-300"></div>
+
+                        <!-- Right: Button -->
+                        <button class="bg-black text-white font-semibold px-6 py-2 rounded-full hover:bg-gray-800 transition">
+                            Write a review
+                        </button>
+
                     </div>
                 </div>
 
-                <!-- 5 stars -->
-                <div class="flex items-center mb-2">
-                    <span class="text-orange-500 mr-2">★★★★★</span>
-                    <div class="flex-1 bg-gray-200 h-3 rounded">
-                        <div class="bg-orange-500 h-3 rounded" style="width: 70%;"></div>
-                    </div>
-                    <span class="ml-2 text-sm">26</span>
-                </div>
+                <div class="w-[64%] flex items-center justify-center">
+                    <div class="owl-carousel owl-theme review-carousel1 w-full">
+                        <!-- Review 1 -->
+                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                <span> ★★★★★</span>
+                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                    "Amazing quality and fast delivery! The packaging was premium and the product
+                                    feels
+                                    luxurious."
+                                </p>
+                            </div>
+                            <!-- Reviewer Info -->
+                            <div class="flex gap-4 items-center w-full">
+                                <div class="flex items-center w-10 h-10">
+                                    <img src="/public/images/dp.png" alt="John D."
+                                        class="w-full h-full rounded-full object-cover border mr-3">
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">John D.</p>
+                                    <!-- <p class="text-xs text-gray-500">Verified Buyer</p> -->
+                                </div>
+                            </div>
+                        </div>
 
-                <!-- 4 stars -->
-                <div class="flex items-center mb-2">
-                    <span class="text-orange-500 mr-2">★★★★☆</span>
-                    <div class="flex-1 bg-gray-200 h-3 rounded">
-                        <div class="bg-orange-500 h-3 rounded" style="width: 20%;"></div>
-                    </div>
-                    <span class="ml-2 text-sm">7</span>
-                </div>
+                        <!-- Review 2 -->
+                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                <span> ★★★★★</span>
+                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                    "Loved the fabric and the trendy style! Feels super comfortable and stylish at the same
+                                    time."
+                                </p>
+                            </div>
+                            <div class="flex gap-4 items-center">
+                                <div class="flex items-center w-10 h-10">
+                                    <img src="/public/images/dp.png" alt="John D."
+                                        class="w-full h-full rounded-full object-cover border mr-3">
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Sarah M.</p>
+                                    <!-- <p class="text-xs text-gray-500">Fashion Enthusiast</p> -->
+                                </div>
+                            </div>
+                        </div>
 
-                <!-- 3 stars -->
-                <div class="flex items-center mb-2">
-                    <span class="text-orange-500 mr-2">★★★☆☆</span>
-                    <div class="flex-1 bg-gray-200 h-3 rounded">
-                        <div class="bg-orange-500 h-3 rounded" style="width: 6%;"></div>
-                    </div>
-                    <span class="ml-2 text-sm">2</span>
-                </div>
+                        <!-- Review 3 -->
+                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                <span> ★★★★★</span>
+                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                    "Great fit and excellent customer service. They really care about their customers and it
+                                    shows!"
+                                </p>
+                            </div>
 
-                <!-- 2 stars -->
-                <div class="flex items-center mb-2">
-                    <span class="text-orange-500 mr-2">★★☆☆☆</span>
-                    <div class="flex-1 bg-gray-200 h-3 rounded">
-                        <div class="bg-orange-500 h-3 rounded" style="width: 3%;"></div>
+                            <div class="flex gap-4 items-center">
+                                <div class="flex items-center w-10 h-10">
+                                    <img src="/public/images/dp.png" alt="John D."
+                                        class="w-full h-full rounded-full object-cover border mr-3">
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Alex P.</p>
+                                    <!-- <p class="text-xs text-gray-500">Loyal Customer</p> -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <span class="ml-2 text-sm">1</span>
-                </div>
-
-                <!-- 1 star -->
-                <div class="flex items-center">
-                    <span class="text-orange-500 mr-2">★☆☆☆☆</span>
-                    <div class="flex-1 bg-gray-200 h-3 rounded">
-                        <div class="bg-orange-500 h-3 rounded" style="width: 1%;"></div>
-                    </div>
-                    <span class="ml-2 text-sm">1</span>
                 </div>
             </div>
+        </div>
+         <div class="w-full flex items-center justify-center mt-10">
+            <div class="flex items-start justify-center  relative w-[90%] gap-5">
+                <div class="w-[65%] h-[28vh] max-w-5xl mx-auto bg-white rounded-lg shadow-md border border-gray-300 px-8 py-6">
+                    <div class="text-center font-semibold text-lg mb-4">Customer Reviews</div>
+                    <div class="flex items-center justify-center gap-8">
 
-        </section>
+                        <!-- Left: Stars + text -->
+                        <div class="flex flex-col items-center">
+                            <div class="flex text-yellow-400 mb-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                </svg>
+                            </div>
+                            <span class="text-sm text-gray-600">Be the first to write a review</span>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="h-12 w-px bg-gray-300"></div>
+
+                        <!-- Right: Button -->
+                        <button class="bg-black text-white font-semibold px-6 py-2 rounded-full hover:bg-gray-800 transition">
+                            Write a review
+                        </button>
+
+                    </div>
+                </div>
+
+                <div class="w-[35%] flex items-center justify-center">
+                    <div class="owl-carousel owl-theme review-carousel2 w-full">
+                        <!-- Review 1 -->
+                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                <span> ★★★★★</span>
+                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                    "Amazing quality and fast delivery! The packaging was premium and the product
+                                    feels
+                                    luxurious."
+                                </p>
+                            </div>
+                            <!-- Reviewer Info -->
+                            <div class="flex gap-4 items-center w-full">
+                                <div class="flex items-center w-10 h-10">
+                                    <img src="/public/images/dp.png" alt="John D."
+                                        class="w-full h-full rounded-full object-cover border mr-3">
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">John D.</p>
+                                    <!-- <p class="text-xs text-gray-500">Verified Buyer</p> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 2 -->
+                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                <span> ★★★★★</span>
+                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                    "Loved the fabric and the trendy style! Feels super comfortable and stylish at the same
+                                    time."
+                                </p>
+                            </div>
+                            <div class="flex gap-4 items-center">
+                                <div class="flex items-center w-10 h-10">
+                                    <img src="/public/images/dp.png" alt="John D."
+                                        class="w-full h-full rounded-full object-cover border mr-3">
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Sarah M.</p>
+                                    <!-- <p class="text-xs text-gray-500">Fashion Enthusiast</p> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 3 -->
+                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                <span> ★★★★★</span>
+                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                    "Great fit and excellent customer service. They really care about their customers and it
+                                    shows!"
+                                </p>
+                            </div>
+
+                            <div class="flex gap-4 items-center">
+                                <div class="flex items-center w-10 h-10">
+                                    <img src="/public/images/dp.png" alt="John D."
+                                        class="w-full h-full rounded-full object-cover border mr-3">
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Alex P.</p>
+                                    <!-- <p class="text-xs text-gray-500">Loyal Customer</p> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full max-w-5xl mx-auto bg-white rounded-lg shadow-md border mt-[15vh] border-gray-300 px-8 py-6">
+            <div class="text-center font-semibold text-lg mb-4">Customer Reviews</div>
+            <div class="flex items-center justify-center gap-8">
+
+                <!-- Left: Stars + text -->
+                <div class="flex flex-col items-center">
+                    <div class="flex text-yellow-400 mb-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                        </svg>
+                    </div>
+                    <span class="text-sm text-gray-600">Be the first to write a review</span>
+                </div>
+
+                <!-- Divider -->
+                <div class="h-12 w-px bg-gray-300"></div>
+
+                <!-- Right: Button -->
+                <button class="bg-black text-white font-semibold px-6 py-2 rounded-full hover:bg-gray-800 transition">
+                    Write a review
+                </button>
+
+            </div>
+        </div>
+
+
 
         <section class="bg-white py-14 max-md:py-8 w-full">
             <div class="w-[90vw] max-md:w-[90vw] mx-auto">
@@ -748,7 +979,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 <div
                                     class="group relative  cursor-pointer transition overflow-hidden">
                                     <!-- Discount Badge -->
-                                    <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
+                                    <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20" style="text-wrap: no-wrap;">
                                         SAVE <?= $discountPercentage ?>%
                                     </span>
 
@@ -1038,6 +1269,66 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 }
             });
         });
+        $(document).ready(function() {
+            $(".review-carousel1").owlCarousel({
+                margin: 10,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
+                loop: true,
+                dots: false,
+                nav: false,
+                // navText: ["‹", "›"],
+                animateOut: 'fadeOut',
+                responsive: {
+                    0: {
+                        items: 1
+                    }, // Mobile
+                    640: {
+                        items: 1
+                    }, // Small tablets
+                    768: {
+                        items: 3
+                    }, // Tablets
+                    1024: {
+                        items: 2
+                    }, // Desktops
+                    1280: {
+                        items: 2
+                    } // Large screens
+                }
+            });
+        });
+         $(document).ready(function() {
+            $(".review-carousel2").owlCarousel({
+                margin: 10,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
+                loop: true,
+                dots: false,
+                nav: false,
+                // navText: ["‹", "›"],
+                // animateOut: 'fadeOut',
+                responsive: {
+                    0: {
+                        items: 1
+                    }, // Mobile
+                    640: {
+                        items: 1
+                    }, // Small tablets
+                    768: {
+                        items: 3
+                    }, // Tablets
+                    1024: {
+                        items: 1
+                    }, // Desktops
+                    1280: {
+                        items: 1
+                    } // Large screens
+                }
+            });
+        });
     </script>
 
 
@@ -1279,7 +1570,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     // eleForm.querySelector(".sideVarientId").value = selectedId
 
                     if (eleForm.querySelector(".sideVarientId")) {
-                    eleForm.querySelector(".sideVarientId").value = selectedId;
+                        eleForm.querySelector(".sideVarientId").value = selectedId;
                     } else {
                         console.warn("No .sideVarientId element found inside:", ele.parentElement.parentElement);
                     }
@@ -1303,7 +1594,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
         }
 
-        function ohmygod(){
+        function ohmygod() {
             let eleForm = document.getElementById("productDetailForm")
             addToCartSidebar(eleForm.querySelector(".sideVarientId").value, eleForm.querySelector(".sideCategoryId").value, eleForm.querySelector(".sideProductId").value, btn, 1, false)
         }

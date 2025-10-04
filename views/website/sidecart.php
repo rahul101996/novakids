@@ -351,6 +351,8 @@
     async function addToWishlistSidebar(product_id, ele) {
 
         try {
+            let page = '<?= $page ?>';
+            console.log(page);
             const request = await axios.post("/add-to-wishlist", new URLSearchParams({
                 product_id: product_id
             }));
@@ -363,7 +365,8 @@
                 // Change the SVG in the button
 
                 if (request.data.message == "Add To wishlist Successfully") {
-                    if ($page = "product-details") {
+                    if (page == "product-details") {
+                        
                         ele.querySelector("img").src = "/public/icons/heart-orange.png";
                     } else {
                         ele.classList.remove('bg-black/70');
@@ -386,7 +389,7 @@
                         <?php
                     }
                     ?>
-                    if ($page = "product-details") {
+                    if (page == "product-details") {
                         ele.querySelector("img").src = "/public/icons/heart-black.png";
                     } else {
                         ele.classList.add('bg-black/70');

@@ -112,7 +112,7 @@ class WebController extends LoginController
                         <p class="text-sm text-gray-900 mt-2">Upgrade your casual wardrobe with our black sporty deconstructed loose
                             pants. These stylish pants feature a relaxed fit and a deconstructed design for a modern and edgy look</p>
                         <p class=" text-xs text-gray-600 mt-1"><a href="" class="underline">shipping</a> calculated at checkout</p>
-                        <p class="text-xs mt-1">⭐⭐⭐⭐⭐ <span class="text-sm">31 reviews</span></p>
+                        <p class="text-xs mt-1 hidden">⭐⭐⭐⭐⭐ <span class="text-sm">31 reviews</span></p>
                     <?php
                     }
                     ?>
@@ -190,16 +190,13 @@ class WebController extends LoginController
                         ?>
                         <div class="w-full">
                             <div class="w-full flex items-center justify-start mt-7 gap-3">
-                                <div
-                                    class="w-[30%]  flex items-center justify-center gap-7 border border-gray-800 p-3 px-3 rounded-lg quantityDiv">
-                                    <div class="cursor-pointer minus" onclick="minus(this)">
-                                        <i class="fa-solid fa-minus text-sm"></i>
-                                    </div>
+                                <div class="  flex items-center justify-center gap-7 border border-gray-800 rounded-lg py-1 quantityDiv">
+                                    <span class="cursor-pointer border-r border-gray-800 px-4 py-2" onclick="minus(this)"><i class="fa-solid fa-minus text-sm"></i></span>
                                     <span class="text-black quantity">1</span>
-                                    <div class="cursor-pointer plus" onclick="plus(this)">
-                                        <i class="fa-solid fa-plus text-sm"></i>
-                                    </div>
+                                    <span class="cursor-pointer border-l border-gray-800 px-4 py-2" onclick="plus(this)"><i class="fa-solid fa-plus text-sm"></i></span>
+
                                 </div>
+                                
 
                                 <div class="w-[80%] relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black"
                                     onclick="AddToCartslider(this, true)">
@@ -715,7 +712,6 @@ class WebController extends LoginController
             }
             exit();
         }
-       
     }
 
     public function thankYou()
@@ -737,7 +733,7 @@ class WebController extends LoginController
             // printWithPre($_POST);
             // die();
             if (isset($_POST["deleteMe"])) {
-                if (isset($_SESSION["type"]) && $_SESSION["type"] == "User" && !empty($_SESSION["username"])) {
+                if (isset($_SESSION["type"]) && !empty($_SESSION["userid"])) {
 
                     $delete = delete($_POST["cartid"], "tbl_cart", "id");
                     $count = count(getData2("SELECT * FROM `tbl_cart` WHERE `userid` = " . $_SESSION['userid']));
