@@ -127,7 +127,7 @@ $categories = getData("tbl_category");
         <p id="rotating-text1" class="text-sm max-md:text-xs text-white font-medium tracking-wide"></p>
     </div>
 
-    <div class="w-full flex items-center justify-between hidden">
+    <div class="w-full flex items-center justify-between ">
         <li class="relative group list-none max-md:hidden hidden">
             <button
                 class="nav-text text-black relative px-6 py-3 text-lg font-semibold flex items-center gap-2 transition-all duration-300">
@@ -1053,7 +1053,7 @@ $categories = getData("tbl_category");
         </div>
     </div>
 
-    <div class="w-full flex items-center justify-between ">
+    <div class="w-full flex items-center justify-between hidden">
         <li class="relative group list-none max-md:hidden hidden">
             <button
                 class="nav-text text-black relative px-6 py-3 text-lg font-semibold flex items-center gap-2 transition-all duration-300">
