@@ -64,17 +64,21 @@ if (!empty($_POST)) {
 
 
                 if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
+                    $checkout = [];
                     foreach ($_SESSION["cart"] as $key => $c) {
                         $cartaratratartaratartrrat = true;
 
-                        $data = getData2("SELECT * FROM `tbl_cart` WHERE `varient` = $c[varient] AND `userid` = $user[id] ORDER BY `id` DESC LIMIT 1")[0];
-                        if ($data) {
+                        $data = getData2("SELECT * FROM `tbl_cart` WHERE `varient` = {$c['varient']} AND `userid` = {$user['id']} ORDER BY `id` DESC LIMIT 1")[0];
+                        $variant = getData2("SELECT * FROM `tbl_variants` WHERE `id` = {$c['varient']}")[0];
 
+                        if ($data) {
                             update([
                                 "quantity" => $data["quantity"] + $c["quantity"]
                             ], $data["id"], "tbl_cart");
-                        } else {
 
+                            $cartid = $data["id"]; // use existing cart id
+                            $finalQty = $data["quantity"] + $c["quantity"];
+                        } else {
                             $cartdata = [
                                 "varient" => $c["varient"],
                                 "category" => $c["category"],
@@ -83,9 +87,25 @@ if (!empty($_POST)) {
                                 "userid" => $user["id"],
                                 "username" => $username,
                             ];
-                            add($cartdata, "tbl_cart");
+                            $cartid = add($cartdata, "tbl_cart");
+                            $finalQty = $c["quantity"];
                         }
+
+                        // Always push into checkout
+                        $checkout['varient'][$key]   = $c["varient"];
+                        $checkout['category'][$key]  = $c["category"];
+                        $checkout['product'][$key]   = $c["product"];
+                        $checkout['quantity'][$key]  = $finalQty;
+                        $checkout['userid'][$key]    = $user["id"];
+                        $checkout['username'][$key]  = $username;
+                        $checkout['price'][$key]     = $variant['price'];
+                        $checkout['cartid'][$key]    = $cartid;
                     }
+
+                    // printWithPre($checkout);
+                    // echo "onuwbnweb";
+                    // die();
+                    $_SESSION["cartData"] = $checkout;
                     unset($_SESSION["cart"]);
                 } else if (isset($_SESSION["FormCartData"])) {
                     $cartaratratartaratartrrat1 = true;
@@ -99,8 +119,8 @@ if (!empty($_POST)) {
                 //     "last_login" => date("Y-m-d H:i:s")
                 // ]);
                 // echo "hii";
-                header("location: /");
-                exit();
+                // header("location: /");
+                // exit();
             } else {
                 // echo "Invalid password.";
                 $_SESSION["err"] = "Invalid Password";
@@ -141,7 +161,6 @@ if (!empty($_POST)) {
                                 "username" => $_POST["username"],
                             ];
                             add($cartdata, "tbl_cart");
-
                         }
                         unset($_SESSION["cart"]);
                     } else if (isset($_SESSION["FormCartData"])) {
@@ -161,19 +180,40 @@ if (!empty($_POST)) {
                 ];
                 // printWithPre($data);
                 // die();
-                $adduser = add($data, "online_users");
-                if ($adduser) {
+                $userid = add($data, "online_users");
+                if ($userid) {
                     $_SESSION["success"] = "Register Successfully";
                     $_SESSION["type"] = "User";
                     $_SESSION["username"] = '';
-                    $_SESSION["userid"] = $adduser;
+                    $_SESSION["userid"] = $userid;
                     $_SESSION["fname"] = '';
                     $_SESSION["lname"] = '';
                     $_SESSION['popup'] = 'false';
                     $_SESSION['mobile'] = $user['mobile'];
 
-                    header("location: /");
-                    exit();
+
+                    if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
+                        foreach ($_SESSION["cart"] as $key => $c) {
+
+                            $cartdata = [
+                                "varient" => $c["varient"],
+                                "category" => $c["category"],
+                                "product" => $c["product"],
+                                "quantity" => $c["quantity"],
+                                "userid" => $userid,
+                                "username" => $_POST["username"],
+                            ];
+                            add($cartdata, "tbl_cart");
+                        }
+                        unset($_SESSION["cart"]);
+                    } else if (isset($_SESSION["FormCartData"])) {
+                        $cartaratratartaratartrrat1 = true;
+                        $_SESSION["cartData"] = $_SESSION["FormCartData"];
+                        unset($_SESSION["FormCartData"]);
+                    }
+                } else {
+                    // echo "Failed to register user.";
+                    $_SESSION["err"] = "Can't Login";
                 }
             } else {
                 $_SESSION["err"] = "User Not Found";
@@ -183,10 +223,10 @@ if (!empty($_POST)) {
         //     $_SESSION["err"] = "Your are Temperary blocked";
         // }
         if ($cartaratratartaratartrrat) {
-            header("location: /");
+            header("location: /checkout");
             exit();
         } else if ($cartaratratartaratartrrat1) {
-            header("location: /checkout.php");
+            header("location: /checkout");
             exit();
         }
         // echo "gandu";
@@ -198,9 +238,9 @@ if (!empty($_POST)) {
 
 <head>
     <script>
-        ! function (f, b, e, v, n, t, s) {
+        ! function(f, b, e, v, n, t, s) {
             if (f.fbq) return;
-            n = f.fbq = function () {
+            n = f.fbq = function() {
                 n.callMethod ?
                     n.callMethod.apply(n, arguments) : n.queue.push(arguments)
             };
@@ -223,7 +263,7 @@ if (!empty($_POST)) {
             src="https://www.facebook.com/tr?id=1525213108842821&ev=PageView&noscript=1" /></noscript>
     <!-- Google Tag Manager -->
     <script>
-        (function (w, d, s, l, i) {
+        (function(w, d, s, l, i) {
             w[l] = w[l] || [];
             w[l].push({
                 'gtm.start': new Date().getTime(),
@@ -344,5 +384,4 @@ if (!empty($_POST)) {
             path.setAttribute("d", "M19 9l-7 7-7-7");
         }
     });
-
 </script>

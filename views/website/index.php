@@ -416,6 +416,7 @@
                 foreach ($collection_products as $key => $product) {
 
                     $product_details = getData2("SELECT * FROM `tbl_products` WHERE `id`='$product'")[0];
+                    if(empty($product_details)) continue;
                     $images = json_decode($product_details['product_images'], true);
                     $images = array_reverse($images);
                     $name = str_replace(' ', '-', $product_details['name']);

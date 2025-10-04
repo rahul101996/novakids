@@ -783,7 +783,7 @@ class WebController extends LoginController
                 $_SESSION["err"] = "Please Select Atleast One Item";
                 header("Location: /");
             } else {
-                printWithPre($_POST);
+                // printWithPre($_POST);
                 $_SESSION["cartData"] = $_POST;
                 // $_SESSION["weight"] = $_POST["totalweight"];
                 // $_SESSION["totalprice"] = $_POST["totalprice"];
@@ -1180,7 +1180,7 @@ class WebController extends LoginController
 
         // $this->checkSession();
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            printWithPre($_SESSION);
+            // printWithPre($_SESSION);
             require 'views/website/checkout.php';
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // printWithPre($_POST);
@@ -1269,15 +1269,15 @@ class WebController extends LoginController
                     $token = $this->validshiprockettoken();
                     echo $token;
 
-                    $placeordershiprocket = $this->placeordershiprocket($token, $order_id);
-                    $placeordershiprocket = (array)$placeordershiprocket;
+                    // $placeordershiprocket = $this->placeordershiprocket($token, $order_id);
+                    // $placeordershiprocket = (array)$placeordershiprocket;
 
-                    printWithPre($placeordershiprocket);
+                    // printWithPre($placeordershiprocket);
                     // die();
-                    // $_SESSION["success"] = "Order Placed Successfully";
-                    // $db->commit();
-                    // unset($_SESSION["cartData"]);
-                    // header("Location: /thank-you");
+                    $_SESSION["success"] = "Order Placed Successfully";
+                    $db->commit();
+                    unset($_SESSION["cartData"]);
+                    header("Location: /thank-you");
                     exit();
                 } else {
                     // echo "Failed";
