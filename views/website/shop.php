@@ -171,7 +171,9 @@ $byCategory = $category_name ?? 'tees';
             // Fetch filtered products
             const res = await fetch("/api/get-products/" + cat, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 body: JSON.stringify({
                     size: selectedSizes,
                     min_price: minPrice,
@@ -232,9 +234,9 @@ $byCategory = $category_name ?? 'tees';
                 const SecondImage = images[1] || images[0];
                 const comparePrice = parseFloat(product.compare_price) || 0;
                 const price = parseFloat(product.price) || 0;
-                const discount = comparePrice > 0
-                    ? Math.round(((comparePrice - price) / comparePrice) * 100)
-                    : 0;
+                const discount = comparePrice > 0 ?
+                    Math.round(((comparePrice - price) / comparePrice) * 100) :
+                    0;
 
                 const name = product.name.replace(/ /g, "-").replace(/'/g, "");
 
@@ -247,9 +249,14 @@ $byCategory = $category_name ?? 'tees';
                         class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
                     <img src="/${SecondImage}" alt="${product.name} Hover"
                         class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                    <button class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500 z-20 stop-link bg-black/70 hover:bg-[#f25b21] text-white">
-                        <i class="fas fa-heart"></i>
-                    </button>
+                                                       <button
+    class="
+        addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500 z-20 stop-link
+        ${product.wishlist ? 'bg-[#f25b21]' : 'bg-black/70 hover:bg-[#f25b21]'} 
+        text-white
+    ">
+    <i class="fas fa-heart"></i>
+</button>
                     <button class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 
                         group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
                         <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
@@ -293,7 +300,10 @@ $byCategory = $category_name ?? 'tees';
             const max = parseInt(priceRange.value);
 
             // Apply both filters together
-            setProducts(selectedSizes, { min, max });
+            setProducts(selectedSizes, {
+                min,
+                max
+            });
         }
 
         function formatNumber(num) {
@@ -316,12 +326,14 @@ $byCategory = $category_name ?? 'tees';
             const selectedSizes = Array.from(document.querySelectorAll('.size-filter:checked'))
                 .map(cb => cb.value);
 
-            setProducts(selectedSizes, { min, max });
+            setProducts(selectedSizes, {
+                min,
+                max
+            });
         }
 
         // Initial load
         setProducts();
-
     </script>
 
     <?php
