@@ -154,7 +154,7 @@
                             }
                         }
                         // printWithPre($images);
-                        ?>
+                    ?>
                         <a href="/products/product-details/<?= $name ?>" class="block">
                             <div class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
@@ -230,7 +230,7 @@
             foreach ($categories as $key => $category) {
 
 
-                ?>
+            ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
                     <a href="/category/<?= strtolower(str_replace(' ', '-', $category['category'])) ?>">
@@ -416,7 +416,7 @@
                 foreach ($collection_products as $key => $product) {
 
                     $product_details = getData2("SELECT * FROM `tbl_products` WHERE `id`='$product'")[0];
-                    if(empty($product_details)) continue;
+                    if (empty($product_details)) continue;
                     $images = json_decode($product_details['product_images'], true);
                     $images = array_reverse($images);
                     $name = str_replace(' ', '-', $product_details['name']);
@@ -438,7 +438,7 @@
                         }
                     }
 
-                    ?>
+                ?>
                     <a href="products/product-details/<?= $name ?>" class="block">
                         <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
                             <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden">
@@ -488,7 +488,7 @@
                             </div>
                         </div>
                     </a>
-                    <?php
+                <?php
                 }
                 ?>
             </div>
@@ -533,7 +533,7 @@
                         foreach ($offerheading as $key => $value) { ?>
                             <span>#</span>
                             <span><?= $value['title'] ?></span>
-                        <?php }
+                    <?php }
                     } ?>
 
 
@@ -870,7 +870,7 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const modal = document.getElementById('newsletterModal');
             const closeBtn = document.getElementById('closeModal');
             const noPopupCheckbox = document.getElementById('noPopup');
@@ -904,7 +904,7 @@
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".new-arrival-carousel").owlCarousel({
                 loop: true,
                 margin: 5,

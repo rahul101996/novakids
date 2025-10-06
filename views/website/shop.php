@@ -357,14 +357,13 @@ $byCategory = $category_name ?? 'tees';
                                     <img src="/${SecondImage}" alt="${product.name} Hover"
                                         class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
 
-                                   <button
-    class="
-        addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500 z-20 stop-link
-        ${product.wishlist ? 'bg-[#f25b21]' : 'bg-black/70 hover:bg-[#f25b21]'} 
-        text-white
-    ">
-    <i class="fas fa-heart"></i>
-</button>
+                                   <button class="
+                                                addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500 z-20 stop-link
+                                                ${product.wishlist ? 'bg-[#f25b21]' : 'bg-black/70 hover:bg-[#f25b21]'} 
+                                                text-white
+                                            ">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
 
 
                                     <button
