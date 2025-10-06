@@ -63,13 +63,22 @@ $byCategory = $category_name ?? 'tees';
 
                     <!-- Price -->
                     <details class="border-b pb-3">
-                        <h4 class="font-semibold mb-2">Filter by Price</h4>
-                        <input id="priceRangeInput" type="range" min="" max="" step="100" value="2000"
-                            class="w-full accent-[#f25b21]" oninput="updatePriceLabel(this.value)">
-                        <p class="text-gray-600 my-2">₹500 — ₹<span id="priceValuedev">2000</span></p>
-
-                        <button type="button" onclick="applyFilters()" class="...">Apply Filters</button>
+                        <div>
+                            <h4 class="font-semibold mb-2">Filter by Price</h4>
+                            <input id="priceRange" type="range" class="w-full accent-orange-500" step="100">
+                            <div class="flex justify-between text-gray-600 font-medium text-sm mt-2">
+                                <span id="minPrice"></span>
+                                <span id="selectedPrice"></span>
+                                <span id="maxPrice"></span>
+                            </div>
+                        </div>
+                        <button type="button" onclick="applyFilters()"
+                            class="px-3 py-2 bg-[#f25b21] text-white rounded">
+                            Apply Filters
+                        </button>
                     </details>
+
+
 
                     <!-- Size -->
                     <details class="border-b pb-3">
@@ -127,10 +136,10 @@ $byCategory = $category_name ?? 'tees';
                             <i id="filterIcon" class="fa-solid fa-sliders"></i> Filters
                         </button>
                         <div class="flex gap-2">
-                            <button class="text-sm text-gray-600 hover:underline">Clear Filters</button>
+                            <!-- <button class="text-sm text-gray-600 hover:underline">Clear Filters</button> -->
                             <!-- Active Filters (Dummy Data) -->
                             <div class="flex gap-2">
-                                <span class="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded text-gray-700">
+                                <!-- <span class="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded text-gray-700">
                                     M
                                     <button class="text-gray-500 hover:text-black">
                                         <i class="fa-solid fa-xmark text-xs"></i>
@@ -141,7 +150,7 @@ $byCategory = $category_name ?? 'tees';
                                     <button class="text-gray-500 hover:text-black">
                                         <i class="fa-solid fa-xmark text-xs"></i>
                                     </button>
-                                </span>
+                                </span> -->
                             </div>
                         </div>
                     </div>
@@ -173,7 +182,7 @@ $byCategory = $category_name ?? 'tees';
             </div>
 
             <!-- Collapsible Filter Section -->
-            <div id="filterPanel" class="hidden mb-6 border-b pb-8 bg-white w-full">
+            <div id="filterPanel" class="hidden border-b pb-8 bg-white w-full">
                 <div class="grid md:grid-cols-5 gap-10 text-sm w-[90vw] mx-auto">
                     <!-- Price -->
                     <div>
@@ -262,22 +271,23 @@ $byCategory = $category_name ?? 'tees';
             }
         });
 
-
-        async function setProducts(selectedSizes = [], priceRange = {}) {
+        async function setProducts(selectedSizes = [], selectedPrice = null) {
             const productsContainer = document.getElementById("product-grid");
             const sizeFilterContainer = document.getElementById("size-filters");
+            const priceRange = document.getElementById("priceRange");
+            const minPriceLabel = document.getElementById("minPrice");
+            const maxPriceLabel = document.getElementById("maxPrice");
+            const selectedPriceLabel = document.getElementById("selectedPrice");
+
             const cat = '<?= $byCategory ?>';
 
             // Fetch products from backend
             const res = await fetch("/api/get-products/" + cat, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     size: selectedSizes,
-                    min_price: priceRange.min ?? 0,
-                    max_price: priceRange.max ?? 999999
+                    max_price: selectedPrice || parseFloat(priceRange.value) || 999999
                 })
             });
 
@@ -289,24 +299,26 @@ $byCategory = $category_name ?? 'tees';
                 return;
             }
 
-            // Determine dynamic min and max prices for the slider
+            // Determine dynamic min and max prices
             const prices = data.data.map(p => parseFloat(p.price));
-
-            console.log(prices)
-
             const minPriceValue = Math.min(...prices);
             const maxPriceValue = Math.max(...prices);
 
-            console.log(minPriceValue, maxPriceValue)
+            // Update slider range only first time
+            if (!priceRange.dataset.initialized) {
+                priceRange.min = minPriceValue;
+                priceRange.max = maxPriceValue;
+                priceRange.value = maxPriceValue;
+                minPriceLabel.textContent = "₹" + formatNumber(minPriceValue);
+                maxPriceLabel.textContent = "₹" + formatNumber(maxPriceValue);
+                selectedPriceLabel.textContent = "₹" + formatNumber(priceRange.value);
+                priceRange.dataset.initialized = true;
+            }
 
-            // Update price slider dynamically
-            const priceSlider = document.getElementById("priceRangeInput");
-            // if (priceSlider) {
-            priceSlider.min = minPriceValue;
-            priceSlider.max = maxPriceValue;
-            priceSlider.value = priceRange.max ?? maxPriceValue;
-            document.getElementById("priceValuedev").textContent = priceSlider.value;
-            // }
+            // Update label on slider move
+            priceRange.oninput = function () {
+                selectedPriceLabel.textContent = "₹" + formatNumber(this.value);
+            };
 
             // Collect unique sizes
             const allSizes = new Set();
@@ -337,57 +349,46 @@ $byCategory = $category_name ?? 'tees';
                 const comparePrice = parseFloat(product.compare_price) || 0;
                 const price = parseFloat(product.price) || 0;
                 const discountAmount = comparePrice - price;
-                const discountPercentage = comparePrice > 0 ?
-                    Math.round((discountAmount / comparePrice) * 100) :
-                    0;
-
+                const discountPercentage = comparePrice > 0 ? Math.round((discountAmount / comparePrice) * 100) : 0;
                 const name = product.name.replace(/ /g, "-").replace(/'/g, "");
-                const inWishlist = !!product.wishlist_id;
 
                 html += `
-                        <a href="/products/product-details/${name}" class="block">
-                            <div class="group relative cursor-pointer transition overflow-hidden">
-                                ${discountPercentage > 0 ? `
-                                <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
-                                    SAVE ${discountPercentage}%
-                                </span>` : ""}
-                                <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
-                                    <img src="/${images[0]}" alt="${product.name}"
-                                        class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-                                    <img src="/${SecondImage}" alt="${product.name} Hover"
-                                        class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+            <a href="/products/product-details/${name}" class="block">
+                <div class="group relative cursor-pointer transition overflow-hidden">
+                    ${discountPercentage > 0 ? `
+                    <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
+                        SAVE ${discountPercentage}%
+                    </span>` : ""}
+                    <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
+                        <img src="/${images[0]}" alt="${product.name}"
+                            class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+                        <img src="/${SecondImage}" alt="${product.name} Hover"
+                            class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
 
-                                   <button
-    class="
-        addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500 z-20 stop-link
-        ${product.wishlist ? 'bg-[#f25b21]' : 'bg-black/70 hover:bg-[#f25b21]'} 
-        text-white
-    ">
-    <i class="fas fa-heart"></i>
-</button>
+                        <button class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500 z-20 stop-link
+                            ${product.wishlist ? 'bg-[#f25b21]' : 'bg-black/70 hover:bg-[#f25b21]'} text-white">
+                            <i class="fas fa-heart"></i>
+                        </button>
 
-
-                                    <button
-                                        class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 
-                                        group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                        <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                    </button>
-                                    <input type="hidden" value="${product.id}" class="ProductId">
-                                </div>
-                                <div class="pt-4 w-full">
-                                    <h3 class="text-base font-semibold uppercase">${product.name}</h3>
-                                    <div class="flex items-center justify-start gap-3 w-full">
-                                        <p class="text-gray-500 line-through text-sm">₹ ${formatNumber(product.compare_price)}.00</p>
-                                        <p class="text-[#f25b21] font-bold">₹ ${formatNumber(product.price)}.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>`;
+                        <button class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 
+                            group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                            <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                        </button>
+                        <input type="hidden" value="${product.id}" class="ProductId">
+                    </div>
+                    <div class="pt-4 w-full">
+                        <h3 class="text-base font-semibold uppercase">${product.name}</h3>
+                        <div class="flex items-center justify-start gap-3 w-full">
+                            <p class="text-gray-500 line-through text-sm">₹ ${formatNumber(product.compare_price)}.00</p>
+                            <p class="text-[#f25b21] font-bold">₹ ${formatNumber(product.price)}.00</p>
+                        </div>
+                    </div>
+                </div>
+            </a>`;
             });
 
             productsContainer.innerHTML = html;
         }
-
 
         // Render size filters dynamically
         function renderSizeFilters(sizes) {
@@ -405,8 +406,7 @@ $byCategory = $category_name ?? 'tees';
         }
 
         function handleFilterChange() {
-            const selectedSizes = Array.from(document.querySelectorAll('.size-filter:checked'))
-                .map(cb => cb.value);
+            const selectedSizes = Array.from(document.querySelectorAll('.size-filter:checked')).map(cb => cb.value);
             setProducts(selectedSizes);
         }
 
@@ -414,26 +414,16 @@ $byCategory = $category_name ?? 'tees';
             return new Intl.NumberFormat("en-IN").format(num);
         }
 
-        // Price filter handler
-        function updatePriceLabel(value) {
-            document.getElementById("priceValue").textContent = value;
-        }
-
+        // Apply Filters (price + size)
         function applyFilters() {
-            const max = parseInt(document.getElementById("priceRange").value);
-            const min = parseInt(document.getElementById("priceRange").min);
-
-            const selectedSizes = Array.from(document.querySelectorAll('.size-filter:checked'))
-                .map(cb => cb.value);
-
-            setProducts(selectedSizes, {
-                min,
-                max
-            });
+            const selectedSizes = Array.from(document.querySelectorAll('.size-filter:checked')).map(cb => cb.value);
+            const selectedPrice = parseFloat(document.getElementById("priceRange").value);
+            setProducts(selectedSizes, selectedPrice);
         }
 
         // Initial load
         setProducts();
+
     </script>
 
     <?php
