@@ -1,5 +1,5 @@
 <?php
-
+// printWithPre($ProductData);
 $page = "product-details";
 if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
@@ -148,13 +148,15 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
     </div>
 
     <div class="w-full mx-auto mt-6 flex flex-col items-center justify-center">
-        <section class="flex items-start justify-center relative w-[90%] gap-5">
+        <section class="flex items-start justify-center relative w-[90%] gap-0">
 
             <div class="flex items-center justify-start max-md:hidden gap-2 w-[64%]">
                 <div class="grid grid-cols-2 gap-2 w-[96%]" id="ProductDetailImg">
                     <?php
                     if (is_array($ppimages[0])) {
-                        foreach (array_reverse($ppimages[0]) as $key => $image) {
+                        $ppimages[0] =  array_reverse($ppimages[0]);
+                        // array_reverse($ppimages[0]);
+                        foreach ($ppimages[0] as $key => $image) {
 
                     ?>
                             <div class=" overflow-hidden  cursor-pointer">
@@ -299,13 +301,13 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     <div class="gap-3 w-full flex items-start justify-between">
                         <div class="flex flex-col items-start justify-center mb-2 w-[75%]">
                             <h2 class="w-full text-[1.7rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
-                            <div class="flex items-center justify-center gap-3 mt-4 prices">
+                            <div class="flex items-center justify-center gap-3 mt-4 ">
                                 <span
-                                    class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
+                                    class="text-gray-300 text-xl line-through">Rs. <span id="comparePrice99"><?= formatNumber($ProductData['compare_price']) ?></span></span>
                                 <span
-                                    class="text-[#f25b21] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
-                                <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg">SAVE
-                                    <?= $discountPercentage ?>%</span>
+                                    class="text-[#f25b21] text-xl prices">Rs.<?= formatNumber($ProductData['price']) ?></span>
+                                <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg ">SAVE
+                                    <span id="save"><?= $discountPercentage ?></span>%</span>
 
                             </div>
 
@@ -323,11 +325,14 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 alt="">
                         </div>
                     </div>
-
-                    <p class="text-sm text-gray-900 mt-2 text-justify">Upgrade your casual wardrobe with our black
-                        sporty deconstructed loose pants, the perfect blend of comfort and style. Designed with a
-                        relaxed fit, these pants allow for effortless movement, while the deconstructed detailing adds a
-                        modern, edgy vibe that sets you apart.</p>
+                    <?php
+                    if ($ProductData['id'] != 7) {
+                    ?>
+                        <p class="text-sm text-gray-900 mt-2 text-justify">Upgrade your casual wardrobe with our black
+                            sporty deconstructed loose pants, the perfect blend of comfort and style. Designed with a
+                            relaxed fit, these pants allow for effortless movement, while the deconstructed detailing adds a
+                            modern, edgy vibe that sets you apart.</p>
+                    <?php } ?>
                     <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated
                         at checkout</p>
                     <!-- Size Selection -->
@@ -408,7 +413,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </div>
 
                             <div class="col-span-2 max-md:order-3 w-[70%]">
-                                <button type="button" onclick="ohmygod()"
+                                <button type="button" onclick="ohmygod()" id="MainCartBtn"
                                     class="w-full sm:flex-1 relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black">
                                     <span
                                         class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
@@ -450,11 +455,11 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             <?php
                             } else {
                             ?>
-                                <input type="hidden" name="varient[]" value="<?= $ProductData['varients'][0]["id"] ?>">
-                                <input type="hidden" name="category[]" value="<?= $ProductData['category'] ?>">
-                                <input type="hidden" name="product[]" value="<?= $ProductData['id'] ?>">
+                                <input type="hidden" name="varient[]" class="sideVarientId" value="<?= $ProductData['varients'][0]["id"] ?>">
+                                <input type="hidden" name="category[]" class="sideCategoryId" value="<?= $ProductData['category'] ?>">
+                                <input type="hidden" name="product[]" class="sideProductId" value="<?= $ProductData['id'] ?>">
                                 <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
-                                <input type="hidden" name="quantity[]" id="product_buy_count1" value="1">
+                                <input type="hidden" name="quantity[]" id="product_buy_count" value="1">
                                 <input type="hidden" name="cartid[]" value="">
                                 <button type="button" onclick="openLogin()" class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-4 hover:border hover:border-[#f25b21] transition-all duration-700"><span
                                         class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
@@ -570,119 +575,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 </form>
             </div>
         </section>
+
         <div class="w-full flex items-center justify-center mt-10">
             <div class="flex items-start justify-center flex-row-reverse relative w-[90%] gap-5">
-                <div class="w-[35%] h-[28vh] max-w-5xl mx-auto bg-white rounded-lg shadow-md border border-gray-300 px-8 py-6">
-                    <div class="text-center font-semibold text-lg mb-4">Customer Reviews</div>
-                    <div class="flex items-center justify-center gap-8">
-
-                        <!-- Left: Stars + text -->
-                        <div class="flex flex-col items-center">
-                            <div class="flex text-yellow-400 mb-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
-                                </svg>
-                            </div>
-                            <span class="text-sm text-gray-600">Be the first to write a review</span>
-                        </div>
-
-                        <!-- Divider -->
-                        <div class="h-12 w-px bg-gray-300"></div>
-
-                        <!-- Right: Button -->
-                        <button class="bg-black text-white font-semibold px-6 py-2 rounded-full hover:bg-gray-800 transition">
-                            Write a review
-                        </button>
-
-                    </div>
-                </div>
-
-                <div class="w-[64%] flex items-center justify-center">
-                    <div class="owl-carousel owl-theme review-carousel w-full">
-                        <!-- Review 1 -->
-                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                                <span> ★★★★★</span>
-                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                    "Amazing quality and fast delivery! The packaging was premium and the product
-                                    feels
-                                    luxurious."
-                                </p>
-                            </div>
-                            <!-- Reviewer Info -->
-                            <div class="flex gap-4 items-center w-full">
-                                <div class="flex items-center w-10 h-10">
-                                    <img src="/public/images/dp.png" alt="John D."
-                                        class="w-full h-full rounded-full object-cover border mr-3">
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-gray-800">John D.</p>
-                                    <!-- <p class="text-xs text-gray-500">Verified Buyer</p> -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Review 2 -->
-                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                                <span> ★★★★★</span>
-                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                    "Loved the fabric and the trendy style! Feels super comfortable and stylish at the same
-                                    time."
-                                </p>
-                            </div>
-                            <div class="flex gap-4 items-center">
-                                <div class="flex items-center w-10 h-10">
-                                    <img src="/public/images/dp.png" alt="John D."
-                                        class="w-full h-full rounded-full object-cover border mr-3">
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-gray-800">Sarah M.</p>
-                                    <!-- <p class="text-xs text-gray-500">Fashion Enthusiast</p> -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Review 3 -->
-                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                                <span> ★★★★★</span>
-                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                    "Great fit and excellent customer service. They really care about their customers and it
-                                    shows!"
-                                </p>
-                            </div>
-
-                            <div class="flex gap-4 items-center">
-                                <div class="flex items-center w-10 h-10">
-                                    <img src="/public/images/dp.png" alt="John D."
-                                        class="w-full h-full rounded-full object-cover border mr-3">
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-gray-800">Alex P.</p>
-                                    <!-- <p class="text-xs text-gray-500">Loyal Customer</p> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w-full flex items-center justify-center mt-10">
-            <div class="flex items-start justify-center flex-row-reverse relative w-[90%] gap-5">
-                <div class="w-[35%] h-[28vh] max-w-5xl mx-auto bg-white rounded-lg shadow-md border border-gray-300 px-8 py-6">
+                <div class="w-[35%] h-[28vh] max-w-5xl mx-auto bg-white rounded-lg shadow-md border border-gray-300 px-8 py-6 flex flex-col items-center justify-center">
                     <div class="text-center font-semibold text-lg mb-4">Customer Reviews</div>
                     <div class="flex items-center justify-center gap-8">
 
@@ -790,162 +686,30 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 </div>
             </div>
         </div>
-         <div class="w-full flex items-center justify-center mt-10">
-            <div class="flex items-start justify-center  relative w-[90%] gap-5">
-                <div class="w-[65%] h-[28vh] max-w-5xl mx-auto bg-white rounded-lg shadow-md border border-gray-300 px-8 py-6">
-                    <div class="text-center font-semibold text-lg mb-4">Customer Reviews</div>
-                    <div class="flex items-center justify-center gap-8">
 
-                        <!-- Left: Stars + text -->
-                        <div class="flex flex-col items-center">
-                            <div class="flex text-yellow-400 mb-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
-                                </svg>
-                            </div>
-                            <span class="text-sm text-gray-600">Be the first to write a review</span>
-                        </div>
 
-                        <!-- Divider -->
-                        <div class="h-12 w-px bg-gray-300"></div>
-
-                        <!-- Right: Button -->
-                        <button class="bg-black text-white font-semibold px-6 py-2 rounded-full hover:bg-gray-800 transition">
-                            Write a review
-                        </button>
-
-                    </div>
-                </div>
-
-                <div class="w-[35%] flex items-center justify-center">
-                    <div class="owl-carousel owl-theme review-carousel2 w-full">
-                        <!-- Review 1 -->
-                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                                <span> ★★★★★</span>
-                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                    "Amazing quality and fast delivery! The packaging was premium and the product
-                                    feels
-                                    luxurious."
-                                </p>
-                            </div>
-                            <!-- Reviewer Info -->
-                            <div class="flex gap-4 items-center w-full">
-                                <div class="flex items-center w-10 h-10">
-                                    <img src="/public/images/dp.png" alt="John D."
-                                        class="w-full h-full rounded-full object-cover border mr-3">
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-gray-800">John D.</p>
-                                    <!-- <p class="text-xs text-gray-500">Verified Buyer</p> -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Review 2 -->
-                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                                <span> ★★★★★</span>
-                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                    "Loved the fabric and the trendy style! Feels super comfortable and stylish at the same
-                                    time."
-                                </p>
-                            </div>
-                            <div class="flex gap-4 items-center">
-                                <div class="flex items-center w-10 h-10">
-                                    <img src="/public/images/dp.png" alt="John D."
-                                        class="w-full h-full rounded-full object-cover border mr-3">
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-gray-800">Sarah M.</p>
-                                    <!-- <p class="text-xs text-gray-500">Fashion Enthusiast</p> -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Review 3 -->
-                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                                <span> ★★★★★</span>
-                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                    "Great fit and excellent customer service. They really care about their customers and it
-                                    shows!"
-                                </p>
-                            </div>
-
-                            <div class="flex gap-4 items-center">
-                                <div class="flex items-center w-10 h-10">
-                                    <img src="/public/images/dp.png" alt="John D."
-                                        class="w-full h-full rounded-full object-cover border mr-3">
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-gray-800">Alex P.</p>
-                                    <!-- <p class="text-xs text-gray-500">Loyal Customer</p> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w-full max-w-5xl mx-auto bg-white rounded-lg shadow-md border mt-[15vh] border-gray-300 px-8 py-6">
-            <div class="text-center font-semibold text-lg mb-4">Customer Reviews</div>
-            <div class="flex items-center justify-center gap-8">
-
-                <!-- Left: Stars + text -->
-                <div class="flex flex-col items-center">
-                    <div class="flex text-yellow-400 mb-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
-                        </svg>
-                    </div>
-                    <span class="text-sm text-gray-600">Be the first to write a review</span>
-                </div>
-
-                <!-- Divider -->
-                <div class="h-12 w-px bg-gray-300"></div>
-
-                <!-- Right: Button -->
-                <button class="bg-black text-white font-semibold px-6 py-2 rounded-full hover:bg-gray-800 transition">
-                    Write a review
-                </button>
-
-            </div>
-        </div>
 
 
 
         <section class="bg-white py-14 max-md:py-8 w-full">
             <div class="w-[90vw] max-md:w-[90vw] mx-auto">
-                <div class="flex flex-col mb-6">
-                    <h3 class="text-left text-3xl font-extrabold uppercase">YOU MAY ALSO LIKE</h3>
-                </div>
+
 
                 <div class="relative">
+                    <div class="flex flex items-center justify-between mb-6">
+                        <h3 class="text-left text-3xl font-extrabold uppercase">YOU MAY ALSO LIKE</h3>
+                        <div class="flex flex items-center gap-2 justify-center">
+                            <div onclick="banner_forward(this)" class=" border bg-black border-white p-2 rounded-full cursor-pointer">
+                                <img src="/public/icons/backward.png" class="w-[25px] h-[25px] max-md:w-[12px] max-md:h-[12px]" alt="">
+                            </div>
+                            <div class="flex flex items-center gap-2 justify-center">
+                                <div onclick="banner_backward(this)" class=" border bg-black border-white p-2 rounded-full cursor-pointer">
+                                    <img src="/public/icons/backward.png" class="w-[25px] h-[25px] max-md:w-[12px] max-md:h-[12px] rotate-180" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                     <div class="owl-carousel owl-theme like-carousel">
 
                         <?php foreach ($uniqueProducts as $key => $product) {
@@ -1013,9 +777,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                         <h3 class="text-base font-semibold uppercase"><?= $product['name'] ?></h3>
                                         <div class="flex items-center justify-start gap-3 w-full">
                                             <p class="text-gray-500 line-through text-sm">₹
-                                                <?= formatNumber($product['compare_price']) ?>.00
+                                                <?= formatNumber($product['compare_price']) ?>
                                             </p>
-                                            <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?>.00</p>
+                                            <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?></p>
                                         </div>
                                         <!-- reviews -->
                                         <div class="flex items-center justify-start space-x-1 hidden">
@@ -1084,26 +848,27 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
     <div id="bottomStrip" class="fixed bottom-0 left-0 w-full bg-gray-200 shadow-lg border-t p-2 hidden z-50">
         <div class="w-[90vw] mx-auto flex max-md:flex-col items-center max-md:gap-2 max-md:items-start justify-between">
             <div class="flex items-center gap-4">
-                <img src="/public/images/333.avif" alt="Product"
-                    class="w-16 h-16 max-md:w-12 max-md:h-12 object-cover border border-white">
+                <img src="/<?= $ppimages[0][0] ?>" alt="Product"
+                    class=" h-24 max-md:w-12 max-md:h-12 object-cover border border-white" id="DownImage">
                 <div>
-                    <h4 class="font-medium text-black max-md:text-sm">BLACK EVERYDAY JOGGERS</h4>
+                    <h4 class="font-medium text-black max-md:text-sm"><?= $ProductData['name'] ?></h4>
                     <p class="text-sm">
-                        <span class="line-through text-black"> ₹230.00</span>
-                        <span class="text-[#f25b21] font-semibold text-lg max-md:text-base"> ₹189.00</span>
+                        <span class="line-through text-black"> ₹<?= formatNumber($ProductData['compare_price']) ?></span>
+                        <span class="text-[#f25b21] font-semibold text-lg max-md:text-base prices"> ₹<?= formatNumber($ProductData['price']) ?></span>
                     </p>
                 </div>
             </div>
 
             <div class="flex items-center gap-3 max-md:justify-end max-md:w-full">
-                <div class="flex items-center border border-gray-500 rounded">
-                    <button class="px-3 py-1 text-black bg-transparent">-</button>
-                    <input type="text" value="1"
-                        class="w-10 text-center border-l border-r border-gray-500 text-black bg-transparent">
-                    <button class="px-3 py-1 text-black bg-transparent">+</button>
+                <div
+                    class="  flex items-center justify-center gap-7 border border-gray-800 rounded-lg py-1">
+                    <span class="cursor-pointer border-r border-gray-800 px-4 py-1" onclick="countMe(this,'-')">-</span>
+                    <span class="text-black counter">1</span>
+                    <span class="cursor-pointer border-l border-gray-800 px-4 py-1" onclick="countMe(this,'+')">+</span>
+
                 </div>
                 <button
-                    class="openCartBtn flex-1 relative rounded-md overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
+                    class="flex-1 relative rounded-md overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black" onclick="ClickonMainCartBtn()">
                     <span
                         class="relative z-10 flex py-1.5 px-6 items-center justify-center gap-2 font-semibold text-base max-md:text-sm transition-colors duration-700 group-hover:text-white">
                         <i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart
@@ -1112,11 +877,17 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
                     </span>
                 </button>
+                <input type="hidden" name="varient[]" class="sideVarientId" value="<?= $ProductData['varients'][0]["id"] ?>">
+                <input type="hidden" value="<?= $ProductData["id"] ?>" class="ProductId">
             </div>
         </div>
     </div>
 
     <script>
+        function ClickonMainCartBtn() {
+
+            document.getElementById('MainCartBtn').click();
+        }
         const strip = document.getElementById("bottomStrip");
 
         window.addEventListener("scroll", () => {
@@ -1199,7 +970,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             $(".like-carousel").owlCarousel({
                 loop: true,
                 margin: 10,
-                nav: true,
+                // nav: true,
                 dots: false,
                 autoplay: true,
                 autoplayTimeout: 3000,
@@ -1299,7 +1070,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 }
             });
         });
-         $(document).ready(function() {
+        $(document).ready(function() {
             $(".review-carousel2").owlCarousel({
                 margin: 10,
                 autoplay: true,
@@ -1496,18 +1267,26 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         // });
 
         function countMe(ele, process) {
-            let counterEl = ele.parentElement.querySelector(".counter");
-            let current = parseInt(counterEl.textContent);
+            // Select all counters
+            const counters = document.querySelectorAll(".counter");
 
-            if (process === "+") {
-                current++;
-            } else if (process === "-" && current > 1) {
-                current--;
-            }
+            counters.forEach((counterEl) => {
+                let current = parseInt(counterEl.textContent);
 
-            counterEl.textContent = current;
-            document.getElementById("product_buy_count").value = current
+                if (process === "+") {
+                    current++;
+                } else if (process === "-" && current > 1) {
+                    current--;
+                }
+
+                counterEl.textContent = current;
+
+                // Update corresponding hidden input if exists
+                const inputEl = counterEl.parentElement.querySelector("#product_buy_count");
+                if (inputEl) inputEl.value = current;
+            });
         }
+
 
         async function getVariants() {
             const response = await axios.post("/api/get-product-data", new URLSearchParams({
@@ -1558,7 +1337,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
             let selectedId = "";
             GLOBAL_product_VARIANT.variants.forEach(async (ar, i) => {
-
+                //    console.log(ar)
                 if (deepEqualCaseInsensitive(JSON.parse(JSON.parse(ar.options)), GLOBAL_product_VARIANT.selected)) {
                     // console.log("matched",JSON.parse(JSON.parse(ar.options)),GLOBAL_VARIANT.selected)
 
@@ -1574,12 +1353,27 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     } else {
                         console.warn("No .sideVarientId element found inside:", ele.parentElement.parentElement);
                     }
-                    eleForm.querySelector(".prices").innerHTML = `
-                        <span class="text-[#33459c] text-xl">Rs. ${ar.price}.00</span>
-                    `
+                    document.querySelectorAll(".prices").forEach(el => {
+                        el.innerHTML = `<span class="text-[#f25b21] text-xl prices">Rs. ${ar.price}</span>`;
+                    });
+                    let comparePrice99 = document.getElementById('comparePrice99');
+                    console.log(comparePrice99)
+                    if (comparePrice99) {
+                        let original = parseFloat(comparePrice99.innerHTML);
+                        let discounted = parseFloat(ar.price);
+
+                        if (!isNaN(original) && original > 0) {
+                            let discountPercent = ((original - discounted) / original) * 100;
+                            document.getElementById('save').innerHTML = `${discountPercent.toFixed(0)}`;
+                        }
+                    }
+
+
+
                     console.log(JSON.parse(ar.images))
                     let imgHtml = ""
-                    JSON.parse(ar.images).reverse().forEach((imgh) => {
+                    let productimages = JSON.parse(ar.images).reverse()
+                    productimages.forEach((imgh) => {
                         imgHtml = imgHtml + `
 
                             <div class=" overflow-hidden  cursor-pointer">
@@ -1588,6 +1382,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </div>
                         `
                     })
+                    console.log(productimages[0])
+                    document.getElementById('DownImage').src = '/' + productimages[0];
                     document.getElementById("ProductDetailImg").innerHTML = imgHtml
                 }
             })
@@ -1596,7 +1392,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
         function ohmygod() {
             let eleForm = document.getElementById("productDetailForm")
-            addToCartSidebar(eleForm.querySelector(".sideVarientId").value, eleForm.querySelector(".sideCategoryId").value, eleForm.querySelector(".sideProductId").value, btn, 1, false)
+            let quantity = eleForm.querySelector('.counter').innerHTML;
+            addToCartSidebar(eleForm.querySelector(".sideVarientId").value, eleForm.querySelector(".sideCategoryId").value, eleForm.querySelector(".sideProductId").value, btn, quantity, false)
         }
         getVariants();
         cnosole.log("hello")
