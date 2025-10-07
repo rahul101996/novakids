@@ -1972,4 +1972,40 @@ ORDER BY id DESC LIMIT 5");
         echo json_encode($response);
         die();
     }
+
+
+
+    public function addReview()
+    {
+        $response = [
+            "success" => false,
+            "message" => "Something went wrong"
+        ];
+
+        try {
+            $this->db->beginTransaction();
+
+            $_POST = json_decode(file_get_contents('php://input'), true);
+
+            // printWithPre($_POST);
+            // die();
+
+            add($_POST, "tbl_product_review");
+
+            $this->db->commit();
+
+            $response = [
+                "success" => true,
+                "message" => "Review Added Successfully"
+            ];
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            $response = [
+                "success" => false,
+                "message" => $e->getMessage()
+            ];
+        } finally {
+            echo json_encode($response);
+        }
+    }
 }
