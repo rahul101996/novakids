@@ -52,6 +52,7 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('/order-details/[i:id]', 'OrderDetails');
     $route->route('order-confirm-mail', 'OrderConfirmMail');
     $route->route('/api/popup-display', 'popupDisplay');
+    $route->route('/api/free-delivery', 'FreeDelivery');
 
     // $route->route('/', 'index');
 });

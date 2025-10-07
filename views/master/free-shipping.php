@@ -1,3 +1,7 @@
+<?php
+        // printWithPre($freeshipping);
+        // die();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,12 +61,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 </div>
                 <?php
 
-if(isset($freeshipping['free_shipping']) && !empty($freeshipping['free_shipping'])){
-?>
-<input type="hidden" value="<?= $freeshipping['id'];  ?>" name="id">
-<?php } ?>
+                if (isset($freeshipping['free_shipping'])) {
+                ?>
+                    <input type="hidden" value="<?= $freeshipping['id'];  ?>" name="id">
+                <?php } ?>
                 <div class="w-[85%]">
-                    <button class="bg-black border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" name="<?= isset($freeshipping['free_shipping']) && !empty($freeshipping['free_shipping']) ? 'update' : 'add' ?>">Save</button>
+                    <button class="bg-black border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" name="<?= isset($freeshipping['free_shipping']) ? 'update' : 'add' ?>">Save</button>
                 </div>
             </form>
         </main>

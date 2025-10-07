@@ -309,6 +309,14 @@ class WebController extends LoginController
             require 'views/website/shop.php';
         }
     }
+    public function FreeDelivery(){
+
+        $freeshipping = getData2("SELECT * FROM `tbl_free_shipping` WHERE `id` = 1 AND `free_shipping` = 1 ORDER BY `id` DESC LIMIT 1")[0];
+        if($freeshipping == null){
+            $freeshipping =[];
+        }
+        echo json_encode($freeshipping);
+    }
     public function getVariantData()
     {
         $id = $_POST['productid'];
