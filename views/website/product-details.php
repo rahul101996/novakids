@@ -743,9 +743,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 <div
                                     class="group relative  cursor-pointer transition overflow-hidden">
                                     <!-- Discount Badge -->
-                                    <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20" style="text-wrap: no-wrap;">
+                                    <span class="bg-[#f25b21] text-white text-xs px-2 py-1 z-20 whitespace-nowrap">
                                         SAVE <?= $discountPercentage ?>%
                                     </span>
+
 
                                     <!-- Product Images -->
                                     <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
