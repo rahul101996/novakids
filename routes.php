@@ -51,6 +51,7 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('edit-address', 'EditAddress');
     $route->route('/order-details/[i:id]', 'OrderDetails');
     $route->route('order-confirm-mail', 'OrderConfirmMail');
+    $route->route('/api/popup-display', 'popupDisplay');
 
     // $route->route('/', 'index');
 });

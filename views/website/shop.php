@@ -249,14 +249,14 @@ $byCategory = $category_name ?? 'tees';
                         class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
                     <img src="/${SecondImage}" alt="${product.name} Hover"
                         class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                                                       <button
-    class="
-        addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500 z-20 stop-link
-        ${product.wishlist ? 'bg-[#f25b21]' : 'bg-black/70 hover:bg-[#f25b21]'} 
-        text-white
-    ">
-    <i class="fas fa-heart"></i>
-</button>
+                         <button
+                        class="
+                            addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500 z-20 stop-link
+                            ${product.wishlist ? 'bg-[#f25b21]' : 'bg-black/70 hover:bg-[#f25b21]'} 
+                            text-white
+                        ">
+                        <i class="fas fa-heart"></i>
+                    </button>
                     <button class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 
                         group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
                         <i class="fas fa-shopping-cart mr-2"></i> Add to Cart

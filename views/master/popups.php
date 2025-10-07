@@ -51,47 +51,48 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             <div class="w-full text-sm">
                 <!-- Table Header -->
                 <div class="space-y-2">
-    <!-- Table Header -->
-    <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-2 text-gray-500 bg-gray-100 rounded">
-        <span>Sr. No</span>
-        <span>Title</span>
-        <span>Banner</span>
-        <span>Action</span>
-    </div>
+                    <!-- Table Header -->
+                    <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-2 text-gray-500 bg-gray-100 rounded">
+                        <span>Sr. No</span>
+                        <span>Title</span>
+                        <span>Banner</span>
+                        <span>Action</span>
+                    </div>
 
-    <!-- Table Rows -->
-    <?php foreach ($banners as $key => $banner) { ?>
-        <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-3 hover:bg-gray-50 text-gray-800 rounded">
-            <!-- Sr. No -->
-            <div class="flex items-center space-x-3">
-                <span><?= $key + 1 ?></span>
-                <svg class="h-4 w-4 text-gray-400 cursor-grab" viewBox="0 0 24 24" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="9" cy="6" r="1.5" />
-                    <circle cx="15" cy="6" r="1.5" />
-                    <circle cx="9" cy="12" r="1.5" />
-                    <circle cx="15" cy="12" r="1.5" />
-                    <circle cx="9" cy="18" r="1.5" />
-                    <circle cx="15" cy="18" r="1.5" />
-                </svg>
-            </div>
+                    <!-- Table Rows -->
+                    <?php foreach ($banners as $key => $banner) { ?>
+                        <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-3 hover:bg-gray-50 text-gray-800 rounded">
+                            <!-- Sr. No -->
+                            <div class="flex items-center space-x-3">
+                                <span><?= $key + 1 ?></span>
+                                <svg class="h-4 w-4 text-gray-400 cursor-grab" viewBox="0 0 24 24" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="9" cy="6" r="1.5" />
+                                    <circle cx="15" cy="6" r="1.5" />
+                                    <circle cx="9" cy="12" r="1.5" />
+                                    <circle cx="15" cy="12" r="1.5" />
+                                    <circle cx="9" cy="18" r="1.5" />
+                                    <circle cx="15" cy="18" r="1.5" />
+                                </svg>
+                            </div>
 
-            <!-- Category Title -->
-            <div class="font-medium"><?= htmlspecialchars($banner['title']) ?></div>
+                            <!-- Category Title -->
+                            <div class="font-medium"><?= htmlspecialchars($banner['title']) ?></div>
 
-            <!-- Image -->
-            <div>
-                <img src="/<?= htmlspecialchars($banner['img']) ?>" class="w-24 rounded" alt="Category Image">
-            </div>
+                            <!-- Image -->
+                            <div>
+                                <img src="/<?= htmlspecialchars($banner['img']) ?>" class="w-24 rounded" alt="Category Image">
+                            </div>
 
-            <!-- Action -->
-            <div class="flex space-x-2">
-                <a href="/edit-popup/<?= $banner['id'] ?>" class="text-blue-500 hover:text-blue-600"><i class="fa-solid fa-pen"></i></a>
-                <a href="/delete-popup/<?= $banner['id'] ?>" class="text-red-500 hover:text-red-600"><i class="fa-solid fa-trash"></i></a>
-            </div>
-        </div>
-    <?php } ?>
-</div>
+                            <!-- Action -->
+                            <div class="flex space-x-2">
+                                <input type="checkbox" name="display" value="<?= $banner["id"] ?>" <?= ($banner["display"] == "1") ? "checked" : "" ?> class="display">
+                                <a href="/edit-popup/<?= $banner['id'] ?>" class="text-blue-500 hover:text-blue-600"><i class="fa-solid fa-pen"></i></a>
+                                <a href="/delete-popup/<?= $banner['id'] ?>" class="text-red-500 hover:text-red-600"><i class="fa-solid fa-trash"></i></a>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
 
 
 
@@ -102,6 +103,55 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/views/include/footer.php";
     ?>
+    <script>
+         document.querySelectorAll('.display').forEach(checkbox => {
+        checkbox.addEventListener('change', async function() {
+            if (this.checked) {
+                // Uncheck all other checkboxes
+                document.querySelectorAll('.display').forEach(otherCheckbox => {
+                    if (otherCheckbox !== this) {
+                        otherCheckbox.checked = false;
+                    }
+                });
+               console.log(this.value);
+               let id = this.value;
+               const request =  await axios.post("/api/popup-display", new URLSearchParams({
+           id: id
+        }));
+        console.log(request.data)
+        if (request.data.success) {
+           
+            toastr.options = {
+                "toastClass": "bg-pink-toast",
+                "progressBar": true,
+                "positionClass": "toast-bottom-right" // Add a custom class
+            };
+
+            toastr.success('Popup updated successfully');
+        }
+            }else{
+                // Uncheck all other checkboxes
+               console.log(this.value);
+               console.log('kuch nhi');
+               let id = this.value;
+               const request =  await axios.post("/api/popup-display", new URLSearchParams({
+           removeid: id
+        }));
+        console.log(request.data)
+        if (request.data.success) {
+           
+            toastr.options = {
+                "toastClass": "bg-pink-toast",
+                "progressBar": true,
+                "positionClass": "toast-bottom-right" // Add a custom class
+            };
+
+            toastr.success('Popup updated successfully');
+        }
+        }
+        });
+    });
+    </script>
 </body>
 
 </html>

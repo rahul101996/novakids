@@ -840,7 +840,16 @@ class WebController extends LoginController
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             require 'views/website/index.php';
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+            if (isset($_POST['popup'])) {
+                $_SESSION['popup'] = $_POST['popup'];
+                echo "nice";
+            }
+            // printWithPre($_SESSION);
+            if (!isset($_SESSION['userid']) && $_SESSION['type'] != "User") {
+                if (!isset($_SESSION['popup'])) {
+                    $_SESSION['popup'] = 'false';
+                }
+            }
             require 'views/website/index.php';
         }
     }
@@ -1052,7 +1061,86 @@ class WebController extends LoginController
             require 'views/website/login.php';
         }
     }
+    public function removeDisplayPopup($id)
+    {
+        try {
+            if (empty($id)) {
 
+
+                $sql = "UPDATE tbl_popup SET `display` = 0 WHERE `display` = '1'";
+
+                $stmt = $this->db->prepare($sql);
+            } else {
+
+                $sql = "UPDATE tbl_popup SET `display` = 0 WHERE `id` = :id";
+
+                $stmt = $this->db->prepare($sql);
+
+
+                $stmt->bindValue(':id', $id);
+            }
+
+            $stmt->execute();
+
+            return true;
+        } catch (\PDOException $e) {
+            // error_log($e->getMessage()); // Uncomment if you wish to log errors
+            return false;
+        }
+    }
+    public function addDisplayPopup(int $id)
+    {
+        try {
+
+            $sql = "UPDATE tbl_popup SET `display` = 1 WHERE `id` = :id";
+
+            $stmt = $this->db->prepare($sql);
+
+
+            $stmt->bindValue(':id', $id);
+
+            $stmt->execute();
+
+            return true;
+        } catch (\PDOException $e) {
+            // error_log($e->getMessage()); // Uncomment if you wish to log errors
+            return false;
+        }
+    }
+    public function popupDisplay()
+    {
+
+
+        if (isset($_POST["id"])) {
+
+            $id = $_POST["id"];
+            $idremove = '';
+            $data = $this->removeDisplayPopup($idremove);
+            if ($data) {
+                $displya = $this->addDisplayPopup($id);
+                if ($displya) {
+                    $response = [
+                        "success" => true,
+                        "data" => 'Popup Update Successfully'
+                    ];
+                    echo json_encode($response);
+                }
+            }
+        }
+        if (isset($_POST["removeid"])) {
+
+            $id = $_POST["id"];
+            $data = $this->removeDisplayPopup($id);
+
+            if ($data) {
+                $response = [
+                    "success" => true,
+                    "data" => 'Hide the Popup'
+                ];
+                echo json_encode($response);
+            }
+        }
+    }
     public function shop()
     {
 
