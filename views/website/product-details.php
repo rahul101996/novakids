@@ -652,7 +652,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         <div class="h-12 w-px bg-gray-300"></div>
 
                         <!-- Right: Button -->
-                        <button type="button" onclick="<?= isset($_SESSION['userid']) && !empty($_SESSION['userid']) ? 'openReviewModal()' : 'openLogin()' ?>"
+                        <button type="button"
+                            onclick="<?= isset($_SESSION['userid']) && !empty($_SESSION['userid']) ? 'openReviewModal()' : 'openLogin()' ?>"
                             class="bg-black text-white font-semibold px-6 py-2 rounded-full hover:bg-gray-800 transition">
                             <?= isset($_SESSION['userid']) && !empty($_SESSION['userid']) ? 'Write a review' : 'Login to write a review' ?>
                         </button>
@@ -792,12 +793,12 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 <div class="group relative  cursor-pointer transition overflow-hidden">
                                     <!-- Discount Badge -->
                                     <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20" ">
-                                                                                                            SAVE <?= $discountPercentage ?>%
-                                                                                                        </span>
+                                                                                                                SAVE <?= $discountPercentage ?>%
+                                                                                                            </span>
 
 
-                                                                                                        <!-- Product Images -->
-                                                                                                        <div class="
+                                                                                                            <!-- Product Images -->
+                                                                                                            <div class="
                                     relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                         <!-- Default Image -->
                                         <img src="/<?= $images[0] ?>" alt="Product 1"
@@ -966,7 +967,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 <!-- Form Content -->
                 <form id="reviewForm" class="px-8 py-6 space-y-5">
                     <!-- Name Input with Icon -->
-                    <div class="group">
+                    <!-- <div class="group">
                         <label for="name"
                             class="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
                             <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -978,7 +979,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         <input type="text" id="name" placeholder="John Doe"
                             class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-300 bg-gray-50 focus:bg-white group-hover:border-gray-300"
                             required>
-                    </div>
+                    </div> -->
+                    <input type="hidden" id="userid" name="userid" value="<?= $_SESSION["userid"] ?>">
+                    <input type="hidden" id="product_id" name="product_id" value="<?= $ProductData["id"] ?>">
 
                     <!-- Interactive Star Rating -->
                     <div>
@@ -1194,7 +1197,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         document.getElementById("reviewForm").addEventListener("submit", async function (e) {
             e.preventDefault();
 
-            const name = document.getElementById("name").value;
+            const userid = document.getElementById("userid").value;
+            const product_id = document.getElementById("product_id").value;
             const reviewText = document.getElementById("reviewText").value;
             const rating = document.getElementById("rating").value;
 
@@ -1206,7 +1210,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    name,
+                    userid,
+                    product_id,
                     reviewText,
                     rating,
                 }),
