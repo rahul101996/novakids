@@ -174,6 +174,9 @@
                 <a href="/admin/payment-gateway" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     Payment Gateway
                 </a>
+                <a href="/admin/popup-list" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                    Add Popup
+                </a>
 
             </div>
         </div>

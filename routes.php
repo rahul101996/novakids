@@ -67,6 +67,18 @@ $route->group(['', 'CollectionController', 'auth'], function ($route) {
 
 });
 
+$route->group(['', 'PopupController', 'auth'], function ($route) {
+    $route->route('admin/add-popup', 'AddPopUp');
+    $route->route('admin/popup-list', 'index');
+    $route->route('/edit-popup/[i:id]', 'AddPopUp');
+
+
+
+
+    // $route->route('/', 'index');
+
+});
+
 $route->group(['', 'ProductController', 'auth'], function ($route) {
     $route->route('/admin/add-product', 'AddProducts');
     $route->route('/admin/edit-product/[i:id]', 'EditProducts');

@@ -38,10 +38,10 @@
     const app = initializeApp(firebaseConfig);
     const messaging = getMessaging(app);
 
-    // const log = (msg) => {
+    const log = (msg) => {
     //   document.getElementById("log").innerText += msg + "\n";
-    //   console.log(msg);
-    // };
+      console.log(msg);
+    };
 
     // 🔹 Register the service worker (classic, not module)
     navigator.serviceWorker.register("firebase-messaging-sw.js")
@@ -55,7 +55,7 @@
         })
         .then((token) => {
             if (token) {
-                console.log(tokan)
+                console.log(token)
                 //   log("FCM Token: " + token);
                 //   document.getElementById("tokenBox").value = token;
             } else {
