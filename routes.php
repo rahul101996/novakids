@@ -148,13 +148,20 @@ $route->group(['', 'DashboardController', 'auth'], function ($route) {
 });
 
 $route->group(['', 'WebsettingController', 'auth'], function ($route) {
+    $route->route('/admin/front-cms/home-banner/add', 'home_banner');
+    $route->route('/admin/front-cms/home-banner/edit/[i:id]', 'home_banner');
+    $route->route('/admin/front-cms/home-banner/delete/[i:id]', 'home_banner_delete');
+
+
     $route->route('admin/front-cms/nav-heading', 'navbar_heading');
     $route->route('admin/front-cms/nav-heading/edit/[i:id]', 'navbar_heading');
     $route->route('admin/front-cms/nav-heading/delete/[i:id]', 'navbar_heading_delete');
+    
 
     $route->route('/admin/front-cms/offer-heading', 'offer_heading');
     $route->route('/admin/front-cms/offer-heading/edit/[i:id]', 'offer_heading');
     $route->route('/admin/front-cms/offer-heading/delete/[i:id]', 'offer_heading_delete');
+    
 });
 
 $route->group(['master', 'MasterController', 'auth'], function ($route) {

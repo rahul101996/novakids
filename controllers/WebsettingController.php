@@ -8,6 +8,56 @@ class WebsettingController
         $this->db = $db;
     }
 
+
+    public function home_banner($id = null)
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageTitle = "Home Banner";
+        $pageModule = "Home Banner";
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+            if ($id != null) {
+
+                $editData = getData2("SELECT * from tbl_nav_heading where id=$id")[0];
+            }
+
+            require 'views/websetting/home.php';
+        } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            // printWithPre($_POST);
+            // die();
+
+            try {
+                // Begin transaction
+                $this->db->beginTransaction();
+
+                if ($id == null) {
+                    add($_POST, "tbl_nav_heading");
+                    $_SESSION['success'] = "Home Banner Added Successfully";
+                } else {
+                    update($_POST, $id, "tbl_nav_heading");
+                    $_SESSION['success'] = "Home Banner Updated Successfully";
+                }
+
+                $this->db->commit();
+            } catch (Exception $e) {
+                $this->db->rollBack();
+                echo $e->getMessage();
+                $_SESSION['err'] = $e->getMessage();
+            }
+
+            redirect('/admin/front-cms/nav-heading');
+        }
+    }
+
+    public function home_banner_delete($id)
+    {
+        delete($id, "tbl_nav_heading");
+        redirect('/admin/front-cms/nav-heading');
+    }
+
+
     public function navbar_heading($id = null)
     {
         $siteName = getDBObject()->getSiteName();
@@ -17,7 +67,7 @@ class WebsettingController
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
             if ($id != null) {
-                
+
                 $editData = getData2("SELECT * from tbl_nav_heading where id=$id")[0];
             }
 
@@ -65,7 +115,7 @@ class WebsettingController
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
             if ($id != null) {
-                
+
                 $editData = getData2("SELECT * from tbl_offer_heading where id=$id")[0];
             }
 
@@ -103,4 +153,5 @@ class WebsettingController
         delete($id, "tbl_offer_heading");
         redirect('/admin/front-cms/offer-heading');
     }
+
 }

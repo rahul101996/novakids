@@ -72,7 +72,7 @@ $byCategory = $category_name ?? 'tees';
                             Showing products up to ₹<span id="maxPriceLabelText">0</span>
                         </p>
 
-                        <button type="button" onclick="applyFilters()"
+                        <!-- <button type="button" onclick="applyFilters()"
                             class="relative font-semibold py-1.5 px-6 rounded-md border-2 border-black overflow-hidden group mt-2">
                             <span
                                 class="relative z-10 text-white group-hover:text-black transition-colors duration-300">
@@ -80,7 +80,7 @@ $byCategory = $category_name ?? 'tees';
                             </span>
                             <span
                                 class="absolute inset-0 bg-black transition-transform duration-300 origin-left group-hover:scale-x-0 scale-x-100"></span>
-                        </button>
+                        </button> -->
                     </div>
 
 
@@ -153,7 +153,7 @@ $byCategory = $category_name ?? 'tees';
         });
 
 
-        async function setProducts(selectedSizes = [], selectedPrice = {}) {
+        async function setProducts(selectedSizes = [], selectedPrice = {}, sortBy = {}) {
             const productsContainer = document.getElementById("product-grid");
             const sizeFilterContainer = document.getElementById("size-filters");
             const priceRange = document.getElementById("priceRange");
@@ -249,7 +249,7 @@ $byCategory = $category_name ?? 'tees';
                         class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
                     <img src="/${SecondImage}" alt="${product.name} Hover"
                         class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                         <button
+                    <button
                         class="
                             addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500 z-20 stop-link
                             ${product.wishlist ? 'bg-[#f25b21]' : 'bg-black/70 hover:bg-[#f25b21]'} 
@@ -315,6 +315,8 @@ $byCategory = $category_name ?? 'tees';
             const value = input.value;
             document.getElementById("selectedPriceLabel").innerText = value;
             document.getElementById("maxPriceLabelText").innerText = value;
+
+            applyFilters()
         }
 
         // Apply filter manually (on button click)
