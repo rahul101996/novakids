@@ -153,7 +153,7 @@ $byCategory = $category_name ?? 'tees';
         });
 
 
-        async function setProducts(selectedSizes = [], selectedPrice = {}) {
+        async function setProducts(selectedSizes = [], selectedPrice = {}, sortBy = {}) {
             const productsContainer = document.getElementById("product-grid");
             const sizeFilterContainer = document.getElementById("size-filters");
             const priceRange = document.getElementById("priceRange");
