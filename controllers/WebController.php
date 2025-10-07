@@ -127,7 +127,7 @@ class WebController extends LoginController
                         if ($key == 'size') {
 
                     ?>
-                            <div class="w-full flex items-center justify-between mt-7 text-sm">
+                            <div class="w-full flex items-center justify-between text-sm">
 
                                 <p class="uppercase"><?= $key ?></p>
                                 <p class="flex gap-1 cursor-pointer"
@@ -166,20 +166,20 @@ class WebController extends LoginController
                                 }
                                 ?>
                             </div>
-                            <div class="my-3 bg-gray-100 py-1 px-3 text-sm border border-gray-300">XS:
+                            <div class="mt-3 bg-gray-100 py-1 px-3 text-sm border border-gray-300">XS:
                                 Chest 41 inches
                                 Length 27 inches</div>
                         <?php
                         } elseif ($key == 'color') {
                         ?>
-                            <p class="uppercase"><?= $key ?></p>
-                            <div class="w-full flex items-center justify-start mt-3 text-sm gap-2"
+                            <p class="uppercase mt-7"><?= $key ?></p>
+                            <div class="w-full flex items-center justify-start text-sm gap-2"
                                 id="<?= !isset($_POST["product_details"]) ? "ColorDiv" : "ColorDetailsDiv" ?>">
 
                             </div>
 
                         <?php } else { ?>
-                            <p class="uppercase"><?= $key ?></p>
+                            <p class="uppercase mt-7"><?= $key ?></p>
                             <div class="w-full flex items-center justify-start mt-3 text-sm">
                                 <?php
                                 $diffcolor = [];
@@ -840,7 +840,16 @@ class WebController extends LoginController
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             require 'views/website/index.php';
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+            if (isset($_POST['popup'])) {
+                $_SESSION['popup'] = $_POST['popup'];
+                echo "nice";
+            }
+            // printWithPre($_SESSION);
+            if (!isset($_SESSION['userid']) && $_SESSION['type'] != "User") {
+                if (!isset($_SESSION['popup'])) {
+                    $_SESSION['popup'] = 'false';
+                }
+            }
             require 'views/website/index.php';
         }
     }
@@ -1052,7 +1061,86 @@ class WebController extends LoginController
             require 'views/website/login.php';
         }
     }
+    public function removeDisplayPopup($id)
+    {
+        try {
+            if (empty($id)) {
 
+
+                $sql = "UPDATE tbl_popup SET `display` = 0 WHERE `display` = '1'";
+
+                $stmt = $this->db->prepare($sql);
+            } else {
+
+                $sql = "UPDATE tbl_popup SET `display` = 0 WHERE `id` = :id";
+
+                $stmt = $this->db->prepare($sql);
+
+
+                $stmt->bindValue(':id', $id);
+            }
+
+            $stmt->execute();
+
+            return true;
+        } catch (\PDOException $e) {
+            // error_log($e->getMessage()); // Uncomment if you wish to log errors
+            return false;
+        }
+    }
+    public function addDisplayPopup(int $id)
+    {
+        try {
+
+            $sql = "UPDATE tbl_popup SET `display` = 1 WHERE `id` = :id";
+
+            $stmt = $this->db->prepare($sql);
+
+
+            $stmt->bindValue(':id', $id);
+
+            $stmt->execute();
+
+            return true;
+        } catch (\PDOException $e) {
+            // error_log($e->getMessage()); // Uncomment if you wish to log errors
+            return false;
+        }
+    }
+    public function popupDisplay()
+    {
+
+
+        if (isset($_POST["id"])) {
+
+            $id = $_POST["id"];
+            $idremove = '';
+            $data = $this->removeDisplayPopup($idremove);
+            if ($data) {
+                $displya = $this->addDisplayPopup($id);
+                if ($displya) {
+                    $response = [
+                        "success" => true,
+                        "data" => 'Popup Update Successfully'
+                    ];
+                    echo json_encode($response);
+                }
+            }
+        }
+        if (isset($_POST["removeid"])) {
+
+            $id = $_POST["id"];
+            $data = $this->removeDisplayPopup($id);
+
+            if ($data) {
+                $response = [
+                    "success" => true,
+                    "data" => 'Hide the Popup'
+                ];
+                echo json_encode($response);
+            }
+        }
+    }
     public function shop()
     {
 
