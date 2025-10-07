@@ -380,7 +380,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     </script>
                     <!-- Color Selection -->
 
-                    <div class="w-full mt-7  bg-gray-50 rounded-lg p-4 shadow-sm">
+                    <div class="w-full mt-7  bg-gray-100 border border-gray-300 rounded-lg p-4 shadow-sm">
                         <!-- Title -->
                         <h3 class="font-semibold text-gray-800 mb-3">Check Delivery</h3>
 
@@ -577,8 +577,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         </section>
 
         <div class="w-full flex items-center justify-center mt-10">
-            <div class="flex items-start justify-center  relative w-[90%] gap-5">
-                <div class="w-[63%] h-[28vh] bg-white rounded-lg shadow-md border border-gray-300  py-6 flex flex-col items-center justify-center">
+            <div class="flex items-start justify-between flex-row-reverse relative w-[90%] gap-5">
+                <div class="w-[37%] h-[28vh] bg-white rounded-lg shadow-md border border-gray-300  py-6 flex flex-col items-center justify-center">
                     <div class="text-center font-semibold text-lg mb-4">Customer Reviews</div>
                     <div class="flex items-center justify-center gap-8">
 
@@ -615,7 +615,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     </div>
                 </div>
 
-                <div class="w-[36%] flex items-center justify-center">
+                <div class="w-[63%] flex items-center justify-center">
                     <div class="owl-carousel owl-theme review-carousel1 w-full">
                         <!-- Review 1 -->
                         <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
