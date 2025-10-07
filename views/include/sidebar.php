@@ -134,6 +134,9 @@
                 </svg>
             </button>
             <div x-show="open === 'front_cms'" x-collapse class="ml-10 mt-2 space-y-1">
+                <a href="/admin/front-cms/home-banner" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                    Home Banner
+                </a>
                 <a href="/admin/front-cms/nav-heading" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     Navbar Heading
                 </a>

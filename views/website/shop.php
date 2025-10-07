@@ -72,7 +72,7 @@ $byCategory = $category_name ?? 'tees';
                             Showing products up to ₹<span id="maxPriceLabelText">0</span>
                         </p>
 
-                        <button type="button" onclick="applyFilters()"
+                        <!-- <button type="button" onclick="applyFilters()"
                             class="relative font-semibold py-1.5 px-6 rounded-md border-2 border-black overflow-hidden group mt-2">
                             <span
                                 class="relative z-10 text-white group-hover:text-black transition-colors duration-300">
@@ -80,7 +80,7 @@ $byCategory = $category_name ?? 'tees';
                             </span>
                             <span
                                 class="absolute inset-0 bg-black transition-transform duration-300 origin-left group-hover:scale-x-0 scale-x-100"></span>
-                        </button>
+                        </button> -->
                     </div>
 
 
@@ -315,6 +315,8 @@ $byCategory = $category_name ?? 'tees';
             const value = input.value;
             document.getElementById("selectedPriceLabel").innerText = value;
             document.getElementById("maxPriceLabelText").innerText = value;
+
+            applyFilters()
         }
 
         // Apply filter manually (on button click)
