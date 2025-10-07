@@ -239,32 +239,32 @@ $byCategory = $category_name ?? 'tees';
                 const name = product.name.replace(/ /g, "-").replace(/'/g, "");
 
                 return `
-        <a href="/products/product-details/${name}" class="block">
-            <div class="group relative cursor-pointer transition overflow-hidden">
-                ${discount > 0 ? `<span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE ${discount}%</span>` : ""}
-                <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
-                    <img src="/${images[0]}" alt="${product.name}"
-                        class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-                    <img src="/${SecondImage}" alt="${product.name} Hover"
-                        class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                    <button class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500 z-20 stop-link bg-black/70 hover:bg-[#f25b21] text-white">
-                        <i class="fas fa-heart"></i>
-                    </button>
-                    <button class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 
-                        group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                        <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                    </button>
-                    <input type="hidden" value="${product.id}" class="ProductId">
-                </div>
-                <div class="pt-4 w-full">
-                    <h3 class="text-base font-semibold uppercase">${product.name}</h3>
-                    <div class="flex items-center justify-start gap-3 w-full">
-                        <p class="text-gray-500 line-through text-sm">₹ ${formatNumber(product.compare_price)}.00</p>
-                        <p class="text-[#f25b21] font-bold">₹ ${formatNumber(product.price)}.00</p>
-                    </div>
-                </div>
-            </div>
-        </a>`;
+                        <a href="/products/product-details/${name}" class="block">
+                            <div class="group relative cursor-pointer transition overflow-hidden">
+                                ${discount > 0 ? `<span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE ${discount}%</span>` : ""}
+                                <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
+                                    <img src="/${images[0]}" alt="${product.name}"
+                                        class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+                                    <img src="/${SecondImage}" alt="${product.name} Hover"
+                                        class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                                    <button class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500 z-20 stop-link bg-black/70 hover:bg-[#f25b21] text-white">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                    <button class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 
+                                        group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                        <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                                    </button>
+                                    <input type="hidden" value="${product.id}" class="ProductId">
+                                </div>
+                                <div class="pt-4 w-full">
+                                    <h3 class="text-base font-semibold uppercase">${product.name}</h3>
+                                    <div class="flex items-center justify-start gap-3 w-full">
+                                        <p class="text-gray-500 line-through text-sm">₹ ${formatNumber(product.compare_price)}.00</p>
+                                        <p class="text-[#f25b21] font-bold">₹ ${formatNumber(product.price)}.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>`;
             }).join("");
         }
 
