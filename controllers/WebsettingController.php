@@ -16,27 +16,62 @@ class WebsettingController
         $pageModule = "Home Banner";
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/websetting/banner_home.php';
+        }
+    }
 
+    public function home_banner_add($id = null)
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageTitle = "Home Banner";
+        $pageModule = "Home Banner";
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+            $editData = [];
             if ($id != null) {
-
-                $editData = getData2("SELECT * from tbl_nav_heading where id=$id")[0];
+                $editData = getData2("SELECT * from tbl_home_banner where id=$id")[0];
             }
 
-            require 'views/websetting/home.php';
+            require 'views/websetting/banner_home_add.php';
         } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // printWithPre($_POST);
+            // printWithPre($_FILES);
             // die();
 
             try {
                 // Begin transaction
                 $this->db->beginTransaction();
 
-                if ($id == null) {
-                    add($_POST, "tbl_nav_heading");
-                    $_SESSION['success'] = "Home Banner Added Successfully";
+                if (isset($_FILES['img']) && $_FILES['img']['error'] == 0) {
+                    $_POST['file'] = uploadFile($_FILES['img'], 'public/home-banner/');
                 } else {
-                    update($_POST, $id, "tbl_nav_heading");
+                    $_POST['file'] = isset($_POST['old_image']) ? $_POST['old_image'] : '';
+                }
+
+                if ($id == null) {
+                    add(
+                        [
+                            "title" => $_POST['title'],
+                            "file" => $_POST['file']
+                        ],
+                        "tbl_home_banner",
+                        false
+                    );
+
+                    $_SESSION['success'] = "Home Banner Added Successfully";
+
+                } else {
+                    update(
+                        [
+                            "title" => $_POST['title'],
+                            "file" => $_POST['file']
+                        ],
+                        $id,
+                        "tbl_home_banner"
+                    );
+
                     $_SESSION['success'] = "Home Banner Updated Successfully";
                 }
 
@@ -47,18 +82,29 @@ class WebsettingController
                 $_SESSION['err'] = $e->getMessage();
             }
 
-            redirect('/admin/front-cms/nav-heading');
+            redirect('/admin/front-cms/home-banner');
         }
     }
+    // public function home_banner_delete($id)
+    // {
+    //     delete($id, "tbl_home_banner");
+    //     redirect('/admin/front-cms/home-banner');
+    // }
 
-    public function home_banner_delete($id)
-    {
-        delete($id, "tbl_nav_heading");
-        redirect('/admin/front-cms/nav-heading');
-    }
+
 
 
     public function navbar_heading($id = null)
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageTitle = "Navbar Heading";
+        $pageModule = "Navbar Heading";
+
+        require 'views/websetting/home.php';
+    }
+
+
+    public function navbar_heading_add($id = null)
     {
         $siteName = getDBObject()->getSiteName();
         $pageTitle = "Navbar Heading";
@@ -71,7 +117,7 @@ class WebsettingController
                 $editData = getData2("SELECT * from tbl_nav_heading where id=$id")[0];
             }
 
-            require 'views/websetting/home.php';
+            require 'views/websetting/home_add.php';
         } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // printWithPre($_POST);
@@ -82,10 +128,21 @@ class WebsettingController
                 $this->db->beginTransaction();
 
                 if ($id == null) {
-                    add($_POST, "tbl_nav_heading");
+                    add(
+                        [
+                            "title" => $_POST['title']
+                        ],
+                        "tbl_nav_heading"
+                    );
                     $_SESSION['success'] = "Navbar Heading Added Successfully";
                 } else {
-                    update($_POST, $id, "tbl_nav_heading");
+                    update(
+                        [
+                            "title" => $_POST['title']
+                        ],
+                        $id,
+                        "tbl_nav_heading"
+                    );
                     $_SESSION['success'] = "Navbar Heading Updated Successfully";
                 }
 
@@ -106,7 +163,16 @@ class WebsettingController
         redirect('/admin/front-cms/nav-heading');
     }
 
-    public function offer_heading($id = null)
+    public function offer_heading()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageTitle = "Offer Heading";
+        $pageModule = "Offer Heading";
+
+        require 'views/websetting/offer-heading.php';
+    }
+
+    public function offer_heading_add($id = null)
     {
         $siteName = getDBObject()->getSiteName();
         $pageTitle = "Offer Heading";
@@ -119,7 +185,7 @@ class WebsettingController
                 $editData = getData2("SELECT * from tbl_offer_heading where id=$id")[0];
             }
 
-            require 'views/websetting/offer-heading.php';
+            require 'views/websetting/offer-heading-add.php';
         } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // printWithPre($_POST);
