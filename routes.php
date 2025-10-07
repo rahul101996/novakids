@@ -54,6 +54,9 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('/api/popup-display', 'popupDisplay');
     $route->route('/api/free-delivery', 'FreeDelivery');
 
+
+    $route->route('/addReview', 'addReview');
+
     // $route->route('/', 'index');
 });
 
@@ -99,6 +102,10 @@ $route->group(['', 'ProductController', 'auth'], function ($route) {
 $route->group(['', 'CustomerController', 'auth'], function ($route) {
     $route->route('admin/customers-list', 'CustomersList');
     $route->route('admin/customer-info/[i:id]', 'CustomersInfo');
+
+
+    $route->route('admin/customer-reviews', 'CustomerReviews');
+    $route->route('api/customer-reviews/status', 'CustomerReviewsStatus');
 
     // $route->route('/admin/products-list', 'ProductsList');
 
@@ -160,13 +167,13 @@ $route->group(['', 'WebsettingController', 'auth'], function ($route) {
     $route->route('admin/front-cms/nav-heading/add', 'navbar_heading_add');
     $route->route('admin/front-cms/nav-heading/edit/[i:id]', 'navbar_heading_add');
     $route->route('admin/front-cms/nav-heading/delete/[i:id]', 'navbar_heading_delete');
-    
+
 
     $route->route('/admin/front-cms/offer-heading', 'offer_heading');
     $route->route('/admin/front-cms/offer-heading/add', 'offer_heading_add');
     $route->route('/admin/front-cms/offer-heading/edit/[i:id]', 'offer_heading_add');
     $route->route('/admin/front-cms/offer-heading/delete/[i:id]', 'offer_heading_delete');
-    
+
 });
 
 $route->group(['master', 'MasterController', 'auth'], function ($route) {

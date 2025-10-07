@@ -1,4 +1,7 @@
 <?php
+
+// printWithPre($_SESSION);
+
 // printWithPre($ProductData);
 $page = "product-details";
 if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
@@ -14,7 +17,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         $data = [];
     }
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -132,6 +137,22 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 transform: translateY(-10px);
             }
         }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-slideDown {
+            animation: slideDown 0.3s ease-out;
+        }
     </style>
 
     <!-- Breadcrumbs -->
@@ -154,16 +175,16 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 <div class="grid grid-cols-2 gap-2 w-[96%]" id="ProductDetailImg">
                     <?php
                     if (is_array($ppimages[0])) {
-                        $ppimages[0] =  array_reverse($ppimages[0]);
+                        $ppimages[0] = array_reverse($ppimages[0]);
                         // array_reverse($ppimages[0]);
                         foreach ($ppimages[0] as $key => $image) {
 
-                    ?>
+                            ?>
                             <div class=" overflow-hidden  cursor-pointer">
                                 <img src="/<?= $image ?>" alt="View 1"
                                     class="w-full h-full object-cover image-hover cursor-zoom-in">
                             </div>
-                    <?php }
+                        <?php }
                     } ?>
 
                 </div>
@@ -302,8 +323,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         <div class="flex flex-col items-start justify-center mb-2 w-[75%]">
                             <h2 class="w-full text-[1.7rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
                             <div class="flex items-center justify-center gap-3 mt-4 ">
-                                <span
-                                    class="text-gray-300 text-xl line-through whitespace-nowrap">Rs. <span id="comparePrice99"><?= formatNumber($ProductData['compare_price']) ?></span></span>
+                                <span class="text-gray-300 text-xl line-through whitespace-nowrap">Rs. <span
+                                        id="comparePrice99"><?= formatNumber($ProductData['compare_price']) ?></span></span>
                                 <span
                                     class="text-[#f25b21] text-xl prices">Rs.<?= formatNumber($ProductData['price']) ?></span>
                                 <span class="bg-[#f25b21] text-white text-xs px-2 py-1 z-20 whitespace-nowrap">SAVE
@@ -315,19 +336,19 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                         </div>
                         <div class="flex items-center justify-end gap-2 w-[25%]">
-                            <button
-                                class="addToWishlistBtn  rounded-full transition-all duration-500  ">
-                                <img src="/public/icons/<?= !empty($data) ? 'heart-orange.png' : 'heart-black.png' ?>" class="cursor-pointer mt-1  h-8 w-8" alt="">
+                            <button class="addToWishlistBtn  rounded-full transition-all duration-500  ">
+                                <img src="/public/icons/<?= !empty($data) ? 'heart-orange.png' : 'heart-black.png' ?>"
+                                    class="cursor-pointer mt-1  h-8 w-8" alt="">
                             </button>
                             <input type="hidden" value="<?= $ProductData['id'] ?>" class="ProductId">
 
-                            <img src="/public/icons/share-black.png" onclick="shareProduct()" class="h-8 cursor-pointer mt-1"
-                                alt="">
+                            <img src="/public/icons/share-black.png" onclick="shareProduct()"
+                                class="h-8 cursor-pointer mt-1" alt="">
                         </div>
                     </div>
                     <?php
                     if ($ProductData['id'] != 7) {
-                    ?>
+                        ?>
                         <p class="text-sm text-gray-900 mt-2 text-justify">Upgrade your casual wardrobe with our black
                             sporty deconstructed loose pants, the perfect blend of comfort and style. Designed with a
                             relaxed fit, these pants allow for effortless movement, while the deconstructed detailing adds a
@@ -406,9 +427,11 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         <div class="w-full flex items-center justify-between space-x-4">
                             <div
                                 class="  flex items-center justify-center gap-7 border border-gray-800 rounded-lg py-1">
-                                <span class="cursor-pointer border-r border-gray-800 px-4 py-2" onclick="countMe(this,'-')">-</span>
+                                <span class="cursor-pointer border-r border-gray-800 px-4 py-2"
+                                    onclick="countMe(this,'-')">-</span>
                                 <span class="text-black counter">1</span>
-                                <span class="cursor-pointer border-l border-gray-800 px-4 py-2" onclick="countMe(this,'+')">+</span>
+                                <span class="cursor-pointer border-l border-gray-800 px-4 py-2"
+                                    onclick="countMe(this,'+')">+</span>
 
                             </div>
 
@@ -436,10 +459,13 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                             <?php
                             if (!empty($_SESSION["userid"])) {
-                            ?>
-                                <input type="hidden" name="varient[]" class="sideVarientId" value="<?= $ProductData['varients'][0]["id"] ?>">
-                                <input type="hidden" name="category[]" class="sideCategoryId" value="<?= $ProductData['category'] ?>">
-                                <input type="hidden" name="product[]" class="sideProductId" value="<?= $ProductData['id'] ?>">
+                                ?>
+                                <input type="hidden" name="varient[]" class="sideVarientId"
+                                    value="<?= $ProductData['varients'][0]["id"] ?>">
+                                <input type="hidden" name="category[]" class="sideCategoryId"
+                                    value="<?= $ProductData['category'] ?>">
+                                <input type="hidden" name="product[]" class="sideProductId"
+                                    value="<?= $ProductData['id'] ?>">
                                 <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
                                 <input type="hidden" name="quantity[]" id="product_buy_count" value="1">
                                 <input type="hidden" name="cartid[]" value="">
@@ -452,16 +478,20 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                     </span>
 
                                 </button>
-                            <?php
+                                <?php
                             } else {
-                            ?>
-                                <input type="hidden" name="varient[]" class="sideVarientId" value="<?= $ProductData['varients'][0]["id"] ?>">
-                                <input type="hidden" name="category[]" class="sideCategoryId" value="<?= $ProductData['category'] ?>">
-                                <input type="hidden" name="product[]" class="sideProductId" value="<?= $ProductData['id'] ?>">
+                                ?>
+                                <input type="hidden" name="varient[]" class="sideVarientId"
+                                    value="<?= $ProductData['varients'][0]["id"] ?>">
+                                <input type="hidden" name="category[]" class="sideCategoryId"
+                                    value="<?= $ProductData['category'] ?>">
+                                <input type="hidden" name="product[]" class="sideProductId"
+                                    value="<?= $ProductData['id'] ?>">
                                 <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
                                 <input type="hidden" name="quantity[]" id="product_buy_count" value="1">
                                 <input type="hidden" name="cartid[]" value="">
-                                <button type="button" onclick="openLogin()" class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-0 hover:border hover:border-[#f25b21] transition-all duration-700"><span
+                                <button type="button" onclick="openLogin()"
+                                    class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-2 hover:border hover:border-[#f25b21] transition-all duration-700"><span
                                         class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
                                         Buy It Now
                                     </span> <span
@@ -470,7 +500,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                                 </button>
 
-                            <?php
+                                <?php
                             }
                             ?>
                             <button
@@ -486,7 +516,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                                 <!-- Item 1 -->
                                 <div class="accordion p-4">
-                                    <button type="button" class="flex justify-between items-center w-full font-semibold text-left">
+                                    <button type="button"
+                                        class="flex justify-between items-center w-full font-semibold text-left">
                                         <span>Description</span>
                                         <i class="fa-solid fa-chevron-down chev"></i>
                                     </button>
@@ -499,7 +530,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                                 <!-- Item 2 -->
                                 <div class="accordion p-4">
-                                    <button type="button" class="flex justify-between items-center w-full font-semibold text-left">
+                                    <button type="button"
+                                        class="flex justify-between items-center w-full font-semibold text-left">
                                         <span>Additional Information</span>
                                         <i class="fa-solid fa-chevron-down chev"></i>
                                     </button>
@@ -578,27 +610,39 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
         <div class="w-full flex items-center justify-center mt-10">
             <div class="flex items-start justify-between flex-row-reverse relative w-[90%] gap-5">
-                <div class="w-[37%] h-[28vh] bg-white rounded-lg shadow-md border border-gray-300  py-6 flex flex-col items-center justify-center">
+
+                <div
+                    class="w-[37%] h-[28vh] bg-white rounded-lg shadow-md border border-gray-300  py-6 flex flex-col items-center justify-center">
                     <div class="text-center font-semibold text-lg mb-4">Customer Reviews</div>
                     <div class="flex items-center justify-center gap-8">
 
                         <!-- Left: Stars + text -->
                         <div class="flex flex-col items-center">
                             <div class="flex text-yellow-400 mb-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
                                 </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
                                 </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
                                 </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
                                 </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.402 8.173L12 18.896l-7.336 3.862 1.402-8.173L.132 9.211l8.2-1.193z" />
                                 </svg>
                             </div>
                             <span class="text-sm text-gray-600">Be the first to write a review</span>
@@ -608,8 +652,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         <div class="h-12 w-px bg-gray-300"></div>
 
                         <!-- Right: Button -->
-                        <button class="bg-black text-white font-semibold px-6 py-2 rounded-full hover:bg-gray-800 transition">
-                            Write a review
+                        <button type="button"
+                            onclick="<?= isset($_SESSION['userid']) && !empty($_SESSION['userid']) ? 'openReviewModal()' : 'openLogin()' ?>"
+                            class="bg-black text-white font-semibold px-6 py-2 rounded-full hover:bg-gray-800 transition">
+                            <?= isset($_SESSION['userid']) && !empty($_SESSION['userid']) ? 'Write a review' : 'Login to write a review' ?>
                         </button>
 
                     </div>
@@ -645,7 +691,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
                                 <span> ★★★★★</span>
                                 <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                    "Loved the fabric and the trendy style! Feels super comfortable and stylish at the same
+                                    "Loved the fabric and the trendy style! Feels super comfortable and stylish at the
+                                    same
                                     time."
                                 </p>
                             </div>
@@ -666,7 +713,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
                                 <span> ★★★★★</span>
                                 <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                    "Great fit and excellent customer service. They really care about their customers and it
+                                    "Great fit and excellent customer service. They really care about their customers
+                                    and it
                                     shows!"
                                 </p>
                             </div>
@@ -693,23 +741,25 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
         <section class="bg-white py-14 max-md:py-8 w-full">
             <div class="w-[90vw] max-md:w-[90vw] mx-auto">
-
-
                 <div class="relative">
                     <div class="flex flex items-center justify-between mb-6">
                         <h3 class="text-left text-3xl font-extrabold uppercase">YOU MAY ALSO LIKE</h3>
                         <div class="flex flex items-center gap-2 justify-center">
-                            <div onclick="banner_forward(this)" class=" border bg-black border-white p-2 rounded-full cursor-pointer">
-                                <img src="/public/icons/backward.png" class="w-[25px] h-[25px] max-md:w-[12px] max-md:h-[12px]" alt="">
+                            <div onclick="banner_forward(this)"
+                                class=" border bg-black border-white p-2 rounded-full cursor-pointer">
+                                <img src="/public/icons/backward.png"
+                                    class="w-[25px] h-[25px] max-md:w-[12px] max-md:h-[12px]" alt="">
                             </div>
                             <div class="flex flex items-center gap-2 justify-center">
-                                <div onclick="banner_backward(this)" class=" border bg-black border-white p-2 rounded-full cursor-pointer">
-                                    <img src="/public/icons/backward.png" class="w-[25px] h-[25px] max-md:w-[12px] max-md:h-[12px] rotate-180" alt="">
+                                <div onclick="banner_backward(this)"
+                                    class=" border bg-black border-white p-2 rounded-full cursor-pointer">
+                                    <img src="/public/icons/backward.png"
+                                        class="w-[25px] h-[25px] max-md:w-[12px] max-md:h-[12px] rotate-180" alt="">
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                     <div class="owl-carousel owl-theme like-carousel">
 
                         <?php foreach ($uniqueProducts as $key => $product) {
@@ -738,18 +788,18 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 }
                             }
                             // printWithPre($images);
-                        ?>
+                            ?>
                             <a href="/products/product-details/<?= $name ?>" class="block">
-                                <div
-                                    class="group relative  cursor-pointer transition overflow-hidden">
+                                <div class="group relative  cursor-pointer transition overflow-hidden">
                                     <!-- Discount Badge -->
                                     <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20" ">
-                                        SAVE <?= $discountPercentage ?>%
-                                    </span>
+                                                                                                                SAVE <?= $discountPercentage ?>%
+                                                                                                            </span>
 
 
-                                    <!-- Product Images -->
-                                    <div class=" relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
+                                                                                                            <!-- Product Images -->
+                                                                                                            <div class="
+                                    relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                         <!-- Default Image -->
                                         <img src="/<?= $images[0] ?>" alt="Product 1"
                                             class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -787,20 +837,16 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                         <span class="text-yellow-500">★★★★★</span>
                                     </div>
                                 </div>
-                    </div>
-                    </a>
+                        </div>
+                        </a>
 
-                <?php } ?>
+                    <?php } ?>
 
                 </div>
             </div>
-    </div>
-    </section>
+        </section>
 
     </div>
-
-    <!-- Size Modal -->
-
 
     <!-- Delivery Modal -->
     <div id="deliveryModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
@@ -854,22 +900,24 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 <div>
                     <h4 class="font-medium text-black max-md:text-sm"><?= $ProductData['name'] ?></h4>
                     <p class="text-sm">
-                        <span class="line-through text-black"> ₹<?= formatNumber($ProductData['compare_price']) ?></span>
-                        <span class="text-[#f25b21] font-semibold text-lg max-md:text-base prices"> ₹<?= formatNumber($ProductData['price']) ?></span>
+                        <span class="line-through text-black">
+                            ₹<?= formatNumber($ProductData['compare_price']) ?></span>
+                        <span class="text-[#f25b21] font-semibold text-lg max-md:text-base prices">
+                            ₹<?= formatNumber($ProductData['price']) ?></span>
                     </p>
                 </div>
             </div>
 
             <div class="flex items-center gap-3 max-md:justify-end max-md:w-full">
-                <div
-                    class="  flex items-center justify-center gap-7 border border-gray-800 rounded-lg py-1">
+                <div class="  flex items-center justify-center gap-7 border border-gray-800 rounded-lg py-1">
                     <span class="cursor-pointer border-r border-gray-800 px-4 py-1" onclick="countMe(this,'-')">-</span>
                     <span class="text-black counter">1</span>
                     <span class="cursor-pointer border-l border-gray-800 px-4 py-1" onclick="countMe(this,'+')">+</span>
 
                 </div>
                 <button
-                    class="flex-1 relative rounded-md overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black" onclick="ClickonMainCartBtn()">
+                    class="flex-1 relative rounded-md overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black"
+                    onclick="ClickonMainCartBtn()">
                     <span
                         class="relative z-10 flex py-1.5 px-6 items-center justify-center gap-2 font-semibold text-base max-md:text-sm transition-colors duration-700 group-hover:text-white">
                         <i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart
@@ -878,8 +926,167 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
                     </span>
                 </button>
-                <input type="hidden" name="varient[]" class="sideVarientId" value="<?= $ProductData['varients'][0]["id"] ?>">
+                <input type="hidden" name="varient[]" class="sideVarientId"
+                    value="<?= $ProductData['varients'][0]["id"] ?>">
                 <input type="hidden" value="<?= $ProductData["id"] ?>" class="ProductId">
+            </div>
+        </div>
+    </div>
+
+
+    <div id="reviewModal"
+        class="hidden fixed inset-0 bg-gradient-to-br from-black/70 via-blue-900/30 to-purple-900/30 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+        <div class="bg-white rounded-3xl w-full max-w-lg relative shadow-2xl animate-slideDown overflow-hidden">
+            <!-- Decorative Background Pattern -->
+            <div
+                class="absolute top-0 right-0 w-64 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full filter blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2">
+            </div>
+            <div
+                class="absolute bottom-0 left-0 w-48 bg-gradient-to-tr from-pink-400 to-orange-500 rounded-full filter blur-3xl opacity-20 translate-y-1/2 -translate-x-1/2">
+            </div>
+
+            <!-- Content Container -->
+            <div class="relative z-10">
+                <!-- Header with Gradient -->
+                <div class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 px-8 py-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-3xl font-bold text-white mb-1">Share Your Experience</h2>
+                            <p class="text-blue-100 text-sm">We value your feedback</p>
+                        </div>
+                        <button onclick="closeReviewModal()"
+                            class="text-white/80 hover:text-white transition-all duration-200 w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/20 backdrop-blur-sm">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Form Content -->
+                <form id="reviewForm" class="px-8 py-6 space-y-5">
+                    <!-- Name Input with Icon -->
+                    <!-- <div class="group">
+                        <label for="name"
+                            class="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            Your Name
+                        </label>
+                        <input type="text" id="name" placeholder="John Doe"
+                            class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-300 bg-gray-50 focus:bg-white group-hover:border-gray-300"
+                            required>
+                    </div> -->
+                    <input type="hidden" id="userid" name="userid" value="<?= $_SESSION["userid"] ?>">
+                    <input type="hidden" id="product_id" name="product_id" value="<?= $ProductData["id"] ?>">
+
+                    <!-- Interactive Star Rating -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            Rate Your Experience
+                        </label>
+
+                        <!-- Star Rating Container -->
+                        <div class="bg-gradient-to-r from-gray-50 to-blue-50 p-6 rounded-2xl border-2 border-gray-200">
+                            <div class="flex justify-center items-center gap-3 mb-3">
+                                <button type="button" onclick="setRating(1)"
+                                    class="star-icon text-gray-300 hover:text-yellow-400 transition-all duration-200 transform hover:scale-125">
+                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </button>
+                                <button type="button" onclick="setRating(2)"
+                                    class="star-icon text-gray-300 hover:text-yellow-400 transition-all duration-200 transform hover:scale-125">
+                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </button>
+                                <button type="button" onclick="setRating(3)"
+                                    class="star-icon text-gray-300 hover:text-yellow-400 transition-all duration-200 transform hover:scale-125">
+                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </button>
+                                <button type="button" onclick="setRating(4)"
+                                    class="star-icon text-gray-300 hover:text-yellow-400 transition-all duration-200 transform hover:scale-125">
+                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </button>
+                                <button type="button" onclick="setRating(5)"
+                                    class="star-icon text-yellow-400 hover:text-yellow-500 transition-all duration-200 transform hover:scale-125">
+                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-center text-sm font-medium text-gray-600" id="ratingText">Excellent</p>
+                        </div>
+                        <input type="hidden" id="rating" value="1" required>
+                    </div>
+
+                    <!-- Review Text with Character Count -->
+                    <div class="group">
+                        <label for="reviewText"
+                            class="block text-sm font-semibold text-gray-700 mb-2 flex items-center justify-between">
+                            <span class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                                </svg>
+                                Your Review
+                            </span>
+                            <span class="text-xs text-gray-400" id="charCount">0/500</span>
+                        </label>
+                        <textarea id="reviewText" rows="4" maxlength="500" oninput="updateCharCount()"
+                            placeholder="Tell us about your experience. What did you like? What could be improved?"
+                            class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-300 resize-none bg-gray-50 focus:bg-white group-hover:border-gray-300"
+                            required></textarea>
+                    </div>
+
+                    <!-- Submit Button with Gradient -->
+                    <div class="pt-2">
+                        <button type="submit"
+                            class="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-bold py-4 rounded-xl hover:shadow-2xl hover:shadow-purple-500/50 transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 relative overflow-hidden group">
+                            <span class="relative z-10 flex items-center justify-center gap-2">
+                                Submit Review
+                                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </span>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            </div>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Footer -->
+                <div class="px-8 py-5 bg-gradient-to-r from-gray-50 to-blue-50 border-t border-gray-100">
+                    <div class="flex items-center justify-center gap-2 text-sm text-gray-600">
+                        <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Your review is secure and helps us improve
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -961,13 +1168,128 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 el.focus();
             }
         }
+
+
+
+
+        // Open Modal
+        function openReviewModal() {
+            document.getElementById("reviewModal").classList.remove("hidden");
+        }
+
+        // Close Modal
+        function closeReviewModal() {
+            document.getElementById("reviewModal").classList.add("hidden");
+        }
+
+        // Handle Form Submission
+        // Open Modal
+        function openReviewModal() {
+            document.getElementById("reviewModal").classList.remove("hidden");
+        }
+
+        // Close Modal
+        function closeReviewModal() {
+            document.getElementById("reviewModal").classList.add("hidden");
+        }
+
+        // Handle Form Submission
+        document.getElementById("reviewForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const userid = document.getElementById("userid").value;
+            const product_id = document.getElementById("product_id").value;
+            const reviewText = document.getElementById("reviewText").value;
+            const rating = document.getElementById("rating").value;
+
+            console.log(name, reviewText, rating);
+
+            let res = await fetch("/addReview", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userid,
+                    product_id,
+                    reviewText,
+                    rating,
+                }),
+            })
+
+            let data = await res.json();
+
+            if (data.success) {
+                toastr.success(data.message);
+                closeReviewModal();
+                this.reset();
+            } else {
+                toastr.error(data.message);
+            }
+
+        });
+
+
+
+        function setRating(stars) {
+            document.getElementById('rating').value = stars;
+
+            const ratingTexts = ['Poor', 'Fair', 'Good', 'Great', 'Excellent'];
+            document.getElementById('ratingText').textContent = ratingTexts[stars - 1];
+
+            // Update star colors
+            const starIcons = document.querySelectorAll('.star-icon');
+            starIcons.forEach((star, index) => {
+                if (index < stars) {
+                    star.classList.remove('text-gray-300');
+                    star.classList.add('text-yellow-400');
+                } else {
+                    star.classList.remove('text-yellow-400');
+                    star.classList.add('text-gray-300');
+                }
+            });
+        }
+
+        function updateCharCount() {
+            const textarea = document.getElementById('reviewText');
+            const charCount = document.getElementById('charCount');
+            charCount.textContent = `${textarea.value.length}/500`;
+        }
+
+        // Initialize on hover effect
+        document.addEventListener('DOMContentLoaded', function () {
+            const starIcons = document.querySelectorAll('.star-icon');
+            starIcons.forEach((star, index) => {
+                star.addEventListener('mouseenter', function () {
+                    starIcons.forEach((s, i) => {
+                        if (i <= index) {
+                            s.classList.remove('text-gray-300');
+                            s.classList.add('text-yellow-400');
+                        }
+                    });
+                });
+
+                star.addEventListener('mouseleave', function () {
+                    const currentRating = parseInt(document.getElementById('rating').value);
+                    starIcons.forEach((s, i) => {
+                        if (i < currentRating) {
+                            s.classList.add('text-yellow-400');
+                            s.classList.remove('text-gray-300');
+                        } else {
+                            s.classList.remove('text-yellow-400');
+                            s.classList.add('text-gray-300');
+                        }
+                    });
+                });
+            });
+        });
     </script>
 
 
 
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".like-carousel").owlCarousel({
                 loop: true,
                 margin: 10,
@@ -993,25 +1315,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         });
     </script>
 
-    <!-- <script>
-        $(document).ready(function () {
-            $(".review-carousel").owlCarousel({
-                items: 2,
-                margin: 10,
-                autoplay: true,
-                autoplayTimeout: 3000,
-                autoplayHoverPause: true,
-                loop: true,
-                dots: false,
-                nav: true,
-                navText: ["‹", "›"], // simple arrows
-                animateOut: 'fadeOut'
-            });
-        });
-    </script> -->
-
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".review-carousel").owlCarousel({
                 margin: 10,
                 autoplay: true,
@@ -1041,7 +1346,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 }
             });
         });
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".review-carousel1").owlCarousel({
                 margin: 10,
                 autoplay: true,
@@ -1071,7 +1376,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 }
             });
         });
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".review-carousel2").owlCarousel({
                 margin: 10,
                 autoplay: true,

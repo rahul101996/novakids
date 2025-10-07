@@ -1829,6 +1829,7 @@ $categories = getData("tbl_category");
     });
 
     function openLogin() {
+        console.log("openLogin")
         modal.classList.remove('hidden');
     }
 
