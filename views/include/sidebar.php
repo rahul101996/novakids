@@ -180,6 +180,9 @@
                 <a href="/admin/popup-list" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     Add Popup
                 </a>
+                 <a href="/admin/free-shipping" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                    Free Shipping
+                </a>
 
             </div>
         </div>

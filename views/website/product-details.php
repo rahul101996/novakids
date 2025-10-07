@@ -303,10 +303,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             <h2 class="w-full text-[1.7rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
                             <div class="flex items-center justify-center gap-3 mt-4 ">
                                 <span
-                                    class="text-gray-300 text-xl line-through">Rs. <span id="comparePrice99"><?= formatNumber($ProductData['compare_price']) ?></span></span>
+                                    class="text-gray-300 text-xl line-through whitespace-nowrap">Rs. <span id="comparePrice99"><?= formatNumber($ProductData['compare_price']) ?></span></span>
                                 <span
                                     class="text-[#f25b21] text-xl prices">Rs.<?= formatNumber($ProductData['price']) ?></span>
-                                <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg ">SAVE
+                                <span class="bg-[#f25b21] text-white text-xs px-2 py-1 z-20 whitespace-nowrap">SAVE
                                     <span id="save"><?= $discountPercentage ?></span>%</span>
 
                             </div>
@@ -577,8 +577,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         </section>
 
         <div class="w-full flex items-center justify-center mt-10">
-            <div class="flex items-start justify-center flex-row-reverse relative w-[90%] gap-5">
-                <div class="w-[35%] h-[28vh] max-w-5xl mx-auto bg-white rounded-lg shadow-md border border-gray-300 px-8 py-6 flex flex-col items-center justify-center">
+            <div class="flex items-start justify-center  relative w-[90%] gap-5">
+                <div class="w-[63%] h-[28vh] bg-white rounded-lg shadow-md border border-gray-300  py-6 flex flex-col items-center justify-center">
                     <div class="text-center font-semibold text-lg mb-4">Customer Reviews</div>
                     <div class="flex items-center justify-center gap-8">
 
@@ -615,7 +615,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     </div>
                 </div>
 
-                <div class="w-[64%] flex items-center justify-center">
+                <div class="w-[36%] flex items-center justify-center">
                     <div class="owl-carousel owl-theme review-carousel1 w-full">
                         <!-- Review 1 -->
                         <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
@@ -743,13 +743,13 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 <div
                                     class="group relative  cursor-pointer transition overflow-hidden">
                                     <!-- Discount Badge -->
-                                    <span class="bg-[#f25b21] text-white text-xs px-2 py-1 z-20 whitespace-nowrap">
+                                    <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20" ">
                                         SAVE <?= $discountPercentage ?>%
                                     </span>
 
 
                                     <!-- Product Images -->
-                                    <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
+                                    <div class=" relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                         <!-- Default Image -->
                                         <img src="/<?= $images[0] ?>" alt="Product 1"
                                             class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -771,31 +771,31 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                             <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                                         </button>
                                         <input type="text" value="<?= $product['id'] ?>" class="ProductId">
-                                    </div>
+                                </div>
 
-                                    <!-- Product Details -->
-                                    <div class="pt-4 w-full ">
-                                        <h3 class="text-base font-semibold uppercase"><?= $product['name'] ?></h3>
-                                        <div class="flex items-center justify-start gap-3 w-full">
-                                            <p class="text-gray-500 line-through text-sm">₹
-                                                <?= formatNumber($product['compare_price']) ?>
-                                            </p>
-                                            <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?></p>
-                                        </div>
-                                        <!-- reviews -->
-                                        <div class="flex items-center justify-start space-x-1 hidden">
-                                            <span class="text-yellow-500">★★★★★</span>
-                                        </div>
+                                <!-- Product Details -->
+                                <div class="pt-4 w-full ">
+                                    <h3 class="text-base font-semibold uppercase"><?= $product['name'] ?></h3>
+                                    <div class="flex items-center justify-start gap-3 w-full">
+                                        <p class="text-gray-500 line-through text-sm">₹
+                                            <?= formatNumber($product['compare_price']) ?>
+                                        </p>
+                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?></p>
+                                    </div>
+                                    <!-- reviews -->
+                                    <div class="flex items-center justify-start space-x-1 hidden">
+                                        <span class="text-yellow-500">★★★★★</span>
                                     </div>
                                 </div>
-                            </a>
-
-                        <?php } ?>
-
                     </div>
+                    </a>
+
+                <?php } ?>
+
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
 
     </div>
 

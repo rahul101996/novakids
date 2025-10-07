@@ -127,7 +127,10 @@ class WebController extends LoginController
                         if ($key == 'size') {
 
                     ?>
-                            <div class="w-full flex items-center justify-between text-sm">
+                            <div class="mt-3 bg-gray-100 py-1 px-3 text-sm border border-gray-300">XS:
+                                Chest 41 inches
+                                Length 27 inches</div>
+                            <div class="w-full flex items-center justify-between text-sm mt-3">
 
                                 <p class="uppercase"><?= $key ?></p>
                                 <p class="flex gap-1 cursor-pointer"
@@ -166,9 +169,7 @@ class WebController extends LoginController
                                 }
                                 ?>
                             </div>
-                            <div class="mt-3 bg-gray-100 py-1 px-3 text-sm border border-gray-300">XS:
-                                Chest 41 inches
-                                Length 27 inches</div>
+
                         <?php
                         } elseif ($key == 'color') {
                         ?>
