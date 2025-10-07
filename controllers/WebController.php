@@ -127,7 +127,7 @@ class WebController extends LoginController
                         if ($key == 'size') {
 
                     ?>
-                            <div class="w-full flex items-center justify-between mt-7 text-sm">
+                            <div class="w-full flex items-center justify-between text-sm">
 
                                 <p class="uppercase"><?= $key ?></p>
                                 <p class="flex gap-1 cursor-pointer"
@@ -166,20 +166,20 @@ class WebController extends LoginController
                                 }
                                 ?>
                             </div>
-                            <div class="my-3 bg-gray-100 py-1 px-3 text-sm border border-gray-300">XS:
+                            <div class="mt-3 bg-gray-100 py-1 px-3 text-sm border border-gray-300">XS:
                                 Chest 41 inches
                                 Length 27 inches</div>
                         <?php
                         } elseif ($key == 'color') {
                         ?>
-                            <p class="uppercase"><?= $key ?></p>
-                            <div class="w-full flex items-center justify-start mt-3 text-sm gap-2"
+                            <p class="uppercase mt-7"><?= $key ?></p>
+                            <div class="w-full flex items-center justify-start text-sm gap-2"
                                 id="<?= !isset($_POST["product_details"]) ? "ColorDiv" : "ColorDetailsDiv" ?>">
 
                             </div>
 
                         <?php } else { ?>
-                            <p class="uppercase"><?= $key ?></p>
+                            <p class="uppercase mt-7"><?= $key ?></p>
                             <div class="w-full flex items-center justify-start mt-3 text-sm">
                                 <?php
                                 $diffcolor = [];

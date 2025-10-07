@@ -336,11 +336,11 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated
                         at checkout</p>
                     <!-- Size Selection -->
-                    <div class="flex flex-col mt-5" id="productDetailsVariants">
+                    <div class="flex flex-col mt-7" id="productDetailsVariants">
 
 
                     </div>
-                    <div class="w-full flex items-center justify-start mt-3 text-sm relative">
+                    <div class="w-full flex items-center justify-start mt-4 text-sm relative">
                         <p class="text-semibold">Variant not available ?</p> &ensp;<span
                             class="text-[#f25b21] cursor-pointer underline" onclick="NotifyMe()">NOTIFY ME</span>
                         <div class="hidden absolute border border-gray-300 top-[107%] flex flex-col items-start justify-center bg-white w-[25vw] z-50"
@@ -402,7 +402,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         </p>
                     </div>
                     <!-- Quantity and Add to Cart -->
-                    <div class="space-y-4 mt-7">
+                    <div class="space-y-4 mt-9">
                         <div class="w-full flex items-center justify-between space-x-4">
                             <div
                                 class="  flex items-center justify-center gap-7 border border-gray-800 rounded-lg py-1">
@@ -444,7 +444,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 <input type="hidden" name="quantity[]" id="product_buy_count" value="1">
                                 <input type="hidden" name="cartid[]" value="">
                                 <button name="myForm"
-                                    class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-4 hover:border hover:border-[#f25b21] transition-all duration-700"><span
+                                    class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-0 hover:border hover:border-[#f25b21] transition-all duration-700"><span
                                         class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
                                         Buy It Now
                                     </span> <span
@@ -461,7 +461,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
                                 <input type="hidden" name="quantity[]" id="product_buy_count" value="1">
                                 <input type="hidden" name="cartid[]" value="">
-                                <button type="button" onclick="openLogin()" class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-4 hover:border hover:border-[#f25b21] transition-all duration-700"><span
+                                <button type="button" onclick="openLogin()" class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-2 hover:border hover:border-[#f25b21] transition-all duration-700"><span
                                         class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
                                         Buy It Now
                                     </span> <span
@@ -482,7 +482,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
                         <div class="flex flex-col">
-                            <div class=" border rounded-md divide-y">
+                            <div class=" border rounded-md divide-y mt-5">
 
                                 <!-- Item 1 -->
                                 <div class="accordion p-4">
@@ -513,7 +513,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </div>
 
                             <!-- Delivery & Return Info -->
-                            <div class="mt-6 space-y-3 text-gray-700">
+                            <div class="mt-7 space-y-3 text-gray-700">
                                 <!-- <button id="openDeliveryModal" class="cursor-pointer flex items-center gap-2">
                                 <i class="fa-solid fa-truck-fast text-gray-900"></i>
                                 <span class="font-semibold">Delivery & Return</span>
