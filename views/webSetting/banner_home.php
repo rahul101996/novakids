@@ -22,8 +22,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
             ?>
             <div class="w-full flex items-center justify-between p-3">
-                <span class="text-xl font-semibold text-gray-800">Offer Headings</span>
-                <a href="/admin/front-cms/offer-heading/add" class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add Offer Heading</a>
+                <span class="text-xl font-semibold text-gray-800">Home Banner</span>
+                <!-- <a href="/admin/front-cms/home-banner/add" class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add
+                    Home Banner</a> -->
             </div>
             <div class="p-3 border-b border-gray-200">
                 <div class="flex justify-between items-center">
@@ -31,6 +32,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     <div class="flex items-center space-x-1">
                         <button
                             class="bg-gray-200 text-gray-800 px-3 py-1.5 rounded-md text-sm font-medium">All</button>
+
                     </div>
                     <div class="flex items-center space-x-1">
                         <button class="text-gray-500 hover:bg-gray-100 p-2 rounded-md">
@@ -60,12 +62,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-2 text-gray-500 bg-gray-100 rounded">
                         <span>Sr. No</span>
                         <span>Title</span>
-                        <!-- <span>Banner</span> -->
+                        <span>Banner</span>
                         <span>Action</span>
                     </div>
 
                     <!-- Table Rows -->
-                    <?php foreach (getData2("SELECT * FROM `tbl_offer_heading` WHERE 1") as $key => $banner) { ?>
+                    <?php foreach (getData2("SELECT * FROM `tbl_home_banner` WHERE 1") as $key => $banner) { ?>
                         <div
                             class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-3 hover:bg-gray-50 text-gray-800 rounded">
                             <!-- Sr. No -->
@@ -85,17 +87,27 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <!-- Category Title -->
                             <div class="font-medium"><?= htmlspecialchars($banner['title']) ?></div>
 
+                            <!-- Image -->
+                            <div>
+                                <img src="/<?= htmlspecialchars($banner['file']) ?>" class="w-24 rounded"
+                                    alt="Category Image">
+                            </div>
+
                             <!-- Action -->
                             <div class="flex space-x-2">
-                                <a href="offer-heading/edit/<?= $banner['id'] ?>" class="text-blue-500 hover:text-blue-600"><i
+                                <a href="home-banner/edit/<?= $banner['id'] ?>" class="text-blue-500 text-xl hover:text-blue-600"><i
                                         class="fa-solid fa-pen"></i></a>
-                                <a href="offer-heading/delete/<?= $banner['id'] ?>" class="text-red-500 hover:text-red-600"><i
-                                        class="fa-solid fa-trash"></i></a>
+                                <!-- <a href="/delete/<?= $banner['id'] ?>" class="text-red-500 hover:text-red-600"><i
+                                        class="fa-solid fa-trash"></i></a> -->
                             </div>
                         </div>
                     <?php } ?>
                 </div>
-            </div>
+
+
+
+
+
         </main>
     </div>
     <?php
