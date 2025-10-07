@@ -95,30 +95,12 @@ if (isset($_POST['update_profile'])) {
     <div
         class="bg-[url('/public/images/dashboard-bg-shape-1.jpg')] bg-cover bg-center bg-no-repeat w-full flex items-center justify-center flex-col bg-[#eff2fa]">
 
-        <div class="flex max-lg:flex-col w-[80%] max-lg:w-[90%] h-auto my-14 items-start justify-start bg-white">
+        <div class="flex max-lg:flex-col w-[80%] max-lg:w-[90%] h-auto my-14 items-start justify-start gap-4">
             <aside
-                class="w-[23%] max-lg:w-full p-6 rounded-tr-2xl rounded-br-2xl md:sticky top-24 max-lg:hidden">
+                class="w-[23%] max-lg:w-full p-6   md:sticky top-24 max-lg:hidden bg-white">
                 <h2 class="text-sm text-gray-500 mb-4 uppercase tracking-wide">Welcome</h2>
                 <nav class="space-y-3 text-gray-700 font-medium">
-                    <!-- <div class="flex hover:bg-gray-100 items-center gap-3 activeTab px-4 py-2 rounded-lg sidenav "
-                        onclick="showPart('dashboard', this)">
-                        <div class="text-xl"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path opacity="0.4"
-                                    d="M16.0041 5.216V1.584C16.0041 0.456 15.4921 0 14.2201 0H10.9881C9.7161 0 9.2041 0.456 9.2041 1.584V5.208C9.2041 6.344 9.7161 6.792 10.9881 6.792H14.2201C15.4921 6.8 16.0041 6.344 16.0041 5.216Z"
-                                    fill="currentColor"></path>
-                                <path
-                                    d="M16.0041 14.216V10.984C16.0041 9.71195 15.4921 9.19995 14.2201 9.19995H10.9881C9.7161 9.19995 9.2041 9.71195 9.2041 10.984V14.216C9.2041 15.488 9.7161 16 10.9881 16H14.2201C15.4921 16 16.0041 15.488 16.0041 14.216Z"
-                                    fill="currentColor"></path>
-                                <path
-                                    d="M6.8 5.216V1.584C6.8 0.456 6.288 0 5.016 0H1.784C0.512 0 0 0.456 0 1.584V5.208C0 6.344 0.512 6.792 1.784 6.792H5.016C6.288 6.8 6.8 6.344 6.8 5.216Z"
-                                    fill="currentColor"></path>
-                                <path opacity="0.4"
-                                    d="M6.8 14.216V10.984C6.8 9.71195 6.288 9.19995 5.016 9.19995H1.784C0.512 9.19995 0 9.71195 0 10.984V14.216C0 15.488 0.512 16 1.784 16H5.016C6.288 16 6.8 15.488 6.8 14.216Z"
-                                    fill="currentColor"></path>
-                            </svg></div>
-                        <span>Dashboard</span>
-                    </div> -->
+                    
 
                     <div onclick="showPart('myprofile',this)"
                         class="flex items-center gap-3 px-1 py-1 hover:bg-gray-100 rounded-lg activeTab sidenav">
@@ -137,7 +119,7 @@ if (isset($_POST['update_profile'])) {
                             </svg></div>
                         <span>My Profile</span>
                     </div>
-
+                    <div class="h-[1px] bg-gray-200"></div>
                     <div class="flex items-center gap-3 px-1 py-2 hover:bg-gray-100 rounded-lg sidenav"
                         onclick="showPart('myorders',this)">
                         <div class="text-2xl"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 32 32">
@@ -150,6 +132,7 @@ if (isset($_POST['update_profile'])) {
                             </svg></div>
                         <span>My Orders</span>
                     </div>
+                    <div class="h-[1px] bg-gray-200"></div>
 
                     <div onclick="showPart('setting',this)"
                         class="flex items-center gap-3 px-1 py-2 hover:bg-gray-100 rounded-lg sidenav">
@@ -158,6 +141,8 @@ if (isset($_POST['update_profile'])) {
                             </svg></div>
                         <span>Settings</span>
                     </div>
+                                        <div class="h-[1px] bg-gray-200"></div>
+
                     <div onclick="showPart('Addresses',this)"
                         class="flex items-center gap-3 px-1 py-2 hover:bg-gray-100 rounded-lg sidenav">
                         <div class="text-2xl">
@@ -165,6 +150,7 @@ if (isset($_POST['update_profile'])) {
                         </div>
                         <span>Addresses</span>
                     </div>
+                    <div class="h-[1px] bg-gray-200"></div>
 
                     <a href="/logout" class="flex items-center gap-3 px-1 py-1 hover:bg-gray-100 rounded-lg py-2 px-1">
                         <div class="text-2xl">
@@ -226,7 +212,7 @@ if (isset($_POST['update_profile'])) {
             </div>
 
             <!-- Main Content -->
-            <main class="w-[77%] max-lg:w-full md:px-10 max-lg:mt-6 py-6">
+            <main class="w-[77%] max-lg:w-full md:px-10 max-lg:mt-6 py-6 bg-white">
 
                 <div class="showpart myprofile flex flex-col items-center juastify-center w-full">
                     <div class="flex justify-between items-center mb-6 w-full ">

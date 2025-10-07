@@ -130,8 +130,8 @@ class WebController extends LoginController
 
                             <div class="w-full flex items-center justify-between text-sm">
                                 <div class="flex items-center justify-center gap-2">
-                                    <p class="uppercase"><?= $key ?></p>
-                                    <div class="bg-gray-100 py-1 px-3 text-xs border border-gray-300 rounded-lg">XS:
+                                    <p class="uppercase text-lg"><?= $key ?></p>
+                                    <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded">XS:
                                         Chest 41 inches
                                         Length 27 inches</div>
                                 </div>
@@ -175,7 +175,7 @@ class WebController extends LoginController
                         <?php
                         } elseif ($key == 'color') {
                         ?>
-                            <p class="uppercase mt-7"><?= $key ?></p>
+                            <p class="uppercase mt-7 text-lg"><?= $key ?></p>
                             <div class="w-full flex items-center justify-start text-sm gap-2"
                                 id="<?= !isset($_POST["product_details"]) ? "ColorDiv" : "ColorDetailsDiv" ?>">
 

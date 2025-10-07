@@ -341,7 +341,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                     </div>
                     <div class="w-full flex items-center justify-start mt-4 text-sm relative">
-                        <p class="text-semibold">Variant not available ?</p> &ensp;<span
+                        <p class="text-semibold">Size not available ?</p> &ensp;<span
                             class="text-[#f25b21] cursor-pointer underline" onclick="NotifyMe()">NOTIFY ME</span>
                         <div class="hidden absolute border border-gray-300 top-[107%] flex flex-col items-start justify-center bg-white w-[25vw] z-50"
                             id="NotifyMe">
@@ -461,7 +461,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 <input type="hidden" name="price[]" value="<?= $ProductData['varients'][0]["price"] ?>">
                                 <input type="hidden" name="quantity[]" id="product_buy_count" value="1">
                                 <input type="hidden" name="cartid[]" value="">
-                                <button type="button" onclick="openLogin()" class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-2 hover:border hover:border-[#f25b21] transition-all duration-700"><span
+                                <button type="button" onclick="openLogin()" class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-0 hover:border hover:border-[#f25b21] transition-all duration-700"><span
                                         class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
                                         Buy It Now
                                     </span> <span
