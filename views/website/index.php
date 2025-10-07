@@ -1,6 +1,10 @@
 <?php
 
 // printWithPre($_SESSION);
+$image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]['file'];
+
+// printWithPre($images);
+// die();
 
 ?>
 
@@ -50,7 +54,7 @@
     <section
         class="relative h-[88vh] max-md:h-[90vh] flex items-center bg-gradient-to-r from-red-800 to-black overflow-hidden">
         <!-- Background Image Overlay -->
-        <div class="absolute inset-0 bg-[url('/public/images/banner.webp')] bg-cover bg-center opacity-70"></div>
+        <div class="absolute inset-0 bg-[url('/<?= $image ?>')] bg-cover bg-center opacity-70"></div>
         <h2 class="absolute md:top-16 md:left-10 max-md:left-8 max-md:bottom-40 text-7xl max-md:text-5xl font-extrabold text-white"
             data-aos="fade-right" data-aos-duration="1000" data-aos-delay="100">
             NEW <br> IN <br> FOR <br> YOUNGSTARS
