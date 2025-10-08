@@ -179,12 +179,12 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         // array_reverse($ppimages[0]);
                         foreach ($ppimages[0] as $key => $image) {
 
-                    ?>
+                            ?>
                             <div class=" overflow-hidden  cursor-pointer">
                                 <img src="/<?= $image ?>" alt="View 1"
                                     class="w-full h-full object-cover image-hover cursor-zoom-in">
                             </div>
-                    <?php }
+                        <?php }
                     } ?>
 
                 </div>
@@ -348,7 +348,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     </div>
                     <?php
                     if ($ProductData['id'] != 7) {
-                    ?>
+                        ?>
                         <p class="text-sm text-gray-900 mt-2 text-justify">Upgrade your casual wardrobe with our black
                             sporty deconstructed loose pants, the perfect blend of comfort and style. Designed with a
                             relaxed fit, these pants allow for effortless movement, while the deconstructed detailing adds a
@@ -459,7 +459,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                             <?php
                             if (!empty($_SESSION["userid"])) {
-                            ?>
+                                ?>
                                 <input type="hidden" name="varient[]" class="sideVarientId"
                                     value="<?= $ProductData['varients'][0]["id"] ?>">
                                 <input type="hidden" name="category[]" class="sideCategoryId"
@@ -478,9 +478,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                     </span>
 
                                 </button>
-                            <?php
+                                <?php
                             } else {
-                            ?>
+                                ?>
                                 <input type="hidden" name="varient[]" class="sideVarientId"
                                     value="<?= $ProductData['varients'][0]["id"] ?>">
                                 <input type="hidden" name="category[]" class="sideCategoryId"
@@ -500,7 +500,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                                 </button>
 
-                            <?php
+                                <?php
                             }
                             ?>
                             <button
@@ -661,7 +661,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     </div>
                 </div>
 
-                <div class="w-[80%] flex items-center ju    stify-center">
+                <div class="w-[80%] flex items-center justify-center">
+
                     <div class="grid grid-cols-2 w-full">
                         <!-- Review 1 -->
                         <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
@@ -708,28 +709,48 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </div>
                         </div>
 
-                        <!-- Review 3 -->
-                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                                <span> ★★★★★</span>
-                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                    "Great fit and excellent customer service. They really care about their customers
-                                    and it
-                                    shows!"
-                                </p>
+                        <?php
+                        foreach (getData2("SELECT tpr.*, ous.username, ous.fname, ous.lname, ous.mobile FROM `tbl_product_review` tpr LEFT JOIN online_users ous ON tpr.userid = ous.id WHERE 1 AND tpr.product_id = $ProductData[id] AND tpr.status = 1") as $key => $value) { ?>
+
+                            <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                                <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                    <span> <?php for ($i = 0; $i < 5; $i++) {
+                                        if ($value['rating'] > $i) {
+                                            echo '★';
+                                        } else {
+                                            echo '☆';
+                                        }
+                                    } ?></span>
+                                    <style>
+                                        .review-text {
+                                            display: -webkit-box;
+                                            -webkit-line-clamp: 4;
+                                            /* show only 4 lines */
+                                            -webkit-box-orient: vertical;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                        }
+                                    </style>
+                                    <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                        "<?= $value['reviewText'] ?>"
+                                    </p>
+                                </div>
+
+                                <div class="flex gap-4 items-center">
+                                    <div class="flex items-center w-10 h-10">
+                                        <img src="/public/images/dp.png" alt="John D."
+                                            class="w-full h-full rounded-full object-cover border mr-3">
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">
+                                            <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="flex gap-4 items-center">
-                                <div class="flex items-center w-10 h-10">
-                                    <img src="/public/images/dp.png" alt="John D."
-                                        class="w-full h-full rounded-full object-cover border mr-3">
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-gray-800">Alex P.</p>
-                                    <!-- <p class="text-xs text-gray-500">Loyal Customer</p> -->
-                                </div>
-                            </div>
-                        </div>
+                        <?php } ?>
+
                     </div>
                 </div>
             </div>
@@ -788,18 +809,19 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 }
                             }
                             // printWithPre($images);
-                        ?>
+                            ?>
                             <a href="/products/product-details/<?= $name ?>" class="block">
                                 <div class="group relative  cursor-pointer transition overflow-hidden">
                                     <!-- Discount Badge -->
-                                    <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20" ">
-                                                                                                                SAVE <?= $discountPercentage ?>%
-                                                                                                            </span>
+                                    <span
+                                        class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20" ">
+                                                                                                                    SAVE <?= $discountPercentage ?>%
+                                                                                                                </span>
 
 
-                                                                                                            <!-- Product Images -->
-                                                                                                            <div class="
-                                        relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
+                                                                                                                <!-- Product Images -->
+                                                                                                                <div class="
+                                    relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                         <!-- Default Image -->
                                         <img src="/<?= $images[0] ?>" alt="Product 1"
                                             class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -837,10 +859,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                         <span class="text-yellow-500">★★★★★</span>
                                     </div>
                                 </div>
-                    </div>
-                    </a>
+                        </div>
+                        </a>
 
-                <?php } ?>
+                    <?php } ?>
 
                 </div>
             </div>
@@ -967,7 +989,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 <!-- Form Content -->
                 <form id="reviewForm" class="px-8 py-6 space-y-5">
                     <!-- Name Input with Icon -->
-                    <!-- <div class="group">
+                    <div class="group">
                         <label for="name"
                             class="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
                             <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -979,7 +1001,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         <input type="text" id="name" placeholder="John Doe"
                             class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-300 bg-gray-50 focus:bg-white group-hover:border-gray-300"
                             required>
-                    </div> -->
+                    </div>
                     <input type="hidden" id="userid" name="userid" value="<?= $_SESSION["userid"] ?>">
                     <input type="hidden" id="product_id" name="product_id" value="<?= $ProductData["id"] ?>">
 
@@ -1183,20 +1205,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         }
 
         // Handle Form Submission
-        // Open Modal
-        function openReviewModal() {
-            document.getElementById("reviewModal").classList.remove("hidden");
-        }
-
-        // Close Modal
-        function closeReviewModal() {
-            document.getElementById("reviewModal").classList.add("hidden");
-        }
-
-        // Handle Form Submission
-        document.getElementById("reviewForm").addEventListener("submit", async function(e) {
+        document.getElementById("reviewForm").addEventListener("submit", async function (e) {
             e.preventDefault();
 
+            const name = document.getElementById("name").value;
             const userid = document.getElementById("userid").value;
             const product_id = document.getElementById("product_id").value;
             const reviewText = document.getElementById("reviewText").value;
@@ -1210,6 +1222,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
+                    name,
                     userid,
                     product_id,
                     reviewText,
@@ -1257,10 +1270,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         }
 
         // Initialize on hover effect
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const starIcons = document.querySelectorAll('.star-icon');
             starIcons.forEach((star, index) => {
-                star.addEventListener('mouseenter', function() {
+                star.addEventListener('mouseenter', function () {
                     starIcons.forEach((s, i) => {
                         if (i <= index) {
                             s.classList.remove('text-gray-300');
@@ -1269,7 +1282,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     });
                 });
 
-                star.addEventListener('mouseleave', function() {
+                star.addEventListener('mouseleave', function () {
                     const currentRating = parseInt(document.getElementById('rating').value);
                     starIcons.forEach((s, i) => {
                         if (i < currentRating) {
@@ -1289,7 +1302,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".like-carousel").owlCarousel({
                 loop: true,
                 margin: 10,
@@ -1316,7 +1329,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
     </script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".review-carousel").owlCarousel({
                 margin: 10,
                 autoplay: true,
@@ -1346,7 +1359,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 }
             });
         });
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".review-carousel1").owlCarousel({
                 margin: 10,
                 autoplay: true,
@@ -1376,7 +1389,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 }
             });
         });
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".review-carousel2").owlCarousel({
                 margin: 10,
                 autoplay: true,
