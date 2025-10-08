@@ -111,6 +111,11 @@ $route->group(['', 'CustomerController', 'auth'], function ($route) {
 
 });
 
+$route->group(['notify', 'NotificationController', 'auth'], function ($route) {
+    $route->route('', 'index');
+
+});
+
 $route->group(['', 'CouponController', 'auth'], function ($route) {
     $route->route('admin/add-coupon', 'AddCoupons');
     $route->route('admin/coupons-list', 'CouponList');
