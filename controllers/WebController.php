@@ -175,7 +175,7 @@ class WebController extends LoginController
 
                             <?php
                         } elseif ($key == 'color') {
-                        ?>
+                            ?>
                             <p class="uppercase mt-7 text-lg"><?= $key ?></p>
                             <div class="w-full flex items-center justify-start text-sm gap-2"
                                 id="<?= !isset($_POST["product_details"]) ? "ColorDiv" : "ColorDetailsDiv" ?>">
@@ -1997,11 +1997,25 @@ ORDER BY id DESC LIMIT 5");
             $this->db->beginTransaction();
 
             $_POST = json_decode(file_get_contents('php://input'), true);
-
             // printWithPre($_POST);
             // die();
 
+            $uname = $_POST['name'];
+            unset($_POST['name']);
+
             add($_POST, "tbl_product_review", false);
+
+            $userName = getData2("SELECT * FROM online_users WHERE id = " . $_POST['userid'] . " LIMIT 1")[0]['fname'];
+            if (empty($userName)) {
+                $_SESSION['fname'] = $uname;
+                update(
+                    [
+                        "fname" => $uname,
+                    ],
+                    $_POST['userid'],
+                    "online_users"
+                );
+            }
 
             $this->db->commit();
 

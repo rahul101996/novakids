@@ -2,8 +2,10 @@
 
 // printWithPre($_SESSION);
 
+
 // printWithPre($ProductData);
 $page = "product-details";
+
 if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
@@ -331,9 +333,6 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                     <span id="save"><?= $discountPercentage ?></span>%</span>
 
                             </div>
-
-
-
                         </div>
                         <div class="flex items-center justify-end gap-2 w-[25%]">
                             <button class="addToWishlistBtn  rounded-full transition-all duration-500  ">
@@ -663,7 +662,6 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                 <div class="w-[63%] flex items-center justify-center">
                     <div class="owl-carousel owl-theme review-carousel1 w-full">
-                        <!-- Review 1 -->
                         <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
                             <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
                                 <span> ★★★★★</span>
@@ -686,7 +684,6 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </div>
                         </div>
 
-                        <!-- Review 2 -->
                         <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
                             <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
                                 <span> ★★★★★</span>
@@ -708,30 +705,51 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </div>
                         </div>
 
-                        <!-- Review 3 -->
-                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                                <span> ★★★★★</span>
-                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                    "Great fit and excellent customer service. They really care about their customers
-                                    and it
-                                    shows!"
-                                </p>
+                        <?php
+                        foreach (getData2("SELECT tpr.*, ous.username, ous.fname, ous.lname, ous.mobile FROM `tbl_product_review` tpr LEFT JOIN online_users ous ON tpr.userid = ous.id WHERE 1 AND tpr.product_id = $ProductData[id] AND tpr.status = 1") as $key => $value) { ?>
+
+                            <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                                <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                    <span> <?php for ($i = 0; $i < 5; $i++) {
+                                        if ($value['rating'] > $i) {
+                                            echo '★';
+                                        } else {
+                                            echo '☆';
+                                        }
+                                    } ?></span>
+                                    <style>
+                                        .review-text {
+                                            display: -webkit-box;
+                                            -webkit-line-clamp: 4;
+                                            /* show only 4 lines */
+                                            -webkit-box-orient: vertical;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                        }
+                                    </style>
+                                    <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                        "<?= $value['reviewText'] ?>"
+                                    </p>
+                                </div>
+
+                                <div class="flex gap-4 items-center">
+                                    <div class="flex items-center w-10 h-10">
+                                        <img src="/public/images/dp.png" alt="John D."
+                                            class="w-full h-full rounded-full object-cover border mr-3">
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">
+                                            <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="flex gap-4 items-center">
-                                <div class="flex items-center w-10 h-10">
-                                    <img src="/public/images/dp.png" alt="John D."
-                                        class="w-full h-full rounded-full object-cover border mr-3">
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-gray-800">Alex P.</p>
-                                    <!-- <p class="text-xs text-gray-500">Loyal Customer</p> -->
-                                </div>
-                            </div>
-                        </div>
+                        <?php } ?>
+
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -792,13 +810,14 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             <a href="/products/product-details/<?= $name ?>" class="block">
                                 <div class="group relative  cursor-pointer transition overflow-hidden">
                                     <!-- Discount Badge -->
-                                    <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20" ">
-                                                                                                                SAVE <?= $discountPercentage ?>%
-                                                                                                            </span>
+                                    <span
+                                        class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20" ">
+                                                                                                                                            SAVE <?= $discountPercentage ?>%
+                                                                                                                                        </span>
 
 
-                                                                                                            <!-- Product Images -->
-                                                                                                            <div class="
+                                                                                                                                        <!-- Product Images -->
+                                                                                                                                        <div class="
                                     relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                         <!-- Default Image -->
                                         <img src="/<?= $images[0] ?>" alt="Product 1"
@@ -967,7 +986,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 <!-- Form Content -->
                 <form id="reviewForm" class="px-8 py-6 space-y-5">
                     <!-- Name Input with Icon -->
-                    <!-- <div class="group">
+                    <div class="group">
                         <label for="name"
                             class="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
                             <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -976,10 +995,13 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </svg>
                             Your Name
                         </label>
-                        <input type="text" id="name" placeholder="John Doe"
+                        <input type="text" name="name"
+                            value="<?= !empty($_SESSION["fname"]) ? $_SESSION["fname"] : "" ?>" id="name"
+                            placeholder="Sharukh, Salman, Akshay"
                             class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-300 bg-gray-50 focus:bg-white group-hover:border-gray-300"
-                            required>
-                    </div> -->
+                            <?= !empty($_SESSION["fname"]) ? "readonly" : "" ?> required>
+                    </div>
+
                     <input type="hidden" id="userid" name="userid" value="<?= $_SESSION["userid"] ?>">
                     <input type="hidden" id="product_id" name="product_id" value="<?= $ProductData["id"] ?>">
 
@@ -1183,20 +1205,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         }
 
         // Handle Form Submission
-        // Open Modal
-        function openReviewModal() {
-            document.getElementById("reviewModal").classList.remove("hidden");
-        }
-
-        // Close Modal
-        function closeReviewModal() {
-            document.getElementById("reviewModal").classList.add("hidden");
-        }
-
-        // Handle Form Submission
         document.getElementById("reviewForm").addEventListener("submit", async function (e) {
             e.preventDefault();
 
+            const name = document.getElementById("name").value;
             const userid = document.getElementById("userid").value;
             const product_id = document.getElementById("product_id").value;
             const reviewText = document.getElementById("reviewText").value;
@@ -1210,6 +1222,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
+                    name,
                     userid,
                     product_id,
                     reviewText,

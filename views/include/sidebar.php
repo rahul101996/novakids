@@ -21,7 +21,7 @@
         </a>
 
         <div>
-            <button @click="open === 'front_cms' ? open = null : open = 'front_cms'"
+            <button @click="open === 'customer' ? open = null : open = 'customer'"
                 class="w-full flex items-center justify-between px-4 py-2 hover:bg-slate-700 rounded-lg">
                 <span class="flex items-center">
                     <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -36,7 +36,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
             </button>
-            <div x-show="open === 'front_cms'" x-collapse class="ml-10 mt-2 space-y-1">
+            <div x-show="open === 'customer'" x-collapse class="ml-10 mt-2 space-y-1">
                 <a href="/admin/customers-list"
                     class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     Customers
