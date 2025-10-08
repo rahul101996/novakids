@@ -1,4 +1,9 @@
 <!-- Add this style -->
+<?php
+
+// $freeshipping = getData2("SELECT * FROM `tbl_free_shipping` WHERE `id` = 1 AND `free_shipping` = '1' ORDER BY `id` DESC LIMIT 1")[0];
+// // printWithPre($freeshipping);
+?>
 <style>
     @keyframes rotatePingPong {
         0% {
@@ -63,10 +68,10 @@
                 </p>
                 <div class="relative w-[90%] h-2 bg-gray-200 rounded-full mt-6">
                     <!-- progress fill -->
-                    <div id="progressBar" class="h-2 bg-[#f25b21] rounded-full" style="width: 0%;"></div>
+                    <div id="progressBar" class="h-2 bg-[#f25b21] rounded-full" style="width: 30%;"></div>
 
                     <!-- truck icon -->
-                    <div id="truckIcon" class="absolute -top-3" style="left: 0%;">
+                    <div id="truckIcon" class="absolute -top-3" style="left: 30%;">
                         <span
                             class="flex items-center justify-center w-7 h-7 rounded-full border border-[#f25b21] bg-white">
                             <i class="fas fa-truck text-[#f25b21] text-sm"></i>
@@ -167,9 +172,9 @@
                         <span
                             class="absolute inset-0 bg-[#f25b21] transition-transform duration-700 origin-left group-hover:scale-x-0 scale-x-100"></span>
                     </button>
-                    <?php
+                <?php
                 } else {
-                    ?>
+                ?>
                     <button onclick="modal.classList.remove('hidden')" type="button"
                         class="relative w-full font-semibold py-1.5 rounded-md border-2 border-[#f25b21] overflow-hidden group">
                         <span class="relative z-10 text-white group-hover:text-[#f25b21] transition-colors duration-700">
@@ -324,15 +329,15 @@
         }
 
     }
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         AddToWishlist();
     });
 
     function AddToWishlist() {
         const addToWishlistBtn = document.querySelectorAll('.addToWishlistBtn');
         if (addToWishlistBtn) {
-            addToWishlistBtn.forEach(function (btn) {
-                btn.addEventListener('click', function (event) {
+            addToWishlistBtn.forEach(function(btn) {
+                btn.addEventListener('click', function(event) {
                     // console.log("hello");
                     event.preventDefault();
                     event.stopPropagation();
@@ -366,7 +371,7 @@
 
                 if (request.data.message == "Add To wishlist Successfully") {
                     if (page == "product-details") {
-                        
+
                         ele.querySelector("img").src = "/public/icons/heart-orange.png";
                     } else {
                         ele.classList.remove('bg-black/70');
@@ -384,9 +389,9 @@
                     <?php
                     if (isset($page) && $page == "Wishlist") {
 
-                        ?>
+                    ?>
                         location.reload();
-                        <?php
+                    <?php
                     }
                     ?>
                     if (page == "product-details") {
@@ -446,29 +451,7 @@
         selected: {}
     };
 
-    function updateCart() {
-        const subtotal = itemPrice * quantity;
-        const remaining = targetFreeShipping - subtotal;
 
-        // Update total price
-        cartTotalEl.textContent = subtotal.toLocaleString();
-
-        // Calculate progress %
-        let progress = (subtotal / targetFreeShipping) * 100;
-        if (progress > 100) progress = 100;
-
-        progressBar.style.width = progress + "%";
-        truckIcon.style.left = progress + "%";
-
-        if (remaining > 0) {
-            congratsMessage.classList.add("hidden");
-            remainingText.classList.remove("hidden");
-            remainingAmountEl.textContent = "₹" + remaining.toLocaleString();
-        } else {
-            remainingText.classList.add("hidden");
-            congratsMessage.classList.remove("hidden");
-        }
-    }
 
     // Quantity controls
     qtyMinus.addEventListener("click", () => {
@@ -520,7 +503,7 @@
         cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
         cartOverlay.classList.add('opacity-100');
     }
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         AddToCart();
     });
 
@@ -529,8 +512,8 @@
         const addToCartBtn = document.querySelectorAll('.openCartBtn');
         // console.log(addToCartBtn);
         if (addToCartBtn) {
-            addToCartBtn.forEach(function (btn) {
-                btn.addEventListener('click', async function (event) {
+            addToCartBtn.forEach(function(btn) {
+                btn.addEventListener('click', async function(event) {
                     console.log("hello");
                     event.preventDefault();
                     event.stopPropagation();
@@ -795,7 +778,7 @@
         }
     }
 
-    function setTotal() {
+    async function setTotal() {
         // console.log("grande")
         const totalarray = sideCart.querySelectorAll(".total")
         // console.log(totalarray)
@@ -806,8 +789,29 @@
             amount = amount.replace('<?= $currency ?>', '')
             total += parseInt(amount)
         });
+        const response = await axios.post("/api/free-delivery", new URLSearchParams({
+
+        }))
+
+        console.log(response.data);
+
 
         document.getElementById("All_Side_Total").innerText = '<?= $currency ?>' + total
+        let remaining = parseFloat(response.data.price) - total;
+        console.log(remaining)
+        if (remaining > 0) {
+            remainingText.innerHTML = ` Buy <span id="remainingAmount" class="text-[#f25b21] font-semibold">₹${remaining}.00</span> more to enjoy
+                    <span class="font-semibold">FREE Shipping</span>`;
+            progressBar.style.width = `${100-(remaining/parseFloat(response.data.price)*100)}%`
+            truckIcon.style.left = `${100-(remaining/parseFloat(response.data.price)*100)}%`
+        } else {
+            remainingText.innerHTML = ` Buy now to enjoy
+                    <span class="font-semibold">FREE Shipping</span>`;
+            progressBar.style.width = '100%'
+            truckIcon.style.left = '100%'
+        }
+        let percentage = total * parseFloat(response.data.price) / 100;
+        console.log(percentage)
         return total
     }
 </script>

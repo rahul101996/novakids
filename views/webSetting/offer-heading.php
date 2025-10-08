@@ -6,9 +6,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
 ?>
 
-<body class="bg-gray-50 bg-gray-100">
+<body class="bg-gray-50">
 
-    <div class="flex h-screen ">
+    <div class="flex h-screen bg-gray-100">
         <?php
         include $_SERVER['DOCUMENT_ROOT'] . "/views/include/sidebar.php";
 
@@ -21,116 +21,86 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
             ?>
+            <div class="w-full flex items-center justify-between p-3">
+                <span class="text-xl font-semibold text-gray-800">Offer Headings</span>
+                <a href="/admin/front-cms/offer-heading/add" class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add Offer Heading</a>
+            </div>
+            <div class="p-3 border-b border-gray-200">
+                <div class="flex justify-between items-center">
 
-
-            <div class="mb-4 bg-white rounded-lg shadow-md m-6">
-                <!-- Card Header - Changed from amber to sky -->
-                <div class="bg-sky-900 px-4 py-3 rounded-t-lg">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-lg font-semibold text-white mb-0"><?= htmlspecialchars($pageTitle) ?></h3>
-                        <!-- <a href="/in-out/out/list" class="bg-white text-sky-600 hover:bg-sky-50 px-3 py-2 rounded flex items-center text-sm font-medium transition-colors duration-200">
-                                <i class="fa fa-bars"></i>&emsp; List
-                            </a> -->
+                    <div class="flex items-center space-x-1">
+                        <button
+                            class="bg-gray-200 text-gray-800 px-3 py-1.5 rounded-md text-sm font-medium">All</button>
+                    </div>
+                    <div class="flex items-center space-x-1">
+                        <button class="text-gray-500 hover:bg-gray-100 p-2 rounded-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
+                        <button class="text-gray-500 hover:bg-gray-100 p-2 rounded-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M3 8h18M3 12h18M3 16h18"
+                                    stroke-opacity="0.5" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M3 8h12M3 12h6" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
+            </div>
 
-                <div class=" p-6 rounded-lg shadow-md">
-                    <form action="" method="POST" enctype="multipart/form-data">
-                        <div class="grid grid-cols-1 gap-x-6 gap-y-5 md:grid-cols-2 lg:grid-cols-3">
+            <div class="w-full text-sm">
+                <!-- Table Header -->
+                <div class="space-y-2">
+                    <!-- Table Header -->
+                    <div
+                        class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-2 text-gray-500 bg-gray-100 rounded">
+                        <span>Sr. No</span>
+                        <span>Title</span>
+                        <!-- <span>Banner</span> -->
+                        <span>Action</span>
+                    </div>
 
-                            <div class="space-y-1">
-                                <label for="title" class="block text-sm font-medium text-gray-700">
-                                    Title <span class="text-red-600 ml-1">*</span>
-                                </label>
-                                <input type="text" name="title" id="title"
-                                    value="<?= !empty($editData) ? $editData['title'] : '' ?>" placeholder="Enter Title"
-                                    class="border border-gray-300 rounded-md shadow-md text-sm py-2 px-3 w-full focus:outline-none focus:border-blue-500"
-                                    required>
+                    <!-- Table Rows -->
+                    <?php foreach (getData2("SELECT * FROM `tbl_offer_heading` WHERE 1") as $key => $banner) { ?>
+                        <div
+                            class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-3 hover:bg-gray-50 text-gray-800 rounded">
+                            <!-- Sr. No -->
+                            <div class="flex items-center space-x-3">
+                                <span><?= $key + 1 ?></span>
+                                <svg class="h-4 w-4 text-gray-400 cursor-grab" viewBox="0 0 24 24" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="9" cy="6" r="1.5" />
+                                    <circle cx="15" cy="6" r="1.5" />
+                                    <circle cx="9" cy="12" r="1.5" />
+                                    <circle cx="15" cy="12" r="1.5" />
+                                    <circle cx="9" cy="18" r="1.5" />
+                                    <circle cx="15" cy="18" r="1.5" />
+                                </svg>
                             </div>
 
-                        </div>
+                            <!-- Category Title -->
+                            <div class="font-medium"><?= htmlspecialchars($banner['title']) ?></div>
 
-                        <div class="flex justify-end max-md:justify-center pt-4">
-                            <button type="submit"
-                                class="bg-sky-900 hover:bg-sky-600 text-white mr-4 px-5 py-2 rounded-md text-sm font-medium transition-colors duration-200">
-                                <?= !empty($editData) ? "Update" : "Submit" ?>
-                            </button>
-                            <button type="button" onclick="history.back()"
-                                class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-5 py-2 rounded-md text-sm font-medium transition-colors duration-200">
-                                Cancel
-                            </button>
+                            <!-- Action -->
+                            <div class="flex space-x-2">
+                                <a href="offer-heading/edit/<?= $banner['id'] ?>" class="text-blue-500 hover:text-blue-600"><i
+                                        class="fa-solid fa-pen"></i></a>
+                                <a href="offer-heading/delete/<?= $banner['id'] ?>" class="text-red-500 hover:text-red-600"><i
+                                        class="fa-solid fa-trash"></i></a>
+                            </div>
                         </div>
-                    </form>
+                    <?php } ?>
                 </div>
             </div>
-
-            <div class="mb-4 bg-white rounded-lg shadow-md m-6">
-                <!-- Card Header - Changed from amber to sky -->
-                <div class="bg-sky-900 px-4 py-3 rounded-t-lg">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-lg font-semibold text-white mb-0"><?= htmlspecialchars($pageTitle) ?> List</h3>
-                        <!-- <a href="/in-out/out/list" class="bg-white text-sky-600 hover:bg-sky-50 px-3 py-2 rounded flex items-center text-sm font-medium transition-colors duration-200">
-                                <i class="fa fa-bars"></i>&emsp; List
-                            </a> -->
-                    </div>
-                </div>
-
-                <div class="p-6">
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full table-auto border border-gray-300 shadow-md rounded-lg" id="myTable">
-                            <thead class="bg-gray-100">
-                                <tr>
-                                    <th
-                                        class="px-6 py-3 text-left text-sm font-bold text-gray-800 border border-gray-300">
-                                        #</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-sm font-bold text-gray-800 border border-gray-300">
-                                        Heading</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-sm font-bold text-gray-800 border border-gray-300">
-                                        Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                foreach (getData2("SELECT * FROM tbl_offer_heading ORDER BY id DESC") as $key => $value) {
-                                    ?>
-                                    <tr class="border border-gray-300">
-                                        <td class="px-6 py-2 text-sm border border-gray-300"><?= $key + 1 ?></td>
-                                        <td class="px-6 py-2 text-sm border border-gray-300">
-                                            <?= $value["title"] ?>
-                                        </td>
-                                        <td class="px-6 py-2 text-sm border border-gray-300">
-                                            <div class="flex space-x-2">
-                                                <a href="/admin/front-cms/offer-heading/edit/<?= $value["id"] ?>"
-                                                    class="bg-sky-500 hover:bg-sky-600 px-3 py-2 rounded text-white">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a onclick="return confirm('Are you sure?')"
-                                                    href="/admin/front-cms/offer-heading/delete/<?= $value["id"] ?>"
-                                                    class="bg-red-500 hover:bg-red-600 px-3 py-2 rounded text-white">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
         </main>
     </div>
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/views/include/footer.php";
     ?>
-    <script>
-
-    </script>
 </body>
 
 </html>

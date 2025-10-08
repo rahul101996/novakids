@@ -285,11 +285,11 @@ $categories = getData("tbl_category");
 
         <div class="flex items-center space-x-7 ml-5">
             <a href="/" class="block">
-                <div class="flex items-center gap-1 py-2">
-                    <img src="/public/logos/nova_favicon.png" alt="Brand Logo"
-                        class="w-auto h-8 rounded-md object-cover my-2 ">
+                <div class="flex items-center gap-1">
+                    <!-- <img src="/public/logos/nova_favicon.png" alt="Brand Logo"
+                        class="w-auto h-8 rounded-md object-cover my-2 "> -->
                     <img src="/public/logos/nova_logo-brnd-name.png" alt="Brand Logo"
-                        class="w-auto h-8 rounded-md object-cover my-2">
+                        class="w-auto h-[6vh] rounded-md object-cover my-2">
                 </div> <img src="/public/logos/nova_favicon.png" alt="Logo" class="h-10 md:hidden">
             </a>
         </div>
@@ -1829,6 +1829,7 @@ $categories = getData("tbl_category");
     });
 
     function openLogin() {
+        console.log("openLogin")
         modal.classList.remove('hidden');
     }
 

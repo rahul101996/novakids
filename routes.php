@@ -51,6 +51,11 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('edit-address', 'EditAddress');
     $route->route('/order-details/[i:id]', 'OrderDetails');
     $route->route('order-confirm-mail', 'OrderConfirmMail');
+    $route->route('/api/popup-display', 'popupDisplay');
+    $route->route('/api/free-delivery', 'FreeDelivery');
+
+
+    $route->route('/addReview', 'addReview');
 
     // $route->route('/', 'index');
 });
@@ -59,6 +64,18 @@ $route->group(['', 'CollectionController', 'auth'], function ($route) {
     $route->route('admin/collections', 'index');
     $route->route('admin/add-collections', 'AddCollections');
     $route->route('/edit-collection/[i:id]', 'AddCollections');
+
+
+
+
+    // $route->route('/', 'index');
+
+});
+
+$route->group(['', 'PopupController', 'auth'], function ($route) {
+    $route->route('admin/add-popup', 'AddPopUp');
+    $route->route('admin/popup-list', 'index');
+    $route->route('/edit-popup/[i:id]', 'AddPopUp');
 
 
 
@@ -85,6 +102,10 @@ $route->group(['', 'ProductController', 'auth'], function ($route) {
 $route->group(['', 'CustomerController', 'auth'], function ($route) {
     $route->route('admin/customers-list', 'CustomersList');
     $route->route('admin/customer-info/[i:id]', 'CustomersInfo');
+
+
+    $route->route('admin/customer-reviews', 'CustomerReviews');
+    $route->route('api/customer-reviews/status', 'CustomerReviewsStatus');
 
     // $route->route('/admin/products-list', 'ProductsList');
 
@@ -132,6 +153,7 @@ $route->group(['', 'PackageController', 'auth'], function ($route) {
     $route->route('/admin/packages-list', 'PackageList');
     $route->route('/edit-package/[i:id]', 'index');
     $route->route('/delete-package/[i:id]', 'DeleteCategory');
+    $route->route('/admin/free-shipping', 'FreeShipping');
 
 });
 
@@ -140,13 +162,23 @@ $route->group(['', 'DashboardController', 'auth'], function ($route) {
 });
 
 $route->group(['', 'WebsettingController', 'auth'], function ($route) {
+    $route->route('/admin/front-cms/home-banner', 'home_banner');
+    $route->route('/admin/front-cms/home-banner/add', 'home_banner_add');
+    $route->route('/admin/front-cms/home-banner/edit/[i:id]', 'home_banner_add');
+    $route->route('/admin/front-cms/home-banner/delete/[i:id]', 'home_banner_delete');
+
+
     $route->route('admin/front-cms/nav-heading', 'navbar_heading');
-    $route->route('admin/front-cms/nav-heading/edit/[i:id]', 'navbar_heading');
+    $route->route('admin/front-cms/nav-heading/add', 'navbar_heading_add');
+    $route->route('admin/front-cms/nav-heading/edit/[i:id]', 'navbar_heading_add');
     $route->route('admin/front-cms/nav-heading/delete/[i:id]', 'navbar_heading_delete');
 
+
     $route->route('/admin/front-cms/offer-heading', 'offer_heading');
-    $route->route('/admin/front-cms/offer-heading/edit/[i:id]', 'offer_heading');
+    $route->route('/admin/front-cms/offer-heading/add', 'offer_heading_add');
+    $route->route('/admin/front-cms/offer-heading/edit/[i:id]', 'offer_heading_add');
     $route->route('/admin/front-cms/offer-heading/delete/[i:id]', 'offer_heading_delete');
+
 });
 
 $route->group(['master', 'MasterController', 'auth'], function ($route) {

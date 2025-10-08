@@ -55,7 +55,7 @@
         })
         .then((token) => {
             if (token) {
-                console.log(tokan)
+                console.log(token)
                 //   log("FCM Token: " + token);
                 //   document.getElementById("tokenBox").value = token;
             } else {
@@ -187,9 +187,9 @@
     });
 
     function banner_forward(ele) {
-        //   console.log(ele);
+          console.log(ele);
         //   console.log("parent",ele.parentElement)
-        let bannerdiv = ele.parentElement.querySelector(".owl-carousel"); // Select the slider directly
+        let bannerdiv = ele.parentElement.parentElement.parentElement.parentElement.querySelector(".owl-carousel"); // Select the slider directly
         //   console.log(bannerdiv);
         if (bannerdiv) {
             let nextButton = bannerdiv.querySelector(".owl-next");
@@ -204,9 +204,9 @@
     }
 
     function banner_backward(ele) {
-        // console.log(ele);
-        // console.log("parent",ele.parentElement)
-        let bannerdiv = ele.parentElement.querySelector(".owl-carousel");
+        console.log(ele);
+        console.log("parent",ele.parentElement)
+        let bannerdiv = ele.parentElement.parentElement.parentElement.parentElement.querySelector(".owl-carousel");
         //   console.log(bannerdiv);
         if (bannerdiv) {
             let prevButton = bannerdiv.querySelector(".owl-prev");

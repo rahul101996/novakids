@@ -1,6 +1,10 @@
 <?php
 
 // printWithPre($_SESSION);
+$image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]['file'];
+
+// printWithPre($images);
+// die();
 
 ?>
 
@@ -50,7 +54,7 @@
     <section
         class="relative h-[88vh] max-md:h-[90vh] flex items-center bg-gradient-to-r from-red-800 to-black overflow-hidden">
         <!-- Background Image Overlay -->
-        <div class="absolute inset-0 bg-[url('/public/images/banner.webp')] bg-cover bg-center opacity-70"></div>
+        <div class="absolute inset-0 bg-[url('/<?= $image ?>')] bg-cover bg-center opacity-70"></div>
         <h2 class="absolute md:top-16 md:left-10 max-md:left-8 max-md:bottom-40 text-7xl max-md:text-5xl font-extrabold text-white"
             data-aos="fade-right" data-aos-duration="1000" data-aos-delay="100">
             NEW <br> IN <br> FOR <br> YOUNGSTARS
@@ -79,6 +83,30 @@
             #GenZStyle
         </p>
     </section>
+   <div class="owl-carousel owl-theme Home-Carousel h-[90vh] w-[100vw] relative">
+            <div class="w-full h-full">
+                <img src="/public/home-banner/homepage_copy_26.avif" class="w-full h-full" alt="">
+            </div>
+            <div class="w-full h-full">
+                <img src="/public/home-banner/homepage_17_U90OqZq.avif" class="w-full h-full" alt="">
+            </div>
+            <div class="w-full h-full">
+                <img src="/public/home-banner/homepage_12_V3Auyr2.avif" class="w-full h-full" alt="">
+            </div>
+        </div>
+    <script>
+$(document).ready(function() {
+ $(".Home-Carousel").owlCarousel({
+  items: 1,
+  loop: true,
+  autoplay: true,
+  autoplayTimeout: 3000,
+  smartSpeed: 1000,
+  slideTransition: "linear",
+});
+
+});
+</script>
 
     <style>
         /* Place nav buttons below the carousel */
@@ -154,7 +182,7 @@
                             }
                         }
                         // printWithPre($images);
-                        ?>
+                    ?>
                         <a href="/products/product-details/<?= $name ?>" class="block">
                             <div class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
@@ -230,7 +258,7 @@
             foreach ($categories as $key => $category) {
 
 
-                ?>
+            ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
                     <a href="/category/<?= strtolower(str_replace(' ', '-', $category['category'])) ?>">
@@ -416,7 +444,7 @@
                 foreach ($collection_products as $key => $product) {
 
                     $product_details = getData2("SELECT * FROM `tbl_products` WHERE `id`='$product'")[0];
-                    if(empty($product_details)) continue;
+                    if (empty($product_details)) continue;
                     $images = json_decode($product_details['product_images'], true);
                     $images = array_reverse($images);
                     $name = str_replace(' ', '-', $product_details['name']);
@@ -438,7 +466,7 @@
                         }
                     }
 
-                    ?>
+                ?>
                     <a href="products/product-details/<?= $name ?>" class="block">
                         <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
                             <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden">
@@ -488,7 +516,7 @@
                             </div>
                         </div>
                     </a>
-                    <?php
+                <?php
                 }
                 ?>
             </div>
@@ -533,7 +561,7 @@
                         foreach ($offerheading as $key => $value) { ?>
                             <span>#</span>
                             <span><?= $value['title'] ?></span>
-                        <?php }
+                    <?php }
                     } ?>
 
 
@@ -817,60 +845,78 @@
     </section>
 
     <!-- Modal Background -->
-    <div id="newsletterModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-        <!-- Modal Content -->
-        <div class="bg-white shadow-lg w-full w-[35vw] max-md:w-[85vw] relative animate-slideDown">
+    <?php
+    // printWithPre($_SESSION);
+    if (!isset($_SESSION['popup']) || $_SESSION['popup'] == 'false') {
+        $popup = getData2("SELECT * FROM tbl_popup WHERE display = 1")[0];
+        // var_dump($popup);
+        // printWithPre($popup);
+        if (count($popup) > 0) {
+            // $popup = $popup[0];
 
-            <!-- Close button -->
-            <button id="closeModal"
-                class="absolute top-3 right-3 text-black hover:text-black text-xl animate-rotate-pingpong">
-                ✕</button>
 
-            <!-- Image -->
-            <img src="/public/images/news.jpg" alt="Newsletter Banner" class="h-52 max-md:h-44 w-full object-cover">
+    ?>
+            <div id="newsletterModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+                <!-- Modal Content -->
+                <div class="bg-white shadow-lg w-full w-[35vw] max-md:w-[85vw] relative animate-slideDown">
 
-            <!-- Content -->
-            <div class="p-6 text-center w-[80%] max-md:w-full mx-auto">
-                <h2 class="text-lg font-bold mb-2">NEWSLETTER</h2>
-                <p class="text-gray-600 text-sm mb-4">
-                    Receive our weekly newsletter.<br>
-                    For dietary content, fashion insider and the best offers.
-                </p>
+                    <!-- Close button -->
+                    <button id="closeModal"
+                        class="absolute top-3 right-3 text-white bg-black rounded-full w-8 h-8 flex items-center justify-center hover:text-black text-xl animate-rotate-pingpong">
+                        ✕</button>
 
-                <!-- Email Input -->
-                <input type="email" placeholder="Enter Your Email Address"
-                    class="w-full border border-gray-300 rounded-md p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-black">
+                    <!-- Image -->
+                    <img src="/<?= $popup['img'] ?>" alt="Newsletter Banner" class="h-52 max-md:h-44 w-full object-cover">
 
-                <button
-                    class="relative w-full font-semibold py-2 rounded-md border-2 border-black overflow-hidden group">
-                    <!-- Text -->
-                    <span class="relative z-10 text-black group-hover:text-white transition-colors duration-700">
-                        Subscribe
-                    </span>
-                    <!-- Animated BG -->
-                    <span
-                        class="absolute inset-0 bg-black transition-transform duration-[1.2s] origin-left scale-x-0 group-hover:scale-x-100"></span>
-                </button>
+                    <!-- Content -->
+                    <div class="p-6 text-center w-[80%] max-md:w-full mx-auto">
+                        <h2 class="text-lg font-bold mb-2">NEWSLETTER</h2>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Receive our weekly newsletter.<br>
+                            For dietary content, fashion insider and the best offers.
+                        </p>
 
-                <!-- Social icons -->
-                <div class="flex justify-center space-x-4 mt-5 text-gray-600">
-                    <a href="#" class="hover:text-black"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="hover:text-black"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="#" class="hover:text-black"><i class="fab fa-pinterest"></i></a>
-                    <a href="#" class="hover:text-black"><i class="fab fa-vimeo"></i></a>
-                </div>
+                        <!-- Email Input -->
+                        <input type="email" placeholder="Enter Your Email Address"
+                            class="w-full border border-gray-300 rounded-md p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-black">
 
-                <!-- Don't show again -->
-                <div class="flex items-center justify-center mt-4">
-                    <input id="noPopup" type="checkbox" class="mr-2">
-                    <label for="noPopup" class="text-sm text-gray-600">Don't show this popup again</label>
+                        <button
+                            class="relative w-full font-semibold py-2 rounded-md border-2 border-black overflow-hidden group">
+                            <!-- Text -->
+                            <span class="relative z-10 text-black group-hover:text-white transition-colors duration-700">
+                                Subscribe
+                            </span>
+                            <!-- Animated BG -->
+                            <span
+                                class="absolute inset-0 bg-black transition-transform duration-[1.2s] origin-left scale-x-0 group-hover:scale-x-100"></span>
+                        </button>
+
+                        <!-- Social icons -->
+                        <div class="flex justify-center space-x-4 mt-5 text-gray-600">
+                            <a href="#" class="hover:text-black"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="hover:text-black"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="#" class="hover:text-black"><i class="fab fa-pinterest"></i></a>
+                            <a href="#" class="hover:text-black"><i class="fab fa-vimeo"></i></a>
+                        </div>
+
+                        <!-- Don't show again -->
+                        <div class="flex items-center justify-center mt-4 hidden">
+                            <input id="noPopup" type="checkbox" class="mr-2">
+                            <label for="noPopup" class="text-sm text-gray-600">Don't show this popup again</label>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
+    <?php }
+    } ?>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        async function close_popup() {
+            const request = await axios.post("", new URLSearchParams({
+                popup: 'true'
+            }));
+            console.log(request.data)
+        }
+        document.addEventListener("DOMContentLoaded", function() {
             const modal = document.getElementById('newsletterModal');
             const closeBtn = document.getElementById('closeModal');
             const noPopupCheckbox = document.getElementById('noPopup');
@@ -885,9 +931,10 @@
             // Close modal
             closeBtn.addEventListener('click', () => {
                 modal.classList.add('hidden');
-                if (noPopupCheckbox.checked) {
-                    sessionStorage.setItem('hideNewsletterModal', 'true');
-                }
+                // if (noPopupCheckbox.checked) {
+                //     sessionStorage.setItem('hideNewsletterModal', 'true');
+                // }
+                close_popup();
             });
 
             // Close modal if clicked outside content
@@ -904,7 +951,7 @@
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".new-arrival-carousel").owlCarousel({
                 loop: true,
                 margin: 5,

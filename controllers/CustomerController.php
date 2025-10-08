@@ -85,4 +85,53 @@ class CustomerController
             require 'views/customers/customer-info.php';
         }
     }
+
+
+    public function CustomerReviews()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageTitle = "Customer Reviews";
+        $pageModule = "Customer Reviews";
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/customers/customer-reviews.php';
+        }
+    }
+
+    public function CustomerReviewsStatus()
+    {
+        $response = [
+            "success" => false,
+            "message" => "Something went wrong"
+        ];
+
+        try {
+            $_POST = json_decode(file_get_contents('php://input'), true);
+
+            // printWithPre($_POST);
+            // die();
+
+            update(
+                [
+                    "status" => $_POST['status']
+                ],
+                $_POST['id'],
+                "tbl_product_review"
+            );
+
+            $response = [
+                "success" => true,
+                "message" => "Status Updated Successfully"
+            ];
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+
+            $response = [
+                "success" => false,
+                "message" => $e->getMessage()
+            ];
+        } finally {
+            echo json_encode($response);
+        }
+    }
 }

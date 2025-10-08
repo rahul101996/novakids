@@ -64,7 +64,7 @@ class PackageController
                     $data = [
                         'is_default' => 0
                     ];
-                    updateSQL( $data , "tbl_packaging", "`is_default` = '1'");
+                    updateSQL($data, "tbl_packaging", "`is_default` = '1'");
                     $_POST['is_default'] = 1;
                 } else {
                     $_POST['is_default'] = 0;
@@ -107,6 +107,57 @@ class PackageController
                 header('Location:/admin/category-list');
                 exit();
             }
+        }
+    }
+
+    public function FreeShipping($id = null)
+    {
+
+
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            // $category = delete("tbl_free_shipping");
+            $freeshipping = getData2("SELECT * FROM `tbl_free_shipping` WHERE `id` = 1 ORDER BY `id` DESC LIMIT 1")[0];
+            // printWithPre($freeshipping);
+            require 'views/master/free-shipping.php';
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // printWithPre($_POST);
+
+            if (isset($_POST['add'])) {
+                $_POST['free_shipping'] = isset($_POST['free_shipping']) ? '1' : '0';
+
+                unset($_POST['add']);
+                $package = add($_POST, "tbl_free_shipping");
+
+                if ($package) {
+                    $_SESSION['success'] = "Shipping Added Successfully";
+                } else {
+                    $_SESSION['err'] = "Failed to add Shipping";
+                }
+
+                header('Location:/admin/free-shipping');
+                exit();
+            } elseif (isset($_POST['update'])) {
+
+                $_POST['free_shipping'] = isset($_POST['free_shipping']) ? '1' : '0';
+
+                $id = $_POST['id'];
+                unset($_POST['id'], $_POST['update']);
+                // printWithPre($_POST);
+                // die();
+                $package = update($_POST, $id, "tbl_free_shipping");
+
+                if ($package) {
+                    $_SESSION['success'] = "Shipping Updated Successfully";
+                } else {
+                    $_SESSION['err'] = "Failed to update Shipping";
+                }
+
+                header('Location:/admin/free-shipping');
+                exit();
+            }
+
+            // header('Location:/admin/free-shipping');
+            // exit();
         }
     }
 }
