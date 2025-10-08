@@ -38,10 +38,10 @@
     const app = initializeApp(firebaseConfig);
     const messaging = getMessaging(app);
 
-    // const log = (msg) => {
+    const log = (msg) => {
     //   document.getElementById("log").innerText += msg + "\n";
-    //   console.log(msg);
-    // };
+      console.log(msg);
+    };
 
     // 🔹 Register the service worker (classic, not module)
     navigator.serviceWorker.register("firebase-messaging-sw.js")
