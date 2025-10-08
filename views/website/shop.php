@@ -23,14 +23,19 @@ $byCategory = $category_name ?? 'tees';
                             <i id="filterIcon" class="fa-solid fa-sliders"></i> Filters
                         </button>
                         <div class="flex gap-2">
-                            <div class="flex gap-2">
+                            <button class="text-sm text-gray-600 hover:underline" id="clearFiltersBtn">Clear
+                                Filters</button>
+                            <!-- Active Filters (Dummy Data) -->
+                            <div class="flex gap-2" id="active-filters">
+
                             </div>
                         </div>
                     </div>
 
                     <div class="flex items-center gap-4 text-sm max-md:hidden">
                         <!-- Sorting -->
-                        <select id="sortSelect" onchange="applySorting()" class="border rounded px-2 py-1 text-sm">
+                        <select id="sortSelect" onchange="handleFilterChange()"
+                            class="border rounded px-2 py-1 text-sm">
                             <option value="">Default Sorting</option>
                             <option value="lowToHigh">Price: Low to High</option>
                             <option value="highToLow">Price: High to Low</option>
@@ -243,6 +248,10 @@ $byCategory = $category_name ?? 'tees';
             }).join("");
         }
 
+        function formatNumber(num) {
+            return new Intl.NumberFormat("en-IN").format(num);
+        }
+
 
         // Render size filters dynamically
         function renderSizeFilters(sizes) {
@@ -268,11 +277,14 @@ $byCategory = $category_name ?? 'tees';
             const max = parseInt(priceRange.value);
             const sortValue = document.getElementById("sortSelect").value;
 
-            setProducts(selectedSizes, { min, max }, sortValue);
-        }
+            console.log(selectedSizes);
 
-        function formatNumber(num) {
-            return new Intl.NumberFormat("en-IN").format(num);
+            setProducts(selectedSizes, { min, max }, sortValue);
+
+            if (selectedSizes.length > 0) {
+
+                setActiveFilter(selectedSizes);
+            }
         }
 
         // Update label while sliding
@@ -281,35 +293,54 @@ $byCategory = $category_name ?? 'tees';
             document.getElementById("selectedPriceLabel").innerText = value;
             document.getElementById("maxPriceLabelText").innerText = value;
 
-            applyFilters()
+            handleFilterChange();
         }
 
-        // Apply filter manually (on button click)
-        function applyFilters() {
+
+        function setActiveFilter(filter) {
+            const activeFilters = document.getElementById('active-filters');
+
+            let html = "";
+            for (let i = 0; i < filter.length; i++) {
+                html += `
+            <span class="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded text-gray-700">
+                <span>${filter[i]}</span>
+                <button class="text-gray-500 hover:text-black remove-filter" data-size="${filter[i]}">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </span>
+        `;
+            }
+
+            activeFilters.innerHTML = html;
+
+            document.querySelectorAll('.remove-filter').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const sizeToRemove = e.currentTarget.dataset.size;
+                    document.querySelectorAll(`.size-filter[value="${sizeToRemove}"]`).forEach(cb => cb.checked = false);
+                    handleFilterChange();
+                });
+            });
+        }
+
+        document.getElementById('clearFiltersBtn').addEventListener('click', () => {
+            // Uncheck all size checkboxes
+            document.querySelectorAll('.size-filter').forEach(cb => cb.checked = false);
+
+            // Reset price range
             const priceRange = document.getElementById("priceRange");
-            const min = parseInt(priceRange.min);
-            const max = parseInt(priceRange.value);
-            const selectedSizes = Array.from(document.querySelectorAll('.size-filter:checked'))
-                .map(cb => cb.value);
+            priceRange.value = priceRange.max;
+            document.getElementById("selectedPriceLabel").innerText = priceRange.value;
+            document.getElementById("maxPriceLabelText").innerText = priceRange.value;
+
+            // Clear active filter tags
+            document.getElementById('active-filters').innerHTML = "";
+
+            // Re-fetch products without filters
             const sortValue = document.getElementById("sortSelect").value;
+            setProducts([], { min: parseInt(priceRange.min), max: parseInt(priceRange.max) }, sortValue);
+        });
 
-            setProducts(selectedSizes, { min, max }, sortValue);
-        }
-
-        function applySorting() {
-            const sortSelect = document.getElementById("sortSelect");
-            const sortValue = sortSelect.value;
-
-            const priceRange = document.getElementById("priceRange");
-            const min = parseInt(priceRange.min);
-            const max = parseInt(priceRange.value);
-
-            const selectedSizes = Array.from(document.querySelectorAll('.size-filter:checked'))
-                .map(cb => cb.value);
-
-            // Call setProducts with all active filters and sorting
-            setProducts(selectedSizes, { min, max }, sortValue);
-        }
 
 
         // Initial load
