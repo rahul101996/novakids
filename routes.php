@@ -97,6 +97,9 @@ $route->group(['', 'ProductController', 'auth'], function ($route) {
     $route->route('/admin/cancel-orders', 'CancelOrderList');
     $route->route('/admin/get-order-details/[i:order_id]', 'OrderDetails');
 
+
+    $route->route('/api/new_arrival/status', 'ChangeNewArrivalStatus');
+
 });
 
 $route->group(['', 'CustomerController', 'auth'], function ($route) {

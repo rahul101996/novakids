@@ -930,13 +930,26 @@ class WebController extends LoginController
         $userid = $_SESSION['userid'] ?? null;
 
         // Get products in category
-        $products = getData2("
-        SELECT tbl_products.* 
-        FROM tbl_products 
-        LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id 
-        WHERE tbl_category.category = '$category_name'
-        AND tbl_products.price BETWEEN $minPrice AND $maxPrice
-    ");
+
+        if ($category_name == "new_arrivals") {
+            $products = getData2("
+                SELECT tbl_products.* 
+                FROM tbl_products 
+                LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id 
+                WHERE tbl_products.new_arrival = 1
+                AND tbl_products.price BETWEEN $minPrice AND $maxPrice
+            ");
+        } else {
+
+            $products = getData2("
+                SELECT tbl_products.* 
+                FROM tbl_products 
+                LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id 
+                WHERE tbl_category.category = '$category_name'
+                AND tbl_products.price BETWEEN $minPrice AND $maxPrice
+            ");
+        }
+
 
         foreach ($products as $key => $product) {
             $variants = getData2("SELECT * FROM tbl_variants WHERE product_id = '$product[id]'");
