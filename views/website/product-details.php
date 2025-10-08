@@ -608,7 +608,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             </div>
         </section>
 
-        <div class="w-full flex items-center justify-center mt-10">
+        <div class="w-full flex items-center justify-center mt-16">
             <div class="flex items-center justify-center flex-col relative w-[90%] gap-5">
 
                 <div
@@ -661,7 +661,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     </div>
                 </div>
 
-                <div class="w-[80%] flex items-center justify-center">
+                <div class="w-[80%] flex items-center ju    stify-center">
                     <div class="grid grid-cols-2 w-full">
                         <!-- Review 1 -->
                         <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
