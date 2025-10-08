@@ -66,7 +66,7 @@ $route->group(['', 'CollectionController', 'auth'], function ($route) {
     $route->route('/edit-collection/[i:id]', 'AddCollections');
 
 
-
+    $route->route('/api/collection/status', 'ChangeCollectionStatus');
 
     // $route->route('/', 'index');
 

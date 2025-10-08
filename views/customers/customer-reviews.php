@@ -109,11 +109,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <span class="text-gray-700 font-semibold"><?= $customer['product_name'] ?> </span>
                         </div>
 
-                        <div>
+                        <div class="w-24">
                             <span class="text-green-500 font-semibold"><?= $customer['rating'] ?> Stars</span>
                         </div>
 
-                        <div>
+                        <div class="h-40 w-40 overflow-x-scroll">
                             <p class="text-gray-500 font-semibold"><?= $customer['reviewText'] ?></p>
                         </div>
 

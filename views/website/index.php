@@ -83,30 +83,30 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
             #GenZStyle
         </p>
     </section>
-   <div class="owl-carousel owl-theme Home-Carousel h-[90vh] w-[100vw] relative">
-            <div class="w-full h-full">
-                <img src="/public/home-banner/homepage_copy_26.avif" class="w-full h-full" alt="">
-            </div>
-            <div class="w-full h-full">
-                <img src="/public/home-banner/homepage_17_U90OqZq.avif" class="w-full h-full" alt="">
-            </div>
-            <div class="w-full h-full">
-                <img src="/public/home-banner/homepage_12_V3Auyr2.avif" class="w-full h-full" alt="">
-            </div>
+    <div class="owl-carousel owl-theme Home-Carousel h-[90vh] w-[100vw] relative">
+        <div class="w-full h-full">
+            <img src="/public/home-banner/homepage_copy_26.avif" class="w-full h-full" alt="">
         </div>
+        <div class="w-full h-full">
+            <img src="/public/home-banner/homepage_17_U90OqZq.avif" class="w-full h-full" alt="">
+        </div>
+        <div class="w-full h-full">
+            <img src="/public/home-banner/homepage_12_V3Auyr2.avif" class="w-full h-full" alt="">
+        </div>
+    </div>
     <script>
-$(document).ready(function() {
- $(".Home-Carousel").owlCarousel({
-  items: 1,
-  loop: true,
-  autoplay: true,
-  autoplayTimeout: 3000,
-  smartSpeed: 1000,
-  slideTransition: "linear",
-});
+        $(document).ready(function () {
+            $(".Home-Carousel").owlCarousel({
+                items: 1,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                smartSpeed: 1000,
+                slideTransition: "linear",
+            });
 
-});
-</script>
+        });
+    </script>
 
     <style>
         /* Place nav buttons below the carousel */
@@ -182,7 +182,7 @@ $(document).ready(function() {
                             }
                         }
                         // printWithPre($images);
-                    ?>
+                        ?>
                         <a href="/products/product-details/<?= $name ?>" class="block">
                             <div class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
@@ -258,7 +258,7 @@ $(document).ready(function() {
             foreach ($categories as $key => $category) {
 
 
-            ?>
+                ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
                     <a href="/category/<?= strtolower(str_replace(' ', '-', $category['category'])) ?>">
@@ -426,102 +426,107 @@ $(document).ready(function() {
         </div>
     </section>
 
-    <section class="bg-white py-14 max-md:py-8 w-full relative overflow-hidden">
-        <div class="absolute hidden -top-12 -right-14 max-md:-right-8 max-md:-top-10 w-auto h-auto opacity-20">
-            <img src="/public/images/net.webp" alt="" class="w-48 max-md:w-32 h-auto">
-        </div>
-        <div class="w-[90vw] max-md:w-[90vw] mx-auto">
-            <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-                <h2 class="text-center text-3xl font-extrabold mb-3 uppercase"><?= $collection['name'] ?></h2>
-                <div class="!text-center text-gray-600 text-lg max-md:text-base max-w-2xl mx-auto">
-                    <?= $collection['description'] ?>
-                </div>
+    <?php foreach (getData2("SELECT * FROM `tbl_collection` WHERE `status` = 1") as $key => $value) { ?>
+        <section class="bg-white py-14 max-md:py-8 w-full relative overflow-hidden">
+            <div class="absolute hidden -top-12 -right-14 max-md:-right-8 max-md:-top-10 w-auto h-auto opacity-20">
+                <img src="/public/images/net.webp" alt="" class="w-48 max-md:w-32 h-auto">
             </div>
+            <div class="w-[90vw] max-md:w-[90vw] mx-auto">
+                <div class="flex flex-col mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                    <h2 class="text-center text-3xl font-extrabold mb-3 uppercase"><?= $value['name'] ?></h2>
+                    <div class="!text-center text-gray-600 text-lg max-md:text-base max-w-2xl mx-auto">
+                        <?= $value['description'] ?>
+                    </div>
+                </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-12 max-md:gap-2">
+                <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-12 max-md:gap-2">
 
-                <?php
-                foreach ($collection_products as $key => $product) {
+                    <?php
+                    $productIds = json_decode($value['products'], true);
+                    foreach ($productIds as $key => $product) {
 
-                    $product_details = getData2("SELECT * FROM `tbl_products` WHERE `id`='$product'")[0];
-                    if (empty($product_details)) continue;
-                    $images = json_decode($product_details['product_images'], true);
-                    $images = array_reverse($images);
-                    $name = str_replace(' ', '-', $product_details['name']);
-                    $comparePrice = floatval($product_details['compare_price']);
-                    $price = floatval($product_details['price']);
-                    $discountAmount = $comparePrice - $price;
-                    $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
-                    if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
+                        $product_details = getData2("SELECT * FROM `tbl_products` WHERE `id`='$product'")[0];
+                        if (empty($product_details))
+                            continue;
+                        $images = json_decode($product_details['product_images'], true);
+                        $images = array_reverse($images);
+                        $name = str_replace(' ', '-', $product_details['name']);
+                        $comparePrice = floatval($product_details['compare_price']);
+                        $price = floatval($product_details['price']);
+                        $discountAmount = $comparePrice - $price;
+                        $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
+                        if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
-                        $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $product . " AND `userid` = " . $_SESSION["userid"])[0];
-                    } else {
-
-                        $data = checkExisteingWishlistSession($product);
-                        if ($data) {
-                            $data = ['id' => $data];
+                            $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $product . " AND `userid` = " . $_SESSION["userid"])[0];
                         } else {
-                            $data = [];
+
+                            $data = checkExisteingWishlistSession($product);
+                            if ($data) {
+                                $data = ['id' => $data];
+                            } else {
+                                $data = [];
+                            }
                         }
-                    }
 
-                ?>
-                    <a href="products/product-details/<?= $name ?>" class="block">
-                        <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
-                            <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden">
-                                <!-- Discount badge -->
-                                <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
-                                    SAVE <?= $discountPercentage ?>%
-                                </span>
+                        ?>
+                        <a href="products/product-details/<?= $name ?>" class="block">
+                            <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
+                                <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden">
+                                    <!-- Discount badge -->
+                                    <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
+                                        SAVE <?= $discountPercentage ?>%
+                                    </span>
 
-                                <!-- Add to favorites Icon (top-right) -->
-                                <button
-                                    class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
-                                    <i class="fas fa-heart"></i>
-                                </button>
+                                    <!-- Add to favorites Icon (top-right) -->
+                                    <button
+                                        class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
 
-                                <!-- Add to Cart Icon -->
-                                <button
-                                    class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                    <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                </button>
-                                <input type="text" value="<?= $product_details['id'] ?>" class="ProductId">
-                                <!-- Multiple images stacked -->
-                                <img src="/<?= $images[0] ?>"
-                                    class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
-                                <!-- <img src="/<?= $images[1] ?>"
+                                    <!-- Add to Cart Icon -->
+                                    <button
+                                        class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                        <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                                    </button>
+                                    <input type="text" value="<?= $product_details['id'] ?>" class="ProductId">
+                                    <!-- Multiple images stacked -->
+                                    <img src="/<?= $images[0] ?>"
+                                        class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-100">
+                                    <!-- <img src="/<?= $images[1] ?>"
                                     class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0">
                                 <img src="/<?= $images[2] ?>"
                                     class="w-full h-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0"> -->
 
-                                <!-- Dots -->
-                                <!-- <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                                    <!-- Dots -->
+                                    <!-- <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
                                 <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
                                 <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
                                 <span class="w-2 h-2 rounded-full bg-white opacity-50"></span>
                             </div> -->
-                            </div>
+                                </div>
 
-                            <!-- Product info below the images -->
-                            <div class="pt-4 text-left">
-                                <h3 class="text-base font-semibold"><?= $product_details['name'] ?></h3>
-                                <div class="flex items-center justify-start gap-3 w-full">
-                                    <p class="text-gray-500 line-through text-sm">₹
-                                        <?= formatNumber($product_details['compare_price']) ?>.00
-                                    </p>
-                                    <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product_details['price']) ?>.00
-                                    </p>
+                                <!-- Product info below the images -->
+                                <div class="pt-4 text-left">
+                                    <h3 class="text-base font-semibold"><?= $product_details['name'] ?></h3>
+                                    <div class="flex items-center justify-start gap-3 w-full">
+                                        <p class="text-gray-500 line-through text-sm">₹
+                                            <?= formatNumber($product_details['compare_price']) ?>.00
+                                        </p>
+                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product_details['price']) ?>.00
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                <?php
-                }
-                ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    <?php } ?>
+
 
     <style>
         .scroll-container,
@@ -561,7 +566,7 @@ $(document).ready(function() {
                         foreach ($offerheading as $key => $value) { ?>
                             <span>#</span>
                             <span><?= $value['title'] ?></span>
-                    <?php }
+                        <?php }
                     } ?>
 
 
@@ -853,9 +858,9 @@ $(document).ready(function() {
         // printWithPre($popup);
         if (count($popup) > 0) {
             // $popup = $popup[0];
+    
 
-
-    ?>
+            ?>
             <div id="newsletterModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
                 <!-- Modal Content -->
                 <div class="bg-white shadow-lg w-full w-[35vw] max-md:w-[85vw] relative animate-slideDown">
@@ -907,7 +912,7 @@ $(document).ready(function() {
                     </div>
                 </div>
             </div>
-    <?php }
+        <?php }
     } ?>
     <script>
         async function close_popup() {
@@ -916,7 +921,7 @@ $(document).ready(function() {
             }));
             console.log(request.data)
         }
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const modal = document.getElementById('newsletterModal');
             const closeBtn = document.getElementById('closeModal');
             const noPopupCheckbox = document.getElementById('noPopup');
@@ -951,7 +956,7 @@ $(document).ready(function() {
 
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".new-arrival-carousel").owlCarousel({
                 loop: true,
                 margin: 5,
