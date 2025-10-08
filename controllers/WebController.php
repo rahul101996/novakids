@@ -135,10 +135,10 @@ class WebController extends LoginController
                                         Chest 41 inches
                                         Length 27 inches</div>
                                 </div>
-                                <p class="flex gap-1 cursor-pointer"
+                                <div class="flex gap-1 cursor-pointer items-end justify-center"
                                     onclick="document.getElementById('sizeChartModal').classList.remove('hidden')">
-                                    <svg class="icon icon-accordion color-foreground-" aria-hidden="true" focusable="false"
-                                        role="presentation" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20">
+                                    <svg class="icon icon-accordion mb-1 color-foreground-" aria-hidden="true" focusable="false"
+                                        role="presentation" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 20 20">
                                         <path
                                             d="M18.9836 5.32852L14.6715 1.01638L1.01638 14.6715L5.32852 18.9836L18.9836 5.32852ZM15.3902 0.297691C14.9933 -0.0992303 14.3497 -0.0992303 13.9528 0.297691L0.297691 13.9528C-0.0992301 14.3497 -0.0992305 14.9932 0.297691 15.3902L4.60983 19.7023C5.00675 20.0992 5.65029 20.0992 6.04721 19.7023L19.7023 6.04721C20.0992 5.65029 20.0992 5.00675 19.7023 4.60983L15.3902 0.297691Z"
                                             fill-rule="evenodd"></path>
@@ -156,7 +156,7 @@ class WebController extends LoginController
                                         </path>
                                     </svg>
                                     <span class="text-[1.12rem]">Size guide</span>
-                                </p>
+                                </div>
                             </div>
                             <div class="w-full flex items-center justify-start mt-3 text-sm" id="SizeDiv">
                                 <?php
