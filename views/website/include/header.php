@@ -342,6 +342,11 @@ if (!empty($_POST)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NovaKids</title>
+    <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+/>
+
     <link rel="icon" href="/public/logos/nova_favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="/public/css/style.css">
 
