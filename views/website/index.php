@@ -83,7 +83,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
             #GenZStyle
         </p>
     </section>
-   <div class="owl-carousel owl-theme Home-Carousel h-[90vh] w-[100vw] relative">
+   <div class="owl-carousel owl-theme Home-Carousel h-[90vh] w-[100vw] relative hidden">
             <div class="w-full h-full">
                 <img src="/public/home-banner/homepage_copy_26.avif" class="w-full h-full" alt="">
             </div>
@@ -94,17 +94,17 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                 <img src="/public/home-banner/homepage_12_V3Auyr2.avif" class="w-full h-full" alt="">
             </div>
         </div>
-    <script>
+   <script>
 $(document).ready(function() {
- $(".Home-Carousel").owlCarousel({
-  items: 1,
-  loop: true,
-  autoplay: true,
-  autoplayTimeout: 3000,
-  smartSpeed: 1000,
-  slideTransition: "linear",
-});
-
+  $(".Home-Carousel").owlCarousel({
+    items: 1,
+    loop: true,
+    autoplay: true,
+    autoplayTimeout: 4000, // time before changing slide
+    smartSpeed: 8000,      // speed of internal owl transition
+    animateOut: "animate__animated animate__slideOutRight animate__slower",
+    animateIn: "animate__animated animate__slideInLeft animate__slower",
+  });
 });
 </script>
 
