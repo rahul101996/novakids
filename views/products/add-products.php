@@ -325,72 +325,107 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     </div>
                 </div>
                 <div id="myModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/40 backdrop-blur-sm">
-        <div class="flex mt-10 justify-center p-4 w-full">
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden transition-all duration-300">
-            
-            <!-- Modal Header -->
-            <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 px-6 py-4">
-                <h2 class="text-xl font-semibold text-gray-800 dark:text-white">
-                Size Chart
-                </h2>
-                <button onclick="closeModal('myModal')" class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-2xl leading-none">
-                &times;
-                </button>
+                    <div class="flex mt-10 justify-center p-4 w-full">
+                        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden transition-all duration-300">
+                        
+                        <!-- Modal Header -->
+                        <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+                            <h2 class="text-xl font-semibold text-gray-800 dark:text-white">
+                            Size Chart
+                            </h2>
+                            <button onclick="closeModal('myModal')" class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-2xl leading-none">
+                            &times;
+                            </button>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="p-6 text-gray-700 dark:text-gray-300 body">
+                            <div class="flex gap-6">
+    <!-- Size Description -->
+    <div class="flex-1">
+        <label for="sizeDescription" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Size Description
+        </label>
+        <textarea id="sizeDescription" name="sizeDescription" placeholder="Enter size description..."
+                  class="w-full h-40 border border-gray-300 dark:border-gray-600 rounded-lg p-3 resize-y
+                         focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800
+                         text-gray-800 dark:text-gray-100 summernote"></textarea>
+    </div>
+
+    <!-- Size Chart Image -->
+    <div class="flex-1">
+        <label for="sizeImage" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Upload Size Chart Image
+        </label>
+
+        <div class="flex flex-col items-center gap-2">
+            <!-- Image Preview -->
+            <div id="previewContainer" class="w-full h-48 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-800 overflow-hidden">
+                <img id="sizeImagePreview" class="object-contain h-full" />
+                <span id="defaultIcon" class="text-gray-400 text-3xl">📷</span>
             </div>
 
-            <!-- Modal Body -->
-            <div class="p-6 text-gray-700 dark:text-gray-300 body">
-                <textarea class="w-full h-40 border-0 focus:ring-0 resize-y p-3 summernote" placeholder="" name="sizeDescription"></textarea>
-                <input type="file" name=""sizeImage">
-                
-                <div class="overflow-x-auto">
-                    <table class="w-full border-collapse text-sm text-left">
-                        <thead>
-                        <tr class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                            <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">Size</th>
-                            <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
-                            <div class="flex items-center gap-2">
-                                <input type="text" value="Chest" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                <button type="button" onclick="
-                                (this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
-                                
-                            </div>
-                            </th>
-                            <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
-                            <div class="flex items-center gap-2">
-                                <input type="text" value="Length" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                <button type="button" onclick="removeMySize(this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
-                            </div>
-                            </th>
-                            <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
-                            <div class="flex items-center gap-2">
-                                <input type="text" value="Sleeve" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                <button type="button" onclick="removeMySize(this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
-                            </div>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <!-- JS will fill rows here -->
-                        </tbody>
-                    </table>
-
-                    <div>
-                        <button type="button" onclick="addColumn()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md mr-2">+ Add Column</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal Footer -->
-            <div class="flex justify-end gap-3 border-t border-gray-200 dark:border-gray-700 px-6 py-4 bg-gray-50 dark:bg-gray-900">
-                <button type="button" onclick="closeModal('myModal')" class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                    Confirm
-                </button>
-            </div>
-
-            </div>
+            <!-- File Input -->
+            <input type="file" id="sizeImage" name="sizeImage"
+                   class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
+                          file:rounded-lg file:border-0
+                          file:text-sm file:font-semibold
+                          file:bg-blue-500 file:text-white
+                          hover:file:bg-blue-600
+                          dark:file:bg-blue-600 dark:file:text-white"
+                   accept="image/*">
         </div>
     </div>
+</div>
+                            
+                            <div class="overflow-x-auto">
+                                <table class="w-full border-collapse text-sm text-left">
+                                    <thead>
+                                    <tr class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                                        <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">Size</th>
+                                        <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
+                                        <div class="flex items-center gap-2">
+                                            <input type="text" value="Chest" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                            <button type="button" onclick="
+                                            (this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
+                                            
+                                        </div>
+                                        </th>
+                                        <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
+                                        <div class="flex items-center gap-2">
+                                            <input type="text" value="Length" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                            <button type="button" onclick="removeMySize(this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
+                                        </div>
+                                        </th>
+                                        <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
+                                        <div class="flex items-center gap-2">
+                                            <input type="text" value="Sleeve" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                            <button type="button" onclick="removeMySize(this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
+                                        </div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- JS will fill rows here -->
+                                    </tbody>
+                                </table>
+
+                                <div>
+                                    <button type="button" onclick="addColumn()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md mr-2">+ Add Column</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal Footer -->
+                        <div class="flex justify-end gap-3 border-t border-gray-200 dark:border-gray-700 px-6 py-4 bg-gray-50 dark:bg-gray-900">
+                            <button type="button" onclick="closeModal('myModal')" class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                Confirm
+                            </button>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
             </form>
         </main>
     </div>
@@ -502,7 +537,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             addValue(optionCount);
             
         }
-
+        var sizeCount = true;
         function addSizeChart() {
             const modal = document.getElementById("myModal");
             const container = document.getElementById("optionsContainer");
@@ -512,33 +547,37 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             let trHtml = "";
             const modalTableTh = modal.querySelector("thead tr").querySelectorAll("th");
 
-            // Build empty inputs for each column (except 'Size')
-            for (let i = 0; i < modalTableTh.length - 1; i++) {
-                trHtml += `
-                <td class="px-4 py-2">
-                    <input type="text" name="sizeValues[]"
-                    class="border border-gray-300 rounded-md px-3 py-1 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                </td>
-                `;
-            }
-
-            // Generate table rows dynamically
-            optionDivValues.forEach((ele) => {
-                const sizeValue = ele.querySelector("input").value.trim();
-
-                modalHtml += `
-                <tr class="hover:bg-gray-50">
+            if(sizeCount){
+                // Build empty inputs for each column (except 'Size')
+                for (let i = 0; i < modalTableTh.length - 1; i++) {
+                    trHtml += `
                     <td class="px-4 py-2">
-                    <input type="text" value="${sizeValue}" name="sizeVariant[]"
+                        <input type="text" name="sizeValues[]"
                         class="border border-gray-300 rounded-md px-3 py-1 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
                     </td>
-                    ${trHtml}
-                </tr>
-                `;
-            });
+                    `;
+                }
 
-            modal.querySelector("tbody").innerHTML = modalHtml;
+                // Generate table rows dynamically
+                optionDivValues.forEach((ele) => {
+                    const sizeValue = ele.querySelector("input").value.trim();
+
+                    modalHtml += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-2">
+                        <input type="text" value="${sizeValue}" name="sizeVariant[]"
+                            class="border border-gray-300 rounded-md px-3 py-1 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        </td>
+                        ${trHtml}
+                    </tr>
+                    `;
+                });
+
+                
+                modal.querySelector("tbody").innerHTML = modalHtml;
+            }
             modal.classList.remove("hidden");
+            sizeCount = false;
         }
 
 
@@ -792,6 +831,27 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 }
             });
         });
+
+        document.getElementById('sizeImage').addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    const previewContainer = document.getElementById('previewContainer');
+    const previewImage = document.getElementById('sizeImagePreview');
+    const defaultIcon = document.getElementById('defaultIcon');
+
+    if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            previewImage.src = e.target.result;
+            previewImage.style.display = "block";
+            defaultIcon.style.display = "none";
+        };
+        reader.readAsDataURL(file);
+    } else {
+        previewImage.src = "";
+        previewImage.style.display = "none";
+        defaultIcon.style.display = "block";
+    }
+});
     </script>
 </body>
 

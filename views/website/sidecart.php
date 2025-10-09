@@ -625,7 +625,7 @@
         }
     }
 
-    function changeSideVariant(ele, tp, value, key1) {
+    function changeSideVariant(ele, tp, value, key1,json) {
         console.log(ele, tp, value, key1)
         updateKey(GLOBAL_VARIANT.selected, tp, value);
         let divs = ele.parentElement.querySelectorAll("div")
@@ -821,5 +821,14 @@
         let percentage = total * parseFloat(response.data.price) / 100;
         console.log(percentage)
         return total
+    }
+
+    async function showSizeChart(id){
+        let res= await fetch(`/api/getSizeChart?id=${id}`)
+        res = await res.json();
+        if(res.success){
+            document.getElementById('sizeChartModal').innerHTML=res.data;
+            document.getElementById('sizeChartModal').classList.remove('hidden')
+        }
     }
 </script>
