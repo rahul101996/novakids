@@ -128,8 +128,10 @@ class WebController extends LoginController
 
                     ?>
                             <?php
-                                if(!empty($ProductData["sizeChart"])){
-                                    $sizeChart = (array) json_decode($ProductData["sizeChart"]);
+                            $sizeChart = (array) json_decode($ProductData["sizeChart"]);
+                            // printWithPre($sizeChart);    
+                            if(!empty($ProductData["sizeChart"])){
+                                    
                                      $sizeChartValue = $sizeChart[$value[0]];
                                         $sizeChartValueString = "";
                                         foreach($sizeChartValue as $kk=>$sv){
@@ -185,10 +187,13 @@ class WebController extends LoginController
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
-                                    $sizeChartValue = $sizeChart[$value1];
                                     $sizeChartValueString = "";
-                                    foreach($sizeChartValue as $kk=>$sv){
-                                        $sizeChartValueString = $sizeChartValueString . "$kk $sv inches ";
+                                    if(!empty($sizeChart)){
+                                        $sizeChartValue = $sizeChart[$value1];
+                                        
+                                        foreach($sizeChartValue as $kk=>$sv){
+                                            $sizeChartValueString = $sizeChartValueString . "$kk $sv inches ";
+                                        }
                                     }
                                 ?>
                                     <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>,"<?=$sizeChartValueString?>")'
