@@ -212,7 +212,7 @@
             <div>
                 <h4 class="font-bold text-black mb-6 max-md:mb-3 text-lg">About</h4>
                 <ul class="space-y-3 mb-6">
-                    <li><a href="#" class="link-hover text-gray-600">Our Story</a></li>
+                    <li><a href="/about" class="link-hover text-gray-600">Our Story</a></li>
                     <!-- <li><a href="#" class="link-hover text-gray-600">Brand Partners</a></li> -->
                     <li><a href="#" class="link-hover text-gray-600">Client Reviews</a></li>
                 </ul>
