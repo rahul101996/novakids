@@ -7,6 +7,14 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
 ?>
 
+<style>
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+</style>
+
 <body class="bg-gray-50 bg-gray-100">
 
     <div class="flex h-screen ">
@@ -30,7 +38,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     <h1 class="text-2xl font-semibold ml-2">Add Product</h1>
                 </div>
             </div>
-            <form action="" method="POST" enctype="multipart/form-data" class="w-full flex flex-col items-center justify-center">
+            <form action="" id="productForm" method="POST" enctype="multipart/form-data" class="w-full flex flex-col items-center justify-center">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-[85%] pb-10">
                     <div class="lg:col-span-2 flex flex-col gap-6">
 
@@ -38,16 +46,16 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Title</label>
                             <input
                                 class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($collection['name']) ? $collection['name'] : '' ?>" name="name"
-                                id="title" placeholder="e.g., Summer collection, Under $100, Staff picks" type="text" />
+                                id="title" placeholder="e.g., Summer collection, Under $100, Staff picks" type="text" required/>
                             <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
                                 for="description">Description</label>
                             <div class="border border-gray-800 rounded-md">
                                 <textarea class="w-full h-40 border-0 focus:ring-0 resize-y p-3 summernote"
-                                    placeholder="" name="description"><?= isset($collection['description']) ? $collection['description'] : '' ?></textarea>
+                                    placeholder="" name="description" required><?= isset($collection['description']) ? $collection['description'] : '' ?></textarea>
                             </div>
                             <h2 class="text-sm font-medium mt-3">Category</h2>
                             <div class="w-full flex items-center justify-start">
-                                <select name="category" class="selectElement">
+                                <select name="category" class="selectElement" required>
                                     <?php
                                     foreach ($categories as $category) {
                                     ?>
@@ -94,7 +102,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     </div>
                                 </div>
                             </div>
-                            <div class="relative flex items-start mt-2">
+                            <div class="relative flex items-start mt-2 hidden">
                                 <div class="flex h-5 items-center">
                                     <input id="charge-tax" name="charge_tax" type="checkbox" checked class="h-4 w-4 rounded border-gray-800 text-indigo-600 focus:ring-indigo-500">
                                 </div>
@@ -128,7 +136,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         </div>
 
 
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="bg-white p-6 rounded-lg shadow-sm hidden">
                             <h2 class="text-base font-medium text-gray-900">Inventory</h2>
 
                             <div class="relative flex items-start mt-2">
@@ -168,10 +176,58 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             </div>
                         </div>
 
+                        <div class="bg-white p-6 rounded-lg shadow-sm w-full">
+                            <h2 class="text-base font-medium text-gray-900">Variants</h2>
+                            <div class="w-full mx-auto">
+
+                                <!-- Options Container -->
+                                <div class="flex flex-col items-center justify-center border border-gray-200 rounded-lg w-full">
+                                    <div id="optionsContainer" class="space-y-6 w-full">
+                                        
+                                    </div>
+                                    <div class="flex items-center justify-between w-[95%] py-2">
+                                        <button onclick="addOption()" type="button" class="text-white bg-blue-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">
+                                            <i class="fa-solid fa-circle-plus mr-2 border-none" aria-hidden="true"></i> Add another option
+                                        </button>
+
+                                        <button onclick="generateVariants()" type="button"
+  class="text-white px-5 py-2 rounded-lg shadow-md font-medium 
+         bg-gradient-to-r from-red-500  to-blue-500 
+         bg-[length:200%_200%] animate-[gradient-move_6s_ease_infinite]
+         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 
+         transition-all duration-300 hover:scale-105 flex items-center">
+  <i class="fa-solid fa-layer-group mr-2"></i>
+  Generate Variants
+</button>
+                                    </div>
+                                </div>
+
+
+
+                                <!-- Variants Table -->
+                                <div id="variantsSection" class="hidden w-full">
+
+                                    <table class="w-full table-auto border-collapse border border-gray-300 text-sm">
+                                        <thead>
+                                            <tr class="bg-gray-100">
+                                                <th class="border border-gray-300 px-3 py-3 text-left">Variant</th>
+                                                <th class="border border-gray-300 px-3 py-3 text-left">Price</th>
+                                                <th class="border border-gray-300 px-3 py-3 text-left">Available</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody id="variantsTableBody">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="bg-white p-6 rounded-lg shadow-sm">
                             <h2 class="text-base font-medium text-gray-900">Shipping</h2>
 
-                            <div class="relative flex items-start mt-2">
+                            <div class="relative flex items-start mt-2 hidden">
                                 <div class="flex h-5 items-center">
                                     <input id="physical-product" name="physical_product" type="checkbox" checked class="h-4 w-4 rounded border-gray-800 text-indigo-600 focus:ring-indigo-500">
                                 </div>
@@ -233,47 +289,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         </div>
 
 
-                        <div class="bg-white p-6 rounded-lg shadow-sm w-full">
-                            <h2 class="text-base font-medium text-gray-900">Variants</h2>
-                            <div class="w-full mx-auto">
-
-                                <!-- Options Container -->
-                                <div class="flex flex-col items-center justify-center border border-gray-200 rounded-lg w-full">
-                                    <div id="optionsContainer" class="space-y-6 w-full">
-                                        
-                                    </div>
-                                    <div class="flex items-center justify-between w-[95%] py-2">
-                                        <button onclick="addOption()" type="button" class="focus:outline-none focus:ring-0">
-                                            <i class="fa-solid fa-circle-plus mr-2 border-none" aria-hidden="true"></i> Add another option
-                                        </button>
-
-                                        <button onclick="generateVariants()" type="button" class="focus:outline-none focus:ring-0">
-                                            <i class="fa-solid fa-layer-group mr-2 border-none" aria-hidden="true"></i> Generate Variants
-                                        </button>
-                                    </div>
-                                </div>
-
-
-
-                                <!-- Variants Table -->
-                                <div id="variantsSection" class="hidden w-full">
-
-                                    <table class="w-full table-auto border-collapse border border-gray-300 text-sm">
-                                        <thead>
-                                            <tr class="bg-gray-100">
-                                                <th class="border border-gray-300 px-3 py-3 text-left">Variant</th>
-                                                <th class="border border-gray-300 px-3 py-3 text-left">Price</th>
-                                                <th class="border border-gray-300 px-3 py-3 text-left">Available</th>
-                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody id="variantsTableBody">
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <button class="text-white bg-gray-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm w-fit">Add</button>
 
@@ -325,72 +341,107 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     </div>
                 </div>
                 <div id="myModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/40 backdrop-blur-sm">
-        <div class="flex mt-10 justify-center p-4 w-full">
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden transition-all duration-300">
-            
-            <!-- Modal Header -->
-            <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 px-6 py-4">
-                <h2 class="text-xl font-semibold text-gray-800 dark:text-white">
-                Size Chart
-                </h2>
-                <button onclick="closeModal('myModal')" class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-2xl leading-none">
-                &times;
-                </button>
-            </div>
+                    <div class="flex mt-10 justify-center p-4 w-full">
+                        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden transition-all duration-300">
+                        
+                        <!-- Modal Header -->
+                        <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+                            <h2 class="text-xl font-semibold text-gray-800 dark:text-white">
+                            Size Chart
+                            </h2>
+                            <button onclick="closeModal('myModal')" class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-2xl leading-none">
+                            &times;
+                            </button>
+                        </div>
 
-            <!-- Modal Body -->
-            <div class="p-6 text-gray-700 dark:text-gray-300 body">
-                <textarea class="w-full h-40 border-0 focus:ring-0 resize-y p-3 summernote" placeholder="" name="sizeDescription"></textarea>
-                <input type="file" name=""sizeImage">
-                
-                <div class="overflow-x-auto">
-                    <table class="w-full border-collapse text-sm text-left">
-                        <thead>
-                        <tr class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                            <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">Size</th>
-                            <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
-                            <div class="flex items-center gap-2">
-                                <input type="text" value="Chest" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                <button type="button" onclick="
-                                (this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
-                                
-                            </div>
-                            </th>
-                            <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
-                            <div class="flex items-center gap-2">
-                                <input type="text" value="Length" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                <button type="button" onclick="removeMySize(this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
-                            </div>
-                            </th>
-                            <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
-                            <div class="flex items-center gap-2">
-                                <input type="text" value="Sleeve" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                <button type="button" onclick="removeMySize(this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
-                            </div>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <!-- JS will fill rows here -->
-                        </tbody>
-                    </table>
+                        <!-- Modal Body -->
+                        <div class="p-6 text-gray-700 dark:text-gray-300 body">
+                            <div class="flex gap-6">
+                                <!-- Size Description -->
+                                <div class="flex-1">
+                                    <label for="sizeDescription" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                        Size Description
+                                    </label>
+                                    <textarea id="sizeDescription" name="sizeDescription" placeholder="Enter size description..."
+                                            class="w-full h-40 border border-gray-300 dark:border-gray-600 rounded-lg p-3 resize-y
+                                                    focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800
+                                                    text-gray-800 dark:text-gray-100 summernote"></textarea>
+                                </div>
 
-                    <div>
-                        <button type="button" onclick="addColumn()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md mr-2">+ Add Column</button>
+                                <!-- Size Chart Image -->
+                                <div class="flex-1">
+                                    <label for="sizeImage" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                        Upload Size Chart Image
+                                    </label>
+
+                                    <div class="flex flex-col items-center gap-2">
+                                        <!-- Image Preview -->
+                                        <div id="previewContainer" class="w-full h-48 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-800 overflow-hidden">
+                                            <img id="sizeImagePreview" class="object-contain h-full" />
+                                            <span id="defaultIcon" class="text-gray-400 text-3xl">📷</span>
+                                        </div>
+
+                                        <!-- File Input -->
+                                        <input type="file" id="sizeImage" name="sizeImage"
+                                            class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
+                                                    file:rounded-lg file:border-0
+                                                    file:text-sm file:font-semibold
+                                                    file:bg-blue-500 file:text-white
+                                                    hover:file:bg-blue-600
+                                                    dark:file:bg-blue-600 dark:file:text-white"
+                                            accept="image/*">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="overflow-x-auto">
+                                <table class="w-full border-collapse text-sm text-left">
+                                    <thead>
+                                    <tr class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                                        <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">Size</th>
+                                        <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
+                                        <div class="flex items-center gap-2">
+                                            <input type="text" value="Chest" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                            <button type="button" onclick="
+                                            (this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
+                                            
+                                        </div>
+                                        </th>
+                                        <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
+                                        <div class="flex items-center gap-2">
+                                            <input type="text" value="Length" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                            <button type="button" onclick="removeMySize(this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
+                                        </div>
+                                        </th>
+                                        <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
+                                        <div class="flex items-center gap-2">
+                                            <input type="text" value="Sleeve" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                            <button type="button" onclick="removeMySize(this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
+                                        </div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- JS will fill rows here -->
+                                    </tbody>
+                                </table>
+
+                                <div>
+                                    <button type="button" onclick="addColumn()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md mr-2">+ Add Column</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal Footer -->
+                        <div class="flex justify-end gap-3 border-t border-gray-200 dark:border-gray-700 px-6 py-4 bg-gray-50 dark:bg-gray-900">
+                            <button type="button" onclick="closeModal('myModal')" class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                Confirm
+                            </button>
+                        </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Modal Footer -->
-            <div class="flex justify-end gap-3 border-t border-gray-200 dark:border-gray-700 px-6 py-4 bg-gray-50 dark:bg-gray-900">
-                <button type="button" onclick="closeModal('myModal')" class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                    Confirm
-                </button>
-            </div>
-
-            </div>
-        </div>
-    </div>
             </form>
         </main>
     </div>
@@ -474,23 +525,25 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             optionDiv.id = `option-${optionCount}`;
 
             let addSize = "" 
+            let val = ""
             if(isFirst==1){
-                addSize=`<button onclick="addSizeChart()" type="button" class="text-red-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add Size Chart</button>`
+                addSize=`<button onclick="addSizeChart()" type="button" class="text-blue-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add Size Chart</button>`
+                val = 'value="Size" readonly'
             }
 
             optionDiv.innerHTML = `
             <span class="w-full text-left">Option Name</span>
                 <div class="flex justify-between items-center mb-2 w-full">
-                    <input type="text" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2 mt-2" name="options_name[]" placeholder="Eg. Size">
+                    <input type="text" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2 mt-2" name="options_name[]" placeholder="Eg. Size" ${val}>
                     
                 </div>
                 <div id="values-${optionCount}" class="space-y-2 w-full mt-3">
                             <span class="w-full text-left mb-2">Option Values</span>
                 </div>
                 <div class="w-full flex items-center justify-between mt-3">
-                    <button onclick="addValue(${optionCount})" type="button" class="text-white bg-gray-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add</button>
+                    <button onclick="addValue(${optionCount})" type="button" class="text-white bg-gray-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add Option Values</button>
                     ${addSize}
-                    <button onclick="removeOption(${optionCount})" type="button" class="text-red-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Delete</button>
+                    <button onclick="removeOption(${optionCount})" type="button" class="text-red-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Delete Option</button>
                     
                     
                 </div>
@@ -502,7 +555,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             addValue(optionCount);
             
         }
-
+        var sizeCount = true;
         function addSizeChart() {
             const modal = document.getElementById("myModal");
             const container = document.getElementById("optionsContainer");
@@ -512,33 +565,37 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             let trHtml = "";
             const modalTableTh = modal.querySelector("thead tr").querySelectorAll("th");
 
-            // Build empty inputs for each column (except 'Size')
-            for (let i = 0; i < modalTableTh.length - 1; i++) {
-                trHtml += `
-                <td class="px-4 py-2">
-                    <input type="text" name="sizeValues[]"
-                    class="border border-gray-300 rounded-md px-3 py-1 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                </td>
-                `;
-            }
-
-            // Generate table rows dynamically
-            optionDivValues.forEach((ele) => {
-                const sizeValue = ele.querySelector("input").value.trim();
-
-                modalHtml += `
-                <tr class="hover:bg-gray-50">
+            if(sizeCount){
+                // Build empty inputs for each column (except 'Size')
+                for (let i = 0; i < modalTableTh.length - 1; i++) {
+                    trHtml += `
                     <td class="px-4 py-2">
-                    <input type="text" value="${sizeValue}" name="sizeVariant[]"
+                        <input type="text" name="sizeValues[]"
                         class="border border-gray-300 rounded-md px-3 py-1 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
                     </td>
-                    ${trHtml}
-                </tr>
-                `;
-            });
+                    `;
+                }
 
-            modal.querySelector("tbody").innerHTML = modalHtml;
+                // Generate table rows dynamically
+                optionDivValues.forEach((ele) => {
+                    const sizeValue = ele.querySelector("input").value.trim();
+
+                    modalHtml += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-2">
+                        <input type="text" value="${sizeValue}" name="sizeVariant[]"
+                            class="border border-gray-300 rounded-md px-3 py-1 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        </td>
+                        ${trHtml}
+                    </tr>
+                    `;
+                });
+
+                
+                modal.querySelector("tbody").innerHTML = modalHtml;
+            }
             modal.classList.remove("hidden");
+            sizeCount = false;
         }
 
 
@@ -727,10 +784,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
         </div>
     </td>
     <td class="px-3 py-3">
-        <input type="number" name="variant_prices[${index}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹ 0.00">
+        <input type="number" name="variant_prices[${index}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹ 0.00" required>
     </td>
     <td class="px-3 py-3">
-        <input type="number" name="variant_quantities[${index}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="0">
+        <input type="number" name="variant_quantities[${index}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="0" required>
     </td>
         `;
 
@@ -792,6 +849,44 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 }
             });
         });
+
+        document.getElementById('sizeImage').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            const previewContainer = document.getElementById('previewContainer');
+            const previewImage = document.getElementById('sizeImagePreview');
+            const defaultIcon = document.getElementById('defaultIcon');
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = "block";
+                    defaultIcon.style.display = "none";
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewImage.src = "";
+                previewImage.style.display = "none";
+                defaultIcon.style.display = "block";
+            }
+        });
+
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // prevent actual submit first
+            let tt = document.getElementById("variantsTableBody").querySelectorAll("tr")
+            if(tt.length==0){
+                alert("Please Create Atleas 1 Variant")
+                generateVariants();
+                return 
+            }
+
+            // ✅ All validations passed — now submit
+            console.log("Submitting....")
+            
+            // this.submit();
+        });
+
+        addOption();
     </script>
 </body>
 

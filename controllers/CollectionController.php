@@ -54,15 +54,12 @@ class CollectionController
             require 'views/products/add-collections.php';
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-
             // printWithPre($_POST);
             if (isset($_POST['add'])) {
 
                 unset($_POST['old_vdata_image']);
                 unset($_POST['add']);
                 $_POST['products'] = json_encode($_POST['products']);
-                // die();
-                // unset($_POST['products']);
 
                 // printWithPre($_FILES);
 
@@ -79,6 +76,7 @@ class CollectionController
                     header('Location:/admin/collections');
                     exit();
                 }
+
             } else {
                 // unset($_POST['old_vdata_image']);
                 unset($_POST['update']);
@@ -107,6 +105,25 @@ class CollectionController
                 }
             }
         }
+    }
+
+    public function deleteCollection($id)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            delete($id, "tbl_collection");
+
+            $_SESSION['success'] = "Collection Deleted Successfully";
+
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            echo $e->getMessage();
+            $_SESSION['err'] = $e->getMessage();
+        }
+
+        redirect('/admin/collections');
     }
 
     
