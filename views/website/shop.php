@@ -13,7 +13,8 @@ $byCategory = $category_name ?? 'new_arrivals';
     <!-- Main Container -->
     <div class="w-full mx-auto">
         <div class="flex flex-col gap-6 w-full">
-            <div class="flex items-center justify-between border-b p-6 max-md:p-4 sticky top-16 h-fit bg-white z-40 w-full">
+            <div
+                class="flex items-center justify-between border-b p-6 max-md:p-4 sticky top-16 h-fit bg-white z-40 w-full">
                 <div class="flex items-center justify-between w-[90vw] mx-auto">
                     <div class="flex max-md:flex-col items-start gap-4 text-sm">
                         <button id="filterToggle"
@@ -30,8 +31,9 @@ $byCategory = $category_name ?? 'new_arrivals';
                     </div>
 
                     <div class="flex items-center gap-4 text-sm max-md:hidden">
+                        <span class="text-gray-700 font-medium">Sort by:</span>
                         <select id="sortSelect" onchange="handleFilterChange()"
-                            class="border rounded px-2 py-1 text-sm">
+                            class="bg-white border border-gray-300 rounded-lg px-4 py-2.5 text-sm text-gray-700 font-medium shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e')] bg-[length:20px] bg-[right_0.5rem_center] bg-no-repeat pr-10">
                             <option value="">Default Sorting</option>
                             <option value="lowToHigh">Price: Low to High</option>
                             <option value="highToLow">Price: High to Low</option>
