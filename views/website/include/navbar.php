@@ -312,9 +312,9 @@ $categories = getData("tbl_category");
     <div class="px-4 py-6 space-y-6">
         <div class="space-y-3 flex flex-col">
             <div class="border-b border-gray-200">
-                <p class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium">
+                <a href="/new-arrivals" class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium">
                     New Arrivals
-                </p>
+            </a>
             </div>
             <div class="border-b border-gray-200">
                 <p class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium">
