@@ -1054,6 +1054,10 @@ $categories = getData("tbl_category");
             countdownEl.textContent = '00:00';
             clearInterval(timerInterval);
             // cut(); // Call cut() function when timer expires
+
+            document.getElementById("otp-div").classList.add("hidden");
+            document.getElementById("mobile-div").classList.remove("hidden");
+
             console.log("Timer expired");
         } else {
             timeLeft--;
@@ -1066,5 +1070,4 @@ $categories = getData("tbl_category");
     // Then update every second
     const timerInterval = setInterval(updateTimer, 1000);
 
-    // searchProducts();
 </script>
