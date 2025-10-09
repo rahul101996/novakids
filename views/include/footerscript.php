@@ -13,6 +13,19 @@
 <!-- Bootstrap (required by Summernote) -->
 
 
+<style>
+    .toast-success {
+    background-color: #28a745 !important;  /* Green background */
+    color: #fff !important;                /* White text */
+    }
+
+    /* ❌ Error Toast */
+    .toast-error {
+    background-color: #dc3545 !important;  /* Red background */
+    color: #fff !important;
+    }
+</style>
+
 
 <script>
     $(document).ready(function() {
@@ -31,6 +44,13 @@
             ]
         });
     });
+
+    toastr.options = {
+    // "closeButton": true,
+    "progressBar": true,
+    // "positionClass": "toast-top-right",
+    // "timeOut": "300000"
+    };
 
    
     <?php if (isset($_SESSION['err']) && !empty($_SESSION['err'])) : ?>

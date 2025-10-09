@@ -1443,6 +1443,9 @@ class WebController extends LoginController
         $pageModule = "Shipping Info";
         $pageTitle = "Shipping Info";
         $cartData = $_SESSION["cartData"];
+        if(empty($cartData)){
+            redirect("/");
+        }
         $userData = getData2("SELECT * FROM `online_users` WHERE `id` = $_SESSION[userid]")[0];
         $address = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $_SESSION[userid] ORDER BY `id` DESC ");
 
@@ -1576,45 +1579,86 @@ class WebController extends LoginController
 
                         ]);
 
+                        
+
                         if ($orderId) {
-                            // $keyapi = "rzp_live_JdPrOFrNVQV4gM";
                             $keyapi = $PaymentGateWay['keyid'];
 
                             ?>
 
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-                            <form action="/razorpay" method="POST">
-                                <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="<?= $keyapi ?>"
-                                    data-amount="<?= $_POST["allTotal"] * 100 ?>" data-currency="INR" data-id="<?= $orderId ?>"
-                                    data-buttontext="Pay with Razorpay" data-name="Nova Kids"
-                                    data-description="Authentic streetwear for the next generation. Quality pieces that speak your language and match your vibe."
-                                    data-image="https://nova.bloomcrm.in/public/logos/nova_logo.png"
-                                    data-prefill.name="<?= $_POST["lname"] . " " . $_POST["fname"] ?>"
-                                    data-prefill.contact="<?= $_POST["mobile"] ?>" data-theme.color="#1774ff"></script>
-                                <input type="hidden" custom="Hidden Element" name="order_id" value="<?= $orderId ?>" />
-                            </form>
-
-                            <style>
-                                .razorpay-payment-button {
-                                    display: none;
-                                }
-                            </style>
+                            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
                             <script>
                                 $(document).ready(function () {
-                                    $('.razorpay-payment-button').click();
+                                    var options = {
+                                        "key": "<?= $keyapi ?>",
+                                        "amount": "<?= $_POST["allTotal"] * 100 ?>",
+                                        "currency": "INR",
+                                        "name": "Nova Kids",
+                                        "description": "Authentic streetwear for the next generation. Quality pieces that speak your language and match your vibe.",
+                                        "image": "https://nova.bloomcrm.in/public/logos/nova_logo.png",
+                                        "handler": function (response) {
+                                            // Payment successful - submit form
+                                            var form = document.createElement('form');
+                                            form.method = 'POST';
+                                            form.action = '/razorpay';
+                                            
+                                            var orderInput = document.createElement('input');
+                                            orderInput.type = 'hidden';
+                                            orderInput.name = 'order_id';
+                                            orderInput.value = '<?= $orderId ?>';
+                                            form.appendChild(orderInput);
+                                            
+                                            var paymentInput = document.createElement('input');
+                                            paymentInput.type = 'hidden';
+                                            paymentInput.name = 'razorpay_payment_id';
+                                            paymentInput.value = response.razorpay_payment_id;
+                                            form.appendChild(paymentInput);
+                                            
+                                            if (response.razorpay_signature) {
+                                                var signatureInput = document.createElement('input');
+                                                signatureInput.type = 'hidden';
+                                                signatureInput.name = 'razorpay_signature';
+                                                signatureInput.value = response.razorpay_signature;
+                                                form.appendChild(signatureInput);
+                                            }
+                                            
+                                            document.body.appendChild(form);
+                                            form.submit();
+                                        },
+                                        "prefill": {
+                                            "name": "<?= $_POST["lname"] . " " . $_POST["fname"] ?>",
+                                            "contact": "<?= $_POST["mobile"] ?>"
+                                        },
+                                        "theme": {
+                                            "color": "#1774ff"
+                                        },
+                                        "modal": {
+                                            "ondismiss": function() {
+                                                // User closed the payment modal
+                                                // Optional: Update order status to "Cancelled" via AJAX
+                                                console.log("closing...")
+                                                window.history.back();
+                                            }
+                                        }
+                                    };
+
+                                    var rzp = new Razorpay(options);
+                                    
+                                    rzp.on('payment.failed', function (response){
+                                        // Handle payment failure
+                                        alert('Payment failed: ' + response.error.description);
+                                        window.history.back();
+                                    });
+                                    
+                                    rzp.open();
                                 });
                             </script>
                             <?php
                             exit();
                         }
                     }
-                    // else {
-                    //     $_SESSION["err"] = "Enter Your Mobile Number in Profile";
-                    //     header("Location: checkout.php");
-                    //     exit();
-                    // }
                 }
             }
 
@@ -2207,5 +2251,90 @@ ORDER BY id DESC LIMIT 5");
         } finally {
             echo json_encode($response);
         }
+    }
+
+    public function getSizeChart(){
+        // die();
+        $id = $_GET["id"];
+        $ProductData = getData2("SELECT tbl_products.*, tbl_category.category as category_name FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_products.id = $id")[0];
+        if(empty($ProductData) || empty($ProductData["sizeChart"])){
+            echo json_encode([
+                "success"=>false
+            ]);
+            die();
+        }
+        ob_start();
+        $data = json_decode($ProductData["sizeChart"]);
+        ?>
+            <div class="bg-white shadow-lg w-[65%] max-md:w-[90%] max-h-[80vh] relative flex flex-col animate-slideDown">
+                <!-- Close button -->
+                <button onclick="document.getElementById('sizeChartModal').classList.add('hidden')"
+                    class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 animate-rotate-pingpong">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
+                </button>
+
+                <!-- Header -->
+                <div class="p-6 pb-2 flex-shrink-0">
+                    <h2 class="text-2xl max-md:text-lg font-bold mb-1">SIZE CHART</h2>
+                    <p class="text-sm text-gray-500">Reviews: Fits true to size</p>
+                </div>
+
+                <!-- Scrollable body -->
+                <div class="p-6 pt-0 overflow-y-auto flex-1">
+                    <!-- Measuring unit toggle (hidden for now) -->
+                    <div class="flex items-center gap-2 mb-6">
+                        <span class="text-gray-700 font-medium">Measuring Unit :</span>
+                        <span>Inches</span>
+                    </div>
+
+                    <!-- Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full border-collapse text-center text-gray-700">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="p-3">Size</th>
+                                <th class="p-3">Chest</th>
+                                <th class="p-3">Length</th>
+                                <th class="p-3">Sleeve</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $rowClass = "border-t";
+                            foreach ($data as $size => $measurements) {
+                                echo "<tr class='{$rowClass}'>";
+                                echo "<td class='p-3'>{$size}</td>";
+                                echo "<td class='p-3'>{$measurements->Chest}</td>";
+                                echo "<td class='p-3'>{$measurements->Length}</td>";
+                                echo "<td class='p-3'>{$measurements->Sleeve}</td>";
+                                echo "</tr>";
+
+                                // Alternate row color
+                                $rowClass = ($rowClass === "border-t") ? "border-t bg-gray-50" : "border-t";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- How to Measure Section -->
+                <div class="mt-8 border-t pt-6 flex flex-col md:flex-row items-center">
+                    <!-- Text -->
+                    <div class="w-full md:w-[60%]">
+                        <?=$ProductData["sizeDescription"]?>
+                    </div>
+                    <!-- Image -->
+                    <div class="w-full md:w-[40%] flex justify-center">
+                        <img src="/<?=$ProductData["sizeImage"]?>" alt="How to measure T-shirt" class="h-72 max-md:h-64">
+                    </div>
+                </div>
+            </div>
+        <?php
+        $html = ob_get_clean();
+
+        echo json_encode([
+            "success"=>true,
+            "data"=>$html
+        ]);
     }
 }
