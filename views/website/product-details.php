@@ -1644,8 +1644,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
         // }
 
-        function changeDetailVariant(ele, tp, value, key1) {
-            console.log(ele, tp, value, key1)
+        function changeDetailVariant(ele, tp, value, key1,json) {
+            // console.log(ele, tp, value, key1)
             updateKey(GLOBAL_product_VARIANT.selected, tp, value);
             let divs = ele.parentElement.querySelectorAll("div")
             divs.forEach(div => {
@@ -1653,8 +1653,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             });
             // console.log(divs[key1])
             divs[key1].classList.add("border-gray-900");
-            console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
+            // console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
             let selectedId = "";
+            document.querySelector(".changeDetailVariant").innerText = json;
+
             GLOBAL_product_VARIANT.variants.forEach(async (ar, i) => {
                 //    console.log(ar)
                 if (deepEqualCaseInsensitive(JSON.parse(JSON.parse(ar.options)), GLOBAL_product_VARIANT.selected)) {
@@ -1670,13 +1672,13 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     if (eleForm.querySelector(".sideVarientId")) {
                         eleForm.querySelector(".sideVarientId").value = selectedId;
                     } else {
-                        console.warn("No .sideVarientId element found inside:", ele.parentElement.parentElement);
+                        // console.warn("No .sideVarientId element found inside:", ele.parentElement.parentElement);
                     }
                     document.querySelectorAll(".prices").forEach(el => {
                         el.innerHTML = `<span class="text-[#f25b21] text-xl prices">Rs. ${ar.price}</span>`;
                     });
                     let comparePrice99 = document.getElementById('comparePrice99');
-                    console.log(comparePrice99)
+                    // console.log(comparePrice99)
                     if (comparePrice99) {
                         let original = parseFloat(comparePrice99.innerHTML);
                         let discounted = parseFloat(ar.price);
@@ -1701,7 +1703,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </div>
                         `
                     })
-                    console.log(productimages[0])
+                    // console.log(productimages[0])
                     document.getElementById('DownImage').src = '/' + productimages[0];
                     document.getElementById("ProductDetailImg").innerHTML = imgHtml
                 }
@@ -1715,7 +1717,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             addToCartSidebar(eleForm.querySelector(".sideVarientId").value, eleForm.querySelector(".sideCategoryId").value, eleForm.querySelector(".sideProductId").value, btn, quantity, false)
         }
         getVariants();
-        cnosole.log("hello")
+        console.log("hello")
     </script>
 
 </body>

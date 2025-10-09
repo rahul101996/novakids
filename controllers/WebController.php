@@ -127,44 +127,67 @@ class WebController extends LoginController
                         if ($key == 'size') {
 
                     ?>
+                            <?php
+                                if(!empty($ProductData["sizeChart"])){
+                                    $sizeChart = (array) json_decode($ProductData["sizeChart"]);
+                                ?>
+                                    <div class="w-full flex items-center justify-between text-sm">
+                                        <div class="flex items-center justify-center gap-2">
+                                            <p class="uppercase text-lg"><?= $key ?></p>
+                                            <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded <?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>">XS:
+                                                Chest 41 inches
+                                                Length 27 inches
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex gap-1 cursor-pointer items-end justify-center"
+                                            onclick="showSizeChart('<?=$id?>')">
+                                            <svg class="icon icon-accordion mb-1 color-foreground-" aria-hidden="true" focusable="false"
+                                                role="presentation" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M18.9836 5.32852L14.6715 1.01638L1.01638 14.6715L5.32852 18.9836L18.9836 5.32852ZM15.3902 0.297691C14.9933 -0.0992303 14.3497 -0.0992303 13.9528 0.297691L0.297691 13.9528C-0.0992301 14.3497 -0.0992305 14.9932 0.297691 15.3902L4.60983 19.7023C5.00675 20.0992 5.65029 20.0992 6.04721 19.7023L19.7023 6.04721C20.0992 5.65029 20.0992 5.00675 19.7023 4.60983L15.3902 0.297691Z"
+                                                    fill-rule="evenodd"></path>
+                                                <path
+                                                    d="M11.7863 2.67056C11.9848 2.4721 12.3065 2.4721 12.505 2.67056L14.4237 4.58927C14.6222 4.78774 14.6222 5.1095 14.4237 5.30796C14.2252 5.50642 13.9035 5.50642 13.705 5.30796L11.7863 3.38925C11.5878 3.19079 11.5878 2.86902 11.7863 2.67056Z">
+                                                </path>
+                                                <path
+                                                    d="M8.93891 5.36331C9.13737 5.16485 9.45914 5.16485 9.6576 5.36331L11.5763 7.28202C11.7748 7.48048 11.7748 7.80225 11.5763 8.00071C11.3779 8.19917 11.0561 8.19917 10.8576 8.00071L8.93891 6.082C8.74045 5.88354 8.74045 5.56177 8.93891 5.36331Z">
+                                                </path>
+                                                <path
+                                                    d="M6.24307 8.20742C6.44153 8.00896 6.76329 8.00896 6.96175 8.20742L8.88047 10.1261C9.07893 10.3246 9.07893 10.6464 8.88047 10.8448C8.68201 11.0433 8.36024 11.0433 8.16178 10.8448L6.24307 8.92611C6.0446 8.72765 6.0446 8.40588 6.24307 8.20742Z">
+                                                </path>
+                                                <path
+                                                    d="M3.37296 10.8776C3.57142 10.6791 3.89319 10.6791 4.09165 10.8776L6.01036 12.7963C6.20882 12.9948 6.20882 13.3165 6.01036 13.515C5.8119 13.7134 5.49013 13.7134 5.29167 13.515L3.37296 11.5963C3.1745 11.3978 3.1745 11.076 3.37296 10.8776Z">
+                                                </path>
+                                            </svg>
+                                            <span class="text-[1.12rem]">Size guide</span>
+                                        </div>
+                                            
+                                    </div>
+                                 <?php
+                                }else{
+                                    ?>
+                                        <div class="w-full flex items-center justify-between text-sm">
+                                            <div class="flex items-center justify-center gap-2">
+                                                <p class="uppercase text-lg"><?= $key ?></p>
+                                            </div>
+                                        </div>
 
-                            <div class="w-full flex items-center justify-between text-sm">
-                                <div class="flex items-center justify-center gap-2">
-                                    <p class="uppercase text-lg"><?= $key ?></p>
-                                    <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded">XS:
-                                        Chest 41 inches
-                                        Length 27 inches</div>
-                                </div>
-                                <div class="flex gap-1 cursor-pointer items-end justify-center"
-                                    onclick="document.getElementById('sizeChartModal').classList.remove('hidden')">
-                                    <svg class="icon icon-accordion mb-1 color-foreground-" aria-hidden="true" focusable="false"
-                                        role="presentation" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 20 20">
-                                        <path
-                                            d="M18.9836 5.32852L14.6715 1.01638L1.01638 14.6715L5.32852 18.9836L18.9836 5.32852ZM15.3902 0.297691C14.9933 -0.0992303 14.3497 -0.0992303 13.9528 0.297691L0.297691 13.9528C-0.0992301 14.3497 -0.0992305 14.9932 0.297691 15.3902L4.60983 19.7023C5.00675 20.0992 5.65029 20.0992 6.04721 19.7023L19.7023 6.04721C20.0992 5.65029 20.0992 5.00675 19.7023 4.60983L15.3902 0.297691Z"
-                                            fill-rule="evenodd"></path>
-                                        <path
-                                            d="M11.7863 2.67056C11.9848 2.4721 12.3065 2.4721 12.505 2.67056L14.4237 4.58927C14.6222 4.78774 14.6222 5.1095 14.4237 5.30796C14.2252 5.50642 13.9035 5.50642 13.705 5.30796L11.7863 3.38925C11.5878 3.19079 11.5878 2.86902 11.7863 2.67056Z">
-                                        </path>
-                                        <path
-                                            d="M8.93891 5.36331C9.13737 5.16485 9.45914 5.16485 9.6576 5.36331L11.5763 7.28202C11.7748 7.48048 11.7748 7.80225 11.5763 8.00071C11.3779 8.19917 11.0561 8.19917 10.8576 8.00071L8.93891 6.082C8.74045 5.88354 8.74045 5.56177 8.93891 5.36331Z">
-                                        </path>
-                                        <path
-                                            d="M6.24307 8.20742C6.44153 8.00896 6.76329 8.00896 6.96175 8.20742L8.88047 10.1261C9.07893 10.3246 9.07893 10.6464 8.88047 10.8448C8.68201 11.0433 8.36024 11.0433 8.16178 10.8448L6.24307 8.92611C6.0446 8.72765 6.0446 8.40588 6.24307 8.20742Z">
-                                        </path>
-                                        <path
-                                            d="M3.37296 10.8776C3.57142 10.6791 3.89319 10.6791 4.09165 10.8776L6.01036 12.7963C6.20882 12.9948 6.20882 13.3165 6.01036 13.515C5.8119 13.7134 5.49013 13.7134 5.29167 13.515L3.37296 11.5963C3.1745 11.3978 3.1745 11.076 3.37296 10.8776Z">
-                                        </path>
-                                    </svg>
-                                    <span class="text-[1.12rem]">Size guide</span>
-                                </div>
-                            </div>
+                                    <?php
+                                }
+                                ?>
                             <div class="w-full flex items-center justify-start mt-3 text-sm" id="SizeDiv">
                                 <?php
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
+                                    $sizeChartValue = $sizeChart[$value1];
+                                    $sizeChartValueString = "";
+                                    foreach($sizeChartValue as $kk=>$sv){
+                                        $sizeChartValueString = $sizeChartValueString . "$kk $sv inches ";
+                                    }
                                 ?>
-                                    <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>)'
+                                    <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>,"<?=$sizeChartValueString?>")'
                                         class="border <?= $key1 == 0 ? "border-gray-900 selected-size" : "border-gray-300" ?>  optionDivs cursor-pointer flex items-center justify-center h-10 w-20"
                                         option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>" onclick="">
                                         <?= $value1 ?>

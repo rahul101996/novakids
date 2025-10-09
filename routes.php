@@ -100,6 +100,8 @@ $route->group(['', 'ProductController', 'auth'], function ($route) {
 
 
     $route->route('/api/new_arrival/status', 'ChangeNewArrivalStatus');
+    $route->route('/api/getSizeChart', 'getSizeChart');
+
 
 });
 
