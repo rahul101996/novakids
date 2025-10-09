@@ -1026,7 +1026,7 @@ class WebController extends LoginController
                 $siteName = getDBObject()->getSiteName();
                 $pageModule = "Product Page";
                 $pageTitle = "Product Page";
-               $ProductData = getData2("
+                $ProductData = getData2("
                                     SELECT 
                                         tbl_products.*, 
                                         tbl_category.category AS category_name 
@@ -1196,6 +1196,21 @@ class WebController extends LoginController
             require 'views/website/contact.php';
         }
     }
+
+
+    public function ContactUs2()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "Contact Us2";
+        $pageTitle = "Contact Us2";
+
+        // $this->checkSession();
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/website/contact2.php';
+        }
+    }
+
+
     public function OurOffices()
     {
         $siteName = getDBObject()->getSiteName();
@@ -2064,7 +2079,7 @@ ORDER BY id DESC LIMIT 5");
             $userid = $_POST['userid'];
 
             if (!empty($token)) {
-                
+
                 $isExistToken = getData2("SELECT * FROM `tbl_tokens` WHERE `token` = '$token'");
 
                 if (empty($isExistToken)) {
