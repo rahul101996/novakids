@@ -244,7 +244,7 @@
 
                 <!-- Large Featured Image -->
                 <div class="animate-slideInLeft delay-100 image-overlay rounded-3xl overflow-hidden relative h-full  bg-gradient-to-br from-gray-900 to-gray-600">
-                    <img src="/public/images/5.webp" alt="Product Image" class="absolute inset-0 w-full h-full object-cover rounded-3xl">
+                    <img src="/public/images/5.webp" alt="Product Image" class="w-full h-full object-cover rounded-3xl">
                 </div>
 
 

@@ -1190,6 +1190,19 @@ class WebController extends LoginController
             require 'views/website/shop.php';
         }
     }
+    public function AboutUs()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "About Us";
+        $pageTitle = "About Us";
+
+        // $this->checkSession();
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/website/about.php';
+        }
+    }
+
+
 
 
     public function ContactUs()
