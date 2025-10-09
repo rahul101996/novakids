@@ -1026,15 +1026,16 @@ class WebController extends LoginController
                 $siteName = getDBObject()->getSiteName();
                 $pageModule = "Product Page";
                 $pageTitle = "Product Page";
-                $ProductData = getData2("
-                                                    SELECT 
-                                                        tbl_products.*, 
-                                                        tbl_category.category AS category_name 
-                                                    FROM tbl_products 
-                                                    LEFT JOIN tbl_category 
-                                                        ON tbl_products.category = tbl_category.id 
-                                                    WHERE REPLACE(tbl_products.name, \"'\", '') = REPLACE('$name', \"'\", '')
-                                                ")[0];
+               $ProductData = getData2("
+                                    SELECT 
+                                        tbl_products.*, 
+                                        tbl_category.category AS category_name 
+                                    FROM tbl_products 
+                                    LEFT JOIN tbl_category 
+                                        ON tbl_products.category = tbl_category.id 
+                                    WHERE 
+                                        REPLACE(REPLACE(tbl_products.name, \"'\", ''), '-', ' ') = REPLACE(REPLACE('$name', \"'\", ''), '-', ' ')
+                                ")[0];
 
                 $id = $ProductData['id'];
                 $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
