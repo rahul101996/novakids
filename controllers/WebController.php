@@ -1020,13 +1020,15 @@ class WebController extends LoginController
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             //  echo $product_name;
             if ($product_name == null) {
-                require 'views/website/product-details1.php';
+                http_response_code(404);
+                require __DIR__ . '/../views/website/404.php';
+                exit();
             } else {
                 $name = str_replace('-', ' ', $product_name);
                 $siteName = getDBObject()->getSiteName();
                 $pageModule = "Product Page";
                 $pageTitle = "Product Page";
-               $ProductData = getData2("
+                $ProductData = getData2("
                                     SELECT 
                                         tbl_products.*, 
                                         tbl_category.category AS category_name 
@@ -1036,7 +1038,11 @@ class WebController extends LoginController
                                     WHERE 
                                         REPLACE(REPLACE(tbl_products.name, \"'\", ''), '-', ' ') = REPLACE(REPLACE('$name', \"'\", ''), '-', ' ')
                                 ")[0];
-
+                if (empty($ProductData)) {
+                    http_response_code(404);
+                    require __DIR__ . '/../views/website/404.php';
+                    exit();
+                }
                 $id = $ProductData['id'];
                 $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
                 $ProductData['varients'] = $varients;
@@ -1894,7 +1900,15 @@ ORDER BY id DESC LIMIT 5");
         // "SELECT * FROM online_users WHERE id = " . $_SESSION['userid'];
         // printWithPre($userData);
         // printWithPre($ActiveuserAddress);
+        $orders = getData2("SELECT tbl_purchase.*, indian_states.name AS state_name FROM tbl_purchase LEFT JOIN  indian_states ON tbl_purchase.state = indian_states.id WHERE tbl_purchase.userid = '$_SESSION[userid]' ORDER BY tbl_purchase.id DESC");
 
+        $wishlists = getData2("SELECT * FROM `tbl_wishlist` WHERE `userid` = " . $_SESSION["userid"]);
+
+        $TotalWishlist = count($wishlists);
+        $TotalOrders = count($orders);
+
+        echo $TotalWishlist;
+        echo $TotalOrders;
 
         require 'views/website/myprofile.php';
     }
