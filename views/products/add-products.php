@@ -47,11 +47,20 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <input
                                 class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($collection['name']) ? $collection['name'] : '' ?>" name="name"
                                 id="title" placeholder="e.g., Summer collection, Under $100, Staff picks" type="text" required/>
+                            
+                            <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
+                                for="description">Short Description</label>
+                            <div class="border border-gray-800 rounded-md">
+                                <textarea class="w-full border-0 focus:ring-0 resize-y p-3 "
+                                    placeholder="" name="shortDescription" id="shortDescription" required></textarea>
+                            </div>
+                            
+                            
                             <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
                                 for="description">Description</label>
                             <div class="border border-gray-800 rounded-md">
                                 <textarea class="w-full h-40 border-0 focus:ring-0 resize-y p-3 summernote"
-                                    placeholder="" name="description" required><?= isset($collection['description']) ? $collection['description'] : '' ?></textarea>
+                                    placeholder="" name="description"><?= isset($collection['description']) ? $collection['description'] : '' ?></textarea>
                             </div>
                             <h2 class="text-sm font-medium mt-3">Category</h2>
                             <div class="w-full flex items-center justify-start">
@@ -78,15 +87,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         <div class="bg-white p-6 rounded-lg shadow-sm">
                             <h2 class="text-base font-medium text-gray-900">Pricing</h2>
                             <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div>
-                                    <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
-                                    <div class="relative mt-1 rounded-md">
-                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                            <!-- <span class="text-gray-500 sm:text-sm">₹</span> -->
-                                        </div>
-                                        <input type="number" step="0.1" name="price" id="price" class="w-full border border-gray-800 rounded-md  focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00" oninput="CalculateProfitMargin()">
-                                    </div>
-                                </div>
+                                
                                 <div>
                                     <label for="compare-price" class="flex items-center text-sm font-medium text-gray-700">
                                         Compare-at price
@@ -101,6 +102,17 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         <input type="number" name="compare_price" id="compare-price" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00" oninput="CalculateProfitMargin()">
                                     </div>
                                 </div>
+
+                                <div>
+                                    <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                                    <div class="relative mt-1 rounded-md">
+                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <!-- <span class="text-gray-500 sm:text-sm">₹</span> -->
+                                        </div>
+                                        <input type="number" step="0.1" name="price" id="price" class="w-full border border-gray-800 rounded-md  focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00" oninput="CalculateProfitMargin()">
+                                    </div>
+                                </div>
+                                
                             </div>
                             <div class="relative flex items-start mt-2 hidden">
                                 <div class="flex h-5 items-center">
@@ -349,7 +361,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <h2 class="text-xl font-semibold text-gray-800 dark:text-white">
                             Size Chart
                             </h2>
-                            <button onclick="closeModal('myModal')" class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-2xl leading-none">
+                            <button type="button" onclick="closeModal('myModal')" class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-2xl leading-none">
                             &times;
                             </button>
                         </div>
@@ -571,7 +583,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     trHtml += `
                     <td class="px-4 py-2">
                         <input type="text" name="sizeValues[]"
-                        class="border border-gray-300 rounded-md px-3 py-1 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        class="sizeValues border border-gray-300 rounded-md px-3 py-1 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
                     </td>
                     `;
                 }
@@ -874,16 +886,57 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
         document.getElementById('productForm').addEventListener('submit', function(e) {
             e.preventDefault(); // prevent actual submit first
             let tt = document.getElementById("variantsTableBody").querySelectorAll("tr")
+            
+            let compare = document.getElementById("compare-price");
+            
             if(tt.length==0){
                 alert("Please Create Atleas 1 Variant")
                 generateVariants();
                 return 
             }
 
+            // if(document.getElementById("shortDescription").value){
+            //     alert("Please Enter Discription")
+            //     return;
+            // }
+
+            let trs = document.getElementById("variantsTableBody").querySelectorAll("tr")
+
+            for (let i = 0; i < trs.length; i++) {
+                const inputs = trs[i].querySelectorAll("input");
+                
+                const priceValue = inputs[2]?.value || ""; // safeguard in case input doesn’t exist
+                console.log(inputs,priceValue)
+                // convert to integer safely
+                const price = parseInt(priceValue, 10) || 0; // if NaN or empty => becomes 0
+
+                if (price > compare.value) {
+                    // console.log(`Row ${i + 1}: price is 0`);
+                    alert("Variant price should not be greater than or equal to compare price")
+                    return;
+                } 
+            }
+
+            let modal = document.getElementById("myModal").querySelectorAll(".sizeValues")
+            // console.log(modal)
+            
+            if(modal.length===0){
+                alert("Please create size chart")
+                addSizeChart();
+                return;
+            }
+            for (let i = 0; i < trs.length; i++) {
+                if(modal[i].value=="" || modal[i].value==null){
+                    alert("Please enter propper values in size chart")
+                    addSizeChart();
+                    return;
+                }
+            }
+
             // ✅ All validations passed — now submit
             console.log("Submitting....")
             
-            // this.submit();
+            this.submit();
         });
 
         addOption();
