@@ -183,7 +183,7 @@
         }
     </style>
 
-    <!-- Hero Section with Background Images -->
+    
     <div class="relative py-10 px-6 bg-gray-100 overflow-hidden">
 
         <div class="max-w-7xl mx-auto relative z-10">
@@ -235,20 +235,20 @@
 
 
 
-    <!-- Main Content Grid with Product Images -->
+    
     <div class="w-[85%] mx-auto  py-10">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 
-            <!-- Left Column - Product Images Showcase -->
+          
             <div class=" space-y-6">
 
-                <!-- Large Featured Image -->
+               
                 <div class="animate-slideInLeft delay-100 image-overlay rounded-3xl overflow-hidden relative h-full  bg-gradient-to-br from-gray-900 to-gray-600">
                     <img src="/public/images/5.webp" alt="Product Image" class="w-full h-full object-cover rounded-3xl">
                 </div>
 
 
-                <!-- Two Column Grid -->
+                
                 <!-- <div class="grid grid-cols-2 gap-6">
                     <div class="animate-slideInLeft delay-200 image-overlay rounded-3xl h-64 bg-gradient-to-br from-gray-700 to-gray-500 relative overflow-hidden">
                         <div class="absolute inset-0 flex items-center justify-center">
@@ -263,10 +263,9 @@
                 </div> -->
             </div>
 
-            <!-- Right Column - Contact Form & Info -->
             <div class=" space-y-6 ">
 
-                <!-- Contact Form -->
+                
                 <div class="animate-slideInRight delay-200 bg-white rounded-3xl px-12 py-8 max-md:px-0 max-md:py-0">
                     <h2 class="text-4xl font-black mb-8 tracking-tight uppercase">Send us a message</h2>
 

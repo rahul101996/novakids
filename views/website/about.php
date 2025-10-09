@@ -20,7 +20,7 @@
     </section>
 
 
-    <section class="py-20 max-md:py-16 text-center max-md:px-4">
+    <section class="py-16 text-center max-md:px-4">
         <h3 class="text-sm tracking-widest uppercase text-gray-900 mb-4">Who We Are</h3>
         <h2 class="text-3xl md:text-5xl leading-snug max-w-3xl mx-auto">
             At <span class="font-semibold text-dark">Nova Universe</span>, we craft
@@ -43,37 +43,54 @@
     </section>
 
 
-    <section class="py-20 bg-gray-50">
+    <section class="py-10 bg-gray-50">
         <div class="w-[90%] mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="col-span-2 grid grid-cols-2 gap-3">
-                    <img src="/public/images/11.avif" alt="Nova Universe Outfit" class="rounded-2xl object-cover w-full h-80">
-                    <img src="/public/images/45.png" alt="Streetwear Style" class="rounded-2xl object-cover w-full h-80">
-                    <img src="/public/images/7.webp" alt="Casual Wear" class="rounded-2xl object-cover w-full h-80">
-                    <img src="/public/images/5.webp" alt="Trendy Look" class="rounded-2xl object-cover w-full h-80">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="col-span-1 grid grid-cols-2 gap-3">
+                    <img src="/public/images/11.avif" alt="Nova Universe Outfit" class="rounded-2xl object-cover w-full h-[50vh]">
+                    <img src="/public/images/45.png" alt="Streetwear Style" class="rounded-2xl object-cover w-full h-[50vh]">
+                    <img src="/public/images/7.webp" alt="Casual Wear" class="rounded-2xl object-cover w-full h-[50vh]">
+                    <img src="/public/images/5.webp" alt="Trendy Look" class="rounded-2xl object-cover w-full h-[50vh]">
                 </div>
-                <div class="flex flex-col justify-center items-start p-6">
-                    <h3 class="text-3xl md:text-6xl font-semibold mb-4">Style That Defines You</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+                <div class="flex flex-col justify-center items-start p-6 space-y-6">
+                    <h3 class="text-3xl md:text-6xl font-semibold mb-2">Style That Defines You</h3>
+
+                    <p class="text-gray-600 leading-relaxed text-lg max-w-xl">
                         Every outfit in our collection tells a story — one of confidence, comfort, and creativity.
-                        Nova Universe is more than clothing; it’s your personality in motion.
+                        <span class="font-medium text-gray-800">Nova Universe</span> is more than clothing;
+                        it’s your personality in motion — designed for those who dare to be different.
                     </p>
-                    <button
-                        class="relative inline-block uppercase rounded-md overflow-hidden group border-2 border-black bg-transparent px-6 py-2 text-black font-bold text-base">
-                        <span class="relative z-10 transition-colors duration-700 group-hover:text-white">
-                            Shop Now
-                        </span>
-                        <span
-                            class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0"></span>
-                    </button>
+
+                    <p class="text-gray-600 leading-relaxed max-w-xl">
+                        From laid-back casuals to bold statement streetwear, we create pieces that blend
+                        <span class="italic text-gray-800">trend, comfort, and individuality</span>.
+                        Our designs are made to move with you — whether you’re out with friends, at college, or making a statement online.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 mt-4">
+                        <!-- Primary Button -->
+                        <a href="/shop"
+                            class="relative inline-block uppercase rounded-md overflow-hidden group border-2 border-black bg-transparent px-8 py-3 text-black font-bold text-base">
+                            <span class="relative z-10 transition-colors duration-700 group-hover:text-white">
+                                Shop Now
+                            </span>
+                            <span
+                                class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0"></span>
+                        </a>
+
+
+                    </div>
+
+
 
                 </div>
+
             </div>
         </div>
     </section>
 
 
-    <section class="py-20 max-md:py-16 text-center bg-white">
+    <section class="py-16 text-center bg-white">
         <h3 class="text-sm tracking-widest uppercase text-gray-900 mb-4">Our Philosophy</h3>
         <h2 class="text-3xl md:text-5xl font-light max-w-4xl mx-auto leading-snug">
             Fashion that speaks for you — <span class="font-semibold">bold, effortless, and timeless.</span>
