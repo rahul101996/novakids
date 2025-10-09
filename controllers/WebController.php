@@ -28,7 +28,7 @@ class WebController extends LoginController
         $price = floatval($ProductData['price']);
         $discountAmount = $comparePrice - $price;
         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
-?>
+        ?>
 
         <?php
         // printWithPre($ProductData);
@@ -63,20 +63,20 @@ class WebController extends LoginController
             ];
 
             // printWithPre($finalData);
-        ?>
+            ?>
             <?php
             if (!isset($_POST["product_details"])) {
-            ?>
+                ?>
                 <div class="w-[47%] p-3 h-full overflow-y-scroll bg-gray-200 flex flex-col items-center justify-start no-scrollbar gap-3 transform translate-x-full transition-transform duration-[0.8s] ease-in-out"
                     id="VarImg">
                     <?php
                     foreach (array_reverse($images[0]) as $key => $image) {
 
-                    ?>
+                        ?>
                         <img src="/<?= $image ?>" alt="">
                     <?php } ?>
                 </div>
-            <?php
+                <?php
             }
             ?>
             <div class=" h-full <?= !isset($_POST["product_details"]) ? " w-[53%] overflow-y-scroll" : "" ?> flex flex-col items-start justify-start z-10 bg-white"
@@ -85,7 +85,7 @@ class WebController extends LoginController
 
                 <?php
                 if (!isset($_POST["product_details"])) {
-                ?>
+                    ?>
                     <div class="w-full flex items-center justify-between px-7 pt-7 ">
                         <span class="uppercase ">SELECT OPTIONS</span>
                         <button id="closeAddToCartSidebar" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong"
@@ -94,14 +94,14 @@ class WebController extends LoginController
                         </button>
                     </div>
                     <span class="w-full h-[1px] bg-gray-200 my-5"></span>
-                <?php
+                    <?php
                 }
                 ?>
 
                 <div class="flex flex-col items-start justify-start w-full <?= !isset($_POST["product_details"]) ? "px-7" : "" ?>">
                     <?php
                     if (!isset($_POST["product_details"])) {
-                    ?>
+                        ?>
                         <h2 class="w-full text-[1.8rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
                         <div class="flex items-center justify-center gap-3 mt-1 prices">
                             <span
@@ -114,7 +114,7 @@ class WebController extends LoginController
                             pants. These stylish pants feature a relaxed fit and a deconstructed design for a modern and edgy look</p>
                         <p class=" text-xs text-gray-600 mt-1"><a href="" class="underline">shipping</a> calculated at checkout</p>
                         <p class="text-xs mt-1 hidden">⭐⭐⭐⭐⭐ <span class="text-sm">31 reviews</span></p>
-                    <?php
+                        <?php
                     }
                     ?>
 
@@ -201,14 +201,14 @@ class WebController extends LoginController
                                         option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>" onclick="">
                                         <?= $value1 ?>
                                     </div>
-                                <?php
+                                    <?php
                                 }
                                 ?>
                             </div>
 
-                        <?php
+                            <?php
                         } elseif ($key == 'color') {
-                        ?>
+                            ?>
                             <p class="uppercase mt-7 text-lg"><?= $key ?></p>
                             <div class="w-full flex items-center justify-start text-sm gap-2"
                                 id="<?= !isset($_POST["product_details"]) ? "ColorDiv" : "ColorDetailsDiv" ?>">
@@ -222,15 +222,15 @@ class WebController extends LoginController
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
-                                ?>
+                                    ?>
                                     <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>)'
                                         class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> cursor-pointer flex items-center justify-center h-10 w-20"
                                         option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?></div>
-                                <?php
+                                    <?php
                                 }
                                 ?>
                             </div>
-                        <?php
+                            <?php
                         }
                     }
                     if (!isset($_POST["product_details"])) {
@@ -262,7 +262,7 @@ class WebController extends LoginController
 
                             <?php
                             if (!empty($_SESSION["userid"])) {
-                            ?>
+                                ?>
                                 <form method="POST" action="/checkout-cart" class="w-full">
                                     <input type="hidden" name="varient[]" class="sideVarientId"
                                         value="<?= $ProductData['varients'][0]["id"] ?>">
@@ -281,9 +281,9 @@ class WebController extends LoginController
 
                                     </button>
                                 </form>
-                            <?php
+                                <?php
                             } else {
-                            ?>
+                                ?>
                                 <input type="hidden" name="varient[]" class="sideVarientId"
                                     value="<?= $ProductData['varients'][0]["id"] ?>">
                                 <input type="hidden" name="category[]" class="sideCategoryId" value="<?= $ProductData['category'] ?>">
@@ -300,14 +300,14 @@ class WebController extends LoginController
                                     </span>
 
                                 </button>
-                            <?php
+                                <?php
                             }
                             ?>
 
                         </div>
 
 
-                    <?php
+                        <?php
                     }
 
                     ?>
@@ -317,7 +317,7 @@ class WebController extends LoginController
                 </div>
             </div>
 
-        <?php
+            <?php
 
         } else {
             echo "<p>No variants found</p>";
@@ -380,7 +380,7 @@ class WebController extends LoginController
         foreach ($co as $color => $images) {
             // printWithPre($images);
 
-        ?>
+            ?>
             <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"color","<?= $color ?>",<?= $i ?>)'
                 class=" h-[95px] flex items-center justify-start mt-1 text-sm gap-2 p-1 cursor-pointer border <?= $i == 0 ? " border-gray-900 selected-color" : "" ?>"
                 option_name="color" option_value="" product_id="<?= $id ?>">
@@ -390,7 +390,7 @@ class WebController extends LoginController
 
             </div>
 
-        <?php
+            <?php
             $i++;
         }
 
@@ -450,12 +450,12 @@ class WebController extends LoginController
         ob_start();
 
         if (!empty($matchedVariants)) {
-        ?>
+            ?>
             <?php
             foreach ($matchedVariants as $key => $value) {
                 $images = array_reverse(json_decode($value['images']));
 
-            ?>
+                ?>
                 <div onclick='changeSideVariant(this,"color","<?= parse_variant_options(($value["options"]))["Color"] ?>",<?= $key ?>)'
                     class=" h-[95px] flex items-center justify-start mt-3 text-sm gap-2 p-1 cursor-pointer border <?= $key == 0 ? " border-gray-900 selected-color" : "" ?>"
                     option_name="color" option_value="" product_id="<?= $id ?>">
@@ -564,7 +564,7 @@ class WebController extends LoginController
                     $variants = json_decode($vdata['options'], true);
                     $variants = json_decode($variants, true);
                     $totalprice = $vdata['price'] * $quantity;
-                ?>
+                    ?>
 
                     <div class="flex items-center gap-4 border-b py-2 w-full">
                         <!-- Product image -->
@@ -576,7 +576,7 @@ class WebController extends LoginController
                             <div class="flex gap-3 flex-wrap items-center justify-start">
                                 <?php
                                 foreach ($variants as $key => $variant) {
-                                ?>
+                                    ?>
                                     <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
                                 <?php } ?>
                             </div>
@@ -605,7 +605,7 @@ class WebController extends LoginController
                         </button>
                     </div>
 
-                <?php
+                    <?php
                 }
             } else {
                 ?>
@@ -616,7 +616,7 @@ class WebController extends LoginController
                         No Products in the cart.
                     </p>
                 </div>
-            <?php
+                <?php
             }
             ?>
 
@@ -648,7 +648,7 @@ class WebController extends LoginController
                     $variants = json_decode($vdata['options'], true);
                     $variants = json_decode($variants, true);
                     $totalprice = $vdata['price'] * $quantity;
-            ?>
+                    ?>
 
                     <div class="flex items-center gap-4 border-b py-2 w-full">
                         <!-- Product image -->
@@ -660,7 +660,7 @@ class WebController extends LoginController
                             <div class="flex gap-3 flex-wrap items-center justify-start">
                                 <?php
                                 foreach ($variants as $key => $variant) {
-                                ?>
+                                    ?>
                                     <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
                                 <?php } ?>
                             </div>
@@ -682,7 +682,7 @@ class WebController extends LoginController
                         </button>
                     </div>
 
-                <?php
+                    <?php
 
 
                 }
@@ -696,7 +696,7 @@ class WebController extends LoginController
                         No Products in the cart.
                     </p>
                 </div>
-            <?php
+                <?php
             }
             ?>
 
@@ -961,7 +961,9 @@ class WebController extends LoginController
         ];
 
         $input = json_decode(file_get_contents("php://input"), true);
-        $sizeFilters = $input['size'] ?? [];
+
+        $filters = $input['filters'] ?? [];
+
         $minPrice = $input['min_price'] ?? 0;
         $maxPrice = $input['max_price'] ?? 999999;
 
@@ -992,44 +994,69 @@ class WebController extends LoginController
         foreach ($products as $key => $product) {
             $variants = getData2("SELECT * FROM tbl_variants WHERE product_id = '$product[id]'");
 
-            // Apply size filter (if selected)
-            if (!empty($sizeFilters)) {
-                $match = false;
+            // Apply dynamic filters safely
+            $matchAll = true;
+
+            foreach ($filters as $filterKey => $filterValues) {
+                $filterKey = strtoupper($filterKey); // normalize key name
+
+                $matchKey = false;
+
+                // Normalize filter values to uppercase
+                $normalizedFilterValues = array_map('strtoupper', $filterValues);
+
                 foreach ($variants as $variant) {
-                    $opts = json_decode($variant['options'], true);
-                    if (is_string($opts))
+                    $opts = $variant['options'];
+
+                    // Decode until we get an array (handles double-encoded JSON)
+                    while (is_string($opts)) {
                         $opts = json_decode($opts, true);
-                    if (!empty($opts['Size']) && in_array($opts['Size'], $sizeFilters)) {
-                        $match = true;
+                    }
+                    if (!is_array($opts))
+                        $opts = [];
+
+                    // ✅ Normalize all option keys to uppercase
+                    $opts = array_change_key_case($opts, CASE_UPPER);
+
+                    // Normalize variant option value
+                    $variantValue = !empty($opts[$filterKey]) ? strtoupper($opts[$filterKey]) : null;
+
+                    if ($variantValue && in_array($variantValue, $normalizedFilterValues)) {
+                        $matchKey = true;
                         break;
                     }
                 }
-                if (!$match) {
-                    unset($products[$key]);
-                    continue;
+
+
+                if (!$matchKey) {
+                    $matchAll = false;
+                    break;
                 }
             }
 
-            // Check wishlist (logged in or session-based)
+            // Skip product if it doesn't match all filters
+            if (!$matchAll) {
+                unset($products[$key]);
+                continue;
+            }
+
+            // Wishlist logic
             $wishlist = false;
 
             if ($userid) {
-                // Logged in user — check in DB
                 $wishData = getData2("SELECT id FROM tbl_wishlist WHERE product = '$product[id]' AND userid = '$userid' LIMIT 1");
-                if (!empty($wishData)) {
+                if (!empty($wishData))
                     $wishlist = true;
-                }
             } else {
-                // Not logged in — check session wishlist
                 $wishlistCheck = checkExisteingWishlistSession($product['id']);
-                if ($wishlistCheck !== false) {
+                if ($wishlistCheck !== false)
                     $wishlist = true;
-                }
             }
 
             $products[$key]['wishlist'] = $wishlist;
             $products[$key]['variants'] = $variants;
         }
+
 
         $products = array_values($products);
 
@@ -1553,7 +1580,7 @@ class WebController extends LoginController
                             // $keyapi = "rzp_live_JdPrOFrNVQV4gM";
                             $keyapi = $PaymentGateWay['keyid'];
 
-            ?>
+                            ?>
 
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -1575,11 +1602,11 @@ class WebController extends LoginController
                             </style>
 
                             <script>
-                                $(document).ready(function() {
+                                $(document).ready(function () {
                                     $('.razorpay-payment-button').click();
                                 });
                             </script>
-<?php
+                            <?php
                             exit();
                         }
                     }
@@ -1612,7 +1639,8 @@ class WebController extends LoginController
 
             if (!isset($data['orderid']) && empty($data['orderid'])) {
 
-                $data["orderid"] = generateRandomString(16) . time();;
+                $data["orderid"] = generateRandomString(16) . time();
+                ;
                 // echo $data["orderid"];
                 // die();
             }
