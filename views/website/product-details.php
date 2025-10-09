@@ -603,7 +603,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                         <!-- Left: Stars + text -->
                         <div class="flex flex-col items-center">
-                            <div class="flex text-yellow-400 mb-1">
+                            <div class="flex text-orange-500 mb-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"
                                     viewBox="0 0 24 24">
                                     <path
@@ -646,7 +646,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     </div>
                 </div>
 
-                <div class="w-[80%] flex items-center justify-center">
+                <div class="w-[80%] max-md:w-[90%] flex items-center justify-center">
                     <div class="owl-carousel reviews-sliders w-full">
                         <?php
                         foreach (getData2("SELECT tpr.*, ous.username, ous.fname, ous.lname, ous.mobile FROM `tbl_product_review` tpr LEFT JOIN online_users ous ON tpr.userid = ous.id WHERE 1 AND tpr.product_id = $ProductData[id] AND tpr.status = 1") as $key => $value) { ?>
@@ -704,10 +704,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     smartSpeed: 1000,
                     // slideTransition: "linear",
                     responsive: {
-                        0: { 
+                        0: {
                             items: 1
                         },
-                        768: { 
+                        768: {
                             items: 2
                         }
                     }
@@ -899,7 +899,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
     <div id="reviewModal"
         class="hidden fixed inset-0 bg-gradient-to-br from-black/70 via-blue-900/30 to-purple-900/30 backdrop-blur-sm flex justify-center items-center z-50 p-4">
-        <div class="bg-white rounded-3xl w-full max-w-lg relative shadow-2xl animate-slideDown overflow-hidden">
+        <div class="bg-white rounded-md w-full max-w-lg relative shadow-2xl animate-slideDown overflow-hidden">
             <!-- Decorative Background Pattern -->
             <div
                 class="absolute top-0 right-0 w-64 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full filter blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2">
@@ -911,14 +911,14 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             <!-- Content Container -->
             <div class="relative z-10">
                 <!-- Header with Gradient -->
-                <div class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 px-8 py-6">
+                <div class="bg-black to-pink-600 px-8 py-6 max-md:py-4 max-md:px-4">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h2 class="text-3xl font-bold text-white mb-1">Share Your Experience</h2>
+                            <h2 class="text-3xl max-md:text-xl font-bold text-white mb-1">Share Your Experience</h2>
                             <p class="text-blue-100 text-sm">We value your feedback</p>
                         </div>
                         <button onclick="closeReviewModal()"
-                            class="text-white/80 hover:text-white transition-all duration-200 w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/20 backdrop-blur-sm">
+                            class="animate-rotate-pingpong text-white/80 hover:text-white transition-all duration-200 w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/20 backdrop-blur-sm">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M6 18L18 6M6 6l12 12" />
@@ -928,19 +928,19 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 </div>
 
                 <!-- Form Content -->
-                <form id="reviewForm" class="px-8 py-6 space-y-5">
+                <form id="reviewForm" class="px-8 py-6 max-md:py-4 max-md:px-4 space-y-5 max-md:space-y-3">
                     <!-- Name Input with Icon -->
                     <div class="group">
                         <label for="name"
-                            class="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            class="block text-sm font-semibold text-gray-700 mb-2 max-md:mb-1 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                             Your Name
                         </label>
                         <input type="text" id="name" placeholder="John Doe"
-                            class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-300 bg-gray-50 focus:bg-white group-hover:border-gray-300"
+                            class="w-full px-4 py-2 max-md:py-1 border-2 border-gray-200 rounded-md focus:ring focus:ring-orange-500 focus:border-orange-500 outline-none transition-all duration-300 bg-gray-50 focus:bg-white group-hover:border-gray-300"
                             required>
                     </div>
                     <input type="hidden" id="userid" name="userid" value="<?= $_SESSION["userid"] ?>">
@@ -948,8 +948,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                     <!-- Interactive Star Rating -->
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                            <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <label class="block text-sm font-semibold text-gray-700 mb-3 max-md:mb-1 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
                                 <path
                                     d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                             </svg>
@@ -957,39 +957,39 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         </label>
 
                         <!-- Star Rating Container -->
-                        <div class="bg-gradient-to-r from-gray-50 to-blue-50 p-6 rounded-2xl border-2 border-gray-200">
-                            <div class="flex justify-center items-center gap-3 mb-3">
+                        <div class="bg-gradient-to-r from-gray-50 to-blue-50 p-6 max-md:p-3 rounded-md border-2 border-gray-200">
+                            <div class="flex justify-center items-center gap-3 mb-3 max-md:mb-0">
                                 <button type="button" onclick="setRating(1)"
-                                    class="star-icon text-gray-300 hover:text-yellow-400 transition-all duration-200 transform hover:scale-125">
-                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                                    class="star-icon text-gray-300 hover:text-orange-500 transition-all duration-200 transform hover:scale-125">
+                                    <svg class="w-12 h-12 max-md:w-8 max-md:h-8" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
                                 </button>
                                 <button type="button" onclick="setRating(2)"
-                                    class="star-icon text-gray-300 hover:text-yellow-400 transition-all duration-200 transform hover:scale-125">
-                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                                    class="star-icon text-gray-300 hover:text-orange-500 transition-all duration-200 transform hover:scale-125">
+                                    <svg class="w-12 h-12 max-md:w-8 max-md:h-8" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
                                 </button>
                                 <button type="button" onclick="setRating(3)"
-                                    class="star-icon text-gray-300 hover:text-yellow-400 transition-all duration-200 transform hover:scale-125">
-                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                                    class="star-icon text-gray-300 hover:text-orange-500 transition-all duration-200 transform hover:scale-125">
+                                    <svg class="w-12 h-12 max-md:w-8 max-md:h-8" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
                                 </button>
                                 <button type="button" onclick="setRating(4)"
-                                    class="star-icon text-gray-300 hover:text-yellow-400 transition-all duration-200 transform hover:scale-125">
-                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                                    class="star-icon text-gray-300 hover:text-orange-500 transition-all duration-200 transform hover:scale-125">
+                                    <svg class="w-12 h-12 max-md:w-8 max-md:h-8" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
                                 </button>
                                 <button type="button" onclick="setRating(5)"
-                                    class="star-icon text-yellow-400 hover:text-yellow-500 transition-all duration-200 transform hover:scale-125">
-                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                                    class="star-icon text-orange-500 hover:text-orange-500 transition-all duration-200 transform hover:scale-125">
+                                    <svg class="w-12 h-12 max-md:w-8 max-md:h-8" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
@@ -1003,9 +1003,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     <!-- Review Text with Character Count -->
                     <div class="group">
                         <label for="reviewText"
-                            class="block text-sm font-semibold text-gray-700 mb-2 flex items-center justify-between">
+                            class="block text-sm font-semibold text-gray-700 mb-2 max-md:mb-1 flex items-center justify-between">
                             <span class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor"
+                                <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
@@ -1016,14 +1016,22 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         </label>
                         <textarea id="reviewText" rows="4" maxlength="500" oninput="updateCharCount()"
                             placeholder="Tell us about your experience. What did you like? What could be improved?"
-                            class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-300 resize-none bg-gray-50 focus:bg-white group-hover:border-gray-300"
+                            class="w-full px-4 py-2 max-md:py-1 border-2 border-gray-200 rounded-md focus:ring focus:ring-orange-500 focus:border-orange-500 outline-none transition-all duration-300 resize-none bg-gray-50 focus:bg-white group-hover:border-gray-300"
                             required></textarea>
                     </div>
 
                     <!-- Submit Button with Gradient -->
-                    <div class="pt-2">
+                    <div class="md:pt-2">
                         <button type="submit"
-                            class="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-bold py-4 rounded-xl hover:shadow-2xl hover:shadow-purple-500/50 transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 relative overflow-hidden group">
+                            class="flex-1 w-full relative rounded-md overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
+                            <span class="relative z-10 flex py-2 px-6 max-md:px-4 max-md:py-1 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
+                                Submit Review
+                            </span>
+                            <span class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
+                            </span>
+                        </button>
+                        <!-- <button type="submit"
+                            class="w-full bg-orange-500 text-white font-bold py-4 max-md:py-2 rounded-xl hover:shadow-2xl transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 relative overflow-hidden group">
                             <span class="relative z-10 flex items-center justify-center gap-2">
                                 Submit Review
                                 <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none"
@@ -1032,17 +1040,14 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                         d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                 </svg>
                             </span>
-                            <div
-                                class="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            </div>
-                        </button>
+                        </button> -->
                     </div>
                 </form>
 
                 <!-- Footer -->
                 <div class="px-8 py-5 bg-gradient-to-r from-gray-50 to-blue-50 border-t border-gray-100">
                     <div class="flex items-center justify-center gap-2 text-sm text-gray-600">
-                        <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
                                 d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                 clip-rule="evenodd" />
@@ -1196,9 +1201,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             starIcons.forEach((star, index) => {
                 if (index < stars) {
                     star.classList.remove('text-gray-300');
-                    star.classList.add('text-yellow-400');
+                    star.classList.add('text-orange-500');
                 } else {
-                    star.classList.remove('text-yellow-400');
+                    star.classList.remove('text-orange-500');
                     star.classList.add('text-gray-300');
                 }
             });
@@ -1218,7 +1223,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     starIcons.forEach((s, i) => {
                         if (i <= index) {
                             s.classList.remove('text-gray-300');
-                            s.classList.add('text-yellow-400');
+                            s.classList.add('text-orange-500');
                         }
                     });
                 });
@@ -1227,10 +1232,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     const currentRating = parseInt(document.getElementById('rating').value);
                     starIcons.forEach((s, i) => {
                         if (i < currentRating) {
-                            s.classList.add('text-yellow-400');
+                            s.classList.add('text-orange-500');
                             s.classList.remove('text-gray-300');
                         } else {
-                            s.classList.remove('text-yellow-400');
+                            s.classList.remove('text-orange-500');
                             s.classList.add('text-gray-300');
                         }
                     });
@@ -1582,7 +1587,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
         // }
 
-        function changeDetailVariant(ele, tp, value, key1,json) {
+        function changeDetailVariant(ele, tp, value, key1, json) {
             // console.log(ele, tp, value, key1)
             updateKey(GLOBAL_product_VARIANT.selected, tp, value);
             let divs = ele.parentElement.querySelectorAll("div")

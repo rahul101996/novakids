@@ -139,7 +139,7 @@ class WebController extends LoginController
                                 ?>
                                     <div class="w-full flex items-center justify-between text-sm">
                                         <div class="flex items-center justify-center gap-2">
-                                            <p class="uppercase text-lg"><?= $key ?></p>
+                                            <p class="uppercase text-lg max-md:text-sm"><?= $key ?></p>
                                             <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded <?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>"><?=$sizeChartValueString?>
                                             </div>
                                         </div>
@@ -173,7 +173,7 @@ class WebController extends LoginController
                                     ?>
                                         <div class="w-full flex items-center justify-between text-sm">
                                             <div class="flex items-center justify-center gap-2">
-                                                <p class="uppercase text-lg"><?= $key ?></p>
+                                                <p class="uppercase text-lg max-md:text-sm"><?= $key ?></p>
                                             </div>
                                         </div>
 
