@@ -172,7 +172,7 @@ $categories = getData("tbl_category");
 
         <div class="flex items-center absolute left-1/2 transform -translate-x-1/2 space-x-7 max-md:hidden">
             <div class="relative group">
-                <a href="/new-arrivals" class="text-gray-800  group duration-300 cursor-pointer">NEW ARRIVALS
+                <a href="/new-arrivals" class="text-gray-800  group duration-300 cursor-pointer <?= $pageTitle == 'New Arrivals' ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>">NEW ARRIVALS
                     <span
                         class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
                     <span
@@ -185,7 +185,7 @@ $categories = getData("tbl_category");
             ?>
                 <div class="relative group">
                     <a href="/category/<?= $category ?>"
-                        class="text-gray-800  group duration-300 cursor-pointer"><?= $value['category'] ?>
+                        class="text-gray-800  group duration-300 cursor-pointer <?= $category ==  '$category' ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>"><?= $value['category'] ?>
                         <span
                             class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
                         <span
@@ -209,10 +209,10 @@ $categories = getData("tbl_category");
                     </svg>
                 </button>
             </div>
-            <!-- <button id="Openvariant">Open Cart</button> -->
+
             <button <?= isset($_SESSION['userid']) && !empty($_SESSION['userid']) ? 'onclick="window.location.href=\'/profile\'"' : 'id="openLogin"' ?>
                 class="nav-text text-black p-2 max-md:p-1 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
-                <div class="max-md:hidden">
+                <div class="max-md:hidden flex items-center justify-center gap-1">
                     <svg class="svgUser2 anarkali-svg-icon" enable-background="new 0 0 512 512" height="24px"
                         viewBox="0 0 512 512" width="24px" xmlns="http://www.w3.org/2000/svg">
                         <g>
@@ -228,6 +228,9 @@ $categories = getData("tbl_category");
                             </g>
                         </g>
                     </svg>
+                    <div>
+                        <div class="font-thin text-xs flex flex-col items-start justify-start "><span class="text-gray-600">Hello,</span><span class="font-semibold uppercase tracking-wider"><?= isset($_SESSION['fname']) ? $_SESSION['fname'].' '.$_SESSION['lname'] : 'Guest' ?></span></div>
+                    </div>
                 </div>
                 <div class="md:hidden">
                     <svg class="svgUser2 anarkali-svg-icon" enable-background="new 0 0 512 512" height="22px"
@@ -294,8 +297,6 @@ $categories = getData("tbl_category");
                     <?= $count ?>
                 </span>
             </div>
-
-
         </div>
     </div>
 </nav>
@@ -314,27 +315,21 @@ $categories = getData("tbl_category");
     <div class="px-4 py-6 space-y-6">
         <div class="space-y-3 flex flex-col">
             <div class="border-b border-gray-200">
-                <p class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium">
-                    New Arrivals
-                </p>
-            </div>
-            <div class="border-b border-gray-200">
-                <p class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium">
-                    Tees
-                </p>
+                <a href="/new-arrivals" class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium">
+                    NEW ARRIVALS
+                </a>
             </div>
 
-            <div class="border-b border-gray-200">
-                <p class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium">
-                    Co-ords
-                </p>
-            </div>
-
-            <div class="border-b border-gray-200">
-                <p class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium">
-                    Joggers
-                </p>
-            </div>
+            <?php
+            foreach ($categories as $key => $value) {
+                $category = strtolower(str_replace(" ", "-", $value['category']));
+            ?>
+                <div class="border-b border-gray-200">
+                    <a href="/category/<?= $category ?>"
+                        class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium"><?= $value['category'] ?>
+                    </a>
+                </div>
+            <?php } ?>
         </div>
 
         <div class="space-y-4">
@@ -732,11 +727,11 @@ $categories = getData("tbl_category");
     const openBtn = document.getElementById('openLogin');
     const closeBtn = document.getElementById('closeLogin');
     const modal = document.getElementById('loginModal');
-
+   if(openBtn){
     openBtn.addEventListener('click', () => {
         modal.classList.remove('hidden');
     });
-
+   }
     function openLogin() {
         console.log("openLogin")
         modal.classList.remove('hidden');

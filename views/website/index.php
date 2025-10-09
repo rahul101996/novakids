@@ -50,7 +50,6 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
         }
     </style>
 
-    <!-- Hero Section -->
     <section
         class="relative h-[88vh] max-md:h-[90vh] flex items-center bg-gradient-to-r from-red-800 to-black overflow-hidden">
         <!-- Background Image Overlay -->
@@ -83,7 +82,125 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
             #GenZStyle
         </p>
     </section>
-    <div class="owl-carousel owl-theme Home-Carousel h-auto w-[100vw] relative">
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        .myBanner {
+            width: 100vw;
+            height: 60vh;
+        }
+
+        .swiper-slide {
+            transition: transform 1.5s ease, opacity 1.5s ease;
+        }
+
+        .swiper-slide-active {
+            transform: scale(1.05);
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .swiper-slide-next,
+        .swiper-slide-prev {
+            opacity: 0.7;
+            transform: scale(0.95);
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .swiper-pagination {
+            bottom: 20px !important;
+        }
+
+        .swiper-pagination-bullet {
+            background: rgba(255, 255, 255, 0.6);
+            opacity: 1;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+            .myBanner {
+                height: 70vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .myBanner {
+                height: 60vh;
+            }
+        }
+    </style>
+
+    <div class="swiper myBanner">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="/public/home-banner/homepage_copy_26.avif" alt="">
+            </div>
+            <div class="swiper-slide">
+                <img src="/public/home-banner/homepage_17_U90OqZq.avif" alt="">
+            </div>
+            <div class="swiper-slide">
+                <img src="/public/home-banner/homepage_12_V3Auyr2.avif" alt="">
+            </div>
+            <div class="swiper-slide">
+                <img src="/public/home-banner/homepage_copy_26.avif" alt="">
+            </div>
+            <div class="swiper-slide">
+                <img src="/public/home-banner/homepage_17_U90OqZq.avif" alt="">
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper(".myBanner", {
+            slidesPerView: 3,
+            centeredSlides: true,
+            spaceBetween: 10,
+            loop: true,
+            speed: 3000,
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: false,
+            },
+            allowTouchMove: true,
+            grabCursor: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                    centeredSlides: true,
+                    spaceBetween: 10,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                },
+            },
+        });
+    </script>
+
+
+
+    <!-- <div class="owl-carousel owl-theme Home-Carousel h-auto w-[100vw] relative">
         <div class="w-full h-full">
             <img src="/public/home-banner/homepage_copy_26.avif" class="w-full h-full" alt="">
         </div>
@@ -95,7 +212,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
         </div>
     </div>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".Home-Carousel").owlCarousel({
                 items: 1,
                 loop: true,
@@ -106,34 +223,35 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
             });
 
         });
-    </script>
+    </script> -->
 
     <style>
-        /* Place nav buttons below the carousel */
-        .new-arrival-carousel .owl-nav {
+        .newarrivalcarousel .owl-nav {
             position: absolute;
             top: -55px;
-            /* push below blog cards */
             left: 96%;
             transform: translateX(-50%);
             display: flex;
             gap: 10px;
         }
 
-        /* Style smaller buttons */
-        .new-arrival-carousel .owl-nav button span {
-            font-size: 16px;
-            padding: 6px 10px;
+        .newarrivalcarousel .owl-nav button span {
+            font-size: 20px;
+            padding: 2px 10px;
             background: #000000ff;
-            /* Tailwind pink-500 */
             color: white;
             border-radius: 9999px;
-            /* fully rounded */
             transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .newarrivalcarousel .owl-nav button:hover span {
+            background: #000000ff !important;  
+            color: white;
         }
 
         @media (max-width: 768px) {
-            .new-arrival-carousel .owl-nav {
+            .newarrivalcarousel .owl-nav {
                 height: auto;
                 top: 350px;
                 left: 50%;
@@ -153,8 +271,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
             </div>
 
             <div class="relative">
-                <div class="owl-carousel owl-theme new-arrival-carousel">
-                    <!-- Product 2 -->
+                <div class="owl-carousel owl-theme newarrivalcarousel">
                     <?php
 
                     foreach (getData2("SELECT * FROM `tbl_products` WHERE `status` = 1 AND `new_arrival` = 1 ORDER BY `id` DESC LIMIT 8") as $key => $product) {
@@ -183,7 +300,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                             }
                         }
                         // printWithPre($images);
-                        ?>
+                    ?>
                         <a href="/products/product-details/<?= $name ?>" class="block">
                             <div class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
@@ -232,7 +349,6 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                                 </div>
                             </div>
                         </a>
-
                     <?php } ?>
                 </div>
             </div>
@@ -259,7 +375,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
             foreach ($categories as $key => $category) {
 
 
-                ?>
+            ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
                     <a href="/category/<?= strtolower(str_replace(' ', '-', $category['category'])) ?>">
@@ -471,7 +587,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                             }
                         }
 
-                        ?>
+                    ?>
                         <a href="products/product-details/<?= $name ?>" class="block">
                             <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
                                 <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden">
@@ -521,7 +637,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                                 </div>
                             </div>
                         </a>
-                        <?php
+                    <?php
                     }
                     ?>
                 </div>
@@ -568,9 +684,9 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                         foreach ($offerheading as $key => $value) { ?>
                             <span>#</span>
                             <span><?= $value['title'] ?></span>
-                        <?php }
+                    <?php }
                     } ?>
-                    
+
                 </div>
             </div>
         </div>
@@ -771,9 +887,9 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
         // printWithPre($popup);
         if (count($popup) > 0) {
             // $popup = $popup[0];
-    
 
-            ?>
+
+    ?>
             <div id="newsletterModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
                 <!-- Modal Content -->
                 <div class="bg-white shadow-lg w-full w-[35vw] max-md:w-[85vw] relative animate-slideDown">
@@ -825,7 +941,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                     </div>
                 </div>
             </div>
-        <?php }
+    <?php }
     } ?>
     <script>
         async function close_popup() {
@@ -834,19 +950,20 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
             }));
             console.log(request.data)
         }
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const modal = document.getElementById('newsletterModal');
             const closeBtn = document.getElementById('closeModal');
             const noPopupCheckbox = document.getElementById('noPopup');
 
             // Show modal after 3s unless "Don't show again" is checked for this session
-            if (!sessionStorage.getItem('hideNewsletterModal')) {
-                setTimeout(() => {
-                    modal.classList.remove('hidden');
-                }, 3000);
-            }
+            // if (!sessionStorage.getItem('hideNewsletterModal')) {
+            //     setTimeout(() => {
+            //         modal.classList.remove('hidden');
+            //     }, 3000);
+            // }
 
             // Close modal
+            if(closeBtn){
             closeBtn.addEventListener('click', () => {
                 modal.classList.add('hidden');
                 // if (noPopupCheckbox.checked) {
@@ -854,7 +971,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                 // }
                 close_popup();
             });
-
+        }
             // Close modal if clicked outside content
             window.addEventListener('click', (e) => {
                 if (e.target === modal) {
@@ -869,8 +986,8 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
 
 
     <script>
-        $(document).ready(function () {
-            $(".new-arrival-carousel").owlCarousel({
+        $(document).ready(function() {
+            $(".newarrivalcarousel").owlCarousel({
                 loop: true,
                 margin: 5,
                 nav: true,

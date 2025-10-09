@@ -19,7 +19,7 @@
         </ol>
     </div>
 
-    <div class="max-w-3xl mx-auto px-4 pb-12">
+    <div class="max-w-3xl mx-auto px-4 py-12">
         <h1 class="text-4xl font-semibold mb-2">Returns & Exchanges</h1>
         <p class="text-gray-500 mb-8">
             Everything you need to know about returning or exchanging your Nova Universe clothing.

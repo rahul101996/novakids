@@ -445,7 +445,13 @@ function add($data, $table, $timestamp = true)
         $data["created_date"] = (isset($data["created_date"]) ? $data["created_date"] : date("Y-m-d"));
         $data["created_time"] = date("H:i:s");
         $data["created_at"] = (isset($data["created_at"]) ? $data["created_at"] : date("Y-m-d H:i:s"));
-        $data["created_by"] = (isset($data["created_by"])) ? $data["created_by"] : $_SESSION["id"];
+        if (isset($data["created_by"])) {
+            $data["created_by"] = $data["created_by"];
+        } elseif (isset($_SESSION["id"])) {
+            $data["created_by"] = $_SESSION["id"];
+        } elseif (isset($_SESSION["userid"])) {
+            $data["created_by"] = $_SESSION["userid"];
+        }
     }
 
     $columns = implode(", ", array_keys($data));
@@ -550,7 +556,7 @@ function SendOrderMail($purchase_id)
             tbl_variants.images as variant_images, tbl_variants.options as variant_options, tbl_variants.price as variant_price FROM `tbl_purchase_item` LEFT JOIN tbl_products ON tbl_purchase_item.product = tbl_products.id LEFT JOIN tbl_variants ON tbl_purchase_item.varient = tbl_variants.id WHERE tbl_purchase_item.purchase_id = '$purchase_id' ORDER BY tbl_purchase_item.id DESC");
 
     // printWithPre($products);
-     ob_start();
+    ob_start();
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -711,7 +717,7 @@ function SendOrderMail($purchase_id)
     </html>
 <?php
     $html = ob_get_clean();
-    sendOfficialMail($OrderDetails['email'], $OrderDetails['fname'] . " " . $OrderDetails['lname'], "Order Confirmation", $html,[],'sarveshgandhere2002@gmal.com', 'Sarvesh Gandhere');
+    sendOfficialMail($OrderDetails['email'], $OrderDetails['fname'] . " " . $OrderDetails['lname'], "Order Confirmation", $html, [], 'sarveshgandhere2002@gmal.com', 'Sarvesh Gandhere');
 }
 function updateSQL($data, $table, $sql)
 {

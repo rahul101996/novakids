@@ -80,7 +80,7 @@
                 </div>
             </div>
 
-
+ 
             <!-- Cart item -->
             <div class="flex items-start w-full justify-start flex-col" id="cartItems">
                 <div class="flex items-center gap-4 border-b py-2">
@@ -523,8 +523,8 @@
             addToCartBtn.forEach(function(btn) {
                 btn.addEventListener('click', async function(event) {
                     console.log("hello");
-                    event.preventDefault();
-                    event.stopPropagation();
+                    // event.preventDefault();
+                    // event.stopPropagation();
                     // 
                     let ee = btn.parentElement
                     // showVarients(ee.querySelector(".ProductId").value);
@@ -625,7 +625,7 @@
         }
     }
 
-    function changeSideVariant(ele, tp, value, key1) {
+    function changeSideVariant(ele, tp, value, key1,json) {
         console.log(ele, tp, value, key1)
         updateKey(GLOBAL_VARIANT.selected, tp, value);
         let divs = ele.parentElement.querySelectorAll("div")
@@ -821,5 +821,14 @@
         let percentage = total * parseFloat(response.data.price) / 100;
         console.log(percentage)
         return total
+    }
+
+    async function showSizeChart(id){
+        let res= await fetch(`/api/getSizeChart?id=${id}`)
+        res = await res.json();
+        if(res.success){
+            document.getElementById('sizeChartModal').innerHTML=res.data;
+            document.getElementById('sizeChartModal').classList.remove('hidden')
+        }
     }
 </script>

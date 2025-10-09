@@ -183,7 +183,7 @@
         }
     </style>
 
-    <!-- Hero Section with Background Images -->
+
     <div class="relative py-10 px-6 bg-gray-100 overflow-hidden">
 
         <div class="max-w-7xl mx-auto relative z-10">
@@ -191,7 +191,7 @@
                 <div class="inline-block mb-4 px-6 py-2 bg-black text-white text-xs font-bold tracking-widest rounded-full">
                     LET'S CONNECT
                 </div>
-                <h1 class="text-6xl md:text-8xl font-black mb-6 tracking-tighter leading-none">
+                <h1 class="text-5xl md:text-8xl font-black mb-6 tracking-tighter leading-none">
                     Get In Touch
 
                 </h1>
@@ -204,28 +204,28 @@
 
     <!-- <div class="w-full h-px bg-gradient-to-r from-transparent via-black to-transparent"></div> -->
 
-    <div class="w-full bg-gray-100 flex flex-col sm:flex-row items-center justify-center gap-24 py-6 ">
+    <div class="w-full max-md:px-12 bg-gray-100 flex flex-col sm:flex-row items-center justify-center max-md:justify-start max-md:items-start gap-24 py-6 max-md:gap-4 max-md:py-2 ">
 
         <!-- Address -->
-        <div class="flex flex-col items-center text-center">
-            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-black text-white text-2xl mb-3 shadow-lg">
-                <i class="fa-solid fa-location-dot"></i>
+        <div class="flex flex-col items-center text-center max-md:flex-row max-md:gap-4 max-md:items-start">
+            <div class="w-16 h-16 max-md:w-8 max-md:h-8  flex items-center justify-center rounded-full bg-black text-white text-2xl mb-3 shadow-lg">
+                <i class="fa-solid fa-location-dot max-md:text-xs"></i>
             </div>
             <p class="text-gray-700 font-medium">123 Main Street City, Country</p>
         </div>
 
         <!-- Call -->
-        <div class="flex flex-col items-center text-center">
-            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-black text-white text-2xl mb-3 shadow-lg">
-                <i class="fa-solid fa-phone"></i>
+        <div class="flex flex-col items-center text-center max-md:flex-row max-md:gap-4 max-md:items-start">
+            <div class="w-16 h-16 max-md:w-8 max-md:h-8  flex items-center justify-center rounded-full bg-black text-white text-2xl mb-3 shadow-lg">
+                <i class="fa-solid fa-phone max-md:text-xs"></i>
             </div>
             <p class="text-gray-700 font-medium">+1 (555) 000-0000</p>
         </div>
 
         <!-- Email -->
-        <div class="flex flex-col items-center text-center">
-            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-black text-white text-2xl mb-3 shadow-lg">
-                <i class="fa-solid fa-envelope"></i>
+        <div class="flex flex-col items-center text-center max-md:flex-row max-md:gap-4 max-md:items-start">
+            <div class="w-16 h-16 max-md:w-8 max-md:h-8  flex items-center justify-center rounded-full bg-black text-white text-2xl mb-3 shadow-lg">
+                <i class="fa-solid fa-envelope max-md:text-xs"></i>
             </div>
             <p class="text-gray-700 font-medium">info@example.com</p>
         </div>
@@ -235,20 +235,20 @@
 
 
 
-    <!-- Main Content Grid with Product Images -->
-    <div class="w-[85%] mx-auto  py-10">
-        <div class="grid grid-cols-2 gap-10">
 
-            <!-- Left Column - Product Images Showcase -->
+    <div class="w-[85%] mx-auto  py-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+
             <div class=" space-y-6">
 
-                <!-- Large Featured Image -->
-                <div class="animate-slideInLeft delay-100 image-overlay rounded-3xl overflow-hidden relative h-full  bg-gradient-to-br from-gray-900 to-gray-600">
-                    <img src="/public/images/5.webp" alt="Product Image" class="absolute inset-0 w-full h-full object-cover rounded-3xl">
+
+                <div class="animate-slideInLeft delay-100 image-overlay rounded-3xl overflow-hidden relative h-full  max-md:h-[40vh]  bg-gradient-to-br from-gray-900 to-gray-600">
+                    <img src="/public/images/5.webp" alt="Product Image" class="w-full h-full object-cover rounded-3xl max-md:object-top">
                 </div>
 
 
-                <!-- Two Column Grid -->
+
                 <!-- <div class="grid grid-cols-2 gap-6">
                     <div class="animate-slideInLeft delay-200 image-overlay rounded-3xl h-64 bg-gradient-to-br from-gray-700 to-gray-500 relative overflow-hidden">
                         <div class="absolute inset-0 flex items-center justify-center">
@@ -263,11 +263,10 @@
                 </div> -->
             </div>
 
-            <!-- Right Column - Contact Form & Info -->
             <div class=" space-y-6 ">
 
-                <!-- Contact Form -->
-                <div class="animate-slideInRight delay-200 bg-white rounded-3xl px-12 py-8">
+
+                <div class="animate-slideInRight delay-200 bg-white rounded-3xl px-12 py-8 max-md:px-0 max-md:py-0">
                     <h2 class="text-4xl font-black mb-8 tracking-tight uppercase">Send us a message</h2>
 
                     <div class="space-y-3">

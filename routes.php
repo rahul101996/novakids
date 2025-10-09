@@ -19,6 +19,7 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('checkout', 'checkout');
     $route->route('contact', 'ContactUs');
     $route->route('contact2', 'ContactUs2');
+    $route->route('about', 'AboutUs');
     $route->route('wishlist', 'wishlist');
     $route->route('return-exchange', 'returnExchange');
     $route->route('size-guide', 'sizeGuide');
@@ -102,8 +103,9 @@ $route->group(['', 'ProductController', 'auth'], function ($route) {
 
 
     $route->route('/api/new_arrival/status', 'ChangeNewArrivalStatus');
-    $route->route('/api/product/status', 'ChangeProductStatus');
+    $route->route('/api/getSizeChart', 'getSizeChart');
 
+    $route->route('/api/product/status', 'ChangeProductStatus');
 });
 
 $route->group(['', 'CustomerController', 'auth'], function ($route) {
@@ -119,9 +121,8 @@ $route->group(['', 'CustomerController', 'auth'], function ($route) {
 });
 
 $route->group(['notify', 'NotificationController', 'auth'], function ($route) {
-    
-    $route->route('', 'index');
 
+    $route->route('', 'index');
 });
 
 $route->group(['', 'CouponController', 'auth'], function ($route) {
@@ -162,7 +163,6 @@ $route->group(['', 'PackageController', 'auth'], function ($route) {
     $route->route('/edit-package/[i:id]', 'index');
     $route->route('/delete-package/[i:id]', 'DeleteCategory');
     $route->route('/admin/free-shipping', 'FreeShipping');
-
 });
 
 $route->group(['', 'DashboardController', 'auth'], function ($route) {
@@ -186,7 +186,6 @@ $route->group(['', 'WebsettingController', 'auth'], function ($route) {
     $route->route('/admin/front-cms/offer-heading/add', 'offer_heading_add');
     $route->route('/admin/front-cms/offer-heading/edit/[i:id]', 'offer_heading_add');
     $route->route('/admin/front-cms/offer-heading/delete/[i:id]', 'offer_heading_delete');
-
 });
 
 $route->group(['master', 'MasterController', 'auth'], function ($route) {

@@ -13,8 +13,7 @@ $byCategory = $category_name ?? 'new_arrivals';
     <!-- Main Container -->
     <div class="w-full mx-auto">
         <div class="flex flex-col gap-6 w-full">
-
-            <div class="flex items-center justify-between border-b p-6 sticky top-16 h-fit bg-white z-40 w-full">
+            <div class="flex items-center justify-between border-b p-6 max-md:p-4 sticky top-16 h-fit bg-white z-40 w-full">
                 <div class="flex items-center justify-between w-[90vw] mx-auto">
                     <div class="flex max-md:flex-col items-start gap-4 text-sm">
                         <button id="filterToggle"
@@ -39,7 +38,6 @@ $byCategory = $category_name ?? 'new_arrivals';
                             <option value="newest">Newest</option>
                         </select>
                     </div>
-
                 </div>
             </div>
 
@@ -95,7 +93,8 @@ $byCategory = $category_name ?? 'new_arrivals';
             </div>
 
             <main class="md:col-span-3 w-[90vw] mx-auto pb-16">
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 max-md:gap-3" id="product-grid">
+                <!-- Product Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 max-md:gap-5" id="product-grid">
 
                 </div>
             </main>

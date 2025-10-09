@@ -15,7 +15,7 @@
                 <div class="bg-gray-50 p-8 md:p-12 relative shadow-lg">
                     <div class="relative z-10 w-[80%] mx-auto">
                         <h1 class="text-4xl md:text-6xl font-bold mb-6 text-gray-900">Contact Us</h1>
-                        <p class="text-gray-600 mb-12 leading-relaxed text-sm w-1/2">
+                        <p class="text-gray-600 mb-12 leading-relaxed text-sm w-3/4">
                             Have questions about our collections or need assistance? Reach out to us and our team will be happy to help!
                         </p>
 
