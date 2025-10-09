@@ -303,6 +303,7 @@ class WebController extends LoginController
     }
     public function NewArrivals()
     {
+        $pageTitle = "New Arrivals";
         // echo $category;
         $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id");
         // printWithPre($products); 
