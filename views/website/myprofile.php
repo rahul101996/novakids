@@ -169,8 +169,8 @@ if (isset($_POST['update_profile'])) {
                         <img src="/public/icons/forward-black.png" class="h-4" alt="">
 
                     </div>
-                     <div onclick="showPart('Wishlist',this)"
-                        class="flex items-center justify-between gap-3 px-5 py-2 hover:bg-gray-100  sidenav " id="ShowWishlist">
+                    <div onclick="showPart('Rate&Review',this)"
+                        class="flex items-center justify-between gap-3 px-5 py-2 hover:bg-gray-100  sidenav " id="ShowRate">
                         <div class="flex items-center justify-center gap-3">
 
                             <div class="text-2xl py-1">
@@ -255,7 +255,7 @@ if (isset($_POST['update_profile'])) {
                     </div>
 
                     <div onclick="showPart('setting', this)"
-                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 rounded-lg sidenav" >
+                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 rounded-lg sidenav">
                         <span class="text-xl">⚙️</span>
                         <span>Settings</span>
                     </div>
@@ -320,7 +320,7 @@ if (isset($_POST['update_profile'])) {
                 <div class="w-full flex flex-col items-center justify-center overview showpart">
                     <div class="w-full flex items-start justify-start flex-col relative h-[40vh]">
                         <img src="/public/images/myprofile-bg.webp" class="w-full h-full object-cover" alt="">
-                        <div class="w-full h-full flex flex-col items-start justify-start absolute top-0 left-0 text-white z-10 p-2">
+                        <div class="w-full h-full flex flex-col items-start justify-start absolute top-0 left-0 text-white z-10 p-3">
                             <div class="w-full flex items-end justify-between">
                                 <span>Welcome, <span class="font-semibold text-lg"><?= $userData['fname'] ?></span></span>
                                 <img src="/public/logos/logo-white.png" class="h-12" alt="">
@@ -329,11 +329,11 @@ if (isset($_POST['update_profile'])) {
                             <p class="text-sm mt-4 flex items-center gap-2"><svg class="svgLove anarkali-svg-icon" width="18px" height="18px" fill="white" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <path d="m29.55 6.509c-1.73-2.302-3.759-3.483-6.031-3.509h-.076c-3.29 0-6.124 2.469-7.443 3.84-1.32-1.371-4.153-3.84-7.444-3.84h-.075c-2.273.026-4.3 1.207-6.059 3.549a8.265 8.265 0 0 0 1.057 10.522l11.821 11.641a1 1 0 0 0 1.4 0l11.82-11.641a8.278 8.278 0 0 0 1.03-10.562zm-2.432 9.137-11.118 10.954-11.118-10.954a6.254 6.254 0 0 1 -.832-7.936c1.335-1.777 2.831-2.689 4.45-2.71h.058c3.48 0 6.627 3.924 6.658 3.964a1.037 1.037 0 0 0 1.57 0c.032-.04 3.2-4.052 6.716-3.964a5.723 5.723 0 0 1 4.421 2.67 6.265 6.265 0 0 1 -.805 7.976z">
                                     </path>
-                                </svg><?= $TotalWishlist ?> items in your wishlist. <span class="underline italic">Click Here</span> to view</p>
+                                </svg><?= $TotalWishlist ?> items in your wishlist. <span class="underline italic cursor-pointer" onclick="showPart('Wishlist',document.getElementById('ShowWishlist'))">Click Here</span> to view</p>
                             <p class="text-sm mt-1 flex items-center gap-2"><svg class="shopBag anarkali-svg-icon" width="18px" height="18px" fill="white" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <path d="m26 8.9a1 1 0 0 0 -1-.9h-3a6 6 0 0 0 -12 0h-3a1 1 0 0 0 -1 .9l-1.78 17.8a3 3 0 0 0 .78 2.3 3 3 0 0 0 2.22 1h17.57a3 3 0 0 0 2.21-1 3 3 0 0 0 .77-2.31zm-10-4.9a4 4 0 0 1 4 4h-8a4 4 0 0 1 4-4zm9.53 23.67a1 1 0 0 1 -.74.33h-17.58a1 1 0 0 1 -.74-.33 1 1 0 0 1 -.26-.77l1.7-16.9h2.09v3a1 1 0 0 0 2 0v-3h8v3a1 1 0 0 0 2 0v-3h2.09l1.7 16.9a1 1 0 0 1 -.26.77z">
                                     </path>
-                                </svg><?= $TotalOrders ?> orders. <span class="underline italic">Click Here</span> to view</p>
+                                </svg><?= $TotalOrders ?> orders. <span class="underline italic cursor-pointer" onclick="showPart('myorders',document.getElementById('ShowOrders'))">Click Here</span> to view</p>
                             <div class="w-full">
                                 <h2 class="uppercase  mt-4">Default Address</h2>
                                 <p class="text-sm"><?= $ActiveuserAddress['address_line1'] ?> <?= $ActiveuserAddress['address_line2'] ?></p>
@@ -370,7 +370,7 @@ if (isset($_POST['update_profile'])) {
 
 
                         <!-- Rate & Review -->
-                        <div onclick="showPart('Rate&Review',document.getElementById('ShowAddress'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition">
+                        <div onclick="showPart('Rate&Review',document.getElementById('ShowRate'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition">
                             <i class="fas fa-star text-3xl mb-3"></i>
                             <h3 class="font-semibold text-lg text-gray-800">Rate & Review</h3>
                             <p class="text-gray-500 text-sm mt-1 text-center">Share your feedback and experiences</p>
@@ -390,7 +390,48 @@ if (isset($_POST['update_profile'])) {
                     </div>
 
                 </div>
-                <div class="w-full flex flex-col items-center justify-center Wishlist showpart hidden" >
+                <div class="w-full flex flex-col items-center justify-center Rate&Review showpart hidden">
+                    <h2 class="text-2xl font-semibold uppercase">Rate & Review</h2>
+                    <?php
+                    foreach (getData2("SELECT tbl_product_review.*, tbl_products.name as product_name  FROM `tbl_product_review` LEFT JOIN tbl_products ON tbl_product_review.product_id = tbl_products.id where tbl_product_review.userid= $_SESSION[userid]") as $review) {
+                        $name = str_replace(' ', '-', $review['product_name']);
+                        $name = str_replace("'", '', $name);
+                    ?>
+                        <div class="border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition mt-2 w-full">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-medium">
+                                        R
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800"><?= $_SESSION['fname'] ?> <?= $_SESSION['lname'] ?></h4>
+                                        <p class="text-sm text-gray-500">Reviewed on <?= formatDate($review['created_at']) ?></p>
+                                    </div>
+                                </div>
+                                <!-- Rating Stars -->
+                                <div class="flex items-center text-yellow-500">
+                                    <?php
+                                    $averageRating = round($review['rating'], 1);
+                                    for ($i = 0; $i < floor($averageRating); $i++): ?>
+                                        <i class="fas fa-star"></i>
+                                    <?php endfor; ?>
+                                </div>
+                            </div>
+
+                            <p class="mt-4 text-gray-700 leading-relaxed">
+                                <?= $review['reviewText'] ?>
+                            </p>
+
+                            <div class="mt-4 flex items-center gap-4 text-sm text-gray-500">
+                                <a href="/products/product-details/<?= $name ?>" class="flex items-center hover:text-custom-pink transition bg-black text-white py-2 px-4 rounded-md">
+                                    View Product
+                                </a>
+
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+                <div class="w-full flex flex-col items-center justify-center Wishlist showpart hidden">
                     <?php
 
                     if (empty($wishlists)) {
@@ -852,11 +893,22 @@ if (isset($_POST['update_profile'])) {
 
 
             function openModal1(id = null) {
-                console.log("hello");
+                // console.log("hello");
                 addressmodal.classList.add('show');
                 addressmodal.classList.remove('hidden');
+                if (id == null) {
+                    addressInput1.value = '';
+                    addressInput2.value = '';
+                    cityInput.value = '';
+                    // document.getElementById("state").value = state;
+                    stateInput.value = '';
+                    pincodeInput.value = '';
+                    buttonValue.value = '';
+                    defaultAddress.checked = false;
 
-                console.log(addressmodal);
+
+                }
+                // console.log(addressmodal);
 
                 // modal.style.display = 'block';
                 backdrop.classList.add('show');
@@ -881,7 +933,11 @@ if (isset($_POST['update_profile'])) {
                 let delivery = '';
 
                 console.log('this is delevry value' + delivery)
-
+                if (defaultAddress.checked) {
+                    status = 1;
+                } else {
+                    status = 0;
+                }
                 const response = await axios.post("/user-address", new URLSearchParams({
                     process: buttonValue.value,
                     address_line1: addressInput1.value,
@@ -891,6 +947,9 @@ if (isset($_POST['update_profile'])) {
                     pincode: pincodeInput.value,
                     userid: '<?php echo $_SESSION['userid']; ?>',
                     created_by: '<?php echo $_SESSION['userid']; ?>',
+                    status: status,
+
+
 
                 }))
 
