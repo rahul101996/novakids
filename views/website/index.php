@@ -157,7 +157,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                     <!-- Product 2 -->
                     <?php
 
-                    foreach ($products as $key => $product) {
+                    foreach (getData2("SELECT * FROM `tbl_products` WHERE `status` = 1 AND `new_arrival` = 1 ORDER BY `id` DESC LIMIT 8") as $key => $product) {
                         $images = json_decode($product['product_images'], true);
                         $images = array_reverse($images);
                         $SecondImage = true;
@@ -428,6 +428,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
     </section>
 
     <?php foreach (getData2("SELECT * FROM `tbl_collection` WHERE `status` = 1") as $key => $value) { ?>
+
         <section class="bg-white py-14 max-md:py-8 w-full relative overflow-hidden">
             <div class="absolute hidden -top-12 -right-14 max-md:-right-8 max-md:-top-10 w-auto h-auto opacity-20">
                 <img src="/public/images/net.webp" alt="" class="w-48 max-md:w-32 h-auto">
@@ -446,7 +447,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                     $productIds = json_decode($value['products'], true);
                     foreach ($productIds as $key => $product) {
 
-                        $product_details = getData2("SELECT * FROM `tbl_products` WHERE `id`='$product'")[0];
+                        $product_details = getData2("SELECT * FROM `tbl_products` WHERE `id`='$product' AND `status` = 1")[0];
                         if (empty($product_details))
                             continue;
                         $images = json_decode($product_details['product_images'], true);
