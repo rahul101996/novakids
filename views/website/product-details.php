@@ -647,9 +647,14 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 </div>
 
                 <div class="w-[80%] max-md:w-[90%] flex items-center justify-center">
-                    <div class="owl-carousel reviews-sliders w-full">
+                    <?php 
+                    $reviws = getData2("SELECT tpr.*, ous.username, ous.fname, ous.lname, ous.mobile FROM `tbl_product_review` tpr LEFT JOIN online_users ous ON tpr.userid = ous.id WHERE 1 AND tpr.product_id = $ProductData[id] AND tpr.status = 1");
+                    if(count($reviws)>1){
+                        ?>
+                        
+                        <div class="owl-carousel reviews-sliders w-full">
                         <?php
-                        foreach (getData2("SELECT tpr.*, ous.username, ous.fname, ous.lname, ous.mobile FROM `tbl_product_review` tpr LEFT JOIN online_users ous ON tpr.userid = ous.id WHERE 1 AND tpr.product_id = $ProductData[id] AND tpr.status = 1") as $key => $value) { ?>
+                        foreach ($reviws as $key => $value) { ?>
 
                             <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
                                 <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
@@ -691,6 +696,50 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         <?php } ?>
 
                     </div>
+                        <?php
+                    }else{
+                        $value = $reviws[0]; 
+                        ?>
+                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                                <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                    <span> <?php for ($i = 0; $i < 5; $i++) {
+                                                if ($value['rating'] > $i) {
+                                                    echo '★';
+                                                } else {
+                                                    echo '☆';
+                                                }
+                                            } ?></span>
+                                    <style>
+                                        .review-text {
+                                            display: -webkit-box;
+                                            -webkit-line-clamp: 4;
+                                            /* show only 4 lines */
+                                            -webkit-box-orient: vertical;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                        }
+                                    </style>
+                                    <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                        "<?= $value['reviewText'] ?>"
+                                    </p>
+                                </div>
+
+                                <div class="flex gap-4 items-center">
+                                    <div class="flex items-center w-10 h-10">
+                                        <img src="/public/images/dp.png" alt="John D."
+                                            class="w-full h-full rounded-full object-cover border mr-3">
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">
+                                            <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                    }
+                    ?>
+                    
                 </div>
             </div>
         </div>
