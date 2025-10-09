@@ -172,7 +172,7 @@ $categories = getData("tbl_category");
 
         <div class="flex items-center absolute left-1/2 transform -translate-x-1/2 space-x-7 max-md:hidden">
             <div class="relative group">
-                <a href="/new-arrivals" class="text-gray-800  group duration-300 cursor-pointer <?=  $pageTitle == 'New Arrivals' ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>">NEW ARRIVALS
+                <a href="/new-arrivals" class="text-gray-800  group duration-300 cursor-pointer <?= $pageTitle == 'New Arrivals' ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>">NEW ARRIVALS
                     <span
                         class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
                     <span
@@ -312,27 +312,21 @@ $categories = getData("tbl_category");
     <div class="px-4 py-6 space-y-6">
         <div class="space-y-3 flex flex-col">
             <div class="border-b border-gray-200">
-                <p class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium">
-                    New Arrivals
-                </p>
-            </div>
-            <div class="border-b border-gray-200">
-                <p class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium">
-                    Tees
-                </p>
+                <a href="/new-arrivals" class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium">
+                    NEW ARRIVALS
+                </a>
             </div>
 
-            <div class="border-b border-gray-200">
-                <p class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium">
-                    Co-ords
-                </p>
-            </div>
-
-            <div class="border-b border-gray-200">
-                <p class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium">
-                    Joggers
-                </p>
-            </div>
+            <?php
+            foreach ($categories as $key => $value) {
+                $category = strtolower(str_replace(" ", "-", $value['category']));
+            ?>
+                <div class="border-b border-gray-200">
+                    <a href="/category/<?= $category ?>"
+                        class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium"><?= $value['category'] ?>
+                    </a>
+                </div>
+            <?php } ?>
         </div>
 
         <div class="space-y-4">

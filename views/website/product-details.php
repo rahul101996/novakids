@@ -69,26 +69,21 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         }
     </style>
     <style>
-        /* Place nav buttons below the carousel */
         .like-carousel .owl-nav {
             position: absolute;
             top: -60px;
-            /* push below blog cards */
             left: 90%;
             transform: translateX(-50%);
             display: flex;
             gap: 10px;
         }
 
-        /* Style smaller buttons */
         .like-carousel .owl-nav button span {
             font-size: 16px;
             padding: 6px 10px;
             background: #000000ff;
-            /* Tailwind pink-500 */
             color: white;
             border-radius: 9999px;
-            /* fully rounded */
             transition: all 0.3s ease;
         }
     </style>
@@ -652,47 +647,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 </div>
 
                 <div class="w-[80%] flex items-center justify-center">
-                    <div class="grid grid-cols-2 max-md:grid-cols-1 w-full">
-                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                                <span> ★★★★★</span>
-                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                    "Amazing quality and fast delivery! The packaging was premium and the product
-                                    feels
-                                    luxurious."
-                                </p>
-                            </div>
-                            <div class="flex gap-4 items-center w-full">
-                                <div class="flex items-center w-10 h-10">
-                                    <img src="/public/images/dp.png" alt="John D."
-                                        class="w-full h-full rounded-full object-cover border mr-3">
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-gray-800">John D.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                                <span> ★★★★★</span>
-                                <p class="text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                    "Loved the fabric and the trendy style! Feels super comfortable and stylish at the
-                                    same
-                                    time."
-                                </p>
-                            </div>
-                            <div class="flex gap-4 items-center">
-                                <div class="flex items-center w-10 h-10">
-                                    <img src="/public/images/dp.png" alt="John D."
-                                        class="w-full h-full rounded-full object-cover border mr-3">
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-gray-800">Sarah M.</p>
-                                </div>
-                            </div>
-                        </div>
-
+                    <div class="owl-carousel reviews-sliders w-full">
                         <?php
                         foreach (getData2("SELECT tpr.*, ous.username, ous.fname, ous.lname, ous.mobile FROM `tbl_product_review` tpr LEFT JOIN online_users ous ON tpr.userid = ous.id WHERE 1 AND tpr.product_id = $ProductData[id] AND tpr.status = 1") as $key => $value) { ?>
 
@@ -739,6 +694,27 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 </div>
             </div>
         </div>
+
+        <script>
+            $(document).ready(function() {
+                $(".reviews-sliders").owlCarousel({
+                    loop: true,
+                    autoplay: true,
+                    autoplayTimeout: 3000,
+                    smartSpeed: 1000,
+                    // slideTransition: "linear",
+                    responsive: {
+                        0: { 
+                            items: 1
+                        },
+                        768: { 
+                            items: 2
+                        }
+                    }
+                });
+            });
+        </script>
+
 
         <section class="bg-white py-14 max-md:py-8 w-full">
             <div class="w-[90vw] max-md:w-[90vw] mx-auto">
@@ -1262,9 +1238,6 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             });
         });
     </script>
-
-
-
 
     <script>
         $(document).ready(function() {

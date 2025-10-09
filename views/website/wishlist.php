@@ -78,7 +78,7 @@ $page = 'Wishlist';
                             <div
                                 class="group relative  cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
-                                <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
+                                <span class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">
                                     SAVE <?= $discountPercentage ?>%
                                 </span>
 
@@ -95,8 +95,8 @@ $page = 'Wishlist';
 
                                     <!-- Add to favorites Icon (top-right) -->
                                     <button
-                                        class="addToWishlistBtn absolute top-2 right-3 bg-[#f25b21] text-white h-10 w-10 rounded-full  group-hover:opacity-100 z-20 stop-link">
-                                        <i class="fas fa-heart"></i>
+                                        class="addToWishlistBtn absolute top-2 right-3 bg-[#f25b21] text-white h-10 w-10 max-md:h-6 max-md:w-6 flex items-center justify-center rounded-full  group-hover:opacity-100 z-20 stop-link">
+                                        <i class="fas fa-heart max-md:text-xs"></i>
                                     </button>
 
                                     <!-- Add to Cart Icon -->
@@ -109,7 +109,7 @@ $page = 'Wishlist';
 
                                 <!-- Product Details -->
                                 <div class="pt-4 w-full ">
-                                    <h3 class="text-base font-semibold uppercase"><?= $product['name'] ?></h3>
+                                    <h3 class="text-base font-semibold uppercase max-md:text-sm"><?= $product['name'] ?></h3>
                                     <div class="flex items-center justify-start gap-3 w-full">
                                         <p class="text-gray-500 line-through text-sm">₹
                                             <?= formatNumber($product['compare_price']) ?>.00

@@ -756,6 +756,10 @@ class WebController extends LoginController
         } else {
             $id = $_POST['process'];
             unset($_POST['process']);
+            // printWithPre($_POST);
+            if($_POST['status'] == 1){
+              update(['status' => 0], 1, "tbl_user_address", "status");
+            }
             $address = update($_POST, $id, "tbl_user_address");
             if ($address) {
                 $_SESSION['success'] = "Address Update Successfully";
@@ -1963,8 +1967,8 @@ ORDER BY id DESC LIMIT 5");
         $TotalWishlist = count($wishlists);
         $TotalOrders = count($orders);
 
-        echo $TotalWishlist;
-        echo $TotalOrders;
+        // echo $TotalWishlist;
+        // echo $TotalOrders;
 
         require 'views/website/myprofile.php';
     }
@@ -2086,8 +2090,8 @@ ORDER BY id DESC LIMIT 5");
 
             $uname = $_POST['name'];
             unset($_POST['name']);
-
-            add($_POST, "tbl_product_review", false);
+           
+            add($_POST, "tbl_product_review");
 
             $userName = getData2("SELECT * FROM online_users WHERE id = " . $_POST['userid'] . " LIMIT 1")[0]['fname'];
             if (empty($userName)) {
