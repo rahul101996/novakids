@@ -34,7 +34,7 @@ class ProductController
             $packages = getData("tbl_packaging");
             require 'views/products/add-products.php';
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            printWithPre($_POST);
+            // printWithPre($_POST);
             // $sizeChart = [];
             $sizeType = $_POST["sizeType"];
             $sizeVariant = $_POST["sizeVariant"];
@@ -81,6 +81,7 @@ class ProductController
                 $data = [
                     'name' => $_POST['name'],
                     'description' => $_POST['description'],
+                    'shortDescription' => $_POST['shortDescription'],
                     'category' => $_POST['category'],
                     'price' => $_POST['price'],
                     'compare_price' => $_POST['compare_price'],
@@ -433,7 +434,6 @@ class ProductController
                     </div>
                 </div>
             </div>
-        </div>
         <?php
         $html = ob_get_clean();
 
