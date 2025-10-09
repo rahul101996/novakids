@@ -130,13 +130,17 @@ class WebController extends LoginController
                             <?php
                                 if(!empty($ProductData["sizeChart"])){
                                     $sizeChart = (array) json_decode($ProductData["sizeChart"]);
+                                     $sizeChartValue = $sizeChart[$value[0]];
+                                        $sizeChartValueString = "";
+                                        foreach($sizeChartValue as $kk=>$sv){
+                                            $sizeChartValueString = $sizeChartValueString . "$kk $sv inches ";
+                                        }
+                                    
                                 ?>
                                     <div class="w-full flex items-center justify-between text-sm">
                                         <div class="flex items-center justify-center gap-2">
                                             <p class="uppercase text-lg"><?= $key ?></p>
-                                            <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded <?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>">XS:
-                                                Chest 41 inches
-                                                Length 27 inches
+                                            <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded <?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>"><?=$sizeChartValueString?>
                                             </div>
                                         </div>
                                         
