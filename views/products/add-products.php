@@ -240,7 +240,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 <!-- Options Container -->
                                 <div class="flex flex-col items-center justify-center border border-gray-200 rounded-lg w-full">
                                     <div id="optionsContainer" class="space-y-6 w-full">
-
+                                        
                                     </div>
                                     <div class="flex items-center justify-between w-[95%] py-2">
                                         <button onclick="addOption()" type="button" class="focus:outline-none focus:ring-0">
@@ -264,6 +264,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                 <th class="border border-gray-300 px-3 py-3 text-left">Variant</th>
                                                 <th class="border border-gray-300 px-3 py-3 text-left">Price</th>
                                                 <th class="border border-gray-300 px-3 py-3 text-left">Available</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody id="variantsTableBody">
@@ -323,9 +324,81 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                     </div>
                 </div>
+                <div id="myModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/40 backdrop-blur-sm">
+        <div class="flex mt-10 justify-center p-4 w-full">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden transition-all duration-300">
+            
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+                <h2 class="text-xl font-semibold text-gray-800 dark:text-white">
+                Size Chart
+                </h2>
+                <button onclick="closeModal('myModal')" class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-2xl leading-none">
+                &times;
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 text-gray-700 dark:text-gray-300 body">
+                <textarea class="w-full h-40 border-0 focus:ring-0 resize-y p-3 summernote" placeholder="" name="sizeDescription"></textarea>
+                <input type="file" name=""sizeImage">
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse text-sm text-left">
+                        <thead>
+                        <tr class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                            <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">Size</th>
+                            <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
+                            <div class="flex items-center gap-2">
+                                <input type="text" value="Chest" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                <button type="button" onclick="
+                                (this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
+                                
+                            </div>
+                            </th>
+                            <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
+                            <div class="flex items-center gap-2">
+                                <input type="text" value="Length" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                <button type="button" onclick="removeMySize(this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
+                            </div>
+                            </th>
+                            <th class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
+                            <div class="flex items-center gap-2">
+                                <input type="text" value="Sleeve" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                <button type="button" onclick="removeMySize(this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
+                            </div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- JS will fill rows here -->
+                        </tbody>
+                    </table>
+
+                    <div>
+                        <button type="button" onclick="addColumn()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md mr-2">+ Add Column</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex justify-end gap-3 border-t border-gray-200 dark:border-gray-700 px-6 py-4 bg-gray-50 dark:bg-gray-900">
+                <button type="button" onclick="closeModal('myModal')" class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    Confirm
+                </button>
+            </div>
+
+            </div>
+        </div>
+    </div>
             </form>
         </main>
     </div>
+
+    <!-- Modal -->
+    
+
+
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/views/include/footer.php";
     ?>
@@ -389,15 +462,21 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             }
         });
         let optionCount = 0;
-
+        let isFirst = 0;
         function addOption() {
             optionCount++;
+            isFirst++;
             const container = document.getElementById('optionsContainer');
 
             const optionDiv = document.createElement('div');
 
-            optionDiv.className = "w-full flex flex-col items-center justify-center mt-2 border-b border-gray-200  rounded-md p-4";
+            optionDiv.className = "w-full flex flex-col items-center justify-center mt-2 border-b border-gray-200  rounded-md p-4 OptionDiv";
             optionDiv.id = `option-${optionCount}`;
+
+            let addSize = "" 
+            if(isFirst==1){
+                addSize=`<button onclick="addSizeChart()" type="button" class="text-red-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add Size Chart</button>`
+            }
 
             optionDiv.innerHTML = `
             <span class="w-full text-left">Option Name</span>
@@ -407,29 +486,181 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 </div>
                 <div id="values-${optionCount}" class="space-y-2 w-full mt-3">
                             <span class="w-full text-left mb-2">Option Values</span>
-</div>
+                </div>
                 <div class="w-full flex items-center justify-between mt-3">
-                                <button onclick="removeOption(${optionCount})" type="button" class="text-red-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Delete</button>
-                                <button onclick="addValue(${optionCount})" type="button" class="text-white bg-gray-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add</button>
-                            </div>
+                    <button onclick="addValue(${optionCount})" type="button" class="text-white bg-gray-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add</button>
+                    ${addSize}
+                    <button onclick="removeOption(${optionCount})" type="button" class="text-red-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Delete</button>
+                    
+                    
+                </div>
             `;
 
             container.appendChild(optionDiv);
 
             // Add the first value input by default
             addValue(optionCount);
+            
+        }
+
+        function addSizeChart() {
+            const modal = document.getElementById("myModal");
+            const container = document.getElementById("optionsContainer");
+            const optionDivValues = container.querySelector(".OptionDiv").querySelectorAll(".OptionValues");
+
+            let modalHtml = "";
+            let trHtml = "";
+            const modalTableTh = modal.querySelector("thead tr").querySelectorAll("th");
+
+            // Build empty inputs for each column (except 'Size')
+            for (let i = 0; i < modalTableTh.length - 1; i++) {
+                trHtml += `
+                <td class="px-4 py-2">
+                    <input type="text" name="sizeValues[]"
+                    class="border border-gray-300 rounded-md px-3 py-1 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </td>
+                `;
+            }
+
+            // Generate table rows dynamically
+            optionDivValues.forEach((ele) => {
+                const sizeValue = ele.querySelector("input").value.trim();
+
+                modalHtml += `
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-2">
+                    <input type="text" value="${sizeValue}" name="sizeVariant[]"
+                        class="border border-gray-300 rounded-md px-3 py-1 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    </td>
+                    ${trHtml}
+                </tr>
+                `;
+            });
+
+            modal.querySelector("tbody").innerHTML = modalHtml;
+            modal.classList.remove("hidden");
+        }
+
+
+        function removeMySize(buttonOrEvent) {
+            // Accept either the element or an event
+            const button = (buttonOrEvent && buttonOrEvent.target) ? buttonOrEvent.target : buttonOrEvent;
+            if (!button || !(button instanceof Element)) return;
+
+            // 1) Walk up from the button to try to find a <TH> and the enclosing <TABLE>
+            let el = button;
+            let th = null;
+            let table = null;
+            while (el && el.nodeType === 1) {
+                if (!th && el.tagName === 'TH') th = el;
+                if (el.tagName === 'TABLE') { table = el; break; }
+                el = el.parentNode;
+            }
+
+            // 2) If table not found yet, continue walking up to find TABLE (in case TH wasn't encountered)
+            if (!table) {
+                el = button.parentNode;
+                while (el && el.nodeType === 1) {
+                if (el.tagName === 'TABLE') { table = el; break; }
+                el = el.parentNode;
+                }
+            }
+
+            // 3) If we have a table but no TH, try to find the TH inside this table that contains the button
+            if (!th && table) {
+                const thead = table.querySelector('thead');
+                if (thead) {
+                const ths = thead.querySelectorAll('th');
+                for (let i = 0; i < ths.length; i++) {
+                    if (ths[i].contains(button)) { th = ths[i]; break; }
+                }
+                }
+            }
+
+            // 4) Final fallback: search all tables on page for a TH that contains the button
+            if (!th || !table) {
+                const tables = document.querySelectorAll('table');
+                for (let ti = 0; ti < tables.length && (!th || !table); ti++) {
+                const t = tables[ti];
+                const ths = t.querySelectorAll('thead th');
+                for (let hi = 0; hi < ths.length; hi++) {
+                    if (ths[hi].contains(button)) {
+                    table = t;
+                    th = ths[hi];
+                    break;
+                    }
+                }
+                }
+            }
+
+            // If still not found, bail out
+            if (!table || !th) return;
+
+            // 5) Determine column index of the TH within its header row
+            const headerRow = th.parentNode;
+            let colIndex = 0;
+            const headerCells = headerRow.children;
+            for (let i = 0; i < headerCells.length; i++) {
+                if (headerCells[i] === th) { colIndex = i; break; }
+            }
+
+            // 6) Remove the header cell
+            headerRow.removeChild(th);
+
+            // 7) Remove corresponding TD in every tbody row (handle multiple TBODYs too)
+            const tbodies = table.tBodies;
+            for (let bi = 0; bi < tbodies.length; bi++) {
+                const rows = tbodies[bi].rows;
+                for (let ri = 0; ri < rows.length; ri++) {
+                const cells = rows[ri].children;
+                if (cells[colIndex]) {
+                    rows[ri].removeChild(cells[colIndex]);
+                }
+                }
+            }
+        }
+
+
+        function addColumn() {
+            const modal = document.getElementById("myModal");
+            const headRow = modal.querySelector("thead tr")
+            const rows = modal.querySelectorAll('tbody tr');
+
+            // Create new header cell
+            const th = document.createElement('th');
+            th.className = "px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600";
+            th.innerHTML = `
+                <div class="flex items-center gap-2">
+                <input type="text" value="New Size" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                <button onclick="removeMySize(this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
+                </div>
+            `;
+            headRow.appendChild(th);
+
+            // Add a column in each row
+            rows.forEach(row => {
+                const td = document.createElement('td');
+                td.className = "px-4 py-2";
+                td.innerHTML = `<input type="text" name="sizeValues[]" class="border border-gray-300 rounded-md px-3 py-1 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">`;
+                row.appendChild(td);
+            });
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").classList.add('hidden');
         }
 
         function removeOption(id) {
             const optionDiv = document.getElementById(`option-${id}`);
             optionDiv.remove();
+            isFirst--;
         }
 
         function addValue(optionId) {
             const valuesDiv = document.getElementById(`values-${optionId}`);
             const valueInput = document.createElement('div');
 
-            valueInput.className = "flex items-center flex-col justify-center w-full ";
+            valueInput.className = "flex items-center flex-col justify-center w-full OptionValues";
 
             valueInput.innerHTML = `
             <div class="w-full flex items-center justify-center w-full gap-3">
@@ -552,6 +783,15 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             document.getElementById("margin").value = margin;
         }
         // toastr.error("Product added successfully");
+
+        document.addEventListener('click', function (e) {
+            const modals = document.querySelectorAll('[id^="myModal"]');
+            modals.forEach(modal => {
+                if (!modal.classList.contains('hidden') && e.target === modal) {
+                closeModal(modal.id);
+                }
+            });
+        });
     </script>
 </body>
 

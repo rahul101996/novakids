@@ -35,7 +35,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         <div class="bg-white p-6 rounded-lg shadow-sm">
 
                             <!-- Radio buttons for Send Type (Token or Topic) -->
-                            <div class="radio-group mb-6">
+                            <!-- <div class="radio-group mb-6">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Send To:</label>
                                 <div class="flex items-center">
                                     <label class="inline-flex items-center mr-6">
@@ -47,16 +47,16 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         <span class="ml-2 text-gray-700">Topic</span>
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!-- Target Identifier (Token or Topic Name) -->
-                            <div class="w-full mb-6">
+                            <!-- <div class="w-full mb-6">
                                 <label class="block text-sm font-medium text-gray-700 mb-1" for="target_identifier" id="targetLabel">Target Device Token:</label>
                                 <input
                                     class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
                                     value="" name="target_identifier" id="target_identifier" placeholder="e.g., FCM token from browser console" type="text" required />
                                 <small class="text-gray-500 text-xs mt-1 block">Enter an FCM token or a topic name (e.g., 'all_users').</small>
-                            </div>
+                            </div> -->
 
                             <!-- Notification Title -->
                             <div class="w-full mb-6">

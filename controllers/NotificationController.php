@@ -1,6 +1,16 @@
 <?php
 
-use Google\Client;
+use Google\Service\AndroidManagement\Display;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\Messaging\Notification;
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
 
 class NotificationController
 {
@@ -13,55 +23,45 @@ class NotificationController
     public function index()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            // redirect("views/master/send-notification");
             require("views/master/send-notification.php");
         } else {
 
-            require 'vendor/autoload.php';
 
+            // Initialize Firebase with service account
+            $factory = (new Factory)->withServiceAccount('serviceAccountKey.json');
+            $messaging = $factory->createMessaging();
 
+            // Fetch tokens from database
+            $tokensData = getData2("SELECT token FROM `tbl_tokens` WHERE 1");
 
-            // Load service account file
-            $client = new Client();
-            $client->setAuthConfig('serviceAccountKey.json');
-            $client->addScope('https://www.googleapis.com/auth/firebase.messaging');
+            // Extract plain token strings
+            $tokens = array_column($tokensData, 'token');
 
-            // Get OAuth2 access token
-            $accessToken = $client->fetchAccessTokenWithAssertion()['access_token'];
+            // Firebase allows max 500 tokens per multicast
+            $chunks = array_chunk($tokens, 100);
 
-            // Display token (for debugging)
-            // echo "Access Token: " . $accessToken . "\n";
+            // Get title and body from POST (or set defaults)
+            $title = $_POST['title'] ?? 'Default Title';
+            $body = $_POST['body'] ?? 'Default Body';
 
-            // Now send notification
-            $projectId = 'nova-7626d';
+            // Create notification
+            $notification = Notification::create($title, $body);
 
-            $url = "https://fcm.googleapis.com/v1/projects/{$projectId}/messages:send";
+            // Send in batches
+            foreach ($chunks as $chunk) {
+                $message = CloudMessage::new()->withNotification($notification);
 
-            $message = [
-                'message' => [
-                    // 'token' => 'fD5rTNQWBYGVeTC6C96wqN:APA91bECNFZcC6Kq9e50xlvhXIk_ZY2N8tp5U-8tnXSOKjMN9Y7PwNAXM0Rh_YHx4ZbOs4hRnhKyvPkmjkrQoIEmf0vw92wk9MGOPUbdjljvjw5nx3W1ixo',
-                    'token' => 'ctI8RFFFt2B-e-hVHJmlhZ:APA91bHGDXJvNG0NdSucpODqHz_Mkmp_lK6dN_ccPJt8_J-WWjZaXu9iLYIhB0GKpuBDecqaoObJCk9hStdSJQmgDYVxNnP42Zx02z4pqF70XMWkiZC79hU',
-                    'notification' => [
-                        'title' => $_POST["title"],
-                        'body' => $_POST["body"]
-                    ]
-                ]
-            ];
+                $report = $messaging->sendMulticast($message, $chunk);
 
-            $options = [
-                'http' => [
-                    'header'  => [
-                        "Authorization: Bearer $accessToken",
-                        "Content-Type: application/json"
-                    ],
-                    'method'  => 'POST',
-                    'content' => json_encode($message)
-                ]
-            ];
+                // Optional: Output results
+                echo "Sent to {$report->successes()->count()} tokens.<br>";
+                if ($report->failures()->count() > 0) {
+                    foreach ($report->failures()->getItems() as $failure) {
+                        echo "Failed: " . $failure->target()->value() . " — " . $failure->error()->getMessage() . "<br>";
+                    }
+                }
+            }
 
-            $context  = stream_context_create($options);
-            $result = file_get_contents($url, false, $context);
-            echo $result;
             // redirect("/notify");
         }
     }
