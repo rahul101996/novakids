@@ -39,8 +39,8 @@
     const messaging = getMessaging(app);
 
     const log = (msg) => {
-    //   document.getElementById("log").innerText += msg + "\n";
-      console.log(msg);
+        //   document.getElementById("log").innerText += msg + "\n";
+        console.log(msg);
     };
 
     // 🔹 Register the service worker (classic, not module)
@@ -53,9 +53,31 @@
                 vapidKey: "BK7NN3eBAn6jhm8398O5hW4E9nT_WmayntD04VyR_p_pNY7_vPno4u1qenRkDKVWMDHiu_UeLo8CS_sa7m6WE-s" // 👉 From Firebase Console → Project Settings → Cloud Messaging → Web Push Certificates
             });
         })
-        .then((token) => {
+        .then(async (token) => {
             if (token) {
+                
+                let userid = '<?= $_SESSION['userid'] ?>';
+
                 console.log(token)
+                console.log(userid)
+
+                let res = await fetch("/api/saveToken", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        token: token,
+                        userid: userid
+                    })
+                });
+                let data = await res.json();
+                
+                console.log(data);
+
+                localStorage.setItem("token", token);
+
+
                 //   log("FCM Token: " + token);
                 //   document.getElementById("tokenBox").value = token;
             } else {
@@ -112,14 +134,14 @@
 
     <?php if (isset($_SESSION['success']) && !empty($_SESSION['success'])): ?>
         console.log("Success: <?= $_SESSION['success'] ?>");
-        $(document).ready(function() {
+        $(document).ready(function () {
             toastr.success("<?= $_SESSION['success'] ?>");
         });
         <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
 
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.home-banner-slider').owlCarousel({
             loop: true,
             items: 1, // Fade effect works best with a single item
@@ -131,7 +153,7 @@
             nav: false
         });
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.testimonial').owlCarousel({
             loop: true,
             items: 1, // Fade effect works best with a single item
@@ -141,7 +163,7 @@
             nav: false
         });
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.testimonial-video').owlCarousel({
             loop: true,
             items: 2, // Fade effect works best with a single item
@@ -166,7 +188,7 @@
             }
         });
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.PastQuiz').owlCarousel({
             loop: true,
             margin: 15,
@@ -187,7 +209,7 @@
     });
 
     function banner_forward(ele) {
-          console.log(ele);
+        console.log(ele);
         //   console.log("parent",ele.parentElement)
         let bannerdiv = ele.parentElement.parentElement.parentElement.parentElement.querySelector(".owl-carousel"); // Select the slider directly
         //   console.log(bannerdiv);
@@ -205,7 +227,7 @@
 
     function banner_backward(ele) {
         console.log(ele);
-        console.log("parent",ele.parentElement)
+        console.log("parent", ele.parentElement)
         let bannerdiv = ele.parentElement.parentElement.parentElement.parentElement.querySelector(".owl-carousel");
         //   console.log(bannerdiv);
         if (bannerdiv) {
@@ -219,7 +241,7 @@
             console.error("Banner slider not found");
         }
     }
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const counters = document.querySelectorAll(".count-up");
 
         const observer = new IntersectionObserver(
@@ -239,8 +261,8 @@
                     }
                 });
             }, {
-                threshold: 0.5
-            }
+            threshold: 0.5
+        }
         );
 
         counters.forEach((counter) => observer.observe(counter));

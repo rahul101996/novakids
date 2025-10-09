@@ -56,6 +56,7 @@ $route->group(['', 'WebController'], function ($route) {
 
 
     $route->route('/addReview', 'addReview');
+    $route->route('/api/saveToken', 'saveToken');
 
     // $route->route('/', 'index');
 });

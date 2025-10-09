@@ -2046,4 +2046,58 @@ ORDER BY id DESC LIMIT 5");
             echo json_encode($response);
         }
     }
+
+    public function saveToken()
+    {
+        $response = [
+            "success" => false,
+            "message" => "Something went wrong"
+        ];
+
+        try {
+            $this->db->beginTransaction();
+
+            $_POST = json_decode(file_get_contents('php://input'), true);
+
+            $token = $_POST['token'];
+            $userid = $_POST['userid'];
+
+            if (!empty($token)) {
+                
+                $isExistToken = getData2("SELECT * FROM `tbl_tokens` WHERE `token` = '$token'");
+
+                if (empty($isExistToken)) {
+                    add([
+                        "token" => $token,
+                        "userid" => $userid,
+                        "created_date" => date("Y-m-d"),
+                        "created_time" => date("H:i:s"),
+                        "created_at" => date("Y-m-d H:i:s")
+                    ], "tbl_tokens", false);
+                } else if (empty($isExistToken[0]['userid']) && !empty($userid)) {
+                    update([
+                        "userid" => $userid
+                    ], $isExistToken[0]['id'], "tbl_tokens");
+                }
+            }
+
+            // printWithPre($_POST);
+            // die();
+
+            $response = [
+                "success" => true,
+                "message" => "Token Saved Successfully"
+            ];
+
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            $response = [
+                "success" => false,
+                "message" => $e->getMessage()
+            ];
+        } finally {
+            echo json_encode($response);
+        }
+    }
 }
