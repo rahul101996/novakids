@@ -80,7 +80,7 @@
                 </div>
             </div>
 
- 
+
             <!-- Cart item -->
             <div class="flex items-start w-full justify-start flex-col" id="cartItems">
                 <div class="flex items-center gap-4 border-b py-2">
@@ -311,6 +311,7 @@
     const cartItems = document.getElementById('cartItems');
     const closeCart = document.getElementById('closeCart');
     const cartOverlay = document.getElementById('sidecartOverlay');
+    const VariantSelects = document.getElementById('AddToCartSidebar');
 
     async function openCart() {
 
@@ -328,6 +329,85 @@
             setTotal();
         }
 
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        AddToCart();
+        console.log('bibibdbbwbwbicbwbcwbcibicwicbpw');
+    });
+
+    function AddToCart() {
+
+        const addToCartBtn = document.querySelectorAll('.openCartBtn');
+        // console.log(addToCartBtn);
+        if (addToCartBtn) {
+            addToCartBtn.forEach(function(btn) {
+                btn.addEventListener('click', async function(event) {
+                    console.log("hello");
+                    // event.preventDefault();
+                    // event.stopPropagation();
+                    // 
+                    let ee = btn.parentElement
+                    // showVarients(ee.querySelector(".ProductId").value);
+                    // console.log(ee);
+                    let product_id = parseInt(ee.querySelector(".ProductId").value);
+                    const response = await axios.post("/api/get-product-data", new URLSearchParams({
+                        productid: product_id,
+
+                    }))
+                    console.log(response.data)
+                    GLOBAL_VARIANT.variants = response.data.variants;
+                    let firstValues = {};
+                    let dict = response.data.grouped
+                    for (let key in dict) {
+                        if (Array.isArray(dict[key]) && dict[key].length > 0) {
+                            firstValues[key] = dict[key][0];
+                        }
+                    }
+
+                    console.log(firstValues);
+                    GLOBAL_VARIANT.selected = firstValues
+
+                    if (response.data.variants.length > 0) {
+
+                        VariantSelects.innerHTML = response.data.html;
+                        Openvariant()
+                        let options = document.querySelectorAll('.optionDivs');
+
+                        // console.log("options", options);
+
+                        let FirstOption = options[0];
+
+                        // // console.log(FirstOption);
+                        let OptionName = FirstOption.getAttribute('option_name');
+                        let OptionValue = FirstOption.getAttribute('option_value');
+                        let product_id = FirstOption.getAttribute('product_id');
+                        console.log(OptionName, OptionValue, product_id);
+                        const response2 = await axios.post("/api/get-variant-data", new URLSearchParams({
+                            productid: product_id,
+                            option_name: OptionName,
+                            option_value: OptionValue
+
+                        }))
+                        // console.log("response2.data",response2.data)
+                        const ColorDiv = document.getElementById('ColorDiv');
+                        if (ColorDiv) {
+                            ColorDiv.innerHTML = response2.data.html;
+
+                        }
+
+
+                    } else {
+
+
+
+                    }
+
+                    // addToCartSidebar(ee.querySelector(".sideVarientId").value, ee.querySelector(".sideCategoryId").value, ee.querySelector(".sideProductId").value, btn)
+
+
+                });
+            });
+        }
     }
     document.addEventListener('DOMContentLoaded', function() {
         AddToWishlist();
@@ -394,7 +474,7 @@
                     <?php
                     }
                     ?>
-                     <?php
+                    <?php
                     if (isset($page) && $page == "My Profile") {
 
                     ?>
@@ -477,7 +557,6 @@
     });
 
     updateCart(); // initial call
-    const VariantSelects = document.getElementById('AddToCartSidebar');
 
     function CloseVariant() {
         // console.log("hello this is close cart")
@@ -511,84 +590,7 @@
         cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
         cartOverlay.classList.add('opacity-100');
     }
-    document.addEventListener('DOMContentLoaded', function() {
-        AddToCart();
-    });
 
-    function AddToCart() {
-
-        const addToCartBtn = document.querySelectorAll('.openCartBtn');
-        // console.log(addToCartBtn);
-        if (addToCartBtn) {
-            addToCartBtn.forEach(function(btn) {
-                btn.addEventListener('click', async function(event) {
-                    console.log("hello");
-                    // event.preventDefault();
-                    // event.stopPropagation();
-                    // 
-                    let ee = btn.parentElement
-                    // showVarients(ee.querySelector(".ProductId").value);
-                    // console.log(ee);
-                    let product_id = parseInt(ee.querySelector(".ProductId").value);
-                    const response = await axios.post("/api/get-product-data", new URLSearchParams({
-                        productid: product_id,
-
-                    }))
-                    console.log(response.data)
-                    GLOBAL_VARIANT.variants = response.data.variants;
-                    let firstValues = {};
-                    let dict = response.data.grouped
-                    for (let key in dict) {
-                        if (Array.isArray(dict[key]) && dict[key].length > 0) {
-                            firstValues[key] = dict[key][0];
-                        }
-                    }
-
-                    console.log(firstValues);
-                    GLOBAL_VARIANT.selected = firstValues
-
-                    if (response.data.variants.length > 0) {
-
-                        VariantSelects.innerHTML = response.data.html;
-                        Openvariant()
-                        let options = document.querySelectorAll('.optionDivs');
-
-                        // console.log("options", options);
-
-                        let FirstOption = options[0];
-
-                        // // console.log(FirstOption);
-                        let OptionName = FirstOption.getAttribute('option_name');
-                        let OptionValue = FirstOption.getAttribute('option_value');
-                        let product_id = FirstOption.getAttribute('product_id');
-                        console.log(OptionName, OptionValue, product_id);
-                        const response2 = await axios.post("/api/get-variant-data", new URLSearchParams({
-                            productid: product_id,
-                            option_name: OptionName,
-                            option_value: OptionValue
-
-                        }))
-                        // console.log("response2.data",response2.data)
-                        const ColorDiv = document.getElementById('ColorDiv');
-                        if (ColorDiv) {
-                            ColorDiv.innerHTML = response2.data.html;
-
-                        }
-
-
-                    } else {
-
-
-
-                    }
-
-                    // addToCartSidebar(ee.querySelector(".sideVarientId").value, ee.querySelector(".sideCategoryId").value, ee.querySelector(".sideProductId").value, btn)
-
-
-                });
-            });
-        }
-    }
 
     async function changeCartSidebarImage(i = 0) {
         let options = document.querySelectorAll('.optionDivs');
@@ -625,7 +627,7 @@
         }
     }
 
-    function changeSideVariant(ele, tp, value, key1,json) {
+    function changeSideVariant(ele, tp, value, key1, json) {
         console.log(ele, tp, value, key1)
         updateKey(GLOBAL_VARIANT.selected, tp, value);
         let divs = ele.parentElement.querySelectorAll("div")
@@ -823,11 +825,11 @@
         return total
     }
 
-    async function showSizeChart(id){
-        let res= await fetch(`/api/getSizeChart?id=${id}`)
+    async function showSizeChart(id) {
+        let res = await fetch(`/api/getSizeChart?id=${id}`)
         res = await res.json();
-        if(res.success){
-            document.getElementById('sizeChartModal').innerHTML=res.data;
+        if (res.success) {
+            document.getElementById('sizeChartModal').innerHTML = res.data;
             document.getElementById('sizeChartModal').classList.remove('hidden')
         }
     }
