@@ -67,6 +67,7 @@ $route->group(['', 'CollectionController', 'auth'], function ($route) {
     $route->route('admin/collections', 'index');
     $route->route('admin/add-collections', 'AddCollections');
     $route->route('/edit-collection/[i:id]', 'AddCollections');
+    $route->route('/delete-collection/[i:id]', 'deleteCollection');
 
 
     $route->route('/api/collection/status', 'ChangeCollectionStatus');

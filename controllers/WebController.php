@@ -130,7 +130,7 @@ class WebController extends LoginController
 
                             <div class="w-full flex items-center justify-between text-sm">
                                 <div class="flex items-center justify-center gap-2">
-                                    <p class="uppercase text-lg"><?= $key ?></p>
+                                    <p class="uppercase text-lg max-md:text-sm"><?= $key ?></p>
                                     <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded">XS:
                                         Chest 41 inches
                                         Length 27 inches</div>
@@ -155,7 +155,7 @@ class WebController extends LoginController
                                             d="M3.37296 10.8776C3.57142 10.6791 3.89319 10.6791 4.09165 10.8776L6.01036 12.7963C6.20882 12.9948 6.20882 13.3165 6.01036 13.515C5.8119 13.7134 5.49013 13.7134 5.29167 13.515L3.37296 11.5963C3.1745 11.3978 3.1745 11.076 3.37296 10.8776Z">
                                         </path>
                                     </svg>
-                                    <span class="text-[1.12rem]">Size guide</span>
+                                    <span class="text-[1.12rem] max-md:text-sm">Size guide</span>
                                 </div>
                             </div>
                             <div class="w-full flex items-center justify-start mt-3 text-sm" id="SizeDiv">
@@ -165,7 +165,7 @@ class WebController extends LoginController
                                     // $diffcolor = $finalData['images'][$key1];
                                 ?>
                                     <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>)'
-                                        class="border <?= $key1 == 0 ? "border-gray-900 selected-size" : "border-gray-300" ?>  optionDivs cursor-pointer flex items-center justify-center h-10 w-20"
+                                        class="border <?= $key1 == 0 ? "border-gray-900 selected-size" : "border-gray-300" ?>  optionDivs cursor-pointer flex items-center justify-center h-10 w-20 max-md:h-8 max-md:w-8"
                                         option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>" onclick="">
                                         <?= $value1 ?>
                                     </div>
@@ -303,6 +303,7 @@ class WebController extends LoginController
     }
     public function NewArrivals()
     {
+        $pageTitle = "New Arrivals";
         // echo $category;
         $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id");
         // printWithPre($products); 

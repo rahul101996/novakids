@@ -237,7 +237,7 @@
 
     <!-- Main Content Grid with Product Images -->
     <div class="w-[85%] mx-auto  py-10">
-        <div class="grid grid-cols-2 gap-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 
             <!-- Left Column - Product Images Showcase -->
             <div class=" space-y-6">
@@ -267,7 +267,7 @@
             <div class=" space-y-6 ">
 
                 <!-- Contact Form -->
-                <div class="animate-slideInRight delay-200 bg-white rounded-3xl px-12 py-8">
+                <div class="animate-slideInRight delay-200 bg-white rounded-3xl px-12 py-8 max-md:px-0 max-md:py-0">
                     <h2 class="text-4xl font-black mb-8 tracking-tight uppercase">Send us a message</h2>
 
                     <div class="space-y-3">

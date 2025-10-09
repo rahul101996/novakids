@@ -80,7 +80,7 @@
                 </div>
             </div>
 
-
+ 
             <!-- Cart item -->
             <div class="flex items-start w-full justify-start flex-col" id="cartItems">
                 <div class="flex items-center gap-4 border-b py-2">
@@ -391,6 +391,14 @@
 
                     ?>
                         location.reload();
+                    <?php
+                    }
+                    ?>
+                     <?php
+                    if (isset($page) && $page == "My Profile") {
+
+                    ?>
+                        ele.parentElement.parentElement.parentElement.remove();
                     <?php
                     }
                     ?>
