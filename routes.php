@@ -116,6 +116,7 @@ $route->group(['', 'CustomerController', 'auth'], function ($route) {
 });
 
 $route->group(['notify', 'NotificationController', 'auth'], function ($route) {
+    
     $route->route('', 'index');
 
 });
