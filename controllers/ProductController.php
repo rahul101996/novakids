@@ -297,4 +297,43 @@ class ProductController
             echo json_encode($response);
         }
     }
+
+
+    public function ChangeProductStatus()
+    {
+        $response = [
+            "success" => false,
+            "message" => "Something went wrong"
+        ];
+
+        try {
+            $_POST = json_decode(file_get_contents('php://input'), true);
+
+            // printWithPre($_POST);
+            // die();
+
+            update(
+                [
+                    "status" => $_POST['status']
+                ],
+                $_POST['id'],
+                "tbl_products"
+            );
+
+            $response = [
+                "success" => true,
+                "message" => "Status Updated Successfully"
+            ];
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+
+            $response = [
+                "success" => false,
+                "message" => $e->getMessage()
+            ];
+        } finally {
+            echo json_encode($response);
+        }
+    }
 }

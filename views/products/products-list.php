@@ -63,8 +63,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     <span>Inventory</span>
                     <span>Category</span>
                     <span>Price</span>
-                    <span>Status</span>
                     <span>New Arrival</span>
+                    <span>Status</span>
                     <span>Action</span>
                 </div>
 
@@ -115,85 +115,98 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 <p class="text-gray-500 font-semibold">₹ <?= $product['price'] ?></p>
                             </div>
 
-                            <!-- Status -->
-                            <div>
-                                <?php if ($product['status'] == 1) { ?>
-                                    <span class="text-green-500 bg-green-200 font-semibold px-2 py-1 rounded">Active</span>
-                                <?php } else { ?>
-                                    <span class="text-red-500">Inactive</span>
-                                <?php } ?>
+                            <!-- ✅ New Arrival Toggle -->
+                            <div class="relative inline-block w-14 mr-2 align-middle select-none">
+                                <input type="checkbox" id="togglr_arrival_<?= $product['id'] ?>"
+                                    <?= $product['new_arrival'] == 1 ? 'checked' : '' ?>
+                                    onchange="updateNewArrival(this, <?= $product['id'] ?>)"
+                                    class="sr-only peer">
+
+                                <label for="togglr_arrival_<?= $product['id'] ?>"
+                                    class="block overflow-hidden h-7 rounded-full bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out peer-checked:bg-sky-800 before:content-[''] before:absolute before:top-0.5 before:left-0.5 before:bg-sky-50 before:border-2 before:border-gray-300 before:h-6 before:w-6 before:rounded-full before:transition-all before:duration-300 before:shadow-md peer-checked:before:translate-x-7 peer-checked:before:border-sky-800">
+                                    <span
+                                        class="absolute inset-y-0 left-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-sky-50 peer-checked:translate-x-7">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                            viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
+                                    <span
+                                        class="absolute inset-y-0 right-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                            viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
+                                </label>
                             </div>
 
-                            <div>
+                            <!-- ✅ Product Status Toggle -->
+                            <div class="relative inline-block w-14 mr-2 align-middle select-none">
+                                <input type="checkbox" id="togglr_status_<?= $product['id'] ?>"
+                                    <?= $product['status'] == 1 ? 'checked' : '' ?>
+                                    onchange="updateProductStatus(this, <?= $product['id'] ?>)"
+                                    class="sr-only peer">
 
-                                <div class="relative inline-block w-14 mr-2 align-middle select-none">
-                                    <input type="checkbox" id="togglr_<?= $product['id'] ?>"
-                                        <?= $product['new_arrival'] == 1 ? 'checked' : '' ?>
-                                        onchange="updateStatus(this, <?= $product['id'] ?>)"
-                                        class="sr-only peer">
-
-                                    <label for="togglr_<?= $product['id'] ?>"
-                                        class="block overflow-hidden h-7 rounded-full bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out peer-checked:bg-sky-800 before:content-[''] before:absolute before:top-0.5 before:left-0.5 before:bg-sky-50 before:border-2 before:border-gray-300 before:h-6 before:w-6 before:rounded-full before:transition-all before:duration-300 before:shadow-md peer-checked:before:translate-x-7 peer-checked:before:border-sky-800">
-                                        <span
-                                            class="absolute inset-y-0 left-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-sky-50 peer-checked:translate-x-7">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
-                                                viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </span>
-                                        <span
-                                            class="absolute inset-y-0 right-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-white">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
-                                                viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </span>
-                                    </label>
-                                </div>
-
+                                <label for="togglr_status_<?= $product['id'] ?>"
+                                    class="block overflow-hidden h-7 rounded-full bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out peer-checked:bg-sky-800 before:content-[''] before:absolute before:top-0.5 before:left-0.5 before:bg-sky-50 before:border-2 before:border-gray-300 before:h-6 before:w-6 before:rounded-full before:transition-all before:duration-300 before:shadow-md peer-checked:before:translate-x-7 peer-checked:before:border-sky-800">
+                                    <span
+                                        class="absolute inset-y-0 left-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-sky-50 peer-checked:translate-x-7">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                            viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
+                                    <span
+                                        class="absolute inset-y-0 right-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                            viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
+                                </label>
                             </div>
-
 
                             <!-- Action -->
                             <div class="flex space-x-2">
                                 <a href="/admin/edit-product/<?= $product['id'] ?>"
                                     class="text-blue-500 hover:text-blue-600"><i class="fa-solid fa-pen"></i></a>
-                                <a href="/delete-collection/<?= $product['id'] ?>"
-                                    class="text-red-500 hover:text-red-600"><i class="fa-solid fa-trash"></i></a>
+                                <!-- <a href="/delete-collection/<?= $product['id'] ?>"
+                                    class="text-red-500 hover:text-red-600"><i class="fa-solid fa-trash"></i></a> -->
                             </div>
                         </div>
                     </div>
                 <?php } ?>
             </div>
-
-
-
-
-
         </main>
     </div>
+
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/views/include/footer.php";
     ?>
 
     <script>
-        async function updateStatus(ele, id) {
+
+        async function updateStatusGeneric(ele, id, endpoint) {
             let data = {
                 id,
                 status: ele.checked ? "1" : "0"
             };
 
             ele.disabled = true;
-            const label = ele.nextElementSibling;
+            const label = ele.closest('div').querySelector('label');
             label.classList.add('opacity-70');
 
             try {
-
-                let res = await fetch('/api/new_arrival/status', {
+                let res = await fetch(endpoint, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data),
@@ -201,23 +214,31 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                 let response = await res.json();
 
-                // console.log(response);
-
                 if (response.success) {
                     toastr.success(response.message);
                 } else {
-                    ele.checked = !ele.checked; // revert state
+                    ele.checked = !ele.checked;
                     toastr.error(response.message);
                 }
             } catch (e) {
-                ele.checked = !ele.checked; // revert state on error
+                ele.checked = !ele.checked;
                 toastr.error("Something went wrong!");
-                // console.log(e);
+                console.error(e);
             } finally {
                 ele.disabled = false;
                 label.classList.remove('opacity-70');
             }
         }
+
+        function updateNewArrival(ele, id) {
+            updateStatusGeneric(ele, id, '/api/new_arrival/status');
+        }
+
+        function updateProductStatus(ele, id) {
+            updateStatusGeneric(ele, id, '/api/product/status');
+        }
+
+
 
     </script>
 </body>

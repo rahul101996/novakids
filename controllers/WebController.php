@@ -937,7 +937,7 @@ class WebController extends LoginController
                 SELECT tbl_products.* 
                 FROM tbl_products 
                 LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id 
-                WHERE tbl_products.new_arrival = 1
+                WHERE tbl_products.new_arrival = 1 AND tbl_products.status = 1
                 AND tbl_products.price BETWEEN $minPrice AND $maxPrice
             ");
         } else {
@@ -946,7 +946,7 @@ class WebController extends LoginController
                 SELECT tbl_products.* 
                 FROM tbl_products 
                 LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id 
-                WHERE tbl_category.category = '$category_name'
+                WHERE tbl_category.category = '$category_name' AND tbl_products.status = 1
                 AND tbl_products.price BETWEEN $minPrice AND $maxPrice
             ");
         }
