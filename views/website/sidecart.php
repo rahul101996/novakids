@@ -394,6 +394,14 @@
                     <?php
                     }
                     ?>
+                     <?php
+                    if (isset($page) && $page == "My Profile") {
+
+                    ?>
+                        ele.parentElement.parentElement.parentElement.remove();
+                    <?php
+                    }
+                    ?>
                     if (page == "product-details") {
                         ele.querySelector("img").src = "/public/icons/heart-black.png";
                     } else {

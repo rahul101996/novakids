@@ -1,4 +1,5 @@
 <?php
+$page = "My Profile";
 $allstates = getData("indian_states");
 
 if (isset($_POST['update_profile'])) {
@@ -114,7 +115,7 @@ if (isset($_POST['update_profile'])) {
 
                     </div>
                     <div onclick="showPart('myprofile',this)"
-                        class="flex items-center justify-between gap-3 px-5 py-2 hover:bg-gray-100 activeTab sidenav ">
+                        class="flex items-center justify-between gap-3 px-5 py-2 hover:bg-gray-100  sidenav ">
                         <div class="flex items-center justify-center gap-3">
 
                             <div class="text-2xl py-1"><svg class="svgUser2 anarkali-svg-icon" enable-background="new 0 0 512 512" height="24px" viewBox="0 0 512 512" width="24px" xmlns="http://www.w3.org/2000/svg">
@@ -136,7 +137,7 @@ if (isset($_POST['update_profile'])) {
 
                     </div>
                     <!-- <div class="h-[1px] bg-gray-200"></div> -->
-                    <div class="flex items-center justify-between gap-3 px-5 py-3 hover:bg-gray-100  sidenav"
+                    <div class="flex items-center justify-between gap-3 px-5 py-3 hover:bg-gray-100  sidenav" id="ShowOrders"
                         onclick="showPart('myorders',this)">
 
                         <div class="flex items-center justify-center gap-3">
@@ -155,8 +156,32 @@ if (isset($_POST['update_profile'])) {
 
                     </div>
                     <!-- <div class="h-[1px] bg-gray-200"></div> -->
+                    <div onclick="showPart('Wishlist',this)"
+                        class="flex items-center justify-between gap-3 px-5 py-2 hover:bg-gray-100  sidenav " id="ShowWishlist">
+                        <div class="flex items-center justify-center gap-3">
 
-                    <div onclick="showPart('setting',this)"
+                            <div class="text-2xl py-1"><svg class="svgLove anarkali-svg-icon" width="24px" height="24px" fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="m29.55 6.509c-1.73-2.302-3.759-3.483-6.031-3.509h-.076c-3.29 0-6.124 2.469-7.443 3.84-1.32-1.371-4.153-3.84-7.444-3.84h-.075c-2.273.026-4.3 1.207-6.059 3.549a8.265 8.265 0 0 0 1.057 10.522l11.821 11.641a1 1 0 0 0 1.4 0l11.82-11.641a8.278 8.278 0 0 0 1.03-10.562zm-2.432 9.137-11.118 10.954-11.118-10.954a6.254 6.254 0 0 1 -.832-7.936c1.335-1.777 2.831-2.689 4.45-2.71h.058c3.48 0 6.627 3.924 6.658 3.964a1.037 1.037 0 0 0 1.57 0c.032-.04 3.2-4.052 6.716-3.964a5.723 5.723 0 0 1 4.421 2.67 6.265 6.265 0 0 1 -.805 7.976z">
+                                    </path>
+                                </svg></div>
+                            <span class="uppercase text-sm">Wishlist</span>
+                        </div>
+                        <img src="/public/icons/forward-black.png" class="h-4" alt="">
+
+                    </div>
+                     <div onclick="showPart('Wishlist',this)"
+                        class="flex items-center justify-between gap-3 px-5 py-2 hover:bg-gray-100  sidenav " id="ShowWishlist">
+                        <div class="flex items-center justify-center gap-3">
+
+                            <div class="text-2xl py-1">
+                                <img src="/public/icons/star.png" class="h-[24px]" alt="">
+                            </div>
+                            <span class="uppercase text-sm">Rate & Review</span>
+                        </div>
+                        <img src="/public/icons/forward-black.png" class="h-4" alt="">
+
+                    </div>
+                    <div onclick="showPart('setting',this)" id="ShowSetting"
                         class="flex items-center justify-between gap-3 px-5 py-2 hover:bg-gray-100  sidenav">
                         <div class="flex items-center justify-center gap-3">
                             <div class="text-2xl"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 50 50">
@@ -169,7 +194,7 @@ if (isset($_POST['update_profile'])) {
                     <!-- <div class="h-[1px] bg-gray-200"></div> -->
 
                     <div onclick="showPart('Addresses',this)"
-                        class="flex items-center justify-between gap-3 px-5 py-3 hover:bg-gray-100 sidenav">
+                        class="flex items-center justify-between gap-3 px-5 py-3 hover:bg-gray-100 sidenav" id="ShowAddress">
                         <div class="flex items-center justify-center gap-3">
 
                             <div class="text-2xl">
@@ -230,7 +255,7 @@ if (isset($_POST['update_profile'])) {
                     </div>
 
                     <div onclick="showPart('setting', this)"
-                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 rounded-lg sidenav">
+                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 rounded-lg sidenav" >
                         <span class="text-xl">⚙️</span>
                         <span>Settings</span>
                     </div>
@@ -321,43 +346,165 @@ if (isset($_POST['update_profile'])) {
 
                     <div class="w-full mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
                         <!-- Orders -->
-                        <div class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition">
+                        <div class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition" onclick="showPart('myorders',document.getElementById('ShowOrders'))">
                             <i class="fas fa-box-open text-3xl mb-3"></i>
                             <h3 class="font-semibold text-lg text-gray-800">Orders</h3>
                             <p class="text-gray-500 text-sm mt-1 text-center">Track and manage your purchases</p>
                         </div>
 
                         <!-- Wishlist -->
-                        <div class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition">
+                        <div class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition" onclick="showPart('Wishlist',document.getElementById('ShowWishlist'))">
                             <i class="fas fa-heart text-3xl mb-3"></i>
                             <h3 class="font-semibold text-lg text-gray-800">Wishlist</h3>
                             <p class="text-gray-500 text-sm mt-1 text-center">Save items for later and quick access</p>
                         </div>
 
                         <!-- Refunds -->
-                        <div class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition">
+                        <div onclick="showPart('Rate&Review',document.getElementById('ShowAddress'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition">
                             <i class="fas fa-rupee-sign text-3xl mb-3 rotate-180"></i>
                             <h3 class="font-semibold text-lg text-gray-800">Refunds</h3>
                             <p class="text-gray-500 text-sm mt-1 text-center">Check refund status and history</p>
                         </div>
 
                         <!-- Gift Cards -->
-                        
+
 
                         <!-- Rate & Review -->
-                        <div class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition">
+                        <div onclick="showPart('Rate&Review',document.getElementById('ShowAddress'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition">
                             <i class="fas fa-star text-3xl mb-3"></i>
                             <h3 class="font-semibold text-lg text-gray-800">Rate & Review</h3>
                             <p class="text-gray-500 text-sm mt-1 text-center">Share your feedback and experiences</p>
                         </div>
 
                         <!-- Stores -->
-                        <div class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition">
+                        <div onclick="showPart('Addresses',document.getElementById('ShowAddress'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition">
                             <i class="fas fa-map-marker-alt text-3xl mb-3"></i>
                             <h3 class="font-semibold text-lg text-gray-800">Addresses</h3>
                             <p class="text-gray-500 text-sm mt-1 text-center">Find nearest stores and directions</p>
                         </div>
+                        <div onclick="showPart('setting',document.getElementById('ShowSetting'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition">
+                            <i class="fas fa-cog text-3xl mb-3"></i>
+                            <h3 class="font-semibold text-lg text-gray-800">Settings</h3>
+                            <p class="text-gray-500 text-sm mt-1 text-center">Find nearest stores and directions</p>
+                        </div>
                     </div>
+
+                </div>
+                <div class="w-full flex flex-col items-center justify-center Wishlist showpart hidden" >
+                    <?php
+
+                    if (empty($wishlists)) {
+                    ?>
+                        <div class="text-center py-12  w-[50%] max-md:w-[85%] mx-auto">
+                            <!-- Heart Icon with Badge -->
+                            <div class="relative inline-block mb-6">
+                                <i class="fa-regular fa-heart text-6xl text-gray-400"></i>
+                                <span
+                                    class="absolute -top-2 -right-3 bg-black text-white text-xs font-semibold rounded-full h-6 w-6 flex items-center justify-center">0</span>
+                            </div>
+
+                            <!-- Message -->
+                            <p class="text-lg font-medium mb-2">Your Wishlist Is Currently Empty</p>
+                            <p class="text-gray-500 text-sm mb-8">Click the <i class="fa-regular fa-heart"></i> icons to add products
+                            </p>
+
+                            <button onclick="window.location.href='/'"
+                                class="flex-1 relative rounded-md overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
+                                <span
+                                    class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
+                                    Return to Shop
+                                </span>
+                                <span
+                                    class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0">
+                                </span>
+                            </button>
+                        </div>
+                    <?php } else { ?>
+                        <div class="text-center mb-10 max-md:mt-6">
+                            <h1 class="text-2xl font-bold text-gray-900">Wishlist</h1>
+                            <p class="text-gray-600 mt-1">
+                                Manage your wishlist and keep track of the products you love.
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 max-md:gap-3">
+                            <?php
+                            $wishlists = getData2("SELECT * FROM `tbl_wishlist` WHERE `userid` = " . $_SESSION["userid"]);
+
+                            foreach ($wishlists as $key => $wishlist) {
+                                $product = getData2("SELECT * FROM `tbl_products` WHERE `id` = " . $wishlist['product'])[0];
+                                $images = json_decode($product['product_images'], true);
+                                $images = array_reverse($images);
+                                $SecondImage = true;
+                                (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
+                                $comparePrice = floatval($product['compare_price']);
+                                $price = floatval($product['price']);
+                                $discountAmount = $comparePrice - $price;
+                                $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
+
+                                $name = str_replace(' ', '-', $product['name']);
+                                $name = str_replace("'", '', $name);
+
+
+                                // printWithPre($images);
+                            ?>
+                                <a href="/products/product-details/<?= $name ?>" class="block">
+                                    <div
+                                        class="group relative  cursor-pointer transition overflow-hidden">
+                                        <!-- Discount Badge -->
+                                        <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
+                                            SAVE <?= $discountPercentage ?>%
+                                        </span>
+
+                                        <!-- Product Images -->
+                                        <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
+                                            <!-- Default Image -->
+                                            <img src="/<?= $images[0] ?>" alt="Product 1"
+                                                class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+
+                                            <!-- Hover Image -->
+
+                                            <img src="/<?= $SecondImage ?>" alt="Product 1 Hover"
+                                                class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+
+                                            <!-- Add to favorites Icon (top-right) -->
+                                            <button
+                                                class="addToWishlistBtn absolute top-2 right-3 bg-[#f25b21] text-white h-10 w-10 rounded-full  group-hover:opacity-100 z-20 stop-link">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+
+                                            <!-- Add to Cart Icon -->
+                                            <button
+                                                class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                                            </button>
+                                            <input type="text" value="<?= $product['id'] ?>" class="ProductId">
+                                        </div>
+
+                                        <!-- Product Details -->
+                                        <div class="pt-4 w-full ">
+                                            <h3 class="text-base font-semibold uppercase"><?= $product['name'] ?></h3>
+                                            <div class="flex items-center justify-start gap-3 w-full">
+                                                <p class="text-gray-500 line-through text-sm">₹
+                                                    <?= formatNumber($product['compare_price']) ?>.00
+                                                </p>
+                                                <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?>.00</p>
+                                            </div>
+                                            <!-- reviews -->
+                                            <div class="flex items-center justify-start space-x-1 hidden">
+                                                <span class="text-yellow-500">★★★★★</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            <?php } ?>
+
+
+                        </div>
+
+                    <?php }
+                    ?>
+
 
                 </div>
                 <div class="showpart Addresses flex flex-col items-center justify-center w-full hidden">
@@ -684,7 +831,9 @@ if (isset($_POST['update_profile'])) {
             </div>
         </div>
         <div id="modalBackdrop" class="modal-backdrop hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
-        <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/footer.php'; ?>
+        <?php
+        include $_SERVER['DOCUMENT_ROOT'] . "/views/website/sidecart.php";
+        include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/footer.php'; ?>
         <script>
             const addressmodal = document.getElementById('addressModal');
             const defaultAddress = document.getElementById('defaultAddress');
