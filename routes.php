@@ -18,6 +18,7 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('shop', 'shop');
     $route->route('checkout', 'checkout');
     $route->route('contact', 'ContactUs');
+    $route->route('contact2', 'ContactUs2');
     $route->route('wishlist', 'wishlist');
     $route->route('return-exchange', 'returnExchange');
     $route->route('size-guide', 'sizeGuide');
@@ -100,6 +101,7 @@ $route->group(['', 'ProductController', 'auth'], function ($route) {
 
 
     $route->route('/api/new_arrival/status', 'ChangeNewArrivalStatus');
+    $route->route('/api/product/status', 'ChangeProductStatus');
 
 });
 
