@@ -937,7 +937,7 @@ class WebController extends LoginController
                 SELECT tbl_products.* 
                 FROM tbl_products 
                 LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id 
-                WHERE tbl_products.new_arrival = 1
+                WHERE tbl_products.new_arrival = 1 AND tbl_products.status = 1
                 AND tbl_products.price BETWEEN $minPrice AND $maxPrice
             ");
         } else {
@@ -946,7 +946,7 @@ class WebController extends LoginController
                 SELECT tbl_products.* 
                 FROM tbl_products 
                 LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id 
-                WHERE tbl_category.category = '$category_name'
+                WHERE tbl_category.category = '$category_name' AND tbl_products.status = 1
                 AND tbl_products.price BETWEEN $minPrice AND $maxPrice
             ");
         }
@@ -1020,13 +1020,15 @@ class WebController extends LoginController
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             //  echo $product_name;
             if ($product_name == null) {
-                require 'views/website/product-details1.php';
+                http_response_code(404);
+                require __DIR__ . '/../views/website/404.php';
+                exit();
             } else {
                 $name = str_replace('-', ' ', $product_name);
                 $siteName = getDBObject()->getSiteName();
                 $pageModule = "Product Page";
                 $pageTitle = "Product Page";
-               $ProductData = getData2("
+                $ProductData = getData2("
                                     SELECT 
                                         tbl_products.*, 
                                         tbl_category.category AS category_name 
@@ -1036,7 +1038,11 @@ class WebController extends LoginController
                                     WHERE 
                                         REPLACE(REPLACE(tbl_products.name, \"'\", ''), '-', ' ') = REPLACE(REPLACE('$name', \"'\", ''), '-', ' ')
                                 ")[0];
-
+                if (empty($ProductData)) {
+                    http_response_code(404);
+                    require __DIR__ . '/../views/website/404.php';
+                    exit();
+                }
                 $id = $ProductData['id'];
                 $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
                 $ProductData['varients'] = $varients;
@@ -1196,6 +1202,21 @@ class WebController extends LoginController
             require 'views/website/contact.php';
         }
     }
+
+
+    public function ContactUs2()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "Contact Us2";
+        $pageTitle = "Contact Us2";
+
+        // $this->checkSession();
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/website/contact2.php';
+        }
+    }
+
+
     public function OurOffices()
     {
         $siteName = getDBObject()->getSiteName();
@@ -1894,7 +1915,15 @@ ORDER BY id DESC LIMIT 5");
         // "SELECT * FROM online_users WHERE id = " . $_SESSION['userid'];
         // printWithPre($userData);
         // printWithPre($ActiveuserAddress);
+        $orders = getData2("SELECT tbl_purchase.*, indian_states.name AS state_name FROM tbl_purchase LEFT JOIN  indian_states ON tbl_purchase.state = indian_states.id WHERE tbl_purchase.userid = '$_SESSION[userid]' ORDER BY tbl_purchase.id DESC");
 
+        $wishlists = getData2("SELECT * FROM `tbl_wishlist` WHERE `userid` = " . $_SESSION["userid"]);
+
+        $TotalWishlist = count($wishlists);
+        $TotalOrders = count($orders);
+
+        echo $TotalWishlist;
+        echo $TotalOrders;
 
         require 'views/website/myprofile.php';
     }
@@ -2037,6 +2066,60 @@ ORDER BY id DESC LIMIT 5");
                 "success" => true,
                 "message" => "Review Added Successfully"
             ];
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            $response = [
+                "success" => false,
+                "message" => $e->getMessage()
+            ];
+        } finally {
+            echo json_encode($response);
+        }
+    }
+
+    public function saveToken()
+    {
+        $response = [
+            "success" => false,
+            "message" => "Something went wrong"
+        ];
+
+        try {
+            $this->db->beginTransaction();
+
+            $_POST = json_decode(file_get_contents('php://input'), true);
+
+            $token = $_POST['token'];
+            $userid = $_POST['userid'];
+
+            if (!empty($token)) {
+
+                $isExistToken = getData2("SELECT * FROM `tbl_tokens` WHERE `token` = '$token'");
+
+                if (empty($isExistToken)) {
+                    add([
+                        "token" => $token,
+                        "userid" => $userid,
+                        "created_date" => date("Y-m-d"),
+                        "created_time" => date("H:i:s"),
+                        "created_at" => date("Y-m-d H:i:s")
+                    ], "tbl_tokens", false);
+                } else if (empty($isExistToken[0]['userid']) && !empty($userid)) {
+                    update([
+                        "userid" => $userid
+                    ], $isExistToken[0]['id'], "tbl_tokens");
+                }
+            }
+
+            // printWithPre($_POST);
+            // die();
+
+            $response = [
+                "success" => true,
+                "message" => "Token Saved Successfully"
+            ];
+
+            $this->db->commit();
         } catch (Exception $e) {
             $this->db->rollBack();
             $response = [

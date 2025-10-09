@@ -34,6 +34,22 @@ class ProductController
             $packages = getData("tbl_packaging");
             require 'views/products/add-products.php';
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            printWithPre($_POST);
+            // $sizeChart = [];
+            $sizeType = $_POST["sizeType"];
+            $sizeVariant = $_POST["sizeVariant"];
+            $sizeValues = $_POST["sizeValues"];
+
+            $result = [];
+            $typeCount = count($sizeType);
+
+            foreach ($sizeVariant as $i => $variant) {
+                $startIndex = $i * $typeCount;
+                $values = array_slice($sizeValues, $startIndex, $typeCount);
+                $result[$variant] = array_combine($sizeType, $values);
+            }
+            // printWithPre($result);
+            // die();
             try {
                 // Begin transaction
                 $db->beginTransaction();
@@ -75,7 +91,8 @@ class ProductController
                     'physical_product' => isset($_POST['physical_product']) && $_POST['physical_product'] ? 1 : 0,
                     'packaging' => $_POST['packaging'],
                     'status' => isset($_POST['status']) && $_POST['status'] ? 1 : 0,
-                    'product_images' => $productImagesJson // Added here
+                    'product_images' => $productImagesJson, // Added here
+                    'sizeChart' => json_encode($result),
                 ];
 
                 // Insert into tbl_products
@@ -276,6 +293,45 @@ class ProductController
             update(
                 [
                     "new_arrival" => $_POST['status']
+                ],
+                $_POST['id'],
+                "tbl_products"
+            );
+
+            $response = [
+                "success" => true,
+                "message" => "Status Updated Successfully"
+            ];
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+
+            $response = [
+                "success" => false,
+                "message" => $e->getMessage()
+            ];
+        } finally {
+            echo json_encode($response);
+        }
+    }
+
+
+    public function ChangeProductStatus()
+    {
+        $response = [
+            "success" => false,
+            "message" => "Something went wrong"
+        ];
+
+        try {
+            $_POST = json_decode(file_get_contents('php://input'), true);
+
+            // printWithPre($_POST);
+            // die();
+
+            update(
+                [
+                    "status" => $_POST['status']
                 ],
                 $_POST['id'],
                 "tbl_products"
