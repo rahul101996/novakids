@@ -169,9 +169,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
     </div>
 
     <div class="w-full mx-auto mt-6 flex flex-col items-center justify-center">
-        <section class="flex items-start justify-center relative w-[90%] gap-0">
+        <section class="flex max-md:flex-col items-start justify-center relative w-[90%] gap-0 max-md:gap-6">
 
-            <div class="flex items-center justify-start max-md:hidden gap-2 w-[55%]">
+            <div class="flex items-center justify-start max-md:hidden gap-2 w-[55%] max-md:w-full">
                 <div class="grid grid-cols-2 gap-2 w-[96%]" id="ProductDetailImg">
                     <?php
                     if (is_array($ppimages[0])) {
@@ -179,20 +179,19 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         // array_reverse($ppimages[0]);
                         foreach ($ppimages[0] as $key => $image) {
 
-                            ?>
+                    ?>
                             <div class=" overflow-hidden  cursor-pointer">
                                 <img src="/<?= $image ?>" alt="View 1"
                                     class="w-full h-full object-cover image-hover cursor-zoom-in">
                             </div>
-                        <?php }
+                    <?php }
                     } ?>
 
                 </div>
             </div>
 
-
             <!-- Mobile Carousel -->
-            <div class="md:hidden relative w-[65%]">
+            <div class="md:hidden relative w-[65%] max-md:w-full">
                 <div class="swiper">
                     <div class="swiper-wrapper">
                         <!-- Slide 1 -->
@@ -317,38 +316,35 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
             <!-- Product Details Section -->
-            <div class="md:sticky top-32 self-start space-y-4 w-[45%]">
+            <div class="md:sticky top-32 self-start space-y-4 w-[45%] max-md:w-full">
                 <form method="POST" action="/checkout-cart" class="flex flex-col" id="productDetailForm">
                     <div class="gap-3 w-full flex items-start justify-between">
                         <div class="flex flex-col items-start justify-center mb-2 w-[75%]">
-                            <h2 class="w-full text-[1.7rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
+                            <h2 class="w-full text-[1.7rem] max-md:text-lg leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
                             <div class="flex items-center justify-center gap-3 mt-1 ">
-                                <span class="text-gray-300 text-xl line-through whitespace-nowrap">Rs. <span
+                                <span class="text-gray-300 text-xl max-md:text-base line-through whitespace-nowrap">Rs. <span
                                         id="comparePrice99"><?= formatNumber($ProductData['compare_price']) ?></span></span>
                                 <span
-                                    class="text-[#f25b21] text-xl prices">Rs.<?= formatNumber($ProductData['price']) ?></span>
+                                    class="text-[#f25b21] text-xl max-md:text-base prices">Rs.<?= formatNumber($ProductData['price']) ?></span>
                                 <span class="bg-[#f25b21] text-white text-xs px-2 py-1 z-20 whitespace-nowrap">SAVE
                                     <span id="save"><?= $discountPercentage ?></span>%</span>
 
                             </div>
-
-
-
                         </div>
                         <div class="flex items-center justify-end gap-2 w-[25%]">
                             <button class="addToWishlistBtn  rounded-full transition-all duration-500  ">
                                 <img src="/public/icons/<?= !empty($data) ? 'heart-orange.png' : 'heart-black.png' ?>"
-                                    class="cursor-pointer mt-1  h-8 w-8" alt="">
+                                    class="cursor-pointer mt-1 h-8 w-8 max-md:h-6 max-md:w-6" alt="">
                             </button>
                             <input type="hidden" value="<?= $ProductData['id'] ?>" class="ProductId">
 
                             <img src="/public/icons/share-black.png" onclick="shareProduct()"
-                                class="h-8 cursor-pointer mt-1" alt="">
+                                class="h-8 max-md:h-6 cursor-pointer mt-1" alt="">
                         </div>
                     </div>
                     <?php
                     if ($ProductData['id'] != 7) {
-                        ?>
+                    ?>
                         <p class="text-sm text-gray-900 mt-2 text-justify">Upgrade your casual wardrobe with our black
                             sporty deconstructed loose pants, the perfect blend of comfort and style. Designed with a
                             relaxed fit, these pants allow for effortless movement, while the deconstructed detailing adds a
@@ -357,8 +353,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated
                         at checkout</p>
                     <!-- Size Selection -->
-                    <div class="flex flex-col mt-7" id="productDetailsVariants">
-
+                    <div class="flex flex-col mt-7 max-md:mt-3" id="productDetailsVariants">
 
                     </div>
                     <div class="w-full flex items-center justify-start mt-4 text-sm relative">
@@ -401,7 +396,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     </script>
                     <!-- Color Selection -->
 
-                    <div class="w-full mt-7">
+                    <div class="w-full mt-7 max-md:mt-4">
                         <!-- Title -->
                         <h3 class="font-semibold text-gray-800 mb-3">Check Delivery</h3>
 
@@ -423,7 +418,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         </p>
                     </div>
                     <!-- Quantity and Add to Cart -->
-                    <div class="space-y-4 mt-7">
+                    <div class="space-y-4 max-md:space-y-2 mt-7 max-md:mt-4">
                         <div class="w-full flex items-center justify-between space-x-4">
                             <div
                                 class="  flex items-center justify-center gap-7 border border-gray-800 rounded-lg py-1">
@@ -448,18 +443,13 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 </button>
                                 <input type="hidden" value="<?= $ProductData["id"] ?>" class="ProductId">
                             </div>
-
-
-
                         </div>
 
                         <div class="flex w-full items-center justify-start gap-4">
 
-
-
                             <?php
                             if (!empty($_SESSION["userid"])) {
-                                ?>
+                            ?>
                                 <input type="hidden" name="varient[]" class="sideVarientId"
                                     value="<?= $ProductData['varients'][0]["id"] ?>">
                                 <input type="hidden" name="category[]" class="sideCategoryId"
@@ -478,9 +468,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                     </span>
 
                                 </button>
-                                <?php
+                            <?php
                             } else {
-                                ?>
+                            ?>
                                 <input type="hidden" name="varient[]" class="sideVarientId"
                                     value="<?= $ProductData['varients'][0]["id"] ?>">
                                 <input type="hidden" name="category[]" class="sideCategoryId"
@@ -500,7 +490,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                                 </button>
 
-                                <?php
+                            <?php
                             }
                             ?>
                             <button
@@ -522,7 +512,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                         <i class="fa-solid fa-chevron-down chev"></i>
                                     </button>
                                     <div class="accordion-content">
-                                        <div class="pt-2 text-gray-600">
+                                        <div class="pt-2 text-gray-600 max-md:text-sm">
                                             <?= $ProductData['description'] ?>
                                         </div>
                                     </div>
@@ -536,7 +526,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                         <i class="fa-solid fa-chevron-down chev"></i>
                                     </button>
                                     <div class="accordion-content">
-                                        <div class="pt-2 text-gray-600">
+                                        <div class="pt-2 text-gray-600 max-md:text-sm">
                                             Extra specifications and details go here. The panel closes smoothly too.
                                         </div>
                                     </div>
@@ -608,13 +598,13 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             </div>
         </section>
 
-        <div class="w-full flex items-center justify-center mt-16">
+        <div class="w-full flex items-center justify-center mt-16 max-md:mt-8">
             <div class="flex items-center justify-center flex-col relative w-[90%] gap-5">
 
                 <div
-                    class="w-[80%] h-[28vh] bg-white rounded-lg shadow-md border border-gray-300  py-6 flex flex-col items-center justify-center">
+                    class="w-[80%] max-md:w-[90%] h-[28vh] bg-white rounded-lg shadow-md border border-gray-300  py-6 flex flex-col items-center justify-center">
                     <div class="text-center font-semibold text-lg mb-4">Customer Reviews</div>
-                    <div class="flex items-center justify-center gap-8">
+                    <div class="flex max-md:flex-col items-center justify-center gap-8 max-md:gap-2">
 
                         <!-- Left: Stars + text -->
                         <div class="flex flex-col items-center">
@@ -649,7 +639,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         </div>
 
                         <!-- Divider -->
-                        <div class="h-12 w-px bg-gray-300"></div>
+                        <div class="h-12 w-px bg-gray-300 max-md:hidden"></div>
 
                         <!-- Right: Button -->
                         <button type="button"
@@ -662,9 +652,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 </div>
 
                 <div class="w-[80%] flex items-center justify-center">
-
-                    <div class="grid grid-cols-2 w-full">
-                        <!-- Review 1 -->
+                    <div class="grid grid-cols-2 max-md:grid-cols-1 w-full">
                         <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
                             <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
                                 <span> ★★★★★</span>
@@ -674,7 +662,6 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                     luxurious."
                                 </p>
                             </div>
-                            <!-- Reviewer Info -->
                             <div class="flex gap-4 items-center w-full">
                                 <div class="flex items-center w-10 h-10">
                                     <img src="/public/images/dp.png" alt="John D."
@@ -682,12 +669,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 </div>
                                 <div>
                                     <p class="font-semibold text-gray-800">John D.</p>
-                                    <!-- <p class="text-xs text-gray-500">Verified Buyer</p> -->
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Review 2 -->
                         <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
                             <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
                                 <span> ★★★★★</span>
@@ -704,7 +689,6 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 </div>
                                 <div>
                                     <p class="font-semibold text-gray-800">Sarah M.</p>
-                                    <!-- <p class="text-xs text-gray-500">Fashion Enthusiast</p> -->
                                 </div>
                             </div>
                         </div>
@@ -715,12 +699,12 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
                                 <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
                                     <span> <?php for ($i = 0; $i < 5; $i++) {
-                                        if ($value['rating'] > $i) {
-                                            echo '★';
-                                        } else {
-                                            echo '☆';
-                                        }
-                                    } ?></span>
+                                                if ($value['rating'] > $i) {
+                                                    echo '★';
+                                                } else {
+                                                    echo '☆';
+                                                }
+                                            } ?></span>
                                     <style>
                                         .review-text {
                                             display: -webkit-box;
@@ -756,15 +740,11 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             </div>
         </div>
 
-
-
-
-
         <section class="bg-white py-14 max-md:py-8 w-full">
             <div class="w-[90vw] max-md:w-[90vw] mx-auto">
                 <div class="relative">
                     <div class="flex flex items-center justify-between mb-6">
-                        <h3 class="text-left text-3xl font-extrabold uppercase">YOU MAY ALSO LIKE</h3>
+                        <h3 class="text-left text-3xl max-md:text-xl font-extrabold uppercase">YOU MAY ALSO LIKE</h3>
                         <div class="flex flex items-center gap-2 justify-center">
                             <div onclick="banner_forward(this)"
                                 class=" border bg-black border-white p-2 rounded-full cursor-pointer">
@@ -809,77 +789,62 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 }
                             }
                             // printWithPre($images);
-                            ?>
+                        ?>
                             <a href="/products/product-details/<?= $name ?>" class="block">
                                 <div class="group relative  cursor-pointer transition overflow-hidden">
                                     <!-- Discount Badge -->
                                     <span
-                                        class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20" ">
-                                                                                                                    SAVE <?= $discountPercentage ?>%
-                                                                                                                </span>
+                                        class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">
+                                        SAVE <?= $discountPercentage ?>%
+                                    </span>
 
-
-                                                                                                                <!-- Product Images -->
-                                                                                                                <div class="
-                                    relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
-                                        <!-- Default Image -->
+                                    <div class=" relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                         <img src="/<?= $images[0] ?>" alt="Product 1"
                                             class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
-
-                                        <!-- Hover Image -->
 
                                         <img src="/<?= $SecondImage ?>" alt="Product 1 Hover"
                                             class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
 
-                                        <!-- Add to favorites Icon (top-right) -->
                                         <button
-                                            class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
-                                            <i class="fas fa-heart"></i>
+                                            class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 max-md:h-6 max-md:w-6 flex items-center justify-center rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
+                                            <i class="fas fa-heart max-md:text-xs"></i>
                                         </button>
 
-                                        <!-- Add to Cart Icon -->
                                         <button
                                             class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
                                             <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                                         </button>
                                         <input type="text" value="<?= $product['id'] ?>" class="ProductId">
-                                </div>
-
-                                <!-- Product Details -->
-                                <div class="pt-4 w-full ">
-                                    <h3 class="text-base font-semibold uppercase"><?= $product['name'] ?></h3>
-                                    <div class="flex items-center justify-start gap-3 w-full">
-                                        <p class="text-gray-500 line-through text-sm">₹
-                                            <?= formatNumber($product['compare_price']) ?>
-                                        </p>
-                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?></p>
                                     </div>
-                                    <!-- reviews -->
-                                    <div class="flex items-center justify-start space-x-1 hidden">
-                                        <span class="text-yellow-500">★★★★★</span>
+
+                                    <div class="pt-4 w-full ">
+                                        <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?></h3>
+                                        <div class="flex items-center justify-start gap-3 w-full">
+                                            <p class="text-gray-500 line-through text-sm">₹
+                                                <?= formatNumber($product['compare_price']) ?>
+                                            </p>
+                                            <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?></p>
+                                        </div>
+                                        <div class="flex items-center justify-start space-x-1 hidden">
+                                            <span class="text-yellow-500">★★★★★</span>
+                                        </div>
                                     </div>
                                 </div>
-                        </div>
-                        </a>
-
-                    <?php } ?>
-
+                            </a>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
         </section>
 
     </div>
 
-    <!-- Delivery Modal -->
     <div id="deliveryModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
         <div class="bg-white w-full w-[65vw] max-md:w-[94vw] shadow-lg relative p-8 max-md:p-5 animate-slideDown">
-            <!-- Close Button -->
             <button id="closeDeliveryModal"
                 class="absolute top-4 right-4 text-gray-600 hover:text-black animate-rotate-pingpong">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
-
-            <!-- Modal Content -->
             <h2 class="text-2xl font-bold mb-4">Delivery & Return</h2>
             <p class="text-gray-700 mb-4">
                 We want you to be happy with your purchase and we apologize if it is not.
@@ -1205,7 +1170,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         }
 
         // Handle Form Submission
-        document.getElementById("reviewForm").addEventListener("submit", async function (e) {
+        document.getElementById("reviewForm").addEventListener("submit", async function(e) {
             e.preventDefault();
 
             const name = document.getElementById("name").value;
@@ -1270,10 +1235,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         }
 
         // Initialize on hover effect
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const starIcons = document.querySelectorAll('.star-icon');
             starIcons.forEach((star, index) => {
-                star.addEventListener('mouseenter', function () {
+                star.addEventListener('mouseenter', function() {
                     starIcons.forEach((s, i) => {
                         if (i <= index) {
                             s.classList.remove('text-gray-300');
@@ -1282,7 +1247,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     });
                 });
 
-                star.addEventListener('mouseleave', function () {
+                star.addEventListener('mouseleave', function() {
                     const currentRating = parseInt(document.getElementById('rating').value);
                     starIcons.forEach((s, i) => {
                         if (i < currentRating) {
@@ -1302,7 +1267,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".like-carousel").owlCarousel({
                 loop: true,
                 margin: 10,
@@ -1329,7 +1294,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
     </script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".review-carousel").owlCarousel({
                 margin: 10,
                 autoplay: true,
@@ -1359,7 +1324,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 }
             });
         });
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".review-carousel1").owlCarousel({
                 margin: 10,
                 autoplay: true,
@@ -1389,7 +1354,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 }
             });
         });
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".review-carousel2").owlCarousel({
                 margin: 10,
                 autoplay: true,

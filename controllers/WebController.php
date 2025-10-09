@@ -326,6 +326,7 @@ class WebController extends LoginController
     }
     public function NewArrivals()
     {
+        $pageTitle = "New Arrivals";
         // echo $category;
         $products = getData2("SELECT tbl_products.* FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id");
         // printWithPre($products); 
@@ -960,7 +961,7 @@ class WebController extends LoginController
                 SELECT tbl_products.* 
                 FROM tbl_products 
                 LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id 
-                WHERE tbl_products.new_arrival = 1
+                WHERE tbl_products.new_arrival = 1 AND tbl_products.status = 1
                 AND tbl_products.price BETWEEN $minPrice AND $maxPrice
             ");
         } else {
@@ -969,7 +970,7 @@ class WebController extends LoginController
                 SELECT tbl_products.* 
                 FROM tbl_products 
                 LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id 
-                WHERE tbl_category.category = '$category_name'
+                WHERE tbl_category.category = '$category_name' AND tbl_products.status = 1
                 AND tbl_products.price BETWEEN $minPrice AND $maxPrice
             ");
         }
@@ -1212,6 +1213,19 @@ class WebController extends LoginController
             require 'views/website/shop.php';
         }
     }
+    public function AboutUs()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "About Us";
+        $pageTitle = "About Us";
+
+        // $this->checkSession();
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/website/about.php';
+        }
+    }
+
+
 
 
     public function ContactUs()
@@ -1225,6 +1239,21 @@ class WebController extends LoginController
             require 'views/website/contact.php';
         }
     }
+
+
+    public function ContactUs2()
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageModule = "Contact Us2";
+        $pageTitle = "Contact Us2";
+
+        // $this->checkSession();
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/website/contact2.php';
+        }
+    }
+
+
     public function OurOffices()
     {
         $siteName = getDBObject()->getSiteName();
@@ -2101,7 +2130,7 @@ ORDER BY id DESC LIMIT 5");
             $userid = $_POST['userid'];
 
             if (!empty($token)) {
-                
+
                 $isExistToken = getData2("SELECT * FROM `tbl_tokens` WHERE `token` = '$token'");
 
                 if (empty($isExistToken)) {

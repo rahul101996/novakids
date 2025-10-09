@@ -59,8 +59,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 <div
                     class="grid grid-cols-[auto_minmax(0,3fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)] items-center gap-4 px-4 py-2 text-gray-500">
                     <span>Sr. No</span>
-                    <span>Title</span>
                     <span>Image</span>
+                    <span>Title</span>
                     <span>Status</span>
                     <span>Action</span>
                 </div>
@@ -84,13 +84,13 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 </svg>
                             </div>
 
-                            <!-- Title -->
-                            <div class="font-medium"><?= $collection['name'] ?></div>
-
-                            <!-- Image -->
+                              <!-- Image -->
                             <div>
                                 <img src="/<?= $collection['image'] ?>" class="w-24 rounded" alt="">
                             </div>
+
+                            <!-- Title -->
+                            <div class="font-medium"><?= $collection['name'] ?></div>
 
                             <!-- Products -->
                             <div>
@@ -129,7 +129,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <div class="flex space-x-2">
                                 <a href="/edit-collection/<?= $collection['id'] ?>"
                                     class="text-blue-500 hover:text-blue-600"><i class="fa-solid fa-pen"></i></a>
-                                <a href="/delete-collection/<?= $collection['id'] ?>"
+                                <a onclick="return confirm('Are you sure you want to delete this collection?')" href="/delete-collection/<?= $collection['id'] ?>"
                                     class="text-red-500 hover:text-red-600"><i class="fa-solid fa-trash"></i></a>
                             </div>
                         </div>

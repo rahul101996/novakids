@@ -62,7 +62,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
 
         <div class="absolute bottom-20 left-10">
             <button onclick="window.location.href = '/category/tees'"
-                class="relative px-10 py-3 bg-transparent hover:bg-white text-white hover:text-black border border-white rounded-md font-semibold shadow-lg overflow-hidden group transition-all duration-700">
+                class="relative px-10 py-3 max-md:py-2 max-md:px-6 bg-transparent hover:bg-white text-white hover:text-black border border-white rounded-md font-semibold shadow-lg overflow-hidden group transition-all duration-700">
                 <span class="relative z-10 block transition-colors duration-300 group-hover:animate-glitch">SHOP
                     NOW</span>
                 <span
@@ -83,7 +83,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
             #GenZStyle
         </p>
     </section>
-    <div class="owl-carousel owl-theme Home-Carousel h-[90vh] w-[100vw] relative">
+    <div class="owl-carousel owl-theme Home-Carousel h-auto w-[100vw] relative">
         <div class="w-full h-full">
             <img src="/public/home-banner/homepage_copy_26.avif" class="w-full h-full" alt="">
         </div>
@@ -134,15 +134,16 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
 
         @media (max-width: 768px) {
             .new-arrival-carousel .owl-nav {
-                top: -120px;
-                left: 85%;
+                height: auto;
+                top: 350px;
+                left: 50%;
             }
         }
     </style>
 
     <section class="bg-white pt-12 pb-6 max-md:py-8 w-full">
         <div class="w-[90vw] max-md:w-[90vw] mx-auto">
-            <div class="flex flex-col mb-4 max-md:mb-2" data-aos="fade-up" data-aos-duration="1000"
+            <div class="flex flex-col mb-4 max-md:mb-6" data-aos="fade-up" data-aos-duration="1000"
                 data-aos-delay="100">
                 <h3 class="text-center text-3xl font-extrabold mb-3 uppercase">New Arrival</h3>
                 <p class="text-center mx-auto text-gray-600 text-lg max-md:text-base max-w-xl">
@@ -186,7 +187,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                         <a href="/products/product-details/<?= $name ?>" class="block">
                             <div class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
-                                <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
+                                <span class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">
                                     SAVE <?= $discountPercentage ?>%
                                 </span>
 
@@ -203,8 +204,8 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
 
                                     <!-- Add to favorites Icon (top-right) -->
                                     <button
-                                        class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
-                                        <i class="fas fa-heart"></i>
+                                        class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 max-md:h-6 max-md:w-6 flex items-center justify-center rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
+                                        <i class="fas fa-heart max-md:text-xs"></i>
                                     </button>
 
                                     <!-- Add to Cart Icon -->
@@ -217,7 +218,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
 
                                 <!-- Product Details -->
                                 <div class="pt-4 w-full ">
-                                    <h3 class="text-base font-semibold uppercase"><?= $product['name'] ?></h3>
+                                    <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?></h3>
                                     <div class="flex items-center justify-start gap-3 w-full">
                                         <p class="text-gray-500 line-through text-sm">₹
                                             <?= formatNumber($product['compare_price']) ?>.00
@@ -239,7 +240,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
     </section>
 
     <!-- Section -->
-    <section class="md:pb-16 relative">
+    <section class="md:pb-16 max-md:pt-16 relative">
         <div class="absolute hidden -top-14 max-md:-top-16 -left-14 w-auto h-auto opacity-20">
             <img src="/public/images/naruto.webp" alt="" class="w-40 max-md:w-28 h-auto">
         </div>
@@ -264,7 +265,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                     <a href="/category/<?= strtolower(str_replace(' ', '-', $category['category'])) ?>">
 
                         <img src="/<?= $category['img'] ?>" alt="Tees"
-                            class="w-full h-[380px] max-md:h-[200px] object-cover object-top transform group-hover:scale-110 transition duration-700 ease-out">
+                            class="w-full h-[400px] max-md:h-[200px] object-cover object-top transform group-hover:scale-110 transition duration-700 ease-out">
                         <!-- Overlay -->
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
@@ -559,7 +560,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
         <div id="bottomRow" class="marquee bg-black">
             <div class="marquee-content text-grey-700 max-md:text-sm py-1 text-nowrap">
                 <div
-                    class="flex items-center space-x-10 text-outline transition-all duration-700 text-white font-semibold text-xl max-md:text-lg cursor-pointer">
+                    class="flex items-center space-x-10 text-outline transition-all duration-700 text-white font-semibold text-xl max-md:text-base cursor-pointer">
 
                     <?php
                     for ($i = 0; $i < 10; $i++) {
@@ -568,96 +569,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                             <span><?= $value['title'] ?></span>
                         <?php }
                     } ?>
-
-
-                    <!-- <span>#</span>
-                            <span>Streetwear</span>
-                            <span>#</span>
-                            <span>Oversized Tees</span>
-                            <span>#</span>
-                            <span>Graphic Hoodies</span>
-                            <span>#</span>
-                            <span>Joggers & Co-ords</span>
-                            <span>#</span>
-                            <span>Fresh Drops Weekly</span>
-                            <span>#</span>
-                            <span>Nova Universe Exclusive</span>
-                            <span>#</span>
-                            <span>Stay Trendy</span>
-                            <span>#</span>
-                            <span>Free Shipping Over ₹999</span>
-                            <span>#</span>
-                            <span>Made for Gen Z</span>
-                            <span>#</span>
-                            <span>Streetwear</span>
-                            <span>#</span>
-                            <span>Oversized Tees</span>
-                            <span>#</span>
-                            <span>Graphic Hoodies</span>
-                            <span>#</span>
-                            <span>Joggers & Co-ords</span>
-                            <span>#</span>
-                            <span>Fresh Drops Weekly</span>
-                            <span>#</span>
-                            <span>Nova Universe Exclusive</span>
-                            <span>#</span>
-                            <span>Stay Trendy</span>
-                            <span>#</span>
-                            <span>Free Shipping Over ₹999</span>
-                            <span>#</span>
-                            <span>Made for Gen Z</span><span>#</span>
-                            <span>Streetwear</span>
-                            <span>#</span>
-                            <span>Oversized Tees</span>
-                            <span>#</span>
-                            <span>Graphic Hoodies</span>
-                            <span>#</span>
-                            <span>Joggers & Co-ords</span>
-                            <span>#</span>
-                            <span>Fresh Drops Weekly</span>
-                            <span>#</span>
-                            <span>Nova Universe Exclusive</span>
-                            <span>#</span>
-                            <span>Stay Trendy</span>
-                            <span>#</span>
-                            <span>Free Shipping Over ₹999</span>
-                            <span>#</span>
-                            <span>Made for Gen Z</span><span>#</span>
-                            <span>Streetwear</span>
-                            <span>#</span>
-                            <span>Oversized Tees</span>
-                            <span>#</span>
-                            <span>Graphic Hoodies</span>
-                            <span>#</span>
-                            <span>Joggers & Co-ords</span>
-                            <span>#</span>
-                            <span>Fresh Drops Weekly</span>
-                            <span>#</span>
-                            <span>Nova Universe Exclusive</span>
-                            <span>#</span>
-                            <span>Stay Trendy</span>
-                            <span>#</span>
-                            <span>Free Shipping Over ₹999</span>
-                            <span>#</span>
-                            <span>Made for Gen Z</span><span>#</span>
-                            <span>Streetwear</span>
-                            <span>#</span>
-                            <span>Oversized Tees</span>
-                            <span>#</span>
-                            <span>Graphic Hoodies</span>
-                            <span>#</span>
-                            <span>Joggers & Co-ords</span>
-                            <span>#</span>
-                            <span>Fresh Drops Weekly</span>
-                            <span>#</span>
-                            <span>Nova Universe Exclusive</span>
-                            <span>#</span>
-                            <span>Stay Trendy</span>
-                            <span>#</span>
-                            <span>Free Shipping Over ₹999</span>
-                            <span>#</span>
-                            <span>Made for Gen Z</span> -->
-
+                    
                 </div>
             </div>
         </div>
@@ -785,21 +697,21 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
     <section class="py-16 max-md:pt-6 max-md:pb-4 w-[90vw] mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
             <!-- Left Side Text (Sticky) -->
-            <div class="md:sticky top-24 self-start">
+            <div class="md:sticky top-24 md:self-start max-md:items-center max-md:text-center">
                 <h2 class="text-3xl md:text-6xl font-extrabold uppercase leading-tight md:mt-24">
                     Follow us <br> on
                     <span class="animated-gradient bg-clip-text text-transparent">
                         Instagram
                     </span>
                 </h2>
-                <p class="mt-4 text-lg text-gray-600 max-w-md mb-8 max-md:mb-4">
+                <p class="mt-4 text-lg max-md:text-base text-gray-600 max-w-md mb-8 max-md:mb-4">
                     Stay updated with the latest drops, streetwear vibes, and Gen-Z inspo straight from our feed.
                 </p>
 
                 <button
                     class="flex-1 relative rounded-md overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black">
                     <span
-                        class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
+                        class="relative z-10 flex py-2 px-6 max-md:px-4 max-md:py-1 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
                         @novauniverse
                     </span>
                     <span
