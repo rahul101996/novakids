@@ -133,10 +133,12 @@ class WebController extends LoginController
                             if(!empty($ProductData["sizeChart"])){
                                     
                                      $sizeChartValue = $sizeChart[$value[0]];
-                                        $sizeChartValueString = "";
+                                        $sizeChartValueString = [];
                                         foreach($sizeChartValue as $kk=>$sv){
-                                            $sizeChartValueString = $sizeChartValueString . "$kk $sv inches ";
+                                            $sizeChartValueString[] = "$kk $sv inches ";
                                         }
+
+                                        $sizeChartValueString = implode(" | ",$sizeChartValueString)
                                     
                                 ?>
                                     <div class="w-full flex items-center justify-between text-sm">
@@ -187,13 +189,15 @@ class WebController extends LoginController
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
-                                    $sizeChartValueString = "";
+                                    $sizeChartValueString = [];
                                     if(!empty($sizeChart)){
                                         $sizeChartValue = $sizeChart[$value1];
                                         
                                         foreach($sizeChartValue as $kk=>$sv){
-                                            $sizeChartValueString = $sizeChartValueString . "$kk $sv inches ";
+                                            $sizeChartValueString[] =  "$kk $sv inches ";
                                         }
+
+                                        $sizeChartValueString = implode(" | ",$sizeChartValueString);
                                     }
                                 ?>
                                     <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>,"<?=$sizeChartValueString?>")'

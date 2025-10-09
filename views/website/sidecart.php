@@ -343,8 +343,8 @@
             addToCartBtn.forEach(function(btn) {
                 btn.addEventListener('click', async function(event) {
                     console.log("hello");
-                    // event.preventDefault();
-                    // event.stopPropagation();
+                    event.preventDefault();
+                    event.stopPropagation();
                     // 
                     let ee = btn.parentElement
                     // showVarients(ee.querySelector(".ProductId").value);
@@ -636,7 +636,10 @@
         });
         // console.log(divs[key1])
         divs[key1].classList.add("border-gray-900");
-        console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
+        // console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
+        if(document.querySelector(".changeSideVariant")){
+            document.querySelector(".changeSideVariant").innerText = json;
+        }
         let selectedId = "";
         GLOBAL_VARIANT.variants.forEach(async (ar, i) => {
 
