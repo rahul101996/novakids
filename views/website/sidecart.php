@@ -523,8 +523,8 @@
             addToCartBtn.forEach(function(btn) {
                 btn.addEventListener('click', async function(event) {
                     console.log("hello");
-                    event.preventDefault();
-                    event.stopPropagation();
+                    // event.preventDefault();
+                    // event.stopPropagation();
                     // 
                     let ee = btn.parentElement
                     // showVarients(ee.querySelector(".ProductId").value);

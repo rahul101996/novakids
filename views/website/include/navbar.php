@@ -212,7 +212,7 @@ $categories = getData("tbl_category");
 
             <button <?= isset($_SESSION['userid']) && !empty($_SESSION['userid']) ? 'onclick="window.location.href=\'/profile\'"' : 'id="openLogin"' ?>
                 class="nav-text text-black p-2 max-md:p-1 rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
-                <div class="max-md:hidden">
+                <div class="max-md:hidden flex items-center justify-center gap-1">
                     <svg class="svgUser2 anarkali-svg-icon" enable-background="new 0 0 512 512" height="24px"
                         viewBox="0 0 512 512" width="24px" xmlns="http://www.w3.org/2000/svg">
                         <g>
@@ -228,6 +228,9 @@ $categories = getData("tbl_category");
                             </g>
                         </g>
                     </svg>
+                    <div>
+                        <div class="font-thin text-xs flex flex-col items-start justify-start "><span class="text-gray-600">Hello,</span><span class="font-semibold uppercase tracking-wider"><?= isset($_SESSION['fname']) ? $_SESSION['fname'].' '.$_SESSION['lname'] : 'Guest' ?></span></div>
+                    </div>
                 </div>
                 <div class="md:hidden">
                     <svg class="svgUser2 anarkali-svg-icon" enable-background="new 0 0 512 512" height="22px"
@@ -724,11 +727,11 @@ $categories = getData("tbl_category");
     const openBtn = document.getElementById('openLogin');
     const closeBtn = document.getElementById('closeLogin');
     const modal = document.getElementById('loginModal');
-
+   if(openBtn){
     openBtn.addEventListener('click', () => {
         modal.classList.remove('hidden');
     });
-
+   }
     function openLogin() {
         console.log("openLogin")
         modal.classList.remove('hidden');

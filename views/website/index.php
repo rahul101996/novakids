@@ -955,13 +955,14 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
             const noPopupCheckbox = document.getElementById('noPopup');
 
             // Show modal after 3s unless "Don't show again" is checked for this session
-            if (!sessionStorage.getItem('hideNewsletterModal')) {
-                setTimeout(() => {
-                    modal.classList.remove('hidden');
-                }, 3000);
-            }
+            // if (!sessionStorage.getItem('hideNewsletterModal')) {
+            //     setTimeout(() => {
+            //         modal.classList.remove('hidden');
+            //     }, 3000);
+            // }
 
             // Close modal
+            if(closeBtn){
             closeBtn.addEventListener('click', () => {
                 modal.classList.add('hidden');
                 // if (noPopupCheckbox.checked) {
@@ -969,7 +970,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                 // }
                 close_popup();
             });
-
+        }
             // Close modal if clicked outside content
             window.addEventListener('click', (e) => {
                 if (e.target === modal) {
