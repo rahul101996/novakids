@@ -1598,7 +1598,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             divs[key1].classList.add("border-gray-900");
             // console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
             let selectedId = "";
-            document.querySelector(".changeDetailVariant").innerText = json;
+           if(document.querySelector(".changeDetailVariant")){
+             document.querySelector(".changeDetailVariant").innerText = json;
+           }
 
             GLOBAL_product_VARIANT.variants.forEach(async (ar, i) => {
                 //    console.log(ar)
