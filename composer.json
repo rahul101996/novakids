@@ -16,7 +16,8 @@
         "phpmailer/phpmailer": "^6.9",
         "picqer/php-barcode-generator": "^2.4",
         "mpdf/mpdf": "^8.0",
-        "google/apiclient": "^2.15"
+        "google/apiclient": "^2.15",
+        "kreait/firebase-php": "^6.9"
     },
 
     "config": {

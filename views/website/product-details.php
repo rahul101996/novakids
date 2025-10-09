@@ -2,10 +2,8 @@
 
 // printWithPre($_SESSION);
 
-
 // printWithPre($ProductData);
 $page = "product-details";
-
 if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
@@ -173,7 +171,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
     <div class="w-full mx-auto mt-6 flex flex-col items-center justify-center">
         <section class="flex items-start justify-center relative w-[90%] gap-0">
 
-            <div class="flex items-center justify-start max-md:hidden gap-2 w-[64%]">
+            <div class="flex items-center justify-start max-md:hidden gap-2 w-[55%]">
                 <div class="grid grid-cols-2 gap-2 w-[96%]" id="ProductDetailImg">
                     <?php
                     if (is_array($ppimages[0])) {
@@ -319,12 +317,12 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
             <!-- Product Details Section -->
-            <div class="md:sticky top-32 self-start space-y-4 w-[35%]">
+            <div class="md:sticky top-32 self-start space-y-4 w-[45%]">
                 <form method="POST" action="/checkout-cart" class="flex flex-col" id="productDetailForm">
                     <div class="gap-3 w-full flex items-start justify-between">
                         <div class="flex flex-col items-start justify-center mb-2 w-[75%]">
                             <h2 class="w-full text-[1.7rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
-                            <div class="flex items-center justify-center gap-3 mt-4 ">
+                            <div class="flex items-center justify-center gap-3 mt-1 ">
                                 <span class="text-gray-300 text-xl line-through whitespace-nowrap">Rs. <span
                                         id="comparePrice99"><?= formatNumber($ProductData['compare_price']) ?></span></span>
                                 <span
@@ -333,6 +331,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                     <span id="save"><?= $discountPercentage ?></span>%</span>
 
                             </div>
+
+
+
                         </div>
                         <div class="flex items-center justify-end gap-2 w-[25%]">
                             <button class="addToWishlistBtn  rounded-full transition-all duration-500  ">
@@ -400,7 +401,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     </script>
                     <!-- Color Selection -->
 
-                    <div class="w-full mt-7  bg-gray-100 border border-gray-300 rounded-lg p-4 shadow-sm">
+                    <div class="w-full mt-7">
                         <!-- Title -->
                         <h3 class="font-semibold text-gray-800 mb-3">Check Delivery</h3>
 
@@ -422,14 +423,14 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         </p>
                     </div>
                     <!-- Quantity and Add to Cart -->
-                    <div class="space-y-4 mt-9">
+                    <div class="space-y-4 mt-7">
                         <div class="w-full flex items-center justify-between space-x-4">
                             <div
                                 class="  flex items-center justify-center gap-7 border border-gray-800 rounded-lg py-1">
-                                <span class="cursor-pointer border-r border-gray-800 px-4 py-2"
+                                <span class="cursor-pointer border-r border-gray-800 px-4 py-1"
                                     onclick="countMe(this,'-')">-</span>
                                 <span class="text-black counter">1</span>
-                                <span class="cursor-pointer border-l border-gray-800 px-4 py-2"
+                                <span class="cursor-pointer border-l border-gray-800 px-4 py-1"
                                     onclick="countMe(this,'+')">+</span>
 
                             </div>
@@ -438,7 +439,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 <button type="button" onclick="ohmygod()" id="MainCartBtn"
                                     class="w-full sm:flex-1 relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black">
                                     <span
-                                        class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
+                                        class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
                                         <i class="fas fa-cart-plus"></i> Add to Cart
                                     </span>
                                     <span
@@ -470,7 +471,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 <input type="hidden" name="cartid[]" value="">
                                 <button name="myForm"
                                     class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-0 hover:border hover:border-[#f25b21] transition-all duration-700"><span
-                                        class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
+                                        class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
                                         Buy It Now
                                     </span> <span
                                         class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
@@ -491,7 +492,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 <input type="hidden" name="cartid[]" value="">
                                 <button type="button" onclick="openLogin()"
                                     class="w-full relative rounded-lg overflow-hidden group transform hover:shadow-xl bg-[#f25b21] text-black mt-2 hover:border hover:border-[#f25b21] transition-all duration-700"><span
-                                        class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
+                                        class="relative z-10 flex py-2 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 text-white group-hover:text-[#f25b21]">
                                         Buy It Now
                                     </span> <span
                                         class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
@@ -607,11 +608,11 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             </div>
         </section>
 
-        <div class="w-full flex items-center justify-center mt-10">
-            <div class="flex items-start justify-between flex-row-reverse relative w-[90%] gap-5">
+        <div class="w-full flex items-center justify-center mt-16">
+            <div class="flex items-center justify-center flex-col relative w-[90%] gap-5">
 
                 <div
-                    class="w-[37%] h-[28vh] bg-white rounded-lg shadow-md border border-gray-300  py-6 flex flex-col items-center justify-center">
+                    class="w-[80%] h-[28vh] bg-white rounded-lg shadow-md border border-gray-300  py-6 flex flex-col items-center justify-center">
                     <div class="text-center font-semibold text-lg mb-4">Customer Reviews</div>
                     <div class="flex items-center justify-center gap-8">
 
@@ -660,8 +661,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     </div>
                 </div>
 
-                <div class="w-[63%] flex items-center justify-center">
-                    <div class="owl-carousel owl-theme review-carousel1 w-full">
+                <div class="w-[80%] flex items-center justify-center">
+
+                    <div class="grid grid-cols-2 w-full">
+                        <!-- Review 1 -->
                         <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
                             <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
                                 <span> ★★★★★</span>
@@ -684,6 +687,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </div>
                         </div>
 
+                        <!-- Review 2 -->
                         <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
                             <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
                                 <span> ★★★★★</span>
@@ -749,7 +753,6 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -812,12 +815,12 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                     <!-- Discount Badge -->
                                     <span
                                         class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20" ">
-                                                                                                                                            SAVE <?= $discountPercentage ?>%
-                                                                                                                                        </span>
+                                                                                                                    SAVE <?= $discountPercentage ?>%
+                                                                                                                </span>
 
 
-                                                                                                                                        <!-- Product Images -->
-                                                                                                                                        <div class="
+                                                                                                                <!-- Product Images -->
+                                                                                                                <div class="
                                     relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                         <!-- Default Image -->
                                         <img src="/<?= $images[0] ?>" alt="Product 1"
@@ -915,13 +918,13 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         <div class="w-[90vw] mx-auto flex max-md:flex-col items-center max-md:gap-2 max-md:items-start justify-between">
             <div class="flex items-center gap-4">
                 <img src="/<?= $ppimages[0][0] ?>" alt="Product"
-                    class=" h-24 max-md:w-12 max-md:h-12 object-cover border border-white" id="DownImage">
+                    class=" h-12 max-md:w-12 max-md:h-12 object-cover border border-white" id="DownImage">
                 <div>
-                    <h4 class="font-medium text-black max-md:text-sm"><?= $ProductData['name'] ?></h4>
+                    <h4 class="text-sm text-black max-md:text-sm"><?= $ProductData['name'] ?></h4>
                     <p class="text-sm">
                         <span class="line-through text-black">
                             ₹<?= formatNumber($ProductData['compare_price']) ?></span>
-                        <span class="text-[#f25b21] font-semibold text-lg max-md:text-base prices">
+                        <span class="text-[#f25b21] font-semibold text-sm max-md:text-base prices">
                             ₹<?= formatNumber($ProductData['price']) ?></span>
                     </p>
                 </div>
@@ -929,16 +932,16 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
             <div class="flex items-center gap-3 max-md:justify-end max-md:w-full">
                 <div class="  flex items-center justify-center gap-7 border border-gray-800 rounded-lg py-1">
-                    <span class="cursor-pointer border-r border-gray-800 px-4 py-1" onclick="countMe(this,'-')">-</span>
+                    <span class="cursor-pointer border-r border-gray-800 px-4" onclick="countMe(this,'-')">-</span>
                     <span class="text-black counter">1</span>
-                    <span class="cursor-pointer border-l border-gray-800 px-4 py-1" onclick="countMe(this,'+')">+</span>
+                    <span class="cursor-pointer border-l border-gray-800 px-4" onclick="countMe(this,'+')">+</span>
 
                 </div>
                 <button
                     class="flex-1 relative rounded-md overflow-hidden group transform shadow-md hover:shadow-xl border-2 border-black bg-transparent text-black"
                     onclick="ClickonMainCartBtn()">
                     <span
-                        class="relative z-10 flex py-1.5 px-6 items-center justify-center gap-2 font-semibold text-base max-md:text-sm transition-colors duration-700 group-hover:text-white">
+                        class="relative z-10 flex py-1.5 px-6 items-center justify-center gap-2 font-semibold text-sm max-md:text-sm transition-colors duration-700 group-hover:text-white">
                         <i class="fas fa-cart-plus" aria-hidden="true"></i> Add to Cart
                     </span>
                     <span
@@ -995,13 +998,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </svg>
                             Your Name
                         </label>
-                        <input type="text" name="name"
-                            value="<?= !empty($_SESSION["fname"]) ? $_SESSION["fname"] : "" ?>" id="name"
-                            placeholder="Sharukh, Salman, Akshay"
+                        <input type="text" id="name" placeholder="John Doe"
                             class="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-300 bg-gray-50 focus:bg-white group-hover:border-gray-300"
-                            <?= !empty($_SESSION["fname"]) ? "readonly" : "" ?> required>
+                            required>
                     </div>
-
                     <input type="hidden" id="userid" name="userid" value="<?= $_SESSION["userid"] ?>">
                     <input type="hidden" id="product_id" name="product_id" value="<?= $ProductData["id"] ?>">
 

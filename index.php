@@ -1,6 +1,6 @@
 <?php
 
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
@@ -43,7 +43,8 @@ if ($match) {
 
     if (!$matchedRoute) {
         http_response_code(404);
-        exit("Route definition not found.");
+        require __DIR__ . '/views/website/404.php';
+        exit();
     }
 
     // Handle middleware (if any)
@@ -62,27 +63,30 @@ if ($match) {
 
     if (!file_exists($controllerPath)) {
         http_response_code(404);
-        exit("Controller file '$controllerPath' not found.");
+        require __DIR__ . '/views/website/404.php';
+        exit();
     }
 
     require_once $controllerPath;
 
     if (!class_exists($controllerName)) {
         http_response_code(404);
-        exit("Controller class '$controllerName' not found.");
+        require __DIR__ . '/views/website/404.php';
+        exit();
     }
 
     $controller = new $controllerName(getDBObject()->getConnection());
 
     if (!method_exists($controller, $method)) {
         http_response_code(404);
-        exit("Method '$method' not found in controller '$controllerName'.");
+        require __DIR__ . '/views/website/404.php';
+        exit();
     }
 
     // Call controller method
     call_user_func_array([$controller, $method], $match['params']);
-
 } else {
     http_response_code(404);
-    echo "Route not matched";
+    require __DIR__ . '/views/website/404.php';
+    exit();
 }

@@ -28,7 +28,7 @@ class WebController extends LoginController
         $price = floatval($ProductData['price']);
         $discountAmount = $comparePrice - $price;
         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
-        ?>
+?>
 
         <?php
         // printWithPre($ProductData);
@@ -63,20 +63,20 @@ class WebController extends LoginController
             ];
 
             // printWithPre($finalData);
-            ?>
+        ?>
             <?php
             if (!isset($_POST["product_details"])) {
-                ?>
+            ?>
                 <div class="w-[47%] p-3 h-full overflow-y-scroll bg-gray-200 flex flex-col items-center justify-start no-scrollbar gap-3 transform translate-x-full transition-transform duration-[0.8s] ease-in-out"
                     id="VarImg">
                     <?php
                     foreach (array_reverse($images[0]) as $key => $image) {
 
-                        ?>
+                    ?>
                         <img src="/<?= $image ?>" alt="">
                     <?php } ?>
                 </div>
-                <?php
+            <?php
             }
             ?>
             <div class=" h-full <?= !isset($_POST["product_details"]) ? " w-[53%] overflow-y-scroll" : "" ?> flex flex-col items-start justify-start z-10 bg-white"
@@ -85,7 +85,7 @@ class WebController extends LoginController
 
                 <?php
                 if (!isset($_POST["product_details"])) {
-                    ?>
+                ?>
                     <div class="w-full flex items-center justify-between px-7 pt-7 ">
                         <span class="uppercase ">SELECT OPTIONS</span>
                         <button id="closeAddToCartSidebar" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong"
@@ -94,14 +94,14 @@ class WebController extends LoginController
                         </button>
                     </div>
                     <span class="w-full h-[1px] bg-gray-200 my-5"></span>
-                    <?php
+                <?php
                 }
                 ?>
 
                 <div class="flex flex-col items-start justify-start w-full <?= !isset($_POST["product_details"]) ? "px-7" : "" ?>">
                     <?php
                     if (!isset($_POST["product_details"])) {
-                        ?>
+                    ?>
                         <h2 class="w-full text-[1.8rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
                         <div class="flex items-center justify-center gap-3 mt-1 prices">
                             <span
@@ -114,7 +114,7 @@ class WebController extends LoginController
                             pants. These stylish pants feature a relaxed fit and a deconstructed design for a modern and edgy look</p>
                         <p class=" text-xs text-gray-600 mt-1"><a href="" class="underline">shipping</a> calculated at checkout</p>
                         <p class="text-xs mt-1 hidden">⭐⭐⭐⭐⭐ <span class="text-sm">31 reviews</span></p>
-                        <?php
+                    <?php
                     }
                     ?>
 
@@ -126,7 +126,7 @@ class WebController extends LoginController
                         // echo $key;
                         if ($key == 'size') {
 
-                            ?>
+                    ?>
 
                             <div class="w-full flex items-center justify-between text-sm">
                                 <div class="flex items-center justify-center gap-2">
@@ -135,10 +135,10 @@ class WebController extends LoginController
                                         Chest 41 inches
                                         Length 27 inches</div>
                                 </div>
-                                <p class="flex gap-1 cursor-pointer"
+                                <div class="flex gap-1 cursor-pointer items-end justify-center"
                                     onclick="document.getElementById('sizeChartModal').classList.remove('hidden')">
-                                    <svg class="icon icon-accordion color-foreground-" aria-hidden="true" focusable="false"
-                                        role="presentation" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20">
+                                    <svg class="icon icon-accordion mb-1 color-foreground-" aria-hidden="true" focusable="false"
+                                        role="presentation" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 20 20">
                                         <path
                                             d="M18.9836 5.32852L14.6715 1.01638L1.01638 14.6715L5.32852 18.9836L18.9836 5.32852ZM15.3902 0.297691C14.9933 -0.0992303 14.3497 -0.0992303 13.9528 0.297691L0.297691 13.9528C-0.0992301 14.3497 -0.0992305 14.9932 0.297691 15.3902L4.60983 19.7023C5.00675 20.0992 5.65029 20.0992 6.04721 19.7023L19.7023 6.04721C20.0992 5.65029 20.0992 5.00675 19.7023 4.60983L15.3902 0.297691Z"
                                             fill-rule="evenodd"></path>
@@ -154,28 +154,29 @@ class WebController extends LoginController
                                         <path
                                             d="M3.37296 10.8776C3.57142 10.6791 3.89319 10.6791 4.09165 10.8776L6.01036 12.7963C6.20882 12.9948 6.20882 13.3165 6.01036 13.515C5.8119 13.7134 5.49013 13.7134 5.29167 13.515L3.37296 11.5963C3.1745 11.3978 3.1745 11.076 3.37296 10.8776Z">
                                         </path>
-                                    </svg> Size guide
-                                </p>
+                                    </svg>
+                                    <span class="text-[1.12rem]">Size guide</span>
+                                </div>
                             </div>
                             <div class="w-full flex items-center justify-start mt-3 text-sm" id="SizeDiv">
                                 <?php
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
-                                    ?>
+                                ?>
                                     <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>)'
                                         class="border <?= $key1 == 0 ? "border-gray-900 selected-size" : "border-gray-300" ?>  optionDivs cursor-pointer flex items-center justify-center h-10 w-20"
                                         option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>" onclick="">
                                         <?= $value1 ?>
                                     </div>
-                                    <?php
+                                <?php
                                 }
                                 ?>
                             </div>
 
-                            <?php
+                        <?php
                         } elseif ($key == 'color') {
-                            ?>
+                        ?>
                             <p class="uppercase mt-7 text-lg"><?= $key ?></p>
                             <div class="w-full flex items-center justify-start text-sm gap-2"
                                 id="<?= !isset($_POST["product_details"]) ? "ColorDiv" : "ColorDetailsDiv" ?>">
@@ -189,15 +190,15 @@ class WebController extends LoginController
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
-                                    ?>
+                                ?>
                                     <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>)'
                                         class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> cursor-pointer flex items-center justify-center h-10 w-20"
                                         option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?></div>
-                                    <?php
+                                <?php
                                 }
                                 ?>
                             </div>
-                            <?php
+                        <?php
                         }
                     }
                     if (!isset($_POST["product_details"])) {
@@ -229,7 +230,7 @@ class WebController extends LoginController
 
                             <?php
                             if (!empty($_SESSION["userid"])) {
-                                ?>
+                            ?>
                                 <form method="POST" action="/checkout-cart" class="w-full">
                                     <input type="hidden" name="varient[]" class="sideVarientId"
                                         value="<?= $ProductData['varients'][0]["id"] ?>">
@@ -248,9 +249,9 @@ class WebController extends LoginController
 
                                     </button>
                                 </form>
-                                <?php
+                            <?php
                             } else {
-                                ?>
+                            ?>
                                 <input type="hidden" name="varient[]" class="sideVarientId"
                                     value="<?= $ProductData['varients'][0]["id"] ?>">
                                 <input type="hidden" name="category[]" class="sideCategoryId" value="<?= $ProductData['category'] ?>">
@@ -267,14 +268,14 @@ class WebController extends LoginController
                                     </span>
 
                                 </button>
-                                <?php
+                            <?php
                             }
                             ?>
 
                         </div>
 
 
-                        <?php
+                    <?php
                     }
 
                     ?>
@@ -284,7 +285,7 @@ class WebController extends LoginController
                 </div>
             </div>
 
-            <?php
+        <?php
 
         } else {
             echo "<p>No variants found</p>";
@@ -346,7 +347,7 @@ class WebController extends LoginController
         foreach ($co as $color => $images) {
             // printWithPre($images);
 
-            ?>
+        ?>
             <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"color","<?= $color ?>",<?= $i ?>)'
                 class=" h-[95px] flex items-center justify-start mt-1 text-sm gap-2 p-1 cursor-pointer border <?= $i == 0 ? " border-gray-900 selected-color" : "" ?>"
                 option_name="color" option_value="" product_id="<?= $id ?>">
@@ -356,7 +357,7 @@ class WebController extends LoginController
 
             </div>
 
-            <?php
+        <?php
             $i++;
         }
 
@@ -416,12 +417,12 @@ class WebController extends LoginController
         ob_start();
 
         if (!empty($matchedVariants)) {
-            ?>
+        ?>
             <?php
             foreach ($matchedVariants as $key => $value) {
                 $images = array_reverse(json_decode($value['images']));
 
-                ?>
+            ?>
                 <div onclick='changeSideVariant(this,"color","<?= parse_variant_options(($value["options"]))["Color"] ?>",<?= $key ?>)'
                     class=" h-[95px] flex items-center justify-start mt-3 text-sm gap-2 p-1 cursor-pointer border <?= $key == 0 ? " border-gray-900 selected-color" : "" ?>"
                     option_name="color" option_value="" product_id="<?= $id ?>">
@@ -530,7 +531,7 @@ class WebController extends LoginController
                     $variants = json_decode($vdata['options'], true);
                     $variants = json_decode($variants, true);
                     $totalprice = $vdata['price'] * $quantity;
-                    ?>
+                ?>
 
                     <div class="flex items-center gap-4 border-b py-2 w-full">
                         <!-- Product image -->
@@ -542,7 +543,7 @@ class WebController extends LoginController
                             <div class="flex gap-3 flex-wrap items-center justify-start">
                                 <?php
                                 foreach ($variants as $key => $variant) {
-                                    ?>
+                                ?>
                                     <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
                                 <?php } ?>
                             </div>
@@ -571,7 +572,7 @@ class WebController extends LoginController
                         </button>
                     </div>
 
-                    <?php
+                <?php
                 }
             } else {
                 ?>
@@ -582,7 +583,7 @@ class WebController extends LoginController
                         No Products in the cart.
                     </p>
                 </div>
-                <?php
+            <?php
             }
             ?>
 
@@ -614,7 +615,7 @@ class WebController extends LoginController
                     $variants = json_decode($vdata['options'], true);
                     $variants = json_decode($variants, true);
                     $totalprice = $vdata['price'] * $quantity;
-                    ?>
+            ?>
 
                     <div class="flex items-center gap-4 border-b py-2 w-full">
                         <!-- Product image -->
@@ -626,7 +627,7 @@ class WebController extends LoginController
                             <div class="flex gap-3 flex-wrap items-center justify-start">
                                 <?php
                                 foreach ($variants as $key => $variant) {
-                                    ?>
+                                ?>
                                     <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
                                 <?php } ?>
                             </div>
@@ -648,7 +649,7 @@ class WebController extends LoginController
                         </button>
                     </div>
 
-                    <?php
+                <?php
 
 
                 }
@@ -662,7 +663,7 @@ class WebController extends LoginController
                         No Products in the cart.
                     </p>
                 </div>
-                <?php
+            <?php
             }
             ?>
 
@@ -930,13 +931,26 @@ class WebController extends LoginController
         $userid = $_SESSION['userid'] ?? null;
 
         // Get products in category
-        $products = getData2("
-        SELECT tbl_products.* 
-        FROM tbl_products 
-        LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id 
-        WHERE tbl_category.category = '$category_name'
-        AND tbl_products.price BETWEEN $minPrice AND $maxPrice
-    ");
+
+        if ($category_name == "new_arrivals") {
+            $products = getData2("
+                SELECT tbl_products.* 
+                FROM tbl_products 
+                LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id 
+                WHERE tbl_products.new_arrival = 1
+                AND tbl_products.price BETWEEN $minPrice AND $maxPrice
+            ");
+        } else {
+
+            $products = getData2("
+                SELECT tbl_products.* 
+                FROM tbl_products 
+                LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id 
+                WHERE tbl_category.category = '$category_name'
+                AND tbl_products.price BETWEEN $minPrice AND $maxPrice
+            ");
+        }
+
 
         foreach ($products as $key => $product) {
             $variants = getData2("SELECT * FROM tbl_variants WHERE product_id = '$product[id]'");
@@ -1006,22 +1020,29 @@ class WebController extends LoginController
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             //  echo $product_name;
             if ($product_name == null) {
-                require 'views/website/product-details1.php';
+                http_response_code(404);
+                require __DIR__ . '/../views/website/404.php';
+                exit();
             } else {
                 $name = str_replace('-', ' ', $product_name);
                 $siteName = getDBObject()->getSiteName();
                 $pageModule = "Product Page";
                 $pageTitle = "Product Page";
                 $ProductData = getData2("
-                                                    SELECT 
-                                                        tbl_products.*, 
-                                                        tbl_category.category AS category_name 
-                                                    FROM tbl_products 
-                                                    LEFT JOIN tbl_category 
-                                                        ON tbl_products.category = tbl_category.id 
-                                                    WHERE REPLACE(tbl_products.name, \"'\", '') = REPLACE('$name', \"'\", '')
-                                                ")[0];
-
+                                    SELECT 
+                                        tbl_products.*, 
+                                        tbl_category.category AS category_name 
+                                    FROM tbl_products 
+                                    LEFT JOIN tbl_category 
+                                        ON tbl_products.category = tbl_category.id 
+                                    WHERE 
+                                        REPLACE(REPLACE(tbl_products.name, \"'\", ''), '-', ' ') = REPLACE(REPLACE('$name', \"'\", ''), '-', ' ')
+                                ")[0];
+                if (empty($ProductData)) {
+                    http_response_code(404);
+                    require __DIR__ . '/../views/website/404.php';
+                    exit();
+                }
                 $id = $ProductData['id'];
                 $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
                 $ProductData['varients'] = $varients;
@@ -1467,7 +1488,7 @@ class WebController extends LoginController
                             // $keyapi = "rzp_live_JdPrOFrNVQV4gM";
                             $keyapi = $PaymentGateWay['keyid'];
 
-                            ?>
+            ?>
 
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -1489,11 +1510,11 @@ class WebController extends LoginController
                             </style>
 
                             <script>
-                                $(document).ready(function () {
+                                $(document).ready(function() {
                                     $('.razorpay-payment-button').click();
                                 });
                             </script>
-                            <?php
+<?php
                             exit();
                         }
                     }
@@ -1526,8 +1547,7 @@ class WebController extends LoginController
 
             if (!isset($data['orderid']) && empty($data['orderid'])) {
 
-                $data["orderid"] = generateRandomString(16) . time();
-                ;
+                $data["orderid"] = generateRandomString(16) . time();;
                 // echo $data["orderid"];
                 // die();
             }
@@ -1880,7 +1900,15 @@ ORDER BY id DESC LIMIT 5");
         // "SELECT * FROM online_users WHERE id = " . $_SESSION['userid'];
         // printWithPre($userData);
         // printWithPre($ActiveuserAddress);
+        $orders = getData2("SELECT tbl_purchase.*, indian_states.name AS state_name FROM tbl_purchase LEFT JOIN  indian_states ON tbl_purchase.state = indian_states.id WHERE tbl_purchase.userid = '$_SESSION[userid]' ORDER BY tbl_purchase.id DESC");
 
+        $wishlists = getData2("SELECT * FROM `tbl_wishlist` WHERE `userid` = " . $_SESSION["userid"]);
+
+        $TotalWishlist = count($wishlists);
+        $TotalOrders = count($orders);
+
+        echo $TotalWishlist;
+        echo $TotalOrders;
 
         require 'views/website/myprofile.php';
     }
@@ -2023,6 +2051,60 @@ ORDER BY id DESC LIMIT 5");
                 "success" => true,
                 "message" => "Review Added Successfully"
             ];
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            $response = [
+                "success" => false,
+                "message" => $e->getMessage()
+            ];
+        } finally {
+            echo json_encode($response);
+        }
+    }
+
+    public function saveToken()
+    {
+        $response = [
+            "success" => false,
+            "message" => "Something went wrong"
+        ];
+
+        try {
+            $this->db->beginTransaction();
+
+            $_POST = json_decode(file_get_contents('php://input'), true);
+
+            $token = $_POST['token'];
+            $userid = $_POST['userid'];
+
+            if (!empty($token)) {
+                
+                $isExistToken = getData2("SELECT * FROM `tbl_tokens` WHERE `token` = '$token'");
+
+                if (empty($isExistToken)) {
+                    add([
+                        "token" => $token,
+                        "userid" => $userid,
+                        "created_date" => date("Y-m-d"),
+                        "created_time" => date("H:i:s"),
+                        "created_at" => date("Y-m-d H:i:s")
+                    ], "tbl_tokens", false);
+                } else if (empty($isExistToken[0]['userid']) && !empty($userid)) {
+                    update([
+                        "userid" => $userid
+                    ], $isExistToken[0]['id'], "tbl_tokens");
+                }
+            }
+
+            // printWithPre($_POST);
+            // die();
+
+            $response = [
+                "success" => true,
+                "message" => "Token Saved Successfully"
+            ];
+
+            $this->db->commit();
         } catch (Exception $e) {
             $this->db->rollBack();
             $response = [

@@ -56,6 +56,7 @@ $route->group(['', 'WebController'], function ($route) {
 
 
     $route->route('/addReview', 'addReview');
+    $route->route('/api/saveToken', 'saveToken');
 
     // $route->route('/', 'index');
 });
@@ -66,7 +67,7 @@ $route->group(['', 'CollectionController', 'auth'], function ($route) {
     $route->route('/edit-collection/[i:id]', 'AddCollections');
 
 
-
+    $route->route('/api/collection/status', 'ChangeCollectionStatus');
 
     // $route->route('/', 'index');
 
@@ -97,6 +98,9 @@ $route->group(['', 'ProductController', 'auth'], function ($route) {
     $route->route('/admin/cancel-orders', 'CancelOrderList');
     $route->route('/admin/get-order-details/[i:order_id]', 'OrderDetails');
 
+
+    $route->route('/api/new_arrival/status', 'ChangeNewArrivalStatus');
+
 });
 
 $route->group(['', 'CustomerController', 'auth'], function ($route) {
@@ -112,6 +116,7 @@ $route->group(['', 'CustomerController', 'auth'], function ($route) {
 });
 
 $route->group(['notify', 'NotificationController', 'auth'], function ($route) {
+    
     $route->route('', 'index');
 
 });

@@ -1,7 +1,7 @@
 <?php
 
 // $byCategory = str_replace('-', ' ', $category_name);
-$byCategory = $category_name ?? 'tees';
+$byCategory = $category_name ?? 'new_arrivals';
 
 ?>
 
@@ -70,6 +70,11 @@ $byCategory = $category_name ?? 'tees';
                     <div>
                         <h4 class="font-semibold mb-2">Product Categories</h4>
                         <ul class="space-y-2">
+                            <li>
+                                <label><input type="radio" onclick="window.location.href='/new-arrivals'"
+                                        <?= $byCategory == 'new_arrivals' ? 'checked' : '' ?> name="category"
+                                        class="mr-2 accent-[#f25b21]"> New Arrivals </label>
+                            </li>
                             <li>
                                 <label><input type="radio" onclick="window.location.href='/category/tees'"
                                         <?= $byCategory == 'tees' ? 'checked' : '' ?> name="category"

@@ -20,6 +20,7 @@ class ProductController
             require 'views/products/products-list.php';
         }
     }
+
     public function AddProducts($id = null)
     {
         $siteName = getDBObject()->getSiteName();
@@ -273,5 +274,44 @@ class ProductController
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             require 'views/products/cancel-order-list.php';
         }
-    } 
+    }
+
+
+    public function ChangeNewArrivalStatus()
+    {
+        $response = [
+            "success" => false,
+            "message" => "Something went wrong"
+        ];
+
+        try {
+            $_POST = json_decode(file_get_contents('php://input'), true);
+
+            // printWithPre($_POST);
+            // die();
+
+            update(
+                [
+                    "new_arrival" => $_POST['status']
+                ],
+                $_POST['id'],
+                "tbl_products"
+            );
+
+            $response = [
+                "success" => true,
+                "message" => "Status Updated Successfully"
+            ];
+
+        } catch (Exception $e) {
+            $this->db->rollBack();
+
+            $response = [
+                "success" => false,
+                "message" => $e->getMessage()
+            ];
+        } finally {
+            echo json_encode($response);
+        }
+    }
 }

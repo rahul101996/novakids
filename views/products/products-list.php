@@ -23,24 +23,30 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             ?>
             <div class="w-full flex items-center justify-between p-3">
                 <span class="text-xl font-semibold text-gray-800">Products</span>
-                <a href="/admin/add-product" class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add Product</a>
+                <a href="/admin/add-product"
+                    class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add Product</a>
             </div>
             <div class="p-3 border-b border-gray-200">
                 <div class="flex justify-between items-center">
 
                     <div class="flex items-center space-x-1">
-                        <button class="bg-gray-200 text-gray-800 px-3 py-1.5 rounded-md text-sm font-medium">All</button>
+                        <button
+                            class="bg-gray-200 text-gray-800 px-3 py-1.5 rounded-md text-sm font-medium">All</button>
 
                     </div>
                     <div class="flex items-center space-x-1">
                         <button class="text-gray-500 hover:bg-gray-100 p-2 rounded-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </button>
                         <button class="text-gray-500 hover:bg-gray-100 p-2 rounded-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M3 8h18M3 12h18M3 16h18" stroke-opacity="0.5" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M3 8h18M3 12h18M3 16h18"
+                                    stroke-opacity="0.5" />
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M3 8h12M3 12h6" />
                             </svg>
                         </button>
@@ -50,23 +56,28 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
             <div class="w-full text-sm">
                 <!-- Table Header -->
-                <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-2 text-gray-500">
+               <div
+                    class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-2 text-gray-500">
                     <span>Sr. No</span>
                     <span>Product</span>
-                    <span>Status</span>
                     <span>Inventory</span>
                     <span>Category</span>
-                    <span>Price</span> <!-- ✅ New column -->
+                    <span>Price</span>
+                    <span>Status</span>
+                    <span>New Arrival</span>
                     <span>Action</span>
                 </div>
 
-                <?php foreach ($products as $key => $product) {
+
+                <?php foreach (getData2("SELECT tp.*, tc.category AS category_name FROM `tbl_products` tp LEFT JOIN tbl_category tc ON tp.category = tc.id") as $key => $product) {
                     $images = json_decode($product['product_images'], true);
                     $images = array_reverse($images);
-                ?>
+                    ?>
                     <div class="divide-y divide-gray-200">
                         <!-- Table Row -->
-                        <div class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-3 hover:bg-gray-50 text-gray-800">
+                        <div
+                            class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-3 hover:bg-gray-50 text-gray-800">
+
                             <!-- Sr. No -->
                             <div class="flex items-center space-x-3">
                                 <span><?= $key + 1 ?></span>
@@ -89,6 +100,21 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 </div>
                             </div>
 
+                            <!-- Inventory -->
+                            <div>
+                                <p class="text-gray-500 font-semibold"><?= !empty($product['quantity']) ? $product['quantity'] : 0 ?> in stock</p>
+                            </div>
+
+                            <!-- Category -->
+                            <div>
+                                <p class="text-gray-500 font-semibold"><?= $product['category_name'] ?></p>
+                            </div>
+
+                            <!-- ✅ Price -->
+                            <div>
+                                <p class="text-gray-500 font-semibold">₹ <?= $product['price'] ?></p>
+                            </div>
+
                             <!-- Status -->
                             <div>
                                 <?php if ($product['status'] == 1) { ?>
@@ -98,25 +124,46 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 <?php } ?>
                             </div>
 
-                            <!-- Inventory -->
                             <div>
-                                <p class="text-gray-500 font-semibold"><?= $product['quantity'] ?> in stock</p>
+
+                                <div class="relative inline-block w-14 mr-2 align-middle select-none">
+                                    <input type="checkbox" id="togglr_<?= $product['id'] ?>"
+                                        <?= $product['new_arrival'] == 1 ? 'checked' : '' ?>
+                                        onchange="updateStatus(this, <?= $product['id'] ?>)"
+                                        class="sr-only peer">
+
+                                    <label for="togglr_<?= $product['id'] ?>"
+                                        class="block overflow-hidden h-7 rounded-full bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out peer-checked:bg-sky-800 before:content-[''] before:absolute before:top-0.5 before:left-0.5 before:bg-sky-50 before:border-2 before:border-gray-300 before:h-6 before:w-6 before:rounded-full before:transition-all before:duration-300 before:shadow-md peer-checked:before:translate-x-7 peer-checked:before:border-sky-800">
+                                        <span
+                                            class="absolute inset-y-0 left-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-sky-50 peer-checked:translate-x-7">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </span>
+                                        <span
+                                            class="absolute inset-y-0 right-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-white">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </span>
+                                    </label>
+                                </div>
+
                             </div>
 
-                            <!-- Category -->
-                            <div>
-                                <p class="text-gray-500 font-semibold"><?= $product['category'] ?></p>
-                            </div>
-
-                            <!-- ✅ Price -->
-                            <div>
-                                <p class="text-gray-500 font-semibold">₹ <?= $product['price'] ?></p>
-                            </div>
 
                             <!-- Action -->
                             <div class="flex space-x-2">
-                                <a href="/admin/edit-product/<?= $product['id'] ?>" class="text-blue-500 hover:text-blue-600"><i class="fa-solid fa-pen"></i></a>
-                                <a href="/delete-collection/<?= $product['id'] ?>" class="text-red-500 hover:text-red-600"><i class="fa-solid fa-trash"></i></a>
+                                <a href="/admin/edit-product/<?= $product['id'] ?>"
+                                    class="text-blue-500 hover:text-blue-600"><i class="fa-solid fa-pen"></i></a>
+                                <a href="/delete-collection/<?= $product['id'] ?>"
+                                    class="text-red-500 hover:text-red-600"><i class="fa-solid fa-trash"></i></a>
                             </div>
                         </div>
                     </div>
@@ -132,6 +179,47 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/views/include/footer.php";
     ?>
+
+    <script>
+        async function updateStatus(ele, id) {
+            let data = {
+                id,
+                status: ele.checked ? "1" : "0"
+            };
+
+            ele.disabled = true;
+            const label = ele.nextElementSibling;
+            label.classList.add('opacity-70');
+
+            try {
+
+                let res = await fetch('/api/new_arrival/status', {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+
+                let response = await res.json();
+
+                // console.log(response);
+
+                if (response.success) {
+                    toastr.success(response.message);
+                } else {
+                    ele.checked = !ele.checked; // revert state
+                    toastr.error(response.message);
+                }
+            } catch (e) {
+                ele.checked = !ele.checked; // revert state on error
+                toastr.error("Something went wrong!");
+                // console.log(e);
+            } finally {
+                ele.disabled = false;
+                label.classList.remove('opacity-70');
+            }
+        }
+
+    </script>
 </body>
 
 </html>

@@ -52,24 +52,32 @@ class CustomerController
                 $parts[] = $diff->d . " Day" . ($diff->d > 1 ? "s" : "");
             }
 
-            $LastOrder = $PurchaseData[0];
-            $LastOrderid = $LastOrder["id"];
-            $products = getData2("SELECT tbl_purchase_item.*, tbl_products.name as product_name,
-            tbl_variants.images as variant_images, tbl_variants.options as variant_options, tbl_variants.price as variant_price FROM `tbl_purchase_item` LEFT JOIN tbl_products ON tbl_purchase_item.product = tbl_products.id LEFT JOIN tbl_variants ON tbl_purchase_item.varient = tbl_variants.id WHERE tbl_purchase_item.purchase_id = $LastOrderid ORDER BY tbl_purchase_item.id DESC");
+            if (!empty($PurchaseData)) {
+                $LastOrder = $PurchaseData[0];
+                $LastOrderid = $LastOrder["id"];
+                $products = getData2("SELECT tbl_purchase_item.*, tbl_products.name as product_name tbl_variants.images as variant_images, tbl_variants.options as variant_options, tbl_variants.price as variant_price FROM `tbl_purchase_item` LEFT JOIN tbl_products ON tbl_purchase_item.product = tbl_products.id LEFT JOIN tbl_variants ON tbl_purchase_item.varient = tbl_variants.id WHERE tbl_purchase_item.purchase_id = $LastOrderid ORDER BY tbl_purchase_item.id DESC");
+            }
+
             // printWithPre($LastOrder);
 
-            $defaultAddress = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $id AND `status` = 1 ORDER BY `id` DESC ")[0];
+
+
+            $add = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $id AND `status` = 1 ORDER BY `id` DESC ");
+            $defaultAddress = [];
+            if (!empty($add)) {
+                $defaultAddress = $add[0];
+            }
             $TimelineData = getData2("SELECT id, created_date, orderid, created_time, 'tbl_purchase' AS source
-    FROM tbl_purchase 
-    WHERE userid = $id
+                                            FROM tbl_purchase 
+                                            WHERE userid = $id
 
-    UNION ALL
+                                            UNION ALL
 
-    SELECT id, created_date, NULL AS orderid, created_time, 'online_users' AS source
-    FROM online_users 
-    WHERE id = $id
+                                            SELECT id, created_date, NULL AS orderid, created_time, 'online_users' AS source
+                                            FROM online_users 
+                                            WHERE id = $id
 
-    ORDER BY created_date DESC;
+                                            ORDER BY created_date DESC;
 
                                         ");
             $grouped = [];

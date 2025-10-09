@@ -3,7 +3,6 @@
 
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
-
 ?>
 
 <body class="bg-gray-50">
@@ -54,7 +53,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     <span>Sr. No</span>
                     <span>Product</span>
                     <span>Status</span>
-                    <span>KSU</span>
+                    <span>SKU</span>
                     <span>Unavailable</span>
                     <span>Committed</span>
                     <span>Available</span>
