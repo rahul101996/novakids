@@ -23,8 +23,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             ?>
             <div class="w-full flex items-center justify-between p-3">
                 <span class="text-xl font-semibold text-gray-800">Home Banner</span>
-                <!-- <a href="/admin/front-cms/home-banner/add" class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add
-                    Home Banner</a> -->
+                <a href="/admin/front-cms/home-banner/add" class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add
+                    Home Banner</a>
             </div>
             <div class="p-3 border-b border-gray-200">
                 <div class="flex justify-between items-center">
@@ -95,19 +95,15 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                             <!-- Action -->
                             <div class="flex space-x-2">
-                                <a href="home-banner/edit/<?= $banner['id'] ?>" class="text-blue-500 text-xl hover:text-blue-600"><i
-                                        class="fa-solid fa-pen"></i></a>
+                                <a href="home-banner/edit/<?= $banner['id'] ?>"
+                                    class="text-blue-500 text-xl hover:text-blue-600"><i class="fa-solid fa-pen"></i></a>
                                 <!-- <a href="/delete/<?= $banner['id'] ?>" class="text-red-500 hover:text-red-600"><i
                                         class="fa-solid fa-trash"></i></a> -->
                             </div>
                         </div>
                     <?php } ?>
                 </div>
-
-
-
-
-
+            </div>
         </main>
     </div>
     <?php
