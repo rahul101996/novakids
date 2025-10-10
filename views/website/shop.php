@@ -268,7 +268,7 @@ $page = "shop";
             // ✅ Render products
             productsContainer.innerHTML = products.map(product => renderProductHTML(product)).join("");
 
-            console.log(activeFilters);
+            // console.log(activeFilters);
             AddToCart();
             AddToWishlist();
 
@@ -424,7 +424,7 @@ $page = "shop";
             }, sortValue);
             setActiveFilter(activeFilters);
 
-            console.log(activeFilters);
+            // console.log(activeFilters);
 
         }
 
