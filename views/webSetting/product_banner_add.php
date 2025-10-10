@@ -37,7 +37,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <select name="product_id" class="selectElement" id="product_id">
                                 <option value="" selected disabled>Select Product</option>
                                 <?php foreach (getData2("SELECT * FROM `tbl_products` WHERE `status` = 1") as $key => $value) { ?>
-                                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                                    <option 
+                                        value="<?= $value['id'] ?>"
+                                        <?= isset($editData['product_id']) && $editData['product_id'] == $value['id'] ? 'selected' : '' ?>>
+                                        <?= $value['name'] ?>
+                                    </option>
                                 <?php } ?>
                             </select>
                         </div>

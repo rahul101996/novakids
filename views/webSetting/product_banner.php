@@ -95,7 +95,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                             <!-- Action -->
                             <div class="flex space-x-2">
-                                <a href="home-banner/edit/<?= $banner['id'] ?>"
+                                <a href="product-banner/edit/<?= $banner['id'] ?>"
                                     class="text-blue-500 text-xl hover:text-blue-600"><i class="fa-solid fa-pen"></i></a>
                                 <!-- <a href="/delete/<?= $banner['id'] ?>" class="text-red-500 hover:text-red-600"><i
                                         class="fa-solid fa-trash"></i></a> -->
