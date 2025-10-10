@@ -320,7 +320,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 <span class="text-gray-300 text-xl max-md:text-base line-through whitespace-nowrap">Rs. <span
                                         id="comparePrice99"><?= formatNumber($ProductData['compare_price']) ?></span></span>
                                 <span
-                                    class="text-[#f25b21] text-xl max-md:text-base prices">Rs.<?= formatNumber($ProductData['price']) ?></span>
+                                    class="text-[#f25b21] text-xl max-md:text-base whitespace-nowrap prices">Rs.<?= formatNumber($ProductData['price']) ?></span>
                                 <span class="bg-[#f25b21] text-white text-xs px-2 py-1 z-20 whitespace-nowrap">SAVE
                                     <span id="save"><?= $discountPercentage ?></span>%</span>
 
