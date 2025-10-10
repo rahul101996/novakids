@@ -54,11 +54,11 @@ $page = "shop";
             </div>
 
             <div id="filterPanel" class="hidden border-b pb-8 bg-white w-full">
-                <div class="grid md:grid-cols-4 gap-6 text-sm w-[90vw] mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-sm w-[90vw] mx-auto">
 
                     <!-- Filter by Price -->
                     <div
-                        class="w-auto p-4 bg-white rounded-xl shadow-sm border border-gray-100 transition-all hover:shadow-md">
+                        class="w-full md:w-auto p-4 bg-white rounded-xl shadow-sm border border-gray-100 transition-all hover:shadow-md">
                         <h4 class="font-semibold text-gray-800 text-base mb-3 border-b pb-2 border-gray-200">
                             Filter by Price
                         </h4>
@@ -83,12 +83,12 @@ $page = "shop";
 
                     <!-- Product Categories -->
                     <div
-                        class="w-auto p-4 bg-white rounded-xl shadow-sm border border-gray-100 transition-all hover:shadow-md">
+                        class="w-full md:w-auto p-4 bg-white rounded-xl shadow-sm border border-gray-100 transition-all hover:shadow-md">
                         <h4 class="font-semibold text-gray-800 text-base mb-3 border-b pb-2 border-gray-200">
                             Product Categories
                         </h4>
 
-                        <ul class="grid grid-cols-2 gap-3">
+                        <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-3">
                             <li>
                                 <label
                                     class="flex items-center gap-2 px-3 py-1.5 border rounded-full cursor-pointer text-sm font-medium bg-gray-50 border-gray-200 text-gray-700 hover:bg-orange-50 hover:border-orange-300 transition-all">
@@ -114,12 +114,12 @@ $page = "shop";
                         </ul>
                     </div>
 
-
-
-                    <div class="col-span-2">
+                    <!-- Filters (col-span-2 on desktop) -->
+                    <div class="col-span-1 md:col-span-2">
                         <div id="filters-container" class="flex flex-wrap gap-3"></div>
                     </div>
                 </div>
+
             </div>
 
             <main class="md:col-span-3 w-[90vw] mx-auto pb-16">
@@ -226,7 +226,7 @@ $page = "shop";
             products.forEach(p => {
                 (p.variants || []).forEach(v => {
 
-                    
+
 
                     if (!v.options) return;
 
