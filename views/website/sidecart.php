@@ -332,24 +332,26 @@
         }
 
     }
+     <?php
+    if (!isset($page) && $page != "shop") {
+
+    ?>
     document.addEventListener('DOMContentLoaded', function() {
         AddToCart();
         console.log('bibibdbbwbwbicbwbcwbcibicwicbpw');
     });
+    <?php } ?>
 
     function AddToCart() {
 
         const addToCartBtn = document.querySelectorAll('.openCartBtn');
         // console.log(addToCartBtn);
         if (addToCartBtn) {
-            console.log("Adding on button")
             addToCartBtn.forEach(function(btn) {
                 btn.addEventListener('click', async function(event) {
                     console.log("hello");
-                    event.preventDefault();
-                    event.stopPropagation();
-                    event.preventDefault();
-                    event.stopPropagation();
+                    // event.preventDefault();
+                    // event.stopPropagation();
                     // 
                     let ee = btn.parentElement
                     // showVarients(ee.querySelector(".ProductId").value);
@@ -414,9 +416,14 @@
             });
         }
     }
-    document.addEventListener('DOMContentLoaded', function() {
-        AddToWishlist();
-    });
+    <?php
+    if (!isset($page) && $page != "shop") {
+
+    ?>
+        document.addEventListener('DOMContentLoaded', function() {
+            AddToWishlist();
+        });
+    <?php } ?>
 
     function AddToWishlist() {
         const addToWishlistBtn = document.querySelectorAll('.addToWishlistBtn');
@@ -517,7 +524,7 @@
         // document.getElementById("AddToCartSidebar").innerHTML=""
     }
 
-    // openCartBtns.forEach(btn => btn.addEventListener('click', openCart));
+    openCartBtns.forEach(btn => btn.addEventListener('click', openCart));
     closeCart.addEventListener('click', closeCartFn);
     cartOverlay.addEventListener('click', closeCartFn);
 </script>
@@ -547,21 +554,21 @@
 
 
     // Quantity controls
-    // qtyMinus.addEventListener("click", () => {
-    //     if (quantity > 1) {
-    //         quantity--;
-    //         qtyDisplay.textContent = quantity;
-    //         updateCart();
-    //     }
-    // });
+    qtyMinus.addEventListener("click", () => {
+        if (quantity > 1) {
+            quantity--;
+            qtyDisplay.textContent = quantity;
+            updateCart();
+        }
+    });
 
-    // qtyPlus.addEventListener("click", () => {
-    //     quantity++;
-    //     qtyDisplay.textContent = quantity;
-    //     updateCart();
-    // });
+    qtyPlus.addEventListener("click", () => {
+        quantity++;
+        qtyDisplay.textContent = quantity;
+        updateCart();
+    });
 
-    // updateCart(); // initial call
+    updateCart(); // initial call
 
     function CloseVariant() {
         // console.log("hello this is close cart")
@@ -633,7 +640,7 @@
     }
 
     function changeSideVariant(ele, tp, value, key1, json) {
-        // console.log(ele, tp, value, key1)
+        console.log(ele, tp, value, key1)
         updateKey(GLOBAL_VARIANT.selected, tp, value);
         let divs = ele.parentElement.querySelectorAll("div")
         divs.forEach(div => {
@@ -641,11 +648,8 @@
         });
         // console.log(divs[key1])
         divs[key1].classList.add("border-gray-900");
-        // console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
+        console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
         let selectedId = "";
-        if(document.querySelector(".changeSideVariant")){
-             document.querySelector(".changeSideVariant").innerText = json;
-           }
         GLOBAL_VARIANT.variants.forEach(async (ar, i) => {
 
             if (deepEqualCaseInsensitive(JSON.parse(JSON.parse(ar.options)), GLOBAL_VARIANT.selected)) {
@@ -665,7 +669,7 @@
                 ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
                     <span class="text-[#33459c] text-xl">Rs. ${ar.price}.00</span>
                 `
-                // console.log("ar", ar, ele.parentElement.parentElement.querySelector(".sideVarientId"))
+                console.log("ar", ar, ele.parentElement.parentElement.querySelector(".sideVarientId"))
                 let imgHtml = ""
                 JSON.parse(ar.images).forEach((imgh) => {
                     imgHtml = imgHtml + `

@@ -2,7 +2,7 @@
 
 // $byCategory = str_replace('-', ' ', $category_name);
 $byCategory = $category_name ?? 'new_arrivals';
-
+$page = "shop";
 ?>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/header.php'; ?>
