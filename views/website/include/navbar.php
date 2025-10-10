@@ -178,22 +178,24 @@ $categories = getData("tbl_category");
                     class="text-gray-800  group duration-300 cursor-pointer <?= $pageTitle == 'New Arrivals' ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>">NEW
                     ARRIVALS
                     <span
-                        class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                        class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] <?= $pageTitle == 'New Arrivals' ? 'w-3/6' : '' ?> group-hover:w-3/6"></span>
                     <span
-                        class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                        class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] <?= $pageTitle == 'New Arrivals' ? 'w-3/6' : '' ?> group-hover:w-3/6"></span>
                 </a>
             </div>
             <?php
+            
+
             foreach ($categories as $key => $value) {
                 $category = strtolower(str_replace(" ", "-", $value['category']));
             ?>
                 <div class="relative group">
                     <a href="/category/<?= $category ?>"
-                        class="text-gray-800  group duration-300 cursor-pointer <?= $category == '$category' ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>"><?= $value['category'] ?>
+                        class="text-gray-800  group duration-300 cursor-pointer <?= $category == $category_name ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>"><?= $value['category'] ?>
                         <span
-                            class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                            class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] <?= $category == $category_name ? 'w-3/6' : '' ?> group-hover:w-3/6"></span>
                         <span
-                            class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                            class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] <?= $category == $category_name ? 'w-3/6' : '' ?> group-hover:w-3/6"></span>
                     </a>
                 </div>
             <?php } ?>
@@ -765,6 +767,7 @@ $categories = getData("tbl_category");
 
 
         const handleKeyDown = (e) => {
+            // Allow only numeric keys, Backspace, Delete, Tab, or Meta
             if (
                 !/^[0-9]{1}$/.test(e.key) &&
                 e.key !== 'Backspace' &&
@@ -772,17 +775,23 @@ $categories = getData("tbl_category");
                 e.key !== 'Tab' &&
                 !e.metaKey
             ) {
-                e.preventDefault()
+                e.preventDefault();
             }
 
             if (e.key === 'Delete' || e.key === 'Backspace') {
                 const index = inputs.indexOf(e.target);
+
+                // 🧹 Always clear current input value first
+                inputs[index].value = '';
+
+                // ⬅️ Then move focus to previous input (if not first)
                 if (index > 0) {
-                    inputs[index - 1].value = '';
                     inputs[index - 1].focus();
                 }
+
+                e.preventDefault(); // optional — prevents weird browser behavior
             }
-        }
+        };
 
         const handleInput = (e) => {
             const {
@@ -993,7 +1002,7 @@ $categories = getData("tbl_category");
 <script>
     let debounceTimer;
 
-   
+
     async function searchProducts() {
         let ele = document.getElementById("searchInput");
         clearTimeout(debounceTimer);
@@ -1033,8 +1042,8 @@ $categories = getData("tbl_category");
                     data.data.forEach(product => {
                         let parsed = JSON.parse(product.product_images);
 
-                        let name = product.name.replace(/ /g, '-');  // Replace spaces with dashes
-                        name = name.replace(/'/g, '');              // Remove all single quotes
+                        let name = product.name.replace(/ /g, '-'); // Replace spaces with dashes
+                        name = name.replace(/'/g, ''); // Remove all single quotes
 
 
                         html += `
