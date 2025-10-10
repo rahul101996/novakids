@@ -642,22 +642,6 @@ $categories = getData("tbl_category");
 
             <!-- Search Results -->
             <div id="searchResults" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-
-                <?php for ($i = 0; $i < 5; $i++) {
-                    $value = $uniqueProducts[$i];
-
-                    $images = json_decode($value['product_images'], true);
-                    $firstImage = !empty($images) ? $images[0] : null;
-
-                ?>
-                    <div class="border overflow-hidden hover:shadow-md transition">
-                        <img src="/<?= $firstImage ?>" alt="<?= $value['name'] ?>" class="w-full h-40 object-cover">
-                        <div class="p-2">
-                            <h3 class="font-semibold text-sm"><?= $value['name'] ?></h3>
-                            <p class="text-gray-500 text-sm">₹<?= $value['price'] ?></p>
-                        </div>
-                    </div>
-                <?php } ?>
             </div>
         </div>
     </div>
