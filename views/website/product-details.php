@@ -340,7 +340,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     <?php
                     if ($ProductData['id'] != 7) {
                     ?>
-                        <p class="text-sm text-gray-900 mt-2 text-justify"><?=$ProductData["shortDescription"]?></p>
+                        <p class="text-sm text-gray-900 mt-2 text-justify"><?= $ProductData["shortDescription"] ?></p>
                     <?php } ?>
                     <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated
                         at checkout</p>
@@ -644,99 +644,99 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 </div>
 
                 <div class="w-[80%] max-md:w-[90%] flex items-center justify-center">
-                    <?php 
+                    <?php
                     $reviws = getData2("SELECT tpr.*, ous.username, ous.fname, ous.lname, ous.mobile FROM `tbl_product_review` tpr LEFT JOIN online_users ous ON tpr.userid = ous.id WHERE 1 AND tpr.product_id = $ProductData[id] AND tpr.status = 1");
-                    if(count($reviws)>1){
-                        ?>
-                        
+                    if (count($reviws) > 1) {
+                    ?>
+
                         <div class="owl-carousel reviews-sliders w-full">
-                        <?php
-                        foreach ($reviws as $key => $value) { ?>
+                            <?php
+                            foreach ($reviws as $key => $value) { ?>
 
-                            <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                                <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                                    <span> <?php for ($i = 0; $i < 5; $i++) {
-                                                if ($value['rating'] > $i) {
-                                                    echo '★';
-                                                } else {
-                                                    echo '☆';
-                                                }
-                                            } ?></span>
-                                    <style>
-                                        .review-text {
-                                            display: -webkit-box;
-                                            -webkit-line-clamp: 4;
-                                            /* show only 4 lines */
-                                            -webkit-box-orient: vertical;
-                                            overflow: hidden;
-                                            text-overflow: ellipsis;
-                                        }
-                                    </style>
-                                    <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                        "<?= $value['reviewText'] ?>"
-                                    </p>
-                                </div>
-
-                                <div class="flex gap-4 items-center">
-                                    <div class="flex items-center w-10 h-10">
-                                        <img src="/public/images/dp.png" alt="John D."
-                                            class="w-full h-full rounded-full object-cover border mr-3">
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-gray-800">
-                                            <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
+                                <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                                    <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                        <span> <?php for ($i = 0; $i < 5; $i++) {
+                                                    if ($value['rating'] > $i) {
+                                                        echo '★';
+                                                    } else {
+                                                        echo '☆';
+                                                    }
+                                                } ?></span>
+                                        <style>
+                                            .review-text {
+                                                display: -webkit-box;
+                                                -webkit-line-clamp: 4;
+                                                /* show only 4 lines */
+                                                -webkit-box-orient: vertical;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                            }
+                                        </style>
+                                        <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                            "<?= $value['reviewText'] ?>"
                                         </p>
                                     </div>
+
+                                    <div class="flex gap-4 items-center">
+                                        <div class="flex items-center w-10 h-10">
+                                            <img src="/public/images/dp.png" alt="John D."
+                                                class="w-full h-full rounded-full object-cover border mr-3">
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-gray-800">
+                                                <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
 
-                        <?php } ?>
+                            <?php } ?>
 
-                    </div>
-                        <?php
-                    }else if(count($reviws)==1){
-                        $value = $reviws[0]; 
-                        ?>
+                        </div>
+                    <?php
+                    } else if (count($reviws) == 1) {
+                        $value = $reviws[0];
+                    ?>
                         <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                                <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                                    <span> <?php for ($i = 0; $i < 5; $i++) {
-                                                if ($value['rating'] > $i) {
-                                                    echo '★';
-                                                } else {
-                                                    echo '☆';
-                                                }
-                                            } ?></span>
-                                    <style>
-                                        .review-text {
-                                            display: -webkit-box;
-                                            -webkit-line-clamp: 4;
-                                            /* show only 4 lines */
-                                            -webkit-box-orient: vertical;
-                                            overflow: hidden;
-                                            text-overflow: ellipsis;
-                                        }
-                                    </style>
-                                    <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                        "<?= $value['reviewText'] ?>"
+                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                <span> <?php for ($i = 0; $i < 5; $i++) {
+                                            if ($value['rating'] > $i) {
+                                                echo '★';
+                                            } else {
+                                                echo '☆';
+                                            }
+                                        } ?></span>
+                                <style>
+                                    .review-text {
+                                        display: -webkit-box;
+                                        -webkit-line-clamp: 4;
+                                        /* show only 4 lines */
+                                        -webkit-box-orient: vertical;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                    }
+                                </style>
+                                <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                    "<?= $value['reviewText'] ?>"
+                                </p>
+                            </div>
+
+                            <div class="flex gap-4 items-center">
+                                <div class="flex items-center w-10 h-10">
+                                    <img src="/public/images/dp.png" alt="John D."
+                                        class="w-full h-full rounded-full object-cover border mr-3">
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">
+                                        <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
                                     </p>
                                 </div>
-
-                                <div class="flex gap-4 items-center">
-                                    <div class="flex items-center w-10 h-10">
-                                        <img src="/public/images/dp.png" alt="John D."
-                                            class="w-full h-full rounded-full object-cover border mr-3">
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-gray-800">
-                                            <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
-                                        </p>
-                                    </div>
-                                </div>
                             </div>
-                        <?php
+                        </div>
+                    <?php
                     }
                     ?>
-                    
+
                 </div>
             </div>
         </div>
@@ -786,9 +786,13 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     <div class="owl-carousel owl-theme like-carousel">
 
                         <?php foreach ($uniqueProducts as $key => $product) {
-                            $images = json_decode($product['product_images'], true);
-                            $images = array_reverse($images);
+                            // $images = json_decode($product['product_images'], true);
+                            // $images = array_reverse($images);
                             $SecondImage = true;
+                            $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
+                            // printWithPre($varients);
+                            $images = json_decode($varients['images'], true);
+                            $images = array_reverse($images);
                             (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
                             $comparePrice = floatval($product['compare_price']);
                             $price = floatval($product['price']);
@@ -1208,7 +1212,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
             console.log(name, reviewText, rating);
 
-            if(reviewText.length>=0){
+            if (reviewText.length >= 0) {
                 let res = await fetch("/addReview", {
                     method: "POST",
                     headers: {
@@ -1232,7 +1236,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 } else {
                     toastr.error(data.message);
                 }
-            }else{
+            } else {
                 toastr.error("Please Write review");
             }
 
@@ -1648,9 +1652,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             divs[key1].classList.add("border-gray-900");
             // console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
             let selectedId = "";
-           if(document.querySelector(".changeDetailVariant")){
-             document.querySelector(".changeDetailVariant").innerText = json;
-           }
+            if (document.querySelector(".changeDetailVariant")) {
+                document.querySelector(".changeDetailVariant").innerText = json;
+            }
 
             GLOBAL_product_VARIANT.variants.forEach(async (ar, i) => {
                 //    console.log(ar)
@@ -1674,12 +1678,12 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     });
                     let comparePrice99 = document.getElementById('comparePrice99');
                     // console.log(comparePrice99)
-                    
+
                     if (comparePrice99) {
                         comparePrice99 = parseFloat(comparePrice99.innerHTML.replace(/,/g, ''))
                         let original = parseFloat(comparePrice99);
                         let discounted = parseFloat(ar.price);
-                        console.log(original,discounted)
+                        console.log(original, discounted)
                         if (!isNaN(original) && original > 0) {
                             let discountPercent = ((original - discounted) / original) * 100;
                             document.getElementById('save').innerHTML = `${discountPercent.toFixed(0)}`;

@@ -305,9 +305,13 @@ $ppimg = array_reverse($imags);
                     <?php
 
                     foreach (getData2("SELECT * FROM `tbl_products` WHERE `status` = 1 AND `new_arrival` = 1 ORDER BY `id` DESC LIMIT 8") as $key => $product) {
-                        $images = json_decode($product['product_images'], true);
-                        $images = array_reverse($images);
+                        // $images = json_decode($product['product_images'], true);
+                        // $images = array_reverse($images);
                         $SecondImage = true;
+                        $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
+                        // printWithPre($varients);
+                        $images = json_decode($varients['images'], true);
+                        $images = array_reverse($images);
                         (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
                         $comparePrice = floatval($product['compare_price']);
                         $price = floatval($product['price']);
@@ -331,7 +335,7 @@ $ppimg = array_reverse($imags);
                         }
 
                         // printWithPre($images);
-                        ?>
+                    ?>
                         <a href="/products/product-details/<?= $name ?>" class="block">
                             <div class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
@@ -406,7 +410,7 @@ $ppimg = array_reverse($imags);
             <!-- Tees -->
             <?php
             foreach ($categories as $key => $category) {
-                ?>
+            ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
                     <a href="/category/<?= strtolower(str_replace(' ', '-', $category['category'])) ?>">
@@ -625,7 +629,7 @@ $ppimg = array_reverse($imags);
                             }
                         }
 
-                        ?>
+                    ?>
                         <a href="products/product-details/<?= $name ?>" class="block">
                             <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
                                 <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden">
@@ -675,7 +679,7 @@ $ppimg = array_reverse($imags);
                                 </div>
                             </div>
                         </a>
-                        <?php
+                    <?php
                     }
                     ?>
                 </div>
@@ -722,7 +726,7 @@ $ppimg = array_reverse($imags);
                         foreach ($offerheading as $key => $value) { ?>
                             <span>#</span>
                             <span><?= $value['title'] ?></span>
-                        <?php }
+                    <?php }
                     } ?>
 
                 </div>
@@ -925,9 +929,9 @@ $ppimg = array_reverse($imags);
         // printWithPre($popup);
         if (count($popup) > 0) {
             // $popup = $popup[0];
-    
 
-            ?>
+
+    ?>
             <div id="newsletterModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
                 <!-- Modal Content -->
                 <div class="bg-white shadow-lg w-full w-[35vw] max-md:w-[85vw] relative animate-slideDown">
@@ -979,7 +983,7 @@ $ppimg = array_reverse($imags);
                     </div>
                 </div>
             </div>
-        <?php }
+    <?php }
     } ?>
     <script>
         async function close_popup() {
@@ -988,7 +992,7 @@ $ppimg = array_reverse($imags);
             }));
             console.log(request.data)
         }
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const modal = document.getElementById('newsletterModal');
             const closeBtn = document.getElementById('closeModal');
             const noPopupCheckbox = document.getElementById('noPopup');
@@ -1024,7 +1028,7 @@ $ppimg = array_reverse($imags);
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".newarrivalcarousel").owlCarousel({
                 loop: true,
                 margin: 5,
