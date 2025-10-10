@@ -208,11 +208,11 @@ if (isset($_POST['update_profile'])) {
                     </div>
                     <!-- <div class="h-[1px] bg-gray-200"></div> -->
 
-                    <a href="/logout" class="flex items-center gap-3 px-5 py-2 hover:bg-gray-100 rounded-lg">
+                    <a href="/logout" class="flex items-center gap-3 px-5 py-3 hover:bg-gray-100 ">
                         <div class="text-2xl">
-                            <img src="/public/icons/exit.png" class="h-[24px] " alt="">
+                            <img src="/public/icons/exit-red.png" class="h-[24px] " alt="">
                         </div>
-                        <span class="uppercase text-sm">Logout</span>
+                        <span class="uppercase text-sm text-red-500 font-semibold">Logout</span>
                     </a>
 
                 </nav>
