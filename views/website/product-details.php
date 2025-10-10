@@ -1208,28 +1208,32 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
             console.log(name, reviewText, rating);
 
-            let res = await fetch("/addReview", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    name,
-                    userid,
-                    product_id,
-                    reviewText,
-                    rating,
-                }),
-            })
+            if(reviewText.length>=0){
+                let res = await fetch("/addReview", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name,
+                        userid,
+                        product_id,
+                        reviewText,
+                        rating,
+                    }),
+                })
 
-            let data = await res.json();
+                let data = await res.json();
 
-            if (data.success) {
-                toastr.success(data.message);
-                closeReviewModal();
-                this.reset();
-            } else {
-                toastr.error(data.message);
+                if (data.success) {
+                    toastr.success(data.message);
+                    closeReviewModal();
+                    this.reset();
+                } else {
+                    toastr.error(data.message);
+                }
+            }else{
+                toastr.error("Please Write review");
             }
 
         });
@@ -1670,10 +1674,12 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     });
                     let comparePrice99 = document.getElementById('comparePrice99');
                     // console.log(comparePrice99)
+                    
                     if (comparePrice99) {
-                        let original = parseFloat(comparePrice99.innerHTML);
+                        comparePrice99 = parseFloat(comparePrice99.innerHTML.replace(/,/g, ''))
+                        let original = parseFloat(comparePrice99);
                         let discounted = parseFloat(ar.price);
-
+                        console.log(original,discounted)
                         if (!isNaN(original) && original > 0) {
                             let discountPercent = ((original - discounted) / original) * 100;
                             document.getElementById('save').innerHTML = `${discountPercent.toFixed(0)}`;
