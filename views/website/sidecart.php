@@ -417,8 +417,7 @@
         }
     }
     <?php
-    if (isset($page) && $page != "shop") {
-
+if ($page != "shop") {
     ?>
         document.addEventListener('DOMContentLoaded', function() {
             AddToWishlist();
