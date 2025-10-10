@@ -150,7 +150,9 @@ $byCategory = $category_name ?? 'new_arrivals';
             // 🔥 Fetch products with filters
             const res = await fetch("/api/get-products/" + cat, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 body: JSON.stringify({
                     filters: selectedFilters,
                     min_price: minPrice,
@@ -229,12 +231,14 @@ $byCategory = $category_name ?? 'new_arrivals';
 
             restoreCheckedFilters();
             setActiveFilter(activeFilters);
-            // AddToCart();
 
             // ✅ Render products
             productsContainer.innerHTML = products.map(product => renderProductHTML(product)).join("");
 
             console.log(activeFilters);
+            AddToCart();
+            AddToWishlist();
+
 
         }
 
@@ -325,7 +329,10 @@ $byCategory = $category_name ?? 'new_arrivals';
             const max = parseInt(priceRange.value);
             const sortValue = document.getElementById("sortSelect")?.value || "";
 
-            setProducts(activeFilters, { min, max }, sortValue);
+            setProducts(activeFilters, {
+                min,
+                max
+            }, sortValue);
             setActiveFilter(activeFilters);
 
             console.log(activeFilters);
@@ -360,7 +367,10 @@ $byCategory = $category_name ?? 'new_arrivals';
 
             document.querySelectorAll('.remove-filter').forEach(btn => {
                 btn.addEventListener('click', e => {
-                    const { key, value } = e.currentTarget.dataset;
+                    const {
+                        key,
+                        value
+                    } = e.currentTarget.dataset;
                     document.querySelectorAll(`.filter-checkbox[data-key="${key}"][value="${value}"]`)
                         .forEach(cb => cb.checked = false);
                     handleFilterChange();
@@ -391,7 +401,10 @@ $byCategory = $category_name ?? 'new_arrivals';
             document.getElementById('active-filters').innerHTML = "";
 
             const sortValue = document.getElementById("sortSelect")?.value || "";
-            setProducts({}, { min: parseInt(priceRange.min), max: parseInt(priceRange.max) }, sortValue);
+            setProducts({}, {
+                min: parseInt(priceRange.min),
+                max: parseInt(priceRange.max)
+            }, sortValue);
         });
 
         // ✅ Format price numbers
@@ -401,8 +414,6 @@ $byCategory = $category_name ?? 'new_arrivals';
 
         // ✅ Initial load
         setProducts();
-
-
     </script>
 
     <?php
