@@ -28,7 +28,7 @@ class WebController extends LoginController
         $price = floatval($ProductData['price']);
         $discountAmount = $comparePrice - $price;
         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
-        ?>
+?>
 
         <?php
         // printWithPre($ProductData);
@@ -63,20 +63,20 @@ class WebController extends LoginController
             ];
 
             // printWithPre($finalData);
-            ?>
+        ?>
             <?php
             if (!isset($_POST["product_details"])) {
-                ?>
+            ?>
                 <div class="w-[47%] p-3 h-full overflow-y-scroll bg-gray-200 flex flex-col items-center justify-start no-scrollbar gap-3 transform translate-x-full transition-transform duration-[0.8s] ease-in-out"
                     id="VarImg">
                     <?php
                     foreach (array_reverse($images[0]) as $key => $image) {
 
-                        ?>
+                    ?>
                         <img src="/<?= $image ?>" alt="">
                     <?php } ?>
                 </div>
-                <?php
+            <?php
             }
             ?>
             <div class=" h-full <?= !isset($_POST["product_details"]) ? " w-[53%] overflow-y-scroll" : "" ?> flex flex-col items-start justify-start z-10 bg-white"
@@ -85,7 +85,7 @@ class WebController extends LoginController
 
                 <?php
                 if (!isset($_POST["product_details"])) {
-                    ?>
+                ?>
                     <div class="w-full flex items-center justify-between px-7 pt-7 ">
                         <span class="uppercase ">SELECT OPTIONS</span>
                         <button id="closeAddToCartSidebar" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong"
@@ -94,14 +94,14 @@ class WebController extends LoginController
                         </button>
                     </div>
                     <span class="w-full h-[1px] bg-gray-200 my-5"></span>
-                    <?php
+                <?php
                 }
                 ?>
 
                 <div class="flex flex-col items-start justify-start w-full <?= !isset($_POST["product_details"]) ? "px-7" : "" ?>">
                     <?php
                     if (!isset($_POST["product_details"])) {
-                        ?>
+                    ?>
                         <h2 class="w-full text-[1.8rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
                         <div class="flex items-center justify-center gap-3 mt-1 prices">
                             <span
@@ -110,8 +110,8 @@ class WebController extends LoginController
                             <span class="text-xs bg-[#33459c] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
 
                         </div>
-                        <p class="text-sm text-gray-900 mt-2"><?=$ProductData["shortDescription"]?></p>
-                        <?php
+                        <p class="text-sm text-gray-900 mt-2"><?= $ProductData["shortDescription"] ?></p>
+                    <?php
                     }
                     ?>
 
@@ -127,89 +127,89 @@ class WebController extends LoginController
                             <?php
                             $sizeChart = (array) json_decode($ProductData["sizeChart"]);
                             // printWithPre($sizeChart);    
-                            if(!empty($ProductData["sizeChart"])){
-                                    
-                                     $sizeChartValue = $sizeChart[$value[0]];
-                                        $sizeChartValueString = [];
-                                        foreach($sizeChartValue as $kk=>$sv){
-                                            $sizeChartValueString[] = "$kk $sv inches ";
-                                        }
+                            if (!empty($ProductData["sizeChart"])) {
 
-                                        $sizeChartValueString = implode(" | ",$sizeChartValueString)
-                                    
-                                ?>
-                                    <div class="w-full flex items-center justify-between text-sm">
-                                        <div class="flex items-center justify-center gap-2">
-                                            <p class="uppercase text-lg max-md:text-sm"><?= $key ?></p>
-                                            <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded <?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>"><?=$sizeChartValueString?>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="flex gap-1 cursor-pointer items-end justify-center"
-                                            onclick="showSizeChart('<?=$id?>')">
-                                            <svg class="icon icon-accordion mb-1 color-foreground-" aria-hidden="true" focusable="false"
-                                                role="presentation" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 20 20">
-                                                <path
-                                                    d="M18.9836 5.32852L14.6715 1.01638L1.01638 14.6715L5.32852 18.9836L18.9836 5.32852ZM15.3902 0.297691C14.9933 -0.0992303 14.3497 -0.0992303 13.9528 0.297691L0.297691 13.9528C-0.0992301 14.3497 -0.0992305 14.9932 0.297691 15.3902L4.60983 19.7023C5.00675 20.0992 5.65029 20.0992 6.04721 19.7023L19.7023 6.04721C20.0992 5.65029 20.0992 5.00675 19.7023 4.60983L15.3902 0.297691Z"
-                                                    fill-rule="evenodd"></path>
-                                                <path
-                                                    d="M11.7863 2.67056C11.9848 2.4721 12.3065 2.4721 12.505 2.67056L14.4237 4.58927C14.6222 4.78774 14.6222 5.1095 14.4237 5.30796C14.2252 5.50642 13.9035 5.50642 13.705 5.30796L11.7863 3.38925C11.5878 3.19079 11.5878 2.86902 11.7863 2.67056Z">
-                                                </path>
-                                                <path
-                                                    d="M8.93891 5.36331C9.13737 5.16485 9.45914 5.16485 9.6576 5.36331L11.5763 7.28202C11.7748 7.48048 11.7748 7.80225 11.5763 8.00071C11.3779 8.19917 11.0561 8.19917 10.8576 8.00071L8.93891 6.082C8.74045 5.88354 8.74045 5.56177 8.93891 5.36331Z">
-                                                </path>
-                                                <path
-                                                    d="M6.24307 8.20742C6.44153 8.00896 6.76329 8.00896 6.96175 8.20742L8.88047 10.1261C9.07893 10.3246 9.07893 10.6464 8.88047 10.8448C8.68201 11.0433 8.36024 11.0433 8.16178 10.8448L6.24307 8.92611C6.0446 8.72765 6.0446 8.40588 6.24307 8.20742Z">
-                                                </path>
-                                                <path
-                                                    d="M3.37296 10.8776C3.57142 10.6791 3.89319 10.6791 4.09165 10.8776L6.01036 12.7963C6.20882 12.9948 6.20882 13.3165 6.01036 13.515C5.8119 13.7134 5.49013 13.7134 5.29167 13.515L3.37296 11.5963C3.1745 11.3978 3.1745 11.076 3.37296 10.8776Z">
-                                                </path>
-                                            </svg>
-                                            <span class="text-[1.12rem]">Size guide</span>
-                                        </div>
-                                            
-                                    </div>
-                                 <?php
-                                }else{
-                                    ?>
-                                        <div class="w-full flex items-center justify-between text-sm">
-                                            <div class="flex items-center justify-center gap-2">
-                                                <p class="uppercase text-lg max-md:text-sm"><?= $key ?></p>
-                                            </div>
-                                        </div>
-
-                                    <?php
+                                $sizeChartValue = $sizeChart[$value[0]];
+                                $sizeChartValueString = [];
+                                foreach ($sizeChartValue as $kk => $sv) {
+                                    $sizeChartValueString[] = "$kk $sv inches ";
                                 }
-                                ?>
+
+                                $sizeChartValueString = implode(" | ", $sizeChartValueString)
+
+                            ?>
+                                <div class="w-full flex items-center justify-between text-sm">
+                                    <div class="flex items-center justify-center gap-2">
+                                        <p class="uppercase text-lg max-md:text-sm"><?= $key ?></p>
+                                        <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded <?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>"><?= $sizeChartValueString ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex gap-1 cursor-pointer items-end justify-center"
+                                        onclick="showSizeChart('<?= $id ?>')">
+                                        <svg class="icon icon-accordion mb-1 color-foreground-" aria-hidden="true" focusable="false"
+                                            role="presentation" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 20 20">
+                                            <path
+                                                d="M18.9836 5.32852L14.6715 1.01638L1.01638 14.6715L5.32852 18.9836L18.9836 5.32852ZM15.3902 0.297691C14.9933 -0.0992303 14.3497 -0.0992303 13.9528 0.297691L0.297691 13.9528C-0.0992301 14.3497 -0.0992305 14.9932 0.297691 15.3902L4.60983 19.7023C5.00675 20.0992 5.65029 20.0992 6.04721 19.7023L19.7023 6.04721C20.0992 5.65029 20.0992 5.00675 19.7023 4.60983L15.3902 0.297691Z"
+                                                fill-rule="evenodd"></path>
+                                            <path
+                                                d="M11.7863 2.67056C11.9848 2.4721 12.3065 2.4721 12.505 2.67056L14.4237 4.58927C14.6222 4.78774 14.6222 5.1095 14.4237 5.30796C14.2252 5.50642 13.9035 5.50642 13.705 5.30796L11.7863 3.38925C11.5878 3.19079 11.5878 2.86902 11.7863 2.67056Z">
+                                            </path>
+                                            <path
+                                                d="M8.93891 5.36331C9.13737 5.16485 9.45914 5.16485 9.6576 5.36331L11.5763 7.28202C11.7748 7.48048 11.7748 7.80225 11.5763 8.00071C11.3779 8.19917 11.0561 8.19917 10.8576 8.00071L8.93891 6.082C8.74045 5.88354 8.74045 5.56177 8.93891 5.36331Z">
+                                            </path>
+                                            <path
+                                                d="M6.24307 8.20742C6.44153 8.00896 6.76329 8.00896 6.96175 8.20742L8.88047 10.1261C9.07893 10.3246 9.07893 10.6464 8.88047 10.8448C8.68201 11.0433 8.36024 11.0433 8.16178 10.8448L6.24307 8.92611C6.0446 8.72765 6.0446 8.40588 6.24307 8.20742Z">
+                                            </path>
+                                            <path
+                                                d="M3.37296 10.8776C3.57142 10.6791 3.89319 10.6791 4.09165 10.8776L6.01036 12.7963C6.20882 12.9948 6.20882 13.3165 6.01036 13.515C5.8119 13.7134 5.49013 13.7134 5.29167 13.515L3.37296 11.5963C3.1745 11.3978 3.1745 11.076 3.37296 10.8776Z">
+                                            </path>
+                                        </svg>
+                                        <span class="text-[1.12rem]">Size guide</span>
+                                    </div>
+
+                                </div>
+                            <?php
+                            } else {
+                            ?>
+                                <div class="w-full flex items-center justify-between text-sm">
+                                    <div class="flex items-center justify-center gap-2">
+                                        <p class="uppercase text-lg max-md:text-sm"><?= $key ?></p>
+                                    </div>
+                                </div>
+
+                            <?php
+                            }
+                            ?>
                             <div class="w-full flex items-center justify-start mt-3 text-sm" id="SizeDiv">
                                 <?php
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
                                     $sizeChartValueString = [];
-                                    if(!empty($sizeChart)){
+                                    if (!empty($sizeChart)) {
                                         $sizeChartValue = $sizeChart[$value1];
-                                        
-                                        foreach($sizeChartValue as $kk=>$sv){
+
+                                        foreach ($sizeChartValue as $kk => $sv) {
                                             $sizeChartValueString[] =  "$kk $sv inches ";
                                         }
 
-                                        $sizeChartValueString = implode(" | ",$sizeChartValueString);
+                                        $sizeChartValueString = implode(" | ", $sizeChartValueString);
                                     }
                                 ?>
-                                    <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>,"<?=$sizeChartValueString?>")'
+                                    <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>,"<?= $sizeChartValueString ?>")'
                                         class="border <?= $key1 == 0 ? "border-gray-900 selected-size" : "border-gray-300" ?>  optionDivs cursor-pointer flex items-center justify-center h-10 w-20"
                                         option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>" onclick="">
                                         <?= $value1 ?>
                                     </div>
-                                    <?php
+                                <?php
                                 }
                                 ?>
                             </div>
 
-                            <?php
+                        <?php
                         } elseif ($key == 'color') {
-                            ?>
+                        ?>
                             <p class="uppercase mt-7 text-lg"><?= $key ?></p>
                             <div class="w-full flex items-center justify-start text-sm gap-2"
                                 id="<?= !isset($_POST["product_details"]) ? "ColorDiv" : "ColorDetailsDiv" ?>">
@@ -223,15 +223,16 @@ class WebController extends LoginController
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
-                                    ?>
+                                ?>
                                     <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>)'
                                         class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> cursor-pointer flex items-center justify-center h-10 w-20"
-                                        option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?></div>
+                                        option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?>
+                                    </div>
                                     <?php
                                 }
                                 ?>
                             </div>
-                            <?php
+                        <?php
                         }
                     }
                     if (!isset($_POST["product_details"])) {
@@ -263,7 +264,7 @@ class WebController extends LoginController
 
                             <?php
                             if (!empty($_SESSION["userid"])) {
-                                ?>
+                            ?>
                                 <form method="POST" action="/checkout-cart" class="w-full">
                                     <input type="hidden" name="varient[]" class="sideVarientId"
                                         value="<?= $ProductData['varients'][0]["id"] ?>">
@@ -282,9 +283,9 @@ class WebController extends LoginController
 
                                     </button>
                                 </form>
-                                <?php
+                            <?php
                             } else {
-                                ?>
+                            ?>
                                 <input type="hidden" name="varient[]" class="sideVarientId"
                                     value="<?= $ProductData['varients'][0]["id"] ?>">
                                 <input type="hidden" name="category[]" class="sideCategoryId" value="<?= $ProductData['category'] ?>">
@@ -301,14 +302,14 @@ class WebController extends LoginController
                                     </span>
 
                                 </button>
-                                <?php
+                            <?php
                             }
                             ?>
 
                         </div>
 
 
-                        <?php
+                    <?php
                     }
 
                     ?>
@@ -318,7 +319,7 @@ class WebController extends LoginController
                 </div>
             </div>
 
-            <?php
+        <?php
 
         } else {
             echo "<p>No variants found</p>";
@@ -381,7 +382,7 @@ class WebController extends LoginController
         foreach ($co as $color => $images) {
             // printWithPre($images);
 
-            ?>
+        ?>
             <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"color","<?= $color ?>",<?= $i ?>)'
                 class=" h-[95px] flex items-center justify-start mt-1 text-sm gap-2 p-1 cursor-pointer border <?= $i == 0 ? " border-gray-900 selected-color" : "" ?>"
                 option_name="color" option_value="" product_id="<?= $id ?>">
@@ -391,7 +392,7 @@ class WebController extends LoginController
 
             </div>
 
-            <?php
+        <?php
             $i++;
         }
 
@@ -451,12 +452,12 @@ class WebController extends LoginController
         ob_start();
 
         if (!empty($matchedVariants)) {
-            ?>
+        ?>
             <?php
             foreach ($matchedVariants as $key => $value) {
                 $images = array_reverse(json_decode($value['images']));
 
-                ?>
+            ?>
                 <div onclick='changeSideVariant(this,"color","<?= parse_variant_options(($value["options"]))["Color"] ?>",<?= $key ?>)'
                     class=" h-[95px] flex items-center justify-start mt-3 text-sm gap-2 p-1 cursor-pointer border <?= $key == 0 ? " border-gray-900 selected-color" : "" ?>"
                     option_name="color" option_value="" product_id="<?= $id ?>">
@@ -565,7 +566,7 @@ class WebController extends LoginController
                     $variants = json_decode($vdata['options'], true);
                     $variants = json_decode($variants, true);
                     $totalprice = $vdata['price'] * $quantity;
-                    ?>
+                ?>
 
                     <div class="flex items-center gap-4 border-b py-2 w-full">
                         <!-- Product image -->
@@ -577,7 +578,7 @@ class WebController extends LoginController
                             <div class="flex gap-3 flex-wrap items-center justify-start">
                                 <?php
                                 foreach ($variants as $key => $variant) {
-                                    ?>
+                                ?>
                                     <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
                                 <?php } ?>
                             </div>
@@ -606,7 +607,7 @@ class WebController extends LoginController
                         </button>
                     </div>
 
-                    <?php
+                <?php
                 }
             } else {
                 ?>
@@ -617,7 +618,7 @@ class WebController extends LoginController
                         No Products in the cart.
                     </p>
                 </div>
-                <?php
+            <?php
             }
             ?>
 
@@ -649,7 +650,7 @@ class WebController extends LoginController
                     $variants = json_decode($vdata['options'], true);
                     $variants = json_decode($variants, true);
                     $totalprice = $vdata['price'] * $quantity;
-                    ?>
+            ?>
 
                     <div class="flex items-center gap-4 border-b py-2 w-full">
                         <!-- Product image -->
@@ -661,7 +662,7 @@ class WebController extends LoginController
                             <div class="flex gap-3 flex-wrap items-center justify-start">
                                 <?php
                                 foreach ($variants as $key => $variant) {
-                                    ?>
+                                ?>
                                     <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
                                 <?php } ?>
                             </div>
@@ -683,7 +684,7 @@ class WebController extends LoginController
                         </button>
                     </div>
 
-                    <?php
+                <?php
 
 
                 }
@@ -697,7 +698,7 @@ class WebController extends LoginController
                         No Products in the cart.
                     </p>
                 </div>
-                <?php
+            <?php
             }
             ?>
 
@@ -763,8 +764,8 @@ class WebController extends LoginController
             $id = $_POST['process'];
             unset($_POST['process']);
             // printWithPre($_POST);
-            if($_POST['status'] == 1){
-              update(['status' => 0], 1, "tbl_user_address", "status");
+            if ($_POST['status'] == 1) {
+                update(['status' => 0], 1, "tbl_user_address", "status");
             }
             $address = update($_POST, $id, "tbl_user_address");
             if ($address) {
@@ -1444,6 +1445,9 @@ class WebController extends LoginController
         $pageModule = "Shipping Info";
         $pageTitle = "Shipping Info";
         $cartData = $_SESSION["cartData"];
+        if (empty($cartData)) {
+            redirect("/");
+        }
         $userData = getData2("SELECT * FROM `online_users` WHERE `id` = $_SESSION[userid]")[0];
         $address = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $_SESSION[userid] ORDER BY `id` DESC ");
 
@@ -1459,7 +1463,28 @@ class WebController extends LoginController
             $id = $_SESSION["userid"];
             $mode = $_POST["payment_mode"];
             $order_id = generateRandomString(16) . time();
+            $pp = 1;
+            foreach ($address as $key => $value) {
 
+                if ($_POST['address_line1'] == $value['address_line1'] && $_POST['address_line2'] == $value['address_line2']) {
+                    $pp = 0;
+                    break;
+                }
+            }
+            if ($pp) {
+                $addressId = [
+                    "address_line1" => $_POST["address_line1"],
+                    "address_line2" => $_POST["address_line2"],
+                    "city" => $_POST["city"],
+                    "state" => $_POST["state"],
+                    "pincode" => $_POST["pin_code"],
+                    "address_type" => $_POST["delivery"],
+                    "mobile" => $_POST["mobile"],
+                    "email" => $_POST["email"],
+                    "userid" => $_SESSION["userid"],
+                ];
+                add($addressId, "tbl_user_address");
+            }
             if ($mode == "COD") {
                 // printWithPre($_POST);
                 // die();
@@ -1535,7 +1560,7 @@ class WebController extends LoginController
                     delete($id, "tbl_cart", "userid");
                     // printWithPre($purchaseid);
                     // die();
-                    $_SESSION["new_order"] = $purchaseid[0];
+                    $_SESSION["new_order"] = $purchaseid;
                     $_SESSION['order_id'] = $order_id;
                     $token = $this->validshiprockettoken();
                     // echo $token;
@@ -1545,6 +1570,10 @@ class WebController extends LoginController
 
                     // printWithPre($placeordershiprocket);
                     // die();
+
+
+                    // $this->OrderConfirmMail();
+                    sendOrderMail($purchaseid);
                     $_SESSION["success"] = "Order Placed Successfully";
                     $db->commit();
                     unset($_SESSION["cartData"]);
@@ -1577,45 +1606,86 @@ class WebController extends LoginController
 
                         ]);
 
+
+
                         if ($orderId) {
-                            // $keyapi = "rzp_live_JdPrOFrNVQV4gM";
                             $keyapi = $PaymentGateWay['keyid'];
 
-                            ?>
+            ?>
 
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-                            <form action="/razorpay" method="POST">
-                                <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="<?= $keyapi ?>"
-                                    data-amount="<?= $_POST["allTotal"] * 100 ?>" data-currency="INR" data-id="<?= $orderId ?>"
-                                    data-buttontext="Pay with Razorpay" data-name="Nova Kids"
-                                    data-description="Authentic streetwear for the next generation. Quality pieces that speak your language and match your vibe."
-                                    data-image="https://nova.bloomcrm.in/public/logos/nova_logo.png"
-                                    data-prefill.name="<?= $_POST["lname"] . " " . $_POST["fname"] ?>"
-                                    data-prefill.contact="<?= $_POST["mobile"] ?>" data-theme.color="#1774ff"></script>
-                                <input type="hidden" custom="Hidden Element" name="order_id" value="<?= $orderId ?>" />
-                            </form>
-
-                            <style>
-                                .razorpay-payment-button {
-                                    display: none;
-                                }
-                            </style>
+                            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
                             <script>
-                                $(document).ready(function () {
-                                    $('.razorpay-payment-button').click();
+                                $(document).ready(function() {
+                                    var options = {
+                                        "key": "<?= $keyapi ?>",
+                                        "amount": "<?= $_POST["allTotal"] * 100 ?>",
+                                        "currency": "INR",
+                                        "name": "Nova Kids",
+                                        "description": "Authentic streetwear for the next generation. Quality pieces that speak your language and match your vibe.",
+                                        "image": "https://nova.bloomcrm.in/public/logos/nova_logo.png",
+                                        "handler": function(response) {
+                                            // Payment successful - submit form
+                                            var form = document.createElement('form');
+                                            form.method = 'POST';
+                                            form.action = '/razorpay';
+
+                                            var orderInput = document.createElement('input');
+                                            orderInput.type = 'hidden';
+                                            orderInput.name = 'order_id';
+                                            orderInput.value = '<?= $orderId ?>';
+                                            form.appendChild(orderInput);
+
+                                            var paymentInput = document.createElement('input');
+                                            paymentInput.type = 'hidden';
+                                            paymentInput.name = 'razorpay_payment_id';
+                                            paymentInput.value = response.razorpay_payment_id;
+                                            form.appendChild(paymentInput);
+
+                                            if (response.razorpay_signature) {
+                                                var signatureInput = document.createElement('input');
+                                                signatureInput.type = 'hidden';
+                                                signatureInput.name = 'razorpay_signature';
+                                                signatureInput.value = response.razorpay_signature;
+                                                form.appendChild(signatureInput);
+                                            }
+
+                                            document.body.appendChild(form);
+                                            form.submit();
+                                        },
+                                        "prefill": {
+                                            "name": "<?= $_POST["lname"] . " " . $_POST["fname"] ?>",
+                                            "contact": "<?= $_POST["mobile"] ?>"
+                                        },
+                                        "theme": {
+                                            "color": "#1774ff"
+                                        },
+                                        "modal": {
+                                            "ondismiss": function() {
+                                                // User closed the payment modal
+                                                // Optional: Update order status to "Cancelled" via AJAX
+                                                console.log("closing...")
+                                                window.history.back();
+                                            }
+                                        }
+                                    };
+
+                                    var rzp = new Razorpay(options);
+
+                                    rzp.on('payment.failed', function(response) {
+                                        // Handle payment failure
+                                        alert('Payment failed: ' + response.error.description);
+                                        window.history.back();
+                                    });
+
+                                    rzp.open();
                                 });
                             </script>
-                            <?php
+        <?php
                             exit();
                         }
                     }
-                    // else {
-                    //     $_SESSION["err"] = "Enter Your Mobile Number in Profile";
-                    //     header("Location: checkout.php");
-                    //     exit();
-                    // }
                 }
             }
 
@@ -1640,8 +1710,7 @@ class WebController extends LoginController
 
             if (!isset($data['orderid']) && empty($data['orderid'])) {
 
-                $data["orderid"] = generateRandomString(16) . time();
-                ;
+                $data["orderid"] = generateRandomString(16) . time();;
                 // echo $data["orderid"];
                 // die();
             }
@@ -2124,7 +2193,7 @@ ORDER BY id DESC LIMIT 5");
 
             $uname = $_POST['name'];
             unset($_POST['name']);
-           
+
             add($_POST, "tbl_product_review");
 
             $userName = getData2("SELECT * FROM online_users WHERE id = " . $_POST['userid'] . " LIMIT 1")[0]['fname'];
@@ -2210,43 +2279,44 @@ ORDER BY id DESC LIMIT 5");
         }
     }
 
-    public function getSizeChart(){
+    public function getSizeChart()
+    {
         // die();
         $id = $_GET["id"];
         $ProductData = getData2("SELECT tbl_products.*, tbl_category.category as category_name FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_products.id = $id")[0];
-        if(empty($ProductData) || empty($ProductData["sizeChart"])){
+        if (empty($ProductData) || empty($ProductData["sizeChart"])) {
             echo json_encode([
-                "success"=>false
+                "success" => false
             ]);
             die();
         }
         ob_start();
         $data = json_decode($ProductData["sizeChart"]);
         ?>
-            <div class="bg-white shadow-lg w-[65%] max-md:w-[90%] max-h-[80vh] relative flex flex-col animate-slideDown">
-                <!-- Close button -->
-                <button onclick="document.getElementById('sizeChartModal').classList.add('hidden')"
-                    class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 animate-rotate-pingpong">
-                    <i class="fa-solid fa-xmark text-2xl"></i>
-                </button>
+        <div class="bg-white shadow-lg w-[65%] max-md:w-[90%] max-h-[80vh] relative flex flex-col animate-slideDown">
+            <!-- Close button -->
+            <button onclick="document.getElementById('sizeChartModal').classList.add('hidden')"
+                class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 animate-rotate-pingpong">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
 
-                <!-- Header -->
-                <div class="p-6 pb-2 flex-shrink-0">
-                    <h2 class="text-2xl max-md:text-lg font-bold mb-1">SIZE CHART</h2>
-                    <p class="text-sm text-gray-500">Reviews: Fits true to size</p>
+            <!-- Header -->
+            <div class="p-6 pb-2 flex-shrink-0">
+                <h2 class="text-2xl max-md:text-lg font-bold mb-1">SIZE CHART</h2>
+                <p class="text-sm text-gray-500">Reviews: Fits true to size</p>
+            </div>
+
+            <!-- Scrollable body -->
+            <div class="p-6 pt-0 overflow-y-auto flex-1">
+                <!-- Measuring unit toggle (hidden for now) -->
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="text-gray-700 font-medium">Measuring Unit :</span>
+                    <span>Inches</span>
                 </div>
 
-                <!-- Scrollable body -->
-                <div class="p-6 pt-0 overflow-y-auto flex-1">
-                    <!-- Measuring unit toggle (hidden for now) -->
-                    <div class="flex items-center gap-2 mb-6">
-                        <span class="text-gray-700 font-medium">Measuring Unit :</span>
-                        <span>Inches</span>
-                    </div>
-
-                    <!-- Table -->
-                    <div class="overflow-x-auto">
-                        <table class="w-full border-collapse text-center text-gray-700">
+                <!-- Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse text-center text-gray-700">
                         <thead>
                             <tr class="bg-gray-100">
                                 <th class="p-3">Size</th>
@@ -2278,20 +2348,20 @@ ORDER BY id DESC LIMIT 5");
                 <div class="mt-8 border-t pt-6 flex flex-col md:flex-row items-center">
                     <!-- Text -->
                     <div class="w-full md:w-[60%]">
-                        <?=$ProductData["sizeDescription"]?>
+                        <?= $ProductData["sizeDescription"] ?>
                     </div>
                     <!-- Image -->
                     <div class="w-full md:w-[40%] flex justify-center">
-                        <img src="/<?=$ProductData["sizeImage"]?>" alt="How to measure T-shirt" class="h-72 max-md:h-64">
+                        <img src="/<?= $ProductData["sizeImage"] ?>" alt="How to measure T-shirt" class="h-72 max-md:h-64">
                     </div>
                 </div>
             </div>
-        <?php
+    <?php
         $html = ob_get_clean();
 
         echo json_encode([
-            "success"=>true,
-            "data"=>$html
+            "success" => true,
+            "data" => $html
         ]);
     }
 }

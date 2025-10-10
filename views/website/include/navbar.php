@@ -186,7 +186,7 @@ $categories = getData("tbl_category");
             <?php
             foreach ($categories as $key => $value) {
                 $category = strtolower(str_replace(" ", "-", $value['category']));
-                ?>
+            ?>
                 <div class="relative group">
                     <a href="/category/<?= $category ?>"
                         class="text-gray-800  group duration-300 cursor-pointer <?= $category == '$category' ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>"><?= $value['category'] ?>
@@ -233,9 +233,19 @@ $categories = getData("tbl_category");
                         </g>
                     </svg>
                     <div>
-                        <div class="font-thin text-xs flex flex-col items-start justify-start "><span
-                                class="text-gray-600">Hello,</span><span
-                                class="font-semibold uppercase tracking-wider"><?= isset($_SESSION['fname']) ? $_SESSION['fname'] . ' ' . $_SESSION['lname'] : 'Guest' ?></span>
+                        <div class="font-thin text-xs flex flex-col items-start justify-start "><span class="text-gray-600">Hello,</span>
+                            <span class="font-semibold uppercase tracking-wider">
+                                <?php
+                                if (isset($_SESSION['fname']) && trim($_SESSION['fname']) !== '') {
+                                    echo $_SESSION['fname'] . ' ' . $_SESSION['lname'];
+                                } elseif (isset($_SESSION['fname']) && trim($_SESSION['fname']) === '') {
+                                    echo 'My Profile';
+                                } else {
+                                    echo 'Guest';
+                                }
+                                ?>
+                            </span>
+
                         </div>
                     </div>
                 </div>
@@ -330,7 +340,7 @@ $categories = getData("tbl_category");
             <?php
             foreach ($categories as $key => $value) {
                 $category = strtolower(str_replace(" ", "-", $value['category']));
-                ?>
+            ?>
                 <div class="border-b border-gray-200">
                     <a href="/category/<?= $category ?>"
                         class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium"><?= $value['category'] ?>
@@ -642,22 +652,6 @@ $categories = getData("tbl_category");
 
             <!-- Search Results -->
             <div id="searchResults" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-
-                <?php for ($i = 0; $i < 5; $i++) {
-                    $value = $uniqueProducts[$i];
-
-                    $images = json_decode($value['product_images'], true);
-                    $firstImage = !empty($images) ? $images[0] : null;
-
-                    ?>
-                    <div class="border overflow-hidden hover:shadow-md transition">
-                        <img src="/<?= $firstImage ?>" alt="<?= $value['name'] ?>" class="w-full h-40 object-cover">
-                        <div class="p-2">
-                            <h3 class="font-semibold text-sm"><?= $value['name'] ?></h3>
-                            <p class="text-gray-500 text-sm">₹<?= $value['price'] ?></p>
-                        </div>
-                    </div>
-                <?php } ?>
             </div>
         </div>
     </div>
@@ -748,6 +742,7 @@ $categories = getData("tbl_category");
             modal.classList.remove('hidden');
         });
     }
+
     function openLogin() {
         console.log("openLogin")
         modal.classList.remove('hidden');
@@ -770,6 +765,7 @@ $categories = getData("tbl_category");
 
 
         const handleKeyDown = (e) => {
+            // Allow only numeric keys, Backspace, Delete, Tab, or Meta
             if (
                 !/^[0-9]{1}$/.test(e.key) &&
                 e.key !== 'Backspace' &&
@@ -777,17 +773,23 @@ $categories = getData("tbl_category");
                 e.key !== 'Tab' &&
                 !e.metaKey
             ) {
-                e.preventDefault()
+                e.preventDefault();
             }
 
             if (e.key === 'Delete' || e.key === 'Backspace') {
                 const index = inputs.indexOf(e.target);
+
+                // 🧹 Always clear current input value first
+                inputs[index].value = '';
+
+                // ⬅️ Then move focus to previous input (if not first)
                 if (index > 0) {
-                    inputs[index - 1].value = '';
                     inputs[index - 1].focus();
                 }
+
+                e.preventDefault(); // optional — prevents weird browser behavior
             }
-        }
+        };
 
         const handleInput = (e) => {
             const {
@@ -825,6 +827,9 @@ $categories = getData("tbl_category");
             input.addEventListener('paste', handlePaste)
         })
     })
+    let timeLeft = 60; // 60 seconds = 1 minute
+    const countdownEl = document.getElementById('countdown');
+    let timerInterval;
 
     const sendOtp = document.getElementById('sendOtp');
     const mobileInput = document.getElementById('mobile');
@@ -833,86 +838,119 @@ $categories = getData("tbl_category");
     const mobileDiv = document.getElementById('mobile-div');
     const mobilespan = document.getElementById('mobile-span');
     const Username = document.getElementById('username');
+
+    let currentOtp = null;
+    let currentUserData = null;
+
+    function updateTimer() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+
+        countdownEl.textContent =
+            `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+        if (timeLeft === 0) {
+            countdownEl.classList.remove('text-blue-600');
+            countdownEl.classList.add('text-red-600');
+            countdownEl.textContent = '00:00';
+            clearInterval(timerInterval);
+
+            document.getElementById("otp-div").classList.add("hidden");
+            document.getElementById("mobile-div").classList.remove("hidden");
+            sendOtp.classList.remove("hidden");
+
+            console.log("Timer expired");
+        } else {
+            timeLeft--;
+        }
+    }
+
     sendOtp.addEventListener('click', async () => {
-        // console.log("hiiiiiiiii")
-        if (mobileInput.value != "" && mobileInput.value.length == 10) {
+        if (mobileInput.value !== "" && mobileInput.value.length === 10) {
             const response = await axios.post('/api/send-otp', new URLSearchParams({
                 phone: mobileInput.value,
-            }))
-            // console.log(response.data)
+            }));
+            console.log(response.data);
 
             if (response.data.success) {
-                console.log(response.data)
-                mobilespan.innerHTML = '+91' + ' ' + mobileInput.value
-                mobileDiv.classList.add('hidden')
+                // ✅ Save OTP + user
+                window.currentOtp = response.data.otp;
+                window.currentUserData = response.data.data;
+
+                // 🔄 Reset and start timer
+                timeLeft = 60;
+                countdownEl.classList.add('text-blue-600');
+                countdownEl.classList.remove('text-red-600');
+                clearInterval(timerInterval);
+                updateTimer();
+                timerInterval = setInterval(updateTimer, 1000);
+
+                mobilespan.innerHTML = '+91 ' + mobileInput.value;
+                mobileDiv.classList.add('hidden');
                 sendOtp.classList.add('hidden');
                 OtpDiv.classList.remove('hidden');
-                verifyOtp.addEventListener('click', async () => {
-                    console.log("testing......")
-                    const otpInput = inputs.map(input => input.value).join("");
-                    console.log(otpInput, response.data.otp);
-
-                    if (response.data.otp == otpInput) {
-                        console.log("Matched")
-                        Username.value = response.data.data.username
-
-                        verifyOtp.type = "submit"
-                        verifyOtp.click();
-                    } else {
-                        toastr.error("Otp Verification Fail");
-                    }
-
-                })
             } else {
                 toastr.error(response.data.message);
             }
         } else {
             toastr.error("Please Enter Valid number");
         }
+    });
 
+    verifyOtp.addEventListener('click', async () => {
+        const otpInput = inputs.map(input => input.value).join("");
 
-    })
+        if (otpInput === window.currentOtp) {
+            Username.value = window.currentUserData.username;
+            verifyOtp.type = "submit";
+            verifyOtp.click();
+        } else {
+            toastr.error("OTP Verification Failed");
+        }
+    });
 
     function EditotpNumber() {
-
-        mobileDiv.classList.remove('hidden')
+        mobileDiv.classList.remove('hidden');
         sendOtp.classList.remove('hidden');
         OtpDiv.classList.add('hidden');
     }
+
     async function ResendOtp() {
-        if (mobileInput.value != "" && mobileInput.value.length == 10) {
-            const response = await axios.post('/api/send-otp', new URLSearchParams({
-                phone: mobileInput.value,
-            }))
-            // console.log(response.data)
+        if (mobileInput.value !== "" && mobileInput.value.length === 10) {
+            try {
+                const response = await axios.post('/api/send-otp', new URLSearchParams({
+                    phone: mobileInput.value,
+                }));
 
-            if (response.data.success) {
-                console.log(response.data)
-                mobilespan.innerHTML = '+91' + ' ' + mobileInput.value
-                mobileDiv.classList.add('hidden')
-                sendOtp.classList.add('hidden');
-                OtpDiv.classList.remove('hidden');
-                verifyOtp.addEventListener('click', async () => {
-                    console.log("testing......")
-                    const otpInput = inputs.map(input => input.value).join("");
-                    console.log(otpInput, response.data.otp);
+                if (response.data.success) {
+                    // ✅ Save OTP again
+                    console.log(response.data);
+                    window.currentOtp = response.data.otp;
+                    window.currentUserData = response.data.data;
 
-                    if (response.data.otp == otpInput) {
-                        console.log("Matched")
-                        Username.value = response.data.data.username
+                    // 🔄 Reset timer and UI
+                    timeLeft = 60;
+                    countdownEl.classList.add('text-blue-600');
+                    countdownEl.classList.remove('text-red-600');
+                    clearInterval(timerInterval);
+                    updateTimer();
+                    timerInterval = setInterval(updateTimer, 1000);
 
-                        verifyOtp.type = "submit"
-                        verifyOtp.click();
-                    } else {
-                        toastr.error("Otp Verification Fail");
-                    }
+                    mobilespan.innerHTML = '+91 ' + mobileInput.value;
+                    mobileDiv.classList.add('hidden');
+                    sendOtp.classList.add('hidden');
+                    OtpDiv.classList.remove('hidden');
 
-                })
-            } else {
-                toastr.error(response.data.message);
+                    toastr.success("OTP resent successfully");
+                } else {
+                    toastr.error(response.data.message);
+                }
+            } catch (error) {
+                toastr.error("Failed to resend OTP");
+                console.error(error);
             }
         } else {
-            toastr.error("Please Enter Valid number");
+            toastr.error("Please enter a valid number");
         }
     }
 </script>
@@ -951,7 +989,7 @@ $categories = getData("tbl_category");
     function decodeJwtResponse(token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
 
@@ -961,6 +999,7 @@ $categories = getData("tbl_category");
 
 <script>
     let debounceTimer;
+
 
     async function searchProducts() {
         let ele = document.getElementById("searchInput");
@@ -1001,8 +1040,8 @@ $categories = getData("tbl_category");
                     data.data.forEach(product => {
                         let parsed = JSON.parse(product.product_images);
 
-                        let name = product.name.replace(/ /g, '-');  // Replace spaces with dashes
-                        name = name.replace(/'/g, '');              // Remove all single quotes
+                        let name = product.name.replace(/ /g, '-'); // Replace spaces with dashes
+                        name = name.replace(/'/g, ''); // Remove all single quotes
 
 
                         html += `
@@ -1045,38 +1084,4 @@ $categories = getData("tbl_category");
     }
 
     searchProducts();
-
-
-    let timeLeft = 60; // 60 seconds = 1 minute
-    const countdownEl = document.getElementById('countdown');
-
-    function updateTimer() {
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
-
-        countdownEl.textContent =
-            `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-        if (timeLeft === 0) {
-            countdownEl.classList.remove('text-blue-600');
-            countdownEl.classList.add('text-red-600');
-            countdownEl.textContent = '00:00';
-            clearInterval(timerInterval);
-            // cut(); // Call cut() function when timer expires
-
-            document.getElementById("otp-div").classList.add("hidden");
-            document.getElementById("mobile-div").classList.remove("hidden");
-
-            console.log("Timer expired");
-        } else {
-            timeLeft--;
-        }
-    }
-
-    // Update immediately
-    updateTimer();
-
-    // Then update every second
-    const timerInterval = setInterval(updateTimer, 1000);
-
 </script>
