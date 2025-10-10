@@ -1043,7 +1043,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </div>
                             <p class="text-center text-sm font-medium text-gray-600" id="ratingText">Excellent</p>
                         </div>
-                        <input type="hidden" id="rating" value="1" required>
+                        <input type="hidden" id="rating" value="" required>
                     </div>
 
                     <!-- Review Text with Character Count -->
