@@ -449,9 +449,13 @@ if (isset($_POST['update_profile'])) {
 
                             foreach ($wishlists as $key => $wishlist) {
                                 $product = getData2("SELECT * FROM `tbl_products` WHERE `id` = " . $wishlist['product'])[0];
-                                $images = json_decode($product['product_images'], true);
-                                $images = array_reverse($images);
+                                // $images = json_decode($product['product_images'], true);
+                                // $images = array_reverse($images);
                                 $SecondImage = true;
+                                $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
+                                // printWithPre($varients);
+                                $images = json_decode($varients['images'], true);
+                                $images = array_reverse($images);
                                 (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
                                 $comparePrice = floatval($product['compare_price']);
                                 $price = floatval($product['price']);
@@ -720,7 +724,7 @@ if (isset($_POST['update_profile'])) {
 
                             </div>
 
-                            
+
                             <div class="mt-4">
                                 <button
                                     class="bg-[#f25b21] border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white  "

@@ -673,6 +673,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                             "<?= $value['reviewText'] ?>"
                                         </p>
                                     </div>
+<<<<<<< HEAD
 
                                     <div class="flex gap-4 items-center">
                                         <div class="flex items-center w-10 h-10">
@@ -687,13 +688,29 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                     </div>
                                 </div>
 
+=======
+
+                                    <div class="flex gap-4 items-center">
+                                        <div class="flex items-center w-10 h-10">
+                                            <img src="/public/images/dp.png" alt="John D."
+                                                class="w-full h-full rounded-full object-cover border mr-3">
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-gray-800">
+                                                <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+>>>>>>> 20ecea29837686308243f7e6b693640c1ade1e4b
                             <?php } ?>
 
-                    </div>
-                        <?php
-                    }else if(count($reviws)==1){
-                        $value = $reviws[0]; 
-                        ?>
+                        </div>
+                    <?php
+                    } else if (count($reviws) == 1) {
+                        $value = $reviws[0];
+                    ?>
                         <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
                             <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
                                 <span> <?php for ($i = 0; $i < 5; $i++) {
@@ -783,9 +800,13 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     <div class="owl-carousel owl-theme like-carousel">
 
                         <?php foreach ($uniqueProducts as $key => $product) {
-                            $images = json_decode($product['product_images'], true);
-                            $images = array_reverse($images);
+                            // $images = json_decode($product['product_images'], true);
+                            // $images = array_reverse($images);
                             $SecondImage = true;
+                            $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
+                            // printWithPre($varients);
+                            $images = json_decode($varients['images'], true);
+                            $images = array_reverse($images);
                             (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
                             $comparePrice = floatval($product['compare_price']);
                             $price = floatval($product['price']);
@@ -1167,7 +1188,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
             console.log(name, reviewText, rating);
 
-            if(reviewText.length>=0){
+            if (reviewText.length >= 0) {
                 let res = await fetch("/addReview", {
                     method: "POST",
                     headers: {
@@ -1191,7 +1212,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 } else {
                     toastr.error(data.message);
                 }
-            }else{
+            } else {
                 toastr.error("Please Write review");
             }
 
@@ -1610,12 +1631,12 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     });
                     let comparePrice99 = document.getElementById('comparePrice99');
                     // console.log(comparePrice99)
-                    
+
                     if (comparePrice99) {
                         comparePrice99 = parseFloat(comparePrice99.innerHTML.replace(/,/g, ''))
                         let original = parseFloat(comparePrice99);
                         let discounted = parseFloat(ar.price);
-                        console.log(original,discounted)
+                        console.log(original, discounted)
                         if (!isNaN(original) && original > 0) {
                             let discountPercent = ((original - discounted) / original) * 100;
                             document.getElementById('save').innerHTML = `${discountPercent.toFixed(0)}`;
