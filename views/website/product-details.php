@@ -320,7 +320,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 <span class="text-gray-300 text-xl max-md:text-base line-through whitespace-nowrap">Rs. <span
                                         id="comparePrice99"><?= formatNumber($ProductData['compare_price']) ?></span></span>
                                 <span
-                                    class="text-[#f25b21] text-xl max-md:text-base prices">Rs.<?= formatNumber($ProductData['price']) ?></span>
+                                    class="text-[#f25b21] text-xl max-md:text-base prices">Rs.<?= formatNumber($ProductData['varients'][0]["price"]) ?></span>
                                 <span class="bg-[#f25b21] text-white text-xs px-2 py-1 z-20 whitespace-nowrap">SAVE
                                     <span id="save"><?= $discountPercentage ?></span>%</span>
 
@@ -396,6 +396,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         <div class="flex items-center space-x-2 border-b border-gray-300 pb-2">
                             <input type="text" id="pincode" maxlength="6" value="" placeholder="Enter Pincode"
                                 oninput="checkMaharashtraPincode()"
+                                onkeydown="if(event.key === 'Enter'){ event.preventDefault(); return false; }"
                                 class="flex-1 bg-transparent outline-none text-gray-700" />
                             <!-- <button type="button"
                                 class="bg-black text-white text-sm font-semibold px-3 py-1 rounded-md hover:bg-gray-800">
