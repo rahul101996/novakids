@@ -226,7 +226,8 @@ class WebController extends LoginController
                                     ?>
                                     <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>)'
                                         class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> cursor-pointer flex items-center justify-center h-10 w-20"
-                                        option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?></div>
+                                        option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?>
+                                    </div>
                                     <?php
                                 }
                                 ?>
@@ -1584,45 +1585,86 @@ class WebController extends LoginController
 
                         ]);
 
+                        
+
                         if ($orderId) {
-                            // $keyapi = "rzp_live_JdPrOFrNVQV4gM";
                             $keyapi = $PaymentGateWay['keyid'];
 
                             ?>
 
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-                            <form action="/razorpay" method="POST">
-                                <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="<?= $keyapi ?>"
-                                    data-amount="<?= $_POST["allTotal"] * 100 ?>" data-currency="INR" data-id="<?= $orderId ?>"
-                                    data-buttontext="Pay with Razorpay" data-name="Nova Kids"
-                                    data-description="Authentic streetwear for the next generation. Quality pieces that speak your language and match your vibe."
-                                    data-image="https://nova.bloomcrm.in/public/logos/nova_logo.png"
-                                    data-prefill.name="<?= $_POST["lname"] . " " . $_POST["fname"] ?>"
-                                    data-prefill.contact="<?= $_POST["mobile"] ?>" data-theme.color="#1774ff"></script>
-                                <input type="hidden" custom="Hidden Element" name="order_id" value="<?= $orderId ?>" />
-                            </form>
-
-                            <style>
-                                .razorpay-payment-button {
-                                    display: none;
-                                }
-                            </style>
+                            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
                             <script>
                                 $(document).ready(function () {
-                                    $('.razorpay-payment-button').click();
+                                    var options = {
+                                        "key": "<?= $keyapi ?>",
+                                        "amount": "<?= $_POST["allTotal"] * 100 ?>",
+                                        "currency": "INR",
+                                        "name": "Nova Kids",
+                                        "description": "Authentic streetwear for the next generation. Quality pieces that speak your language and match your vibe.",
+                                        "image": "https://nova.bloomcrm.in/public/logos/nova_logo.png",
+                                        "handler": function (response) {
+                                            // Payment successful - submit form
+                                            var form = document.createElement('form');
+                                            form.method = 'POST';
+                                            form.action = '/razorpay';
+                                            
+                                            var orderInput = document.createElement('input');
+                                            orderInput.type = 'hidden';
+                                            orderInput.name = 'order_id';
+                                            orderInput.value = '<?= $orderId ?>';
+                                            form.appendChild(orderInput);
+                                            
+                                            var paymentInput = document.createElement('input');
+                                            paymentInput.type = 'hidden';
+                                            paymentInput.name = 'razorpay_payment_id';
+                                            paymentInput.value = response.razorpay_payment_id;
+                                            form.appendChild(paymentInput);
+                                            
+                                            if (response.razorpay_signature) {
+                                                var signatureInput = document.createElement('input');
+                                                signatureInput.type = 'hidden';
+                                                signatureInput.name = 'razorpay_signature';
+                                                signatureInput.value = response.razorpay_signature;
+                                                form.appendChild(signatureInput);
+                                            }
+                                            
+                                            document.body.appendChild(form);
+                                            form.submit();
+                                        },
+                                        "prefill": {
+                                            "name": "<?= $_POST["lname"] . " " . $_POST["fname"] ?>",
+                                            "contact": "<?= $_POST["mobile"] ?>"
+                                        },
+                                        "theme": {
+                                            "color": "#1774ff"
+                                        },
+                                        "modal": {
+                                            "ondismiss": function() {
+                                                // User closed the payment modal
+                                                // Optional: Update order status to "Cancelled" via AJAX
+                                                console.log("closing...")
+                                                window.history.back();
+                                            }
+                                        }
+                                    };
+
+                                    var rzp = new Razorpay(options);
+                                    
+                                    rzp.on('payment.failed', function (response){
+                                        // Handle payment failure
+                                        alert('Payment failed: ' + response.error.description);
+                                        window.history.back();
+                                    });
+                                    
+                                    rzp.open();
                                 });
                             </script>
                             <?php
                             exit();
                         }
                     }
-                    // else {
-                    //     $_SESSION["err"] = "Enter Your Mobile Number in Profile";
-                    //     header("Location: checkout.php");
-                    //     exit();
-                    // }
                 }
             }
 
