@@ -1047,8 +1047,8 @@ $ppimg = array_reverse($imags);
                     }
                 }
             });
-            AddToCart();
-            AddToWishlist();
+            // AddToCart();
+            // AddToWishlist();
         });
     </script>
 

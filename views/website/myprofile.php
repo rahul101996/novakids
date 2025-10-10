@@ -903,7 +903,7 @@ if (isset($_POST['update_profile'])) {
                     // document.getElementById("state").value = state;
                     stateInput.value = '';
                     pincodeInput.value = '';
-                    buttonValue.value = '';
+                    buttonValue.value = 'add';
                     defaultAddress.checked = false;
 
 

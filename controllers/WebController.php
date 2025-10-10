@@ -106,8 +106,8 @@ class WebController extends LoginController
                         <div class="flex items-center justify-center gap-3 mt-1 prices">
                             <span
                                 class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
-                            <span class="text-[#33459c] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
-                            <span class="text-xs bg-[#33459c] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
+                            <span class="text-[#f25b21] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
+                            <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
 
                         </div>
                         <p class="text-sm text-gray-900 mt-2"><?= $ProductData["shortDescription"] ?></p>
@@ -765,7 +765,7 @@ class WebController extends LoginController
             unset($_POST['process']);
             // printWithPre($_POST);
             if ($_POST['status'] == 1) {
-                update(['status' => 0], 1, "tbl_user_address", "status");
+                updateSQL(['status' => 0], "tbl_user_address", "status = '1' AND userid = $userid");
             }
             $address = update($_POST, $id, "tbl_user_address");
             if ($address) {
@@ -1449,7 +1449,7 @@ class WebController extends LoginController
             redirect("/");
         }
         $userData = getData2("SELECT * FROM `online_users` WHERE `id` = $_SESSION[userid]")[0];
-        $address = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $_SESSION[userid] ORDER BY `id` DESC ");
+        $address = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $_SESSION[userid] ORDER BY `status` DESC ");
 
         $PaymentGateWay = getData2("SELECT * FROM `payment_gateway` WHERE `status` = 1 ORDER BY `id` ASC")[0];
 

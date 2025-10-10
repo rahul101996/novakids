@@ -40,7 +40,7 @@ $encodedAddress = urlencode($OrderData['address_line2'] . ", " . $OrderData['add
                         </iframe>
                         <div class="absolute top-4 left-4 bg-white rounded-lg shadow-sm px-4 py-3">
                             <p class="text-sm font-semibold text-gray-800"><?= $OrderData['city'] ?></p>
-                            <p class="text-sm text-gray-600"><?= $OrderData['state'] ?></p>
+                            <!-- <p class="text-sm text-gray-600"><?= $OrderData['state'] ?></p> -->
                         </div>
                     </div>
                 </div>
@@ -61,14 +61,7 @@ $encodedAddress = urlencode($OrderData['address_line2'] . ", " . $OrderData['add
                                 <p class="text-gray-800">+91 <?= $OrderData['mobile'] ?></p>
                             </div>
 
-                            <div>
-                                <h3 class="text-gray-600 text-sm font-semibold mb-3">Shipping address</h3>
-                                <div class="space-y-1">
 
-                                    <p class="text-gray-800 w-[80%]"><?= $OrderData['address_line1'] ?></p>
-                                    <p class="text-gray-800 w-[80%]"><?= $OrderData['address_line2'] ?></p>
-                                </div>
-                            </div>
 
 
                         </div>
@@ -77,16 +70,18 @@ $encodedAddress = urlencode($OrderData['address_line2'] . ", " . $OrderData['add
                         <div class="space-y-8">
                             <div>
                                 <h3 class="text-gray-600 text-sm font-semibold mb-3">Payment method</h3>
-                                <p class="text-gray-800">Prepaid - ₹<?= formatNumber($OrderData['total_amount'])  ?></p>
+                                <p class="text-gray-800"><?= $OrderData['payment_mode'] ?> - ₹<?= formatNumber($OrderData['total_amount'])  ?></p>
                             </div>
 
-                            <div>
-                                <h3 class="text-gray-600 text-sm font-semibold mb-3">Billing address</h3>
-                                <div class="space-y-1">
-                                    <p class="text-gray-800 w-[80%]"><?= $OrderData['address_line1'] ?></p>
-                                    <p class="text-gray-800 w-[80%]"><?= $OrderData['address_line2'] ?></p>
-                                </div>
-                            </div>
+
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="text-gray-600 text-sm font-semibold mb-3">Shipping address</h3>
+                        <div class="space-y-1">
+
+                            <p class="text-gray-800 w-[80%]"><?= $OrderData['address_line1'] ?></p>
+                            <p class="text-gray-800 w-[80%]"><?= $OrderData['address_line2'] ?></p>
                         </div>
                     </div>
                 </div>
