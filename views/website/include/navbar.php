@@ -186,7 +186,7 @@ $categories = getData("tbl_category");
             <?php
             foreach ($categories as $key => $value) {
                 $category = strtolower(str_replace(" ", "-", $value['category']));
-                ?>
+            ?>
                 <div class="relative group">
                     <a href="/category/<?= $category ?>"
                         class="text-gray-800  group duration-300 cursor-pointer <?= $category == '$category' ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>"><?= $value['category'] ?>
@@ -330,7 +330,7 @@ $categories = getData("tbl_category");
             <?php
             foreach ($categories as $key => $value) {
                 $category = strtolower(str_replace(" ", "-", $value['category']));
-                ?>
+            ?>
                 <div class="border-b border-gray-200">
                     <a href="/category/<?= $category ?>"
                         class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium"><?= $value['category'] ?>
@@ -649,7 +649,7 @@ $categories = getData("tbl_category");
                     $images = json_decode($value['product_images'], true);
                     $firstImage = !empty($images) ? $images[0] : null;
 
-                    ?>
+                ?>
                     <div class="border overflow-hidden hover:shadow-md transition">
                         <img src="/<?= $firstImage ?>" alt="<?= $value['name'] ?>" class="w-full h-40 object-cover">
                         <div class="p-2">
@@ -748,6 +748,7 @@ $categories = getData("tbl_category");
             modal.classList.remove('hidden');
         });
     }
+
     function openLogin() {
         console.log("openLogin")
         modal.classList.remove('hidden');
@@ -825,7 +826,32 @@ $categories = getData("tbl_category");
             input.addEventListener('paste', handlePaste)
         })
     })
+    let timeLeft = 60; // 60 seconds = 1 minute
+    const countdownEl = document.getElementById('countdown');
+    let timerInterval; // <--- define here (global)
 
+    function updateTimer() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+
+        countdownEl.textContent =
+            `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+        if (timeLeft === 0) {
+            countdownEl.classList.remove('text-blue-600');
+            countdownEl.classList.add('text-red-600');
+            countdownEl.textContent = '00:00';
+            clearInterval(timerInterval); // now accessible ✅
+
+            document.getElementById("otp-div").classList.add("hidden");
+            document.getElementById("mobile-div").classList.remove("hidden");
+            sendOtp.classList.remove("hidden");
+
+            console.log("Timer expired");
+        } else {
+            timeLeft--;
+        }
+    }
     const sendOtp = document.getElementById('sendOtp');
     const mobileInput = document.getElementById('mobile');
     const OtpDiv = document.getElementById('otp-div');
@@ -834,44 +860,42 @@ $categories = getData("tbl_category");
     const mobilespan = document.getElementById('mobile-span');
     const Username = document.getElementById('username');
     sendOtp.addEventListener('click', async () => {
-        // console.log("hiiiiiiiii")
         if (mobileInput.value != "" && mobileInput.value.length == 10) {
             const response = await axios.post('/api/send-otp', new URLSearchParams({
                 phone: mobileInput.value,
-            }))
-            // console.log(response.data)
+            }));
 
             if (response.data.success) {
-                console.log(response.data)
-                mobilespan.innerHTML = '+91' + ' ' + mobileInput.value
-                mobileDiv.classList.add('hidden')
+                timeLeft = 60; // reset timer each time you send OTP
+                countdownEl.classList.add('text-blue-600');
+                countdownEl.classList.remove('text-red-600');
+                updateTimer();
+                clearInterval(timerInterval); // prevent duplicates
+                timerInterval = setInterval(updateTimer, 1000); // <--- now it works ✅
+
+                mobilespan.innerHTML = '+91 ' + mobileInput.value;
+                mobileDiv.classList.add('hidden');
                 sendOtp.classList.add('hidden');
                 OtpDiv.classList.remove('hidden');
+
                 verifyOtp.addEventListener('click', async () => {
-                    console.log("testing......")
                     const otpInput = inputs.map(input => input.value).join("");
-                    console.log(otpInput, response.data.otp);
 
                     if (response.data.otp == otpInput) {
-                        console.log("Matched")
-                        Username.value = response.data.data.username
-
-                        verifyOtp.type = "submit"
+                        Username.value = response.data.data.username;
+                        verifyOtp.type = "submit";
                         verifyOtp.click();
                     } else {
                         toastr.error("Otp Verification Fail");
                     }
-
-                })
+                });
             } else {
                 toastr.error(response.data.message);
             }
         } else {
             toastr.error("Please Enter Valid number");
         }
-
-
-    })
+    });
 
     function EditotpNumber() {
 
@@ -951,7 +975,7 @@ $categories = getData("tbl_category");
     function decodeJwtResponse(token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
 
@@ -1037,37 +1061,4 @@ $categories = getData("tbl_category");
 
         }, 500); // 500ms debounce
     }
-
-    let timeLeft = 60; // 60 seconds = 1 minute
-    const countdownEl = document.getElementById('countdown');
-
-    function updateTimer() {
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
-
-        countdownEl.textContent =
-            `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-        if (timeLeft === 0) {
-            countdownEl.classList.remove('text-blue-600');
-            countdownEl.classList.add('text-red-600');
-            countdownEl.textContent = '00:00';
-            clearInterval(timerInterval);
-            // cut(); // Call cut() function when timer expires
-
-            document.getElementById("otp-div").classList.add("hidden");
-            document.getElementById("mobile-div").classList.remove("hidden");
-
-            console.log("Timer expired");
-        } else {
-            timeLeft--;
-        }
-    }
-
-    // Update immediately
-    updateTimer();
-
-    // Then update every second
-    const timerInterval = setInterval(updateTimer, 1000);
-
 </script>
