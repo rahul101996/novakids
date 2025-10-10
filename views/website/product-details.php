@@ -809,7 +809,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             $images = array_reverse($images);
                             (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
                             $comparePrice = floatval($product['compare_price']);
-                            $price = floatval($product['price']);
+                            $price = floatval($varients['price']);
                             $discountAmount = $comparePrice - $price;
                             $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
@@ -863,7 +863,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                             <p class="text-gray-500 line-through text-sm">₹
                                                 <?= formatNumber($product['compare_price']) ?>
                                             </p>
-                                            <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?></p>
+                                            <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?></p>
                                         </div>
                                         <div class="flex items-center justify-start space-x-1 hidden">
                                             <span class="text-yellow-500">★★★★★</span>
