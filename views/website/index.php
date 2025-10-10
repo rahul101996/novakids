@@ -316,6 +316,7 @@ $home_imges = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC
                                 $data = [];
                             }
                         }
+                        
                         // printWithPre($images);
                         ?>
                         <a href="/products/product-details/<?= $name ?>" class="block">
