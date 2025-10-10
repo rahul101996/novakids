@@ -24,7 +24,7 @@ $page = 'Wishlist';
         <!-- Wishlist Content -->
         <?php
         if (isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type'] == "User") {
-                    $wishlists = getData2("SELECT * FROM `tbl_wishlist` WHERE `userid` = " . $_SESSION["userid"]);
+            $wishlists = getData2("SELECT * FROM `tbl_wishlist` WHERE `userid` = " . $_SESSION["userid"]);
 
             if (empty($wishlists)) {
         ?>
@@ -59,9 +59,13 @@ $page = 'Wishlist';
 
                     foreach ($wishlists as $key => $wishlist) {
                         $product = getData2("SELECT * FROM `tbl_products` WHERE `id` = " . $wishlist['product'])[0];
-                        $images = json_decode($product['product_images'], true);
-                        $images = array_reverse($images);
+                        // $images = json_decode($product['product_images'], true);
+                        // $images = array_reverse($images);
                         $SecondImage = true;
+                        $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
+                        // printWithPre($varients);
+                        $images = json_decode($varients['images'], true);
+                        $images = array_reverse($images);
                         (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
                         $comparePrice = floatval($product['compare_price']);
                         $price = floatval($product['price']);
@@ -177,7 +181,7 @@ $page = 'Wishlist';
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
                         $name = str_replace(' ', '-', $product['name']);
-                        $name = str_replace("'", '', $name); 
+                        $name = str_replace("'", '', $name);
 
                         // printWithPre($images);
                     ?>

@@ -1,4 +1,5 @@
 <?php
+// printWithPre($userData);
 $page = "My Profile";
 $allstates = getData("indian_states");
 
@@ -280,8 +281,7 @@ if (isset($_POST['update_profile'])) {
                                 <tr>
                                     <td class="bg-gray-50 font-medium px-6 py-4 max-lg:px-4 max-lg:py-3 w-1/3">
                                         Registration Date</td>
-                                    <td class="px-6 py-4 max-lg:px-4 max-lg:py-3 font-semibold text-gray-900">May 26,
-                                        2025 6:54 am</td>
+                                    <td class="px-6 py-4 max-lg:px-4 max-lg:py-3 font-semibold text-gray-900"><?= formatDate($userData['created_at']) ?></td>
                                 </tr>
                                 <tr>
                                     <td class="bg-gray-50 font-medium px-6 py-4 max-lg:px-4 max-lg:py-3"> Name</td>
@@ -473,9 +473,13 @@ if (isset($_POST['update_profile'])) {
 
                             foreach ($wishlists as $key => $wishlist) {
                                 $product = getData2("SELECT * FROM `tbl_products` WHERE `id` = " . $wishlist['product'])[0];
-                                $images = json_decode($product['product_images'], true);
-                                $images = array_reverse($images);
+                                // $images = json_decode($product['product_images'], true);
+                                // $images = array_reverse($images);
                                 $SecondImage = true;
+                                $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
+                                // printWithPre($varients);
+                                $images = json_decode($varients['images'], true);
+                                $images = array_reverse($images);
                                 (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
                                 $comparePrice = floatval($product['compare_price']);
                                 $price = floatval($product['price']);
@@ -726,39 +730,7 @@ if (isset($_POST['update_profile'])) {
 
                             </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">State</label>
-                                    <select type="text" value="<?= $userData['state'] ?>" name="state"
-                                        class="w-full border border-gray-300   px-4 py-2" required>
-                                        <option value="">Select State</option>
-                                        <?php foreach (getData2("SELECT * FROM `tbl_state`") as $key => $state) { ?>
-                                            <option value="<?= $state['id']; ?>"
-                                                <?= $state['id'] == $userData['state'] ? 'selected' : '' ?>>
-                                                <?= $state['state_name']; ?>
-                                            </option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">City</label>
-                                    <input type="text" name="city" value="<?= $userData['city'] ?>"
-                                        class="w-full border border-gray-300   px-4 py-2" id="">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Pincode</label>
-                                    <input type="text" name="pincode" value="<?= $userData['pincode'] ?>"
-                                        class="w-full border border-gray-300   px-4 py-2" id="">
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Address</label>
-                                    <textarea name="address_line1"
-                                        class="w-full border border-gray-300   px-4 py-2" id="" cols="30"
-                                        rows="2"><?= $userData['address_line1'] ?></textarea>
-                                </div>
-                            </div>
+
                             <div class="mt-4">
                                 <button
                                     class="bg-[#f25b21] border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white  "
