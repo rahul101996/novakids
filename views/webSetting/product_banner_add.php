@@ -14,7 +14,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
         $date = date('Y-m-d');
 
-
         ?>
 
         <main class="flex w-full flex-col items-center justify-start md:ml-60">
@@ -26,7 +25,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     <button class="text-gray-500 hover:text-gray-700">
                         <span class="material-icons">arrow_back</span>
                     </button>
-                    <h1 class="text-2xl font-semibold ml-2">Add Home Banner</h1>
+                    <h1 class="text-2xl font-semibold ml-2">Add Product Banner</h1>
                 </div>
             </div>
             <form action="" method="POST" class="w-[85%]" enctype="multipart/form-data">
@@ -34,17 +33,21 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     <div class="lg:col-span-2 flex flex-col gap-6">
 
                         <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Title</label>
-                            <input
-                                class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
-                                value="<?= isset($editData['title']) ? $editData['title'] : '' ?>" name="title" id="title"
-                                type="text" placeholder="Enter Title" />
-
+                            <label class="block text-sm font-medium text-gray-700 mb-1" for="product_id">Product</label>
+                            <select name="product_id" class="selectElement" id="product_id">
+                                <option value="" selected disabled>Select Product</option>
+                                <?php foreach (getData2("SELECT * FROM `tbl_products` WHERE `status` = 1") as $key => $value) { ?>
+                                    <option 
+                                        value="<?= $value['id'] ?>"
+                                        <?= isset($editData['product_id']) && $editData['product_id'] == $value['id'] ? 'selected' : '' ?>>
+                                        <?= $value['name'] ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
                         </div>
                     </div>
 
                     <div class="lg:col-span-1 flex flex-col gap-6">
-
 
                         <div class="bg-white p-6 rounded-lg shadow-sm">
                             <h2 class="text-base font-medium text-gray-900">Home Banner</h2>
