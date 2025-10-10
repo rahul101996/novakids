@@ -178,22 +178,24 @@ $categories = getData("tbl_category");
                     class="text-gray-800  group duration-300 cursor-pointer <?= $pageTitle == 'New Arrivals' ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>">NEW
                     ARRIVALS
                     <span
-                        class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                        class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] <?= $pageTitle == 'New Arrivals' ? 'w-3/6' : '' ?> group-hover:w-3/6"></span>
                     <span
-                        class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                        class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] <?= $pageTitle == 'New Arrivals' ? 'w-3/6' : '' ?> group-hover:w-3/6"></span>
                 </a>
             </div>
             <?php
+            
+
             foreach ($categories as $key => $value) {
                 $category = strtolower(str_replace(" ", "-", $value['category']));
             ?>
                 <div class="relative group">
                     <a href="/category/<?= $category ?>"
-                        class="text-gray-800  group duration-300 cursor-pointer <?= $category == '$category' ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>"><?= $value['category'] ?>
+                        class="text-gray-800  group duration-300 cursor-pointer <?= $category == $category_name ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>"><?= $value['category'] ?>
                         <span
-                            class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                            class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] <?= $category == $category_name ? 'w-3/6' : '' ?> group-hover:w-3/6"></span>
                         <span
-                            class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
+                            class="absolute -bottom-0 right-1/2 w-0 transition-all h-0.5 bg-[#f25b21] <?= $category == $category_name ? 'w-3/6' : '' ?> group-hover:w-3/6"></span>
                     </a>
                 </div>
             <?php } ?>
