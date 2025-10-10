@@ -333,7 +333,7 @@
 
     }
      <?php
-    if (!isset($page) && $page != "shop") {
+    if (isset($page) && $page != "shop") {
 
     ?>
     document.addEventListener('DOMContentLoaded', function() {
@@ -417,7 +417,7 @@
         }
     }
     <?php
-    if (!isset($page) && $page != "shop") {
+    if (isset($page) && $page != "shop") {
 
     ?>
         document.addEventListener('DOMContentLoaded', function() {

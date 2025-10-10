@@ -176,6 +176,11 @@ $route->group(['', 'WebsettingController', 'auth'], function ($route) {
     $route->route('/admin/front-cms/home-banner/edit/[i:id]', 'home_banner_add');
     $route->route('/admin/front-cms/home-banner/delete/[i:id]', 'home_banner_delete');
 
+    $route->route('/admin/front-cms/product-banner', 'product_banner');
+    $route->route('/admin/front-cms/product-banner/add', 'product_banner_add');
+    $route->route('/admin/front-cms/product-banner/edit/[i:id]', 'product_banner_add');
+    $route->route('/admin/front-cms/product-banner/delete/[i:id]', 'product_banner_delete');
+
 
     $route->route('admin/front-cms/nav-heading', 'navbar_heading');
     $route->route('admin/front-cms/nav-heading/add', 'navbar_heading_add');

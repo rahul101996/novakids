@@ -327,7 +327,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </div>
                         </div>
                         <div class="flex items-center justify-end gap-2 w-[25%]">
-                            <button class="addToWishlistBtn  rounded-full transition-all duration-500  ">
+                            <button type="button" class="addToWishlistBtn  rounded-full transition-all duration-500  ">
                                 <img src="/public/icons/<?= !empty($data) ? 'heart-orange.png' : 'heart-black.png' ?>"
                                     class="cursor-pointer mt-1 h-8 w-8 max-md:h-6 max-md:w-6" alt="">
                             </button>
