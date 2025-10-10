@@ -1444,6 +1444,9 @@ class WebController extends LoginController
         $pageModule = "Shipping Info";
         $pageTitle = "Shipping Info";
         $cartData = $_SESSION["cartData"];
+        if(empty($cartData)){
+            redirect("/");
+        }
         $userData = getData2("SELECT * FROM `online_users` WHERE `id` = $_SESSION[userid]")[0];
         $address = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $_SESSION[userid] ORDER BY `id` DESC ");
 
@@ -1535,7 +1538,7 @@ class WebController extends LoginController
                     delete($id, "tbl_cart", "userid");
                     // printWithPre($purchaseid);
                     // die();
-                    $_SESSION["new_order"] = $purchaseid[0];
+                    $_SESSION["new_order"] = $purchaseid;
                     $_SESSION['order_id'] = $order_id;
                     $token = $this->validshiprockettoken();
                     // echo $token;
@@ -1545,6 +1548,10 @@ class WebController extends LoginController
 
                     // printWithPre($placeordershiprocket);
                     // die();
+
+
+                    // $this->OrderConfirmMail();
+                    sendOrderMail($purchaseid);
                     $_SESSION["success"] = "Order Placed Successfully";
                     $db->commit();
                     unset($_SESSION["cartData"]);
