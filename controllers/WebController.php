@@ -110,10 +110,7 @@ class WebController extends LoginController
                             <span class="text-xs bg-[#33459c] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
 
                         </div>
-                        <p class="text-sm text-gray-900 mt-2">Upgrade your casual wardrobe with our black sporty deconstructed loose
-                            pants. These stylish pants feature a relaxed fit and a deconstructed design for a modern and edgy look</p>
-                        <p class=" text-xs text-gray-600 mt-1"><a href="" class="underline">shipping</a> calculated at checkout</p>
-                        <p class="text-xs mt-1 hidden">⭐⭐⭐⭐⭐ <span class="text-sm">31 reviews</span></p>
+                        <p class="text-sm text-gray-900 mt-2"><?=$ProductData["shortDescription"]?></p>
                         <?php
                     }
                     ?>
@@ -255,7 +252,7 @@ class WebController extends LoginController
                                 <div class="w-[80%] relative rounded-lg overflow-hidden group transform hover:shadow-xl border border-black bg-transparent text-black"
                                     onclick="AddToCartslider(this, true)">
                                     <span
-                                        class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white">
+                                        class="relative z-10 flex py-3 px-6 items-center justify-center gap-2 font-bold text-base transition-colors duration-700 group-hover:text-white cursor-pointer">
                                         <i class="fas fa-cart-plus"></i> Add to Cart
                                     </span> <span
                                         class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-[1.2s] ease-in-out ease-out z-0">
@@ -2079,7 +2076,7 @@ ORDER BY id DESC LIMIT 5");
             $search = $_POST['search'];
 
             if (empty($search)) {
-                $products = getData2("SELECT * FROM `tbl_products`");
+                $products = getData2("SELECT * FROM `tbl_products` ORDER BY `id` DESC LIMIT 8");
             } else {
                 $products = getData2("SELECT * FROM `tbl_products` WHERE `name` LIKE '%$search%'");
             }
@@ -2211,5 +2208,90 @@ ORDER BY id DESC LIMIT 5");
         } finally {
             echo json_encode($response);
         }
+    }
+
+    public function getSizeChart(){
+        // die();
+        $id = $_GET["id"];
+        $ProductData = getData2("SELECT tbl_products.*, tbl_category.category as category_name FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_products.id = $id")[0];
+        if(empty($ProductData) || empty($ProductData["sizeChart"])){
+            echo json_encode([
+                "success"=>false
+            ]);
+            die();
+        }
+        ob_start();
+        $data = json_decode($ProductData["sizeChart"]);
+        ?>
+            <div class="bg-white shadow-lg w-[65%] max-md:w-[90%] max-h-[80vh] relative flex flex-col animate-slideDown">
+                <!-- Close button -->
+                <button onclick="document.getElementById('sizeChartModal').classList.add('hidden')"
+                    class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 animate-rotate-pingpong">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
+                </button>
+
+                <!-- Header -->
+                <div class="p-6 pb-2 flex-shrink-0">
+                    <h2 class="text-2xl max-md:text-lg font-bold mb-1">SIZE CHART</h2>
+                    <p class="text-sm text-gray-500">Reviews: Fits true to size</p>
+                </div>
+
+                <!-- Scrollable body -->
+                <div class="p-6 pt-0 overflow-y-auto flex-1">
+                    <!-- Measuring unit toggle (hidden for now) -->
+                    <div class="flex items-center gap-2 mb-6">
+                        <span class="text-gray-700 font-medium">Measuring Unit :</span>
+                        <span>Inches</span>
+                    </div>
+
+                    <!-- Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full border-collapse text-center text-gray-700">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="p-3">Size</th>
+                                <th class="p-3">Chest</th>
+                                <th class="p-3">Length</th>
+                                <th class="p-3">Sleeve</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $rowClass = "border-t";
+                            foreach ($data as $size => $measurements) {
+                                echo "<tr class='{$rowClass}'>";
+                                echo "<td class='p-3'>{$size}</td>";
+                                echo "<td class='p-3'>{$measurements->Chest}</td>";
+                                echo "<td class='p-3'>{$measurements->Length}</td>";
+                                echo "<td class='p-3'>{$measurements->Sleeve}</td>";
+                                echo "</tr>";
+
+                                // Alternate row color
+                                $rowClass = ($rowClass === "border-t") ? "border-t bg-gray-50" : "border-t";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- How to Measure Section -->
+                <div class="mt-8 border-t pt-6 flex flex-col md:flex-row items-center">
+                    <!-- Text -->
+                    <div class="w-full md:w-[60%]">
+                        <?=$ProductData["sizeDescription"]?>
+                    </div>
+                    <!-- Image -->
+                    <div class="w-full md:w-[40%] flex justify-center">
+                        <img src="/<?=$ProductData["sizeImage"]?>" alt="How to measure T-shirt" class="h-72 max-md:h-64">
+                    </div>
+                </div>
+            </div>
+        <?php
+        $html = ob_get_clean();
+
+        echo json_encode([
+            "success"=>true,
+            "data"=>$html
+        ]);
     }
 }
