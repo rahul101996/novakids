@@ -650,6 +650,9 @@
         divs[key1].classList.add("border-gray-900");
         console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
         let selectedId = "";
+        if(document.querySelector(".changeSideVariant")){
+             document.querySelector(".changeSideVariant").innerText = json;
+           }
         GLOBAL_VARIANT.variants.forEach(async (ar, i) => {
 
             if (deepEqualCaseInsensitive(JSON.parse(JSON.parse(ar.options)), GLOBAL_VARIANT.selected)) {
