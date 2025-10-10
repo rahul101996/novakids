@@ -277,10 +277,10 @@ $page = "shop";
 
         // ✅ Render single product HTML
         function renderProductHTML(product) {
-            const images = JSON.parse(product.product_images || "[]").reverse();
+            const images = JSON.parse(product.variants[0].images || "[]").reverse();
             const SecondImage = images[1] || images[0];
             const comparePrice = parseFloat(product.compare_price) || 0;
-            const price = parseFloat(product.price) || 0;
+            const price = parseFloat(product.variants[0].price) || 0;
             const discount = comparePrice > 0 ? Math.round(((comparePrice - price) / comparePrice) * 100) : 0;
             const name = product.name.replace(/ /g, "-").replace(/'/g, "");
 
