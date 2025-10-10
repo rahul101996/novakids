@@ -269,52 +269,51 @@
                 <div class="animate-slideInRight delay-200 bg-white rounded-3xl px-12 py-8 max-md:px-0 max-md:py-0">
                     <h2 class="text-4xl font-black mb-8 tracking-tight uppercase">Send us a message</h2>
 
-                    <div class="space-y-3">
+                    <form action="form.php" method="post" class="space-y-3">
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-xs font-bold mb-3 uppercase tracking-wider text-gray-700">First Name</label>
-                                <input type="text"
+                                <input type="text" name="fullname" id="fullname"
                                     class="w-full px-5 py-1 bg-white border-2 border-gray-200 rounded font-medium"
-                                    placeholder="John">
+                                    placeholder="John" required>
                             </div>
                             <div>
                                 <label class="block text-xs font-bold mb-3 uppercase tracking-wider text-gray-700">Last Name</label>
-                                <input type="text"
-                                    class="w-full  px-5 py-1 bg-white border-2 border-gray-200 rounded font-medium"
+                                <input type="text" name="lastname" id="lastname"
+                                    class="w-full px-5 py-1 bg-white border-2 border-gray-200 rounded font-medium"
                                     placeholder="Doe">
                             </div>
                         </div>
 
                         <div>
                             <label class="block text-xs font-bold mb-3 uppercase tracking-wider text-gray-700">Email Address</label>
-                            <input type="email"
-                                class="w-full  px-5 py-1 bg-white border-2 border-gray-200 rounded font-medium"
-                                placeholder="john@example.com">
+                            <input type="email" name="email" id="email"
+                                class="w-full px-5 py-1 bg-white border-2 border-gray-200 rounded font-medium"
+                                placeholder="john@example.com" required>
                         </div>
 
                         <div>
                             <label class="block text-xs font-bold mb-3 uppercase tracking-wider text-gray-700">Phone Number</label>
-                            <input type="tel"
-                                class="w-full  px-5 py-1 bg-white border-2 border-gray-200 rounded font-medium"
-                                placeholder="+1 (555) 000-0000">
+                            <input type="tel" name="phone" id="phone"
+                                class="w-full px-5 py-1 bg-white border-2 border-gray-200 rounded font-medium"
+                                placeholder="1234567890" required>
                         </div>
 
                         <div>
                             <label class="block text-xs font-bold mb-3 uppercase tracking-wider text-gray-700">What can we help you with?</label>
-                            <textarea
-                                class="w-full  px-5 py-1 bg-white border-2 border-gray-200 rounded resize-none font-medium"
-                                rows="4"
-                                placeholder="Tell us about your inquiry..."></textarea>
+                            <textarea name="message" id="message"
+                                class="w-full px-5 py-1 bg-white border-2 border-gray-200 rounded resize-none font-medium"
+                                rows="4" placeholder="Tell us about your inquiry..." required></textarea>
                         </div>
 
                         <button
                             class="relative w-full uppercase rounded-md overflow-hidden group border-2 border-black bg-transparent py-2 text-black font-bold text-base">
-                            <span class="relative z-10 transition-colors duration-700 group-hover:text-white">Send
-                                Message</span>
+                            <span class="relative z-10 transition-colors duration-700 group-hover:text-white">Send Message</span>
                             <span
                                 class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out z-0"></span>
                         </button>
-                    </div>
+                    </form>
+
                 </div>
 
 
@@ -328,6 +327,82 @@
 
 
 
+
+
+    <div id="notification"
+        class="hidden fixed inset-0 flex items-center justify-center z-50">
+        <div id="notificationBox"
+            class="bg-white shadow-2xl rounded-2xl px-6 py-4 text-center text-gray-800 font-medium transform scale-90 opacity-0 transition-all duration-300">
+        </div>
+    </div>
+
+    <script>
+        const form = document.querySelector("form");
+        const phoneInput = document.getElementById("phone"); // updated id
+        const notification = document.getElementById("notification");
+        const notificationBox = document.getElementById("notificationBox");
+
+        function showNotification(message, type = "error") {
+            notification.classList.remove("hidden");
+            notificationBox.textContent = message;
+
+            notificationBox.className =
+                (type === "error") ?
+                "bg-red-100 text-red-700 border border-red-400 shadow-lg rounded-2xl px-6 py-4 text-center transform scale-90 opacity-0 transition-all duration-300" :
+                "bg-green-100 text-green-700 border border-green-400 shadow-lg rounded-2xl px-6 py-4 text-center transform scale-90 opacity-0 transition-all duration-300";
+
+            setTimeout(() => {
+                notificationBox.classList.remove("scale-90", "opacity-0");
+                notificationBox.classList.add("scale-100", "opacity-100");
+            }, 50);
+
+            setTimeout(() => {
+                notificationBox.classList.add("scale-90", "opacity-0");
+                setTimeout(() => {
+                    notification.classList.add("hidden");
+                }, 300);
+            }, 2500);
+        }
+
+        form.addEventListener("submit", function(e) {
+            const phone = phoneInput.value.trim();
+            const phoneRegex = /^\d{10}$/;
+
+            if (!phoneRegex.test(phone)) {
+                e.preventDefault();
+                showNotification("Invalid phone number! Please enter a valid 10-digit mobile.", "error");
+                return false;
+            }
+        });
+    </script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <?php
+
+    if (isset($_SESSION['flash_success'])): ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Thank You!',
+                text: '<?php echo $_SESSION['flash_success']; ?>',
+                confirmButtonColor: '#1e40af'
+            });
+        </script>
+        <?php unset($_SESSION['flash_success']); ?>
+    <?php elseif (isset($_SESSION['flash_error'])): ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '<?php echo $_SESSION['flash_error']; ?>',
+                confirmButtonColor: '#e11d48'
+            });
+        </script>
+        <?php unset($_SESSION['flash_error']); ?>
+    <?php endif; ?>
 
 
 
