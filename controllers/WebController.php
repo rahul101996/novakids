@@ -765,7 +765,7 @@ class WebController extends LoginController
             unset($_POST['process']);
             // printWithPre($_POST);
             if ($_POST['status'] == 1) {
-                update(['status' => 0], 1, "tbl_user_address", "status");
+                updateSQL(['status' => 0], "tbl_user_address", "status = '1' AND userid = $userid");
             }
             $address = update($_POST, $id, "tbl_user_address");
             if ($address) {
@@ -1449,7 +1449,7 @@ class WebController extends LoginController
             redirect("/");
         }
         $userData = getData2("SELECT * FROM `online_users` WHERE `id` = $_SESSION[userid]")[0];
-        $address = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $_SESSION[userid] ORDER BY `id` DESC ");
+        $address = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $_SESSION[userid] ORDER BY `status` DESC ");
 
         $PaymentGateWay = getData2("SELECT * FROM `payment_gateway` WHERE `status` = 1 ORDER BY `id` ASC")[0];
 
