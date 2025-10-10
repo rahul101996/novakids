@@ -97,10 +97,10 @@ if (isset($_POST['update_profile'])) {
     <div
         class="bg-[url('/public/images/dashboard-bg-shape-1.jpg')] bg-cover bg-center bg-no-repeat w-full flex items-center justify-center flex-col bg-white">
 
-        <div class="flex max-lg:flex-col w-[95%] max-lg:w-[90%] h-auto my-14 items-start justify-start gap-4">
-            <aside
-                class="w-[23%] max-lg:w-full  md:sticky top-24 max-lg:hidden bg-white border border-gray-300">
-                <h2 class="text-sm px-5 pt-5 mb-4 uppercase tracking-wide">Welcome</h2>
+        <div class="flex max-lg:flex-col w-[95%] max-lg:w-[90%] max-md:w-full h-auto my-14 max-md:mb-6 max-md:mt-0 items-start justify-start gap-4">
+            <aside id="userSidebar"
+                class="w-[23%] max-lg:w-full md:sticky top-24 bg-white md:border md:border-gray-300">
+                <h2 class="text-sm max-md:text-xl max-md:font-semibold px-5 pt-5 mb-4 uppercase tracking-wide">Welcome</h2>
                 <nav class="space-y-3 text-gray-700 font-medium pb-5">
 
                     <div onclick="showPart('overview',this)"
@@ -218,59 +218,17 @@ if (isset($_POST['update_profile'])) {
                 </nav>
             </aside>
 
-            <!-- Toggle Button -->
-            <div class="md:hidden fixed bottom-5 right-5 z-[9999]">
-                <button id="openMobileSidebar"
-                    class="bg-orange-600 text-white p-4 rounded-full shadow-lg hover:bg-[#002a4d] transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
-
-
-            <!-- Mobile Bottom Sidebar -->
-            <div id="mobileSidebarBottom"
-                class="fixed bottom-0 left-0 w-full bg-white z-[9999] rounded-t-2xl shadow-xl transform translate-y-full transition-transform duration-300 ease-in-out md:hidden">
-                <div class="flex justify-between items-center p-4 border-b">
-                    <h2 class="text-sm text-gray-600 uppercase">Menu</h2>
-                    <button id="closeMobileSidebar" class="text-gray-500 text-lg">✕</button>
-                </div>
-                <nav class="p-4 space-y-3 text-gray-700 font-medium">
-                    <!-- <div onclick="showPart('dashboard', this)"
-                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 rounded-lg activeTab sidenav">
-                        <span class="text-xl">🏠</span>
-                        <span>Dashboard</span>
-                    </div> -->
-                    <div onclick="showPart('myprofile', this)"
-                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 rounded-lg activeTab sidenav">
-                        <span class="text-xl">👤</span>
-                        <span>My Profile</span>
-                    </div>
-                    <div onclick="showPart('myorders', this)"
-                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 rounded-lg sidenav">
-                        <span class="text-xl">🎓</span>
-                        <span>My Orders</span>
-                    </div>
-
-                    <div onclick="showPart('setting', this)"
-                        class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 rounded-lg sidenav">
-                        <span class="text-xl">⚙️</span>
-                        <span>Settings</span>
-                    </div>
-                    <a href="/logout" class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 rounded-lg sidenav">
-                        <span class="text-xl">↩️</span>
-                        <span>Logout</span>
-                    </a>
-                </nav>
-            </div>
-
             <!-- Main Content -->
-            <main class="w-[77%] max-lg:w-full md:px-10 max-lg:mt-6 py-6 bg-white border border-gray-300">
+            <main class="w-[77%] max-lg:w-full md:px-10 max-lg:mt-6 max-md:mt-0 md:py-6 bg-white md:border md:border-gray-300">
 
                 <div class="showpart myprofile flex flex-col items-center juastify-center w-full hidden">
+                    <div class="flex justify-start items-left mb-6 w-full md:hidden border-b border-gray-300 shadow px-4 py-5">
+                        <!-- Back button (only visible on mobile) -->
+                        <button onclick="goBackToSidebar()" class="max-lg:flex hidden flex items-center gap-1 text-sm">
+                            <i class="fas fa-chevron-left"></i> Back
+                        </button>
+                    </div>
+
                     <div class="flex justify-center items-center mb-6 w-full ">
                         <h1 class="text-2xl uppercase font-semibold">My Profile</h1>
 
@@ -318,6 +276,12 @@ if (isset($_POST['update_profile'])) {
 
                 </div>
                 <div class="w-full flex flex-col items-center justify-center overview showpart">
+                    <div class="flex justify-start items-left w-full md:hidden border-b border-gray-300 shadow px-4 py-5">
+                        <!-- Back button (only visible on mobile) -->
+                        <button onclick="goBackToSidebar()" class="max-lg:flex hidden flex items-center gap-1 text-sm">
+                            <i class="fas fa-chevron-left"></i> Back
+                        </button>
+                    </div>
                     <div class="w-full flex items-start justify-start flex-col relative h-[40vh]">
                         <img src="/public/images/myprofile-bg.webp" class="w-full h-full object-cover" alt="">
                         <div class="w-full h-full flex flex-col items-start justify-start absolute top-0 left-0 text-white z-10 p-3">
@@ -344,25 +308,25 @@ if (isset($_POST['update_profile'])) {
                         </div>
                     </div>
 
-                    <div class="w-full mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                    <div class="w-full max-md:w-[90%] mx-auto grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-md:gap-4 mt-6">
                         <!-- Orders -->
-                        <div class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition" onclick="showPart('myorders',document.getElementById('ShowOrders'))">
-                            <i class="fas fa-box-open text-3xl mb-3"></i>
-                            <h3 class="font-semibold text-lg text-gray-800">Orders</h3>
+                        <div class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 max-md:p-4 hover:shadow-md transition" onclick="showPart('myorders',document.getElementById('ShowOrders'))">
+                            <i class="fas fa-box-open text-3xl max-md:text-2xl mb-3 max-md:mb-2"></i>
+                            <h3 class="font-semibold text-lg max-md:text-base text-gray-800">Orders</h3>
                             <p class="text-gray-500 text-sm mt-1 text-center">Track and manage your purchases</p>
                         </div>
 
                         <!-- Wishlist -->
-                        <div class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition" onclick="showPart('Wishlist',document.getElementById('ShowWishlist'))">
-                            <i class="fas fa-heart text-3xl mb-3"></i>
-                            <h3 class="font-semibold text-lg text-gray-800">Wishlist</h3>
+                        <div class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 max-md:p-4 hover:shadow-md transition" onclick="showPart('Wishlist',document.getElementById('ShowWishlist'))">
+                            <i class="fas fa-heart text-3xl max-md:text-2xl mb-3 max-md:mb-2"></i>
+                            <h3 class="font-semibold text-lg max-md:text-base text-gray-800">Wishlist</h3>
                             <p class="text-gray-500 text-sm mt-1 text-center">Save items for later and quick access</p>
                         </div>
 
                         <!-- Refunds -->
-                        <div onclick="showPart('Rate&Review',document.getElementById('ShowAddress'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition">
-                            <i class="fas fa-rupee-sign text-3xl mb-3 rotate-180"></i>
-                            <h3 class="font-semibold text-lg text-gray-800">Refunds</h3>
+                        <div onclick="showPart('Rate&Review',document.getElementById('ShowAddress'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 max-md:p-4 hover:shadow-md transition">
+                            <i class="fas fa-rupee-sign text-3xl max-md:text-2xl mb-3 max-md:mb-2 rotate-180"></i>
+                            <h3 class="font-semibold text-lg max-md:text-base text-gray-800">Refunds</h3>
                             <p class="text-gray-500 text-sm mt-1 text-center">Check refund status and history</p>
                         </div>
 
@@ -370,27 +334,33 @@ if (isset($_POST['update_profile'])) {
 
 
                         <!-- Rate & Review -->
-                        <div onclick="showPart('Rate&Review',document.getElementById('ShowRate'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition">
-                            <i class="fas fa-star text-3xl mb-3"></i>
-                            <h3 class="font-semibold text-lg text-gray-800">Rate & Review</h3>
+                        <div onclick="showPart('Rate&Review',document.getElementById('ShowRate'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 max-md:p-4 hover:shadow-md transition">
+                            <i class="fas fa-star text-3xl max-md:text-2xl mb-3 max-md:mb-2"></i>
+                            <h3 class="font-semibold text-lg max-md:text-base text-gray-800">Rate & Review</h3>
                             <p class="text-gray-500 text-sm mt-1 text-center">Share your feedback and experiences</p>
                         </div>
 
                         <!-- Stores -->
-                        <div onclick="showPart('Addresses',document.getElementById('ShowAddress'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition">
-                            <i class="fas fa-map-marker-alt text-3xl mb-3"></i>
-                            <h3 class="font-semibold text-lg text-gray-800">Addresses</h3>
+                        <div onclick="showPart('Addresses',document.getElementById('ShowAddress'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 max-md:p-4 hover:shadow-md transition">
+                            <i class="fas fa-map-marker-alt text-3xl max-md:text-2xl mb-3 max-md:mb-2"></i>
+                            <h3 class="font-semibold text-lg max-md:text-base text-gray-800">Addresses</h3>
                             <p class="text-gray-500 text-sm mt-1 text-center">Find nearest stores and directions</p>
                         </div>
-                        <div onclick="showPart('setting',document.getElementById('ShowSetting'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 hover:shadow-md transition">
-                            <i class="fas fa-cog text-3xl mb-3"></i>
-                            <h3 class="font-semibold text-lg text-gray-800">Settings</h3>
+                        <div onclick="showPart('setting',document.getElementById('ShowSetting'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 max-md:p-4 hover:shadow-md transition">
+                            <i class="fas fa-cog text-3xl max-md:text-2xl mb-3 max-md:mb-2"></i>
+                            <h3 class="font-semibold text-lg max-md:text-base text-gray-800">Settings</h3>
                             <p class="text-gray-500 text-sm mt-1 text-center">Find nearest stores and directions</p>
                         </div>
                     </div>
 
                 </div>
                 <div class="w-full flex flex-col items-center justify-center Rate&Review showpart hidden">
+                    <div class="flex justify-start items-left mb-6 w-full md:hidden border-b border-gray-300 shadow px-4 py-5">
+                        <!-- Back button (only visible on mobile) -->
+                        <button onclick="goBackToSidebar()" class="max-lg:flex hidden flex items-center gap-1 text-sm">
+                            <i class="fas fa-chevron-left"></i> Back
+                        </button>
+                    </div>
                     <h2 class="text-2xl font-semibold uppercase">Rate & Review</h2>
                     <?php
                     foreach (getData2("SELECT tbl_product_review.*, tbl_products.name as product_name  FROM `tbl_product_review` LEFT JOIN tbl_products ON tbl_product_review.product_id = tbl_products.id where tbl_product_review.userid= $_SESSION[userid]") as $review) {
@@ -432,6 +402,12 @@ if (isset($_POST['update_profile'])) {
                     <?php } ?>
                 </div>
                 <div class="w-full flex flex-col items-center justify-center Wishlist showpart hidden">
+                    <div class="flex justify-start items-left mb-6 w-full md:hidden border-b border-gray-300 shadow px-4 py-5">
+                        <!-- Back button (only visible on mobile) -->
+                        <button onclick="goBackToSidebar()" class="max-lg:flex hidden flex items-center gap-1 text-sm">
+                            <i class="fas fa-chevron-left"></i> Back
+                        </button>
+                    </div>
                     <?php
 
                     if (empty($wishlists)) {
@@ -553,9 +529,15 @@ if (isset($_POST['update_profile'])) {
 
                 </div>
                 <div class="showpart Addresses flex flex-col items-center justify-center w-full hidden">
-                    <div class="w-[80%] flex items-center justify-between">
-                        <h2 class="text-2xl uppercase font-semibold">Saved Addresses</h2>
-                        <button class="bg-[#f25b21] text-white py-2 px-4" onclick="openModal1()">Add New Address</button>
+                    <div class="flex justify-start items-left mb-6 w-full md:hidden border-b border-gray-300 shadow px-4 py-5">
+                        <!-- Back button (only visible on mobile) -->
+                        <button onclick="goBackToSidebar()" class="max-lg:flex hidden flex items-center gap-1 text-sm">
+                            <i class="fas fa-chevron-left"></i> Back
+                        </button>
+                    </div>
+                    <div class="w-[80%] flex max-md:flex-col max-md:gap-3 items-center justify-between">
+                        <h2 class="text-2xl max-md:text-xl uppercase font-semibold">Saved Addresses</h2>
+                        <button class="bg-[#f25b21] max-md:text-sm text-white py-2 px-4" onclick="openModal1()">Add New Address</button>
                     </div>
                     <div class="w-[80%] grid grid-cols-2 gap-2 items-center justify-center">
                         <?php
@@ -633,6 +615,12 @@ if (isset($_POST['update_profile'])) {
                     }
                 </script>
                 <div class="showpart myorders flex flex-col items-center justify-center w-full hidden">
+                    <div class="flex justify-start items-left mb-6 w-full md:hidden border-b border-gray-300 shadow px-4 py-5">
+                        <!-- Back button (only visible on mobile) -->
+                        <button onclick="goBackToSidebar()" class="max-lg:flex hidden flex items-center gap-1 text-sm">
+                            <i class="fas fa-chevron-left"></i> Back
+                        </button>
+                    </div>
                     <div class="flex justify-center items-center mb-6 w-full">
                         <h1 class="text-2xl uppercase font-semibold">My Orders</h1>
                     </div>
@@ -687,11 +675,17 @@ if (isset($_POST['update_profile'])) {
 
 
                 <div class="showpart setting flex flex-col items-center justify-center w-full hidden">
+                    <div class="flex justify-start items-left mb-6 w-full md:hidden border-b border-gray-300 shadow px-4 py-5">
+                        <!-- Back button (only visible on mobile) -->
+                        <button onclick="goBackToSidebar()" class="max-lg:flex hidden flex items-center gap-1 text-sm">
+                            <i class="fas fa-chevron-left"></i> Back
+                        </button>
+                    </div>
                     <div
                         class="flex justify-center flex-col items-center font-semibold  w-full bg-white  rounded-lg ">
                         <h1 class="text-2xl uppercase">Profile
-                            Setting</h1>
-
+                            Setting
+                        </h1>
                     </div>
 
                     <form action="" method="POST" class="w-full" id="profileForm">
@@ -936,7 +930,7 @@ if (isset($_POST['update_profile'])) {
                 closeModal1();
             }
         </script>
-        <script>
+        <!-- <script>
             let AllshowItems = document.querySelectorAll('.showpart');
             let sideNavItems = document.querySelectorAll('.sidenav');
 
@@ -1011,47 +1005,118 @@ if (isset($_POST['update_profile'])) {
 
             newPassword.addEventListener('input', validatePasswords);
             repeatPassword.addEventListener('input', validatePasswords);
-        </script>
+        </script> -->
 
         <script>
-            const openBtn = document.getElementById('openMobileSidebar');
-            const closeBtn = document.getElementById('closeMobileSidebar');
-            const mobileSidebar = document.getElementById('mobileSidebarBottom');
+            let AllshowItems = document.querySelectorAll('.showpart');
+            let sideNavItems = document.querySelectorAll('.sidenav');
 
-            openBtn.addEventListener('click', () => {
-                mobileSidebar.classList.remove('translate-y-full');
-            });
+            function showPart(part, ele) {
+                // Show the selected part, hide all others
+                AllshowItems.forEach(item => {
+                    if (item.classList.contains(part)) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
 
-            closeBtn.addEventListener('click', () => {
-                mobileSidebar.classList.add('translate-y-full');
-            });
+                // Update active nav link
+                sideNavItems.forEach(item => {
+                    if (item === ele) {
+                        item.classList.add('activeTab');
+                    } else {
+                        item.classList.remove('activeTab');
+                    }
+                });
 
-            // Close when clicking outside
-            window.addEventListener('click', (e) => {
-                if (!mobileSidebar.contains(e.target) && !openBtn.contains(e.target)) {
-                    mobileSidebar.classList.add('translate-y-full');
+                if (window.innerWidth < 1024) {
+                    const sidebar = document.getElementById('userSidebar');
+                    sidebar.style.display = 'none';
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+
+                    // Remove activeTab from other nav items but keep clicked one active
+                    sideNavItems.forEach(item => {
+                        if (item !== ele) item.classList.remove('activeTab');
+                    });
                 }
-            });
+            }
 
-            // Close when any nav item is clicked inside the mobile sidebar
-            const navLinks = mobileSidebar.querySelectorAll('nav > div, nav > a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileSidebar.classList.add('translate-y-full');
+
+           // 🟢 NEW: Back button logic for mobile
+function goBackToSidebar() {
+    const sidebar = document.getElementById('userSidebar');
+    sidebar.style.display = 'block';
+    AllshowItems.forEach(item => item.classList.add('hidden'));
+    document.querySelector('.overview')?.classList.remove('hidden');
+
+    // Refresh the page to reset everything
+    window.location.reload();
+}
+
+
+            // Hide overview on mobile by default
+            if (window.innerWidth < 1024) {
+                document.querySelector('.overview')?.classList.add('hidden');
+            }
+
+
+            // Existing profile tab logic
+            let profile_tabs = document.querySelectorAll('.profile_tab');
+            profile_tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    profile_tabs.forEach(tab => {
+                        tab.classList.remove('active_profile');
+                    });
+                    tab.classList.add('active_profile');
+                    if (tab.classList.contains('edit_profile')) {
+                        console.log('edit_profile');
+                        document.getElementById('profileForm').classList.remove('hidden');
+                        document.getElementById('passwordForm').classList.add('hidden');
+                    } else {
+                        console.log('change_password');
+                        document.getElementById('profileForm').classList.add('hidden');
+                        document.getElementById('passwordForm').classList.remove('hidden');
+                    }
                 });
             });
 
-            <?php
-            if (isset($_SESSION['new_order'])) {
-            ?>
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('newpassword');
+            togglePassword.addEventListener('click', () => {
+                const isPassword = passwordInput.type === 'password';
+                passwordInput.type = isPassword ? 'text' : 'password';
+                togglePassword.classList.toggle('fa-eye');
+                togglePassword.classList.toggle('fa-eye-slash');
+            });
 
-                function OpenOrderModal() {
-                    document.getElementById('OpenOrderHistory').click();
+            const newPassword = document.getElementById('newpassword');
+            const repeatPassword = document.getElementById('repeatpassword');
+            const passwordError = document.getElementById('passwordError');
+            const submitBtn = document.getElementById('submitBtn');
+
+            function validatePasswords() {
+                const newVal = newPassword.value;
+                const repeatVal = repeatPassword.value;
+                if (newVal && repeatVal && newVal === repeatVal) {
+                    passwordError.classList.add('hidden');
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                } else {
+                    passwordError.classList.remove('hidden');
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
                 }
-                OpenOrderModal();
+            }
 
-            <?php } ?>
+            newPassword.addEventListener('input', validatePasswords);
+            repeatPassword.addEventListener('input', validatePasswords);
         </script>
+
+
 </body>
 
 </html>

@@ -320,7 +320,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 <span class="text-gray-300 text-xl max-md:text-base line-through whitespace-nowrap">Rs. <span
                                         id="comparePrice99"><?= formatNumber($ProductData['compare_price']) ?></span></span>
                                 <span
-                                    class="text-[#f25b21] text-xl max-md:text-base prices">Rs.<?= formatNumber($ProductData['varients'][0]["price"]) ?></span>
+                                    class="text-[#f25b21] text-xl max-md:text-base whitespace-nowrap prices">Rs.<?= formatNumber($ProductData['varients'][0]["price"]) ?></span>
                                 <span class="bg-[#f25b21] text-white text-xs px-2 py-1 z-20 whitespace-nowrap">SAVE
                                     <span id="save"><?= $discountPercentage ?></span>%</span>
 
@@ -529,10 +529,6 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                             <!-- Delivery & Return Info -->
                             <div class="mt-7 space-y-3 text-gray-700">
-                                <!-- <button id="openDeliveryModal" class="cursor-pointer flex items-center gap-2">
-                                <i class="fa-solid fa-truck-fast text-gray-900"></i>
-                                <span class="font-semibold">Delivery & Return</span>
-                            </button> -->
                                 <p>
                                     <i class="fas fa-tags mr-2 text-gray-900"></i>
                                     <span class="font-semibold">Category:</span> <?= $ProductData['category_name'] ?>
@@ -677,6 +673,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                             "<?= $value['reviewText'] ?>"
                                         </p>
                                     </div>
+<<<<<<< HEAD
 
                                     <div class="flex gap-4 items-center">
                                         <div class="flex items-center w-10 h-10">
@@ -691,6 +688,22 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                     </div>
                                 </div>
 
+=======
+
+                                    <div class="flex gap-4 items-center">
+                                        <div class="flex items-center w-10 h-10">
+                                            <img src="/public/images/dp.png" alt="John D."
+                                                class="w-full h-full rounded-full object-cover border mr-3">
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-gray-800">
+                                                <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+>>>>>>> 20ecea29837686308243f7e6b693640c1ade1e4b
                             <?php } ?>
 
                         </div>
@@ -866,44 +879,6 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
     </div>
 
-    <div id="deliveryModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white w-full w-[65vw] max-md:w-[94vw] shadow-lg relative p-8 max-md:p-5 animate-slideDown">
-            <button id="closeDeliveryModal"
-                class="absolute top-4 right-4 text-gray-600 hover:text-black animate-rotate-pingpong">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-            <h2 class="text-2xl font-bold mb-4">Delivery & Return</h2>
-            <p class="text-gray-700 mb-4">
-                We want you to be happy with your purchase and we apologize if it is not.
-                For whatever reason that you are not satisfied, we provide exchanges and returns
-                if the following conditions are met.
-            </p>
-
-            <h3 class="text-xl font-semibold mb-2">Rules</h3>
-            <p class="text-gray-600 mb-4">
-                All exchanges and returns must be raised within 10 days of the invoice date for
-                local orders, and 20 days for overseas orde₹ For local deliveries, there is an
-                option
-                to exchange at any of our boutiques or through our online portal.
-            </p>
-
-            <h3 class="text-xl font-semibold mb-2">Interpretation and Definitions</h3>
-            <p class="text-gray-600 mb-6">
-                All requests for returns must be strictly made online. Refunds and exchanges
-                will be processed according to company policy for both local and overseas
-                deliveries.
-            </p>
-
-            <button onclick="window.location.href='/return-exchange'"
-                class="relative font-semibold py-2 px-6 rounded-md border-2 border-black overflow-hidden group">
-                <span class="relative z-10 text-white group-hover:text-black transition-colors duration-300">
-                    Read More
-                </span>
-                <span
-                    class="absolute inset-0 bg-black transition-transform duration-300 origin-left group-hover:scale-x-0 scale-x-100"></span>
-            </button>
-        </div>
-    </div>
 
     <!-- Sticky Bottom Strip -->
     <div id="bottomStrip" class="fixed bottom-0 left-0 w-full bg-gray-200 shadow-lg border-t p-2 hidden z-50">
@@ -1451,29 +1426,6 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         }
                         content.removeEventListener('transitionend', handler);
                     });
-                }
-            });
-        });
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const modal = document.getElementById('deliveryModal');
-            const openBtn = document.getElementById('openDeliveryModal');
-            const closeBtn = document.getElementById('closeDeliveryModal');
-
-            openBtn.addEventListener('click', () => {
-                modal.classList.remove('hidden');
-            });
-
-            closeBtn.addEventListener('click', () => {
-                modal.classList.add('hidden');
-            });
-
-            // Close on background click
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.add('hidden');
                 }
             });
         });
