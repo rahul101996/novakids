@@ -1,7 +1,20 @@
 <?php
 
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
 // printWithPre($_SESSION);
 $home_imges = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC");
+
+
+$product_imge = getData2("SELECT tpb.*, tp.name as product_name, tp.price, tp.product_images FROM tbl_product_banner tpb LEFT JOIN tbl_products tp ON tpb.product_id = tp.id ORDER BY tpb.id DESC Limit 1")[0];
+
+$ppname = str_replace(' ', '-', $product_imge['product_name']);
+$ppname = str_replace("'", '', $ppname);
+
+$imags = json_decode($product_imge['product_images'], true);
+$ppimg = array_reverse($imags);
 
 // printWithPre($images);
 // die();
@@ -316,7 +329,7 @@ $home_imges = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC
                                 $data = [];
                             }
                         }
-                        
+
                         // printWithPre($images);
                         ?>
                         <a href="/products/product-details/<?= $name ?>" class="block">
@@ -457,7 +470,7 @@ $home_imges = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC
 
     <section class="relative w-full h-auto max-md:h-[30vh]">
         <!-- Banner Image -->
-        <img src="/public/images/b2.avif" alt="" class="w-full h-auto max-md:h-[30vh]">
+        <img src="/<?= $product_imge['file'] ?>" alt="" class="w-full h-auto max-md:h-[30vh]">
 
         <!-- Hotspot 1 (bottom-left) -->
         <div class="absolute bottom-[20%] left-[30%] group max-md:hidden">
@@ -478,11 +491,14 @@ $home_imges = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC
                         class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white">
                     </div>
 
-                    <img src="/public/images/f8.webp" alt="Product 1" class="w-20 h-20 object-cover">
+                    <img src="/<?= $ppimg[0] ?>" alt="<?= $product_imge['product_name'] ?>"
+                        class="w-20 h-20 object-cover">
                     <div>
-                        <p class="text-sm font-semibold text-gray-800">Gotham Shirt</p>
-                        <p class="text-sm font-semibold text-[#f25b21]">₹ 1,999</p>
-                        <a href="#" class="text-sm text-gray-800 underline">View Product</a>
+                        <p class="text-sm font-semibold text-gray-800"><?= $product_imge['product_name'] ?></p>
+                        <p class="text-sm font-semibold text-[#f25b21]">₹ <?= formatNumber($product_imge['price']) ?>
+                        </p>
+                        <a href="/products/product-details/<?= $ppname ?>" class="text-sm text-gray-800 underline">View
+                            Product</a>
                     </div>
                 </div>
             </div>
@@ -501,23 +517,27 @@ $home_imges = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC
 
             <!-- Tooltip -->
             <div
-                class="absolute top-10 left-1/2 -translate-x-1/2 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                class="absolute bottom-10 -left-[120px] opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
                 <div class="relative bg-white shadow-lg p-2 w-64 flex items-center space-x-2">
                     <!-- Pointer -->
                     <div
-                        class="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-transparent border-b-white">
+                        class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white">
                     </div>
 
-                    <img src="/public/images/f9.webp" alt="Product 2" class="w-20 h-20 object-cover">
+                    <img src="/<?= $ppimg[1] ?>" alt="<?= $product_imge['product_name'] ?>"
+                        class="w-20 h-20 object-cover">
                     <div>
-                        <p class="text-sm font-semibold text-gray-800">Gotham Shirt</p>
-                        <p class="text-sm font-semibold text-[#f25b21]">₹ 1,999</p>
-                        <a href="#" class="text-sm text-gray-800 underline">View Product</a>
+                        <p class="text-sm font-semibold text-gray-800"><?= $product_imge['product_name'] ?></p>
+                        <p class="text-sm font-semibold text-[#f25b21]">₹ <?= formatNumber($product_imge['price']) ?>
+                        </p>
+                        <a href="/products/product-details/<?= $ppname ?>" class="text-sm text-gray-800 underline">View
+                            Product</a>
                     </div>
                 </div>
             </div>
 
         </div>
+
     </section>
 
     <section class="pb-12 pt-20 relative overflow-hidden hidden">
@@ -1027,8 +1047,8 @@ $home_imges = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC
                     }
                 }
             });
-            AddToCart();
-            AddToWishlist();
+            // AddToCart();
+            // AddToWishlist();
         });
     </script>
 

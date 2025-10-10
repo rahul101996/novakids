@@ -333,7 +333,7 @@
 
     }
      <?php
-    if (!isset($page) && $page != "shop") {
+    if ($page != "shop") {
 
     ?>
     document.addEventListener('DOMContentLoaded', function() {
@@ -417,8 +417,7 @@
         }
     }
     <?php
-    if (!isset($page) && $page != "shop") {
-
+if ($page != "shop") {
     ?>
         document.addEventListener('DOMContentLoaded', function() {
             AddToWishlist();
@@ -524,8 +523,8 @@
         // document.getElementById("AddToCartSidebar").innerHTML=""
     }
 
-    openCartBtns.forEach(btn => btn.addEventListener('click', openCart));
-    closeCart.addEventListener('click', closeCartFn);
+    // openCartBtns.forEach(btn => btn.addEventListener('click', openCart));
+    // closeCart.addEventListener('click', closeCartFn);
     cartOverlay.addEventListener('click', closeCartFn);
 </script>
 
@@ -670,7 +669,7 @@
                 }
 
                 ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
-                    <span class="text-[#33459c] text-xl">Rs. ${ar.price}.00</span>
+                    <span class="text-[#f25b21] text-xl">Rs. ${ar.price}.00</span>
                 `
                 console.log("ar", ar, ele.parentElement.parentElement.querySelector(".sideVarientId"))
                 let imgHtml = ""

@@ -25,7 +25,7 @@ class WebController extends LoginController
         ob_start();
         // printWithPre($ProductData);
         $comparePrice = floatval($ProductData['compare_price']);
-        $price = floatval($ProductData['price']);
+        $price = floatval($ProductData['varients'][0]["price"]);
         $discountAmount = $comparePrice - $price;
         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 ?>
@@ -106,8 +106,8 @@ class WebController extends LoginController
                         <div class="flex items-center justify-center gap-3 mt-1 prices">
                             <span
                                 class="text-gray-300 text-xl line-through whitespace-nowrap">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
-                            <span class="text-[#33459c] text-xl whitespace-nowrap">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
-                            <span class="text-xs bg-[#33459c] text-white py-1 px-2 rounded-lg whitespace-nowrap">SAVE <?= $discountPercentage ?>%</span>
+                            <span class="text-[#f25b21] text-xl whitespace-nowrap">Rs.<?= formatNumber($ProductData['varients'][0]["price"]) ?>.00</span>
+                            <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg whitespace-nowrap">SAVE <?= $discountPercentage ?>%</span>
 
                         </div>
                         <p class="text-sm text-gray-900 mt-2"><?= $ProductData["shortDescription"] ?></p>
@@ -765,7 +765,7 @@ class WebController extends LoginController
             unset($_POST['process']);
             // printWithPre($_POST);
             if ($_POST['status'] == 1) {
-                update(['status' => 0], 1, "tbl_user_address", "status");
+                updateSQL(['status' => 0], "tbl_user_address", "status = '1' AND userid = $userid");
             }
             $address = update($_POST, $id, "tbl_user_address");
             if ($address) {
@@ -1113,7 +1113,7 @@ class WebController extends LoginController
                 $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
                 $ProductData['varients'] = $varients;
                 $comparePrice = floatval($ProductData['compare_price']);
-                $price = floatval($ProductData['price']);
+                $price = floatval($ProductData['varients'][0]["price"]);
                 $discountAmount = $comparePrice - $price;
                 $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
@@ -1449,7 +1449,7 @@ class WebController extends LoginController
             redirect("/");
         }
         $userData = getData2("SELECT * FROM `online_users` WHERE `id` = $_SESSION[userid]")[0];
-        $address = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $_SESSION[userid] ORDER BY `id` DESC ");
+        $address = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $_SESSION[userid] ORDER BY `status` DESC ");
 
         $PaymentGateWay = getData2("SELECT * FROM `payment_gateway` WHERE `status` = 1 ORDER BY `id` ASC")[0];
 
@@ -2314,6 +2314,7 @@ ORDER BY id DESC LIMIT 5");
         }
         ob_start();
         $data = json_decode($ProductData["sizeChart"]);
+        // printWithPre($data);
         ?>
         <div class="bg-white shadow-lg w-[65%] max-md:w-[90%] max-h-[80vh] relative flex flex-col animate-slideDown">
             <!-- Close button -->
@@ -2341,10 +2342,16 @@ ORDER BY id DESC LIMIT 5");
                     <table class="w-full border-collapse text-center text-gray-700">
                         <thead>
                             <tr class="bg-gray-100">
-                                <th class="p-3">Size</th>
-                                <th class="p-3">Chest</th>
-                                <th class="p-3">Length</th>
-                                <th class="p-3">Sleeve</th>
+                                <th class="p-3 border-b">Size</th>
+                                <?php
+                                // Get first object to extract measurement keys
+                                $first = reset($data);
+                                if ($first && is_object($first)) {
+                                    foreach ($first as $key => $val) {
+                                        echo "<th class='p-3 border-b'>" . htmlspecialchars($key) . "</th>";
+                                    }
+                                }
+                                ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -2352,13 +2359,13 @@ ORDER BY id DESC LIMIT 5");
                             $rowClass = "border-t";
                             foreach ($data as $size => $measurements) {
                                 echo "<tr class='{$rowClass}'>";
-                                echo "<td class='p-3'>{$size}</td>";
-                                echo "<td class='p-3'>{$measurements->Chest}</td>";
-                                echo "<td class='p-3'>{$measurements->Length}</td>";
-                                echo "<td class='p-3'>{$measurements->Sleeve}</td>";
-                                echo "</tr>";
+                                echo "<td class='p-3 font-medium'>" . htmlspecialchars($size) . "</td>";
 
-                                // Alternate row color
+                                foreach ($measurements as $key => $value) {
+                                    echo "<td class='p-3'>" . htmlspecialchars($value) . "</td>";
+                                }
+
+                                echo "</tr>";
                                 $rowClass = ($rowClass === "border-t") ? "border-t bg-gray-50" : "border-t";
                             }
                             ?>
@@ -2373,7 +2380,7 @@ ORDER BY id DESC LIMIT 5");
                         <?= $ProductData["sizeDescription"] ?>
                     </div>
                     <!-- Image -->
-                    <div class="w-full md:w-[40%] flex justify-center">
+                    <div class="w-full md:w-[40%] flex justify-center <?=empty($ProductData["sizeImage"])?"hidden":""?>">
                         <img src="/<?= $ProductData["sizeImage"] ?>" alt="How to measure T-shirt" class="h-72 max-md:h-64">
                     </div>
                 </div>
@@ -2383,7 +2390,8 @@ ORDER BY id DESC LIMIT 5");
 
         echo json_encode([
             "success" => true,
-            "data" => $html
+            "data" => $html,
+            "vv"=>$data
         ]);
     }
 }

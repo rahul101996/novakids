@@ -320,14 +320,14 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 <span class="text-gray-300 text-xl max-md:text-base line-through whitespace-nowrap">Rs. <span
                                         id="comparePrice99"><?= formatNumber($ProductData['compare_price']) ?></span></span>
                                 <span
-                                    class="text-[#f25b21] text-xl max-md:text-base whitespace-nowrap prices">Rs.<?= formatNumber($ProductData['price']) ?></span>
+                                    class="text-[#f25b21] text-xl max-md:text-base whitespace-nowrap prices">Rs.<?= formatNumber($ProductData['varients'][0]["price"]) ?></span>
                                 <span class="bg-[#f25b21] text-white text-xs px-2 py-1 z-20 whitespace-nowrap">SAVE
                                     <span id="save"><?= $discountPercentage ?></span>%</span>
 
                             </div>
                         </div>
                         <div class="flex items-center justify-end gap-2 w-[25%]">
-                            <button class="addToWishlistBtn  rounded-full transition-all duration-500  ">
+                            <button type="button" class="addToWishlistBtn  rounded-full transition-all duration-500  ">
                                 <img src="/public/icons/<?= !empty($data) ? 'heart-orange.png' : 'heart-black.png' ?>"
                                     class="cursor-pointer mt-1 h-8 w-8 max-md:h-6 max-md:w-6" alt="">
                             </button>
@@ -396,6 +396,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         <div class="flex items-center space-x-2 border-b border-gray-300 pb-2">
                             <input type="text" id="pincode" maxlength="6" value="" placeholder="Enter Pincode"
                                 oninput="checkMaharashtraPincode()"
+                                onkeydown="if(event.key === 'Enter'){ event.preventDefault(); return false; }"
                                 class="flex-1 bg-transparent outline-none text-gray-700" />
                             <!-- <button type="button"
                                 class="bg-black text-white text-sm font-semibold px-3 py-1 rounded-md hover:bg-gray-800">
@@ -688,11 +689,11 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                             <?php } ?>
 
-                        </div>
-                    <?php
-                    } else {
-                        $value = $reviws[0];
-                    ?>
+                    </div>
+                        <?php
+                    }else if(count($reviws)==1){
+                        $value = $reviws[0]; 
+                        ?>
                         <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
                             <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
                                 <span> <?php for ($i = 0; $i < 5; $i++) {
@@ -1001,7 +1002,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </div>
                             <p class="text-center text-sm font-medium text-gray-600" id="ratingText">Excellent</p>
                         </div>
-                        <input type="hidden" id="rating" value="1" required>
+                        <input type="hidden" id="rating" value="" required>
                     </div>
 
                     <!-- Review Text with Character Count -->
@@ -1166,28 +1167,32 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
             console.log(name, reviewText, rating);
 
-            let res = await fetch("/addReview", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    name,
-                    userid,
-                    product_id,
-                    reviewText,
-                    rating,
-                }),
-            })
+            if(reviewText.length>=0){
+                let res = await fetch("/addReview", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name,
+                        userid,
+                        product_id,
+                        reviewText,
+                        rating,
+                    }),
+                })
 
-            let data = await res.json();
+                let data = await res.json();
 
-            if (data.success) {
-                toastr.success(data.message);
-                closeReviewModal();
-                this.reset();
-            } else {
-                toastr.error(data.message);
+                if (data.success) {
+                    toastr.success(data.message);
+                    closeReviewModal();
+                    this.reset();
+                } else {
+                    toastr.error(data.message);
+                }
+            }else{
+                toastr.error("Please Write review");
             }
 
         });
@@ -1605,10 +1610,12 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     });
                     let comparePrice99 = document.getElementById('comparePrice99');
                     // console.log(comparePrice99)
+                    
                     if (comparePrice99) {
-                        let original = parseFloat(comparePrice99.innerHTML);
+                        comparePrice99 = parseFloat(comparePrice99.innerHTML.replace(/,/g, ''))
+                        let original = parseFloat(comparePrice99);
                         let discounted = parseFloat(ar.price);
-
+                        console.log(original,discounted)
                         if (!isNaN(original) && original > 0) {
                             let discountPercent = ((original - discounted) / original) * 100;
                             document.getElementById('save').innerHTML = `${discountPercent.toFixed(0)}`;
