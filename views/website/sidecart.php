@@ -524,8 +524,8 @@
         // document.getElementById("AddToCartSidebar").innerHTML=""
     }
 
-    openCartBtns.forEach(btn => btn.addEventListener('click', openCart));
-    closeCart.addEventListener('click', closeCartFn);
+    // openCartBtns.forEach(btn => btn.addEventListener('click', openCart));
+    // closeCart.addEventListener('click', closeCartFn);
     cartOverlay.addEventListener('click', closeCartFn);
 </script>
 
