@@ -993,6 +993,7 @@ $categories = getData("tbl_category");
 <script>
     let debounceTimer;
 
+   
     async function searchProducts() {
         let ele = document.getElementById("searchInput");
         clearTimeout(debounceTimer);
@@ -1032,8 +1033,8 @@ $categories = getData("tbl_category");
                     data.data.forEach(product => {
                         let parsed = JSON.parse(product.product_images);
 
-                        let name = product.name.replace(/ /g, '-'); // Replace spaces with dashes
-                        name = name.replace(/'/g, ''); // Remove all single quotes
+                        let name = product.name.replace(/ /g, '-');  // Replace spaces with dashes
+                        name = name.replace(/'/g, '');              // Remove all single quotes
 
 
                         html += `
@@ -1074,4 +1075,6 @@ $categories = getData("tbl_category");
 
         }, 500); // 500ms debounce
     }
+
+    searchProducts();
 </script>
