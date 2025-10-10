@@ -280,6 +280,7 @@ $page = "shop";
             const images = JSON.parse(product.variants[0].images || "[]").reverse();
             const SecondImage = images[1] || images[0];
             const comparePrice = parseFloat(product.compare_price) || 0;
+            // console.log(product.variants[0].price);
             const price = parseFloat(product.variants[0].price) || 0;
             const discount = comparePrice > 0 ? Math.round(((comparePrice - price) / comparePrice) * 100) : 0;
             const name = product.name.replace(/ /g, "-").replace(/'/g, "");
@@ -303,7 +304,7 @@ $page = "shop";
                                 <h3 class="text-base font-semibold uppercase">${product.name}</h3>
                                 <div class="flex items-center justify-start gap-3 w-full">
                                     <p class="text-gray-500 line-through text-sm">₹ ${formatNumber(product.compare_price)}.00</p>
-                                    <p class="text-[#f25b21] font-bold">₹ ${formatNumber(product.price)}.00</p>
+                                    <p class="text-[#f25b21] font-bold">₹ ${formatNumber(price)}.00</p>
                                 </div>
                             </div>
                         </div>
