@@ -355,8 +355,8 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
         </div>
     </section>
 
-    <!-- Section -->
-    <section class="md:pb-16 max-md:pt-16 relative">
+    <!-- Section --> 
+    <section class="md:pb-16 max-md:py-16 relative">
         <div class="absolute hidden -top-14 max-md:-top-16 -left-14 w-auto h-auto opacity-20">
             <img src="/public/images/naruto.webp" alt="" class="w-40 max-md:w-28 h-auto">
         </div>
@@ -369,12 +369,10 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
         </div>
 
 
-        <div class="grid grid-cols-3 md:grid-cols-3 md:gap-16 w-[90vw] max-md:w-full mx-auto md:px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 md:gap-16 w-[90vw] max-md:w-[80vw] max-md:gap-6 mx-auto md:px-4">
             <!-- Tees -->
             <?php
             foreach ($categories as $key => $category) {
-
-
             ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
