@@ -16,82 +16,110 @@ $page = "shop";
             <div
                 class="flex items-center justify-between border-b p-6 max-md:p-4 sticky top-16 h-fit bg-white z-40 w-full">
                 <div class="flex items-center justify-between w-[90vw] mx-auto">
-                    <div class="flex max-md:flex-col items-start gap-4 text-sm">
+                    <div class="flex flex-wrap md:flex-nowrap items-center gap-4">
+                        <!-- Filter Toggle -->
                         <button id="filterToggle"
-                            class="flex items-center gap-2 px-3 py-1 border rounded hover:bg-gray-100">
-                            <i id="filterIcon" class="fa-solid fa-sliders"></i> Filters
+                            class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 hover:shadow transition-all">
+                            <i id="filterIcon" class="fa-solid fa-sliders text-blue-500"></i>
+                            <span>Filters</span>
                         </button>
-                        <div class="flex gap-2">
-                            <button class="text-sm text-gray-600 hover:underline" id="clearFiltersBtn">Clear
-                                Filters</button>
-                            <div class="flex gap-2" id="active-filters">
 
-                            </div>
+                        <!-- Clear + Active Filters -->
+                        <div class="flex flex-wrap items-center gap-3 text-sm">
+                            <button id="clearFiltersBtn"
+                                class="text-gray-500 hover:text-red-500 font-medium transition-all">
+                                <i class="fa-solid fa-xmark mr-1"></i> Clear Filters
+                            </button>
+                            <div id="active-filters" class="flex flex-wrap gap-2"></div>
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-4 text-sm max-md:hidden">
-                        <span class="text-gray-700 font-medium">Sort by:</span>
-                        <select id="sortSelect" onchange="handleFilterChange()"
-                            class="bg-white border border-gray-300 rounded-lg px-4 py-2.5 text-sm text-gray-700 font-medium shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e')] bg-[length:20px] bg-[right_0.5rem_center] bg-no-repeat pr-10">
-                            <option value="">Default Sorting</option>
-                            <option value="lowToHigh">Price: Low to High</option>
-                            <option value="highToLow">Price: High to Low</option>
-                            <option value="newest">Newest</option>
-                        </select>
+                    <div class="flex items-center gap-3 text-sm">
+                        <span class="text-gray-700 font-semibold">Sort by:</span>
+                        <div class="relative">
+                            <select id="sortSelect" onchange="handleFilterChange()"
+                                class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-10 text-gray-700 font-medium shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer">
+                                <option value="">Default Sorting</option>
+                                <option value="lowToHigh">Price: Low to High</option>
+                                <option value="highToLow">Price: High to Low</option>
+                                <option value="newest">Newest</option>
+                            </select>
+                            <!-- Custom dropdown arrow -->
+                            <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div id="filterPanel" class="hidden border-b pb-8 bg-white w-full">
-                <div class="grid md:grid-cols-5 gap-10 text-sm w-[90vw] mx-auto">
-                    <div>
-                        <h4 class="font-semibold mb-2">Filter by Price</h4>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-sm w-[90vw] mx-auto">
 
+                    <!-- Filter by Price -->
+                    <div
+                        class="w-full md:w-auto p-4 bg-white rounded-xl shadow-sm border border-gray-100 transition-all hover:shadow-md">
+                        <h4 class="font-semibold text-gray-800 text-base mb-3 border-b pb-2 border-gray-200">
+                            Filter by Price
+                        </h4>
+
+                        <!-- Range Slider -->
                         <div class="flex items-center gap-3">
-                            <span>₹<span id="minPriceLabel">0</span></span>
+                            <span class="text-gray-700 font-medium">₹<span id="minPriceLabel">0</span></span>
+
                             <input id="priceRange" type="range" min="0" max="0" step="100" value="0"
-                                class="w-full accent-[#f25b21]" oninput="updatePriceLabel(this)">
-                            <span>₹<span id="selectedPriceLabel">0</span></span>
+                                class="w-44 accent-[#f25b21] cursor-pointer appearance-none h-2 bg-gray-200 rounded-lg outline-none transition-all hover:bg-orange-100 focus:ring-2 focus:ring-[#f25b21]"
+                                oninput="updatePriceLabel(this)">
+
+                            <span class="text-gray-700 font-medium">₹<span id="selectedPriceLabel">0</span></span>
                         </div>
 
-                        <p class="text-gray-600 mt-2 text-sm">
-                            Showing products up to ₹<span id="maxPriceLabelText">0</span>
+                        <!-- Price Info -->
+                        <p class="text-gray-600 mt-3 text-sm">
+                            Showing products up to <span class="font-semibold text-gray-800">₹<span
+                                    id="maxPriceLabelText">0</span></span>
                         </p>
-
                     </div>
 
-                    <div>
-                        <h4 class="font-semibold mb-2">Product Categories</h4>
-                        <ul class="space-y-2">
+                    <!-- Product Categories -->
+                    <div
+                        class="w-full md:w-auto p-4 bg-white rounded-xl shadow-sm border border-gray-100 transition-all hover:shadow-md">
+                        <h4 class="font-semibold text-gray-800 text-base mb-3 border-b pb-2 border-gray-200">
+                            Product Categories
+                        </h4>
+
+                        <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-3">
                             <li>
-                                <label><input type="radio" onclick="window.location.href='/new-arrivals'"
-                                        <?= $byCategory == 'new_arrivals' ? 'checked' : '' ?> name="category"
-                                        class="mr-2 accent-[#f25b21]"> New Arrivals </label>
+                                <label
+                                    class="flex items-center gap-2 px-3 py-1.5 border rounded-full cursor-pointer text-sm font-medium bg-gray-50 border-gray-200 text-gray-700 hover:bg-orange-50 hover:border-orange-300 transition-all">
+                                    <input type="radio" name="category" onclick="window.location.href='/new-arrivals'"
+                                        <?= $byCategory == 'new_arrivals' ? 'checked' : '' ?>
+                                        class="accent-[#f25b21] cursor-pointer">
+                                    <span>New Arrivals</span>
+                                </label>
                             </li>
-                            <li>
-                                <label><input type="radio" onclick="window.location.href='/category/tees'"
-                                        <?= $byCategory == 'tees' ? 'checked' : '' ?> name="category"
-                                        class="mr-2 accent-[#f25b21]"> Tees / Relaxed
-                                    Tees</label>
-                            </li>
-                            <li>
-                                <label><input type="radio" onclick="window.location.href='/category/joggers'"
-                                        <?= $byCategory == 'joggers' ? 'checked' : '' ?> name="category"
-                                        class="mr-2 accent-[#f25b21]">Joggers</label>
-                            </li>
-                            <li>
-                                <label><input type="radio" onclick="window.location.href='/category/co-ords'"
-                                        <?= $byCategory == 'co-ords' ? 'checked' : '' ?> name="category"
-                                        class="mr-2 accent-[#f25b21]">Co-ords</label>
-                            </li>
+
+                            <?php foreach (getData2("SELECT * FROM tbl_category") as $key => $value) { ?>
+                                <li>
+                                    <label
+                                        class="flex items-center gap-2 px-3 py-1.5 border rounded-full cursor-pointer text-sm font-medium bg-gray-50 border-gray-200 text-gray-700 hover:bg-orange-50 hover:border-orange-300 transition-all">
+                                        <input type="radio" name="category"
+                                            onclick="window.location.href='/category/<?= strtolower($value['category']) ?>'"
+                                            <?= $byCategory == strtolower($value['category']) ? 'checked' : '' ?>
+                                            class="accent-[#f25b21] cursor-pointer">
+                                        <span><?= $value['category'] ?></span>
+                                    </label>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
 
-                    <div>
-                        <div id="filters-container" class="flex gap-3 mb-6"></div>
+                    <!-- Filters (col-span-2 on desktop) -->
+                    <div class="col-span-1 md:col-span-2">
+                        <div id="filters-container" class="flex flex-wrap gap-3"></div>
                     </div>
                 </div>
+
             </div>
 
             <main class="md:col-span-3 w-[90vw] mx-auto pb-16">
@@ -169,6 +197,8 @@ $page = "shop";
 
             let products = data.data;
 
+            console.log(products);
+
             // ✅ Sorting
             if (sortBy === "lowToHigh") products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
             else if (sortBy === "highToLow") products.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
@@ -195,6 +225,9 @@ $page = "shop";
 
             products.forEach(p => {
                 (p.variants || []).forEach(v => {
+
+
+
                     if (!v.options) return;
 
                     try {
@@ -235,7 +268,7 @@ $page = "shop";
             // ✅ Render products
             productsContainer.innerHTML = products.map(product => renderProductHTML(product)).join("");
 
-            console.log(activeFilters);
+            // console.log(activeFilters);
             AddToCart();
             AddToWishlist();
 
@@ -244,10 +277,11 @@ $page = "shop";
 
         // ✅ Render single product HTML
         function renderProductHTML(product) {
-            const images = JSON.parse(product.product_images || "[]").reverse();
+            const images = JSON.parse(product.variants[0].images || "[]").reverse();
             const SecondImage = images[1] || images[0];
             const comparePrice = parseFloat(product.compare_price) || 0;
-            const price = parseFloat(product.price) || 0;
+            // console.log(product.variants[0].price);
+            const price = parseFloat(product.variants[0].price) || 0;
             const discount = comparePrice > 0 ? Math.round(((comparePrice - price) / comparePrice) * 100) : 0;
             const name = product.name.replace(/ /g, "-").replace(/'/g, "");
 
@@ -270,7 +304,7 @@ $page = "shop";
                                 <h3 class="text-base font-semibold uppercase">${product.name}</h3>
                                 <div class="flex items-center justify-start gap-3 w-full">
                                     <p class="text-gray-500 line-through text-sm">₹ ${formatNumber(product.compare_price)}.00</p>
-                                    <p class="text-[#f25b21] font-bold">₹ ${formatNumber(product.price)}.00</p>
+                                    <p class="text-[#f25b21] font-bold">₹ ${formatNumber(price)}.00</p>
                                 </div>
                             </div>
                         </div>
@@ -281,28 +315,83 @@ $page = "shop";
         // ✅ Render dynamic filter checkboxes
         function renderDynamicFilter(key, values) {
             const container = document.getElementById("filters-container");
-            const section = document.createElement("div");
-            section.classList.add("filter-section", "mb-3");
 
+            // Section wrapper
+            const section = document.createElement("div");
+            section.classList.add(
+                "filter-section",
+                // "mb-6",
+                "p-4",
+                "bg-white",
+                "rounded-xl",
+                "shadow-sm",
+                "border",
+                "border-gray-100",
+                "transition-all",
+                "hover:shadow-md"
+            );
+
+            // Filter title
             const title = document.createElement("h4");
             title.textContent = `Filter by ${key}`;
-            title.classList.add("font-semibold", "mb-2");
+            title.classList.add(
+                "font-semibold",
+                "text-gray-800",
+                "text-base",
+                "text-nowrap",
+                "mb-3",
+                "border-b",
+                "pb-2",
+                "border-gray-200"
+            );
 
+            // Container for filter options
             const optionsContainer = document.createElement("div");
-            values.forEach(val => {
-                const label = document.createElement("label");
-                label.classList.add("inline-flex", "items-center", "mr-2");
+            optionsContainer.classList.add(
+                // "flex",
+                // "flex-wrap",
+                "grid",
+                "grid-cols-2",
+                "text-nowrap",
+                "gap-2"
+            );
 
+            values.forEach(val => {
+                // Label wrapper for checkbox and text
+                const label = document.createElement("label");
+                label.classList.add(
+                    "inline-flex",
+                    "items-center",
+                    "gap-2",
+                    "px-3",
+                    "py-1.5",
+                    "border",
+                    "rounded-full",
+                    "cursor-pointer",
+                    "text-sm",
+                    "font-medium",
+                    "bg-gray-50",
+                    "border-gray-200",
+                    "text-gray-700",
+                    "hover:bg-orange-50",
+                    "hover:border-orange-300",
+                    "transition-all"
+                );
+
+                // Checkbox
                 const input = document.createElement("input");
                 input.type = "checkbox";
                 input.dataset.key = key;
-                input.dataset.value = val.toUpperCase(); // normalized value for backend
-                input.value = val; // display value
-                input.classList.add("filter-checkbox", "mr-1", "accent-[#f25b21]");
+                input.dataset.value = val.toUpperCase();
+                input.value = val;
+                input.classList.add("filter-checkbox", "accent-[#f25b21]", "cursor-pointer");
                 input.addEventListener("change", handleFilterChange);
 
+                // Append elements
                 label.appendChild(input);
-                label.appendChild(document.createTextNode(val));
+                const span = document.createElement("span");
+                span.textContent = val;
+                label.appendChild(span);
                 optionsContainer.appendChild(label);
             });
 
@@ -310,6 +399,7 @@ $page = "shop";
             section.appendChild(optionsContainer);
             container.appendChild(section);
         }
+
 
 
         // ✅ Handle checkbox changes
@@ -335,7 +425,7 @@ $page = "shop";
             }, sortValue);
             setActiveFilter(activeFilters);
 
-            console.log(activeFilters);
+            // console.log(activeFilters);
 
         }
 

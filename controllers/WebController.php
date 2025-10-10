@@ -102,12 +102,12 @@ class WebController extends LoginController
                     <?php
                     if (!isset($_POST["product_details"])) {
                     ?>
-                        <h2 class="w-full text-[1.8rem] leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
+                        <h2 class="w-full text-[1.7rem] max-md:text-lg leading-[2rem] uppercase "><?= $ProductData['name'] ?></h2>
                         <div class="flex items-center justify-center gap-3 mt-1 prices">
                             <span
-                                class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
-                            <span class="text-[#f25b21] text-xl">Rs.<?= formatNumber($ProductData['varients'][0]["price"]) ?>.00</span>
-                            <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
+                                class="text-gray-300 text-xl line-through whitespace-nowrap">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
+                            <span class="text-[#f25b21] text-xl whitespace-nowrap">Rs.<?= formatNumber($ProductData['varients'][0]["price"]) ?>.00</span>
+                            <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg whitespace-nowrap">SAVE <?= $discountPercentage ?>%</span>
 
                         </div>
                         <p class="text-sm text-gray-900 mt-2"><?= $ProductData["shortDescription"] ?></p>
@@ -132,20 +132,20 @@ class WebController extends LoginController
                                 $sizeChartValue = $sizeChart[$value[0]];
                                 $sizeChartValueString = [];
                                 foreach ($sizeChartValue as $kk => $sv) {
-                                    $sizeChartValueString[] = "$kk $sv inches ";
+                                    $sizeChartValueString[] = "$kk $sv inch";
                                 }
 
                                 $sizeChartValueString = implode(" | ", $sizeChartValueString)
 
                             ?>
-                                <div class="w-full flex items-center justify-between text-sm">
-                                    <div class="flex items-center justify-center gap-2">
+                                <div class="w-full flex max-md:flex-col-reverse items-center justify-between text-sm">
+                                    <div class="flex max-md:flex-col items-center max-md:items-start justify-center gap-2">
                                         <p class="uppercase text-lg max-md:text-sm"><?= $key ?></p>
                                         <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded <?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>"><?= $sizeChartValueString ?>
                                         </div>
                                     </div>
 
-                                    <div class="flex gap-1 cursor-pointer items-end justify-center"
+                                    <div class="flex gap-1 cursor-pointer items-end justify-center max-md:justify-end max-md:w-full"
                                         onclick="showSizeChart('<?= $id ?>')">
                                         <svg class="icon icon-accordion mb-1 color-foreground-" aria-hidden="true" focusable="false"
                                             role="presentation" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 20 20">
@@ -165,7 +165,7 @@ class WebController extends LoginController
                                                 d="M3.37296 10.8776C3.57142 10.6791 3.89319 10.6791 4.09165 10.8776L6.01036 12.7963C6.20882 12.9948 6.20882 13.3165 6.01036 13.515C5.8119 13.7134 5.49013 13.7134 5.29167 13.515L3.37296 11.5963C3.1745 11.3978 3.1745 11.076 3.37296 10.8776Z">
                                             </path>
                                         </svg>
-                                        <span class="text-[1.12rem]">Size guide</span>
+                                        <span class="text-[1.12rem] max-md:text-sm">Size guide</span>
                                     </div>
 
                                 </div>
@@ -181,7 +181,7 @@ class WebController extends LoginController
                             <?php
                             }
                             ?>
-                            <div class="w-full flex items-center justify-start mt-3 text-sm" id="SizeDiv">
+                            <div class="w-full flex items-center justify-start mt-2 text-sm" id="SizeDiv">
                                 <?php
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
