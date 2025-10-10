@@ -166,6 +166,10 @@
                     class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     Home Banner
                 </a>
+                <a href="/admin/front-cms/product-banner"
+                    class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
+                    Product Banner
+                </a>
                 <a href="/admin/front-cms/nav-heading"
                     class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-slate-700 rounded">
                     Navbar Heading
