@@ -2292,6 +2292,7 @@ ORDER BY id DESC LIMIT 5");
         }
         ob_start();
         $data = json_decode($ProductData["sizeChart"]);
+        // printWithPre($data);
         ?>
         <div class="bg-white shadow-lg w-[65%] max-md:w-[90%] max-h-[80vh] relative flex flex-col animate-slideDown">
             <!-- Close button -->
@@ -2319,10 +2320,16 @@ ORDER BY id DESC LIMIT 5");
                     <table class="w-full border-collapse text-center text-gray-700">
                         <thead>
                             <tr class="bg-gray-100">
-                                <th class="p-3">Size</th>
-                                <th class="p-3">Chest</th>
-                                <th class="p-3">Length</th>
-                                <th class="p-3">Sleeve</th>
+                                <th class="p-3 border-b">Size</th>
+                                <?php
+                                // Get first object to extract measurement keys
+                                $first = reset($data);
+                                if ($first && is_object($first)) {
+                                    foreach ($first as $key => $val) {
+                                        echo "<th class='p-3 border-b'>" . htmlspecialchars($key) . "</th>";
+                                    }
+                                }
+                                ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -2330,13 +2337,13 @@ ORDER BY id DESC LIMIT 5");
                             $rowClass = "border-t";
                             foreach ($data as $size => $measurements) {
                                 echo "<tr class='{$rowClass}'>";
-                                echo "<td class='p-3'>{$size}</td>";
-                                echo "<td class='p-3'>{$measurements->Chest}</td>";
-                                echo "<td class='p-3'>{$measurements->Length}</td>";
-                                echo "<td class='p-3'>{$measurements->Sleeve}</td>";
-                                echo "</tr>";
+                                echo "<td class='p-3 font-medium'>" . htmlspecialchars($size) . "</td>";
 
-                                // Alternate row color
+                                foreach ($measurements as $key => $value) {
+                                    echo "<td class='p-3'>" . htmlspecialchars($value) . "</td>";
+                                }
+
+                                echo "</tr>";
                                 $rowClass = ($rowClass === "border-t") ? "border-t bg-gray-50" : "border-t";
                             }
                             ?>
@@ -2361,7 +2368,8 @@ ORDER BY id DESC LIMIT 5");
 
         echo json_encode([
             "success" => true,
-            "data" => $html
+            "data" => $html,
+            "vv"=>$data
         ]);
     }
 }
