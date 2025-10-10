@@ -226,8 +226,9 @@ class WebController extends LoginController
                                 ?>
                                     <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>)'
                                         class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> cursor-pointer flex items-center justify-center h-10 w-20"
-                                        option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?></div>
-                                <?php
+                                        option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?>
+                                    </div>
+                                    <?php
                                 }
                                 ?>
                             </div>

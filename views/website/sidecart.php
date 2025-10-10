@@ -130,8 +130,8 @@
                             <a href="/products/product-details/<?= $sname ?>" class="flex items-center gap-4 p-2 bg-gray-100 border border-gray-200">
                                 <img src="/<?= $firstImage ?>" alt="Product" class="w-16 h-16 object-cover">
                                 <div class="flex-1">
-                                    <h3 class="font-semibold text-base"><?= $value['name'] ?></h3>
-                                    <p class="font-bold text-[#f25b21]">₹<span id="cartTotal"><?= $value['cost_per_item'] ?></span></p>
+                                    <h3 class="font-semibold text-base"><?= $sunit['name'] ?></h3>
+                                    <p class="font-bold text-[#f25b21]">₹<span id="cartTotal"><?= $sunit['price'] ?></span></p>
                                 </div>
                                 <span 
                                     class="relative inline-block text-sm px-2 py-1 rounded-md border border-[#f25b21] text-[#f25b21] font-semibold overflow-hidden group">
@@ -147,7 +147,7 @@
 
 
         <!-- Footer -->
-        <div class="px-6 py-2 border-t">
+        <div class="px-6 py-2 border-t  sticky bottom-0 bg-white fixed">
             <div class="flex justify-between font-bold text-xl mb-2">
                 <span>Total</span>
                 <span id="All_Side_Total"></span>
@@ -650,6 +650,9 @@
         divs[key1].classList.add("border-gray-900");
         console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
         let selectedId = "";
+        if(document.querySelector(".changeSideVariant")){
+             document.querySelector(".changeSideVariant").innerText = json;
+           }
         GLOBAL_VARIANT.variants.forEach(async (ar, i) => {
 
             if (deepEqualCaseInsensitive(JSON.parse(JSON.parse(ar.options)), GLOBAL_VARIANT.selected)) {
