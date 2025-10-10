@@ -340,7 +340,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     <?php
                     if ($ProductData['id'] != 7) {
                     ?>
-                        <p class="text-sm text-gray-900 mt-2 text-justify"><?=$ProductData["shortDescription"]?></p>
+                        <p class="text-sm text-gray-900 mt-2 text-justify"><?= $ProductData["shortDescription"] ?></p>
                     <?php } ?>
                     <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated
                         at checkout</p>
@@ -528,10 +528,6 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                             <!-- Delivery & Return Info -->
                             <div class="mt-7 space-y-3 text-gray-700">
-                                <!-- <button id="openDeliveryModal" class="cursor-pointer flex items-center gap-2">
-                                <i class="fa-solid fa-truck-fast text-gray-900"></i>
-                                <span class="font-semibold">Delivery & Return</span>
-                            </button> -->
                                 <p>
                                     <i class="fas fa-tags mr-2 text-gray-900"></i>
                                     <span class="font-semibold">Category:</span> <?= $ProductData['category_name'] ?>
@@ -644,99 +640,99 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 </div>
 
                 <div class="w-[80%] max-md:w-[90%] flex items-center justify-center">
-                    <?php 
+                    <?php
                     $reviws = getData2("SELECT tpr.*, ous.username, ous.fname, ous.lname, ous.mobile FROM `tbl_product_review` tpr LEFT JOIN online_users ous ON tpr.userid = ous.id WHERE 1 AND tpr.product_id = $ProductData[id] AND tpr.status = 1");
-                    if(count($reviws)>1){
-                        ?>
-                        
+                    if (count($reviws) > 1) {
+                    ?>
+
                         <div class="owl-carousel reviews-sliders w-full">
-                        <?php
-                        foreach ($reviws as $key => $value) { ?>
+                            <?php
+                            foreach ($reviws as $key => $value) { ?>
 
-                            <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                                <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                                    <span> <?php for ($i = 0; $i < 5; $i++) {
-                                                if ($value['rating'] > $i) {
-                                                    echo '★';
-                                                } else {
-                                                    echo '☆';
-                                                }
-                                            } ?></span>
-                                    <style>
-                                        .review-text {
-                                            display: -webkit-box;
-                                            -webkit-line-clamp: 4;
-                                            /* show only 4 lines */
-                                            -webkit-box-orient: vertical;
-                                            overflow: hidden;
-                                            text-overflow: ellipsis;
-                                        }
-                                    </style>
-                                    <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                        "<?= $value['reviewText'] ?>"
-                                    </p>
-                                </div>
-
-                                <div class="flex gap-4 items-center">
-                                    <div class="flex items-center w-10 h-10">
-                                        <img src="/public/images/dp.png" alt="John D."
-                                            class="w-full h-full rounded-full object-cover border mr-3">
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-gray-800">
-                                            <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
+                                <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                                    <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                        <span> <?php for ($i = 0; $i < 5; $i++) {
+                                                    if ($value['rating'] > $i) {
+                                                        echo '★';
+                                                    } else {
+                                                        echo '☆';
+                                                    }
+                                                } ?></span>
+                                        <style>
+                                            .review-text {
+                                                display: -webkit-box;
+                                                -webkit-line-clamp: 4;
+                                                /* show only 4 lines */
+                                                -webkit-box-orient: vertical;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                            }
+                                        </style>
+                                        <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                            "<?= $value['reviewText'] ?>"
                                         </p>
                                     </div>
+
+                                    <div class="flex gap-4 items-center">
+                                        <div class="flex items-center w-10 h-10">
+                                            <img src="/public/images/dp.png" alt="John D."
+                                                class="w-full h-full rounded-full object-cover border mr-3">
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-gray-800">
+                                                <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
 
-                        <?php } ?>
+                            <?php } ?>
 
-                    </div>
-                        <?php
-                    }else{
-                        $value = $reviws[0]; 
-                        ?>
+                        </div>
+                    <?php
+                    } else {
+                        $value = $reviws[0];
+                    ?>
                         <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                                <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                                    <span> <?php for ($i = 0; $i < 5; $i++) {
-                                                if ($value['rating'] > $i) {
-                                                    echo '★';
-                                                } else {
-                                                    echo '☆';
-                                                }
-                                            } ?></span>
-                                    <style>
-                                        .review-text {
-                                            display: -webkit-box;
-                                            -webkit-line-clamp: 4;
-                                            /* show only 4 lines */
-                                            -webkit-box-orient: vertical;
-                                            overflow: hidden;
-                                            text-overflow: ellipsis;
-                                        }
-                                    </style>
-                                    <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                        "<?= $value['reviewText'] ?>"
+                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                <span> <?php for ($i = 0; $i < 5; $i++) {
+                                            if ($value['rating'] > $i) {
+                                                echo '★';
+                                            } else {
+                                                echo '☆';
+                                            }
+                                        } ?></span>
+                                <style>
+                                    .review-text {
+                                        display: -webkit-box;
+                                        -webkit-line-clamp: 4;
+                                        /* show only 4 lines */
+                                        -webkit-box-orient: vertical;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                    }
+                                </style>
+                                <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                    "<?= $value['reviewText'] ?>"
+                                </p>
+                            </div>
+
+                            <div class="flex gap-4 items-center">
+                                <div class="flex items-center w-10 h-10">
+                                    <img src="/public/images/dp.png" alt="John D."
+                                        class="w-full h-full rounded-full object-cover border mr-3">
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">
+                                        <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
                                     </p>
                                 </div>
-
-                                <div class="flex gap-4 items-center">
-                                    <div class="flex items-center w-10 h-10">
-                                        <img src="/public/images/dp.png" alt="John D."
-                                            class="w-full h-full rounded-full object-cover border mr-3">
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-gray-800">
-                                            <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
-                                        </p>
-                                    </div>
-                                </div>
                             </div>
-                        <?php
+                        </div>
+                    <?php
                     }
                     ?>
-                    
+
                 </div>
             </div>
         </div>
@@ -861,44 +857,6 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
     </div>
 
-    <div id="deliveryModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white w-full w-[65vw] max-md:w-[94vw] shadow-lg relative p-8 max-md:p-5 animate-slideDown">
-            <button id="closeDeliveryModal"
-                class="absolute top-4 right-4 text-gray-600 hover:text-black animate-rotate-pingpong">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-            <h2 class="text-2xl font-bold mb-4">Delivery & Return</h2>
-            <p class="text-gray-700 mb-4">
-                We want you to be happy with your purchase and we apologize if it is not.
-                For whatever reason that you are not satisfied, we provide exchanges and returns
-                if the following conditions are met.
-            </p>
-
-            <h3 class="text-xl font-semibold mb-2">Rules</h3>
-            <p class="text-gray-600 mb-4">
-                All exchanges and returns must be raised within 10 days of the invoice date for
-                local orders, and 20 days for overseas orde₹ For local deliveries, there is an
-                option
-                to exchange at any of our boutiques or through our online portal.
-            </p>
-
-            <h3 class="text-xl font-semibold mb-2">Interpretation and Definitions</h3>
-            <p class="text-gray-600 mb-6">
-                All requests for returns must be strictly made online. Refunds and exchanges
-                will be processed according to company policy for both local and overseas
-                deliveries.
-            </p>
-
-            <button onclick="window.location.href='/return-exchange'"
-                class="relative font-semibold py-2 px-6 rounded-md border-2 border-black overflow-hidden group">
-                <span class="relative z-10 text-white group-hover:text-black transition-colors duration-300">
-                    Read More
-                </span>
-                <span
-                    class="absolute inset-0 bg-black transition-transform duration-300 origin-left group-hover:scale-x-0 scale-x-100"></span>
-            </button>
-        </div>
-    </div>
 
     <!-- Sticky Bottom Strip -->
     <div id="bottomStrip" class="fixed bottom-0 left-0 w-full bg-gray-200 shadow-lg border-t p-2 hidden z-50">
@@ -1447,29 +1405,6 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         });
     </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const modal = document.getElementById('deliveryModal');
-            const openBtn = document.getElementById('openDeliveryModal');
-            const closeBtn = document.getElementById('closeDeliveryModal');
-
-            openBtn.addEventListener('click', () => {
-                modal.classList.remove('hidden');
-            });
-
-            closeBtn.addEventListener('click', () => {
-                modal.classList.add('hidden');
-            });
-
-            // Close on background click
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.add('hidden');
-                }
-            });
-        });
-    </script>
-
     <!-- SwiperJS (Add in <head>) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
 
@@ -1644,9 +1579,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             divs[key1].classList.add("border-gray-900");
             // console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
             let selectedId = "";
-           if(document.querySelector(".changeDetailVariant")){
-             document.querySelector(".changeDetailVariant").innerText = json;
-           }
+            if (document.querySelector(".changeDetailVariant")) {
+                document.querySelector(".changeDetailVariant").innerText = json;
+            }
 
             GLOBAL_product_VARIANT.variants.forEach(async (ar, i) => {
                 //    console.log(ar)
