@@ -25,7 +25,7 @@ class WebController extends LoginController
         ob_start();
         // printWithPre($ProductData);
         $comparePrice = floatval($ProductData['compare_price']);
-        $price = floatval($ProductData['price']);
+        $price = floatval($ProductData['varients'][0]["price"]);
         $discountAmount = $comparePrice - $price;
         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 ?>
@@ -106,7 +106,7 @@ class WebController extends LoginController
                         <div class="flex items-center justify-center gap-3 mt-1 prices">
                             <span
                                 class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
-                            <span class="text-[#f25b21] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
+                            <span class="text-[#f25b21] text-xl">Rs.<?= formatNumber($ProductData['varients'][0]["price"]) ?>.00</span>
                             <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
 
                         </div>
@@ -1113,7 +1113,7 @@ class WebController extends LoginController
                 $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
                 $ProductData['varients'] = $varients;
                 $comparePrice = floatval($ProductData['compare_price']);
-                $price = floatval($ProductData['price']);
+                $price = floatval($ProductData['varients'][0]["price"]);
                 $discountAmount = $comparePrice - $price;
                 $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
