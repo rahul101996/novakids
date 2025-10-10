@@ -2380,7 +2380,7 @@ ORDER BY id DESC LIMIT 5");
                         <?= $ProductData["sizeDescription"] ?>
                     </div>
                     <!-- Image -->
-                    <div class="w-full md:w-[40%] flex justify-center">
+                    <div class="w-full md:w-[40%] flex justify-center <?=empty($ProductData["sizeImage"])?"hidden":""?>">
                         <img src="/<?= $ProductData["sizeImage"] ?>" alt="How to measure T-shirt" class="h-72 max-md:h-64">
                     </div>
                 </div>
