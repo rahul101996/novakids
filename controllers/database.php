@@ -23,6 +23,8 @@ class Database
     private $fast2sms_api = "wzVHgpkoYJa6PFCqDevZMGu83l4LhOAtm9NQxXRdK7f0inSTEBkM6hS0CsJvGBHYZWgq4aRQ19cUxuri";
     private $fast2sms_api_rudratech = "Y2mCHcBsfTPSnLQMx5Gwa40zE3NW6Xg9oFt18bKrZduvjiUJkDS8qzkslUI2AmRhj57aPt1MVb4OryCB";
 
+    private $firebaseKey = "15NOPvhWR5E_zst4r_hoD1VIhW82tRt-qMTyIe4-OW8";
+
     public function __construct()
     {
 
@@ -68,5 +70,10 @@ class Database
     public function getfast2sms_API()
     {
         return [$this->fast2sms_api, $this->fast2sms_api_rudratech];
+    }
+
+    public function getFirebaseKey()
+    {
+        return $this->firebaseKey;
     }
 }
