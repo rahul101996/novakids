@@ -1449,7 +1449,7 @@ class WebController extends LoginController
             redirect("/");
         }
         $userData = getData2("SELECT * FROM `online_users` WHERE `id` = $_SESSION[userid]")[0];
-        $address = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $_SESSION[userid] ORDER BY `id` DESC ");
+        $address = getData2("SELECT * FROM `tbl_user_address` WHERE `userid` = $_SESSION[userid] ORDER BY `status` DESC ");
 
         $PaymentGateWay = getData2("SELECT * FROM `payment_gateway` WHERE `status` = 1 ORDER BY `id` ASC")[0];
 
