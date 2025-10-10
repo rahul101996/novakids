@@ -91,7 +91,7 @@ $home_imges = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC
     <style>
         .myBanner {
             width: 100vw;
-            height: 60vh;
+            height: 90vh;
         }
 
         .swiper-slide {
