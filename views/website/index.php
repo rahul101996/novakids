@@ -468,9 +468,9 @@ $ppimg = array_reverse($imags);
         </div>
     </section>
 
-    <section class="relative w-full h-auto max-md:h-[30vh]">
+    <section class="relative w-full h-auto max-md:h-[72vh]">
         <!-- Banner Image -->
-        <img src="/<?= $product_imge['file'] ?>" alt="" class="w-full h-auto max-md:h-[30vh]">
+        <img src="/<?= $product_imge['file'] ?>" alt="" class="w-full h-auto max-md:h-[72vh] max-md:object-cover">
 
         <!-- Hotspot 1 (bottom-left) -->
         <div class="absolute bottom-[20%] left-[30%] group max-md:hidden">

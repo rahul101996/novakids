@@ -1042,13 +1042,17 @@ if (isset($_POST['update_profile'])) {
             }
 
 
-            // 🟢 NEW: Back button logic for mobile
-            function goBackToSidebar() {
-                const sidebar = document.getElementById('userSidebar');
-                sidebar.style.display = 'block';
-                AllshowItems.forEach(item => item.classList.add('hidden'));
-                document.querySelector('.overview')?.classList.remove('hidden');
-            }
+           // 🟢 NEW: Back button logic for mobile
+function goBackToSidebar() {
+    const sidebar = document.getElementById('userSidebar');
+    sidebar.style.display = 'block';
+    AllshowItems.forEach(item => item.classList.add('hidden'));
+    document.querySelector('.overview')?.classList.remove('hidden');
+
+    // Refresh the page to reset everything
+    window.location.reload();
+}
+
 
             // Hide overview on mobile by default
             if (window.innerWidth < 1024) {
