@@ -314,7 +314,7 @@ $ppimg = array_reverse($imags);
                         $images = array_reverse($images);
                         (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
                         $comparePrice = floatval($product['compare_price']);
-                        $price = floatval($product['price']);
+                        $price = floatval($varients['price']);
                         $discountAmount = $comparePrice - $price;
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
@@ -377,7 +377,7 @@ $ppimg = array_reverse($imags);
                                         <p class="text-gray-500 line-through text-sm">₹
                                             <?= formatNumber($product['compare_price']) ?>.00
                                         </p>
-                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?>.00</p>
+                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?>.00</p>
                                     </div>
                                     <!-- reviews -->
                                     <div class="flex items-center justify-start space-x-1 hidden">

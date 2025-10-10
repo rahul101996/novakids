@@ -132,7 +132,7 @@ class WebController extends LoginController
                                 $sizeChartValue = $sizeChart[$value[0]];
                                 $sizeChartValueString = [];
                                 foreach ($sizeChartValue as $kk => $sv) {
-                                    $sizeChartValueString[] = "$kk $sv inches ";
+                                    $sizeChartValueString[] = "$kk $sv inch";
                                 }
 
                                 $sizeChartValueString = implode(" | ", $sizeChartValueString)
@@ -181,7 +181,7 @@ class WebController extends LoginController
                             <?php
                             }
                             ?>
-                            <div class="w-full flex items-center justify-start mt-3 text-sm" id="SizeDiv">
+                            <div class="w-full flex items-center justify-start mt-2 text-sm" id="SizeDiv">
                                 <?php
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
