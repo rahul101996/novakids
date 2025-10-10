@@ -2076,7 +2076,7 @@ ORDER BY id DESC LIMIT 5");
             $search = $_POST['search'];
 
             if (empty($search)) {
-                $products = getData2("SELECT * FROM `tbl_products`");
+                $products = getData2("SELECT * FROM `tbl_products` ORDER BY `id` DESC LIMIT 8");
             } else {
                 $products = getData2("SELECT * FROM `tbl_products` WHERE `name` LIKE '%$search%'");
             }

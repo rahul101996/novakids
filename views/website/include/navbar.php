@@ -621,7 +621,7 @@ $categories = getData("tbl_category");
             <h2 class="text-2xl font-semibold text-center mb-6">What are you looking for</h2>
             <div class="w-full max-w-2xl mx-auto mb-6">
                 <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
-                    <input type="text" id="searchInput" oninput="searchProducts(this)" placeholder="Search our store"
+                    <input type="text" id="searchInput" oninput="searchProducts()" placeholder="Search our store"
                         class="w-full px-4 py-2 outline-none text-gray-700">
 
                     <!-- <div id="searchResults" class="grid grid-cols-2 gap-4 mt-4"></div> -->
@@ -654,7 +654,7 @@ $categories = getData("tbl_category");
                         <img src="/<?= $firstImage ?>" alt="<?= $value['name'] ?>" class="w-full h-40 object-cover">
                         <div class="p-2">
                             <h3 class="font-semibold text-sm"><?= $value['name'] ?></h3>
-                            <p class="text-gray-500 text-sm">₹<?= $value['cost_per_item'] ?></p>
+                            <p class="text-gray-500 text-sm">₹<?= $value['price'] ?></p>
                         </div>
                     </div>
                 <?php } ?>
@@ -969,11 +969,11 @@ $categories = getData("tbl_category");
         let search = ele.value.trim();
 
         // if search empty, clear results and hide loader
-        if (search == "") {
-            document.getElementById("searchResults").innerHTML = "";
-            document.getElementById("loader").classList.add("hidden");
-            return;
-        }
+        // if (search == "") {
+        //     document.getElementById("searchResults").innerHTML = "";
+        //     document.getElementById("loader").classList.add("hidden");
+        //     return;
+        // }
 
         // show loader immediately when user starts typing
         document.getElementById("loader").classList.remove("hidden");
@@ -1001,14 +1001,20 @@ $categories = getData("tbl_category");
                     data.data.forEach(product => {
                         let parsed = JSON.parse(product.product_images);
 
+                        let name = product.name.replace(/ /g, '-');  // Replace spaces with dashes
+                        name = name.replace(/'/g, '');              // Remove all single quotes
+
+
                         html += `
-                    <div class="border overflow-hidden hover:shadow-md transition">
-                        <img src="/${parsed[0]}" alt="${product.name}" class="w-full h-40 object-cover">
-                        <div class="p-2">
-                            <h3 class="font-semibold text-sm">${product.name}</h3>
-                            <p class="text-gray-500 text-sm">₹${product.cost_per_item}</p>
-                        </div>
-                    </div>
+                        <a href="/products/product-details/${name}" target="_blank">
+                            <div class="border overflow-hidden hover:shadow-md transition">
+                                <img src="/${parsed[0]}" alt="${product.name}" class="w-full h-40 object-cover">
+                                <div class="p-2">
+                                    <h3 class="font-semibold text-sm">${product.name}</h3>
+                                    <p class="text-gray-500 text-sm">₹${product.price}</p>
+                                </div>
+                            </div>
+                        </a>
                 `;
                     });
 
@@ -1037,6 +1043,9 @@ $categories = getData("tbl_category");
 
         }, 500); // 500ms debounce
     }
+
+    searchProducts();
+
 
     let timeLeft = 60; // 60 seconds = 1 minute
     const countdownEl = document.getElementById('countdown');
