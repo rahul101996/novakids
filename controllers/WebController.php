@@ -106,8 +106,8 @@ class WebController extends LoginController
                         <div class="flex items-center justify-center gap-3 mt-1 prices">
                             <span
                                 class="text-gray-300 text-xl line-through">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
-                            <span class="text-[#33459c] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
-                            <span class="text-xs bg-[#33459c] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
+                            <span class="text-[#f25b21] text-xl">Rs.<?= formatNumber($ProductData['price']) ?>.00</span>
+                            <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg">SAVE <?= $discountPercentage ?>%</span>
 
                         </div>
                         <p class="text-sm text-gray-900 mt-2"><?= $ProductData["shortDescription"] ?></p>
