@@ -12,7 +12,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
-define('FCM_SERVER_KEY', '15NOPvhWR5E_zst4r_hoD1VIhW82tRt-qMTyIe4-OW8');
+define('FCM_SERVER_KEY', '');
 
 class NotificationController
 {
