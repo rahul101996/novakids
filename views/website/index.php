@@ -1026,6 +1026,8 @@ $home_imges = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC
                     }
                 }
             });
+            AddToCart();
+            AddToWishlist();
         });
     </script>
 
