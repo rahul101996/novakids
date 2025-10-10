@@ -694,7 +694,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                     </div>
                         <?php
-                    }else{
+                    }else if(count($reviws)==1){
                         $value = $reviws[0]; 
                         ?>
                         <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">

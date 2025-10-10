@@ -228,7 +228,7 @@ class WebController extends LoginController
                                         class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> cursor-pointer flex items-center justify-center h-10 w-20"
                                         option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?>
                                     </div>
-                                    <?php
+                                <?php
                                 }
                                 ?>
                             </div>
@@ -1459,11 +1459,32 @@ class WebController extends LoginController
             require 'views/website/checkout.php';
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // printWithPre($_POST);
+            // printWithPre($_SESSION);
             // die();
             $id = $_SESSION["userid"];
             $mode = $_POST["payment_mode"];
             $order_id = generateRandomString(16) . time();
             $pp = 1;
+            $fields = [
+                'fname' => 'fname',
+                'lname' => 'lname',
+                'username' => 'email',
+                'mobile' => 'mobile'
+            ];
+
+            $userd = [];
+
+            foreach ($fields as $sessionKey => $postKey) {
+                if (isset($_SESSION[$sessionKey]) && $_SESSION[$sessionKey] === '' && !empty($_POST[$postKey])) {
+                    $userd[$sessionKey] = $_POST[$postKey];
+                    $_SESSION[$sessionKey] = $_POST[$postKey];
+                }
+            }
+
+            if (!empty($userd)) {
+                update($userd, $_SESSION["userid"], "online_users");
+            }
+
             foreach ($address as $key => $value) {
 
                 if ($_POST['address_line1'] == $value['address_line1'] && $_POST['address_line2'] == $value['address_line2']) {
@@ -1485,6 +1506,7 @@ class WebController extends LoginController
                 ];
                 add($addressId, "tbl_user_address");
             }
+
             if ($mode == "COD") {
                 // printWithPre($_POST);
                 // die();

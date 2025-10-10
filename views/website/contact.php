@@ -243,9 +243,10 @@
             <div class=" space-y-6">
 
 
-                <div class="animate-slideInLeft delay-100 image-overlay rounded-3xl overflow-hidden relative h-full  max-md:h-[40vh]  bg-gradient-to-br from-gray-900 to-gray-600">
-                    <img src="/public/images/5.webp" alt="Product Image" class="w-full h-full object-cover rounded-3xl max-md:object-top">
+                <div class="animate-slideInLeft delay-100 image-overlay rounded-3xl overflow-hidden relative h-[500px] max-md:h-[40vh] bg-gradient-to-tr from-black to-gray-600">
+                    <img src="/public/images/2.png" alt="Product Image" class="w-full h-full object-contain rounded-3xl max-md:object-top">
                 </div>
+
 
 
 
