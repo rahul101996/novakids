@@ -19,7 +19,6 @@ class WebsettingController
             require 'views/websetting/banner_home.php';
         }
     }
-
     public function home_banner_add($id = null)
     {
         $siteName = getDBObject()->getSiteName();
@@ -94,6 +93,92 @@ class WebsettingController
 
 
 
+
+    public function product_banner($id = null)
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageTitle = "Product Banner";
+        $pageModule = "Product Banner";
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require 'views/websetting/product_banner.php';
+        }
+    }
+    public function product_banner_add($id = null)
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageTitle = "Product Banner";
+        $pageModule = "Product Banner";
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+            $editData = [];
+            if ($id != null) {
+                $editData = getData2("SELECT * from tbl_product_banner where id=$id")[0];
+            }
+
+            require 'views/websetting/product_banner_add.php';
+        } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            // printWithPre($_POST);
+            // printWithPre($_FILES);
+            // die();
+
+            try {
+                // Begin transaction
+                $this->db->beginTransaction();
+
+                if (isset($_FILES['img']) && $_FILES['img']['error'] == 0) {
+                    $_POST['file'] = uploadFile($_FILES['img'], 'public/product-banner/');
+                } else {
+                    $_POST['file'] = isset($_POST['old_image']) ? $_POST['old_image'] : '';
+                }
+
+                if ($id == null) {
+                    add(
+                        [
+                            "product_id" => $_POST['product_id'],
+                            "file" => $_POST['file']
+                        ],
+                        "tbl_product_banner",
+                        false
+                    );
+
+                    $_SESSION['success'] = "Product Banner Added Successfully";
+
+                } else {
+                    update(
+                        [
+                            "product_id" => $_POST['product_id'],
+                            "file" => $_POST['file']
+                        ],
+                        $id,
+                        "tbl_product_banner"
+                    );
+
+                    $_SESSION['success'] = "Product Banner Updated Successfully";
+                }
+
+                $this->db->commit();
+            } catch (Exception $e) {
+                $this->db->rollBack();
+                echo $e->getMessage();
+                $_SESSION['err'] = $e->getMessage();
+            }
+
+            redirect('/admin/front-cms/product-banner');
+        }
+    }
+    // public function product_banner_delete($id)
+    // {
+    //     delete($id, "tbl_product_banner");
+    //     redirect('/admin/front-cms/home-banner');
+    // }
+
+
+
+
+
     public function navbar_heading($id = null)
     {
         $siteName = getDBObject()->getSiteName();
@@ -102,8 +187,6 @@ class WebsettingController
 
         require 'views/websetting/home.php';
     }
-
-
     public function navbar_heading_add($id = null)
     {
         $siteName = getDBObject()->getSiteName();
@@ -156,12 +239,15 @@ class WebsettingController
             redirect('/admin/front-cms/nav-heading');
         }
     }
-
     public function navbar_heading_delete($id)
     {
         delete($id, "tbl_nav_heading");
         redirect('/admin/front-cms/nav-heading');
     }
+
+
+
+
 
     public function offer_heading()
     {

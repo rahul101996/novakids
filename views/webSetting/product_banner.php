@@ -23,8 +23,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             ?>
             <div class="w-full flex items-center justify-between p-3">
                 <span class="text-xl font-semibold text-gray-800">Home Banner</span>
-                <a href="/admin/front-cms/home-banner/add" class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add
-                    Home Banner</a>
+                <!-- <a href="/admin/front-cms/product-banner/add" class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add
+                    Product Banner</a> -->
             </div>
             <div class="p-3 border-b border-gray-200">
                 <div class="flex justify-between items-center">
@@ -61,13 +61,13 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     <div
                         class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-2 text-gray-500 bg-gray-100 rounded">
                         <span>Sr. No</span>
-                        <span>Title</span>
-                        <span>Banner</span>
+                        <span>Product</span>
+                        <span>Banner Image</span>
                         <span>Action</span>
                     </div>
 
                     <!-- Table Rows -->
-                    <?php foreach (getData2("SELECT * FROM `tbl_home_banner` WHERE 1") as $key => $banner) { ?>
+                    <?php foreach (getData2("SELECT tpb.*, tp.name AS product_name FROM `tbl_product_banner` tpb LEFT JOIN tbl_products tp on tpb.product_id = tp.id WHERE 1") as $key => $banner) { ?>
                         <div
                             class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-3 hover:bg-gray-50 text-gray-800 rounded">
                             <!-- Sr. No -->
@@ -85,7 +85,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             </div>
 
                             <!-- Category Title -->
-                            <div class="font-medium"><?= htmlspecialchars($banner['title']) ?></div>
+                            <div class="font-medium"><?= htmlspecialchars($banner['product_name']) ?></div>
 
                             <!-- Image -->
                             <div>
