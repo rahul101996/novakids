@@ -459,6 +459,7 @@ function add($data, $table, $timestamp = true)
 
     // Prepare the SQL statement
     $sql = "INSERT INTO `$table` (" . $columns . ") VALUES (" . $placeholders . ")";
+    // printWithPre($data);
     // echo $sql;
     $stmt = $db->prepare($sql);
 

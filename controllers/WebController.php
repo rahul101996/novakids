@@ -765,7 +765,7 @@ class WebController extends LoginController
             unset($_POST['process']);
             // printWithPre($_POST);
             if ($_POST['status'] == 1) {
-                update(['status' => 0], 1, "tbl_user_address", "status");
+                updateSQL(['status' => 0], "tbl_user_address", "status = '1' AND userid = $userid");
             }
             $address = update($_POST, $id, "tbl_user_address");
             if ($address) {
