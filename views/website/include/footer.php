@@ -101,7 +101,7 @@
 
         <!-- Text -->
         <div class="flex-1 text-center md:text-left">
-            <h3 class="text-lg md:text-3xl font-extrabold text-white mb-2">
+            <h3 class="text-lg md:text-3xl font-semibold text-white mb-2">
                 Stay in the Loop!
             </h3>
             <p class="text-gray-300 text-sm md:text-base">
