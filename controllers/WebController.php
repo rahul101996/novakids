@@ -1113,7 +1113,7 @@ class WebController extends LoginController
                 $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
                 $ProductData['varients'] = $varients;
                 $comparePrice = floatval($ProductData['compare_price']);
-                $price = floatval($ProductData['price']);
+                $price = floatval($ProductData['varients'][0]["price"]);
                 $discountAmount = $comparePrice - $price;
                 $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 

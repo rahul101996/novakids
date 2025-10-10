@@ -670,7 +670,7 @@
                 }
 
                 ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
-                    <span class="text-[#33459c] text-xl">Rs. ${ar.price}.00</span>
+                    <span class="text-[#f25b21] text-xl">Rs. ${ar.price}.00</span>
                 `
                 console.log("ar", ar, ele.parentElement.parentElement.querySelector(".sideVarientId"))
                 let imgHtml = ""
