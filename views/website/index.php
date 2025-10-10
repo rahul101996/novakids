@@ -246,7 +246,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
         }
 
         .newarrivalcarousel .owl-nav button:hover span {
-            background: #000000ff !important;  
+            background: #000000ff !important;
             color: white;
         }
 
@@ -355,7 +355,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
         </div>
     </section>
 
-    <!-- Section --> 
+    <!-- Section -->
     <section class="md:pb-16 max-md:py-16 relative">
         <div class="absolute hidden -top-14 max-md:-top-16 -left-14 w-auto h-auto opacity-20">
             <img src="/public/images/naruto.webp" alt="" class="w-40 max-md:w-28 h-auto">
@@ -961,15 +961,15 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
             // }
 
             // Close modal
-            if(closeBtn){
-            closeBtn.addEventListener('click', () => {
-                modal.classList.add('hidden');
-                // if (noPopupCheckbox.checked) {
-                //     sessionStorage.setItem('hideNewsletterModal', 'true');
-                // }
-                close_popup();
-            });
-        }
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    modal.classList.add('hidden');
+                    // if (noPopupCheckbox.checked) {
+                    //     sessionStorage.setItem('hideNewsletterModal', 'true');
+                    // }
+                    close_popup();
+                });
+            }
             // Close modal if clicked outside content
             window.addEventListener('click', (e) => {
                 if (e.target === modal) {
@@ -1007,6 +1007,8 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                     }
                 }
             });
+            AddToCart();
+            AddToWishlist();
         });
     </script>
 

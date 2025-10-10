@@ -1,10 +1,7 @@
-
-
-
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.js"></script>
- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
 <!-- Summernote -->
@@ -15,29 +12,32 @@
 
 <style>
     .toast-success {
-    background-color: #28a745 !important;  /* Green background */
-    color: #fff !important;                /* White text */
+        background-color: #28a745 !important;
+        /* Green background */
+        color: #fff !important;
+        /* White text */
     }
 
     /* ❌ Error Toast */
     .toast-error {
-    background-color: #dc3545 !important;  /* Red background */
-    color: #fff !important;
+        background-color: #dc3545 !important;
+        /* Red background */
+        color: #fff !important;
     }
 </style>
 
 
 <script>
     $(document).ready(function() {
-        $('textarea.summernote').summernote({                                                           
+        $('textarea.summernote').summernote({
             height: 100,
-            toolbar: [ 
+            toolbar: [
                 ['style', ['style']],
                 ['font', ['bold', 'italic', 'underline', 'clear']],
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['insert', ['link', 'table', 'picture', 'video', 'hr']],
                 ['view', ['fullscreen', 'codeview', 'help']],
-                ['color', ['color']],                        
+                ['color', ['color']],
                 ['height', ['height']],
                 ['fontname', ['fontname']],
                 ['fontsize', ['fontsize']],
@@ -46,14 +46,17 @@
     });
 
     toastr.options = {
-    // "closeButton": true,
-    "progressBar": true,
-    // "positionClass": "toast-top-right",
-    // "timeOut": "300000"
+        // "closeButton": true,
+        "progressBar": true,
+        // "positionClass": "toast-top-right",
+        // "timeOut": "300000"
     };
 
-   
-    <?php if (isset($_SESSION['err']) && !empty($_SESSION['err'])) : ?>
+
+    <?php if (isset($_SESSION['err']) && !empty($_SESSION['err'])) :
+
+        unset($_SESSION['success']);
+    ?>
         console.log("Error: <?= $_SESSION['err'] ?>");
         $(document).ready(function onDocumentReady() {
             toastr.error("<?= $_SESSION['err'] ?>");
@@ -61,7 +64,10 @@
         <?php unset($_SESSION['err']); ?>
     <?php endif; ?>
 
-    <?php if (isset($_SESSION['success']) && !empty($_SESSION['success'])) : ?>
+    <?php if (isset($_SESSION['success']) && !empty($_SESSION['success'])) :
+        unset($_SESSION['err']);
+
+    ?>
         console.log("Error: <?= $_SESSION['success'] ?>");
         $(document).ready(function onDocumentReady() {
             toastr.success("<?= $_SESSION['success'] ?>");
@@ -83,7 +89,7 @@
         <?php unset($_SESSION['print_bill_ot']); ?>
     <?php endif; ?>
 
-    
+
 
 
     function setAllSlim(ele = null) {
@@ -188,6 +194,4 @@
     }
 
     // setDateFocus();
-
-    
 </script>
