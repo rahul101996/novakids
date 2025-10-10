@@ -1,10 +1,14 @@
 <?php
 
 // printWithPre($_SESSION);
-$image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]['file'];
+$home_imges = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC");
 
 // printWithPre($images);
 // die();
+
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 ?>
 
@@ -50,9 +54,8 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
         }
     </style>
 
-    <section
+    <!-- <section
         class="relative h-[88vh] max-md:h-[90vh] flex items-center bg-gradient-to-r from-red-800 to-black overflow-hidden">
-        <!-- Background Image Overlay -->
         <div class="absolute inset-0 bg-[url('/<?= $image ?>')] bg-cover bg-center opacity-70"></div>
         <h2 class="absolute md:top-16 md:left-10 max-md:left-8 max-md:bottom-40 text-7xl max-md:text-5xl font-extrabold text-white"
             data-aos="fade-right" data-aos-duration="1000" data-aos-delay="100">
@@ -81,11 +84,9 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
             class="absolute bottom-12 right-12 max-md:bottom-4 max-md:right-4 text-2xl font-bold text-white rotate-[-6deg] opacity-80 animate-fade">
             #GenZStyle
         </p>
-    </section>
+    </section> -->
 
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
         .myBanner {
@@ -143,7 +144,22 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
 
     <div class="swiper myBanner">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">
+
+
+            <?php foreach ($home_imges as $key => $value) { ?>
+                <div class="swiper-slide">
+                    <img src="/<?= $value['file'] ?>" alt="">
+                </div>
+            <?php } ?>
+
+            <!-- <div class="swiper-slide">
+                <img src="/public/home-banner/homepage_17_U90OqZq.avif" alt="">
+            </div> -->
+            <!-- <div class="swiper-slide">
+                <img src="/public/home-banner/homepage_12_V3Auyr2.avif" alt="">
+            </div> -->
+
+            <!-- <div class="swiper-slide">
                 <img src="/public/home-banner/homepage_copy_26.avif" alt="">
             </div>
             <div class="swiper-slide">
@@ -157,7 +173,8 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
             </div>
             <div class="swiper-slide">
                 <img src="/public/home-banner/homepage_17_U90OqZq.avif" alt="">
-            </div>
+            </div>  -->
+
         </div>
         <div class="swiper-pagination"></div>
     </div>
@@ -246,7 +263,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
         }
 
         .newarrivalcarousel .owl-nav button:hover span {
-            background: #000000ff !important;  
+            background: #000000ff !important;
             color: white;
         }
 
@@ -300,11 +317,12 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                             }
                         }
                         // printWithPre($images);
-                    ?>
+                        ?>
                         <a href="/products/product-details/<?= $name ?>" class="block">
                             <div class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
-                                <span class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">
+                                <span
+                                    class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">
                                     SAVE <?= $discountPercentage ?>%
                                 </span>
 
@@ -335,7 +353,8 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
 
                                 <!-- Product Details -->
                                 <div class="pt-4 w-full ">
-                                    <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?></h3>
+                                    <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?>
+                                    </h3>
                                     <div class="flex items-center justify-start gap-3 w-full">
                                         <p class="text-gray-500 line-through text-sm">₹
                                             <?= formatNumber($product['compare_price']) ?>.00
@@ -355,7 +374,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
         </div>
     </section>
 
-    <!-- Section --> 
+    <!-- Section -->
     <section class="md:pb-16 max-md:py-16 relative">
         <div class="absolute hidden -top-14 max-md:-top-16 -left-14 w-auto h-auto opacity-20">
             <img src="/public/images/naruto.webp" alt="" class="w-40 max-md:w-28 h-auto">
@@ -373,7 +392,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
             <!-- Tees -->
             <?php
             foreach ($categories as $key => $category) {
-            ?>
+                ?>
                 <div class="relative group overflow-hidden shadow-lg" data-aos="zoom-in" data-aos-duration="1000"
                     data-aos-delay="200">
                     <a href="/category/<?= strtolower(str_replace(' ', '-', $category['category'])) ?>">
@@ -585,7 +604,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                             }
                         }
 
-                    ?>
+                        ?>
                         <a href="products/product-details/<?= $name ?>" class="block">
                             <div class="relative group changingimg w-full max-w-sm mx-auto cursor-pointer">
                                 <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden">
@@ -635,7 +654,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                                 </div>
                             </div>
                         </a>
-                    <?php
+                        <?php
                     }
                     ?>
                 </div>
@@ -682,7 +701,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                         foreach ($offerheading as $key => $value) { ?>
                             <span>#</span>
                             <span><?= $value['title'] ?></span>
-                    <?php }
+                        <?php }
                     } ?>
 
                 </div>
@@ -885,9 +904,9 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
         // printWithPre($popup);
         if (count($popup) > 0) {
             // $popup = $popup[0];
+    
 
-
-    ?>
+            ?>
             <div id="newsletterModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
                 <!-- Modal Content -->
                 <div class="bg-white shadow-lg w-full w-[35vw] max-md:w-[85vw] relative animate-slideDown">
@@ -939,7 +958,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
                     </div>
                 </div>
             </div>
-    <?php }
+        <?php }
     } ?>
     <script>
         async function close_popup() {
@@ -948,7 +967,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
             }));
             console.log(request.data)
         }
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const modal = document.getElementById('newsletterModal');
             const closeBtn = document.getElementById('closeModal');
             const noPopupCheckbox = document.getElementById('noPopup');
@@ -961,15 +980,15 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
             // }
 
             // Close modal
-            if(closeBtn){
-            closeBtn.addEventListener('click', () => {
-                modal.classList.add('hidden');
-                // if (noPopupCheckbox.checked) {
-                //     sessionStorage.setItem('hideNewsletterModal', 'true');
-                // }
-                close_popup();
-            });
-        }
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    modal.classList.add('hidden');
+                    // if (noPopupCheckbox.checked) {
+                    //     sessionStorage.setItem('hideNewsletterModal', 'true');
+                    // }
+                    close_popup();
+                });
+            }
             // Close modal if clicked outside content
             window.addEventListener('click', (e) => {
                 if (e.target === modal) {
@@ -984,7 +1003,7 @@ $image = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC")[0]
 
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".newarrivalcarousel").owlCarousel({
                 loop: true,
                 margin: 5,
