@@ -142,7 +142,9 @@ $categories = getData("tbl_category");
         <!-- Mobile Menu Toggle Button -->
         <div class="md:hidden flex items-center">
             <button id="menu-toggle" class="p-2">
-                <svg class="svgBars anarkali-svg-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="svgBars anarkali-svg-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <line x1="0" y1="12" x2="21" y2="12"></line>
                     <line x1="0" y1="6" x2="21" y2="6"></line>
                     <line x1="0" y1="18" x2="21" y2="18"></line>
@@ -151,8 +153,8 @@ $categories = getData("tbl_category");
 
             <button
                 class="openSearch text-black max-md:text-xs rounded-full hover:bg-black/10 transition-all duration-300 active:scale-95">
-                <svg class="svgSearch anarkali-svg-icon" width="22" height="22" fill="currentColor"
-                    viewBox="0 0 48 48" enable-background="new 0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <svg class="svgSearch anarkali-svg-icon" width="22" height="22" fill="currentColor" viewBox="0 0 48 48"
+                    enable-background="new 0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                     <g>
                         <path
                             d="m40.2850342 37.4604492-6.4862061-6.4862061c1.9657593-2.5733643 3.0438843-5.6947021 3.0443115-8.9884033 0-3.9692383-1.5458984-7.7011719-4.3530273-10.5078125-2.8066406-2.8066406-6.5380859-4.3525391-10.5078125-4.3525391-3.9692383 0-7.7011719 1.5458984-10.5078125 4.3525391-5.7939453 5.7944336-5.7939453 15.222168 0 21.015625 2.8066406 2.8071289 6.5385742 4.3530273 10.5078125 4.3530273 3.2937012-.0004272 6.4150391-1.0785522 8.9884033-3.0443115l6.4862061 6.4862061c.3901367.390625.9023438.5859375 1.4140625.5859375s1.0239258-.1953125 1.4140625-.5859375c.78125-.7807617.78125-2.0473633 0-2.828125zm-25.9824219-7.7949219c-4.234375-4.234375-4.2338867-11.1245117 0-15.359375 2.0512695-2.0507813 4.7788086-3.1806641 7.6796875-3.1806641 2.9013672 0 5.628418 1.1298828 7.6796875 3.1806641 2.0512695 2.0512695 3.1811523 4.7788086 3.1811523 7.6796875 0 2.9013672-1.1298828 5.628418-3.1811523 7.6796875s-4.7783203 3.1811523-7.6796875 3.1811523c-2.9008789.0000001-5.628418-1.1298827-7.6796875-3.1811523z">
@@ -172,7 +174,9 @@ $categories = getData("tbl_category");
 
         <div class="flex items-center absolute left-1/2 transform -translate-x-1/2 space-x-7 max-md:hidden">
             <div class="relative group">
-                <a href="/new-arrivals" class="text-gray-800  group duration-300 cursor-pointer <?= $pageTitle == 'New Arrivals' ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>">NEW ARRIVALS
+                <a href="/new-arrivals"
+                    class="text-gray-800  group duration-300 cursor-pointer <?= $pageTitle == 'New Arrivals' ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>">NEW
+                    ARRIVALS
                     <span
                         class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
                     <span
@@ -182,10 +186,10 @@ $categories = getData("tbl_category");
             <?php
             foreach ($categories as $key => $value) {
                 $category = strtolower(str_replace(" ", "-", $value['category']));
-            ?>
+                ?>
                 <div class="relative group">
                     <a href="/category/<?= $category ?>"
-                        class="text-gray-800  group duration-300 cursor-pointer <?= $category ==  '$category' ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>"><?= $value['category'] ?>
+                        class="text-gray-800  group duration-300 cursor-pointer <?= $category == '$category' ? 'text-orange-500 border-b-2 border-orange-500' : '' ?>"><?= $value['category'] ?>
                         <span
                             class="absolute -bottom-0 left-1/2 w-0 transition-all h-0.5 bg-[#f25b21] group-hover:w-3/6"></span>
                         <span
@@ -229,7 +233,10 @@ $categories = getData("tbl_category");
                         </g>
                     </svg>
                     <div>
-                        <div class="font-thin text-xs flex flex-col items-start justify-start "><span class="text-gray-600">Hello,</span><span class="font-semibold uppercase tracking-wider"><?= isset($_SESSION['fname']) ? $_SESSION['fname'].' '.$_SESSION['lname'] : 'Guest' ?></span></div>
+                        <div class="font-thin text-xs flex flex-col items-start justify-start "><span
+                                class="text-gray-600">Hello,</span><span
+                                class="font-semibold uppercase tracking-wider"><?= isset($_SESSION['fname']) ? $_SESSION['fname'] . ' ' . $_SESSION['lname'] : 'Guest' ?></span>
+                        </div>
                     </div>
                 </div>
                 <div class="md:hidden">
@@ -323,7 +330,7 @@ $categories = getData("tbl_category");
             <?php
             foreach ($categories as $key => $value) {
                 $category = strtolower(str_replace(" ", "-", $value['category']));
-            ?>
+                ?>
                 <div class="border-b border-gray-200">
                     <a href="/category/<?= $category ?>"
                         class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium"><?= $value['category'] ?>
@@ -538,6 +545,15 @@ $categories = getData("tbl_category");
                                             class="w-14 h-14 text-center text-2xl otp-input font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                                             maxlength="1" />
                                     </div>
+
+                                    <div class="w-full mx-auto mt-4">
+                                        <div class="text-center bg-white px-5 py-3 rounded-lg shadow-md">
+                                            <div class="text-sm text-gray-600 mb-1">Code expires in</div>
+                                            <div id="countdown" class="text-2xl font-bold text-blue-600 font-mono">01:00
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="w-full mx-auto mt-4">
                                         <button type="button" name="login" id="verifyOtp"
                                             class="relative w-full py-2 rounded-md font-semibold overflow-hidden group border-2 border-black">Verify
@@ -633,7 +649,7 @@ $categories = getData("tbl_category");
                     $images = json_decode($value['product_images'], true);
                     $firstImage = !empty($images) ? $images[0] : null;
 
-                ?>
+                    ?>
                     <div class="border overflow-hidden hover:shadow-md transition">
                         <img src="/<?= $firstImage ?>" alt="<?= $value['name'] ?>" class="w-full h-40 object-cover">
                         <div class="p-2">
@@ -727,11 +743,11 @@ $categories = getData("tbl_category");
     const openBtn = document.getElementById('openLogin');
     const closeBtn = document.getElementById('closeLogin');
     const modal = document.getElementById('loginModal');
-   if(openBtn){
-    openBtn.addEventListener('click', () => {
-        modal.classList.remove('hidden');
-    });
-   }
+    if (openBtn) {
+        openBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+    }
     function openLogin() {
         console.log("openLogin")
         modal.classList.remove('hidden');
@@ -935,7 +951,7 @@ $categories = getData("tbl_category");
     function decodeJwtResponse(token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
 
@@ -1022,5 +1038,36 @@ $categories = getData("tbl_category");
         }, 500); // 500ms debounce
     }
 
-    // searchProducts();
+    let timeLeft = 60; // 60 seconds = 1 minute
+    const countdownEl = document.getElementById('countdown');
+
+    function updateTimer() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+
+        countdownEl.textContent =
+            `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+        if (timeLeft === 0) {
+            countdownEl.classList.remove('text-blue-600');
+            countdownEl.classList.add('text-red-600');
+            countdownEl.textContent = '00:00';
+            clearInterval(timerInterval);
+            // cut(); // Call cut() function when timer expires
+
+            document.getElementById("otp-div").classList.add("hidden");
+            document.getElementById("mobile-div").classList.remove("hidden");
+
+            console.log("Timer expired");
+        } else {
+            timeLeft--;
+        }
+    }
+
+    // Update immediately
+    updateTimer();
+
+    // Then update every second
+    const timerInterval = setInterval(updateTimer, 1000);
+
 </script>

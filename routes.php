@@ -59,6 +59,7 @@ $route->group(['', 'WebController'], function ($route) {
 
     $route->route('/addReview', 'addReview');
     $route->route('/api/saveToken', 'saveToken');
+    $route->route('/api/getSizeChart', 'getSizeChart');
 
     // $route->route('/', 'index');
 });
@@ -103,7 +104,7 @@ $route->group(['', 'ProductController', 'auth'], function ($route) {
 
 
     $route->route('/api/new_arrival/status', 'ChangeNewArrivalStatus');
-    $route->route('/api/getSizeChart', 'getSizeChart');
+    
 
     $route->route('/api/product/status', 'ChangeProductStatus');
 });
