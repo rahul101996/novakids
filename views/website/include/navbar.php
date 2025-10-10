@@ -233,9 +233,19 @@ $categories = getData("tbl_category");
                         </g>
                     </svg>
                     <div>
-                        <div class="font-thin text-xs flex flex-col items-start justify-start "><span
-                                class="text-gray-600">Hello,</span><span
-                                class="font-semibold uppercase tracking-wider"><?= isset($_SESSION['fname']) ? $_SESSION['fname'] . ' ' . $_SESSION['lname'] : 'Guest' ?></span>
+                        <div class="font-thin text-xs flex flex-col items-start justify-start "><span class="text-gray-600">Hello,</span>
+                            <span class="font-semibold uppercase tracking-wider">
+                                <?php
+                                if (isset($_SESSION['fname']) && trim($_SESSION['fname']) !== '') {
+                                    echo $_SESSION['fname'] . ' ' . $_SESSION['lname'];
+                                } elseif (isset($_SESSION['fname']) && trim($_SESSION['fname']) === '') {
+                                    echo 'My Profile';
+                                } else {
+                                    echo 'Guest';
+                                }
+                                ?>
+                            </span>
+
                         </div>
                     </div>
                 </div>
@@ -812,7 +822,18 @@ $categories = getData("tbl_category");
     })
     let timeLeft = 60; // 60 seconds = 1 minute
     const countdownEl = document.getElementById('countdown');
-    let timerInterval; // <--- define here (global)
+    let timerInterval;
+
+    const sendOtp = document.getElementById('sendOtp');
+    const mobileInput = document.getElementById('mobile');
+    const OtpDiv = document.getElementById('otp-div');
+    const verifyOtp = document.getElementById('verifyOtp');
+    const mobileDiv = document.getElementById('mobile-div');
+    const mobilespan = document.getElementById('mobile-span');
+    const Username = document.getElementById('username');
+
+    let currentOtp = null;
+    let currentUserData = null;
 
     function updateTimer() {
         const minutes = Math.floor(timeLeft / 60);
@@ -825,7 +846,7 @@ $categories = getData("tbl_category");
             countdownEl.classList.remove('text-blue-600');
             countdownEl.classList.add('text-red-600');
             countdownEl.textContent = '00:00';
-            clearInterval(timerInterval); // now accessible ✅
+            clearInterval(timerInterval);
 
             document.getElementById("otp-div").classList.add("hidden");
             document.getElementById("mobile-div").classList.remove("hidden");
@@ -836,43 +857,31 @@ $categories = getData("tbl_category");
             timeLeft--;
         }
     }
-    const sendOtp = document.getElementById('sendOtp');
-    const mobileInput = document.getElementById('mobile');
-    const OtpDiv = document.getElementById('otp-div');
-    const verifyOtp = document.getElementById('verifyOtp');
-    const mobileDiv = document.getElementById('mobile-div');
-    const mobilespan = document.getElementById('mobile-span');
-    const Username = document.getElementById('username');
+
     sendOtp.addEventListener('click', async () => {
-        if (mobileInput.value != "" && mobileInput.value.length == 10) {
+        if (mobileInput.value !== "" && mobileInput.value.length === 10) {
             const response = await axios.post('/api/send-otp', new URLSearchParams({
                 phone: mobileInput.value,
             }));
+            console.log(response.data);
 
             if (response.data.success) {
-                timeLeft = 60; // reset timer each time you send OTP
+                // ✅ Save OTP + user
+                window.currentOtp = response.data.otp;
+                window.currentUserData = response.data.data;
+
+                // 🔄 Reset and start timer
+                timeLeft = 60;
                 countdownEl.classList.add('text-blue-600');
                 countdownEl.classList.remove('text-red-600');
+                clearInterval(timerInterval);
                 updateTimer();
-                clearInterval(timerInterval); // prevent duplicates
-                timerInterval = setInterval(updateTimer, 1000); // <--- now it works ✅
+                timerInterval = setInterval(updateTimer, 1000);
 
                 mobilespan.innerHTML = '+91 ' + mobileInput.value;
                 mobileDiv.classList.add('hidden');
                 sendOtp.classList.add('hidden');
                 OtpDiv.classList.remove('hidden');
-
-                verifyOtp.addEventListener('click', async () => {
-                    const otpInput = inputs.map(input => input.value).join("");
-
-                    if (response.data.otp == otpInput) {
-                        Username.value = response.data.data.username;
-                        verifyOtp.type = "submit";
-                        verifyOtp.click();
-                    } else {
-                        toastr.error("Otp Verification Fail");
-                    }
-                });
             } else {
                 toastr.error(response.data.message);
             }
@@ -881,46 +890,60 @@ $categories = getData("tbl_category");
         }
     });
 
-    function EditotpNumber() {
+    verifyOtp.addEventListener('click', async () => {
+        const otpInput = inputs.map(input => input.value).join("");
 
-        mobileDiv.classList.remove('hidden')
+        if (otpInput === window.currentOtp) {
+            Username.value = window.currentUserData.username;
+            verifyOtp.type = "submit";
+            verifyOtp.click();
+        } else {
+            toastr.error("OTP Verification Failed");
+        }
+    });
+
+    function EditotpNumber() {
+        mobileDiv.classList.remove('hidden');
         sendOtp.classList.remove('hidden');
         OtpDiv.classList.add('hidden');
     }
+
     async function ResendOtp() {
-        if (mobileInput.value != "" && mobileInput.value.length == 10) {
-            const response = await axios.post('/api/send-otp', new URLSearchParams({
-                phone: mobileInput.value,
-            }))
-            // console.log(response.data)
+        if (mobileInput.value !== "" && mobileInput.value.length === 10) {
+            try {
+                const response = await axios.post('/api/send-otp', new URLSearchParams({
+                    phone: mobileInput.value,
+                }));
 
-            if (response.data.success) {
-                console.log(response.data)
-                mobilespan.innerHTML = '+91' + ' ' + mobileInput.value
-                mobileDiv.classList.add('hidden')
-                sendOtp.classList.add('hidden');
-                OtpDiv.classList.remove('hidden');
-                verifyOtp.addEventListener('click', async () => {
-                    console.log("testing......")
-                    const otpInput = inputs.map(input => input.value).join("");
-                    console.log(otpInput, response.data.otp);
+                if (response.data.success) {
+                    // ✅ Save OTP again
+                    console.log(response.data);
+                    window.currentOtp = response.data.otp;
+                    window.currentUserData = response.data.data;
 
-                    if (response.data.otp == otpInput) {
-                        console.log("Matched")
-                        Username.value = response.data.data.username
+                    // 🔄 Reset timer and UI
+                    timeLeft = 60;
+                    countdownEl.classList.add('text-blue-600');
+                    countdownEl.classList.remove('text-red-600');
+                    clearInterval(timerInterval);
+                    updateTimer();
+                    timerInterval = setInterval(updateTimer, 1000);
 
-                        verifyOtp.type = "submit"
-                        verifyOtp.click();
-                    } else {
-                        toastr.error("Otp Verification Fail");
-                    }
+                    mobilespan.innerHTML = '+91 ' + mobileInput.value;
+                    mobileDiv.classList.add('hidden');
+                    sendOtp.classList.add('hidden');
+                    OtpDiv.classList.remove('hidden');
 
-                })
-            } else {
-                toastr.error(response.data.message);
+                    toastr.success("OTP resent successfully");
+                } else {
+                    toastr.error(response.data.message);
+                }
+            } catch (error) {
+                toastr.error("Failed to resend OTP");
+                console.error(error);
             }
         } else {
-            toastr.error("Please Enter Valid number");
+            toastr.error("Please enter a valid number");
         }
     }
 </script>
@@ -970,6 +993,7 @@ $categories = getData("tbl_category");
 <script>
     let debounceTimer;
 
+   
     async function searchProducts() {
         let ele = document.getElementById("searchInput");
         clearTimeout(debounceTimer);
@@ -1051,4 +1075,6 @@ $categories = getData("tbl_category");
 
         }, 500); // 500ms debounce
     }
+
+    searchProducts();
 </script>
