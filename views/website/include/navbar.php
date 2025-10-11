@@ -353,7 +353,7 @@ $categories = getData("tbl_category");
 
         <div class="space-y-4">
             <h3 class="text-base font-semibold text-gray-900">Trending Products</h3>
-            <div class="grid grid-cols-2 gap-2">
+            <div class="flex w-full gap-3 overflow-x-scroll">
                 <!-- Product 1 -->
                 <?php
                 foreach ($uniqueProducts as $key => $product) {
@@ -367,8 +367,8 @@ $categories = getData("tbl_category");
                     $name = str_replace("'", '', $name);
                 ?>
                     <a href="/products/product-details/<?= $name ?>">
-                        <div class="border overflow-hidden shadow-sm hover:shadow-md transition">
-                            <img src="/<?= $images[0] ?>" alt="Product 1" class="w-full h-36 object-cover">
+                        <div class="border overflow-hidden shadow-sm hover:shadow-md transition w-36 h-auto">
+                            <img src="/<?= $images[0] ?>" alt="Product 1" class="w-full h-40 object-cover">
                             <div class="p-2">
                                 <p class="text-sm font-medium text-gray-800 truncate"><?= $product['name'] ?></p>
                                 <p class="text-xs text-[#f25b21]">$<?= $price ?></p>
@@ -376,8 +376,6 @@ $categories = getData("tbl_category");
                         </div>
                     </a>
                 <?php } ?>
-                <!-- Product 2 -->
-
             </div>
 
             <a href="/shop"

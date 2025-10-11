@@ -15,7 +15,7 @@ $page = "shop";
         <div class="flex flex-col gap-6 w-full">
             <div
                 class="flex items-center justify-between border-b p-6 max-md:p-4 sticky top-16 h-fit bg-white z-40 w-full">
-                <div class="flex items-center justify-between w-[90vw] mx-auto">
+                <div class="flex items-center max-md:items-start justify-between w-[90vw] mx-auto">
                     <div class="flex flex-wrap md:flex-nowrap items-center gap-4">
                         <!-- Filter Toggle -->
                         <button id="filterToggle"
@@ -34,18 +34,18 @@ $page = "shop";
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-3 text-sm">
-                        <span class="text-gray-700 font-semibold">Sort by:</span>
+                    <div class="flex items-center gap-3 max-md:gap-1 text-sm">
+                        <span class="text-gray-700 font-semibold whitespace-nowrap">Sort by:</span>
                         <div class="relative">
                             <select id="sortSelect" onchange="handleFilterChange()"
-                                class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-10 text-gray-700 font-medium shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer">
+                                class="appearance-none bg-white border border-gray-300 rounded-lg px-4 max-md:px-2 max-md:pr-6 py-2 md:pr-10 text-gray-700 font-medium shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer">
                                 <option value="">Default Sorting</option>
                                 <option value="lowToHigh">Price: Low to High</option>
                                 <option value="highToLow">Price: High to Low</option>
                                 <option value="newest">Newest</option>
                             </select>
                             <!-- Custom dropdown arrow -->
-                            <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                            <span class="absolute right-3 max-md:right-1 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
                                 <i class="fa-solid fa-chevron-down"></i>
                             </span>
                         </div>
@@ -313,12 +313,12 @@ $page = "shop";
             return `
                     <a href="/products/product-details/${name}" class="block">
                         <div class="group relative cursor-pointer transition overflow-hidden">
-                            ${discount > 0 ? `<span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">SAVE ${discount}%</span>` : ""}
+                            ${discount > 0 ? `<span class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 z-20">SAVE ${discount}%</span>` : ""}
                             <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                 <img src="/${images[0]}" alt="${product.name}" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
                                 <img src="/${SecondImage}" alt="${product.name} Hover" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                                <button class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 rounded-full transition-all duration-500 z-20 stop-link ${product.wishlist ? 'bg-[#f25b21]' : 'bg-black/70 hover:bg-[#f25b21]'} text-white">
-                                    <i class="fas fa-heart"></i>
+                                <button class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 max-md:h-6 max-md:w-6 items-center justify-center flex rounded-full transition-all duration-500 z-20 stop-link ${product.wishlist ? 'bg-[#f25b21]' : 'bg-black/70 hover:bg-[#f25b21]'} text-white">
+                                    <i class="fas fa-heart max-md:text-sm"></i>
                                 </button>
                                 <button class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
                                     <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
@@ -326,7 +326,7 @@ $page = "shop";
                                 <input type="hidden" value="${product.id}" class="ProductId">
                             </div>
                             <div class="pt-4 w-full">
-                                <h3 class="text-base font-semibold uppercase">${product.name}</h3>
+                                <h3 class="text-base max-md:text-sm font-semibold uppercase">${product.name}</h3>
                                 <div class="flex items-center justify-start gap-3 w-full">
                                     <p class="text-gray-500 line-through text-sm">₹ ${formatNumber(product.compare_price)}.00</p>
                                     <p class="text-[#f25b21] font-bold">₹ ${formatNumber(price)}.00</p>

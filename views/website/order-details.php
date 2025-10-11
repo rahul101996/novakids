@@ -10,9 +10,15 @@
 
 <body class="">
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
+    <div class="flex justify-start items-left w-full md:hidden border-b border-gray-300 shadow px-4 py-5">
+        <!-- Back button (only visible on mobile) -->
+        <button onclick="history.back()" class="max-lg:flex hidden flex items-center gap-1 text-sm">
+            <i class="fas fa-chevron-left"></i> Back
+        </button>
+    </div>
 
-    <div class="w-full flex items-center justify-center py-16">
-        <div class="w-[80%] flex flex-col ">
+    <div class="w-full flex items-center justify-center py-16 max-md:py-8">
+        <div class="w-[80%] max-md:w-[90%] flex flex-col ">
             <div class="py-5 px-3 w-full border border-gray-300">
                 <h1>Returnable/Exchangeable Products</h1>
             </div>
@@ -26,8 +32,8 @@
 
             ?>
                 <div class="w-full border border-gray-300 flex flex-col items-center">
-                    <div class="w-full p-5 flex items-center justify-between">
-                        <div class="w-[80%] flex items-start justify-start">
+                    <div class="w-full p-5 flex max-md:flex-col max-md:gap-3 items-center justify-between">
+                        <div class="w-[80%] max-md:w-full flex items-start justify-start">
                             <img src="/<?= $images[0] ?>" class="h-24" alt="">
                             <div class="flex flex-col items-start justify-center ml-5">
                                 <h3 class="font-semibold"><?= $product['product_name'] ?></h3>
@@ -39,10 +45,9 @@
                                 <?php } ?>
                                 <!-- <h3 class="text-sm text-gray-600">Size : XS</h3> -->
                                 <h3 class="text-sm text-gray-600 mt-3"> <?= $product['quantity'] ?> x ₹<?= formatNumber($product['amount']) ?></h3>
-
                             </div>
                         </div>
-                        <div class="w-[20%] flex items-center justify-center flex-col gap-2">
+                        <div class="w-[20%] max-md:w-full flex items-center justify-center md:flex-col gap-2">
                             <button class="bg-gray-900 py-2 px-4 text-white w-full"><i class="fa-solid fa-right-left"></i> &ensp;Exchange</button>
                             <button class="bg-gray-900 py-2 px-4 text-white w-full"><i class="fa-solid fa-arrow-left"></i> &ensp;Return</button>
                         </div>
@@ -58,7 +63,7 @@
                         <div class="flex items-center justify-center gap-3">
                             <img src="/public/icons/clock.png" class="h-8" alt="">
                             <div class="flex flex-col items-start justify-start">
-                                <span class="text-sm">Exchange Before</span>
+                                <span class="text-sm">Return Before</span>
                                 <span class="text-gray-500 text-xs">OCT 12th 2025</span>
                             </div>
                         </div>

@@ -28,7 +28,7 @@ class WebController extends LoginController
         $price = floatval($ProductData['varients'][0]["price"]);
         $discountAmount = $comparePrice - $price;
         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
-        ?>
+?>
 
         <?php
         // printWithPre($ProductData);
@@ -63,30 +63,35 @@ class WebController extends LoginController
             ];
 
             // printWithPre($finalData);
-            ?>
+        ?>
             <?php
             if (!isset($_POST["product_details"])) {
-                ?>
-                <div class="w-[47%] p-3 h-full overflow-y-scroll bg-gray-200 flex flex-col items-center justify-start no-scrollbar gap-3 transform translate-x-full transition-transform duration-[0.8s] ease-in-out"
+            ?>
+                <div class="w-full flex items-center bg-white justify-between px-4 py-5 md:hidden">
+                    <span class="uppercase ">SELECT OPTIONS</span>
+                    <button id="closeAddToCartSidebar" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong" onclick="CloseVariant()">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="w-[47%] max-md:w-full p-3 max-md:p-1 md:h-full md:overflow-y-scroll max-md:overflow-x-scroll bg-gray-200 flex md:flex-col items-center justify-start no-scrollbar gap-3 transform translate-x-full transition-transform duration-[0.8s] ease-in-out"
                     id="VarImg">
+
                     <?php
                     foreach (array_reverse($images[0]) as $key => $image) {
 
-                        ?>
-                        <img src="/<?= $image ?>" alt="">
+                    ?>
+                        <img src="/<?= $image ?>" alt="" class="max-md:w-[80%] max-md:h-[80%] w-full h-full object-cover">
                     <?php } ?>
                 </div>
-                <?php
+            <?php
             }
             ?>
-            <div class=" h-full <?= !isset($_POST["product_details"]) ? " w-[53%] overflow-y-scroll" : "" ?> flex flex-col items-start justify-start z-10 bg-white"
+            <div class=" h-full <?= !isset($_POST["product_details"]) ? " w-[53%] max-md:w-full overflow-y-scroll" : "" ?> flex flex-col items-start justify-start z-10 bg-white"
                 id="VarDetails">
-
-
                 <?php
                 if (!isset($_POST["product_details"])) {
-                    ?>
-                    <div class="w-full flex items-center justify-between px-7 pt-7 ">
+                ?>
+                    <div class="w-full flex items-center justify-between px-7 pt-7 max-md:hidden">
                         <span class="uppercase ">SELECT OPTIONS</span>
                         <button id="closeAddToCartSidebar" class="text-gray-500 text-2xl hover:text-black animate-rotate-pingpong"
                             onclick="CloseVariant()">
@@ -94,14 +99,14 @@ class WebController extends LoginController
                         </button>
                     </div>
                     <span class="w-full h-[1px] bg-gray-200 my-5"></span>
-                    <?php
+                <?php
                 }
                 ?>
 
-                <div class="flex flex-col items-start justify-start w-full <?= !isset($_POST["product_details"]) ? "px-7" : "" ?>">
+                <div class="flex flex-col items-start justify-start w-full max-md:mb-8 <?= !isset($_POST["product_details"]) ? "px-7" : "" ?>">
                     <?php
                     if (!isset($_POST["product_details"])) {
-                        ?>
+                    ?>
                         <h2 class="w-full text-[1.7rem] max-md:text-lg leading-[2rem] uppercase "><?= $ProductData['name'] ?></h2>
                         <div class="flex items-center justify-center gap-3 mt-1 prices">
                             <span
@@ -113,7 +118,7 @@ class WebController extends LoginController
 
                         </div>
                         <p class="text-sm text-gray-900 mt-2"><?= $ProductData["shortDescription"] ?></p>
-                        <?php
+                    <?php
                     }
                     ?>
 
@@ -125,7 +130,7 @@ class WebController extends LoginController
                         // echo $key;
                         if ($key == 'size') {
 
-                            ?>
+                    ?>
                             <?php
                             $sizeChart = (array) json_decode($ProductData["sizeChart"]);
                             // printWithPre($sizeChart);    
@@ -139,7 +144,7 @@ class WebController extends LoginController
 
                                 $sizeChartValueString = implode(" | ", $sizeChartValueString)
 
-                                    ?>
+                            ?>
                                 <div class="w-full flex max-md:flex-col-reverse items-center max-md:items-start justify-between text-sm">
                                     <div class="flex max-md:flex-col items-center max-md:items-start justify-center gap-2">
                                         <p class="uppercase text-lg max-md:text-sm"><?= $key ?></p>
@@ -173,16 +178,16 @@ class WebController extends LoginController
                                     </div>
 
                                 </div>
-                                <?php
+                            <?php
                             } else {
-                                ?>
+                            ?>
                                 <div class="w-full flex items-center justify-between text-sm">
                                     <div class="flex items-center justify-center gap-2">
                                         <p class="uppercase text-lg max-md:text-sm"><?= $key ?></p>
                                     </div>
                                 </div>
 
-                                <?php
+                            <?php
                             }
                             ?>
                             <div class="w-full flex max-md:flex-wrap items-center justify-start mt-2 text-sm" id="SizeDiv">
@@ -200,20 +205,20 @@ class WebController extends LoginController
 
                                         $sizeChartValueString = implode(" | ", $sizeChartValueString);
                                     }
-                                    ?>
+                                ?>
                                     <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>,"<?= $sizeChartValueString ?>")'
                                         class="border <?= $key1 == 0 ? "border-gray-900 selected-size" : "border-gray-300" ?>  optionDivs cursor-pointer flex items-center justify-center h-10 w-20"
                                         option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>" onclick="">
                                         <?= $value1 ?>
                                     </div>
-                                    <?php
+                                <?php
                                 }
                                 ?>
                             </div>
 
-                            <?php
+                        <?php
                         } elseif ($key == 'color') {
-                            ?>
+                        ?>
                             <p class="uppercase mt-7 text-lg"><?= $key ?></p>
                             <div class="w-full flex items-center justify-start text-sm gap-2"
                                 id="<?= !isset($_POST["product_details"]) ? "ColorDiv" : "ColorDetailsDiv" ?>">
@@ -227,16 +232,16 @@ class WebController extends LoginController
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
                                     // $diffcolor = $finalData['images'][$key1];
-                                    ?>
+                                ?>
                                     <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"<?= $key ?>","<?= $value1 ?>",<?= $key1 ?>)'
                                         class="border <?= $key1 == 0 ? "border-gray-900" : "border-gray-300" ?> cursor-pointer flex items-center justify-center h-10 w-20"
                                         option_value="<?= $value1 ?>" option_name="<?= $ogkey ?>" product_id="<?= $id ?>"><?= $value1 ?>
                                     </div>
-                                    <?php
+                                <?php
                                 }
                                 ?>
                             </div>
-                            <?php
+                        <?php
                         }
                     }
                     if (!isset($_POST["product_details"])) {
@@ -268,7 +273,7 @@ class WebController extends LoginController
 
                             <?php
                             if (!empty($_SESSION["userid"])) {
-                                ?>
+                            ?>
                                 <form method="POST" action="/checkout-cart" class="w-full">
                                     <input type="hidden" name="varient[]" class="sideVarientId"
                                         value="<?= $ProductData['varients'][0]["id"] ?>">
@@ -287,9 +292,9 @@ class WebController extends LoginController
 
                                     </button>
                                 </form>
-                                <?php
+                            <?php
                             } else {
-                                ?>
+                            ?>
                                 <input type="hidden" name="varient[]" class="sideVarientId"
                                     value="<?= $ProductData['varients'][0]["id"] ?>">
                                 <input type="hidden" name="category[]" class="sideCategoryId" value="<?= $ProductData['category'] ?>">
@@ -306,14 +311,14 @@ class WebController extends LoginController
                                     </span>
 
                                 </button>
-                                <?php
+                            <?php
                             }
                             ?>
 
                         </div>
 
 
-                        <?php
+                    <?php
                     }
 
                     ?>
@@ -323,7 +328,7 @@ class WebController extends LoginController
                 </div>
             </div>
 
-            <?php
+        <?php
 
         } else {
             echo "<p>No variants found</p>";
@@ -386,7 +391,7 @@ class WebController extends LoginController
         foreach ($co as $color => $images) {
             // printWithPre($images);
 
-            ?>
+        ?>
             <div onclick='<?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>(this,"color","<?= $color ?>",<?= $i ?>)'
                 class=" h-[95px] flex items-center justify-start mt-1 text-sm gap-2 p-1 cursor-pointer border <?= $i == 0 ? " border-gray-900 selected-color" : "" ?>"
                 option_name="color" option_value="" product_id="<?= $id ?>">
@@ -396,7 +401,7 @@ class WebController extends LoginController
 
             </div>
 
-            <?php
+        <?php
             $i++;
         }
 
@@ -456,12 +461,12 @@ class WebController extends LoginController
         ob_start();
 
         if (!empty($matchedVariants)) {
-            ?>
+        ?>
             <?php
             foreach ($matchedVariants as $key => $value) {
                 $images = array_reverse(json_decode($value['images']));
 
-                ?>
+            ?>
                 <div onclick='changeSideVariant(this,"color","<?= parse_variant_options(($value["options"]))["Color"] ?>",<?= $key ?>)'
                     class=" h-[95px] flex items-center justify-start mt-3 text-sm gap-2 p-1 cursor-pointer border <?= $key == 0 ? " border-gray-900 selected-color" : "" ?>"
                     option_name="color" option_value="" product_id="<?= $id ?>">
@@ -570,7 +575,7 @@ class WebController extends LoginController
                     $variants = json_decode($vdata['options'], true);
                     $variants = json_decode($variants, true);
                     $totalprice = $vdata['price'] * $quantity;
-                    ?>
+                ?>
 
                     <div class="flex items-center gap-4 max-md:gap-2 border-b py-2 w-full">
                         <!-- Product image -->
@@ -582,7 +587,7 @@ class WebController extends LoginController
                             <div class="flex gap-3 flex-wrap items-center justify-start">
                                 <?php
                                 foreach ($variants as $key => $variant) {
-                                    ?>
+                                ?>
                                     <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
                                 <?php } ?>
                             </div>
@@ -611,7 +616,7 @@ class WebController extends LoginController
                         </button>
                     </div>
 
-                    <?php
+                <?php
                 }
             } else {
                 ?>
@@ -622,7 +627,7 @@ class WebController extends LoginController
                         No Products in the cart.
                     </p>
                 </div>
-                <?php
+            <?php
             }
             ?>
 
@@ -654,7 +659,7 @@ class WebController extends LoginController
                     $variants = json_decode($vdata['options'], true);
                     $variants = json_decode($variants, true);
                     $totalprice = $vdata['price'] * $quantity;
-                    ?>
+            ?>
 
                     <div class="flex items-center gap-4 max-md:gap-2 border-b py-2 w-full">
                         <!-- Product image -->
@@ -666,7 +671,7 @@ class WebController extends LoginController
                             <div class="flex gap-3 flex-wrap items-center justify-start">
                                 <?php
                                 foreach ($variants as $key => $variant) {
-                                    ?>
+                                ?>
                                     <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
                                 <?php } ?>
                             </div>
@@ -688,7 +693,7 @@ class WebController extends LoginController
                         </button>
                     </div>
 
-                    <?php
+                <?php
 
 
                 }
@@ -702,7 +707,7 @@ class WebController extends LoginController
                         No Products in the cart.
                     </p>
                 </div>
-                <?php
+            <?php
             }
             ?>
 
@@ -1647,13 +1652,13 @@ class WebController extends LoginController
                         if ($orderId) {
                             $keyapi = $PaymentGateWay['keyid'];
 
-                            ?>
+            ?>
 
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                             <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
                             <script>
-                                $(document).ready(function () {
+                                $(document).ready(function() {
                                     var options = {
                                         "key": "<?= $keyapi ?>",
                                         "amount": "<?= $_POST["allTotal"] * 100 ?>",
@@ -1661,7 +1666,7 @@ class WebController extends LoginController
                                         "name": "Nova Kids",
                                         "description": "Authentic streetwear for the next generation. Quality pieces that speak your language and match your vibe.",
                                         "image": "https://nova.bloomcrm.in/public/logos/nova_logo.png",
-                                        "handler": function (response) {
+                                        "handler": function(response) {
                                             // Payment successful - submit form
                                             var form = document.createElement('form');
                                             form.method = 'POST';
@@ -1698,7 +1703,7 @@ class WebController extends LoginController
                                             "color": "#1774ff"
                                         },
                                         "modal": {
-                                            "ondismiss": function () {
+                                            "ondismiss": function() {
                                                 // User closed the payment modal
                                                 // Optional: Update order status to "Cancelled" via AJAX
                                                 console.log("closing...")
@@ -1709,7 +1714,7 @@ class WebController extends LoginController
 
                                     var rzp = new Razorpay(options);
 
-                                    rzp.on('payment.failed', function (response) {
+                                    rzp.on('payment.failed', function(response) {
                                         // Handle payment failure
                                         alert('Payment failed: ' + response.error.description);
                                         window.history.back();
@@ -1718,7 +1723,7 @@ class WebController extends LoginController
                                     rzp.open();
                                 });
                             </script>
-                            <?php
+        <?php
                             exit();
                         }
                     }
@@ -1746,8 +1751,7 @@ class WebController extends LoginController
 
             if (!isset($data['orderid']) && empty($data['orderid'])) {
 
-                $data["orderid"] = generateRandomString(16) . time();
-                ;
+                $data["orderid"] = generateRandomString(16) . time();;
                 // echo $data["orderid"];
                 // die();
             }
@@ -2400,13 +2404,13 @@ ORDER BY id DESC LIMIT 5");
                     </div>
                 </div>
             </div>
-            <?php
-            $html = ob_get_clean();
+    <?php
+        $html = ob_get_clean();
 
-            echo json_encode([
-                "success" => true,
-                "data" => $html,
-                "vv" => $data
-            ]);
+        echo json_encode([
+            "success" => true,
+            "data" => $html,
+            "vv" => $data
+        ]);
     }
 }
