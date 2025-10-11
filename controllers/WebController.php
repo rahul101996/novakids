@@ -139,11 +139,13 @@ class WebController extends LoginController
 
                                 $sizeChartValueString = implode(" | ", $sizeChartValueString)
 
-                            ?>
+                                    ?>
                                 <div class="w-full flex max-md:flex-col-reverse items-center max-md:items-start justify-between text-sm">
                                     <div class="flex max-md:flex-col items-center max-md:items-start justify-center gap-2">
                                         <p class="uppercase text-lg max-md:text-sm"><?= $key ?></p>
-                                        <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded <?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>"><?= $sizeChartValueString ?>
+                                        <div
+                                            class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded <?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>">
+                                            <?= $sizeChartValueString ?>
                                         </div>
                                     </div>
 
@@ -2401,10 +2403,10 @@ ORDER BY id DESC LIMIT 5");
             <?php
             $html = ob_get_clean();
 
-        echo json_encode([
-            "success" => true,
-            "data" => $html,
-            "vv" => $data
-        ]);
+            echo json_encode([
+                "success" => true,
+                "data" => $html,
+                "vv" => $data
+            ]);
     }
 }
