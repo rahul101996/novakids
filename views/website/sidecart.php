@@ -117,28 +117,28 @@
                 <p class="text-center mt-2 max-md:mt-5 mb-1">Don't Miss Out Of These😍!</p>
 
                 <div class="grid grid-cols-1 gap-4 mb-2">
-                    
-                    
+
+
 
                     <?php
-                    foreach([$uniqueProducts[0],$uniqueProducts[1]] as $sunit){
+                    foreach ([$uniqueProducts[0], $uniqueProducts[1]] as $sunit) {
                         $images = json_decode($sunit['product_images'], true);
                         $firstImage = !empty($images) ? $images[0] : null;
                         $sname = str_replace(' ', '-', $sunit['name']);
                         $sname = str_replace("'", '', $sname);
-                        ?>
-                            <a href="/products/product-details/<?= $sname ?>" class="flex items-center gap-4 p-2 bg-gray-100 border border-gray-200">
-                                <img src="/<?= $firstImage ?>" alt="Product" class="w-16 h-16 object-cover">
-                                <div class="flex-1">
-                                    <h3 class="font-semibold text-base"><?= $sunit['name'] ?></h3>
-                                    <p class="font-bold text-[#f25b21]">₹<span id="cartTotal"><?= $sunit['price'] ?></span></p>
-                                </div>
-                                <span 
-                                    class="relative inline-block text-sm px-2 py-1 rounded-md border border-[#f25b21] text-[#f25b21] font-semibold overflow-hidden group">
-                                    <i class="fas fa-plus"></i> View
-                                </span>
-                            </a>
-                        <?php
+                    ?>
+                        <a href="/products/product-details/<?= $sname ?>" class="flex items-center gap-4 p-2 bg-gray-100 border border-gray-200">
+                            <img src="/<?= $firstImage ?>" alt="Product" class="w-16 h-16 object-cover">
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-base"><?= $sunit['name'] ?></h3>
+                                <p class="font-bold text-[#f25b21]">₹<span id="cartTotal"><?= $sunit['price'] ?></span></p>
+                            </div>
+                            <span
+                                class="relative inline-block text-sm px-2 py-1 rounded-md border border-[#f25b21] text-[#f25b21] font-semibold overflow-hidden group">
+                                <i class="fas fa-plus"></i> View
+                            </span>
+                        </a>
+                    <?php
                     }
                     ?>
                 </div>
@@ -332,14 +332,14 @@
         }
 
     }
-     <?php
+    <?php
     if ($page != "shop") {
 
     ?>
-    document.addEventListener('DOMContentLoaded', function() {
-        AddToCart();
-        console.log('bibibdbbwbwbicbwbcwbcibicwicbpw');
-    });
+        document.addEventListener('DOMContentLoaded', function() {
+            AddToCart();
+            console.log('bibibdbbwbwbicbwbcwbcibicwicbpw');
+        });
     <?php } ?>
 
     function AddToCart() {
@@ -417,7 +417,7 @@
         }
     }
     <?php
-if ($page != "shop") {
+    if ($page != "shop") {
     ?>
         document.addEventListener('DOMContentLoaded', function() {
             AddToWishlist();
@@ -462,8 +462,13 @@ if ($page != "shop") {
 
                 if (request.data.message == "Add To wishlist Successfully") {
                     if (page == "product-details") {
-
-                        ele.querySelector("img").src = "/public/icons/heart-orange.png";
+                        console.log(ele.querySelector("img"))
+                        if (ele.querySelector("img") != null) {
+                            ele.querySelector("img").src = "/public/icons/heart-orange.png";
+                        } else {
+                            ele.classList.remove('bg-black/70');
+                            ele.classList.add('bg-[#f25b21]');
+                        }
                     } else {
                         ele.classList.remove('bg-black/70');
                         ele.classList.add('bg-[#f25b21]');
@@ -494,7 +499,13 @@ if ($page != "shop") {
                     }
                     ?>
                     if (page == "product-details") {
-                        ele.querySelector("img").src = "/public/icons/heart-black.png";
+                        console.log(ele.querySelector("img"))
+                        if (ele.querySelector("img") != null) {
+                            ele.querySelector("img").src = "/public/icons/heart-black.png";
+                        } else {
+                            ele.classList.add('bg-black/70');
+                            ele.classList.remove('bg-[#f25b21]');
+                        }
                     } else {
                         ele.classList.add('bg-black/70');
                         ele.classList.remove('bg-[#f25b21]');
@@ -649,9 +660,9 @@ if ($page != "shop") {
         divs[key1].classList.add("border-gray-900");
         console.log("GLOBAL_VARIANT", GLOBAL_VARIANT)
         let selectedId = "";
-        if(document.querySelector(".changeSideVariant")){
-             document.querySelector(".changeSideVariant").innerText = json;
-           }
+        if (document.querySelector(".changeSideVariant")) {
+            document.querySelector(".changeSideVariant").innerText = json;
+        }
         GLOBAL_VARIANT.variants.forEach(async (ar, i) => {
 
             if (deepEqualCaseInsensitive(JSON.parse(JSON.parse(ar.options)), GLOBAL_VARIANT.selected)) {
