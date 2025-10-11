@@ -302,7 +302,7 @@ $ppimg = array_reverse($imags);
                         // printWithPre($images);
                     ?>
                         <a href="/products/product-details/<?= $name ?>" class="block">
-                            <div class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
+                            <div class="group relative md:m-2 max-md:m-1 md:p-2 cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
                                 <span
                                     class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">
@@ -358,7 +358,7 @@ $ppimg = array_reverse($imags);
     </section>
 
     <!-- Section -->
-    <section class="md:pb-16 max-md:py-16 relative">
+    <section class="md:pb-16 max-md:py-16 relative max-md:w-[90vw] mx-auto">
         <div class="absolute hidden -top-14 max-md:-top-16 -left-14 w-auto h-auto opacity-20">
             <img src="/public/images/naruto.webp" alt="" class="w-40 max-md:w-28 h-auto">
         </div>
@@ -371,7 +371,7 @@ $ppimg = array_reverse($imags);
         </div>
 
 
-        <div class="grid grid-cols-1 md:grid-cols-3 md:gap-16 w-[90vw] max-md:w-[80vw] max-md:gap-6 mx-auto md:px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 md:gap-16 w-[90vw] max-md:w-[90vw] max-md:gap-6 mx-auto md:px-4">
             <!-- Tees -->
             <?php
             foreach ($categories as $key => $category) {
@@ -381,7 +381,7 @@ $ppimg = array_reverse($imags);
                     <a href="/category/<?= strtolower(str_replace(' ', '-', $category['category'])) ?>">
 
                         <img src="/<?= $category['img'] ?>" alt="Tees"
-                            class="w-full h-[400px] max-md:h-[200px] object-cover object-top transform group-hover:scale-110 transition duration-700 ease-out">
+                            class="w-full h-[400px] max-md:h-[250px] object-cover object-top transform group-hover:scale-110 transition duration-700 ease-out">
                         <!-- Overlay -->
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
@@ -818,7 +818,7 @@ $ppimg = array_reverse($imags);
         }
     </style>
 
-    <section class="py-16 max-md:pt-6 max-md:pb-4 w-[90vw] mx-auto">
+    <section class="py-16 max-md:pt-6 max-md:pb-10 w-[90vw] mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
             <!-- Left Side Text (Sticky) -->
             <div class="md:sticky top-24 md:self-start max-md:items-center max-md:text-center">

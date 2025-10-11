@@ -138,14 +138,14 @@ class WebController extends LoginController
                                 $sizeChartValueString = implode(" | ", $sizeChartValueString)
 
                             ?>
-                                <div class="w-full flex max-md:items-start items-center justify-between text-sm ">
-                                    <div class="flex max-md:flex-col items-center max-md:items-start justify-center gap-2 max-md:w-[50%]">
+                                <div class="w-full flex max-md:flex-col-reverse items-center max-md:items-start justify-between text-sm">
+                                    <div class="flex max-md:flex-col items-center max-md:items-start justify-center gap-2">
                                         <p class="uppercase text-lg max-md:text-sm"><?= $key ?></p>
                                         <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded <?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?> max-md:text-nowrap"><?= $sizeChartValueString ?>
                                         </div>
                                     </div>
 
-                                    <div class="flex gap-1 cursor-pointer items-end justify-center max-md:justify-end max-md:w-[50%]"
+                                    <div class="flex gap-1 cursor-pointer items-end justify-center max-md:justify-end max-md:w-full"
                                         onclick="showSizeChart('<?= $id ?>')">
                                         <svg class="icon icon-accordion mb-1 color-foreground-" aria-hidden="true" focusable="false"
                                             role="presentation" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 20 20">
@@ -181,7 +181,7 @@ class WebController extends LoginController
                             <?php
                             }
                             ?>
-                            <div class="w-full flex items-center justify-start mt-2 text-sm" id="SizeDiv">
+                            <div class="w-full flex max-md:flex-wrap items-center justify-start mt-2 text-sm" id="SizeDiv">
                                 <?php
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
@@ -2381,7 +2381,7 @@ ORDER BY id DESC LIMIT 5");
                         <?= $ProductData["sizeDescription"] ?>
                     </div>
                     <!-- Image -->
-                    <div class="w-full md:w-[40%] flex justify-center <?=empty($ProductData["sizeImage"])?"hidden":""?>">
+                    <div class="w-full md:w-[40%] flex justify-center <?= empty($ProductData["sizeImage"]) ? "hidden" : "" ?>">
                         <img src="/<?= $ProductData["sizeImage"] ?>" alt="How to measure T-shirt" class="h-72 max-md:h-64">
                     </div>
                 </div>
@@ -2392,7 +2392,7 @@ ORDER BY id DESC LIMIT 5");
         echo json_encode([
             "success" => true,
             "data" => $html,
-            "vv"=>$data
+            "vv" => $data
         ]);
     }
 }

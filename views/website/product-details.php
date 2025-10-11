@@ -373,7 +373,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     <div class="w-full flex items-center justify-start mt-4 text-sm relative">
                         <p class="text-semibold">Size not available ?</p> &ensp;<span
                             class="text-[#f25b21] cursor-pointer underline" onclick="NotifyMe()">NOTIFY ME</span>
-                        <div class="hidden absolute border border-gray-300 top-[107%] flex flex-col items-start justify-center bg-white w-[25vw] z-50"
+                        <div class="hidden absolute border border-gray-300 top-[107%] flex flex-col items-start justify-center bg-white w-[25vw] max-md:w-[90vw] shadow-xl z-50"
                             id="NotifyMe">
                             <div class="w-full flex items-center justify-start px-4 py-6 flex-col bg-orange-50 ">
                                 <div class="w-full flex items-center justify-between">
@@ -610,7 +610,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         </section>
 
         <div class="w-full flex items-center justify-center mt-16 max-md:mt-8">
-            <div class="flex items-center justify-center flex-col relative w-[90%] gap-5">
+            <div class="flex items-center justify-center flex-col relative w-[90%] max-md:w-full gap-5">
 
                 <div
                     class="w-[80%] max-md:w-[90%] h-[28vh] bg-white rounded-lg shadow-md border border-gray-300  py-6 flex flex-col items-center justify-center">
@@ -695,7 +695,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                             "<?= $value['reviewText'] ?>"
                                         </p>
                                     </div>
-                                    <<<<<<< HEAD
+                            
 
                                         <div class="flex gap-4 items-center">
                                         <div class="flex items-center w-10 h-10">
@@ -710,7 +710,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 </div>
                         </div>
 
-                        =======
+                    
 
                         <div class="flex gap-4 items-center">
                             <div class="flex items-center w-10 h-10">
@@ -859,6 +859,22 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                     class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">
                                     SAVE <?= $discountPercentage ?>%
                                 </span>
+                                $data = checkExisteingWishlistSession($product['id']);
+                                if ($data) {
+                                    $data = ['id' => $data];
+                                } else {
+                                    $data = [];
+                                }
+                            }
+                            // printWithPre($images);
+                        ?>
+                            <a href="/products/product-details/<?= $name ?>" class="block max-md:m-1">
+                                <div class="group relative  cursor-pointer transition overflow-hidden">
+                                    <!-- Discount Badge -->
+                                    <span
+                                        class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">
+                                        SAVE <?= $discountPercentage ?>%
+                                    </span>
 
                                 <div class=" relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
                                     <img src="/<?= $images[0] ?>" alt="Product 1"
