@@ -138,14 +138,14 @@ class WebController extends LoginController
                                 $sizeChartValueString = implode(" | ", $sizeChartValueString)
 
                             ?>
-                                <div class="w-full flex max-md:flex-col-reverse items-center justify-between text-sm">
-                                    <div class="flex max-md:flex-col items-center max-md:items-start justify-center gap-2">
+                                <div class="w-full flex max-md:items-start items-center justify-between text-sm ">
+                                    <div class="flex max-md:flex-col items-center max-md:items-start justify-center gap-2 max-md:w-[50%]">
                                         <p class="uppercase text-lg max-md:text-sm"><?= $key ?></p>
-                                        <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded <?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>"><?= $sizeChartValueString ?>
+                                        <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded <?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?> max-md:text-nowrap"><?= $sizeChartValueString ?>
                                         </div>
                                     </div>
 
-                                    <div class="flex gap-1 cursor-pointer items-end justify-center max-md:justify-end max-md:w-full"
+                                    <div class="flex gap-1 cursor-pointer items-end justify-center max-md:justify-end max-md:w-[50%]"
                                         onclick="showSizeChart('<?= $id ?>')">
                                         <svg class="icon icon-accordion mb-1 color-foreground-" aria-hidden="true" focusable="false"
                                             role="presentation" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 20 20">
@@ -1111,6 +1111,7 @@ class WebController extends LoginController
                 }
                 $id = $ProductData['id'];
                 $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
+                $similarProducts = getData2("SELECT * FROM `tbl_products` WHERE `category` = $ProductData[category] LIMIT 6");
                 $ProductData['varients'] = $varients;
                 $comparePrice = floatval($ProductData['compare_price']);
                 $price = floatval($ProductData['varients'][0]["price"]);
