@@ -7,6 +7,22 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
 ?>
 
+<style>
+    @keyframes gradient-move {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>
+
 <body class="bg-gray-50 bg-gray-100">
 
     <div class="flex h-screen ">
@@ -14,7 +30,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
         include $_SERVER['DOCUMENT_ROOT'] . "/views/include/sidebar.php";
 
         $date = date('Y-m-d');
-
 
         ?>
 
@@ -27,10 +42,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     <button class="text-gray-500 hover:text-gray-700">
                         <span class="material-icons">arrow_back</span>
                     </button>
-                    <h1 class="text-2xl font-semibold ml-2">Edit Product</h1>
+                    <h1 class="text-2xl font-semibold ml-2">Add Product</h1>
                 </div>
             </div>
-            <form action="" method="POST" enctype="multipart/form-data"
+            <form action="" id="productForm" method="POST" enctype="multipart/form-data"
                 class="w-full flex flex-col items-center justify-center">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-[85%] pb-10">
                     <div class="lg:col-span-2 flex flex-col gap-6">
@@ -39,24 +54,32 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Title</label>
                             <input
                                 class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
-                                value="<?= isset($productData['name']) ? $productData['name'] : '' ?>" name="name"
-                                id="title" placeholder="e.g., Summer collection, Under $100, Staff picks" type="text" />
+                                name="name" value="<?= isset($editData['name']) ? $editData['name'] : '' ?>" id="title"
+                                placeholder="e.g., Summer collection, Under $100, Staff picks" type="text" required />
+
+                            <label class="block text-sm font-medium text-gray-700 mt-6 mb-1" for="description">Short
+                                Description</label>
+                            <div class="border border-gray-800 rounded-md">
+                                <textarea class="w-full border-0 focus:ring-0 resize-y p-3" placeholder=""
+                                    name="shortDescription" id="shortDescription"
+                                    required><?= !empty($editData) && !empty($editData['shortDescription']) ? $editData['shortDescription'] : '' ?></textarea>
+                            </div>
+
+
                             <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
                                 for="description">Description</label>
                             <div class="border border-gray-800 rounded-md">
                                 <textarea class="w-full h-40 border-0 focus:ring-0 resize-y p-3 summernote"
                                     placeholder=""
-                                    name="description"><?= isset($productData['description']) ? $productData['description'] : '' ?></textarea>
+                                    name="description"><?= !empty($editData) && !empty($editData['description']) ? $editData['description'] : '' ?></textarea>
                             </div>
                             <h2 class="text-sm font-medium mt-3">Category</h2>
                             <div class="w-full flex items-center justify-start">
-                                <select name="category" class="selectElement">
+                                <select name="category" class="selectElement" required>
                                     <?php
                                     foreach ($categories as $category) {
                                         ?>
-                                        <option value="<?= $category['id'] ?>" <?= (isset($productData["category"]) && $productData["category"] == $category['id']) ? "selected" : "" ?>>
-                                            <?= $category['category'] ?>
-                                        </option>
+                                        <option value="<?= $category['id'] ?>" <?= $editData['category'] == $category['id'] ? 'selected' : '' ?>><?= $category['category'] ?></option>
 
                                     <?php } ?>
                                     ?>
@@ -65,6 +88,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             </div>
                             <p class="mt-2 text-sm text-gray-500">Determines tax rates and adds metafields to improve
                                 search, filters, and cross-channel sales</p>
+                            <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Product Tag</label>
+                            <input
+                                class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                value="<?= isset($editData['product_tag']) ? $editData['product_tag'] : '' ?>"
+                                name="product_tag" id="title" placeholder="e.g., Only few left" type="text" />
                         </div>
 
 
@@ -72,20 +100,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         <div class="bg-white p-6 rounded-lg shadow-sm">
                             <h2 class="text-base font-medium text-gray-900">Pricing</h2>
                             <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div>
-                                    <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
-                                    <div class="relative mt-1 rounded-md">
-                                        <div
-                                            class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                            <!-- <span class="text-gray-500 sm:text-sm">₹</span> -->
-                                        </div>
-                                        <input type="number" step="0.1"
-                                            value="<?= isset($productData['price']) ? $productData['price'] : '' ?>"
-                                            name="price" id="price"
-                                            class="w-full border border-gray-800 rounded-md  focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
-                                            placeholder="₹0.00" oninput="CalculateProfitMargin()">
-                                    </div>
-                                </div>
+
                                 <div>
                                     <label for="compare-price"
                                         class="flex items-center text-sm font-medium text-gray-700">
@@ -101,17 +116,33 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                             class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                             <!-- <span class="text-gray-500 sm:text-sm">₹</span> -->
                                         </div>
-                                        <input type="number" name="compare_price" id="compare-price"
-                                            value="<?= isset($productData['compare_price']) ? $productData['compare_price'] : '' ?>"
+                                        <input type="number"
+                                            value="<?= !empty($editData) && !empty($editData['compare_price']) ? $editData['compare_price'] : '' ?>"
+                                            name="compare_price" id="compare-price"
                                             class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
                                             placeholder="₹0.00" oninput="CalculateProfitMargin()">
                                     </div>
                                 </div>
+
+                                <div>
+                                    <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                                    <div class="relative mt-1 rounded-md">
+                                        <div
+                                            class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <!-- <span class="text-gray-500 sm:text-sm">₹</span> -->
+                                        </div>
+                                        <input type="number"
+                                            value="<?= !empty($editData) && !empty($editData['price']) ? $editData['price'] : '' ?>"
+                                            step="0.1" name="price" id="price"
+                                            class="w-full border border-gray-800 rounded-md  focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                            placeholder="₹0.00" oninput="CalculateProfitMargin()">
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="relative flex items-start mt-2">
+                            <div class="relative flex items-start mt-2 hidden">
                                 <div class="flex h-5 items-center">
-                                    <input id="charge-tax" name="charge_tax" type="checkbox"
-                                        <?= (isset($productData["charge_tax"]) && !empty($productData["charge_tax"]) ? "checked" : "") ?>
+                                    <input id="charge-tax" name="charge_tax" type="checkbox" checked
                                         class="h-4 w-4 rounded border-gray-800 text-indigo-600 focus:ring-indigo-500">
                                 </div>
                                 <div class="ml-3 text-sm">
@@ -133,24 +164,26 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     </label>
                                     <div class="relative mt-1 rounded-md">
 
-                                        <input type="text" name="cost_per_item"
-                                            value="<?= isset($productData['cost_per_item']) ? $productData['cost_per_item'] : '' ?>"
-                                            id="cost-per-item" oninput="CalculateProfitMargin()"
+                                        <input type="text"
+                                            value="<?= !empty($editData) && !empty($editData['cost_per_item']) ? $editData['cost_per_item'] : '' ?>"
+                                            name="cost_per_item" id="cost-per-item" oninput="CalculateProfitMargin()"
                                             class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
                                             placeholder="₹0.00">
                                     </div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Profit</label>
-                                    <input type="text" name="profit" id="profit"
-                                        value="<?= isset($productData['profit']) ? $productData['profit'] : '' ?>"
+                                    <input type="text"
+                                        value="<?= !empty($editData) && !empty($editData['profit']) ? $editData['profit'] : '' ?>"
+                                        name="profit" id="profit"
                                         class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
                                         placeholder="₹0.00" readonly>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Margin (%)</label>
-                                    <input type="text" name="margin" id="margin"
-                                        value="<?= isset($productData['margin']) ? $productData['margin'] : '' ?>"
+                                    <input type="text"
+                                        value="<?= !empty($editData) && !empty($editData['margin']) ? $editData['margin'] : '' ?>"
+                                        name="margin" id="margin"
                                         class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
                                         placeholder="₹0.00" readonly>
                                 </div>
@@ -158,13 +191,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         </div>
 
 
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="bg-white p-6 rounded-lg shadow-sm hidden">
                             <h2 class="text-base font-medium text-gray-900">Inventory</h2>
 
                             <div class="relative flex items-start mt-2">
                                 <div class="flex h-5 items-center">
-                                    <input name="track_quantity" type="checkbox"
-                                        <?= (isset($productData["track_quantity"]) && !empty($productData["track_quantity"]) ? "checked" : "") ?>
+                                    <input name="track_quantity" type="checkbox" checked
                                         class="h-4 w-4 rounded border-gray-800 text-indigo-600 focus:ring-indigo-500">
                                 </div>
                                 <div class="ml-3 text-sm">
@@ -182,7 +214,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <div class="relative flex items-start mt-3">
                                 <div class="flex h-5 items-center">
                                     <input id="charge-tax" name="continue_selling" type="checkbox"
-                                        <?= (isset($productData["continue_selling"]) && !empty($productData["continue_selling"]) ? "checked" : "") ?>
                                         class="h-4 w-4 rounded border-gray-800 text-indigo-600 focus:ring-indigo-500">
                                 </div>
                                 <div class="ml-3 text-sm">
@@ -205,13 +236,125 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             </div>
                         </div>
 
+                        <div class="bg-white p-6 rounded-lg shadow-sm w-full">
+                            <h2 class="text-base font-medium text-gray-900">Variants</h2>
+                            <div class="w-full mx-auto">
+
+                                <!-- Options Container -->
+                                <div
+                                    class="flex flex-col items-center justify-center border border-gray-200 rounded-lg w-full">
+                                    <div id="optionsContainer" class="space-y-6 w-full">
+
+                                    </div>
+                                    <div class="flex items-center justify-between w-[95%] py-2">
+                                        <button onclick="addOption()" type="button"
+                                            class="text-white bg-blue-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">
+                                            <i class="fa-solid fa-circle-plus mr-2 border-none" aria-hidden="true"></i>
+                                            Add another option
+                                        </button>
+
+                                        <button onclick="generateVariants()" type="button" class="text-white px-5 py-2 rounded-lg shadow-md font-medium 
+                                                    bg-gradient-to-r from-red-500  to-blue-500 
+                                                    bg-[length:200%_200%] animate-[gradient-move_6s_ease_infinite]
+                                                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 
+                                                    transition-all duration-300 hover:scale-105 flex items-center">
+
+                                            <i class="fa-solid fa-layer-group mr-2"></i>
+                                            Generate Variants
+                                        </button>
+                                    </div>
+                                </div>
+
+
+
+                                <!-- Variants Table -->
+                                <div id="variantsSection" class="<?= !empty($editData) ? '' : 'hidden' ?> w-full">
+
+                                    <table class="w-full table-auto border-collapse border border-gray-300 text-sm">
+                                        <thead>
+                                            <tr class="bg-gray-100">
+                                                <th class="border border-gray-300 px-3 py-3 text-left">Variant</th>
+                                                <th class="border border-gray-300 px-3 py-3 text-left">Price</th>
+                                                <th class="border border-gray-300 px-3 py-3 text-left">Available</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="variantsTableBody">
+
+                                            <?php
+
+                                            if (!empty($editData)) {
+
+                                                foreach (getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id") as $vkey => $vdata) {
+
+                                                    $jsonData = json_decode($vdata['options'], true);
+                                                    $lines = explode("\n", trim($jsonData));
+                                                    $pvoptions = [];
+                                                    foreach ($lines as $kkey => $line) {
+                                                        $pvoptions = json_decode($line, true);
+                                                    }
+
+                                                    $vvkeys = array_keys($pvoptions);
+                                                    $vvdd = array_values($pvoptions);
+
+                                                    $dtdtd = "";
+                                                    foreach ($vvkeys as $keyskey => $keysvalue) {
+                                                        $dtdtd .= $vvdd[$keyskey] . "/";
+                                                    }
+                                                    $dtdtd = substr($dtdtd, 0, -1);
+
+                                                    // printWithPre($pvoptions);
+                                                    // printWithPre($vvkeys);
+                                                    // printWithPre($vvdd);
+                                                    // printWithPre($dtdtd);
+
+                                                    ?>
+
+                                                    <tr class="hover:bg-gray-50 border border-gray-200">
+                                                        <td class="px-3 py-3">
+                                                            <div class="flex items-center justify-start gap-3">
+                                                                <div class="bg-white border border-gray-300 flex items-center justify-center w-20 h-20 rounded-xl cursor-pointer image-placeholder overflow-hidden"
+                                                                    data-index="<?= $vkey ?>">
+                                                                    <i class="fa-solid fa-images text-xl"></i>
+                                                                    <img src="" alt=""
+                                                                        class="hidden w-full h-full object-contain relative z-10">
+                                                                </div>
+                                                                <input type="file" name="variant_images[<?= $vkey ?>][]"
+                                                                    accept="image/*" class="hidden file-input" multiple
+                                                                    data-index="<?= $vkey ?>">
+                                                                <span><?= $dtdtd ?></span>
+                                                                <input type="hidden" name="variant_options[<?= $vkey ?>]"
+                                                                    value='<? ?>'>
+                                                            </div>
+                                                        </td>
+                                                        <td class="px-3 py-3">
+                                                            <input type="number" name="variant_prices[<?= $vkey ?>]"
+                                                                value="<?= $vdata['price'] ?>"
+                                                                class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                                                placeholder="₹ 0.00" required>
+                                                        </td>
+                                                        <td class="px-3 py-3">
+                                                            <input type="number" name="variant_quantities[<?= $vkey ?>]"
+                                                                class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                                                value="<?= $vdata['quantity'] ?>" required>
+                                                        </td>
+                                                    </tr>
+                                                    <?php
+                                                }
+                                            } ?>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="bg-white p-6 rounded-lg shadow-sm">
                             <h2 class="text-base font-medium text-gray-900">Shipping</h2>
 
-                            <div class="relative flex items-start mt-2">
+                            <div class="relative flex items-start mt-2 hidden">
                                 <div class="flex h-5 items-center">
-                                    <input id="physical-product" name="physical_product" type="checkbox"
-                                        <?= (isset($productData["physical_product"]) && !empty($productData["physical_product"]) ? "checked" : "") ?>
+                                    <input id="physical-product" name="physical_product" type="checkbox" checked
                                         class="h-4 w-4 rounded border-gray-800 text-indigo-600 focus:ring-indigo-500">
                                 </div>
                                 <div class="ml-3 text-sm">
@@ -219,6 +362,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         This is a physical product</label>
                                 </div>
                             </div>
+
                             <hr class="mt-3 mb-6 border-gray-200">
 
                             <div class="w-full flex items-center justify-start gap-2 ">
@@ -226,11 +370,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     class="rounded-full border-2 border-gray-300 w-5 h-5 flex items-center justify-center pt-[2px]"><i
                                         class="fa-solid fa-question text-gray-400 text-xs"></i></span>
                             </div>
+
                             <div class="relative flex items-start mt-3">
                                 <div class="w-full bg-white rounded-lg ">
 
-                                    <input type="hidden" name="packaging" id="packaging"
-                                        value="<?= isset($productData['packaging']) ? $productData['packaging'] : '' ?>">
+                                    <input type="hidden" name="packaging" id="packaging">
                                     <div id="dropdown" class="relative">
                                         <button id="dropdownButton" type="button"
                                             class="w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
@@ -285,120 +429,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             </div>
                         </div>
 
-
-                        <div class="bg-white p-6 rounded-lg shadow-sm w-full">
-                            <h2 class="text-base font-medium text-gray-900">Variants</h2>
-                            <div class="w-full mx-auto">
-
-                                <!-- Options Container -->
-                                <div
-                                    class="flex flex-col items-center justify-center border border-gray-200 rounded-lg w-full">
-                                    <div id="optionsContainer" class="space-y-6 w-full">
-                                        <?php
-
-                                        /**
-                                         * Robustly decode variant options which might be:
-                                         * - already an array
-                                         * - a JSON object string: '{"Size":"S","Color":"Red"}'
-                                         * - a double-encoded JSON string: '"{\"Size\":\"S\",\"Color\":\"Red\"}"'
-                                         * - an escaped string: "{\"Size\":\"S\",\"Color\":\"Red\"}"
-                                         *
-                                         * Returns an associative array on success, or [] on failure.
-                                         */
-                                        
-
-
-                                        $variantsLabel = getData2("SELECT * FROM tbl_variants where product_id='$id'");
-                                        // printWithPre(json_decode($variantsLabel[0]["options"]));
-                                        $vv = groupOptions($variantsLabel);
-                                        // printWithPre($vv);
-                                        $ii=0;
-                                        foreach($vv as $key=>$oldVariant){
-                                            $ii ++ ;
-                                            ?>
-                                            <div class="w-full flex flex-col items-center justify-center mt-2 border-b border-gray-200  rounded-md p-4"
-                                                id="option-1">
-                                                <span class="w-full text-left">Option Name</span>
-                                                <div class="flex justify-between items-center mb-2 w-full">
-                                                    <input type="text"
-                                                        class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2 mt-2"
-                                                        name="options_name[]" value="<?=$key?>" placeholder="Eg. Size">
-
-                                                </div>
-                                                <div id="values-<?=$ii?>" class="space-y-2 w-full mt-3">
-                                                    <span class="w-full text-left mb-2">Option Values</span>
-                                                    <?php
-                                                    foreach($oldVariant as $ov){
-                                                        ?>
-                                                        <div class="flex items-center flex-col justify-center w-full ">
-                                                            <div class="w-full flex items-center justify-center w-full gap-3">
-                                                                <input placeholder="Eg. Small" type="text"
-                                                                    name="options_value[<?=$ii?>][]"
-                                                                    value="<?=$ov?>"
-                                                                    class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                                                                <button onclick="removeValue(this)"><i
-                                                                        class="fa-solid fa-trash-can text-gray-500"
-                                                                        aria-hidden="true"></i></button>
-                                                            </div>
-
-                                                        </div>
-                                                        <?php
-                                                    }
-                                                    ?>
-                                                </div>
-                                                <div class="w-full flex items-center justify-between mt-3">
-                                                    <button onclick="removeOption(1)" type="button"
-                                                        class="text-red-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Delete</button>
-                                                    <button onclick="addValue(1)" type="button"
-                                                        class="text-white bg-gray-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add</button>
-                                                </div>
-                                            </div>
-                                            <?php
-                                        }
-
-                                        ?>
-                                        
-                                    </div>
-                                    <div class="flex items-center justify-between w-[95%] py-2">
-                                        <button onclick="addOption()" type="button"
-                                            class="focus:outline-none focus:ring-0">
-                                            <i class="fa-solid fa-circle-plus mr-2 border-none" aria-hidden="true"></i>
-                                            Add another option
-                                        </button>
-
-                                        <button onclick="generateVariants()" type="button"
-                                            class="focus:outline-none focus:ring-0">
-                                            <i class="fa-solid fa-layer-group mr-2 border-none" aria-hidden="true"></i>
-                                            Generate Variants
-                                        </button>
-                                    </div>
-                                </div>
-
-
-
-                                <!-- Variants Table -->
-                                <div id="variantsSection" class="hidden w-full">
-
-                                    <table class="w-full table-auto border-collapse border border-gray-300 text-sm">
-                                        <thead>
-                                            <tr class="bg-gray-100">
-                                                <th class="border border-gray-300 px-3 py-3 text-left">Variant</th>
-                                                <th class="border border-gray-300 px-3 py-3 text-left">Price</th>
-                                                <th class="border border-gray-300 px-3 py-3 text-left">Available</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="variantsTableBody">
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
                         <button
-                            class="text-white bg-gray-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm w-fit">Add</button>
-
-
+                            class="text-white bg-gray-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm w-fit"><?= !empty($editData) ? 'Update Product' : 'Add Product' ?></button>
 
                     </div>
 
@@ -409,20 +441,22 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <div class="mt-1 relative">
                                 <select id="status" name="status"
                                     class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                                    <option class="">Active</option>
-                                    <option class="">Draft</option>
+                                    <option class="" <?= !empty($editData) && $editData['status'] == 1 ? 'selected' : '' ?>>Active</option>
+                                    <option class="" <?= !empty($editData) && $editData['status'] == 0 ? 'selected' : '' ?>>Draft</option>
                                 </select>
-
                             </div>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
+
+                        <div
+                            class="bg-white p-6 rounded-lg shadow-sm <?= isset($editData['product_images']) ? 'hidden' : '' ?> ">
                             <h2 class="text-base font-medium text-gray-900">Media</h2>
                             <div
                                 class="space-y-1 text-center flex flex-col items-center border-2 border-gray-800 border-dashed rounded-lg p-8">
 
-                                <div id="imagePreview" class="<?= isset($productData['image']) ? '' : 'hidden' ?> mb-4">
+                                <div id="imagePreview"
+                                    class="<?= isset($editData['product_images']) ? '' : 'hidden' ?> mb-4">
                                     <!-- <input type="hidden" name="old_vdata_image" value=""> -->
-                                    <img src="/<?= isset($productData['image']) ? $productData['image'] : '' ?>"
+                                    <img src="/<?= isset($editData['product_images']) ? $editData['product_images'] : '' ?>"
                                         alt="Preview" class="mx-auto h-32 object-cover">
                                 </div>
                                 <svg class="mx-auto h-8 w-8 text-gray-400" stroke="currentColor" fill="none"
@@ -437,7 +471,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none">
                                         <span>Upload a file</span>
                                         <input id="vdata_image" name="product_images[]" type="file" class="sr-only"
-                                            accept="image/*" required multiple>
+                                            accept="image/*" multiple>
                                     </label>
                                     <p class="pl-1">or drag and drop</p>
                                 </div>
@@ -445,17 +479,135 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             </div>
                         </div>
 
-
-
-
-
-
-
                     </div>
                 </div>
+
+                <div id="myModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/40 backdrop-blur-sm">
+                    <div class="flex mt-10 justify-center p-4 w-full">
+                        <div
+                            class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden transition-all duration-300">
+
+                            <!-- Modal Header -->
+                            <div
+                                class="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+                                <h2 class="text-xl font-semibold text-gray-800 dark:text-white">
+                                    Size Chart
+                                </h2>
+                                <button type="button" onclick="closeModal('myModal')"
+                                    class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-2xl leading-none">
+                                    &times;
+                                </button>
+                            </div>
+
+                            <!-- Modal Body -->
+                            <div class="p-6 text-gray-700 dark:text-gray-300 body">
+                                <div class="flex gap-6">
+                                    <!-- Size Description -->
+                                    <div class="flex-1">
+                                        <label for="sizeDescription"
+                                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                            Size Description
+                                        </label>
+                                        <textarea id="sizeDescription" name="sizeDescription"
+                                            placeholder="Enter size description..." class="w-full h-40 border border-gray-300 dark:border-gray-600 rounded-lg p-3 resize-y
+                                                    focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800
+                                                    text-gray-800 dark:text-gray-100 summernote"></textarea>
+                                    </div>
+
+                                    <!-- Size Chart Image -->
+                                    <div class="flex-1">
+                                        <label for="sizeImage"
+                                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                            Upload Size Chart Image
+                                        </label>
+
+                                        <div class="flex flex-col items-center gap-2">
+                                            <!-- Image Preview -->
+                                            <div id="previewContainer"
+                                                class="w-full h-48 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-800 overflow-hidden">
+                                                <img id="sizeImagePreview" class="object-contain h-full" />
+                                                <span id="defaultIcon" class="text-gray-400 text-3xl">📷</span>
+                                            </div>
+
+                                            <!-- File Input -->
+                                            <input type="file" id="sizeImage" name="sizeImage" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
+                                                    file:rounded-lg file:border-0
+                                                    file:text-sm file:font-semibold
+                                                    file:bg-blue-500 file:text-white
+                                                    hover:file:bg-blue-600
+                                                    dark:file:bg-blue-600 dark:file:text-white" accept="image/*">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="overflow-x-auto">
+                                    <table class="w-full border-collapse text-sm text-left">
+                                        <thead>
+                                            <tr class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                                                <th
+                                                    class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
+                                                    Size</th>
+                                                <th
+                                                    class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="text" value="Chest" name="sizeType[]"
+                                                            class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                                        <button type="button" onclick="
+                                            (this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
+
+                                                    </div>
+                                                </th>
+                                                <th
+                                                    class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="text" value="Length" name="sizeType[]"
+                                                            class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                                        <button type="button" onclick="removeMySize(this)"
+                                                            class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
+                                                    </div>
+                                                </th>
+                                                <th
+                                                    class="px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="text" value="Sleeve" name="sizeType[]"
+                                                            class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                                        <button type="button" onclick="removeMySize(this)"
+                                                            class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- JS will fill rows here -->
+                                        </tbody>
+                                    </table>
+
+                                    <div>
+                                        <button type="button" onclick="addColumn()"
+                                            class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md mr-2">+
+                                            Add Column</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal Footer -->
+                            <div
+                                class="flex justify-end gap-3 border-t border-gray-200 dark:border-gray-700 px-6 py-4 bg-gray-50 dark:bg-gray-900">
+                                <button type="button" onclick="closeModal('myModal')"
+                                    class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    Confirm
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
             </form>
         </main>
     </div>
+
+
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/views/include/footer.php";
     ?>
@@ -488,6 +640,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
             displayVariants(variants, options);
         }
+
         const dropdownButton = document.getElementById('dropdownButton');
         const dropdownMenu = document.getElementById('dropdownMenu');
         const packaging = document.getElementById('packaging');
@@ -519,47 +672,225 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             }
         });
         let optionCount = 0;
+        let isFirst = 0;
 
         function addOption() {
             optionCount++;
+            isFirst++;
             const container = document.getElementById('optionsContainer');
 
             const optionDiv = document.createElement('div');
 
-            optionDiv.className = "w-full flex flex-col items-center justify-center mt-2 border-b border-gray-200  rounded-md p-4";
+            optionDiv.className = "w-full flex flex-col items-center justify-center mt-2 border-b border-gray-200  rounded-md p-4 OptionDiv";
             optionDiv.id = `option-${optionCount}`;
+
+            let addSize = ""
+            let val = ""
+            if (isFirst == 1) {
+                addSize = `<button onclick="addSizeChart()" type="button" class="text-blue-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add Size Chart</button>`
+                val = 'value="Size" readonly'
+            }
 
             optionDiv.innerHTML = `
             <span class="w-full text-left">Option Name</span>
                 <div class="flex justify-between items-center mb-2 w-full">
-                    <input type="text" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2 mt-2" name="options_name[]" placeholder="Eg. Size">
+                    <input type="text" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2 mt-2" name="options_name[]" placeholder="Eg. Size" ${val}>
                     
                 </div>
                 <div id="values-${optionCount}" class="space-y-2 w-full mt-3">
                             <span class="w-full text-left mb-2">Option Values</span>
-</div>
+                </div>
                 <div class="w-full flex items-center justify-between mt-3">
-                                <button onclick="removeOption(${optionCount})" type="button" class="text-red-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Delete</button>
-                                <button onclick="addValue(${optionCount})" type="button" class="text-white bg-gray-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add</button>
-                            </div>
+                    <button onclick="addValue(${optionCount})" type="button" class="text-white bg-gray-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add Option Values</button>
+                    ${addSize}
+                    <button onclick="removeOption(${optionCount})" type="button" class="text-red-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Delete Option</button>
+                    
+                    
+                </div>
             `;
 
             container.appendChild(optionDiv);
 
             // Add the first value input by default
             addValue(optionCount);
+
+        }
+        var sizeCount = true;
+
+        function addSizeChart() {
+            const modal = document.getElementById("myModal");
+            const container = document.getElementById("optionsContainer");
+            const optionDivValues = container.querySelector(".OptionDiv").querySelectorAll(".OptionValues");
+
+            let modalHtml = "";
+            let trHtml = "";
+            const modalTableTh = modal.querySelector("thead tr").querySelectorAll("th");
+
+            if (sizeCount) {
+                // Build empty inputs for each column (except 'Size')
+                for (let i = 0; i < modalTableTh.length - 1; i++) {
+                    trHtml += `
+                    <td class="px-4 py-2">
+                        <input type="text" name="sizeValues[]"
+                        class="sizeValues border border-gray-300 rounded-md px-3 py-1 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    </td>
+                    `;
+                }
+
+                // Generate table rows dynamically
+                optionDivValues.forEach((ele) => {
+                    const sizeValue = ele.querySelector("input").value.trim();
+
+                    modalHtml += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-2">
+                        <input type="text" value="${sizeValue}" name="sizeVariant[]"
+                            class="border border-gray-300 rounded-md px-3 py-1 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        </td>
+                        ${trHtml}
+                    </tr>
+                    `;
+                });
+
+
+                modal.querySelector("tbody").innerHTML = modalHtml;
+            }
+            modal.classList.remove("hidden");
+            sizeCount = false;
+        }
+
+
+        function removeMySize(buttonOrEvent) {
+            // Accept either the element or an event
+            const button = (buttonOrEvent && buttonOrEvent.target) ? buttonOrEvent.target : buttonOrEvent;
+            if (!button || !(button instanceof Element)) return;
+
+            // 1) Walk up from the button to try to find a <TH> and the enclosing <TABLE>
+            let el = button;
+            let th = null;
+            let table = null;
+            while (el && el.nodeType === 1) {
+                if (!th && el.tagName === 'TH') th = el;
+                if (el.tagName === 'TABLE') {
+                    table = el;
+                    break;
+                }
+                el = el.parentNode;
+            }
+
+            // 2) If table not found yet, continue walking up to find TABLE (in case TH wasn't encountered)
+            if (!table) {
+                el = button.parentNode;
+                while (el && el.nodeType === 1) {
+                    if (el.tagName === 'TABLE') {
+                        table = el;
+                        break;
+                    }
+                    el = el.parentNode;
+                }
+            }
+
+            // 3) If we have a table but no TH, try to find the TH inside this table that contains the button
+            if (!th && table) {
+                const thead = table.querySelector('thead');
+                if (thead) {
+                    const ths = thead.querySelectorAll('th');
+                    for (let i = 0; i < ths.length; i++) {
+                        if (ths[i].contains(button)) {
+                            th = ths[i];
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // 4) Final fallback: search all tables on page for a TH that contains the button
+            if (!th || !table) {
+                const tables = document.querySelectorAll('table');
+                for (let ti = 0; ti < tables.length && (!th || !table); ti++) {
+                    const t = tables[ti];
+                    const ths = t.querySelectorAll('thead th');
+                    for (let hi = 0; hi < ths.length; hi++) {
+                        if (ths[hi].contains(button)) {
+                            table = t;
+                            th = ths[hi];
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // If still not found, bail out
+            if (!table || !th) return;
+
+            // 5) Determine column index of the TH within its header row
+            const headerRow = th.parentNode;
+            let colIndex = 0;
+            const headerCells = headerRow.children;
+            for (let i = 0; i < headerCells.length; i++) {
+                if (headerCells[i] === th) {
+                    colIndex = i;
+                    break;
+                }
+            }
+
+            // 6) Remove the header cell
+            headerRow.removeChild(th);
+
+            // 7) Remove corresponding TD in every tbody row (handle multiple TBODYs too)
+            const tbodies = table.tBodies;
+            for (let bi = 0; bi < tbodies.length; bi++) {
+                const rows = tbodies[bi].rows;
+                for (let ri = 0; ri < rows.length; ri++) {
+                    const cells = rows[ri].children;
+                    if (cells[colIndex]) {
+                        rows[ri].removeChild(cells[colIndex]);
+                    }
+                }
+            }
+        }
+
+
+        function addColumn() {
+            const modal = document.getElementById("myModal");
+            const headRow = modal.querySelector("thead tr")
+            const rows = modal.querySelectorAll('tbody tr');
+
+            // Create new header cell
+            const th = document.createElement('th');
+            th.className = "px-4 py-2 font-medium border-b border-gray-200 dark:border-gray-600";
+            th.innerHTML = `
+                <div class="flex items-center gap-2">
+                <input type="text" value="New Size" name="sizeType[]" class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                <button onclick="removeMySize(this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
+                </div>
+            `;
+            headRow.appendChild(th);
+
+            // Add a column in each row
+            rows.forEach(row => {
+                const td = document.createElement('td');
+                td.className = "px-4 py-2";
+                td.innerHTML = `<input type="text" name="sizeValues[]" class="border border-gray-300 rounded-md px-3 py-1 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">`;
+                row.appendChild(td);
+            });
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").classList.add('hidden');
         }
 
         function removeOption(id) {
             const optionDiv = document.getElementById(`option-${id}`);
             optionDiv.remove();
+            isFirst--;
         }
 
         function addValue(optionId) {
             const valuesDiv = document.getElementById(`values-${optionId}`);
             const valueInput = document.createElement('div');
 
-            valueInput.className = "flex items-center flex-col justify-center w-full ";
+            valueInput.className = "flex items-center flex-col justify-center w-full OptionValues";
 
             valueInput.innerHTML = `
             <div class="w-full flex items-center justify-center w-full gap-3">
@@ -615,22 +946,22 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                 row.innerHTML = `
             <td class="px-3 py-3">
-        <div class="flex items-center justify-start gap-3">
-            <div class="bg-white border border-gray-300 flex items-center justify-center w-20 h-20 rounded-xl cursor-pointer image-placeholder overflow-hidden" data-index="${index}">
-                <i class="fa-solid fa-images text-xl"></i>
-                <img src="" alt="" class="hidden w-full h-full object-contain relative z-10">
-            </div>
-            <input type="file" name="variant_images[${index}][]" accept="image/*" class="hidden file-input" multiple data-index="${index}">
-            <span>${variantText}</span>
-            <input type="hidden" name="variant_options[${index}]" value='${JSON.stringify(variant).replace(/'/g, "&apos;")}'>
-        </div>
-    </td>
-    <td class="px-3 py-3">
-        <input type="number" name="variant_prices[${index}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹ 0.00">
-    </td>
-    <td class="px-3 py-3">
-        <input type="number" name="variant_quantities[${index}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="0">
-    </td>
+                <div class="flex items-center justify-start gap-3">
+                    <div class="bg-white border border-gray-300 flex items-center justify-center w-20 h-20 rounded-xl cursor-pointer image-placeholder overflow-hidden" data-index="${index}">
+                        <i class="fa-solid fa-images text-xl"></i>
+                        <img src="" alt="" class="hidden w-full h-full object-contain relative z-10">
+                    </div>
+                    <input type="file" name="variant_images[${index}][]" accept="image/*" class="hidden file-input" multiple data-index="${index}">
+                    <span>${variantText}</span>
+                    <input type="hidden" name="variant_options[${index}]" value='${JSON.stringify(variant).replace(/'/g, "&apos;")}'>
+                </div>
+            </td>
+            <td class="px-3 py-3">
+                <input type="number" name="variant_prices[${index}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹ 0.00" required>
+            </td>
+            <td class="px-3 py-3">
+                <input type="number" name="variant_quantities[${index}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="0" required>
+            </td>
         `;
 
                 tbody.appendChild(row);
@@ -682,6 +1013,111 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             document.getElementById("margin").value = margin;
         }
         // toastr.error("Product added successfully");
+
+        document.addEventListener('click', function (e) {
+            const modals = document.querySelectorAll('[id^="myModal"]');
+            modals.forEach(modal => {
+                if (!modal.classList.contains('hidden') && e.target === modal) {
+                    closeModal(modal.id);
+                }
+            });
+        });
+
+        document.getElementById('sizeImage').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            const previewContainer = document.getElementById('previewContainer');
+            const previewImage = document.getElementById('sizeImagePreview');
+            const defaultIcon = document.getElementById('defaultIcon');
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = "block";
+                    defaultIcon.style.display = "none";
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewImage.src = "";
+                previewImage.style.display = "none";
+                defaultIcon.style.display = "block";
+            }
+        });
+
+        const imageInput = document.getElementById('vdata_image');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewImg = imagePreview.querySelector('img');
+
+
+
+        imageInput.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImg.src = e.target.result;
+                    imagePreview.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        document.getElementById('productForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // prevent actual submit first
+            let tt = document.getElementById("variantsTableBody").querySelectorAll("tr")
+
+            let compare = document.getElementById("compare-price");
+
+            if (tt.length == 0) {
+                alert("Please Create Atleas 1 Variant")
+                generateVariants();
+                return
+            }
+
+            // if(document.getElementById("shortDescription").value){
+            //     alert("Please Enter Discription")
+            //     return;
+            // }
+
+            let trs = document.getElementById("variantsTableBody").querySelectorAll("tr")
+
+            for (let i = 0; i < trs.length; i++) {
+                const inputs = trs[i].querySelectorAll("input");
+
+                const priceValue = inputs[2]?.value || ""; // safeguard in case input doesn’t exist
+                console.log(inputs, priceValue)
+                // convert to integer safely
+                const price = parseInt(priceValue, 10) || 0; // if NaN or empty => becomes 0
+
+                if (price > compare.value) {
+                    // console.log(`Row ${i + 1}: price is 0`);
+                    alert("Variant price should not be greater than or equal to compare price")
+                    return;
+                }
+            }
+
+            let modal = document.getElementById("myModal").querySelectorAll(".sizeValues")
+            // console.log(modal)
+
+            if (modal.length === 0) {
+                alert("Please create size chart")
+                addSizeChart();
+                return;
+            }
+            for (let i = 0; i < trs.length; i++) {
+                if (modal[i].value == "" || modal[i].value == null) {
+                    alert("Please enter propper values in size chart")
+                    addSizeChart();
+                    return;
+                }
+            }
+
+            // ✅ All validations passed — now submit
+            console.log("Submitting....")
+
+            this.submit();
+        });
+
+        addOption();
     </script>
 </body>
 

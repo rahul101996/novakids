@@ -233,7 +233,7 @@ if (isset($_POST['update_profile'])) {
                         <h1 class="text-2xl uppercase font-semibold">My Profile</h1>
 
                     </div>
-                    <div class="w-[80%] mx-auto max-lg:overflow-x-auto bg-white overflow-hidden border border-gray-300">
+                    <div class="w-[80%] max-md:w-[90%] mx-auto max-lg:overflow-x-auto bg-white overflow-hidden border border-gray-300">
                         <table class="min-w-full divide-y divide-gray-200 text-sm text-gray-700 ">
                             <tbody class="divide-y divide-gray-100">
                                 <tr>
@@ -282,8 +282,10 @@ if (isset($_POST['update_profile'])) {
                             <i class="fas fa-chevron-left"></i> Back
                         </button>
                     </div>
-                    <div class="w-full flex items-start justify-start flex-col relative h-[40vh]">
-                        <img src="/public/images/myprofile-bg.webp" class="w-full h-full object-cover" alt="">
+                    <div class="w-full flex items-start justify-start flex-col relative h-[40vh] max-md:h-[45vh]">
+                        <img src="/public/images/overviewbg.png" class="w-full h-full object-cover max-md:hidden" alt="">
+                        <img src="/public/images/overviewbgmobile.png" class="w-full h-full object-cover md:hidden" alt="">
+
                         <div class="w-full h-full flex flex-col items-start justify-start absolute top-0 left-0 text-white z-10 p-3">
                             <div class="w-full flex items-end justify-between">
                                 <span>Welcome, <span class="font-semibold text-lg"><?= $userData['fname'] ?></span></span>
@@ -367,7 +369,7 @@ if (isset($_POST['update_profile'])) {
                         $name = str_replace(' ', '-', $review['product_name']);
                         $name = str_replace("'", '', $name);
                     ?>
-                        <div class="border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition mt-2 w-full">
+                        <div class="border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition mt-2 w-full max-md:w-[90%]">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center space-x-3">
                                     <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-medium">
@@ -437,7 +439,7 @@ if (isset($_POST['update_profile'])) {
                             </button>
                         </div>
                     <?php } else { ?>
-                        <div class="text-center mb-10 max-md:mt-6 max-md:px-4">
+                        <div class="text-center mb-10 max-md:px-4">
                             <h1 class="text-2xl font-bold text-gray-900">Wishlist</h1>
                             <p class="text-gray-600 mt-1">
                                 Manage your wishlist and keep track of the products you love.
@@ -477,7 +479,7 @@ if (isset($_POST['update_profile'])) {
                                         </span>
 
                                         <!-- Product Images -->
-                                        <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
+                                        <div class="relative w-full h-[350px] max-md:h-[250px] overflow-hidden group">
                                             <!-- Default Image -->
                                             <img src="/<?= $images[0] ?>" alt="Product 1"
                                                 class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
@@ -539,7 +541,7 @@ if (isset($_POST['update_profile'])) {
                         <h2 class="text-2xl max-md:text-xl uppercase font-semibold">Saved Addresses</h2>
                         <button class="bg-[#f25b21] max-md:text-sm text-white py-2 px-4" onclick="openModal1()">Add New Address</button>
                     </div>
-                    <div class="w-[80%] grid grid-cols-2 gap-2 items-center justify-center">
+                    <div class="w-[80%] max-md:w-[90%] grid grid-cols-2 max-md:grid-cols-1 gap-2 items-center justify-center">
                         <?php
                         foreach ($userAddress as $address) {
 
@@ -627,7 +629,7 @@ if (isset($_POST['update_profile'])) {
 
                     <!-- <div class="bg-white p-6 rounded w-full"> -->
                     <!-- Orders List -->
-                    <div class="w-[80%] grid grid-cols-2 md:grid-cols-1 lg:grid-cols-1 gap-6">
+                    <div class="w-[80%] max-md:w-[90%] grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6">
                         <!-- Order Card -->
 
                         <?php
@@ -689,7 +691,7 @@ if (isset($_POST['update_profile'])) {
                     </div>
 
                     <form action="" method="POST" class="w-full" id="profileForm">
-                        <div class="w-[80%] mx-auto py-6  bg-white rounded-md  space-y-6">
+                        <div class="w-[80%] max-md:w-[90%] mx-auto py-6  bg-white rounded-md  space-y-6">
                             <div class="grid grid-cols-2 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
@@ -776,7 +778,7 @@ if (isset($_POST['update_profile'])) {
             </main>
         </div>
         <div id="addressModal" class=" h-full w-full fixed inset-0 top-1/2 transform -translate-y-1/2 z-[9999]  overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center   items-center justify-center hidden">
-            <div class="bg-white shadow-lg mx-auto w-[30%]">
+            <div class="bg-white shadow-lg mx-auto w-[30%] max-md:w-[90%]">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-semibold">Update Delivery Address</h3>
@@ -1046,16 +1048,16 @@ if (isset($_POST['update_profile'])) {
             }
 
 
-           // 🟢 NEW: Back button logic for mobile
-function goBackToSidebar() {
-    const sidebar = document.getElementById('userSidebar');
-    sidebar.style.display = 'block';
-    AllshowItems.forEach(item => item.classList.add('hidden'));
-    document.querySelector('.overview')?.classList.remove('hidden');
+            // 🟢 NEW: Back button logic for mobile
+            function goBackToSidebar() {
+                const sidebar = document.getElementById('userSidebar');
+                sidebar.style.display = 'block';
+                AllshowItems.forEach(item => item.classList.add('hidden'));
+                document.querySelector('.overview')?.classList.remove('hidden');
 
-    // Refresh the page to reset everything
-    window.location.reload();
-}
+                // Refresh the page to reset everything
+                window.location.reload();
+            }
 
 
             // Hide overview on mobile by default
