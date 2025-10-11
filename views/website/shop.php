@@ -15,7 +15,7 @@ $page = "shop";
         <div class="flex flex-col gap-6 w-full">
             <div
                 class="flex items-center justify-between border-b p-6 max-md:p-4 sticky top-16 h-fit bg-white z-40 w-full">
-                <div class="flex items-center justify-between w-[90vw] mx-auto">
+                <div class="flex items-center max-md:items-start justify-between w-[90vw] mx-auto">
                     <div class="flex flex-wrap md:flex-nowrap items-center gap-4">
                         <!-- Filter Toggle -->
                         <button id="filterToggle"
@@ -34,11 +34,11 @@ $page = "shop";
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-3 text-sm">
-                        <span class="text-gray-700 font-semibold">Sort by:</span>
+                    <div class="flex items-center gap-3 max-md:gap-1 text-sm">
+                        <span class="text-gray-700 font-semibold whitespace-nowrap">Sort by:</span>
                         <div class="relative">
                             <select id="sortSelect" onchange="handleFilterChange()"
-                                class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-10 text-gray-700 font-medium shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer">
+                                class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 md:pr-10 text-gray-700 font-medium shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer">
                                 <option value="">Default Sorting</option>
                                 <option value="lowToHigh">Price: Low to High</option>
                                 <option value="highToLow">Price: High to Low</option>
