@@ -326,7 +326,7 @@ $page = "shop";
                                 <input type="hidden" value="${product.id}" class="ProductId">
                             </div>
                             <div class="pt-4 w-full">
-                                <h3 class="text-base font-semibold uppercase">${product.name}</h3>
+                                <h3 class="text-base max-md:text-sm font-semibold uppercase">${product.name}</h3>
                                 <div class="flex items-center justify-start gap-3 w-full">
                                     <p class="text-gray-500 line-through text-sm">₹ ${formatNumber(product.compare_price)}.00</p>
                                     <p class="text-[#f25b21] font-bold">₹ ${formatNumber(price)}.00</p>
