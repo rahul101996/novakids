@@ -437,13 +437,13 @@ if (isset($_POST['update_profile'])) {
                             </button>
                         </div>
                     <?php } else { ?>
-                        <div class="text-center mb-10 max-md:mt-6">
+                        <div class="text-center mb-10 max-md:mt-6 max-md:px-4">
                             <h1 class="text-2xl font-bold text-gray-900">Wishlist</h1>
                             <p class="text-gray-600 mt-1">
                                 Manage your wishlist and keep track of the products you love.
                             </p>
                         </div>
-                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 max-md:gap-3">
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 max-md:gap-3 max-md:px-4">
                             <?php
                             $wishlists = getData2("SELECT * FROM `tbl_wishlist` WHERE `userid` = " . $_SESSION["userid"]);
 
@@ -472,7 +472,7 @@ if (isset($_POST['update_profile'])) {
                                     <div
                                         class="group relative  cursor-pointer transition overflow-hidden">
                                         <!-- Discount Badge -->
-                                        <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
+                                        <span class="absolute top-2 left-2 max-md:text-[11px] max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
                                             SAVE <?= $discountPercentage ?>%
                                         </span>
 
@@ -489,8 +489,8 @@ if (isset($_POST['update_profile'])) {
 
                                             <!-- Add to favorites Icon (top-right) -->
                                             <button
-                                                class="addToWishlistBtn absolute top-2 right-3 bg-[#f25b21] text-white h-10 w-10 rounded-full  group-hover:opacity-100 z-20 stop-link">
-                                                <i class="fas fa-heart"></i>
+                                                class="addToWishlistBtn absolute top-2 right-3 bg-[#f25b21] text-white h-10 w-10 max-md:h-6 max-md:w-6 flex items-center justify-center rounded-full  group-hover:opacity-100 z-20 stop-link">
+                                                <i class="fas fa-heart max-md:text-sm"></i>
                                             </button>
 
                                             <!-- Add to Cart Icon -->
@@ -503,12 +503,12 @@ if (isset($_POST['update_profile'])) {
 
                                         <!-- Product Details -->
                                         <div class="pt-4 w-full ">
-                                            <h3 class="text-base font-semibold uppercase"><?= $product['name'] ?></h3>
+                                            <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?></h3>
                                             <div class="flex items-center justify-start gap-3 w-full">
                                                 <p class="text-gray-500 line-through text-sm">₹
                                                     <?= formatNumber($product['compare_price']) ?>.00
                                                 </p>
-                                                <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?>.00</p>
+                                                <p class="text-[#f25b21] font-bold max-md:text-sm max-md:font-semibold">₹ <?= formatNumber($price) ?>.00</p>
                                             </div>
                                             <!-- reviews -->
                                             <div class="flex items-center justify-start space-x-1 hidden">

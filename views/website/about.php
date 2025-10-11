@@ -22,7 +22,7 @@
 
     <section class="py-16 text-center max-md:px-4 max-md:py-10">
         <h3 class="text-sm tracking-widest uppercase text-gray-900 mb-4">Who We Are</h3>
-        <h2 class="text-3xl md:text-5xl leading-snug max-w-3xl mx-auto">
+        <h2 class="text-2xl md:text-5xl leading-snug max-w-3xl mx-auto">
             At <span class="font-semibold text-dark">Nova Universe</span>, we craft
             <span class="italic">modern styles for the new generation</span> — merging
             comfort, trend, and individuality to create fashion that fits every mood.
@@ -43,14 +43,14 @@
     </section>
 
 
-    <section class="py-10 bg-gray-50">
+    <section class="py-10 max-md:py-6 bg-gray-50">
         <div class="w-[90%] mx-auto  ">
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="col-span-1 grid grid-cols-2 gap-3">
-                    <img src="/public/images/11.avif" alt="Nova Universe Outfit" class="rounded-2xl object-cover w-full h-[50vh] max-md:h-[30vh]">
-                    <img src="/public/images/45.png" alt="Streetwear Style" class="rounded-2xl object-cover w-full h-[50vh] max-md:h-[30vh]">
-                    <img src="/public/images/7.webp" alt="Casual Wear" class="rounded-2xl object-cover w-full h-[50vh] max-md:h-[30vh]">
-                    <img src="/public/images/5.webp" alt="Trendy Look" class="rounded-2xl object-cover w-full h-[50vh] max-md:h-[30vh]">
+                    <img src="/public/images/11.avif" alt="Nova Universe Outfit" class="object-cover w-full h-[50vh] max-md:h-[30vh]">
+                    <img src="/public/images/45.png" alt="Streetwear Style" class="object-cover w-full h-[50vh] max-md:h-[30vh]">
+                    <img src="/public/images/7.webp" alt="Casual Wear" class="object-cover w-full h-[50vh] max-md:h-[30vh]">
+                    <img src="/public/images/5.webp" alt="Trendy Look" class="object-cover w-full h-[50vh] max-md:h-[30vh]">
                 </div>
                 <div class="flex flex-col justify-center items-start p-6 space-y-6 max-md:p-0">
                     <h3 class="text-3xl md:text-6xl font-semibold mb-2">Style That Defines You</h3>
