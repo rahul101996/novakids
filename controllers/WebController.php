@@ -2363,7 +2363,7 @@ ORDER BY id DESC LIMIT 5");
                                 $first = reset($data);
                                 if ($first && is_object($first)) {
                                     foreach ($first as $key => $val) {
-                                        echo "<th class='p-3 border-b'>" . htmlspecialchars($key) . "</th>";
+                                        echo "<th class='p-3 border-b whitespace-nowrap'>" . htmlspecialchars($key) . "</th>";
                                     }
                                 }
                                 ?>
@@ -2374,7 +2374,7 @@ ORDER BY id DESC LIMIT 5");
                             $rowClass = "border-t";
                             foreach ($data as $size => $measurements) {
                                 echo "<tr class='{$rowClass}'>";
-                                echo "<td class='p-3 font-medium'>" . htmlspecialchars($size) . "</td>";
+                                echo "<td class='p-3 font-medium whitespace-nowrap'>" . htmlspecialchars($size) . "</td>";
 
                                 foreach ($measurements as $key => $value) {
                                     echo "<td class='p-3'>" . htmlspecialchars($value) . "</td>";
