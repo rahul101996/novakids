@@ -99,7 +99,6 @@ $ppimg = array_reverse($imags);
         </p>
     </section> -->
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
         .myBanner {
@@ -192,41 +191,7 @@ $ppimg = array_reverse($imags);
         <div class="swiper-pagination"></div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        const swiper = new Swiper(".myBanner", {
-            slidesPerView: 3,
-            centeredSlides: true,
-            spaceBetween: 10,
-            loop: true,
-            speed: 3000,
-            autoplay: {
-                delay: 2000,
-                disableOnInteraction: false,
-            },
-            allowTouchMove: true,
-            grabCursor: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            breakpoints: {
-                0: {
-                    slidesPerView: 1,
-                    centeredSlides: true,
-                    spaceBetween: 10,
-                },
-                768: {
-                    slidesPerView: 2,
-                    spaceBetween: 10,
-                },
-                1024: {
-                    slidesPerView: 3,
-                    spaceBetween: 10,
-                },
-            },
-        });
-    </script>
+
 
 
 
@@ -1139,4 +1104,38 @@ $ppimg = array_reverse($imags);
     include $_SERVER['DOCUMENT_ROOT'] . "/views/website/sidecart.php";
     include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/specifications.php";
     include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/footer.php"; ?>
+    <script>
+        const swiper = new Swiper(".myBanner", {
+            slidesPerView: 3,
+            centeredSlides: true,
+            spaceBetween: 10,
+            loop: true,
+            speed: 3000,
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: false,
+            },
+            allowTouchMove: true,
+            grabCursor: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                    centeredSlides: true,
+                    spaceBetween: 10,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                },
+            },
+        });
+    </script>
 </body>

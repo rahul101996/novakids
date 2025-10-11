@@ -141,7 +141,7 @@ class WebController extends LoginController
                                 <div class="w-full flex max-md:flex-col-reverse items-center max-md:items-start justify-between text-sm">
                                     <div class="flex max-md:flex-col items-center max-md:items-start justify-center gap-2">
                                         <p class="uppercase text-lg max-md:text-sm"><?= $key ?></p>
-                                        <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded <?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>"><?= $sizeChartValueString ?>
+                                        <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded <?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?> max-md:text-nowrap"><?= $sizeChartValueString ?>
                                         </div>
                                     </div>
 
@@ -181,7 +181,7 @@ class WebController extends LoginController
                             <?php
                             }
                             ?>
-                            <div class="w-full flex items-center justify-start mt-2 text-sm" id="SizeDiv">
+                            <div class="w-full flex max-md:flex-wrap items-center justify-start mt-2 text-sm" id="SizeDiv">
                                 <?php
                                 $diffcolor = [];
                                 foreach ($value as $key1 => $value1) {
@@ -1111,6 +1111,7 @@ class WebController extends LoginController
                 }
                 $id = $ProductData['id'];
                 $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
+                $similarProducts = getData2("SELECT * FROM `tbl_products` WHERE `category` = $ProductData[category] LIMIT 6");
                 $ProductData['varients'] = $varients;
                 $comparePrice = floatval($ProductData['compare_price']);
                 $price = floatval($ProductData['varients'][0]["price"]);
