@@ -1393,17 +1393,17 @@ class WebController extends LoginController
 
         // printWithPre($centers);
     }
-    public function privacyPolicy()
-    {
-        $siteName = getDBObject()->getSiteName();
-        $pageModule = "Privacy Policy";
-        $pageTitle = "Privacy Policy";
+    // public function privacyPolicy()
+    // {
+    //     $siteName = getDBObject()->getSiteName();
+    //     $pageModule = "Privacy Policy";
+    //     $pageTitle = "Privacy Policy";
 
-        // $this->checkSession();
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            require 'views/website/privacy-policy.php';
-        }
-    }
+    //     // $this->checkSession();
+    //     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    //         require 'views/website/privacy-policy.php';
+    //     }
+    // }
     public function termsAndConditions()
     {
         $siteName = getDBObject()->getSiteName();
@@ -2212,7 +2212,21 @@ ORDER BY id DESC LIMIT 5");
         die();
     }
 
-
+ public function shippingPolicy()
+    {
+        require 'views/website/shipping-policy.php';
+ }
+ public function TermsAndPolicy()
+    {
+        require 'views/website/terms-and-conditions.php';
+ }
+ public function CancellationAndRefunds()
+    {
+        require 'views/website/cancellation-and-refund.php';
+ }
+  public function PrivacyPolicy(){
+      require 'views/website/privacy-policy.php';
+  }
 
     public function addReview()
     {
