@@ -241,7 +241,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
                             // printWithPre($varients);
                             $images = json_decode($varients['images'], true);
-                            $images = array_reverse($images);
+                            $images = array_reverse($images); 
                             (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
                             $comparePrice = floatval($product['compare_price']);
                             $price = floatval($varients['price']);

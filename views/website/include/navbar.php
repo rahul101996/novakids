@@ -184,7 +184,7 @@ $categories = getData("tbl_category");
                 </a>
             </div>
             <?php
-            
+
 
             foreach ($categories as $key => $value) {
                 $category = strtolower(str_replace(" ", "-", $value['category']));
@@ -355,48 +355,29 @@ $categories = getData("tbl_category");
             <h3 class="text-base font-semibold text-gray-900">Trending Products</h3>
             <div class="grid grid-cols-2 gap-2">
                 <!-- Product 1 -->
-                <a href="products/product-details">
-                    <div class="border overflow-hidden shadow-sm hover:shadow-md transition">
-                        <img src="/public/images/f5.webp" alt="Product 1" class="w-full h-36 object-cover">
-                        <div class="p-2">
-                            <p class="text-sm font-medium text-gray-800 truncate">Oversized Tee</p>
-                            <p class="text-xs text-gray-500">$24.99</p>
+                <?php
+                foreach ($uniqueProducts as $key => $product) {
+                    if($key > 3) break;
+                    $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
+                    // printWithPre($varients);
+                    $images = json_decode($varients['images'], true);
+                    $images = array_reverse($images);
+                    $price = floatval($varients['price']);
+                    $name = str_replace(' ', '-', $product['name']);
+                    $name = str_replace("'", '', $name);
+                ?>
+                    <a href="/products/product-details/<?= $name ?>">
+                        <div class="border overflow-hidden shadow-sm hover:shadow-md transition">
+                            <img src="/<?= $images[0] ?>" alt="Product 1" class="w-full h-36 object-cover">
+                            <div class="p-2">
+                                <p class="text-sm font-medium text-gray-800 truncate"><?= $product['name'] ?></p>
+                                <p class="text-xs text-[#f25b21]">$<?= $price ?></p>
+                            </div>
                         </div>
-                    </div>
-                </a>
-
+                    </a>
+                <?php } ?>
                 <!-- Product 2 -->
-                <a href="products/product-details">
-                    <div class="border overflow-hidden shadow-sm hover:shadow-md transition">
-                        <img src="/public/images/f2.webp" alt="Product 2" class="w-full h-36 object-cover">
-                        <div class="p-2">
-                            <p class="text-sm font-medium text-gray-800 truncate">Slim Jogger</p>
-                            <p class="text-xs text-gray-500">$34.99</p>
-                        </div>
-                    </div>
-                </a>
 
-                <!-- Product 3 -->
-                <a href="products/product-details">
-                    <div class="border overflow-hidden shadow-sm hover:shadow-md transition">
-                        <img src="/public/images/f8.webp" alt="Product 3" class="w-full h-36 object-cover">
-                        <div class="p-2">
-                            <p class="text-sm font-medium text-gray-800 truncate">Streetwear Co-ord</p>
-                            <p class="text-xs text-gray-500">$49.99</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 4 -->
-                <a href="products/product-details">
-                    <div class="border overflow-hidden shadow-sm hover:shadow-md transition">
-                        <img src="/public/images/f10.webp" alt="Product 3" class="w-full h-36 object-cover">
-                        <div class="p-2">
-                            <p class="text-sm font-medium text-gray-800 truncate">Co-ord</p>
-                            <p class="text-xs text-gray-500">$49.99</p>
-                        </div>
-                    </div>
-                </a>
             </div>
 
             <a href="/shop"
