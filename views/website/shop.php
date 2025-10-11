@@ -225,6 +225,9 @@ $page = "shop";
 
             // ✅ Always set slider to max value initially
             if (!priceRange.dataset.initialized) {
+                // console.log(minPriceValue, maxPriceValue);
+
+                // console.log(maxPriceValue);
 
                 // ✅ Always set slider to max value initially
                 priceRange.min = minPriceValue;
@@ -253,8 +256,11 @@ $page = "shop";
                         let parsedOptions = JSON.parse(opts);
 
                         Object.entries(parsedOptions).forEach(([key, value]) => {
-                            // Normalize the key (so "Size" and "SIZE" are same)
+                            // ✅ Normalize the key
                             let normalizedKey = key.trim().toLowerCase();
+
+                            // ✅ Normalize the value (convert to string and lowercase)
+                            let normalizedValue = String(value).trim().toLowerCase();
 
                             // Create filter group if not exists
                             if (!allFilters[normalizedKey]) {
@@ -264,13 +270,15 @@ $page = "shop";
                                 };
                             }
 
-                            allFilters[normalizedKey].values.add(value);
+                            // ✅ Add normalized value
+                            allFilters[normalizedKey].values.add(normalizedValue);
                         });
                     } catch (e) {
                         console.warn("Invalid variant options:", v.options);
                     }
                 });
             });
+
 
 
             // ✅ Render filters only once (first load)
@@ -441,6 +449,9 @@ $page = "shop";
                 max
             }, sortValue);
             setActiveFilter(activeFilters);
+
+            // console.log(activeFilters);
+
         }
 
         // ✅ Update price labels dynamically
@@ -518,7 +529,7 @@ $page = "shop";
 
         // ✅ Initial load
         // document.addEventListener("DOMContentLoaded", () => {
-            setProducts(); // Ensures DOM ready before setting labels
+        setProducts(); // Ensures DOM ready before setting labels
         // });
 
     </script>
