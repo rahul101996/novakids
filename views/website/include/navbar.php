@@ -311,7 +311,7 @@ $categories = getData("tbl_category");
                     </div>
                 </button>
                 <span
-                    class="absolute -top-1 max-md:-top-2 -right-3 max-md:-right-1 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md"
+                    class="absolute -top-1 max-md:-top-1 -right-3 max-md:-right-2 bg-[#f25b21] text-white text-xs h-5 w-5 flex items-center justify-center rounded-full shadow-md"
                     id="cart-count">
                     <?= $count ?>
                 </span>

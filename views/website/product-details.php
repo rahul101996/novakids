@@ -350,7 +350,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     <div class="w-full flex items-center justify-start mt-4 text-sm relative">
                         <p class="text-semibold">Size not available ?</p> &ensp;<span
                             class="text-[#f25b21] cursor-pointer underline" onclick="NotifyMe()">NOTIFY ME</span>
-                        <div class="hidden absolute border border-gray-300 top-[107%] flex flex-col items-start justify-center bg-white w-[25vw] z-50"
+                        <div class="hidden absolute border border-gray-300 top-[107%] flex flex-col items-start justify-center bg-white w-[25vw] max-md:w-[90vw] shadow-xl z-50"
                             id="NotifyMe">
                             <div class="w-full flex items-center justify-start px-4 py-6 flex-col bg-orange-50 ">
                                 <div class="w-full flex items-center justify-between">
@@ -587,7 +587,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         </section>
 
         <div class="w-full flex items-center justify-center mt-16 max-md:mt-8">
-            <div class="flex items-center justify-center flex-col relative w-[90%] gap-5">
+            <div class="flex items-center justify-center flex-col relative w-[90%] max-md:w-full gap-5">
 
                 <div
                     class="w-[80%] max-md:w-[90%] h-[28vh] bg-white rounded-lg shadow-md border border-gray-300  py-6 flex flex-col items-center justify-center">
@@ -829,7 +829,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             }
                             // printWithPre($images);
                         ?>
-                            <a href="/products/product-details/<?= $name ?>" class="block">
+                            <a href="/products/product-details/<?= $name ?>" class="block max-md:m-1">
                                 <div class="group relative  cursor-pointer transition overflow-hidden">
                                     <!-- Discount Badge -->
                                     <span

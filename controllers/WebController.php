@@ -138,7 +138,7 @@ class WebController extends LoginController
                                 $sizeChartValueString = implode(" | ", $sizeChartValueString)
 
                             ?>
-                                <div class="w-full flex max-md:flex-col-reverse items-center justify-between text-sm">
+                                <div class="w-full flex max-md:flex-col-reverse items-center max-md:items-start justify-between text-sm">
                                     <div class="flex max-md:flex-col items-center max-md:items-start justify-center gap-2">
                                         <p class="uppercase text-lg max-md:text-sm"><?= $key ?></p>
                                         <div class="bg-gray-100 py-[0.1rem] px-3 text-xs border border-gray-300 rounded <?= !isset($_POST["product_details"]) ? "changeSideVariant" : "changeDetailVariant" ?>"><?= $sizeChartValueString ?>
@@ -2380,7 +2380,7 @@ ORDER BY id DESC LIMIT 5");
                         <?= $ProductData["sizeDescription"] ?>
                     </div>
                     <!-- Image -->
-                    <div class="w-full md:w-[40%] flex justify-center <?=empty($ProductData["sizeImage"])?"hidden":""?>">
+                    <div class="w-full md:w-[40%] flex justify-center <?= empty($ProductData["sizeImage"]) ? "hidden" : "" ?>">
                         <img src="/<?= $ProductData["sizeImage"] ?>" alt="How to measure T-shirt" class="h-72 max-md:h-64">
                     </div>
                 </div>
@@ -2391,7 +2391,7 @@ ORDER BY id DESC LIMIT 5");
         echo json_encode([
             "success" => true,
             "data" => $html,
-            "vv"=>$data
+            "vv" => $data
         ]);
     }
 }
