@@ -188,30 +188,22 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             <!-- Mobile Carousel -->
             <div class="md:hidden relative w-[65%] max-md:w-full">
                 <div class="swiper">
-                    <div class="swiper-wrapper">
+                    <div class="swiper-wrapper" id="mobileProductDetailImg">
                         <!-- Slide 1 -->
-                        <div class="swiper-slide">
-                            <img src="/public/images/222.avif" alt="View 1"
-                                class="w-full h-[400px] object-cover shadow-lg cursor-zoom-in">
-                        </div>
+                        <?php
+                        if (is_array($ppimages[0])) {
+                            $ppimages[0] = array_reverse($ppimages[0]);
+                            // array_reverse($ppimages[0]);
+                            foreach ($ppimages[0] as $key => $image) {
 
+                        ?>
+                                <div class="swiper-slide">
+                                    <img src="/<?= $image ?>" alt="View 1"
+                                        class="w-full h-[400px] object-cover shadow-lg cursor-zoom-in">
+                                </div>
+                        <?php }
+                        } ?>
                         <!-- Slide 2 -->
-                        <div class="swiper-slide">
-                            <img src="/public/images/333.avif" alt="View 2"
-                                class="w-full h-[400px] object-cover shadow-lg cursor-zoom-in">
-                        </div>
-
-                        <!-- Slide 3 -->
-                        <div class="swiper-slide">
-                            <img src="/public/images/444.avif" alt="View 3"
-                                class="w-full h-[400px] object-cover shadow-lg cursor-zoom-in">
-                        </div>
-
-                        <!-- Slide 4 -->
-                        <div class="swiper-slide">
-                            <img src="/public/images/7.webp" alt="View 4"
-                                class="w-full h-[400px] object-cover shadow-lg cursor-zoom-in">
-                        </div>
                     </div>
 
                     <!-- Pagination (dots) -->
@@ -240,53 +232,84 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                     <!-- Product List -->
                     <div class="p-4 grid grid-cols-2 gap-3 max-h-[60vh] overflow-y-auto">
-                        <div class="border shadow-sm overflow-hidden">
-                            <img src="/public/images/f5.webp" alt="Product 1" class="w-full h-44 object-cover">
-                            <div class="p-2">
-                                <p class="text-sm font-medium text-gray-800 truncate">Oversized Tee</p>
-                                <p class="text-xs text-gray-500">$24.99</p>
-                            </div>
-                        </div>
+                        <?php
+                        foreach ($similarProducts as $key => $product) {
+                            // $images = json_decode($product['product_images'], true);
+                            // $images = array_reverse($images);
+                            if($product['id'] == $ProductData['id']) continue;
+                            $SecondImage = true;
+                            $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
+                            // printWithPre($varients);
+                            $images = json_decode($varients['images'], true);
+                            $images = array_reverse($images); 
+                            (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
+                            $comparePrice = floatval($product['compare_price']);
+                            $price = floatval($varients['price']);
+                            $discountAmount = $comparePrice - $price;
+                            $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
-                        <div class="border shadow-sm overflow-hidden">
-                            <img src="/public/images/f2.webp" alt="Product 2" class="w-full h-44 object-cover">
-                            <div class="p-2">
-                                <p class="text-sm font-medium text-gray-800 truncate">Slim Jogger</p>
-                                <p class="text-xs text-gray-500">$34.99</p>
-                            </div>
-                        </div>
+                            $name = str_replace(' ', '-', $product['name']);
+                            $name = str_replace("'", '', $name);
+                            if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
-                        <div class="border shadow-sm overflow-hidden">
-                            <img src="/public/images/f8.webp" alt="Product 3" class="w-full h-44 object-cover">
-                            <div class="p-2">
-                                <p class="text-sm font-medium text-gray-800 truncate">Streetwear Co-ord</p>
-                                <p class="text-xs text-gray-500">$49.99</p>
-                            </div>
-                        </div>
 
-                        <div class="border shadow-sm overflow-hidden">
-                            <img src="/public/images/f10.webp" alt="Product 4" class="w-full h-44 object-cover">
-                            <div class="p-2">
-                                <p class="text-sm font-medium text-gray-800 truncate">Co-ord</p>
-                                <p class="text-xs text-gray-500">$49.99</p>
-                            </div>
-                        </div>
+                                $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $product['id'] . " AND `userid` = " . $_SESSION["userid"])[0];
+                            } else {
 
-                        <div class="border shadow-sm overflow-hidden">
-                            <img src="/public/images/f5.webp" alt="Product 1" class="w-full h-44 object-cover">
-                            <div class="p-2">
-                                <p class="text-sm font-medium text-gray-800 truncate">Oversized Tee</p>
-                                <p class="text-xs text-gray-500">$24.99</p>
-                            </div>
-                        </div>
+                                $data = checkExisteingWishlistSession($product['id']);
+                                if ($data) {
+                                    $data = ['id' => $data];
+                                } else {
+                                    $data = [];
+                                }
+                            }
 
-                        <div class="border shadow-sm overflow-hidden">
-                            <img src="/public/images/f2.webp" alt="Product 2" class="w-full h-44 object-cover">
-                            <div class="p-2">
-                                <p class="text-sm font-medium text-gray-800 truncate">Slim Jogger</p>
-                                <p class="text-xs text-gray-500">$34.99</p>
-                            </div>
-                        </div>
+                            // printWithPre($images);
+                        ?>
+                            <a href="/products/product-details/<?= $name ?>" class="block">
+                                <div class="group relative md:m-2 md:p-2 cursor-pointer transition overflow-hidden">
+                                    <!-- Discount Badge -->
+                                    <span
+                                        class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">
+                                        SAVE <?= $discountPercentage ?>%
+                                    </span>
+
+                                    <!-- Product Images -->
+                                    <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
+                                        <!-- Default Image -->
+                                        <img src="/<?= $images[0] ?>" alt="Product 1"
+                                            class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+
+                                        <!-- Hover Image -->
+
+                                        <img src="/<?= $SecondImage ?>" alt="Product 1 Hover"
+                                            class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+
+                                        <!-- Add to favorites Icon (top-right) -->
+                                        
+                                        <input type="text" value="<?= $product['id'] ?>" class="ProductId">
+                                    </div>
+
+                                    <!-- Product Details -->
+                                    <div class="pt-4 w-full ">
+                                        <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?>
+                                        </h3>
+                                        <div class="flex items-center justify-start gap-3 w-full">
+                                            <p class="text-gray-500 line-through text-sm">₹
+                                                <?= formatNumber($product['compare_price']) ?>.00
+                                            </p>
+                                            <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?>.00</p>
+                                        </div>
+                                        <!-- reviews -->
+                                        <div class="flex items-center justify-start space-x-1 hidden">
+                                            <span class="text-yellow-500">★★★★★</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        <?php } ?>
+
+
                     </div>
                 </div>
 
@@ -350,7 +373,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     <div class="w-full flex items-center justify-start mt-4 text-sm relative">
                         <p class="text-semibold">Size not available ?</p> &ensp;<span
                             class="text-[#f25b21] cursor-pointer underline" onclick="NotifyMe()">NOTIFY ME</span>
-                        <div class="hidden absolute border border-gray-300 top-[107%] flex flex-col items-start justify-center bg-white w-[25vw] z-50"
+                        <div class="hidden absolute border border-gray-300 top-[107%] flex flex-col items-start justify-center bg-white w-[25vw] max-md:w-[90vw] shadow-xl z-50"
                             id="NotifyMe">
                             <div class="w-full flex items-center justify-start px-4 py-6 flex-col bg-orange-50 ">
                                 <div class="w-full flex items-center justify-between">
@@ -587,7 +610,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         </section>
 
         <div class="w-full flex items-center justify-center mt-16 max-md:mt-8">
-            <div class="flex items-center justify-center flex-col relative w-[90%] gap-5">
+            <div class="flex items-center justify-center flex-col relative w-[90%] max-md:w-full gap-5">
 
                 <div
                     class="w-[80%] max-md:w-[90%] h-[28vh] bg-white rounded-lg shadow-md border border-gray-300  py-6 flex flex-col items-center justify-center">
@@ -672,9 +695,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                             "<?= $value['reviewText'] ?>"
                                         </p>
                                     </div>
-<<<<<<< HEAD
+                            
 
-                                    <div class="flex gap-4 items-center">
+                                        <div class="flex gap-4 items-center">
                                         <div class="flex items-center w-10 h-10">
                                             <img src="/public/images/dp.png" alt="John D."
                                                 class="w-full h-full rounded-full object-cover border mr-3">
@@ -684,152 +707,153 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                                 <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
                                             </p>
                                         </div>
-                                    </div>
                                 </div>
-
-=======
-
-                                    <div class="flex gap-4 items-center">
-                                        <div class="flex items-center w-10 h-10">
-                                            <img src="/public/images/dp.png" alt="John D."
-                                                class="w-full h-full rounded-full object-cover border mr-3">
-                                        </div>
-                                        <div>
-                                            <p class="font-semibold text-gray-800">
-                                                <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
->>>>>>> 20ecea29837686308243f7e6b693640c1ade1e4b
-                            <?php } ?>
-
                         </div>
-                    <?php
-                    } else if (count($reviws) == 1) {
-                        $value = $reviws[0];
-                    ?>
-                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                                <span> <?php for ($i = 0; $i < 5; $i++) {
-                                            if ($value['rating'] > $i) {
-                                                echo '★';
-                                            } else {
-                                                echo '☆';
-                                            }
-                                        } ?></span>
-                                <style>
-                                    .review-text {
-                                        display: -webkit-box;
-                                        -webkit-line-clamp: 4;
-                                        /* show only 4 lines */
-                                        -webkit-box-orient: vertical;
-                                        overflow: hidden;
-                                        text-overflow: ellipsis;
-                                    }
-                                </style>
-                                <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                                    "<?= $value['reviewText'] ?>"
+
+                    
+
+                        <div class="flex gap-4 items-center">
+                            <div class="flex items-center w-10 h-10">
+                                <img src="/public/images/dp.png" alt="John D."
+                                    class="w-full h-full rounded-full object-cover border mr-3">
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-800">
+                                    <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
                                 </p>
                             </div>
-
-                            <div class="flex gap-4 items-center">
-                                <div class="flex items-center w-10 h-10">
-                                    <img src="/public/images/dp.png" alt="John D."
-                                        class="w-full h-full rounded-full object-cover border mr-3">
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-gray-800">
-                                        <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
-                                    </p>
-                                </div>
-                            </div>
                         </div>
-                    <?php
-                    }
-                    ?>
+                </div>
 
+                >>>>>>> 20ecea29837686308243f7e6b693640c1ade1e4b
+            <?php } ?>
+
+            </div>
+        <?php
+                    } else if (count($reviws) == 1) {
+                        $value = $reviws[0];
+        ?>
+            <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                    <span> <?php for ($i = 0; $i < 5; $i++) {
+                                if ($value['rating'] > $i) {
+                                    echo '★';
+                                } else {
+                                    echo '☆';
+                                }
+                            } ?></span>
+                    <style>
+                        .review-text {
+                            display: -webkit-box;
+                            -webkit-line-clamp: 4;
+                            /* show only 4 lines */
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    </style>
+                    <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                        "<?= $value['reviewText'] ?>"
+                    </p>
+                </div>
+
+                <div class="flex gap-4 items-center">
+                    <div class="flex items-center w-10 h-10">
+                        <img src="/public/images/dp.png" alt="John D."
+                            class="w-full h-full rounded-full object-cover border mr-3">
+                    </div>
+                    <div>
+                        <p class="font-semibold text-gray-800">
+                            <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <script>
-            $(document).ready(function() {
-                $(".reviews-sliders").owlCarousel({
-                    loop: true,
-                    autoplay: true,
-                    autoplayTimeout: 3000,
-                    smartSpeed: 1000,
-                    // slideTransition: "linear",
-                    responsive: {
-                        0: {
-                            items: 1
-                        },
-                        768: {
-                            items: 2
-                        }
+        <?php
                     }
-                });
+        ?>
+
+        </div>
+    </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $(".reviews-sliders").owlCarousel({
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                smartSpeed: 1000,
+                // slideTransition: "linear",
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    768: {
+                        items: 2
+                    }
+                }
             });
-        </script>
+        });
+    </script>
 
 
-        <section class="bg-white py-14 max-md:py-8 w-full">
-            <div class="w-[90vw] max-md:w-[90vw] mx-auto">
-                <div class="relative">
-                    <div class="flex flex items-center justify-between mb-6">
-                        <h3 class="text-left text-3xl max-md:text-xl font-extrabold uppercase">YOU MAY ALSO LIKE</h3>
+    <section class="bg-white py-14 max-md:py-8 w-full">
+        <div class="w-[90vw] max-md:w-[90vw] mx-auto">
+            <div class="relative">
+                <div class="flex flex items-center justify-between mb-6">
+                    <h3 class="text-left text-3xl max-md:text-xl font-extrabold uppercase">YOU MAY ALSO LIKE</h3>
+                    <div class="flex flex items-center gap-2 justify-center">
+                        <div onclick="banner_forward(this)"
+                            class=" border bg-black border-white p-2 rounded-full cursor-pointer">
+                            <img src="/public/icons/backward.png"
+                                class="w-[25px] h-[25px] max-md:w-[12px] max-md:h-[12px]" alt="">
+                        </div>
                         <div class="flex flex items-center gap-2 justify-center">
-                            <div onclick="banner_forward(this)"
+                            <div onclick="banner_backward(this)"
                                 class=" border bg-black border-white p-2 rounded-full cursor-pointer">
                                 <img src="/public/icons/backward.png"
-                                    class="w-[25px] h-[25px] max-md:w-[12px] max-md:h-[12px]" alt="">
-                            </div>
-                            <div class="flex flex items-center gap-2 justify-center">
-                                <div onclick="banner_backward(this)"
-                                    class=" border bg-black border-white p-2 rounded-full cursor-pointer">
-                                    <img src="/public/icons/backward.png"
-                                        class="w-[25px] h-[25px] max-md:w-[12px] max-md:h-[12px] rotate-180" alt="">
-                                </div>
+                                    class="w-[25px] h-[25px] max-md:w-[12px] max-md:h-[12px] rotate-180" alt="">
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="owl-carousel owl-theme like-carousel">
+                <div class="owl-carousel owl-theme like-carousel">
 
-                        <?php foreach ($uniqueProducts as $key => $product) {
-                            // $images = json_decode($product['product_images'], true);
-                            // $images = array_reverse($images);
-                            $SecondImage = true;
-                            $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
-                            // printWithPre($varients);
-                            $images = json_decode($varients['images'], true);
-                            $images = array_reverse($images);
-                            (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
-                            $comparePrice = floatval($product['compare_price']);
-                            $price = floatval($varients['price']);
-                            $discountAmount = $comparePrice - $price;
-                            $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
+                    <?php foreach ($uniqueProducts as $key => $product) {
+                        // $images = json_decode($product['product_images'], true);
+                        // $images = array_reverse($images);
+                        $SecondImage = true;
+                        $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
+                        // printWithPre($varients);
+                        $images = json_decode($varients['images'], true);
+                        $images = array_reverse($images);
+                        (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
+                        $comparePrice = floatval($product['compare_price']);
+                        $price = floatval($varients['price']);
+                        $discountAmount = $comparePrice - $price;
+                        $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
-                            $name = str_replace(' ', '-', $product['name']);
-                            $name = str_replace("'", '', $name);
-                            if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
+                        $name = str_replace(' ', '-', $product['name']);
+                        $name = str_replace("'", '', $name);
+                        if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
-                                $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $product['id'] . " AND `userid` = " . $_SESSION["userid"])[0];
+                            $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $product['id'] . " AND `userid` = " . $_SESSION["userid"])[0];
+                        } else {
+
+                            $data = checkExisteingWishlistSession($product['id']);
+                            if ($data) {
+                                $data = ['id' => $data];
                             } else {
-
-                                $data = checkExisteingWishlistSession($product['id']);
-                                if ($data) {
-                                    $data = ['id' => $data];
-                                } else {
-                                    $data = [];
-                                }
+                                $data = [];
                             }
-                            // printWithPre($images);
-                        ?>
-                            <a href="/products/product-details/<?= $name ?>" class="block">
+                        }
+                        // printWithPre($images);
+                    ?>
+                        
+                            <a href="/products/product-details/<?= $name ?>" class="block max-md:m-1">
                                 <div class="group relative  cursor-pointer transition overflow-hidden">
                                     <!-- Discount Badge -->
                                     <span
@@ -837,44 +861,44 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                         SAVE <?= $discountPercentage ?>%
                                     </span>
 
-                                    <div class=" relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
-                                        <img src="/<?= $images[0] ?>" alt="Product 1"
-                                            class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+                                <div class=" relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
+                                    <img src="/<?= $images[0] ?>" alt="Product 1"
+                                        class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
 
-                                        <img src="/<?= $SecondImage ?>" alt="Product 1 Hover"
-                                            class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                                    <img src="/<?= $SecondImage ?>" alt="Product 1 Hover"
+                                        class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
 
-                                        <button
-                                            class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 max-md:h-6 max-md:w-6 flex items-center justify-center rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
-                                            <i class="fas fa-heart max-md:text-xs"></i>
-                                        </button>
+                                    <button
+                                        class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 max-md:h-6 max-md:w-6 flex items-center justify-center rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
+                                        <i class="fas fa-heart max-md:text-xs"></i>
+                                    </button>
 
-                                        <button
-                                            class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                            <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                        </button>
-                                        <input type="text" value="<?= $product['id'] ?>" class="ProductId">
+                                    <button
+                                        class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                        <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                                    </button>
+                                    <input type="text" value="<?= $product['id'] ?>" class="ProductId">
+                                </div>
+
+                                <div class="pt-4 w-full ">
+                                    <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?></h3>
+                                    <div class="flex items-center justify-start gap-3 w-full">
+                                        <p class="text-gray-500 line-through text-sm">₹
+                                            <?= formatNumber($product['compare_price']) ?>
+                                        </p>
+                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?></p>
                                     </div>
-
-                                    <div class="pt-4 w-full ">
-                                        <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?></h3>
-                                        <div class="flex items-center justify-start gap-3 w-full">
-                                            <p class="text-gray-500 line-through text-sm">₹
-                                                <?= formatNumber($product['compare_price']) ?>
-                                            </p>
-                                            <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?></p>
-                                        </div>
-                                        <div class="flex items-center justify-start space-x-1 hidden">
-                                            <span class="text-yellow-500">★★★★★</span>
-                                        </div>
+                                    <div class="flex items-center justify-start space-x-1 hidden">
+                                        <span class="text-yellow-500">★★★★★</span>
                                     </div>
                                 </div>
-                            </a>
-                        <?php } ?>
-                    </div>
+                            </div>
+                        </a>
+                    <?php } ?>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
     </div>
 
@@ -1430,20 +1454,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         });
     </script>
 
-    <!-- SwiperJS (Add in <head>) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
 
-    <!-- SwiperJS (Add before </body>) -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script>
-        const swiper = new Swiper('.swiper', {
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-        });
-    </script>
 
 
     <?php
@@ -1646,6 +1657,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                     console.log(JSON.parse(ar.images))
                     let imgHtml = ""
+                    let mobileimgHtml = ""
+
                     let productimages = JSON.parse(ar.images).reverse()
                     productimages.forEach((imgh) => {
                         imgHtml = imgHtml + `
@@ -1656,9 +1669,24 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </div>
                         `
                     })
+                    productimages.forEach((imgh) => {
+                        mobileimgHtml = mobileimgHtml + `
+                            <div class="swiper-slide">
+                                    <img src="/${imgh}" alt="View 1"
+                                        class="w-full h-[400px] object-cover shadow-lg cursor-zoom-in">
+                                </div>
+                        `
+                    })
                     // console.log(productimages[0])
                     document.getElementById('DownImage').src = '/' + productimages[0];
                     document.getElementById("ProductDetailImg").innerHTML = imgHtml
+                    document.getElementById('mobileProductDetailImg').innerHTML = mobileimgHtml;
+
+                    // Reinitialize swiper or update slides
+                    if (typeof swiper !== "undefined") {
+                        swiper.update();
+                        swiper.slideTo(0);
+                    }
                 }
             })
 
@@ -1672,5 +1700,13 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         getVariants();
         console.log("hello")
     </script>
-
+    <script>
+        let swiper = new Swiper('.swiper', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    </script>
 </body>
