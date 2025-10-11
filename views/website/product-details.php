@@ -236,12 +236,12 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         foreach ($similarProducts as $key => $product) {
                             // $images = json_decode($product['product_images'], true);
                             // $images = array_reverse($images);
-                            if($product['id'] == $ProductData['id']) continue;
+                            if ($product['id'] == $ProductData['id']) continue;
                             $SecondImage = true;
                             $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
                             // printWithPre($varients);
                             $images = json_decode($varients['images'], true);
-                            $images = array_reverse($images); 
+                            $images = array_reverse($images);
                             (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
                             $comparePrice = floatval($product['compare_price']);
                             $price = floatval($varients['price']);
@@ -250,20 +250,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                             $name = str_replace(' ', '-', $product['name']);
                             $name = str_replace("'", '', $name);
-                            if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
-
-
-                                $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $product['id'] . " AND `userid` = " . $_SESSION["userid"])[0];
-                            } else {
-
-                                $data = checkExisteingWishlistSession($product['id']);
-                                if ($data) {
-                                    $data = ['id' => $data];
-                                } else {
-                                    $data = [];
-                                }
-                            }
-
+                           
                             // printWithPre($images);
                         ?>
                             <a href="/products/product-details/<?= $name ?>" class="block">
@@ -286,7 +273,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                             class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
 
                                         <!-- Add to favorites Icon (top-right) -->
-                                        
+
                                         <input type="text" value="<?= $product['id'] ?>" class="ProductId">
                                     </div>
 
@@ -365,7 +352,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     ?>
                         <p class="text-sm text-gray-900 mt-2 text-justify"><?= $ProductData["shortDescription"] ?></p>
                     <?php } ?>
-                    
+
                     <!-- Size Selection -->
                     <div class="flex flex-col mt-7 max-md:mt-3" id="productDetailsVariants">
 
@@ -695,9 +682,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                             "<?= $value['reviewText'] ?>"
                                         </p>
                                     </div>
-                            
 
-                                        <div class="flex gap-4 items-center">
+
+                                    <div class="flex gap-4 items-center">
                                         <div class="flex items-center w-10 h-10">
                                             <img src="/public/images/dp.png" alt="John D."
                                                 class="w-full h-full rounded-full object-cover border mr-3">
@@ -707,74 +694,74 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                                 <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
                                             </p>
                                         </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="flex gap-4 items-center">
+                                    <div class="flex items-center w-10 h-10">
+                                        <img src="/public/images/dp.png" alt="John D."
+                                            class="w-full h-full rounded-full object-cover border mr-3">
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">
+                                            <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
+                                        </p>
+                                    </div>
                                 </div>
                         </div>
 
-                    
+                        >>>>>>> 20ecea29837686308243f7e6b693640c1ade1e4b
+                    <?php } ?>
 
-                        <div class="flex gap-4 items-center">
-                            <div class="flex items-center w-10 h-10">
-                                <img src="/public/images/dp.png" alt="John D."
-                                    class="w-full h-full rounded-full object-cover border mr-3">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-gray-800">
-                                    <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
-                                </p>
-                            </div>
-                        </div>
                 </div>
-
-                >>>>>>> 20ecea29837686308243f7e6b693640c1ade1e4b
-            <?php } ?>
-
-            </div>
-        <?php
+            <?php
                     } else if (count($reviws) == 1) {
                         $value = $reviws[0];
-        ?>
-            <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                    <span> <?php for ($i = 0; $i < 5; $i++) {
-                                if ($value['rating'] > $i) {
-                                    echo '★';
-                                } else {
-                                    echo '☆';
-                                }
-                            } ?></span>
-                    <style>
-                        .review-text {
-                            display: -webkit-box;
-                            -webkit-line-clamp: 4;
-                            /* show only 4 lines */
-                            -webkit-box-orient: vertical;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                        }
-                    </style>
-                    <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                        "<?= $value['reviewText'] ?>"
-                    </p>
-                </div>
-
-                <div class="flex gap-4 items-center">
-                    <div class="flex items-center w-10 h-10">
-                        <img src="/public/images/dp.png" alt="John D."
-                            class="w-full h-full rounded-full object-cover border mr-3">
-                    </div>
-                    <div>
-                        <p class="font-semibold text-gray-800">
-                            <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
+            ?>
+                <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                    <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                        <span> <?php for ($i = 0; $i < 5; $i++) {
+                                    if ($value['rating'] > $i) {
+                                        echo '★';
+                                    } else {
+                                        echo '☆';
+                                    }
+                                } ?></span>
+                        <style>
+                            .review-text {
+                                display: -webkit-box;
+                                -webkit-line-clamp: 4;
+                                /* show only 4 lines */
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            }
+                        </style>
+                        <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                            "<?= $value['reviewText'] ?>"
                         </p>
                     </div>
-                </div>
-            </div>
-        <?php
-                    }
-        ?>
 
+                    <div class="flex gap-4 items-center">
+                        <div class="flex items-center w-10 h-10">
+                            <img src="/public/images/dp.png" alt="John D."
+                                class="w-full h-full rounded-full object-cover border mr-3">
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-800">
+                                <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php
+                    }
+            ?>
+
+            </div>
         </div>
-    </div>
     </div>
 
     <script>
@@ -850,29 +837,35 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 $data = [];
                             }
                         }
+
                         // printWithPre($images);
                     ?>
-                        
-                            <a href="/products/product-details/<?= $name ?>" class="block max-md:m-1">
-                                <div class="group relative  cursor-pointer transition overflow-hidden">
-                                    <!-- Discount Badge -->
-                                    <span
-                                        class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">
-                                        SAVE <?= $discountPercentage ?>%
-                                    </span>
+                        <a href="/products/product-details/<?= $name ?>" class="block">
+                            <div class="group relative md:m-2 max-md:m-1 md:p-2 cursor-pointer transition overflow-hidden">
+                                <!-- Discount Badge -->
+                                <span
+                                    class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">
+                                    SAVE <?= $discountPercentage ?>%
+                                </span>
 
-                                <div class=" relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
+                                <!-- Product Images -->
+                                <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
+                                    <!-- Default Image -->
                                     <img src="/<?= $images[0] ?>" alt="Product 1"
                                         class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+
+                                    <!-- Hover Image -->
 
                                     <img src="/<?= $SecondImage ?>" alt="Product 1 Hover"
                                         class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
 
+                                    <!-- Add to favorites Icon (top-right) -->
                                     <button
                                         class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 max-md:h-6 max-md:w-6 flex items-center justify-center rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
                                         <i class="fas fa-heart max-md:text-xs"></i>
                                     </button>
 
+                                    <!-- Add to Cart Icon -->
                                     <button
                                         class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
                                         <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
@@ -880,14 +873,17 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                     <input type="text" value="<?= $product['id'] ?>" class="ProductId">
                                 </div>
 
+                                <!-- Product Details -->
                                 <div class="pt-4 w-full ">
-                                    <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?></h3>
+                                    <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?>
+                                    </h3>
                                     <div class="flex items-center justify-start gap-3 w-full">
                                         <p class="text-gray-500 line-through text-sm">₹
-                                            <?= formatNumber($product['compare_price']) ?>
+                                            <?= formatNumber($product['compare_price']) ?>.00
                                         </p>
-                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?></p>
+                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?>.00</p>
                                     </div>
+                                    <!-- reviews -->
                                     <div class="flex items-center justify-start space-x-1 hidden">
                                         <span class="text-yellow-500">★★★★★</span>
                                     </div>
