@@ -365,8 +365,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     ?>
                         <p class="text-sm text-gray-900 mt-2 text-justify"><?= $ProductData["shortDescription"] ?></p>
                     <?php } ?>
-                    <p class=" text-xs text-gray-600 mt-2"><a href="" class="underline">shipping</a> calculated
-                        at checkout</p>
+                    
                     <!-- Size Selection -->
                     <div class="flex flex-col mt-7 max-md:mt-3" id="productDetailsVariants">
 

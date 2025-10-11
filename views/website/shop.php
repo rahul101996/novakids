@@ -173,7 +173,7 @@ $page = "shop";
 
             const cat = '<?= $byCategory ?>';
             const minPrice = (selectedPrice.min ?? parseInt(priceRange.min)) || 0;
-            const maxPrice = (selectedPrice.max ?? parseInt(priceRange.value)) || 999999;
+            const maxPrice = (selectedPrice.max ?? parseInt(priceRange.value)) || 1500;
 
             // 🔥 Fetch products with filters
             const res = await fetch("/api/get-products/" + cat, {
@@ -200,12 +200,12 @@ $page = "shop";
             console.log(products);
 
             // ✅ Sorting
-            if (sortBy === "lowToHigh") products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-            else if (sortBy === "highToLow") products.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+            if (sortBy === "lowToHigh") products.sort((a, b) => parseFloat(a.variants[0].price) - parseFloat(b.variants[0].price));
+            else if (sortBy === "highToLow") products.sort((a, b) => parseFloat(b.variants[0].price) - parseFloat(a.variants[0].price));
             else if (sortBy === "newest") products.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
             // ✅ Price Range Initialization
-            const prices = products.map(p => parseFloat(p.price));
+            const prices = products.map(p => parseFloat(p.variants[0].price));
             const minPriceValue = Math.floor(Math.min(...prices));
             const maxPriceValue = Math.ceil(Math.max(...prices));
 
@@ -225,9 +225,6 @@ $page = "shop";
 
             products.forEach(p => {
                 (p.variants || []).forEach(v => {
-
-
-
                     if (!v.options) return;
 
                     try {
