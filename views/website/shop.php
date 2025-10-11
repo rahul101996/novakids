@@ -65,19 +65,19 @@ $page = "shop";
 
                         <!-- Range Slider -->
                         <div class="flex items-center gap-3">
-                            <span class="text-gray-700 font-medium">₹<span id="minPriceLabel">0</span></span>
+                            <span class="text-gray-700 font-medium">₹<span id="minPriceLabel"></span></span>
 
-                            <input id="priceRange" type="range" min="0" max="0" step="100" value="0"
+                            <input id="priceRange" type="range" min="0" max="0" step="100" value=""
                                 class="w-44 accent-[#f25b21] cursor-pointer appearance-none h-2 bg-gray-200 rounded-lg outline-none transition-all hover:bg-orange-100 focus:ring-2 focus:ring-[#f25b21]"
                                 oninput="updatePriceLabel(this)">
 
-                            <span class="text-gray-700 font-medium">₹<span id="selectedPriceLabel">0</span></span>
+                            <span class="text-gray-700 font-medium">₹<span id="maxPriceLabel"></span></span>
                         </div>
 
                         <!-- Price Info -->
                         <p class="text-gray-600 mt-3 text-sm">
                             Showing products up to <span class="font-semibold text-gray-800">₹<span
-                                    id="maxPriceLabelText">0</span></span>
+                                    id="selectedPriceLabel">0</span></span>
                         </p>
                     </div>
 
@@ -164,19 +164,19 @@ $page = "shop";
 
         // ✅ Fetch and render products
         async function setProducts(selectedFilters = {}, selectedPrice = {}, sortBy = "") {
-            const productsContainer = document.getElementById("product-grid");
-            const FilterContainer = document.getElementById("filters-container");
-            const priceRange = document.getElementById("priceRange");
-            const minPriceLabel = document.getElementById("minPriceLabel");
-            const selectedPriceLabel = document.getElementById("selectedPriceLabel");
-            const maxPriceLabelText = document.getElementById("maxPriceLabelText");
+            let productsContainer = document.getElementById("product-grid");
+            let FilterContainer = document.getElementById("filters-container");
+            let priceRange = document.getElementById("priceRange");
+            let minPriceLabel = document.getElementById("minPriceLabel");
+            let selectedPriceLabel = document.getElementById("selectedPriceLabel");
+            let maxPriceLabel = document.getElementById("maxPriceLabel");
 
-            const cat = '<?= $byCategory ?>';
-            const minPrice = (selectedPrice.min ?? parseInt(priceRange.min)) || 0;
-            const maxPrice = (selectedPrice.max ?? parseInt(priceRange.value)) || 1500;
+            let cat = '<?= $byCategory ?>';
+            let minPrice = (selectedPrice.min ?? parseInt(priceRange.min));
+            let maxPrice = (selectedPrice.max ?? parseInt(priceRange.value));
 
             // 🔥 Fetch products with filters
-            const res = await fetch("/api/get-products/" + cat, {
+            let res = await fetch("/api/get-products/" + cat, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -188,7 +188,7 @@ $page = "shop";
                 })
             });
 
-            const data = await res.json();
+            let data = await res.json();
 
             if (!data.success || !data.data.length) {
                 productsContainer.innerHTML = `<p class="col-span-full text-center text-gray-500">No products found</p>`;
@@ -200,41 +200,66 @@ $page = "shop";
             console.log(products);
 
             // ✅ Sorting
-            if (sortBy === "lowToHigh") products.sort((a, b) => parseFloat(a.variants[0].price) - parseFloat(b.variants[0].price));
-            else if (sortBy === "highToLow") products.sort((a, b) => parseFloat(b.variants[0].price) - parseFloat(a.variants[0].price));
+            if (sortBy === "lowToHigh") {
+                products.sort((a, b) => {
+                    let minA = Math.min(...a.variants.map(v => parseFloat(v.price)));
+                    let minB = Math.min(...b.variants.map(v => parseFloat(v.price)));
+                    return minA - minB;
+                });
+            }
+            else if (sortBy === "highToLow") {
+                products.sort((a, b) => {
+                    let maxA = Math.max(...a.variants.map(v => parseFloat(v.price)));
+                    let maxB = Math.max(...b.variants.map(v => parseFloat(v.price)));
+                    return maxB - maxA;
+                });
+            }
             else if (sortBy === "newest") products.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-            // ✅ Price Range Initialization
-            const prices = products.map(p => parseFloat(p.variants[0].price));
-            const minPriceValue = Math.floor(Math.min(...prices));
-            const maxPriceValue = Math.ceil(Math.max(...prices));
 
+            // ✅ Price Range Initialization
+            let flatPrices = products.flatMap(p => p.variants.map(v => parseFloat(v.price)));
+            let minPriceValue = Math.floor(Math.min(...flatPrices));
+            let maxPriceValue = Math.ceil(Math.max(...flatPrices));
+
+
+            // ✅ Always set slider to max value initially
             if (!priceRange.dataset.initialized) {
+                // console.log(minPriceValue, maxPriceValue);
+
+                // console.log(maxPriceValue);
+
+                // ✅ Always set slider to max value initially
                 priceRange.min = minPriceValue;
                 priceRange.max = maxPriceValue;
-                priceRange.value = selectedPrice.max ?? maxPriceValue;
+                priceRange.value = maxPriceValue; // 👈 force default selected to max
+
+                // console.log(priceRange.value);
                 priceRange.dataset.initialized = "true";
             }
 
+            // ✅ Update labels correctly
             minPriceLabel.innerText = priceRange.min;
-            selectedPriceLabel.innerText = priceRange.value;
-            maxPriceLabelText.innerText = priceRange.value;
+            maxPriceLabel.innerText = priceRange.max;
+            selectedPriceLabel.innerText = priceRange.value; // 👈 ensures shows ₹1749
+
+            handleFilterChange();
+
 
             // ✅ Build and normalize filter options
-            const allFilters = {};
+            let allFilters = {};
 
             products.forEach(p => {
                 (p.variants || []).forEach(v => {
                     if (!v.options) return;
-
                     try {
                         let opts = v.options.trim();
                         if (opts.startsWith('"') && opts.endsWith('"')) opts = JSON.parse(opts);
-                        const parsedOptions = JSON.parse(opts);
+                        let parsedOptions = JSON.parse(opts);
 
                         Object.entries(parsedOptions).forEach(([key, value]) => {
                             // Normalize the key (so "Size" and "SIZE" are same)
-                            const normalizedKey = key.trim().toLowerCase();
+                            let normalizedKey = key.trim().toLowerCase();
 
                             // Create filter group if not exists
                             if (!allFilters[normalizedKey]) {
@@ -252,6 +277,7 @@ $page = "shop";
                 });
             });
 
+
             // ✅ Render filters only once (first load)
             if (FilterContainer.children.length === 0) {
                 Object.entries(allFilters).forEach(([key, data]) => {
@@ -262,14 +288,13 @@ $page = "shop";
             restoreCheckedFilters();
             setActiveFilter(activeFilters);
 
+
             // ✅ Render products
             productsContainer.innerHTML = products.map(product => renderProductHTML(product)).join("");
 
             // console.log(activeFilters);
             AddToCart();
             AddToWishlist();
-
-
         }
 
         // ✅ Render single product HTML
@@ -429,9 +454,10 @@ $page = "shop";
         // ✅ Update price labels dynamically
         function updatePriceLabel(input) {
             document.getElementById("selectedPriceLabel").innerText = input.value;
-            document.getElementById("maxPriceLabelText").innerText = input.value;
             handleFilterChange();
         }
+
+
 
         // ✅ Show active filter tags
         function setActiveFilter(filters) {
@@ -480,9 +506,8 @@ $page = "shop";
             document.querySelectorAll('.filter-checkbox').forEach(cb => cb.checked = false);
 
             const priceRange = document.getElementById("priceRange");
-            priceRange.value = priceRange.max;
+            priceRange.value = priceRange.max; // 👈 reset to max price
             document.getElementById("selectedPriceLabel").innerText = priceRange.value;
-            document.getElementById("maxPriceLabelText").innerText = priceRange.value;
 
             activeFilters = {};
             document.getElementById('active-filters').innerHTML = "";
@@ -500,7 +525,10 @@ $page = "shop";
         }
 
         // ✅ Initial load
-        setProducts();
+        document.addEventListener("DOMContentLoaded", () => {
+            setProducts(); // Ensures DOM ready before setting labels
+        });
+
     </script>
 
     <?php
