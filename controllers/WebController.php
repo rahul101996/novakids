@@ -568,9 +568,9 @@ class WebController extends LoginController
                     $totalprice = $vdata['price'] * $quantity;
                 ?>
 
-                    <div class="flex items-center gap-4 border-b py-2 w-full">
+                    <div class="flex items-center gap-4 max-md:gap-2 border-b py-2 w-full">
                         <!-- Product image -->
-                        <img src="/<?= $images[0] ?>" alt="Product" class="w-16 h-20 object-cover">
+                        <img src="/<?= $images[0] ?>" alt="Product" class="w-16 h-20 max-md:w-20 max-md:h-24 object-cover">
 
                         <!-- Product details -->
                         <div class="flex-1">
@@ -585,7 +585,7 @@ class WebController extends LoginController
                             <span class="font-bold text-[#f25b21] total">₹<span><?= $totalprice ?></span></span>
 
                             <!-- Quantity controls -->
-                            <div class="flex items-center mt-2 border w-fit">
+                            <div class="flex items-center md:mt-2 border w-fit">
                                 <input type="hidden" name="cartid[]" class="cartid" value="<?= $c['id'] ?>">
                                 <input type="hidden" name="varient[]" class="varient" value="<?= $variant_id ?>">
                                 <input type="hidden" name="category[]" class="category" value="<?= $vdata['category'] ?>">
@@ -611,7 +611,7 @@ class WebController extends LoginController
                 }
             } else {
                 ?>
-                <div class="flex flex-col items-center justify-center w-full h-[60vh]">
+                <div class="flex flex-col items-center justify-center w-full h-[60vh] max-md:h-[30vh]">
                     <i class="fa-solid fa-bag-shopping text-8xl text-gray-200" aria-hidden="true"></i>
 
                     <p class="w-full text-center text-slate-500 font-semibold text-lg h-16 flex flex-col items-center justify-center">
@@ -652,9 +652,9 @@ class WebController extends LoginController
                     $totalprice = $vdata['price'] * $quantity;
             ?>
 
-                    <div class="flex items-center gap-4 border-b py-2 w-full">
+                    <div class="flex items-center gap-4 max-md:gap-2 border-b py-2 w-full">
                         <!-- Product image -->
-                        <img src="/<?= $images[0] ?>" alt="Product" class="w-16 h-20 object-cover">
+                        <img src="/<?= $images[0] ?>" alt="Product" class="w-16 h-20 max-md:w-20 max-md:h-24 object-cover">
 
                         <!-- Product details -->
                         <div class="flex-1">
@@ -669,7 +669,7 @@ class WebController extends LoginController
                             <span class="font-bold text-[#f25b21] total">₹<span><?= $totalprice ?></span></span>
 
                             <!-- Quantity controls -->
-                            <div class="flex items-center mt-2 border w-fit">
+                            <div class="flex items-center md:mt-2 border w-fit">
                                 <button type="button" class="px-3  rounded-l hover:bg-gray-100 py-1"
                                     onclick="minusQuantity(this,'<?= $vdata['id'] ?>','<?= $vdata['product_id'] ?>','<?= $vdata['category'] ?>')">-</button>
                                 <span class="px-4   quantity py-1"><?= $quantity ?></span>
@@ -691,8 +691,8 @@ class WebController extends LoginController
             } else {
 
                 ?>
-                <div class="flex flex-col items-center justify-center w-full h-[60vh]">
-                    <i class="fa-solid fa-bag-shopping text-8xl text-gray-200" aria-hidden="true"></i>
+                <div class="flex flex-col items-center justify-center w-full h-[50vh] border max-md:h-[25vh]">
+                    <i class="fa-solid fa-bag-shopping text-8xl max-md:text-6xl text-gray-200" aria-hidden="true"></i>
 
                     <p class="w-full text-center text-slate-500 font-semibold text-lg h-16 flex flex-col items-center justify-center">
                         No Products in the cart.

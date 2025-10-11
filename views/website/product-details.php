@@ -852,22 +852,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         }
                         // printWithPre($images);
                     ?>
-                        <a href="/products/product-details/<?= $name ?>" class="block">
-                            <div class="group relative  cursor-pointer transition overflow-hidden">
-                                <!-- Discount Badge -->
-                                <span
-                                    class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">
-                                    SAVE <?= $discountPercentage ?>%
-                                </span>
-                                $data = checkExisteingWishlistSession($product['id']);
-                                if ($data) {
-                                    $data = ['id' => $data];
-                                } else {
-                                    $data = [];
-                                }
-                            }
-                            // printWithPre($images);
-                        ?>
+                        
                             <a href="/products/product-details/<?= $name ?>" class="block max-md:m-1">
                                 <div class="group relative  cursor-pointer transition overflow-hidden">
                                     <!-- Discount Badge -->
