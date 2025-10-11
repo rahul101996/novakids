@@ -443,10 +443,11 @@ $categories = getData("tbl_category");
             <div
                 class="absolute -top-20 -left-20 w-60 h-60 bg-gradient-to-tr from-yellow-500/30 to-orange-500/20 rounded-full blur-3xl">
             </div>
-            <img src="/public/logos/logo-white.png" alt="Logo" class="mb-6 max-md:mb-2 h-24 max-md:h-20 drop-shadow-lg">
+            <img src="/public/logos/logo-white.png" alt="Logo" class="mb-6 max-md:mb-2 h-24 max-md:h-16 drop-shadow-lg">
             <h2 class="text-lg md:text-4xl font-extrabold text-center leading-snug tracking-tight">
-                Unlock the <span class="text-orange-400">Spirit</span><br>
-                Conquer the <span class="text-orange-400">Style</span>
+                <!-- Unlock the <span class="text-orange-400">Spirit</span><br>
+                Conquer the <span class="text-orange-400">Style</span> -->
+                Unlock the <span class="text-orange-400">Style</span>
             </h2>
             <div class="mt-10 max-md:mt-4">
                 <!-- Desktop/Tablet Grid -->
@@ -469,15 +470,15 @@ $categories = getData("tbl_category");
                     <div id="mobileCarousel" class="flex transition-transform duration-700 ease-in-out">
                         <div class="w-full flex-shrink-0 text-center text-sm">
                             <p class="text-2xl">⭐</p>
-                            <p class="mt-2 opacity-80">1,00,000+<br>Happy Customers</p>
+                            <p class="mt-2 opacity-80">1,00,000+ Happy Customers</p>
                         </div>
                         <div class="w-full flex-shrink-0 text-center text-sm">
                             <p class="text-2xl">⭐</p>
-                            <p class="mt-2 opacity-80">Fast<br>24hr Shipping</p>
+                            <p class="mt-2 opacity-80">Fast 24hr Shipping</p>
                         </div>
                         <div class="w-full flex-shrink-0 text-center text-sm">
                             <p class="text-2xl">⭐</p>
-                            <p class="mt-2 opacity-80">9,820+<br>Pincodes Reached</p>
+                            <p class="mt-2 opacity-80">9,820+ Pincodes Reached</p>
                         </div>
                     </div>
                 </div>
@@ -497,12 +498,12 @@ $categories = getData("tbl_category");
 
         </div>
 
-        <div class="flex flex-col justify-center w-full md:w-[45%] bg-white p-10 max-md:p-4 relative">
+        <div class="flex flex-col justify-center w-full md:w-[45%] bg-white p-8 max-md:p-4 relative">
             <!-- <div
                 class="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-tr from-yellow-400/20 to-orange-500/20 rounded-full blur-2xl">
             </div> -->
 
-            <h3 class="text-2xl font-bold text-gray-900 text-center mb-6 max-md:mb-4">Start Your Style Journey</h3>
+            <h3 class="text-2xl font-bold text-gray-900 text-center mb-4 max-md:mb-2">Start Your Style Journey</h3>
 
             <form action="/" method="POST" id="otp-form">
                 <input type="text" placeholder="" name="username" class="hidden" id="username">
@@ -519,30 +520,30 @@ $categories = getData("tbl_category");
                             class="text-xs text-green-500 p-1 px-2 border border-green-500 cursor-pointer"
                             onclick="EditotpNumber()">Edit</span></div>
                     <main class="relative flex flex-col justify-center mt-2 overflow-hidden">
-                        <div class="w-full max-w-6xl mx-auto">
+                        <div class="w-full mx-auto">
                             <div class="flex justify-center w-full">
 
-                                <div class="w-full mx-auto text-center bg-white  pt-5 rounded-xl">
+                                <div class="w-full mx-auto text-center bg-white  md:pt-3 rounded-xl">
 
                                     <div class="flex items-center justify-between gap-3 px-10 w-full">
                                         <input type="text"
-                                            class="w-14  h-14 text-center text-2xl otp-input font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                                            class="w-12 h-12 max-md:h-10 max-md:w-10 text-center text-2xl max-md:text-lg otp-input font-extrabold max-md:font-semibold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 max-md:p-2 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                                             pattern="\d*" maxlength="1" />
                                         <input type="text"
-                                            class="w-14 h-14 text-center text-2xl otp-input font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                                            class="w-12 h-12 max-md:h-10 max-md:w-10 text-center text-2xl max-md:text-lg otp-input font-extrabold max-md:font-semibold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 max-md:p-2 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                                             maxlength="1" />
                                         <input type="text"
-                                            class="w-14 h-14 text-center text-2xl otp-input font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                                            class="w-12 h-12 max-md:h-10 max-md:w-10 text-center text-2xl max-md:text-lg otp-input font-extrabold max-md:font-semibold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 max-md:p-2 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                                             maxlength="1" />
                                         <input type="text"
-                                            class="w-14 h-14 text-center text-2xl otp-input font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                                            class="w-12 h-12 max-md:h-10 max-md:w-10 text-center text-2xl max-md:text-lg otp-input font-extrabold max-md:font-semibold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 max-md:p-2 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                                             maxlength="1" />
                                     </div>
 
-                                    <div class="w-full mx-auto mt-4">
-                                        <div class="text-center bg-white px-5 py-3 rounded-lg shadow-md">
+                                    <div class="w-full mx-auto mt-4 max-md:mt-1">
+                                        <div class="text-center bg-white px-5 py-2 max-md:py-1 max-md:px-2 rounded-lg shadow-md">
                                             <div class="text-sm text-gray-600 mb-1">Code expires in</div>
-                                            <div id="countdown" class="text-2xl font-bold text-blue-600 font-mono">01:00
+                                            <div id="countdown" class="text-2xl max-md:text-base font-bold text-blue-600 font-mono">01:00
                                             </div>
                                         </div>
                                     </div>
