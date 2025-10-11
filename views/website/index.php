@@ -9,14 +9,18 @@ $home_imges = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC
 
 
 $product_imge = getData2("SELECT tpb.*, tp.name as product_name, tp.price, tp.product_images FROM tbl_product_banner tpb LEFT JOIN tbl_products tp ON tpb.product_id = tp.id ORDER BY tpb.id DESC Limit 1")[0];
+$product_variants = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product_imge[product_id] ORDER BY `id` DESC LIMIT 1")[0];
+
+// printWithPre($product_imge);
+// die();
 
 $ppname = str_replace(' ', '-', $product_imge['product_name']);
 $ppname = str_replace("'", '', $ppname);
 
-$imags = json_decode($product_imge['product_images'], true);
+$imags = json_decode($product_variants['images'], true);
 $ppimg = array_reverse($imags);
 
-// printWithPre($images);
+// printWithPre($product_variants);
 // die();
 
 // ini_set('display_errors', 1);

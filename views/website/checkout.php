@@ -46,12 +46,12 @@ $allstates = getData("indian_states");
 
     <!-- Main Layout -->
     <form action="" method="POST" class="w-full" id="checkout-form">
-        <main class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-5 gap-10">
+        <main class="w-[90vw] mx-auto py-10 grid md:grid-cols-5 gap-10">
 
             <!-- LEFT: Checkout Sections -->
             <section class="md:col-span-3 space-y-6">
                 <!-- Step 1: Shipping -->
-                <div class="bg-white p-6">
+                <div class="bg-white">
                     <button onclick="openModal1()" type="button" class="bg-black text-white flex py-2 px-6">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -66,8 +66,8 @@ $allstates = getData("indian_states");
                     <div class="grid grid-cols-2 gap-4 mt-3">
                         <input type="text" placeholder="First Name" required class="border px-3 py-2 rounded col-span-1" value="<?= $userData['fname'] ?>" name="fname">
                         <input type="text" placeholder="Last Name" required class="border px-3 py-2 rounded col-span-1" value="<?= $userData['lname'] ?>" name="lname">
-                        <input type="email" placeholder="Email Address" class="border px-3 py-2 rounded col-span-1" value="<?= $userData['username'] ?>" name="email">
-                        <input type="text" placeholder="Phone Number" required class="border px-3 py-2 rounded col-span-1" value="<?= $userData['mobile'] ?>" name="mobile">
+                        <input type="email" placeholder="Email Address" class="border px-3 py-2 rounded col-span-1 max-md:col-span-2" value="<?= $userData['username'] ?>" name="email">
+                        <input type="text" placeholder="Phone Number" required class="border px-3 py-2 rounded col-span-1 max-md:col-span-2" value="<?= $userData['mobile'] ?>" name="mobile">
                         <input type="text" id="address2" placeholder="Apartment, Floor No, suite, etc." required class="border px-3 py-2 rounded col-span-2" name="address_line2" value="<?= $address[0]['address_line2'] ?>">
                         <input type="text" placeholder="Street Address" required
                             class="border px-3 py-2 rounded col-span-2" id="address1" value="<?= $address[0]['address_line1'] ?>" name="address_line1">
@@ -90,7 +90,7 @@ $allstates = getData("indian_states");
                     <!-- Header Section -->
                     <div class="title mb-4 sm:mb-6 flex items-center justify-between">
                         <div class="flex items-center gap-2">
-                            <div class="w-1 h-6 bg-[#1d9267] rounded-full"></div>
+                            <div class="w-1 h-6 bg-[#f25b21] rounded-full"></div>
                             <h2 class="text-lg sm:text-xl font-semibold text-gray-800">Saved Addresses</h2>
                         </div>
                     </div>
@@ -172,7 +172,7 @@ $allstates = getData("indian_states");
                     </div>
                 </div>
                 <!-- Step 2: Delivery -->
-            
+
                 <!-- Step 3: Payment -->
                 <div class="bg-white  p-6">
                     <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
@@ -193,20 +193,25 @@ $allstates = getData("indian_states");
                         <!-- Credit / Debit Card -->
                         <label
                             class="flex items-center justify-between border p-4 rounded-md cursor-pointer hover:border-[#f25b21]">
-                            <span class="flex items-center gap-2">
-                                <i class="fas fa-credit-card text-[#f25b21]"></i>
-                                Credit / Debit Card / UPI / Wallet
+                            <span class="flex max-md:flex-col items-center gap-2">
 
-                                <img src="/public/logos/images (3).png" alt="UPI" class="h-5 mx-1 max-md:h-2">
-                                <img src="/public/logos/visa.png" alt="VISA" class="h-5 mx-1 max-md:h-2">
-                                <img src="/public/logos/mastercard.png" alt="Mastercard" class="h-5 mx-1 max-md:h-2">
-                                <img src="/public/logos/rupay.png" alt="RuPay" class="h-5 mx-1 max-md:h-2">
+                                <p class="whitespace-nowrap flex items-center gap-2">
+                                    <i class="fas fa-credit-card text-[#f25b21]"></i>
+                                    Credit / Debit Card / UPI / Wallet
+                                </p>
+
+                                <div class="flex gap-2">
+                                    <img src="/public/logos/images (3).png" alt="UPI" class="h-5 mx-1 max-md:h-2">
+                                    <img src="/public/logos/visa.png" alt="VISA" class="h-5 mx-1 max-md:h-2">
+                                    <img src="/public/logos/mastercard.png" alt="Mastercard" class="h-5 mx-1 max-md:h-2">
+                                    <img src="/public/logos/rupay.png" alt="RuPay" class="h-5 mx-1 max-md:h-2">
+                                </div>
                             </span>
-                            <input type="radio" name="payment_mode" value="Prepaid" >
+                            <input type="radio" name="payment_mode" value="Prepaid">
                         </label>
 
-                        
-                        
+
+
                     </div>
 
                 </div>
@@ -427,7 +432,7 @@ $allstates = getData("indian_states");
             console.log('this is delevry value' + delivery)
 
             const response = await axios.post("/user-address", new URLSearchParams({
-                process : buttonValue.value,
+                process: buttonValue.value,
                 address_line1: addressInput1.value,
                 address_line2: addressInput2.value,
                 city: cityInput.value,

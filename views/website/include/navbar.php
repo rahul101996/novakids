@@ -605,14 +605,14 @@ $categories = getData("tbl_category");
 <div id="searchOverlay"
     class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center transition-opacity duration-500">
     <div
-        class="bg-white w-[50%] max-md:w-[100%] h-[75vh] max-md:h-[105vh] relative p-8 max-md:p-4 max-md:mt-8 shadow-lg animate-slideDown flex flex-col">
+        class="bg-white w-[50%] max-md:w-[100%] md:h-[78vh] lg:h-[75vh] max-md:h-[105vh] relative p-8 max-md:p-4 max-md:mt-8 shadow-lg animate-slideDown flex flex-col">
         <button id="closeSearch"
             class="absolute top-4 right-6 text-2xl text-gray-700 hover:text-black animate-rotate-pingpong">
             <i class="fas fa-times"></i>
         </button>
 
         <div class="shrink-0">
-            <h2 class="text-2xl font-semibold text-center mb-6">What are you looking for</h2>
+            <h2 class="text-2xl font-semibold text-center mb-4 max-md:my-4">What are you looking for</h2>
             <div class="w-full max-w-2xl mx-auto mb-6">
                 <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
                     <input type="text" id="searchInput" oninput="searchProducts()" placeholder="Search our store"
@@ -635,7 +635,7 @@ $categories = getData("tbl_category");
             </div>
 
             <!-- Search Results -->
-            <div id="searchResults" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+            <div id="searchResults" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-1 w-full h-auto">
             </div>
         </div>
     </div>
@@ -1029,8 +1029,8 @@ $categories = getData("tbl_category");
 
 
                         html += `
-                        <a href="/products/product-details/${name}" target="_blank">
-                            <div class="border overflow-hidden hover:shadow-md transition">
+                        <a href="/products/product-details/${name}" target="_blank" class="flex h-full w-full">
+                            <div class="border overflow-hidden hover:shadow-md transition h-auto w-full">
                                 <img src="/${parsed[0]}" alt="${product.name}" class="w-full h-40 object-cover">
                                 <div class="p-2">
                                     <h3 class="font-semibold text-sm">${product.name}</h3>
