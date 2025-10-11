@@ -553,7 +553,7 @@ $categories = getData("tbl_category");
                                             class="relative w-full py-2 rounded-md font-semibold overflow-hidden group border-2 border-black">Verify
                                             OTP</button>
                                     </div>
-                                    <div class="text-sm text-slate-500 mt-4">Didn't receive code? <button type="button"
+                                    <div class="text-sm text-slate-500 mt-4 max-md:mt-2">Didn't receive code? <button type="button"
                                             class="font-medium text-indigo-500 hover:text-indigo-600"
                                             onclick="ResendOtp()">Resend</button></div>
                                 </div>
@@ -577,7 +577,7 @@ $categories = getData("tbl_category");
                 </button>
 
                 <div>
-                    <p class="text-center text-gray-500 my-3">or</p>
+                    <p class="text-center text-gray-500 my-3 max-md:mt-1">or</p>
                 </div>
 
                 <div id="g_id_onload" style="display:flex; align-items:center; justify-content:center"
