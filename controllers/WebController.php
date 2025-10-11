@@ -67,19 +67,19 @@ class WebController extends LoginController
             <?php
             if (!isset($_POST["product_details"])) {
                 ?>
-                <div class="w-[47%] p-3 h-full overflow-y-scroll bg-gray-200 flex flex-col items-center justify-start no-scrollbar gap-3 transform translate-x-full transition-transform duration-[0.8s] ease-in-out"
+                <div class="w-[47%] max-md:w-full p-3 md:h-full md:overflow-y-scroll max-md:overflow-x-scroll bg-gray-200 flex md:flex-col items-center justify-start no-scrollbar gap-3 transform translate-x-full transition-transform duration-[0.8s] ease-in-out"
                     id="VarImg">
                     <?php
                     foreach (array_reverse($images[0]) as $key => $image) {
 
                         ?>
-                        <img src="/<?= $image ?>" alt="">
+                        <img src="/<?= $image ?>" alt="" class="max-md:w-[80%] max-md:h-[80%] w-full h-full object-cover">
                     <?php } ?>
                 </div>
                 <?php
             }
             ?>
-            <div class=" h-full <?= !isset($_POST["product_details"]) ? " w-[53%] overflow-y-scroll" : "" ?> flex flex-col items-start justify-start z-10 bg-white"
+            <div class=" h-full <?= !isset($_POST["product_details"]) ? " w-[53%] max-md:w-full overflow-y-scroll" : "" ?> flex flex-col items-start justify-start z-10 bg-white"
                 id="VarDetails">
 
 
