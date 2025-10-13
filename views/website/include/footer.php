@@ -133,8 +133,8 @@
             <div class="lg:col-span-2">
                 <div class="mb-6">
                     <div class="flex items-center gap-2">
-                        <img src="/public/logos/nova_favicon.png" alt="Brand Logo" class="w-auto h-8 rounded-md object-cover mb-4">
-                        <img src="/public/logos/nova_logo-brnd-name.png" alt="Brand Logo" class="w-auto h-8 rounded-md object-cover mb-4">
+                        <img src="/public/logos/novafav_png.png" alt="Brand Logo" class="w-auto h-10 rounded-md object-cover mb-4">
+                        <img src="/public/logos/nova_logo-brnd-name.png" alt="Brand Logo" class="w-auto h-10 rounded-md object-cover mb-4">
                     </div>
 
 
@@ -262,7 +262,9 @@
                 <!-- Legal Links -->
                 <div class="flex space-x-6 text-sm">
                     <a href="/privacy-policy" class="link-hover">Privacy Policy</a>
-                    <a href="/terms-and-conditions" class="link-hover">Terms of Service</a>
+                    <a href="/terms-and-conditions" class="link-hover">Terms and Conditions</a>
+                    <a href="/cancellation-and-refunds" class="link-hover">Cancellation and Refunds</a>
+                    <a href="/shipping-policy" class="link-hover">Shipping Policy</a>
                     <a href="/cookies" class="link-hover">Cookies</a>
                 </div>
             </div>

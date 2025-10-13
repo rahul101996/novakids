@@ -46,12 +46,12 @@ $allstates = getData("indian_states");
 
     <!-- Main Layout -->
     <form action="" method="POST" class="w-full" id="checkout-form">
-        <main class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-5 gap-10">
+        <main class="w-[90vw] mx-auto py-10 grid md:grid-cols-5 gap-10">
 
             <!-- LEFT: Checkout Sections -->
             <section class="md:col-span-3 space-y-6">
                 <!-- Step 1: Shipping -->
-                <div class="bg-white p-6">
+                <div class="bg-white">
                     <button onclick="openModal1()" type="button" class="bg-black text-white flex py-2 px-6">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -66,15 +66,15 @@ $allstates = getData("indian_states");
                     <div class="grid grid-cols-2 gap-4 mt-3">
                         <input type="text" placeholder="First Name" required class="border px-3 py-2 rounded col-span-1" value="<?= $userData['fname'] ?>" name="fname">
                         <input type="text" placeholder="Last Name" required class="border px-3 py-2 rounded col-span-1" value="<?= $userData['lname'] ?>" name="lname">
-                        <input type="email" placeholder="Email Address" class="border px-3 py-2 rounded col-span-1" value="<?= $userData['username'] ?>" name="email">
-                        <input type="text" placeholder="Phone Number" required class="border px-3 py-2 rounded col-span-1" value="<?= $userData['mobile'] ?>" name="mobile">
+                        <input type="email" placeholder="Email Address" class="border px-3 py-2 rounded col-span-1 max-md:col-span-2" value="<?= $userData['username'] ?>" name="email">
+                        <input type="text" placeholder="Phone Number" required class="border px-3 py-2 rounded col-span-1 max-md:col-span-2" value="<?= $userData['mobile'] ?>" name="mobile">
                         <input type="text" id="address2" placeholder="Apartment, Floor No, suite, etc." required class="border px-3 py-2 rounded col-span-2" name="address_line2" value="<?= $address[0]['address_line2'] ?>">
                         <input type="text" placeholder="Street Address" required
                             class="border px-3 py-2 rounded col-span-2" id="address1" value="<?= $address[0]['address_line1'] ?>" name="address_line1">
                         <div class="grid grid-cols-3 gap-4 col-span-2">
-                            <input type="text" placeholder="City" id="city" value="<?= $address[0]['city'] ?>" name="city" required class="border px-3 py-2 rounded ">
+                            <input type="text" placeholder="City" id="city" value="<?= $address[0]['city'] ?>" name="city" required class="border px-3 py-2 rounded max-md:col-span-3 w-full">
 
-                            <select class="border px-3 py-2 rounded w-full" id="state" name="state">
+                            <select class="border px-3 py-2 rounded w-full max-md:col-span-3" id="state" name="state">
                                 <?php foreach ($allstates as $key => $state) {  ?>
 
                                     <option value="<?= $state['id'] ?>" <?= (isset($address) && $address[0]['state'] == $state['id']) ? 'selected' : '' ?>><?= $state['name'] ?></option>
@@ -82,7 +82,7 @@ $allstates = getData("indian_states");
                                 <?php  } ?>
                             </select>
 
-                            <input type="text" placeholder="Pincode" id="pinTest" name="pin_code" value="<?= $address[0]['pincode'] ?>" required class="border px-3 py-2 rounded ">
+                            <input type="text" placeholder="Pincode" id="pinTest" name="pin_code" value="<?= $address[0]['pincode'] ?>" required class="border px-3 py-2 rounded max-md:col-span-3 w-full">
                         </div>
                     </div>
                 </div>
@@ -90,17 +90,17 @@ $allstates = getData("indian_states");
                     <!-- Header Section -->
                     <div class="title mb-4 sm:mb-6 flex items-center justify-between">
                         <div class="flex items-center gap-2">
-                            <div class="w-1 h-6 bg-[#1d9267] rounded-full"></div>
+                            <div class="w-1 h-6 bg-[#f25b21] rounded-full"></div>
                             <h2 class="text-lg sm:text-xl font-semibold text-gray-800">Saved Addresses</h2>
                         </div>
                     </div>
 
 
                     <!-- Replace the Address List div with this conditional structure -->
-                    <div class="min-h-[30vh] max-md:h-[40vh] overflow-y-auto space-y-3 pr-2">
+                    <div class="min-h-[30vh] max-md:h-[35vh] overflow-y-auto space-y-3 pr-2">
                         <?php if (empty($address)) { ?>
                             <!-- Empty State -->
-                            <div class="h-full flex flex-col items-center justify-center text-center max-md:p-2">
+                            <div class="h-full flex flex-col items-center justify-center text-center">
                                 <div class="w-24 h-24 mb-2 max-md:w-16 max-md:h-16">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-full h-full text-gray-300">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -172,9 +172,9 @@ $allstates = getData("indian_states");
                     </div>
                 </div>
                 <!-- Step 2: Delivery -->
-            
+
                 <!-- Step 3: Payment -->
-                <div class="bg-white  p-6">
+                <div class="bg-white  pt-6">
                     <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
                         <span
                             class="w-8 h-8 flex items-center justify-center bg-[#f25b21] text-white rounded-full text-sm">2</span>
@@ -192,21 +192,26 @@ $allstates = getData("indian_states");
                         </label>
                         <!-- Credit / Debit Card -->
                         <label
-                            class="flex items-center justify-between border p-4 rounded-md cursor-pointer hover:border-[#f25b21]">
-                            <span class="flex items-center gap-2">
-                                <i class="fas fa-credit-card text-[#f25b21]"></i>
-                                Credit / Debit Card / UPI / Wallet
+                            class="flex items-center max-md:items-start justify-between border p-4 rounded-md cursor-pointer hover:border-[#f25b21]">
+                            <span class="flex max-md:flex-col items-center gap-2 max-md:gap-3">
 
-                                <img src="/public/logos/images (3).png" alt="UPI" class="h-5 mx-1 max-md:h-2">
-                                <img src="/public/logos/visa.png" alt="VISA" class="h-5 mx-1 max-md:h-2">
-                                <img src="/public/logos/mastercard.png" alt="Mastercard" class="h-5 mx-1 max-md:h-2">
-                                <img src="/public/logos/rupay.png" alt="RuPay" class="h-5 mx-1 max-md:h-2">
+                                <p class="whitespace-nowrap flex items-center gap-2">
+                                    <i class="fas fa-credit-card text-[#f25b21]"></i>
+                                    Credit / Debit Card / UPI / Wallet
+                                </p>
+
+                                <div class="flex gap-2 max-md:items-start max-md:w-full">
+                                    <img src="/public/logos/images (3).png" alt="UPI" class="h-5 mx-1 max-md:h-4">
+                                    <img src="/public/logos/visa.png" alt="VISA" class="h-5 mx-1 max-md:h-4">
+                                    <img src="/public/logos/mastercard.png" alt="Mastercard" class="h-5 mx-1 max-md:h-4">
+                                    <img src="/public/logos/rupay.png" alt="RuPay" class="h-5 mx-1 max-md:h-4">
+                                </div>
                             </span>
-                            <input type="radio" name="payment_mode" value="Prepaid" >
+                            <input type="radio" name="payment_mode" value="Prepaid" class="max-md:mt-1.5">
                         </label>
 
-                        
-                        
+
+
                     </div>
 
                 </div>
@@ -233,7 +238,7 @@ $allstates = getData("indian_states");
                         $totalprice = $vdata['price'] * $quantity;
                         $totalAmount += $totalprice;
                     ?>
-                        <div class="flex items-center justify-between">
+                        <div class="flex gap-4 max-md:gap-2 items-center justify-between">
                             <div class="flex items-center gap-3">
                                 <img src="/<?= $images[0] ?>" class="w-16 h-20 object-cover">
                                 <div>
@@ -286,11 +291,11 @@ $allstates = getData("indian_states");
         </main>
     </form>
     <div id="addressModal" class=" h-full w-full fixed inset-0 top-1/2 transform -translate-y-1/2 z-[9999]  overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center   items-center justify-center hidden">
-        <div class="bg-white shadow-lg mx-auto w-[30%]">
+        <div class="bg-white shadow-lg mx-auto w-[30%] max-md:w-[90%]">
             <div class="p-6">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-lg font-semibold">Update Delivery Address</h3>
-                    <button onclick="closeModal1()" type="button" class="text-gray-400 hover:text-gray-500">
+                    <button onclick="closeModal1()" type="button" class="text-gray-400 hover:text-gray-500 animate-rotate-pingpong">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
@@ -427,7 +432,7 @@ $allstates = getData("indian_states");
             console.log('this is delevry value' + delivery)
 
             const response = await axios.post("/user-address", new URLSearchParams({
-                process : buttonValue.value,
+                process: buttonValue.value,
                 address_line1: addressInput1.value,
                 address_line2: addressInput2.value,
                 city: cityInput.value,

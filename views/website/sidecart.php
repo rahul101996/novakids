@@ -190,7 +190,7 @@
         </div>
     </form>
 </div>
-<div class="h-[100vh] w-[59%] z-[50] fixed top-0 right-0 w-full flex items-center justify-center transform translate-x-full transition-transform duration-[0.6s] ease-in-out"
+<div class="h-[100vh] w-[60%] max-md:w-full z-[50] fixed top-0 right-0 w-full flex max-md:flex-col items-center justify-center transform translate-x-full transition-transform duration-[0.6s] ease-in-out"
     id="AddToCartSidebar">
 
 </div>

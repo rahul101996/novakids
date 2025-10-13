@@ -12,26 +12,36 @@ $encodedAddress = urlencode($OrderData['address_line2'] . ", " . $OrderData['add
 <body class="overflow-x-hidden archivo-narrow-k">
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
 
-    <div class="flex w-full min-h-screen">
-        <!-- Left section -->
-        <div class="w-[60%] bg-white p-8 shadow-sm">
-            <div class="max-w-[90%] ml-16">
-                <!-- Order confirmation header -->
-                <div class="flex items-start mb-8">
-                    <div class="rounded-full bg-gradient-to-r from-green-600 to-green-500 p-3 mr-4 shadow-sm">
+    <div class="flex max-md:flex-col w-full min-h-screen mx-auto">
+        <div class="flex order-1 md:hidden flex-col gap-2 mt-6 items-center justify-start justify-center max-md:text-center mb-8 mb-4">
+            <div class="rounded-full bg-gradient-to-r from-green-600 to-green-500 p-3 shadow-sm">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <div class="flex flex-col">
+                <p class="text-gray-600 text-sm font-medium">Order #<?= $OrderData['orderid'] ?></p>
+                <h1 class="text-3xl font-semibold text-gray-800 mt-1">Thank you, <?= $OrderData['fname'] ?> <?= $OrderData['lname'] ?>!</h1>
+            </div>
+        </div>
+
+        <div class="w-[60%] max-md:order-3 max-md:w-full bg-white p-8 max-md:px-4 max-md:py-6 shadow-sm">
+            <div class="max-w-[90%] md:ml-16 max-md:mx-auto">
+                <div class="flex max-md:hidden gap-2 items-center justify-start mb-8">
+                    <div class="rounded-full bg-gradient-to-r from-green-600 to-green-500 p-3 shadow-sm">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
                     </div>
-                    <div>
+                    <div class="flex flex-col">
                         <p class="text-gray-600 text-sm font-medium">Order #<?= $OrderData['orderid'] ?></p>
                         <h1 class="text-3xl font-semibold text-gray-800 mt-1">Thank you, <?= $OrderData['fname'] ?> <?= $OrderData['lname'] ?>!</h1>
                     </div>
                 </div>
 
                 <!-- Map section -->
-                <div class="bg-white rounded-xl border border-gray-100 mb-8 shadow-sm overflow-hidden">
-                    <div class="relative h-64 w-full">
+                <div class="bg-white max-md:mt-4 rounded-xl border border-gray-100 mb-8 shadow-sm overflow-hidden">
+                    <div class="relative h-64 max-md:h-40 w-full">
                         <iframe
                             class="w-full h-full "
                             allowfullscreen
@@ -45,39 +55,29 @@ $encodedAddress = urlencode($OrderData['address_line2'] . ", " . $OrderData['add
                     </div>
                 </div>
 
-                <!-- Confirmation section -->
-
-                <!-- Updates section -->
-
                 <!-- Order details -->
-                <div class="bg-white rounded-xl border border-gray-100 p-8 mb-6">
-                    <h2 class="text-gray-800 font-semibold mb-8">Order details</h2>
+                <div class="bg-white rounded-xl border border-gray-200 p-8 max-md:p-3 mb-6">
+                    <h2 class="text-gray-800 font-semibold mb-8 max-md:mb-4">Order details</h2>
 
-                    <div class="grid grid-cols-2 gap-12">
+                    <div class="grid grid-cols-2 gap-12 max-md:gap-4">
                         <!-- Left column -->
-                        <div class="space-y-8">
+                        <div class="space-y-8 max-md:col-span-2">
                             <div>
-                                <h3 class="text-gray-600 text-sm font-semibold mb-3">Contact information</h3>
+                                <h3 class="text-gray-600 text-sm font-semibold md:mb-3">Contact information</h3>
                                 <p class="text-gray-800">+91 <?= $OrderData['mobile'] ?></p>
                             </div>
-
-
-
-
                         </div>
 
                         <!-- Right column -->
-                        <div class="space-y-8">
+                        <div class="space-y-8 max-md:col-span-2">
                             <div>
-                                <h3 class="text-gray-600 text-sm font-semibold mb-3">Payment method</h3>
+                                <h3 class="text-gray-600 text-sm font-semibold md:mb-3">Payment method</h3>
                                 <p class="text-gray-800"><?= $OrderData['payment_mode'] ?> - ₹<?= formatNumber($OrderData['total_amount'])  ?></p>
                             </div>
-
-
                         </div>
                     </div>
                     <div class="mt-4">
-                        <h3 class="text-gray-600 text-sm font-semibold mb-3">Shipping address</h3>
+                        <h3 class="text-gray-600 text-sm font-semibold md:mb-3">Shipping address</h3>
                         <div class="space-y-1">
 
                             <p class="text-gray-800 w-[80%]"><?= $OrderData['address_line1'] ?></p>
@@ -100,20 +100,19 @@ $encodedAddress = urlencode($OrderData['address_line2'] . ", " . $OrderData['add
                     </a>
                 </div>
 
-                <div class="flex space-x-6 text-sm text-black">
-                    <a href="#" class="hover:text-pink-600 hover:underline">Refund policy</a>
-                    <a href="#" class="hover:text-pink-600 hover:underline">Shipping policy</a>
-                    <a href="#" class="hover:text-pink-600 hover:underline">Privacy policy</a>
-                    <a href="#" class="hover:text-pink-600 hover:underline">Terms of service</a>
+                <div class="flex max-md:flex-wrap max-md:text-center max-md:justify-center max-md:items-center space-x-6 max-md:space-x-0 max-md:gap-4 text-sm text-black">
+                    <!-- <a href="#" class="hover:text-pink-600 hover:underline">Refund policy</a>
+                    <a href="#" class="hover:text-pink-600 hover:underline">Shipping policy</a> -->
+                    <a href="/privacy-policy" class="hover:text-pink-600 hover:underline">Privacy policy</a>
+                    <a href="/terms-and-conditions" class="hover:text-pink-600 hover:underline">Terms of service</a>
                 </div>
             </div>
         </div>
 
-        <!-- Right section -->
-        <div class="w-[40%] bg-gradient-to-br from-orange-50 to-rose-50 p-8 pr-16">
+        <div class="w-[40%] max-md:order-2 max-md:w-full bg-gradient-to-br from-orange-50 to-rose-50 p-8 max-md:px-4 max-md:py-10 md:pr-16">
             <div class="flex items-center gap-2 w-full justify-center">
-                <img src="/public/logos/nova_favicon.png" alt="Brand Logo" class="w-auto h-14 rounded-md object-cover mb-4">
-                <img src="/public/logos/nova_logo-brnd-name.png" alt="Brand Logo" class="w-auto h-14 rounded-md object-cover mb-4">
+                <img src="/public/logos/novafav_png.png" alt="Brand Logo" class="w-auto h-14 max-md:h-8 rounded-md object-cover mb-4">
+                <img src="/public/logos/nova_logo-brnd-name.png" alt="Brand Logo" class="w-auto h-14 max-md:h-8 rounded-md object-cover mb-4">
             </div>
 
             <!-- Order summary -->
@@ -136,7 +135,7 @@ $encodedAddress = urlencode($OrderData['address_line2'] . ", " . $OrderData['add
                         $totalprice = $vdata['price'] * $quantity;
                         $totalAmount += $totalprice;
                     ?>
-                        <div class="flex items-center justify-between bg-white p-2">
+                        <div class="flex items-center justify-between bg-white p-2 max-md:p-3 rounded-md">
                             <div class="flex items-center gap-3">
                                 <img src="/<?= $images[0] ?>" class="w-16 h-20 object-cover">
                                 <div>
