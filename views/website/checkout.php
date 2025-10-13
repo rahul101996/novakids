@@ -251,6 +251,11 @@ $getallcoupons = getData("tbl_coupons");
                                             <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
                                         <?php } ?>
                                     </div>
+                                    <div class="border border-gray-500 px-2 py-1 flex gap-3 items-center mt-2 w-fit">
+                                        <span><i class="fa fa-plus cursor-pointer"></i></span>
+                                        <span><?= $quantity ?></span>
+                                        <span><i class="fa fa-minus cursor-pointer"></i></span>
+                                    </div>
                                 </div>
                             </div>
                             <p class="font-semibold">₹<?= $totalprice ?></p>
