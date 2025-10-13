@@ -189,5 +189,10 @@ $encodedAddress = urlencode($OrderData['address_line2'] . ", " . $OrderData['add
     include $_SERVER['DOCUMENT_ROOT'] . "/views/website/sidecart.php";
     include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/footer.php";
     ?>
+    <script>
+        setTimeout(() => {
+            window.location.href = "/";
+        }, 10000);
+    </script>
 
 </body>
