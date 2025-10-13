@@ -103,7 +103,7 @@ class WebController extends LoginController
                 }
                 ?>
 
-                <div class="flex flex-col items-start justify-start w-full max-md:mb-8 <?= !isset($_POST["product_details"]) ? "px-7" : "" ?>">
+                <div class="flex flex-col items-start justify-start w-full max-md:mb-1 <?= !isset($_POST["product_details"]) ? "px-7" : "" ?>">
                     <?php
                     if (!isset($_POST["product_details"])) {
                     ?>
@@ -1480,6 +1480,20 @@ class WebController extends LoginController
             // printWithPre($_POST);
             // printWithPre($_SESSION);
             // die();
+            if (isset($_POST['couponSecret'])) {
+                $couponSecret = $_POST['couponSecret'];
+                $coupon = getData2("SELECT * FROM `tbl_coupons` WHERE `coupon_secret` = '$couponSecret'")[0];
+                if (!empty($coupon)) {
+                    $coupon_id = $coupon['id'];
+                    $discount = $coupon['discount'];
+                    echo json_encode(['success' => true, 'message' => 'Coupon Applied Successfully', 'coupon_id' => $coupon_id, 'discount' => $discount]);
+                } else {
+
+                    echo json_encode(['success' => false, 'message' => 'Invalid Coupon']);
+                    // die();
+                }
+                exit();
+            }
             $id = $_SESSION["userid"];
             $mode = $_POST["payment_mode"];
             $order_id = generateRandomString(16) . time();
@@ -2215,21 +2229,22 @@ ORDER BY id DESC LIMIT 5");
         die();
     }
 
- public function shippingPolicy()
+    public function shippingPolicy()
     {
         require 'views/website/shipping-policy.php';
- }
- public function TermsAndPolicy()
+    }
+    public function TermsAndPolicy()
     {
         require 'views/website/terms-and-conditions.php';
- }
- public function CancellationAndRefunds()
+    }
+    public function CancellationAndRefunds()
     {
         require 'views/website/cancellation-and-refund.php';
- }
-  public function PrivacyPolicy(){
-      require 'views/website/privacy-policy.php';
-  }
+    }
+    public function PrivacyPolicy()
+    {
+        require 'views/website/privacy-policy.php';
+    }
 
     public function addReview()
     {

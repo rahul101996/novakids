@@ -276,6 +276,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                 <th class="border border-gray-300 px-3 py-3 text-left">Variant</th>
                                                 <th class="border border-gray-300 px-3 py-3 text-left">Price</th>
                                                 <th class="border border-gray-300 px-3 py-3 text-left">Available</th>
+                                                <?php if (!empty($editData)) { ?>
+                                                    <th class="border border-gray-300 px-3 py-3 text-left">Action</th>
+                                                <?php } ?>
 
                                             </tr>
                                         </thead>
@@ -307,7 +310,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                     // printWithPre($vvkeys);
                                                     // printWithPre($vvdd);
                                                     // printWithPre($dtdtd);
-
+                                            
                                                     ?>
 
                                                     <tr class="hover:bg-gray-50 border border-gray-200">
@@ -337,6 +340,14 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                             <input type="number" name="variant_quantities[<?= $vkey ?>]"
                                                                 class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
                                                                 value="<?= $vdata['quantity'] ?>" required>
+                                                        </td>
+                                                        <td class="px-3 py-3">
+                                                            <div class="gap-4">
+                                                                <button type="button" class="text-indigo-600 text-lg "><i
+                                                                        class="fa fa-edit"></i></button>
+                                                                <button type="button" class="text-red-600 text-lg "><i
+                                                                        class="fa fa-trash"></i></button>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                     <?php
@@ -393,7 +404,14 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                                         <div id="dropdownMenu"
                                             class="hidden absolute mt-1 w-full bg-white shadow-lg rounded-md border border-gray-200 z-10 max-h-60 overflow-y-auto px-2 py-1">
-                                            <?php foreach ($packages as $package) { ?>
+                                            <?php
+
+                                            // $selectedPackage = "";
+                                            // if (!empty($editData) && !empty($editData['packaging'])) {
+                                            //     $selectedPackage = getData2("SELECT * FROM tbl_packaging WHERE id = " . $editData['packaging'])[0];
+                                            // }
+
+                                            foreach ($packages as $package) { ?>
                                                 <div class="p-2 hover:bg-gray-100 cursor-pointer flex items-center space-x-2"
                                                     onclick="selectPackage('<?= $package['package_name'] ?>', '<?= $package['length'] ?> × <?= $package['width'] ?> × <?= $package['height'] ?> <?= $package['dimentions_unit'] ?>, <?= $package['weight'] ?> <?= $package['weight_unit'] ?>', '<?= $package['id'] ?>')">
                                                     <?php
@@ -552,9 +570,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                     <div class="flex items-center gap-2">
                                                         <input type="text" value="Chest" name="sizeType[]"
                                                             class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                                        <button type="button" onclick="
-                                            (this)" class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
-
+                                                        <button type="button" onclick="(this)"
+                                                            class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
                                                     </div>
                                                 </th>
                                                 <th
@@ -722,6 +739,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             const container = document.getElementById("optionsContainer");
             const optionDivValues = container.querySelector(".OptionDiv").querySelectorAll(".OptionValues");
 
+            console.log("sizes", optionDivValues);
+
             let modalHtml = "";
             let trHtml = "";
             const modalTableTh = modal.querySelector("thead tr").querySelectorAll("th");
@@ -751,7 +770,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     </tr>
                     `;
                 });
-
 
                 modal.querySelector("tbody").innerHTML = modalHtml;
             }
@@ -1061,6 +1079,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 reader.readAsDataURL(file);
             }
         });
+
+        let editData = <?= json_encode($editData) ?? '' ?>;
+        console.log(editData);
+
         document.getElementById('productForm').addEventListener('submit', function (e) {
             e.preventDefault(); // prevent actual submit first
             let tt = document.getElementById("variantsTableBody").querySelectorAll("tr")
@@ -1080,11 +1102,13 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
             let trs = document.getElementById("variantsTableBody").querySelectorAll("tr")
 
+            console.log(trs)
+
             for (let i = 0; i < trs.length; i++) {
                 const inputs = trs[i].querySelectorAll("input");
 
                 const priceValue = inputs[2]?.value || ""; // safeguard in case input doesn’t exist
-                console.log(inputs, priceValue)
+                // console.log(inputs, priceValue)
                 // convert to integer safely
                 const price = parseInt(priceValue, 10) || 0; // if NaN or empty => becomes 0
 
@@ -1096,18 +1120,23 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             }
 
             let modal = document.getElementById("myModal").querySelectorAll(".sizeValues")
-            // console.log(modal)
 
-            if (modal.length === 0) {
-                alert("Please create size chart")
-                addSizeChart();
-                return;
-            }
-            for (let i = 0; i < trs.length; i++) {
-                if (modal[i].value == "" || modal[i].value == null) {
-                    alert("Please enter propper values in size chart")
+            console.log(modal)
+
+            if (editData.length == 0) {
+
+                if (modal.length === 0) {
+                    alert("Please create size chart")
                     addSizeChart();
                     return;
+                }
+
+                for (let i = 0; i < trs.length; i++) {
+                    if (modal[i].value == "" || modal[i].value == null) {
+                        alert("Please enter propper values in size chart")
+                        addSizeChart();
+                        return;
+                    }
                 }
             }
 

@@ -199,9 +199,10 @@ class ProductController
             // printWithPre($productData);
             require 'views/products/edit-products.php';
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            
-            printWithPre($_POST);
-            die();
+
+            // printWithPre($_POST);
+            // printWithPre($_FILES);
+            // die();
 
 
             $sizeType = $_POST["sizeType"];
@@ -217,8 +218,10 @@ class ProductController
                 $values = array_slice($sizeValues, $startIndex, $typeCount);
                 $result[$variant] = array_combine($sizeType, $values);
             }
-           
-            $sizeImage = uploadFile($_FILES["sizeImage"], $targetDir);
+
+            if (isset($_FILES["sizeImage"]) && $_FILES["sizeImage"]["error"] == 0) {
+                $sizeImage = uploadFile($_FILES["sizeImage"], $targetDir);
+            }
 
             try {
                 // Begin transaction
@@ -237,15 +240,27 @@ class ProductController
                             'size' => $images['size'][$key]
                         ];
 
+                        if ($file['error'] == 0) {
+                            continue;
+                        }
+
                         $uploadedFile = uploadFile($file, $targetDir);
                         if ($uploadedFile) {
                             $productImages[] = $uploadedFile;
                         }
                     }
                 }
-                $productImagesJson = json_encode($productImages);
+
+                if (!empty($productImages)) {
+                    $data['product_images'] = json_encode($productImages);
+                }
 
                 // Prepare product data
+                if (!empty($result)) {
+                    $data['sizeChart'] = json_encode($result);
+                }
+                // printWithPre($result);
+
                 $data = [
                     'name' => $_POST['name'],
                     'description' => $_POST['description'],
@@ -261,89 +276,90 @@ class ProductController
                     'continue_selling' => isset($_POST['continue_selling']) && $_POST['continue_selling'] ? 1 : 0,
                     'physical_product' => isset($_POST['physical_product']) && $_POST['physical_product'] ? 1 : 0,
                     'packaging' => $_POST['packaging'],
-                    'status' => isset($_POST['status']) && $_POST['status'] ? 1 : 0,
-                    'product_images' => $productImagesJson, // Added here
-                    'sizeChart' => json_encode($result),
+                    'status' => isset($_POST['status']) && $_POST['status'] == 'Active' ? 1 : 0,
+                    // 'product_images' => $productImagesJson,
+                    // 'sizeChart' => json_encode($result),
                     'sizeDescription' => $_POST["sizeDescription"],
                     'sizeImage' => $sizeImage
                 ];
 
-                // Insert into tbl_products
-                $productId = add($data, "tbl_products");
 
-                if (!$productId) {
-                    throw new Exception("Failed to add product.");
-                }
+                // Insert into tbl_products
+                update($data, $id, "tbl_products");
+
+                // if (!$productId) {
+                //     throw new Exception("Failed to add product.");
+                // }
 
                 // Insert variants if available
-                if (isset($_POST['variant_prices']) && isset($_POST['variant_quantities'])) {
-                    $prices = $_POST['variant_prices'] ?? [];
-                    $quantities = $_POST['variant_quantities'] ?? [];
-                    $images = $_FILES['variant_images'] ?? [];
-                    $options = $_POST['variant_options'] ?? [];
+                // if (isset($_POST['variant_prices']) && isset($_POST['variant_quantities'])) {
+                //     $prices = $_POST['variant_prices'] ?? [];
+                //     $quantities = $_POST['variant_quantities'] ?? [];
+                //     $images = $_FILES['variant_images'] ?? [];
+                //     $options = $_POST['variant_options'] ?? [];
 
-                    foreach ($prices as $index => $price) {
-                        $price = floatval($price);
-                        $quantity = intval($quantities[$index] ?? 0);
+                //     foreach ($prices as $index => $price) {
+                //         $price = floatval($price);
+                //         $quantity = intval($quantities[$index] ?? 0);
 
-                        if ($price <= 0 || $quantity < 0) {
-                            continue;
-                        }
+                //         if ($price <= 0 || $quantity < 0) {
+                //             continue;
+                //         }
 
-                        // Handle uploaded files for variant images
-                        $uploadedFiles = [];
-                        if (isset($images['name'][$index])) {
-                            foreach ($images['name'][$index] as $key => $filename) {
-                                $file = [
-                                    'name' => $images['name'][$index][$key],
-                                    'type' => $images['type'][$index][$key],
-                                    'tmp_name' => $images['tmp_name'][$index][$key],
-                                    'error' => $images['error'][$index][$key],
-                                    'size' => $images['size'][$index][$key]
-                                ];
-                                $targetDir = 'public/uploads/product-images/';
-                                $uploadedFile = uploadFile($file, $targetDir);
-                                if ($uploadedFile) {
-                                    $uploadedFiles[] = $uploadedFile;
-                                }
-                            }
-                        }
+                //         // Handle uploaded files for variant images
+                //         // $uploadedFiles = [];
+                //         // if (isset($images['name'][$index])) {
+                //         //     foreach ($images['name'][$index] as $key => $filename) {
+                //         //         $file = [
+                //         //             'name' => $images['name'][$index][$key],
+                //         //             'type' => $images['type'][$index][$key],
+                //         //             'tmp_name' => $images['tmp_name'][$index][$key],
+                //         //             'error' => $images['error'][$index][$key],
+                //         //             'size' => $images['size'][$index][$key]
+                //         //         ];
+                //         //         $targetDir = 'public/uploads/product-images/';
+                //         //         $uploadedFile = uploadFile($file, $targetDir);
+                //         //         if ($uploadedFile) {
+                //         //             $uploadedFiles[] = $uploadedFile;
+                //         //         }
+                //         //     }
+                //         // }
 
-                        $imagesJson = json_encode($uploadedFiles);
-                        $optionDetail = isset($options[$index]) ? json_encode($options[$index]) : '';
+                //         // $imagesJson = json_encode($uploadedFiles);
+                //         $optionDetail = isset($options[$index]) ? json_encode($options[$index]) : '';
 
-                        // Prepare variant data
-                        $variantData = [
-                            'product_id' => $productId,
-                            'price' => $price,
-                            'quantity' => $quantity,
-                            'images' => $imagesJson,
-                            'options' => $optionDetail
-                        ];
+                //         // Prepare variant data
+                //         $variantData = [
+                //             'product_id' => $productId,
+                //             'price' => $price,
+                //             'quantity' => $quantity,
+                //             // 'images' => $imagesJson,
+                //             'options' => $optionDetail
+                //         ];
 
-                        // Insert variant
-                        $result = add($variantData, "tbl_variants");
+                //         // Insert variant
+                //         $vresult = add($variantData, "tbl_variants");
 
-                        if (!$result) {
-                            throw new Exception("Failed to add variant at index $index.");
-                        }
-                    }
-                }
+                //         if (!$vresult) {
+                //             throw new Exception("Failed to add variant at index $index.");
+                //         }
+                //     }
+                // }
 
                 // Commit transaction if all successful
                 $db->commit();
 
                 $_SESSION['success'] = "Product and variants added successfully.";
-                header('Location:/admin/add-product');
-                exit();
+
             } catch (Exception $e) {
                 // Rollback on error
                 $db->rollBack();
-
-                $_SESSION['err'] = "Error: " . $e->getMessage();
                 echo $e->getMessage();
+                $_SESSION['err'] = "Error: " . $e->getMessage();
                 // Optionally redirect or log error
             }
+
+            redirect("/admin/products-list");
         }
     }
 

@@ -5,10 +5,8 @@
 <body>
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
 
-
     <div class="w-full  bg-white flex justify-center items-start my-16 max-md:my-8">
         <div class="w-[60%] max-md:w-[90%] flex items-center justify-center flex-col">
-
             <h1 class="text-5xl max-md:text-3xl font-semibold">Terms & Condition</h1>
             <div class="text-gray-600 mt-6">
                 <p>
@@ -24,13 +22,9 @@
 
                     Any dispute arising out of the use of our website and/or purchase with us and/or any engagement with us is subject to the laws of India. We shall be under no liability whatsoever in respect of any loss or damage arising directly or indirectly out of the decline of authorization for any transaction, on account of the cardholder having exceeded the preset limit mutually agreed by us with our acquiring bank from time to time.
                 </p>
-
             </div>
-
         </div>
     </div>
-
-
 
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/footer.php'; ?>
 </body>

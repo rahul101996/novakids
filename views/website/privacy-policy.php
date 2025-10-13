@@ -2,14 +2,14 @@
 <html lang="en">
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/header.php'; ?>
 
-<body>
+<body class="overflow-x-hidden archivo-narrow-k">
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/views/website/include/navbar.php'; ?>
 
 
     <div class="w-full  bg-white flex justify-center items-start my-16 max-md:my-8">
         <div class="w-[60%] max-md:w-[90%] flex items-center justify-center flex-col">
 
-            <h1 class="text-5xl max-md:text-3xl font-semibold">Privacy Policy</h1>
+            <h1 class="text-3xl font-semibold">Privacy Policy</h1>
             <div class="text-gray-600 mt-6">
                 <p>
                     This privacy policy sets out how <strong>NOVAKIDS</strong> uses and protects any information that you give <strong>NOVAKIDS</strong> when you visit our website and/or agree to purchase from us. <strong>NOVAKIDS</strong> is committed to ensuring that your privacy is protected. Should we ask you to provide certain information by which you can be identified when using this website, you can be assured that it will only be used in accordance with this privacy statement. <strong>NOVAKIDS</strong> may change this policy from time to time by updating this page. You should check this page from time to time to ensure that you adhere to these changes.
