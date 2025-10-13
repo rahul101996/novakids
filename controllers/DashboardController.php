@@ -28,7 +28,7 @@ class DashboardController extends LoginController
             $employees = getData2("SELECT * FROM admin");
 
             
-            $Total_Orders = getData2("SELECT * FROM `tbl_order` WHERE `order_status` = 'Delivered' AND YEAR(`order_date`) = $current_year");
+            // $Total_Orders = getData2("SELECT * FROM `tbl_order` WHERE `order_status` = 'Delivered' AND YEAR(`order_date`) = $current_year");
             require 'views/index.php';
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
