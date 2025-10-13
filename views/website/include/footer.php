@@ -1,3 +1,6 @@
+<?php
+$freeshipping = getData2("SELECT * FROM `tbl_free_shipping` WHERE `id` = 1 AND `free_shipping` = 1 ORDER BY `id` DESC LIMIT 1")[0];
+?>
 <style>
     /* Newsletter Input Animation */
     .newsletter-input {
@@ -223,7 +226,7 @@
                     </div>
                     <div class="trust-badge flex items-center text-sm text-gray-500 cursor-pointer">
                         <i class="fas fa-truck mr-3 text-blue-500"></i>
-                        <span>Free Shipping Rs.2000+</span>
+                        <span>Free Shipping Rs.<?= $freeshipping['price'] ?>+</span>
                     </div>
                     <div class="trust-badge flex items-center text-sm text-gray-500 cursor-pointer">
                         <i class="fas fa-undo mr-3 text-purple-500"></i>

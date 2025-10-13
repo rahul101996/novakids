@@ -1,6 +1,7 @@
 <?php
 // printWithPre($_SESSION);
 $allstates = getData("indian_states");
+$getallcoupons = getData("tbl_coupons");
 ?>
 
 <!DOCTYPE html>
@@ -250,6 +251,11 @@ $allstates = getData("indian_states");
                                             <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
                                         <?php } ?>
                                     </div>
+                                    <div class="border border-gray-500 px-2 py-1 flex gap-3 items-center mt-2 w-fit">
+                                        <span><i class="fa fa-plus cursor-pointer"></i></span>
+                                        <span><?= $quantity ?></span>
+                                        <span><i class="fa fa-minus cursor-pointer"></i></span>
+                                    </div>
                                 </div>
                             </div>
                             <p class="font-semibold">₹<?= $totalprice ?></p>
@@ -258,12 +264,20 @@ $allstates = getData("indian_states");
                     <!-- Product 2 -->
 
                 </div>
-
+                <div class="w-full flex items-center justify-center gap-2">
+                    <input type="text" class="hidden" id="coupenDiscount" value="">
+                    <input type="text" class=" w-full py-2 px-2 border border-gray-300 rounded-sm uppercase" name="coupon" placeholder="Enter Coupon Code" id="newDiscount">
+                    <button class="bg-black py-2 px-4 text-white border-lg" type="button" onclick="applyCoupon()">Apply</button>
+                </div>
                 <!-- Totals -->
-                <div class="space-y-2 text-sm">
+                <div class="space-y-2 text-sm mt-2">
                     <div class="flex justify-between">
                         <span>Subtotal</span>
                         <span>₹<?= $totalAmount ?></span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Coupon</span>
+                        <span id="coupenDiscountSpan">₹0</span>
                     </div>
                     <div class="flex justify-between">
                         <span>Shipping</span>
@@ -271,11 +285,25 @@ $allstates = getData("indian_states");
                     </div>
                     <div class="flex justify-between font-bold text-lg border-t pt-3">
                         <span>Total</span>
-                        <span>₹<?= $totalAmount ?></span>
+                        <span id="allTotalSpan">₹<?= $totalAmount ?></span>
                     </div>
-                    <input type="text" name="allTotal" value="<?= $totalAmount ?>" hidden class="hidden">
+                    <input type="text" id="subtotal" value="<?= $totalAmount ?>" class="hidden">
+                    <input type="text" name="allTotal" value="<?= $totalAmount ?>" hidden class="hidden" id="allTotal">
                 </div>
-
+                <div class="mt-3">
+                    <?php foreach ($getallcoupons as $key => $value) { ?>
+                        <div class="px-3 py-5 mb-3 bg-white max-md:py-2 ">
+                            <div class="flex w-full justify-between ">
+                                <div class="border-dashed border-2 bg-[#ebe7f5] border-gray-400 p-2 rounded text-gray-600 max-md:h-8  max-md:justify-center max-md:flex max-md:items-center" style="width: fit-content;">
+                                    <span class="font-semibold text-uppercase max-md:text-xs" id='coupon_<?= $value["id"] ?>'><?= $value["coupon_secret"] ?></span> - <span class="max-md:text-xs"><?= $currency ?><?= $value["discount"] ?></span>
+                                </div>
+                                <button type="button" class="border  px-4  bg-gray-200 hover:bg-gray-300 text-gray-500 text-sm justify-self-end max-md:text-xs"
+                                    onclick="copyCoupon('<?= $value['coupon_secret'] ?>')">Add</button>
+                            </div>
+                            <p class="mt-4 mb-0  border-gray-300 w-1/2 max-md:text-xs max-md:w-full">📢 Get discount on your Order ✨</p>
+                        </div>
+                    <?php } ?>
+                </div>
                 <!-- Button -->
                 <button type="submit"
                     class="relative mt-6 w-full font-semibold py-2 rounded-md border-2 border-black overflow-hidden group">
@@ -390,7 +418,11 @@ $allstates = getData("indian_states");
             backdrop.classList.remove('show');
             // document.body.style.overflow = '';
         }
-
+        function copyCoupon(coupon_secret) {
+            
+            document.getElementById('newDiscount').value = coupon_secret;
+            applyCoupon();
+        }
         async function applyCoupon() {
             // Get the coupon text
             const couponSecret = document.getElementById('newDiscount').value;
@@ -405,11 +437,11 @@ $allstates = getData("indian_states");
                 toastr.success(result.data.message);
 
                 document.getElementById('coupenDiscount').value = result.data.discount;
-                document.getElementById('coupenDiscountSpan').innerText = result.data.discount;
-                let subtotal = document.getElementById('subTotal').innerText;
+                document.getElementById('coupenDiscountSpan').innerText = '₹' + result.data.discount;
+                let subtotal = document.getElementById('subtotal').value;
                 console.log(subtotal);
-                console.log(result.data.discount);
-                let allTotal = document.getElementById('allTotal').value = parseFloat(subtotal) - parseFloat(result.data.discount) + parseFloat(document.getElementById("deliveryCharges").value);
+                // console.log(result.data.discount);
+                let allTotal = document.getElementById('allTotal').value = parseFloat(subtotal) - parseFloat(result.data.discount);
                 console.log(allTotal);
                 document.getElementById('allTotalSpan').innerText = allTotal;
 

@@ -253,13 +253,13 @@ class GeneralController
         }
     } 
 
-    public function placeordershiprocket($token, $orderid)
+    public function placeordershiprocket($token,$purchaseid, $orderid)
     {
         $sql = "SELECT * FROM `tbl_purchase` WHERE orderid = '$orderid'";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $order_data = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        
         $order_data['email'] = (!empty($order_data['email'])) ? $order_data['email'] : $_SESSION['username'];
 
 
@@ -293,15 +293,17 @@ class GeneralController
         // $stmt1 = $this->db->prepare($sql1);
         // $stmt1->execute();
         // $order_items = $stmt1->fetchAll(PDO::FETCH_ASSOC);
-        $sql = "SELECT ti.*,tp.name from tbl_purchase_item ti
+        $sql = "SELECT ti.*,tp.name,tpk.length,tpk.width,tpk.height,tpk.dimentions_unit,tpk.weight,tpk.weight_unit as product_name from tbl_purchase_item ti
             LEFT JOIN tbl_products tp on tp.id = ti.product
-            LEFT JOIN tbl_variants tp on tp.id = ti.product
-
-            where purchase_id='$orderid'
+            LEFT JOIN tbl_variants tv on tv.id = ti.product
+            LEFT JOIN tbl_packaging tpk on tpk.id=tp.packaging
+            where purchase_id='$purchaseid'
         ";
+        // echo "<br>";
+        // echo $sql;
         $order_items = getData2($sql);
         printWithPre($order_items);
-        die();
+        // die();
         // return $order_items;
         // die();
         $orderitems = '';
@@ -323,7 +325,7 @@ class GeneralController
                 },';
                 $orderQty += (int) $value['quantity'];
                 $length += (float) $value['length'];
-                $breadth += (float) $value['breadth'];
+                $breadth += (float) $value['width'];
                 $height += (float) $value['height'];
                 $weight += (float) $value['weight'];
             }
@@ -340,7 +342,7 @@ class GeneralController
             }';
             $orderQty = (int) $order_items[0]['quantity'];
             $length += (float) $order_items[0]['length'];
-            $breadth += (float) $order_items[0]['breadth'];
+            $breadth += (float) $order_items[0]['width'];
             $height += (float) $order_items[0]['height'];
             $weight += (float) $order_items[0]['weight'];
         }

@@ -547,7 +547,7 @@ $categories = getData("tbl_category");
                                     <div class="w-full mx-auto mt-4 max-md:mt-1">
                                         <div class="text-center bg-white px-5 py-2 max-md:py-1 max-md:px-2 rounded-lg shadow-md">
                                             <div class="text-sm text-gray-600 mb-1">Code expires in</div>
-                                            <div id="countdown" class="text-2xl max-md:text-base font-bold text-blue-600 font-mono">01:00
+                                            <div id="countdown" class="text-2xl max-md:text-base font-bold text-blue-600 font-mono">00:30
                                             </div>
                                         </div>
                                     </div>
@@ -815,7 +815,7 @@ $categories = getData("tbl_category");
             input.addEventListener('paste', handlePaste)
         })
     })
-    let timeLeft = 60; // 60 seconds = 1 minute
+    let timeLeft = 30; // 60 seconds = 1 minute
     const countdownEl = document.getElementById('countdown');
     let timerInterval;
 
@@ -866,7 +866,7 @@ $categories = getData("tbl_category");
                 window.currentUserData = response.data.data;
 
                 // 🔄 Reset and start timer
-                timeLeft = 60;
+                timeLeft = 30;
                 countdownEl.classList.add('text-blue-600');
                 countdownEl.classList.remove('text-red-600');
                 clearInterval(timerInterval);
