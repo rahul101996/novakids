@@ -332,7 +332,7 @@ $ppimg = array_reverse($imags);
 
                                     <!-- Add to Cart Icon -->
                                     <button
-                                        class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                        class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full max-md:bg-black/90 max-md:py-1 max-md:text-sm max-md:opacity-100 max-md:translate-y-0 opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
                                         <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                                     </button>
                                     <input type="text" value="<?= $product['id'] ?>" class="ProductId">
