@@ -103,7 +103,7 @@ class WebController extends LoginController
                 }
                 ?>
 
-                <div class="flex flex-col items-start justify-start w-full max-md:mb-8 <?= !isset($_POST["product_details"]) ? "px-7" : "" ?>">
+                <div class="flex flex-col items-start justify-start w-full max-md:mb-1 <?= !isset($_POST["product_details"]) ? "px-7" : "" ?>">
                     <?php
                     if (!isset($_POST["product_details"])) {
                     ?>
