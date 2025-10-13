@@ -16,35 +16,27 @@ $page = "shop";
             <div
                 class="flex items-center justify-between border-b p-6 max-md:p-4 sticky top-16 h-fit bg-white z-40 w-full">
                 <div class="grid max-md:grid-cols-2 grid-cols-5 max-md:gap-2 items-center max-md:items-start w-[90vw] mx-auto">
-                    <div class="flex flex-wrap md:flex-nowrap items-center gap-4 max-md:order-1">
+                    <div class="flex flex-wrap md:flex-nowrap max-md:text-xs items-center gap-4 max-md:order-1">
                         <button id="filterToggle"
-                            class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 hover:shadow transition-all">
+                            class="flex items-center gap-2 px-4 py-2 max-md:py-1 max-md:px-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 hover:shadow transition-all">
                             <i id="filterIcon" class="fa-solid fa-sliders text-blue-500"></i>
                             <span>Filters</span>
                         </button>
-
-                        <!-- <div class="flex flex-wrap items-center gap-3 text-sm">
-                            <button id="clearFiltersBtn"
-                                class="text-gray-500 hover:text-red-500 font-medium transition-all">
-                                <i class="fa-solid fa-xmark mr-1"></i> Clear Filters
-                            </button>
-                            <div id="active-filters" class="flex flex-wrap gap-2"></div>
-                        </div> -->
                     </div>
 
-                    <div class="flex flex-wrap max-md:flex-col items-center max-md:items-start max-md:gap-2 max-md:w-full gap-3 text-sm max-md:order-3 max-md:col-span-2 md:col-span-3">
+                    <div class="flex flex-wrap max-md:flex-col items-center max-md:items-start max-md:gap-2 max-md:w-full gap-3 text-sm max-md:text-xs max-md:order-3 max-md:col-span-2 md:col-span-3">
                         <button id="clearFiltersBtn"
                             class="text-gray-500 hover:text-red-500 font-medium transition-all">
                             <i class="fa-solid fa-xmark mr-1"></i> Clear Filters
                         </button>
-                        <div id="active-filters" class="flex md:flex-wrap gap-2 max-md:whitespace-nowrap max-md:w-full max-md:overflow-x-auto max-md:pb-2"></div>
+                        <div id="active-filters" class="flex md:flex-wrap gap-2 max-md:whitespace-nowrap max-md:w-full max-md:text-xs max-md:overflow-x-auto max-md:pb-2"></div>
                     </div>
 
-                    <div class="flex items-center md:justify-end gap-3 max-md:gap-1 text-sm max-md:order-2">
+                    <div class="flex items-center md:justify-end gap-3 max-md:gap-1 max-md:text-xs text-sm max-md:order-2">
                         <span class="text-gray-700 font-semibold whitespace-nowrap">Sort by:</span>
                         <div class="relative">
                             <select id="sortSelect" onchange="handleFilterChange()"
-                                class="appearance-none bg-white border border-gray-300 rounded-lg px-4 max-md:px-2 max-md:pr-6 py-2 md:pr-10 text-gray-700 font-medium shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer">
+                                class="appearance-none bg-white border border-gray-300 rounded-lg px-4 max-md:px-2 max-md:pr-6 py-2 max-md:py-1 md:pr-10 text-gray-700 font-medium shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer">
                                 <option value="">Default Sorting</option>
                                 <option value="lowToHigh">Price: Low to High</option>
                                 <option value="highToLow">Price: High to Low</option>
