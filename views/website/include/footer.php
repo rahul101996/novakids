@@ -238,7 +238,7 @@
     <!-- Bottom Bar -->
     <div class="border-t border-gray-700 py-4">
         <div class="w-[90vw] mx-auto">
-            <div class="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
+            <div class="flex flex-col lg:flex-row justify-between items-center space-y-6 max-md:space-y-3 lg:space-y-0">
                 <!-- Copyright -->
                 <div class="text-sm">© <?= date('Y') ?> Nova Universe. All rights reserved.</div>
                 <!-- Payment Methods -->
@@ -260,7 +260,7 @@
                     </div>
                 </div>
                 <!-- Legal Links -->
-                <div class="flex space-x-6 text-sm">
+                <div class="flex max-md:flex-wrap max-md:text-center max-md:justify-center space-x-6 max-md:space-x-0 max-md:gap-2 text-sm">
                     <a href="/privacy-policy" class="link-hover">Privacy Policy</a>
                     <a href="/terms-and-conditions" class="link-hover">Terms and Conditions</a>
                     <a href="/cancellation-and-refunds" class="link-hover">Cancellation and Refunds</a>

@@ -15,26 +15,32 @@ $page = "shop";
         <div class="flex flex-col gap-6 w-full">
             <div
                 class="flex items-center justify-between border-b p-6 max-md:p-4 sticky top-16 h-fit bg-white z-40 w-full">
-                <div class="flex items-center max-md:items-start justify-between w-[90vw] mx-auto">
-                    <div class="flex flex-wrap md:flex-nowrap items-center gap-4">
-                        <!-- Filter Toggle -->
+                <div class="grid max-md:grid-cols-2 grid-cols-5 max-md:gap-2 items-center max-md:items-start w-[90vw] mx-auto">
+                    <div class="flex flex-wrap md:flex-nowrap items-center gap-4 max-md:order-1">
                         <button id="filterToggle"
                             class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 hover:shadow transition-all">
                             <i id="filterIcon" class="fa-solid fa-sliders text-blue-500"></i>
                             <span>Filters</span>
                         </button>
 
-                        <!-- Clear + Active Filters -->
-                        <div class="flex flex-wrap items-center gap-3 text-sm">
+                        <!-- <div class="flex flex-wrap items-center gap-3 text-sm">
                             <button id="clearFiltersBtn"
                                 class="text-gray-500 hover:text-red-500 font-medium transition-all">
                                 <i class="fa-solid fa-xmark mr-1"></i> Clear Filters
                             </button>
                             <div id="active-filters" class="flex flex-wrap gap-2"></div>
-                        </div>
+                        </div> -->
                     </div>
 
-                    <div class="flex items-center gap-3 max-md:gap-1 text-sm">
+                    <div class="flex flex-wrap max-md:flex-col items-center max-md:items-start max-md:gap-2 max-md:w-full gap-3 text-sm max-md:order-3 max-md:col-span-2 md:col-span-3">
+                        <button id="clearFiltersBtn"
+                            class="text-gray-500 hover:text-red-500 font-medium transition-all">
+                            <i class="fa-solid fa-xmark mr-1"></i> Clear Filters
+                        </button>
+                        <div id="active-filters" class="flex md:flex-wrap gap-2 max-md:whitespace-nowrap max-md:w-full max-md:overflow-x-auto max-md:pb-2"></div>
+                    </div>
+
+                    <div class="flex items-center md:justify-end gap-3 max-md:gap-1 text-sm max-md:order-2">
                         <span class="text-gray-700 font-semibold whitespace-nowrap">Sort by:</span>
                         <div class="relative">
                             <select id="sortSelect" onchange="handleFilterChange()"
@@ -44,7 +50,6 @@ $page = "shop";
                                 <option value="highToLow">Price: High to Low</option>
                                 <option value="newest">Newest</option>
                             </select>
-                            <!-- Custom dropdown arrow -->
                             <span class="absolute right-3 max-md:right-1 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
                                 <i class="fa-solid fa-chevron-down"></i>
                             </span>
@@ -206,15 +211,13 @@ $page = "shop";
                     let minB = Math.min(...b.variants.map(v => parseFloat(v.price)));
                     return minA - minB;
                 });
-            }
-            else if (sortBy === "highToLow") {
+            } else if (sortBy === "highToLow") {
                 products.sort((a, b) => {
                     let maxA = Math.max(...a.variants.map(v => parseFloat(v.price)));
                     let maxB = Math.max(...b.variants.map(v => parseFloat(v.price)));
                     return maxB - maxA;
                 });
-            }
-            else if (sortBy === "newest") products.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            } else if (sortBy === "newest") products.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
 
             // ✅ Price Range Initialization
@@ -531,7 +534,6 @@ $page = "shop";
         // document.addEventListener("DOMContentLoaded", () => {
         setProducts(); // Ensures DOM ready before setting labels
         // });
-
     </script>
 
     <?php
