@@ -325,7 +325,7 @@ $categories = getData("tbl_category");
     class="fixed top-0 left-0 h-screen w-[85%] max-w-xs bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out z-[100] overflow-y-auto">
 
     <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-        <h2 class="text-lg font-semibold text-black">Boys Collection</h2>
+        <img src="/public/logos/novafav_png.png" alt="" class="w-auto h-8">
         <button id="menu-close" class="text-gray-600 hover:text-black text-xl animate-rotate-pingpong">
             ✕
         </button>
@@ -333,31 +333,37 @@ $categories = getData("tbl_category");
 
     <div class="px-4 py-6 space-y-6">
         <div class="space-y-3 flex flex-col">
-            <div class="border-b border-gray-200">
-                <a href="/new-arrivals" class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium">
+            <div class="border-b border-gray-200 flex justify-between items-center">
+                <a href="/new-arrivals" class="w-full text-base flex justify-between items-center pb-4 text-gray-900 font-medium">
                     NEW ARRIVALS
                 </a>
+                <div class="flex items-center justify-center pb-4">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
             </div>
 
             <?php
             foreach ($categories as $key => $value) {
                 $category = strtolower(str_replace(" ", "-", $value['category']));
             ?>
-                <div class="border-b border-gray-200">
+                <div class="border-b border-gray-200 flex justify-between items-center">
                     <a href="/category/<?= $category ?>"
-                        class="w-full flex justify-between items-center pb-4 text-gray-900 font-medium"><?= $value['category'] ?>
+                        class="w-full text-base flex justify-between items-center pb-4 text-gray-900 font-medium"><?= $value['category'] ?>
                     </a>
+                    <div class="flex items-center justify-center pb-4">
+                        <i class="fas fa-chevron-right text-sm"></i>
+                    </div>
                 </div>
             <?php } ?>
         </div>
 
         <div class="space-y-4">
-            <h3 class="text-base font-semibold text-gray-900">Trending Products</h3>
-            <div class="flex w-full gap-3 overflow-x-scroll">
+            <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2"> <i class="fas fa-fire text-orange-500"></i> Trending Products</h3>
+            <div class="flex w-full gap-3 overflow-x-scroll pb-3">
                 <!-- Product 1 -->
                 <?php
                 foreach ($uniqueProducts as $key => $product) {
-                    if($key > 3) break;
+                    if ($key > 3) break;
                     $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
                     // printWithPre($varients);
                     $images = json_decode($varients['images'], true);
@@ -605,12 +611,12 @@ $categories = getData("tbl_category");
     <div
         class="bg-white w-[50%] max-md:w-[100%] md:h-[78vh] lg:h-[75vh] max-md:h-[105vh] relative p-8 max-md:p-4 max-md:mt-8 shadow-lg animate-slideDown flex flex-col">
         <button id="closeSearch"
-            class="absolute top-4 right-6 text-2xl text-gray-700 hover:text-black animate-rotate-pingpong">
+            class="absolute top-4 max-md:top-8 right-6 text-2xl text-gray-700 hover:text-black animate-rotate-pingpong">
             <i class="fas fa-times"></i>
         </button>
 
         <div class="shrink-0">
-            <h2 class="text-2xl font-semibold text-center mb-4 max-md:my-4">What are you looking for</h2>
+            <h2 class="text-2xl font-semibold text-center mb-4 max-md:mt-8">What are you looking for</h2>
             <div class="w-full max-w-2xl mx-auto mb-6">
                 <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
                     <input type="text" id="searchInput" oninput="searchProducts()" placeholder="Search our store"
