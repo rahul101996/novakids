@@ -15,37 +15,40 @@ $page = "shop";
         <div class="flex flex-col gap-6 w-full">
             <div
                 class="flex items-center justify-between border-b p-6 max-md:p-4 sticky top-16 h-fit bg-white z-40 w-full">
-                <div class="flex items-center max-md:items-start justify-between w-[90vw] mx-auto">
-                    <div class="flex flex-wrap md:flex-nowrap items-center gap-4">
-                        <!-- Filter Toggle -->
+                <div
+                    class="grid max-md:grid-cols-2 grid-cols-5 max-md:gap-2 items-center max-md:items-start w-[90vw] mx-auto">
+                    <div class="flex flex-wrap md:flex-nowrap max-md:text-xs items-center gap-4 max-md:order-1">
                         <button id="filterToggle"
-                            class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 hover:shadow transition-all">
+                            class="flex items-center gap-2 px-4 py-2 max-md:py-1 max-md:px-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 hover:shadow transition-all">
                             <i id="filterIcon" class="fa-solid fa-sliders text-blue-500"></i>
                             <span>Filters</span>
                         </button>
+                    </div>
 
-                        <!-- Clear + Active Filters -->
-                        <div class="flex flex-wrap items-center gap-3 text-sm">
-                            <button id="clearFiltersBtn"
-                                class="text-gray-500 hover:text-red-500 font-medium transition-all">
-                                <i class="fa-solid fa-xmark mr-1"></i> Clear Filters
-                            </button>
-                            <div id="active-filters" class="flex flex-wrap gap-2"></div>
+                    <div
+                        class="flex flex-wrap max-md:flex-col items-center max-md:items-start max-md:gap-2 max-md:w-full gap-3 text-sm max-md:text-xs max-md:order-3 max-md:col-span-2 md:col-span-3">
+                        <button id="clearFiltersBtn"
+                            class="text-gray-500 hover:text-red-500 font-medium transition-all hidden">
+                            <i class="fa-solid fa-xmark mr-1"></i> Clear Filters
+                        </button>
+                        <div id="active-filters"
+                            class="flex md:flex-wrap gap-2 max-md:whitespace-nowrap max-md:w-full max-md:text-xs max-md:overflow-x-auto max-md:pb-2">
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-3 max-md:gap-1 text-sm">
+                    <div
+                        class="flex items-center md:justify-end gap-3 max-md:gap-1 max-md:text-xs text-sm max-md:order-2">
                         <span class="text-gray-700 font-semibold whitespace-nowrap">Sort by:</span>
                         <div class="relative">
                             <select id="sortSelect" onchange="handleFilterChange()"
-                                class="appearance-none bg-white border border-gray-300 rounded-lg px-4 max-md:px-2 max-md:pr-6 py-2 md:pr-10 text-gray-700 font-medium shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer">
+                                class="appearance-none bg-white border border-gray-300 rounded-lg px-4 max-md:px-2 max-md:pr-6 py-2 max-md:py-1 md:pr-10 text-gray-700 font-medium shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer">
                                 <option value="">Default Sorting</option>
                                 <option value="lowToHigh">Price: Low to High</option>
                                 <option value="highToLow">Price: High to Low</option>
                                 <option value="newest">Newest</option>
                             </select>
-                            <!-- Custom dropdown arrow -->
-                            <span class="absolute right-3 max-md:right-1 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                            <span
+                                class="absolute right-3 max-md:right-1 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
                                 <i class="fa-solid fa-chevron-down"></i>
                             </span>
                         </div>
@@ -197,7 +200,7 @@ $page = "shop";
 
             let products = data.data;
 
-            console.log(products);
+            // console.log(products);
 
             // ✅ Sorting
             if (sortBy === "lowToHigh") {
@@ -206,15 +209,13 @@ $page = "shop";
                     let minB = Math.min(...b.variants.map(v => parseFloat(v.price)));
                     return minA - minB;
                 });
-            }
-            else if (sortBy === "highToLow") {
+            } else if (sortBy === "highToLow") {
                 products.sort((a, b) => {
                     let maxA = Math.max(...a.variants.map(v => parseFloat(v.price)));
                     let maxB = Math.max(...b.variants.map(v => parseFloat(v.price)));
                     return maxB - maxA;
                 });
-            }
-            else if (sortBy === "newest") products.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            } else if (sortBy === "newest") products.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
 
             // ✅ Price Range Initialization
@@ -406,9 +407,9 @@ $page = "shop";
                 // Checkbox
                 const input = document.createElement("input");
                 input.type = "checkbox";
-                input.dataset.key = key;
-                input.dataset.value = val.toUpperCase();
-                input.value = val;
+                input.dataset.key = key.toLowerCase();
+                input.dataset.value = val.toLowerCase();
+                input.value = val.toLowerCase();
                 input.classList.add("filter-checkbox", "accent-[#f25b21]", "cursor-pointer");
                 input.addEventListener("change", handleFilterChange);
 
@@ -429,12 +430,13 @@ $page = "shop";
 
         // ✅ Handle checkbox changes
         function handleFilterChange() {
+            document.getElementById('clearFiltersBtn').classList.remove('hidden');
+
             const newFilters = {};
             document.querySelectorAll('.filter-checkbox:checked').forEach(cb => {
-                const key = cb.dataset.key.toUpperCase(); // normalize key
+                const key = cb.dataset.key.toLowerCase(); // 👈 lowercase
                 if (!newFilters[key]) newFilters[key] = [];
-                newFilters[key].push(cb.dataset.value.toUpperCase()); // already uppercase
-
+                newFilters[key].push(cb.dataset.value.toLowerCase()); // 👈 lowercase
             });
 
             activeFilters = newFilters;
@@ -444,15 +446,10 @@ $page = "shop";
             const max = parseInt(priceRange.value);
             const sortValue = document.getElementById("sortSelect")?.value || "";
 
-            setProducts(activeFilters, {
-                min,
-                max
-            }, sortValue);
+            setProducts(activeFilters, { min, max }, sortValue);
             setActiveFilter(activeFilters);
-
-            // console.log(activeFilters);
-
         }
+
 
         // ✅ Update price labels dynamically
         function updatePriceLabel(input) {
@@ -471,7 +468,7 @@ $page = "shop";
                 values.forEach(value => {
                     html += `
                             <span class="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded text-gray-700">
-                                <span>${key}: ${value}</span>
+                                <span>${key.toUpperCase()}: ${value.toUpperCase()}</span>
                                 <button class="text-gray-500 hover:text-black remove-filter" data-key="${key}" data-value="${value}">
                                     <i class="fa-solid fa-xmark text-xs"></i>
                                 </button>
@@ -483,16 +480,28 @@ $page = "shop";
 
             document.querySelectorAll('.remove-filter').forEach(btn => {
                 btn.addEventListener('click', e => {
-                    const {
-                        key,
-                        value
-                    } = e.currentTarget.dataset;
-                    document.querySelectorAll(`.filter-checkbox[data-key="${key}"][value="${value}"]`)
+                    const { key, value } = e.currentTarget.dataset;
+
+                    document.querySelectorAll(`.filter-checkbox[data-key="${key}"][data-value="${value}"]`)
                         .forEach(cb => cb.checked = false);
+
                     handleFilterChange();
                 });
+
+                hideClearFiltersBtn();
             });
         }
+
+        function hideClearFiltersBtn() {
+            let btns = document.querySelectorAll('.remove-filter');
+
+            console.log(btns);
+            if (btns.length == 0) {
+                document.getElementById('clearFiltersBtn').classList.add('hidden');
+            }
+        }
+
+
 
         // ✅ Restore checkbox state after re-render
         function restoreCheckedFilters() {
@@ -520,6 +529,8 @@ $page = "shop";
                 min: parseInt(priceRange.min),
                 max: parseInt(priceRange.max)
             }, sortValue);
+
+            document.getElementById('clearFiltersBtn').classList.add('hidden');
         });
 
         // ✅ Format price numbers
@@ -527,11 +538,10 @@ $page = "shop";
             return new Intl.NumberFormat("en-IN").format(num);
         }
 
+        setProducts(); // Ensures DOM ready before setting labels
         // ✅ Initial load
         // document.addEventListener("DOMContentLoaded", () => {
-        setProducts(); // Ensures DOM ready before setting labels
         // });
-
     </script>
 
     <?php

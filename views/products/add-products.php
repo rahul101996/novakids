@@ -212,10 +212,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                                         <button onclick="generateVariants()" type="button"
                                             class="text-white px-5 py-2 rounded-lg shadow-md font-medium 
-         bg-gradient-to-r from-red-500  to-blue-500 
-         bg-[length:200%_200%] animate-[gradient-move_6s_ease_infinite]
-         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 
-         transition-all duration-300 hover:scale-105 flex items-center">
+                                                    bg-gradient-to-r from-red-500  to-blue-500 
+                                                    bg-[length:200%_200%] animate-[gradient-move_6s_ease_infinite]
+                                                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 
+                                                    transition-all duration-300 hover:scale-105 flex items-center">
                                             <i class="fa-solid fa-layer-group mr-2"></i>
                                             Generate Variants
                                         </button>
@@ -280,7 +280,14 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         </button>
 
                                         <div id="dropdownMenu" class="hidden absolute mt-1 w-full bg-white shadow-lg rounded-md border border-gray-200 z-10 max-h-60 overflow-y-auto px-2 py-1">
-                                            <?php foreach ($packages as $package) { ?>
+                                            <?php 
+                                            
+                                            // $selectedPackage = "";
+                                            // if (!empty($editData) && !empty($editData['packaging'])) {
+                                            //     $selectedPackage = getData2("SELECT * FROM tbl_packaging WHERE id = " . $editData['packaging'])[0];
+                                            // }
+                                            
+                                            foreach ($packages as $package) { ?>
                                                 <div class="p-2 hover:bg-gray-100 cursor-pointer flex items-center space-x-2" onclick="selectPackage('<?= $package['package_name'] ?>', '<?= $package['length'] ?> × <?= $package['width'] ?> × <?= $package['height'] ?> <?= $package['dimentions_unit'] ?>, <?= $package['weight'] ?> <?= $package['weight_unit'] ?>', '<?= $package['id'] ?>')">
                                                     <?php
                                                     if ($package['package_type'] == "box") {
@@ -297,7 +304,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                     </div>
                                                 </div>
                                             <?php } ?>
-
 
                                             <div class="border-t mt-2 py-2 text-left px-2">
                                                 <a href="#" class="text-black font-medium text-sm hover:underline">Manage packages</a>
@@ -351,15 +357,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                             </div>
                         </div>
-
-
-
-
-
-
-
                     </div>
                 </div>
+
                 <div id="myModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/40 backdrop-blur-sm">
                     <div class="flex mt-10 justify-center p-4 w-full">
                         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden transition-all duration-300">
@@ -512,17 +512,18 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
         function selectPackage(name, description, id) {
             dropdownButton.innerHTML = `
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-box text-gray-400"></i>
-                    <div>
-                        <div class="font-medium">${name}</div>
-                        <div class="text-xs text-gray-500">${description}</div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-box text-gray-400"></i>
+                        <div>
+                            <div class="font-medium">${name}</div>
+                            <div class="text-xs text-gray-500">${description}</div>
+                        </div>
                     </div>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
                 </div>
-                <i class="fas fa-chevron-down text-gray-400"></i>
-            </div>
-        `;
+            `;
+
             dropdownMenu.classList.add('hidden');
             packaging.value = id;
         }
@@ -532,6 +533,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 dropdownMenu.classList.add('hidden');
             }
         });
+
         let optionCount = 0;
         let isFirst = 0;
 
@@ -806,24 +808,24 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 const variantText = options.map(opt => `${variant[opt.name]}`).join(' / ');
 
                 row.innerHTML = `
-            <td class="px-3 py-3">
-        <div class="flex items-center justify-start gap-3">
-            <div class="bg-white border border-gray-300 flex items-center justify-center w-20 h-20 rounded-xl cursor-pointer image-placeholder overflow-hidden" data-index="${index}">
-                <i class="fa-solid fa-images text-xl"></i>
-                <img src="" alt="" class="hidden w-full h-full object-contain relative z-10">
-            </div>
-            <input type="file" name="variant_images[${index}][]" accept="image/*" class="hidden file-input" multiple data-index="${index}">
-            <span>${variantText}</span>
-            <input type="hidden" name="variant_options[${index}]" value='${JSON.stringify(variant).replace(/'/g, "&apos;")}'>
-        </div>
-    </td>
-    <td class="px-3 py-3">
-        <input type="number" name="variant_prices[${index}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹ 0.00" required>
-    </td>
-    <td class="px-3 py-3">
-        <input type="number" name="variant_quantities[${index}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="0" required>
-    </td>
-        `;
+                                <td class="px-3 py-3">
+                                    <div class="flex items-center justify-start gap-3">
+                                        <div class="bg-white border border-gray-300 flex items-center justify-center w-20 h-20 rounded-xl cursor-pointer image-placeholder overflow-hidden" data-index="${index}">
+                                            <i class="fa-solid fa-images text-xl"></i>
+                                            <img src="" alt="" class="hidden w-full h-full object-contain relative z-10">
+                                        </div>
+                                        <input type="file" name="variant_images[${index}][]" accept="image/*" class="hidden file-input" multiple data-index="${index}">
+                                        <span>${variantText}</span>
+                                        <input type="hidden" name="variant_options[${index}]" value='${JSON.stringify(variant).replace(/'/g, "&apos;")}'>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-3">
+                                    <input type="number" name="variant_prices[${index}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹ 0.00" required>
+                                </td>
+                                <td class="px-3 py-3">
+                                    <input type="number" name="variant_quantities[${index}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="0" required>
+                                </td>
+                `;
 
                 tbody.appendChild(row);
             });

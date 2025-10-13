@@ -103,7 +103,7 @@ class WebController extends LoginController
                 }
                 ?>
 
-                <div class="flex flex-col items-start justify-start w-full max-md:mb-8 <?= !isset($_POST["product_details"]) ? "px-7" : "" ?>">
+                <div class="flex flex-col items-start justify-start w-full max-md:mb-1 <?= !isset($_POST["product_details"]) ? "px-7" : "" ?>">
                     <?php
                     if (!isset($_POST["product_details"])) {
                     ?>
@@ -1618,14 +1618,13 @@ class WebController extends LoginController
                     $_SESSION["new_order"] = $purchaseid;
                     $_SESSION['order_id'] = $order_id;
                     $token = $this->validshiprockettoken();
-                    // echo $token;
+                    echo $token;
 
                     // $placeordershiprocket = $this->placeordershiprocket($token, $order_id);
                     // $placeordershiprocket = (array)$placeordershiprocket;
 
                     // printWithPre($placeordershiprocket);
                     // die();
-
 
                     // $this->OrderConfirmMail();
                     sendOrderMail($purchaseid);
