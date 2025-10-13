@@ -21,7 +21,7 @@
 
         <!-- Processing Time -->
         <section>
-            <h2 class="text-xl font-semibold mb-3">Shipping Policy</h2>
+            <h2 class="text-3xl font-semibold mb-3 text-center">Shipping Policy</h2>
           <p>
                     For international buyers, orders are shipped and delivered through registered international courier companies and/or international speed post only. For domestic buyers, orders are shipped through registered domestic courier companies and/or speed post only. Orders are shipped within 3-5 days or as per the delivery date agreed at the time of order confirmation, subject to courier company/post office norms.
 

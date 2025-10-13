@@ -212,7 +212,7 @@
                 <ul class="space-y-3 max-md:space-y-2 mb-6">
                     <li><a href="/about" class="link-hover text-gray-600">Our Story</a></li>
                     <!-- <li><a href="#" class="link-hover text-gray-600">Brand Partners</a></li> -->
-                    <li><a href="#" class="link-hover text-gray-600">Client Reviews</a></li>
+                    <!-- <li><a href="#" class="link-hover text-gray-600">Client Reviews</a></li> -->
                 </ul>
 
                 <!-- Trust Badges -->

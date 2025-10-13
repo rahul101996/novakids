@@ -66,7 +66,7 @@
                     <img src="/public/images/shirt-size.jpg" alt="How to measure T-shirt" class="h-72">
                 </div>
             </div>
-            <div class="border-b py-6 flex flex-col md:flex-row items-center">
+            <div class="py-6 flex flex-col md:flex-row items-center">
                 <!-- Text -->
                 <div class="w-full md:w-[60%]">
                     <h3 class="text-lg font-bold mb-4">HOW TO MEASURE Joggers / Bottom Wears?</h3>
@@ -98,7 +98,7 @@
         </section>
 
         <!-- Tees / Shirt / Hoodies Table -->
-        <section class="mb-12">
+        <section class="mb-12 hidden">
             <h3 class="text-xl font-semibold mb-4">T-Shirts & Hoodies</h3>
             <div class="overflow-x-auto">
                 <table class="w-full border border-gray-200 text-sm text-center">
@@ -161,7 +161,7 @@
         </section>
 
         <!-- Joggers / Pants / Bottom Wears Table -->
-        <section>
+        <section class="mb-12 hidden">
             <h3 class="text-xl font-semibold mb-4">Joggers / Pants / Bottom Wears</h3>
             <div class="overflow-x-auto">
                 <table class="w-full border border-gray-200 text-sm text-center">
