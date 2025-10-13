@@ -1530,7 +1530,7 @@ class WebController extends LoginController
                 // printWithPre($_POST);
                 // die();
                 $db = getDBCon(); // PDO instance
-                $db->beginTransaction();
+                // $db->beginTransaction();
                 $purchaseid = [
                     "userid" => $_SESSION["userid"],
                     "username" => $_SESSION["username"],
@@ -1606,7 +1606,7 @@ class WebController extends LoginController
                     $token = $this->validshiprockettoken();
                     echo $token;
 
-                    // $placeordershiprocket = $this->placeordershiprocket($token, $order_id);
+                    // $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid,$order_id);
                     // $placeordershiprocket = (array)$placeordershiprocket;
 
                     // printWithPre($placeordershiprocket);
@@ -1669,7 +1669,7 @@ class WebController extends LoginController
                                             // Payment successful - submit form
                                             var form = document.createElement('form');
                                             form.method = 'POST';
-                                            form.action = '/razorpay';
+                                            form.action = '/thankyou';
 
                                             var orderInput = document.createElement('input');
                                             orderInput.type = 'hidden';
