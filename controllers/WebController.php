@@ -1604,14 +1604,13 @@ class WebController extends LoginController
                     $_SESSION["new_order"] = $purchaseid;
                     $_SESSION['order_id'] = $order_id;
                     $token = $this->validshiprockettoken();
-                    // echo $token;
+                    echo $token;
 
                     // $placeordershiprocket = $this->placeordershiprocket($token, $order_id);
                     // $placeordershiprocket = (array)$placeordershiprocket;
 
                     // printWithPre($placeordershiprocket);
                     // die();
-
 
                     // $this->OrderConfirmMail();
                     sendOrderMail($purchaseid);
