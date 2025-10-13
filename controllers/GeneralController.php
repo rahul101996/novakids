@@ -263,37 +263,45 @@ class GeneralController
         $order_data['email'] = (!empty($order_data['email'])) ? $order_data['email'] : $_SESSION['username'];
 
 
-        $sql1 = "SELECT
-                    tpi.*,
-                    tp.product AS product_name,
-                    tv.id AS varient_id,
-                    tv.unique_id,
-                    tv.category,
-                    tv.product,
-                    tv.size,
-                    tv.color,
-                    tv.length,
-                    tv.breadth,
-                    tv.height,
-                    tv.weight,
-                    tc.name AS color_name,
-                    ts.name AS Size
-                FROM
-                    `tbl_purchase_item` tpi
-                LEFT JOIN `new_tbl_product` tp ON
-                    tp.id = tpi.product
-                LEFT JOIN `new_tbl_varient` tv ON
-                    tv.id = tpi.varient
-                LEFT JOIN `tbl_size` ts ON
-                    ts.id = tv.size
-                LEFT JOIN `tbl_color` tc ON
-                    tc.id = tv.color
-                WHERE
-                    tpi.purchase_id = '$order_data[id]';";
-        $stmt1 = $this->db->prepare($sql1);
-        $stmt1->execute();
-        $order_items = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+        // $sql1 = "SELECT
+        //             tpi.*,
+        //             tp.product AS product_name,
+        //             tv.id AS varient_id,
+        //             tv.unique_id,
+        //             tv.category,
+        //             tv.product,
+        //             tv.size,
+        //             tv.color,
+        //             tv.length,
+        //             tv.breadth,
+        //             tv.height,
+        //             tv.weight,
+        //             tc.name AS color_name,
+        //             ts.name AS Size
+        //         FROM
+        //             `tbl_purchase_item` tpi
+        //         LEFT JOIN `new_tbl_product` tp ON
+        //             tp.id = tpi.product
+        //         LEFT JOIN `new_tbl_varient` tv ON
+        //             tv.id = tpi.varient
+        //         LEFT JOIN `tbl_size` ts ON
+        //             ts.id = tv.size
+        //         LEFT JOIN `tbl_color` tc ON
+        //             tc.id = tv.color
+        //         WHERE
+        //             tpi.purchase_id = '$order_data[id]';";
+        // $stmt1 = $this->db->prepare($sql1);
+        // $stmt1->execute();
+        // $order_items = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "SELECT ti.*,tp.name from tbl_purchase_item ti
+            LEFT JOIN tbl_products tp on tp.id = ti.product
+            LEFT JOIN tbl_variants tp on tp.id = ti.product
 
+            where purchase_id='$orderid'
+        ";
+        $order_items = getData2($sql);
+        printWithPre($order_items);
+        die();
         // return $order_items;
         // die();
         $orderitems = '';
