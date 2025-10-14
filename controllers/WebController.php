@@ -738,11 +738,16 @@ class WebController extends LoginController
             exit();
         } else {
 
+            $purchase = getData2("SELECT * FROM tbl_purchase where id='$id'")[0];
             $products = getData2("SELECT tbl_purchase_item.*, tbl_products.name as product_name,
             tbl_variants.images as variant_images, tbl_variants.options as variant_options, tbl_variants.price as variant_price FROM `tbl_purchase_item` LEFT JOIN tbl_products ON tbl_purchase_item.product = tbl_products.id LEFT JOIN tbl_variants ON tbl_purchase_item.varient = tbl_variants.id WHERE tbl_purchase_item.purchase_id = $id ORDER BY tbl_purchase_item.id DESC");
             // printWithPre($products);
             require 'views/website/order-details.php';
         }
+    }
+
+    public function cancelOrder($id){
+        
     }
     public function OrderConfirmMail()
     {
@@ -1480,6 +1485,23 @@ class WebController extends LoginController
             // printWithPre($_POST);
             // printWithPre($_SESSION);
             // die();
+            if (isset($_POST['updateQuantity'])) {
+                $activity = $_POST['activity'];
+                $key = $_POST['key'];
+                $quantity = $_POST['updateQuantity'];
+
+                if ($activity == 'plus') {
+                    $_SESSION['cartData']['quantity'][$key] = $_SESSION['cartData']['quantity'][$key] + $quantity;
+                    echo json_encode(['success' => true, 'message' => 'Cart Updated Successfully']);
+                } elseif ($activity == 'minus') {
+                    $_SESSION['cartData']['quantity'][$key] = $_SESSION['cartData']['quantity'][$key] - $quantity;
+                    echo json_encode(['success' => true, 'message' => 'Cart Updated Successfully']);
+                } else {
+
+                    echo json_encode(['success' => false, 'message' => 'Something Went Wrong']);
+                }
+                exit();
+            }
             if (isset($_POST['couponSecret'])) {
                 $couponSecret = $_POST['couponSecret'];
                 $coupon = getData2("SELECT * FROM `tbl_coupons` WHERE `coupon_secret` = '$couponSecret'")[0];
@@ -1619,7 +1641,7 @@ class WebController extends LoginController
                     $_SESSION["new_order"] = $purchaseid;
                     $_SESSION['order_id'] = $order_id;
                     $token = $this->validshiprockettoken();
-                    $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid,$order_id);
+                    $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid, $order_id);
                     $placeordershiprocket = (array)$placeordershiprocket;
 
 
