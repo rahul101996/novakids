@@ -818,7 +818,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     
                 </div>
                 <div id="values-${optionCount}" class="space-y-2 w-full mt-3">
-                            <span class="w-full text-left mb-2">Option Values</span>
+                    <span class="w-full text-left mb-2">Option Values</span>
                 </div>
                 <div class="w-full flex items-center justify-between mt-3">
                     <button onclick="addValue(${optionCount})" type="button" class="text-white bg-gray-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add Option Values</button>
@@ -1047,9 +1047,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             valueInput.className = "flex items-center flex-col justify-center w-full OptionValues";
 
             valueInput.innerHTML = `
-            <div class="w-full flex items-center justify-center w-full gap-3">
-                                <input placeholder="Eg. Small" type="text" name="options_value[${optionId}][]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                                <button onclick="removeValue(this)"><i class="fa-solid fa-trash-can text-gray-500"></i></button>
+                                <div class="w-full flex items-center justify-center w-full gap-3">
+                                    <input placeholder="Eg. Small" type="text" name="options_value[${optionId}][]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" />
+                                    <button onclick="removeValue(this)"><i class="fa-solid fa-trash-can text-gray-500"></i></button>
                                 </div>
                 
             `;
@@ -1058,7 +1058,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
         }
 
         function removeValue(button) {
-            button.parentElement.remove();
+            // console.log("helllllllllll");
+            console.log(button.parentElement);
+            button.parentElement.parentElement.remove();
         }
 
 
