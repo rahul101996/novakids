@@ -34,6 +34,8 @@ class ProductController
             $packages = getData("tbl_packaging");
             require 'views/products/add-products.php';
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
             // printWithPre($_POST);
             // $sizeChart = [];
             $sizeType = $_POST["sizeType"];
@@ -276,6 +278,67 @@ class ProductController
                 // printWithPre($data);
 
                 update($data, $id, "tbl_products");
+
+                // Insert variants if available
+                if (isset($_POST['variant_prices']) && isset($_POST['variant_quantities'])) {
+                    $prices = $_POST['variant_prices'] ?? [];
+                    $quantities = $_POST['variant_quantities'] ?? [];
+                    $images = $_FILES['variant_images'] ?? [];
+                    $options = $_POST['variant_options'] ?? [];
+
+                    foreach ($prices as $index => $price) {
+                        $price = floatval($price);
+                        $quantity = intval($quantities[$index] ?? 0);
+
+                        if ($price <= 0 || $quantity < 0) {
+                            continue;
+                        }
+
+                        // Handle uploaded files for variant images
+                        $uploadedFiles = [];
+                        if (isset($images['name'][$index])) {
+                            foreach ($images['name'][$index] as $key => $filename) {
+                                $file = [
+                                    'name' => $images['name'][$index][$key],
+                                    'type' => $images['type'][$index][$key],
+                                    'tmp_name' => $images['tmp_name'][$index][$key],
+                                    'error' => $images['error'][$index][$key],
+                                    'size' => $images['size'][$index][$key]
+                                ];
+                                $targetDir = 'public/uploads/product-images/';
+                                $uploadedFile = uploadFile($file, $targetDir);
+                                if ($uploadedFile) {
+                                    $uploadedFiles[] = $uploadedFile;
+                                }
+                            }
+                        }
+
+                        $imagesJson = json_encode($uploadedFiles);
+                        $optionDetail = isset($options[$index]) && !empty($options[$index]) ? json_encode($options[$index]) : '';
+
+
+                        // Prepare variant data
+                        $variantData = [
+                            'product_id' => $id,
+                            'price' => $price,
+                            'quantity' => $quantity,
+                            'images' => $imagesJson,
+                            'options' => $optionDetail
+                        ];
+
+                        // printWithPre($variantData);
+                        // var_dump($variantData['options'] != "" && $variantData['options'] != null) . " <br>";
+
+                        // Insert variant
+                        if ($variantData['options'] != "" && $variantData['options'] != null) {
+
+                            // echo "hello" . $index;
+                            add($variantData, "tbl_variants");
+                        }
+
+                    }
+                }
+
                 $db->commit();
 
                 $_SESSION['success'] = "Product and variants updated successfully.";
@@ -324,7 +387,6 @@ class ProductController
                     'committed' => $_POST['committed'],
                     'on_hand' => $_POST['on_hand'],
                     'options' => json_encode(json_encode($_POST['options'])),
-                    'updated_at' => date('Y-m-d H:i:s') // optional timestamp
                 ];
 
 
@@ -339,14 +401,13 @@ class ProductController
                 // Upload new images
                 $uploadedImages = [];
                 if (isset($_FILES['variant_images'])) {
-                    $images = $_FILES['variant_images'];
-                    foreach ($images['name'] as $key => $filename) {
+                    foreach ($_FILES['variant_images']['name'] as $key => $filename) {
                         $file = [
-                            'name' => $images['name'][$key],
-                            'type' => $images['type'][$key],
-                            'tmp_name' => $images['tmp_name'][$key],
-                            'error' => $images['error'][$key],
-                            'size' => $images['size'][$key]
+                            'name' => $_FILES['variant_images']['name'][$key],
+                            'type' => $_FILES['variant_images']['type'][$key],
+                            'tmp_name' => $_FILES['variant_images']['tmp_name'][$key],
+                            'error' => $_FILES['variant_images']['error'][$key],
+                            'size' => $_FILES['variant_images']['size'][$key]
                         ];
 
                         if ($file['error'] != 0)
@@ -363,19 +424,19 @@ class ProductController
 
                 $data['images'] = json_encode($finalImages);
 
-                printWithPre($data);
+                // printWithPre($data);
 
                 // Update in DB
                 update($data, $id, "tbl_variants");
 
-                // $db->commit();
-                // $_SESSION['success'] = "Product and variants updated successfully.";
+                $db->commit();
+                $_SESSION['success'] = "Product and variants updated successfully.";
             } catch (Exception $e) {
                 $db->rollBack();
                 echo "Error: " . $e->getMessage();
             }
 
-            // redirect("/admin/products-list");
+            redirect("/admin/products-list");
         }
     }
 

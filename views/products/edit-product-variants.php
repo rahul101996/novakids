@@ -180,7 +180,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     <label for="vdata_image"
                                         class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none">
                                         <span>Upload a file</span>
-                                        <input id="vdata_image" name="product_images[]" type="file" class="sr-only"
+                                        <input id="vdata_image" name="variant_images[]" type="file" class="sr-only"
                                             accept="image/*" multiple>
                                     </label>
                                     <p class="pl-1">or drag and drop</p>
