@@ -372,7 +372,7 @@ class GeneralController
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => '{"order_id": "' . $orderid . '",
                                     "order_date": "' . $order_data['created_at'] . '",
-                                    "pickup_location": "Primary",
+                                    "pickup_location": "Home",
                                     "billing_customer_name": "' . $order_data['fname'] . '",
                                     "billing_last_name": "' . $order_data['lname'] . '",
                                     "billing_address": "' . $order_data['address_line1'] . '",

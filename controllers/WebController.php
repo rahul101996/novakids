@@ -1544,7 +1544,7 @@ class WebController extends LoginController
                 // printWithPre($_POST);
                 // die();
                 $db = getDBCon(); // PDO instance
-                // $db->beginTransaction();
+                $db->beginTransaction();
                 $purchaseid = [
                     "userid" => $_SESSION["userid"],
                     "username" => $_SESSION["username"],
@@ -1620,10 +1620,10 @@ class WebController extends LoginController
                     $token = $this->validshiprockettoken();
                     echo $token;
 
-                    // $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid,$order_id);
-                    // $placeordershiprocket = (array)$placeordershiprocket;
+                    $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid,$order_id);
+                    $placeordershiprocket = (array)$placeordershiprocket;
 
-                    // printWithPre($placeordershiprocket);
+                    printWithPre($placeordershiprocket);
                     // die();
 
                     // $this->OrderConfirmMail();
