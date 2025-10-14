@@ -420,7 +420,7 @@ class ProductController
                 }
 
                 // Combine old + new images
-                $finalImages = array_merge(array_diff($_POST['allImages'], $_POST['delete_images'] ?? []), $uploadedImages);
+                $finalImages = array_merge(array_diff($_POST['allImages'] ?? [], $_POST['delete_images'] ?? []), $uploadedImages);
 
                 $data['images'] = json_encode($finalImages);
 
