@@ -1,5 +1,5 @@
 <?php
-// printWithPre($_SESSION);
+printWithPre($_SESSION);
 $allstates = getData("indian_states");
 $getallcoupons = getData("tbl_coupons");
 ?>
@@ -246,15 +246,15 @@ $getallcoupons = getData("tbl_coupons");
                                     <h3 class="font-semibold text-base"><?= $vdata['product_name'] ?> x <span class="text-xs  px-3 bg-black text-white rounded-lg"> <?= $quantity ?></span></h3>
                                     <div class="flex gap-3 flex-wrap items-center justify-start">
                                         <?php
-                                        foreach ($variants as $key => $variant) {
+                                        foreach ($variants as $key1 => $variant) {
                                         ?>
-                                            <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
+                                            <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key1 ?>: <?= $variant ?></p>
                                         <?php } ?>
                                     </div>
                                     <div class="border border-gray-500 px-2 py-1 flex gap-3 items-center mt-2 w-fit">
-                                        <span><i class="fa fa-plus cursor-pointer"></i></span>
-                                        <span><?= $quantity ?></span>
-                                        <span><i class="fa fa-minus cursor-pointer"></i></span>
+                                        <span class="plus" onclick="checkoutPlus(this,<?= $key ?>,<?= $cartData['price'][$key] ?>)"><i class="fa fa-plus cursor-pointer"></i></span>
+                                        <span class="quantity"><?= $quantity ?></span>
+                                        <span class="minus" onclick="checkoutMinus(this,<?= $key ?>,<?= $cartData['price'][$key] ?>)"><i class="fa fa-minus cursor-pointer"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -273,7 +273,7 @@ $getallcoupons = getData("tbl_coupons");
                 <div class="space-y-2 text-sm mt-2">
                     <div class="flex justify-between">
                         <span>Subtotal</span>
-                        <span>₹<?= $totalAmount ?></span>
+                        <span id="subTotalSpan">₹<?= $totalAmount ?></span>
                     </div>
                     <div class="flex justify-between">
                         <span>Coupon</span>
@@ -288,7 +288,7 @@ $getallcoupons = getData("tbl_coupons");
                         <span id="allTotalSpan">₹<?= $totalAmount ?></span>
                     </div>
                     <input type="text" id="subtotal" value="<?= $totalAmount ?>" class="hidden">
-                    <input type="text" name="allTotal" value="<?= $totalAmount ?>" hidden class="hidden" id="allTotal">
+                    <input type="text" name="allTotal" value="<?= $totalAmount ?>" class="hidden" id="allTotal">
                 </div>
                 <div class="mt-3">
                     <?php foreach ($getallcoupons as $key => $value) { ?>
@@ -418,8 +418,9 @@ $getallcoupons = getData("tbl_coupons");
             backdrop.classList.remove('show');
             // document.body.style.overflow = '';
         }
+
         function copyCoupon(coupon_secret) {
-            
+
             document.getElementById('newDiscount').value = coupon_secret;
             applyCoupon();
         }
@@ -443,7 +444,7 @@ $getallcoupons = getData("tbl_coupons");
                 // console.log(result.data.discount);
                 let allTotal = document.getElementById('allTotal').value = parseFloat(subtotal) - parseFloat(result.data.discount);
                 console.log(allTotal);
-                document.getElementById('allTotalSpan').innerText = allTotal;
+                document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
 
 
             } else {
@@ -485,6 +486,61 @@ $getallcoupons = getData("tbl_coupons");
 
             closeModal1();
         }
+
+        async function checkoutPlus(ele, key, price) {
+
+            let quantity = ele.parentElement.querySelector(".quantity");
+            let quantityValue = quantity.innerText;
+            quantityValue++;
+
+            const result = await axios.post('', new URLSearchParams({
+                key: key,
+                activity: 'plus',
+                updateQuantity: quantityValue
+            }));
+            quantity.innerText = quantityValue;
+            console.log(quantityValue);
+            let subtotal = document.getElementById('subtotal');
+
+            let subtotalspan = document.getElementById('subTotalSpan');
+            subtotal.value = parseFloat(subtotal.value) + parseFloat(price);
+            subtotalspan.innerText = '₹' + subtotal.value;
+            // console.log(subtotal);
+            let allTotal = parseFloat(document.getElementById('allTotal').value) + parseFloat(price);
+            document.getElementById('allTotal').value = allTotal;
+            console.log(allTotal);
+            document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
+        }
+
+        async function checkoutMinus(ele, key, price) {
+
+            let quantity = ele.parentElement.querySelector(".quantity");
+            let quantityValue = quantity.innerText;
+            if (quantityValue > 1) {
+
+                quantityValue--;
+                const result = await axios.post('', new URLSearchParams({
+                    key: key,
+                    activity: 'minus',
+                    updateQuantity: quantityValue
+                }));
+                quantity.innerText = quantityValue;
+                console.log(quantityValue);
+                let subtotal = document.getElementById('subtotal');
+
+                let subtotalspan = document.getElementById('subTotalSpan');
+                subtotal.value = parseFloat(subtotal.value) - parseFloat(price);
+                subtotalspan.innerText = '₹' + subtotal.value;
+                // console.log(subtotal);
+                let allTotal = parseFloat(document.getElementById('allTotal').value) - parseFloat(price);
+                document.getElementById('allTotal').value = allTotal;
+                console.log(allTotal);
+                document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
+            }
+
+        }
+
+
 
         function selectAddress(div) {
             const address = div.querySelector(".selectedAddress1").innerText;

@@ -1545,6 +1545,7 @@ class WebController extends LoginController
                 // die();
                 $db = getDBCon(); // PDO instance
                 $db->beginTransaction();
+                // $db->beginTransaction();
                 $purchaseid = [
                     "userid" => $_SESSION["userid"],
                     "username" => $_SESSION["username"],
@@ -1618,15 +1619,10 @@ class WebController extends LoginController
                     $_SESSION["new_order"] = $purchaseid;
                     $_SESSION['order_id'] = $order_id;
                     $token = $this->validshiprockettoken();
-                    echo $token;
+                    $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid,$order_id);
+                    $placeordershiprocket = (array)$placeordershiprocket;
 
-                    // $placeordershiprocket = $this->placeordershiprocket($token, $order_id);
-                    // $placeordershiprocket = (array)$placeordershiprocket;
 
-                    // printWithPre($placeordershiprocket);
-                    // die();
-
-                    // $this->OrderConfirmMail();
                     sendOrderMail($purchaseid);
                     $_SESSION["success"] = "Order Placed Successfully";
                     $db->commit();
@@ -1856,6 +1852,12 @@ class WebController extends LoginController
                 // die();
                 $_SESSION["new_order"] = $purchaseid[0];
                 $_SESSION['order_id'] = $order_data["orderid"];
+
+                $token = $this->validshiprockettoken();
+                $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid, $order_data["orderid"]);
+                $placeordershiprocket = (array)$placeordershiprocket;
+                sendOrderMail($purchaseid);
+
                 $_SESSION["success"] = "Order Placed Successfully";
                 unset($_SESSION["cartData"]);
                 header("Location: /thank-you");
