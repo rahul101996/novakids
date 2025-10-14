@@ -1700,8 +1700,6 @@ class WebController extends LoginController
                         }
                         $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid, $order_id);
                         $placeordershiprocket = (array)$placeordershiprocket;
-                        // print_r($placeordershiprocket);
-                        // die();
 
                         update(["shiprocketData"=>json_encode($placeordershiprocket)],$purchaseid,"tbl_purchase");
 
@@ -1858,9 +1856,13 @@ class WebController extends LoginController
             }
 
 
-            $purchaseid = add($data, "tbl_purchase");
-
+            $token = $this->validshiprockettoken();
+            $purchaseids = [];
             foreach ($_SESSION["cartData"]["varient"] as $key => $varient) {
+                $data["total_amount"] = $_SESSION["cartData"]["quantity"][$key] * $_SESSION["cartData"]["price"][$key];
+                $data["orderid"] = generateRandomString(16) . time();
+                $order_id = $data["orderid"];
+                $purchaseid = add($data, "tbl_purchase");
                 $insertData = [
                     "purchase_id" => $purchaseid,
                     "varient" => $varient,
@@ -1878,9 +1880,16 @@ class WebController extends LoginController
                     "created_by" => $_SESSION["userid"],
                 ];
                 add($insertData, "tbl_purchase_item");
+                $purchaseids[] = $data["orderid"];
+                $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid, $order_id);
+                $placeordershiprocket = (array)$placeordershiprocket;
+
+                update(["shiprocketData"=>json_encode($placeordershiprocket)],$purchaseid,"tbl_purchase");
+
+                sendOrderMail($purchaseid);
             }
 
-            return [$purchaseid];
+            return $purchaseids;
         } catch (\PDOException $e) {
             // Roll back the transaction if something failed
             echo $e->getMessage();
@@ -1913,7 +1922,7 @@ class WebController extends LoginController
                 "payment_mode" => $order_data['payment_mode'],
                 "payment_status" => "Completed",
                 "razorpay_payment_id" => $_POST['razorpay_payment_id'],
-                "orderid" => $order_data["orderid"],
+                "online_order_id" => $order_data["orderid"],
                 "status" => "Processing",
                 "total_amount" => $checkoutdata["allTotal"],
                 "address_line1" => $checkoutdata["address_line1"],
@@ -1945,12 +1954,12 @@ class WebController extends LoginController
                 delete($id, "tbl_cart", "userid");
                 // printWithPre($purchaseid);
                 // die();
-                $_SESSION['order_id'] = $order_data["orderid"];
+                $_SESSION['order_id'] = $purchaseid;
 
-                $token = $this->validshiprockettoken();
-                $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid, $order_data["orderid"]);
-                $placeordershiprocket = (array)$placeordershiprocket;
-                sendOrderMail($purchaseid);
+                // $token = $this->validshiprockettoken();
+                // $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid, $order_data["orderid"]);
+                // $placeordershiprocket = (array)$placeordershiprocket;
+                // sendOrderMail($purchaseid);
 
                 $_SESSION["success"] = "Order Placed Successfully";
                 unset($_SESSION["cartData"]);
