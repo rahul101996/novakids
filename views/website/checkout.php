@@ -2,6 +2,7 @@
 // printWithPre($_SESSION);
 $allstates = getData("indian_states");
 $getallcoupons = getData("tbl_coupons");
+$page = 'checkout'
 ?>
 
 <!DOCTYPE html>
@@ -237,6 +238,7 @@ $getallcoupons = getData("tbl_coupons");
                         $id = $cartData["product"][$key];
                         $variant_id = $cartData['varient'][$key];
                         $quantity = $cartData['quantity'][$key];
+                        $category = $cartData['category'][$key];
                         $vdata = getData2("SELECT tbl_variants.* , tbl_products.name as product_name, tbl_products.id as product_id, tbl_products.category as category FROM `tbl_variants` LEFT JOIN tbl_products ON tbl_variants.product_id = tbl_products.id WHERE tbl_variants.id = '$variant_id'")[0];
                         // echo $vdata['image'];
                         // printWithPre($vdata);
@@ -265,6 +267,9 @@ $getallcoupons = getData("tbl_coupons");
                                     </div>
                                 </div>
                             </div>
+                            <input type="text" value="<?= $variant_id ?>" class="sideVarientId hidden">
+                            <input type="text" value="<?= $category ?>" class="sideCategoryId hidden">
+                            <input type="text" value="<?= $id ?>" class="sideProductId hidden">
                             <p class="font-semibold xprice">₹<?= $totalprice ?></p>
                         </div>
                     <?php } ?>
@@ -507,6 +512,7 @@ $getallcoupons = getData("tbl_coupons");
                 updateQuantity: 1
             }));
             if (result.data.success) {
+                addToCartSidebar(parentElement.querySelector(".sideVarientId").value, parentElement.querySelector(".sideCategoryId").value, parentElement.querySelector(".sideProductId").value, ele, 1);
                 parentElement.querySelector(".xquantity").innerText = quantityValue;
                 parentElement.querySelector(".xprice").innerText = price * quantityValue;
                 quantity.innerText = quantityValue;
@@ -521,7 +527,7 @@ $getallcoupons = getData("tbl_coupons");
                 document.getElementById('allTotal').value = allTotal;
                 console.log(allTotal);
                 document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
-                toastr.success(result.data.message);
+                // toastr.success(result.data.message);
             } else {
                 toastr.error(result.data.message);
             }
@@ -540,7 +546,10 @@ $getallcoupons = getData("tbl_coupons");
                     activity: 'minus',
                     updateQuantity: 1
                 }));
+
                 if (result.data.success) {
+                    addToCartSidebar(parentElement.querySelector(".sideVarientId").value, parentElement.querySelector(".sideCategoryId").value, parentElement.querySelector(".sideProductId").value, ele, -1);
+
                     parentElement.querySelector(".xquantity").innerText = quantityValue;
                     parentElement.querySelector(".xprice").innerText = price * quantityValue;
                     quantity.innerText = quantityValue;
@@ -555,7 +564,7 @@ $getallcoupons = getData("tbl_coupons");
                     document.getElementById('allTotal').value = allTotal;
                     console.log(allTotal);
                     document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
-                    toastr.success(result.data.message);
+                    // toastr.success(result.data.message);
                 } else {
                     toastr.error(result.data.message);
                 }

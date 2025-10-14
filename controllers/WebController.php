@@ -746,9 +746,7 @@ class WebController extends LoginController
         }
     }
 
-    public function cancelOrder($id){
-        
-    }
+    public function cancelOrder($id) {}
     public function OrderConfirmMail()
     {
         require 'views/website/order-confermation-mail.php';

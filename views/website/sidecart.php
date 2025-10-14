@@ -736,7 +736,14 @@
             }, 1000);
 
         } else {
-            openCart();
+            <?php
+            if ($page == 'checkout') {
+            } else {
+            ?>
+                openCart();
+            <?php
+            }
+            ?>
         }
 
 
