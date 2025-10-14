@@ -282,8 +282,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                                         <?php
                                         $optionCount = 0;
-                                        foreach ($optionGroups as $optionGrpkey => $optionGrpdata) { ?>
-                                            <div id="option-<?= $optionCount++ ?>"
+                                        foreach ($optionGroups as $optionGrpkey => $optionGrpdata) {
+
+                                            $srs = $optionCount++;
+                                            ?>
+                                            <div id="option-<?= $srs ?>"
                                                 class="w-full flex flex-col items-center justify-center mt-2 border-b border-gray-200  rounded-md p-4 OptionDiv">
                                                 <span class="w-full text-left">Option Name</span>
                                                 <div class="flex justify-between items-center mb-2 w-full">
@@ -292,30 +295,29 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                         name="options_name[]" placeholder="Eg. Size" readonly>
 
                                                 </div>
-                                                <div id="values-<?= $optionCount++ ?>" class="space-y-2 w-full mt-3">
+                                                <div id="values-<?= $srs ?>" class="space-y-2 w-full mt-3">
                                                     <span class="w-full text-left mb-2">Option Values</span>
                                                     <?php foreach ($optionGrpdata as $key => $value) { ?>
                                                         <div
                                                             class="flex items-center flex-col justify-center w-full OptionValues">
                                                             <div class="w-full flex items-center justify-center w-full gap-3">
                                                                 <input placeholder="Eg. Small" type="text"
-                                                                    name="options_value[<?= $optionCount++ ?>][]"
-                                                                    value="<?= $value ?>"
+                                                                    name="options_value[<?= $srs ?>][]" value="<?= $value ?>"
                                                                     class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                                                                <button onclick="removeValue(this)"><i
-                                                                        class="fa-solid fa-trash-can text-gray-500"></i></button>
+                                                                <!-- <button onclick="removeValue(this)"><i
+                                                                        class="fa-solid fa-trash-can text-gray-500"></i></button> -->
                                                             </div>
                                                         </div>
                                                     <?php } ?>
                                                 </div>
                                                 <div class="w-full flex items-center justify-between mt-3">
-                                                    <!-- <button onclick="addValue(${optionCount})" type="button"
+                                                    <button onclick="addValue(<?= $srs ?>)" type="button"
                                                         class="text-white bg-gray-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add
                                                         Option Values</button>
-                                                    <button onclick="addSizeChart()" type="button"
+                                                    <!-- <button onclick="addSizeChart()" type="button"
                                                         class="text-blue-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add
-                                                        Size Chart</button>
-                                                    <button onclick="removeOption(${optionCount})" type="button"
+                                                        Size Chart</button> -->
+                                                    <!-- <button onclick="removeOption(${optionCount})" type="button"
                                                         class="text-red-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Delete
                                                         Option</button> -->
                                                 </div>
@@ -325,11 +327,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     </div>
 
                                     <div class="flex items-center justify-between w-[95%] py-2">
-                                        <button onclick="addOption()" type="button"
+                                        <!-- <button onclick="addOption()" type="button"
                                             class="text-white bg-blue-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">
                                             <i class="fa-solid fa-circle-plus mr-2 border-none" aria-hidden="true"></i>
                                             Add another option
-                                        </button>
+                                        </button> -->
 
                                         <button onclick="generateVariants()" type="button" class="text-white px-5 py-2 rounded-lg shadow-md font-medium 
                                                     bg-gradient-to-r from-red-500  to-blue-500 
@@ -362,6 +364,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         </thead>
                                         <tbody id="variantsTableBody">
 
+
                                             <?php
 
                                             if (!empty($editData)) {
@@ -369,6 +372,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                 foreach ($variants as $vkey => $vdata) {
 
                                                     $jsonData = json_decode($vdata['options'], true);
+
+                                                    // printWithPre($jsonData);
+                                            
                                                     $lines = explode("\n", trim($jsonData));
                                                     $pvoptions = [];
                                                     foreach ($lines as $kkey => $line) {
@@ -378,16 +384,15 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                     $vvkeys = array_keys($pvoptions);
                                                     $vvdd = array_values($pvoptions);
 
+                                                    // printWithPre($vvkeys);
+                                                    // printWithPre($vvdd);
+                                            
                                                     $dtdtd = "";
                                                     foreach ($vvkeys as $keyskey => $keysvalue) {
                                                         $dtdtd .= $vvdd[$keyskey] . "/";
                                                     }
                                                     $dtdtd = substr($dtdtd, 0, -1);
 
-                                                    // printWithPre($pvoptions);
-                                                    // printWithPre($vvkeys);
-                                                    // printWithPre($vvdd);
-                                                    // die();
                                                     // printWithPre($dtdtd);
                                             
                                                     ?>
@@ -406,26 +411,30 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                                     data-index="<?= $vkey ?>">
                                                                 <span><?= $dtdtd ?></span>
                                                                 <input type="hidden" name="variant_options[<?= $vkey ?>]"
-                                                                    value='<? ?>'>
+                                                                    value="">
                                                             </div>
                                                         </td>
                                                         <td class="px-3 py-3">
                                                             <input type="number" name="variant_prices[<?= $vkey ?>]"
                                                                 value="<?= $vdata['price'] ?>"
-                                                                class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
-                                                                placeholder="₹ 0.00" required>
+                                                                class="w-full border bg-gray-100 border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                                                placeholder="₹ 0.00" readonly required>
                                                         </td>
                                                         <td class="px-3 py-3">
                                                             <input type="number" name="variant_quantities[<?= $vkey ?>]"
-                                                                class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
-                                                                value="<?= $vdata['quantity'] ?>" required>
+                                                                class="w-full border bg-gray-100 border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                                                value="<?= $vdata['quantity'] ?>" readonly required>
                                                         </td>
                                                         <td class="px-3 py-3">
                                                             <div class="gap-4">
-                                                                <button type="button" class="text-indigo-600 text-lg "><i
-                                                                        class="fa fa-edit"></i></button>
-                                                                <button type="button" class="text-red-600 text-lg "><i
-                                                                        class="fa fa-trash"></i></button>
+                                                                <a href="/admin/edit-product-variant/<?= $vdata['id'] ?>"
+                                                                    target="_blank" class="text-indigo-600 text-lg "><i
+                                                                        class="fa fa-edit"></i>
+                                                                </a>
+                                                                <!-- <a href="/admin/edit-product-variant/<?= $vdata['id'] ?>"
+                                                                    target="_blank" class="text-red-600 text-lg "><i
+                                                                        class="fa fa-trash"></i>
+                                                                </a> -->
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -711,18 +720,17 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             console.log("hello");
             const optionsContainer = document.getElementById('optionsContainer');
             const options = [];
-            // console.log("hello1", optionsContainer);
+
+            // Collect ALL options from the form (including existing ones)
             for (const optionDiv of optionsContainer.children) {
-                // console.log(optionDiv);
                 const optionName = optionDiv.querySelector('input[type="text"]').value.trim();
                 if (!optionName) continue;
-                // console.log(optionName);
 
                 const valuesDiv = optionDiv.querySelector(`#values-${optionDiv.id.split('-')[1]}`);
                 const values = Array.from(valuesDiv.querySelectorAll('input[type="text"]'))
                     .map(input => input.value.trim())
                     .filter(v => v);
-                // console.log(values)
+
                 if (values.length > 0) {
                     options.push({
                         name: optionName,
@@ -732,9 +740,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             }
 
             const variants = cartesianProduct(options);
-
             displayVariants(variants, options);
         }
+
 
         const dropdownButton = document.getElementById('dropdownButton');
         const dropdownMenu = document.getElementById('dropdownMenu');
@@ -783,8 +791,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             }
         });
 
-        let optionCount = 0;
-        let isFirst = 0;
+        let optionCount = document.querySelectorAll('.OptionValues').length;
+        let isFirst = 1;
 
         function addOption() {
             optionCount++;
@@ -796,11 +804,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             optionDiv.className = "w-full flex flex-col items-center justify-center mt-2 border-b border-gray-200  rounded-md p-4 OptionDiv";
             optionDiv.id = `option-${optionCount}`;
 
-            let addSize = ""
-            let val = ""
+            let addSize = "";
+            let val = "";
             if (isFirst == 1) {
                 addSize = `<button onclick="addSizeChart()" type="button" class="text-blue-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add Size Chart</button>`
-                val = 'value="Size" readonly'
+                val = 'value="Size"';
             }
 
             optionDiv.innerHTML = `
@@ -1026,7 +1034,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
         function removeOption(id) {
             const optionDiv = document.getElementById(`option-${id}`);
+            const OptionValuesDiv = document.getElementById(`values-${id}`);
             optionDiv.remove();
+            OptionValuesDiv.remove();
             isFirst--;
         }
 
@@ -1053,97 +1063,118 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
 
 
+        // Enhanced cartesian product function to handle object structure
         function cartesianProduct(options) {
-            if (!options.length) return [];
+            if (options.length === 0) return [{}];
 
-            let result = options[0].values.map(value => ({
-                [options[0].name]: value
-            }));
+            const currentOption = options[0];
+            const remainingOptions = options.slice(1);
+            const remainingCombinations = cartesianProduct(remainingOptions);
 
-            for (let i = 1; i < options.length; i++) {
-                const option = options[i];
-                let temp = [];
-                result.forEach(variant => {
-                    option.values.forEach(value => {
-                        temp.push({
-                            ...variant,
-                            [option.name]: value
-                        });
+            const result = [];
+
+            currentOption.values.forEach(value => {
+                remainingCombinations.forEach(combination => {
+                    result.push({
+                        [currentOption.name]: value,
+                        ...combination
                     });
                 });
-                result = temp;
-            }
+            });
 
             return result;
         }
 
+
         function displayVariants(variants, options) {
-            console.log("fbjh", variants)
+            console.log("Generated variants:", variants);
             const tbody = document.getElementById('variantsTableBody');
-            tbody.innerHTML = '';
+
+            // Create a Set to track existing variants from PHP data
+            const existingVariants = new Set();
+
+            <?php if (!empty($editData)): ?>
+                <?php foreach ($variants as $vkey => $vdata): ?>
+                    <?php
+                    $jsonData = json_decode($vdata['options'], true);
+                    $lines = explode("\n", trim($jsonData));
+                    $pvoptions = [];
+                    foreach ($lines as $kkey => $line) {
+                        $pvoptions = json_decode($line, true);
+                    }
+                    // Create a consistent variant string for comparison - CORRECTED PHP SYNTAX
+                    $variantParts = [];
+                    foreach ($pvoptions as $key => $value) {
+                        $variantParts[] = $value; // Correct PHP array push syntax
+                    }
+                    $variantString = implode(' / ', $variantParts); // Correct PHP array join
+                    ?>
+                    existingVariants.add("<?= addslashes($variantString) ?>");
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+            // Start with existing PHP rows (don't clear them)
+            let newIndex = <?= !empty($editData) ? count($variants) : 0 ?>;
+            let newRowsHTML = '';
 
             variants.forEach((variant, index) => {
-                const row = document.createElement('tr');
-                row.className = "hover:bg-gray-50 border border-gray-200";
+                // Convert variant object to consistent string format
+                const variantText = options.map(opt => variant[opt.name]).join(' / ');
 
-                const variantText = options.map(opt => `${variant[opt.name]}`).join(' / ');
+                console.log("Checking variant:", variantText, "Exists:", existingVariants.has(variantText));
 
-                row.innerHTML = `
-            <td class="px-3 py-3">
-                <div class="flex items-center justify-start gap-3">
-                    <div class="bg-white border border-gray-300 flex items-center justify-center w-20 h-20 rounded-xl cursor-pointer image-placeholder overflow-hidden" data-index="${index}">
-                        <i class="fa-solid fa-images text-xl"></i>
-                        <img src="" alt="" class="hidden w-full h-full object-contain relative z-10">
+                // Skip if variant already exists in edit data
+                if (existingVariants.has(variantText)) {
+                    return;
+                }
+
+                // This is a new variant combination
+                newRowsHTML += `
+            <tr class="hover:bg-gray-50 border border-gray-200">
+                <td class="px-3 py-3">
+                    <div class="flex items-center justify-start gap-3">
+                        <div class="bg-white border border-gray-300 flex items-center justify-center w-20 h-20 rounded-xl cursor-pointer image-placeholder overflow-hidden" data-index="${newIndex}">
+                            <i class="fa-solid fa-images text-xl"></i>
+                            <img src="" alt="" class="hidden w-full h-full object-contain relative z-10">
+                        </div>
+                        <input type="file" name="variant_images[${newIndex}][]" accept="image/*" class="hidden file-input" multiple data-index="${newIndex}">
+                        <span>${variantText}</span>
+                        <input type="hidden" name="variant_options[${newIndex}]" value='${JSON.stringify(variant).replace(/'/g, "&apos;")}'>
                     </div>
-                    <input type="file" name="variant_images[${index}][]" accept="image/*" class="hidden file-input" multiple data-index="${index}">
-                    <span>${variantText}</span>
-                    <input type="hidden" name="variant_options[${index}]" value='${JSON.stringify(variant).replace(/'/g, "&apos;")}'>
-                </div>
-            </td>
-            <td class="px-3 py-3">
-                <input type="number" name="variant_prices[${index}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹ 0.00" required>
-            </td>
-            <td class="px-3 py-3">
-                <input type="number" name="variant_quantities[${index}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="0" required>
-            </td>
+                </td>
+                <td class="px-3 py-3">
+                    <input type="number" name="variant_prices[${newIndex}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹ 0.00" required>
+                </td>
+                <td class="px-3 py-3">
+                    <input type="number" name="variant_quantities[${newIndex}]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="0" required>
+                </td>
+                <?php if (!empty($editData)): ?>
+                <td class="px-3 py-3">
+                    <div class="gap-4">
+                        <button type="button" class="text-red-600 text-lg remove-variant"><i class="fa fa-trash"></i></button>
+                    </div>
+                </td>
+                <?php endif; ?>
+            </tr>
         `;
 
-                tbody.appendChild(row);
+                newIndex++;
             });
-            console.log(tbody)
-            // Add event listeners after rows are added
-            document.querySelectorAll('.image-placeholder').forEach(div => {
-                div.addEventListener('click', function () {
-                    const index = this.getAttribute('data-index');
-                    const fileInput = document.querySelector(`.file-input[data-index="${index}"]`);
-                    if (fileInput) {
-                        fileInput.click();
-                    }
+
+            // Append new rows to existing table
+            tbody.innerHTML += newRowsHTML;
+
+            // Add event listeners for remove buttons
+            document.querySelectorAll('.remove-variant').forEach(button => {
+                button.addEventListener('click', function () {
+                    this.closest('tr').remove();
                 });
             });
 
-            document.querySelectorAll('.file-input').forEach(input => {
-                input.addEventListener('change', function () {
-                    const index = this.getAttribute('data-index');
-                    const file = this.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function (e) {
-                            const placeholder = document.querySelector(`.image-placeholder[data-index="${index}"]`);
-                            const img = placeholder.querySelector('img');
-                            const icon = placeholder.querySelector('i');
-
-                            img.src = e.target.result;
-                            img.classList.remove('hidden');
-                            icon.classList.add('hidden');
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-            });
-
+            // Show the variants section
             document.getElementById('variantsSection').classList.remove('hidden');
 
+            console.log("Added", newRowsHTML ? newRowsHTML.split('</tr>').length - 1 : 0, "new variants");
         }
 
         function CalculateProfitMargin() {
