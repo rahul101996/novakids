@@ -63,7 +63,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <tr>
                                 <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Sr no.</th>
                                 <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Purchase
-                                    <br> Date</th>
+                                    <br> Date
+                                </th>
                                 <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Product
                                 </th>
                                 <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">User</th>
@@ -86,69 +87,71 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         </thead>
                         <tbody>
 
-                            <tr class="bg-red-100">
-                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">1</td>
-                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
-                                    <div class="w-[150px]">
-                                        13 September 25 10:59:00 AM </div>
-                                </td>
-                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
-                                    <div class="flex">
-                                        <a class="block px-4 py-2 text-md font-bol hover:bg-gray-200 hover:text-blue-600 transition-colors duration-200 text-center"
-                                            href="?orderid=49" data-toggle="modal" data-target="#infoModal"
-                                            data-order-id="8811757741294" onclick="getbillproduct('8811759139105')"
-                                            id="viewproduct"><i class="fa-solid fa-eye"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">Meena Pahlajani</td>
-                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
-                                    meenwabackup@gmail.com</td>
-                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">9969596816</td>
-                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
-                                    <div class="w-[250px]">
-                                        Dharave Village, Nerul, Navi Mumbai 400706 Flat no 1302, B Wing, Majestic
-                                        Hights, Sector 23,Dharave Village <br>
-                                        State : Maharashtra<br>
-                                        City : Navi Mumbai <br>
-                                        Pincode : 400706
-                                    </div>
-                                </td>
-                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
-                                    ₹1,016 </td>
-                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
-                                    Prepaid </td>
-                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
-                                    Completed </td>
-                                <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
-                                    <div class="relative inline-block w-14 mr-2 align-middle select-none">
-                                        <input type="checkbox" id="togglr_1" onchange="updateStatus(this, 0)"
-                                            class="sr-only peer">
+                            <?php foreach (getData2("SELECT tp.*, tu.fname, tu.lname, tu.mobile FROM tbl_purchase tp LEFT JOIN online_users tu ON tp.userid = tu.id WHERE tp.status = 'Cancel'") as $key => $value) { ?>
+                                <tr class="bg-red-100">
+                                    <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">1</td>
+                                    <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                        <div class="w-[150px]">
+                                            <?= formatDate($value['created_date']) ?> </div>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                        <div class="flex">
+                                            <button type="button" class="block px-4 py-2 text-md font-bol hover:bg-gray-200 hover:text-blue-600 transition-colors duration-200 text-center" data-toggle="modal" data-target="#infoModal"
+                                                data-order-id="8811757741294" onclick="getbillproduct('<?= $value['orderid'] ?>')"
+                                                id="viewproduct"><i class="fa-solid fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300"><?= $value['fname'] . " " . $value['lname'] ?></td>
+                                    <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                        <?= $value['username'] ?></td>
+                                    <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300"><?= $value['mobile'] ?></td>
+                                    <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                        <div class="w-[250px]">
+                                            <?= $value['address_line1'] ?> <br>
+                                            <?= $value['address_line2'] ?> <br>
+                                            State : <?= $value['state'] ?><br>
+                                            City : <?= $value['city'] ?> <br>
+                                            Pincode : <?= $value['pincode'] ?>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                        ₹<?= formatNumber($value['total_amount']) ?> </td>
+                                    <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                        <?= $value['payment_mode'] ?> </td>
+                                    <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                        <?= $value['payment_status'] ?> </td>
+                                    <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
+                                        <div class="relative inline-block w-14 mr-2 align-middle select-none">
+                                            <input type="checkbox" id="togglr_1" onchange="updateStatus(this, 0)"
+                                                class="sr-only peer">
 
-                                        <label for="togglr_1"
-                                            class="block overflow-hidden h-7 rounded-full bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out peer-checked:bg-gray-100 before:content-[''] before:absolute before:top-0.5 before:left-0.5 before:bg-white before:border-2 before:border-gray-300 before:h-6 before:w-6 before:rounded-full before:transition-all before:duration-300 before:shadow-md peer-checked:before:translate-x-7 peer-checked:before:border-gray-100">
-                                            <span
-                                                class="absolute inset-y-0 left-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-sky-50 peer-checked:translate-x-7">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
-                                                    viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd"
-                                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </span>
-                                            <span
-                                                class="absolute inset-y-0 right-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-white">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
-                                                    viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd"
-                                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </span>
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
+                                            <label for="togglr_1"
+                                                class="block overflow-hidden h-7 rounded-full bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out peer-checked:bg-gray-100 before:content-[''] before:absolute before:top-0.5 before:left-0.5 before:bg-white before:border-2 before:border-gray-300 before:h-6 before:w-6 before:rounded-full before:transition-all before:duration-300 before:shadow-md peer-checked:before:translate-x-7 peer-checked:before:border-gray-100">
+                                                <span
+                                                    class="absolute inset-y-0 left-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-sky-50 peer-checked:translate-x-7">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                                        viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd"
+                                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </span>
+                                                <span
+                                                    class="absolute inset-y-0 right-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-white">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                                        viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd"
+                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+
                         </tbody>
                     </table>
                 </div>
