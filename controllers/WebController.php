@@ -1483,6 +1483,22 @@ class WebController extends LoginController
             // printWithPre($_POST);
             // printWithPre($_SESSION);
             // die();
+            if (isset($_POST['deletecartid'])) {
+                $cartid = $_POST['deletecartid'];
+                $key = $_POST['key'];
+                foreach ($_SESSION['cartData']['cartid'] as $keys => $value) {
+
+                    unset($_SESSION['cartData']['cartid'][$key]);
+                    unset($_SESSION['cartData']['product'][$key]);
+                    unset($_SESSION['cartData']['category'][$key]);
+                    unset($_SESSION['cartData']['quantity'][$key]);
+                    unset($_SESSION['cartData']['price'][$key]);
+                    unset($_SESSION['cartData']['varient'][$key]);
+                }
+                echo json_encode(['success' => true, 'message' => 'Cart Updated Successfully']);
+                exit();
+
+            }
             if (isset($_POST['updateQuantity'])) {
                 $activity = $_POST['activity'];
                 $key = $_POST['key'];

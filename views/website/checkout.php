@@ -248,7 +248,7 @@ $page = 'checkout'
                         $totalprice = $vdata['price'] * $quantity;
                         $totalAmount += $totalprice;
                     ?>
-                        <div class="flex gap-4 max-md:gap-2 items-center justify-between">
+                        <div class="flex gap-4 max-md:gap-2 items-center justify-between deleteCart<?= $cartData['cartid'][$key] ?> " key="<?= $key ?>">
                             <div class="flex items-center gap-3">
                                 <img src="/<?= $images[0] ?>" class="w-16 h-20 object-cover">
                                 <div>
@@ -261,9 +261,9 @@ $page = 'checkout'
                                         <?php } ?>
                                     </div>
                                     <div class="border border-gray-500 px-2 py-1 flex gap-3 items-center mt-2 w-fit">
-                                        <span class="plus" onclick="checkoutPlus(this,<?= $key ?>,<?= $cartData['price'][$key] ?>)"><i class="fa fa-plus cursor-pointer"></i></span>
+                                        <span class="plus checkotplus<?= $variant_id ?>" key="<?= $key ?>" price="<?= $cartData['price'][$key] ?>" onclick="checkoutPlus(this,<?= $key ?>,<?= $cartData['price'][$key] ?>)"><i class="fa fa-plus cursor-pointer"></i></span>
                                         <span class="quantity"><?= $quantity ?></span>
-                                        <span class="minus" onclick="checkoutMinus(this,<?= $key ?>,<?= $cartData['price'][$key] ?>)"><i class="fa fa-minus cursor-pointer"></i></span>
+                                        <span class="minus checkotminus<?= $variant_id ?>" key="<?= $key ?>" price="<?= $cartData['price'][$key] ?>" onclick="checkoutMinus(this,<?= $key ?>,<?= $cartData['price'][$key] ?>)"><i class="fa fa-minus cursor-pointer"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -499,7 +499,14 @@ $page = 'checkout'
             closeModal1();
         }
 
-        async function checkoutPlus(ele, key, price) {
+        async function checkoutPlus(ele, key = null, price = null) {
+            console.log(ele);
+            sidecart = true;
+            if (key == null || price == null) {
+                sidecart = false;
+                key = ele.getAttribute('key');
+                price = ele.getAttribute('price');
+            }
             let parentElement = ele.parentElement.parentElement.parentElement.parentElement;
             console.log(parentElement);
             let quantity = ele.parentElement.querySelector(".quantity");
@@ -512,7 +519,15 @@ $page = 'checkout'
                 updateQuantity: 1
             }));
             if (result.data.success) {
-                addToCartSidebar(parentElement.querySelector(".sideVarientId").value, parentElement.querySelector(".sideCategoryId").value, parentElement.querySelector(".sideProductId").value, ele, 1);
+                if (sidecart) {
+                    const request = await axios.post("/api/add-to-cart", new URLSearchParams({
+                        varient_id: parentElement.querySelector(".sideVarientId").value,
+                        category_id: parentElement.querySelector(".sideCategoryId").value,
+                        product_id: parentElement.querySelector(".sideProductId").value,
+                        quantity: 1
+                    }));
+
+                }
                 parentElement.querySelector(".xquantity").innerText = quantityValue;
                 parentElement.querySelector(".xprice").innerText = price * quantityValue;
                 quantity.innerText = quantityValue;
@@ -527,13 +542,19 @@ $page = 'checkout'
                 document.getElementById('allTotal').value = allTotal;
                 console.log(allTotal);
                 document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
-                // toastr.success(result.data.message);
+                toastr.success(result.data.message);
             } else {
                 toastr.error(result.data.message);
             }
         }
 
-        async function checkoutMinus(ele, key, price) {
+        async function checkoutMinus(ele, key = null, price = null) {
+            sidecart = true;
+            if (key == null || price == null) {
+                sidecart = false;
+                key = ele.getAttribute('key');
+                price = ele.getAttribute('price');
+            }
             let parentElement = ele.parentElement.parentElement.parentElement.parentElement;
 
             let quantity = ele.parentElement.querySelector(".quantity");
@@ -548,7 +569,17 @@ $page = 'checkout'
                 }));
 
                 if (result.data.success) {
-                    addToCartSidebar(parentElement.querySelector(".sideVarientId").value, parentElement.querySelector(".sideCategoryId").value, parentElement.querySelector(".sideProductId").value, ele, -1);
+
+                    if (sidecart) {
+
+
+                        const request = await axios.post("/api/add-to-cart", new URLSearchParams({
+                            varient_id: parentElement.querySelector(".sideVarientId").value,
+                            category_id: parentElement.querySelector(".sideCategoryId").value,
+                            product_id: parentElement.querySelector(".sideProductId").value,
+                            quantity: -1
+                        }));
+                    }
 
                     parentElement.querySelector(".xquantity").innerText = quantityValue;
                     parentElement.querySelector(".xprice").innerText = price * quantityValue;
@@ -564,7 +595,7 @@ $page = 'checkout'
                     document.getElementById('allTotal').value = allTotal;
                     console.log(allTotal);
                     document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
-                    // toastr.success(result.data.message);
+                    toastr.success(result.data.message);
                 } else {
                     toastr.error(result.data.message);
                 }

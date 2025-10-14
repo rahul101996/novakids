@@ -738,12 +738,23 @@
         } else {
             <?php
             if ($page == 'checkout') {
-            } else {
             ?>
-                openCart();
-            <?php
-            }
-            ?>
+                if (quantity == 1) {
+
+
+                    btns = document.querySelector(`.checkotplus${varient_id}`);
+                    checkoutPlus(btns);
+
+                } else {
+
+                    btns = document.querySelector(`.checkotminus${varient_id}`)
+                    checkoutMinus(btns);
+                }
+            <?php } ?>
+
+
+
+            openCart();
         }
 
 
@@ -805,7 +816,24 @@
         if (response.data.success) {
             // console.log(ele, ele.parentElement)
             ele.parentElement.remove();
+            <?php
+            if ($page == 'checkout') {
+            ?>
+                let elems = document.querySelector(`.deleteCart${cartid}`);
+                console.log(elems);
+                let key = elems.getAttribute('key');
+                console.log(key);
+                const response = await axios.post("", new URLSearchParams({
+                    deletecartid: cartid,
+                    key: key,
+                    // "deleteMe": ""
+                }))
+                if (response.data.success) {
 
+
+                    location.reload();
+                }
+            <?php } ?>
             toastr.options = {
                 "toastClass": "bg-pink-toast",
                 "progressBar": true,
