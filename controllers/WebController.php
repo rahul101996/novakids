@@ -1861,6 +1861,7 @@ class WebController extends LoginController
             foreach ($_SESSION["cartData"]["varient"] as $key => $varient) {
                 $data["total_amount"] = $_SESSION["cartData"]["quantity"][$key] * $_SESSION["cartData"]["price"][$key];
                 $data["orderid"] = generateRandomString(16) . time();
+                $data["country"] = "India";
                 $order_id = $data["orderid"];
                 $purchaseid = add($data, "tbl_purchase");
                 $insertData = [
@@ -1885,7 +1886,6 @@ class WebController extends LoginController
                 $placeordershiprocket = (array)$placeordershiprocket;
 
                 update(["shiprocketData"=>json_encode($placeordershiprocket)],$purchaseid,"tbl_purchase");
-
                 sendOrderMail($purchaseid);
             }
 
