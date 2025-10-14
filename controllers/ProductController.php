@@ -383,9 +383,6 @@ class ProductController
                     'product_id' => $_POST['product_id'],
                     'price' => $_POST['price'],
                     'quantity' => $_POST['quantity'],
-                    'unavailable' => $_POST['unavailable'],
-                    'committed' => $_POST['committed'],
-                    'on_hand' => $_POST['on_hand'],
                     'options' => json_encode(json_encode($_POST['options'])),
                 ];
 

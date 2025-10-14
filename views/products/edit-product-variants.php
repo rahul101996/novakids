@@ -96,7 +96,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     </div>
 
                     <!-- Price, Quantity, Unavailable -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Price (₹)</label>
                             <input type="number" step="0.01" name="price"
@@ -110,19 +110,19 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 class="w-full border border-gray-800 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500" />
                         </div>
 
-                        <div>
+                        <!-- <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Unavailable</label>
                             <select name="unavailable"
                                 class="w-full border border-gray-800 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500">
                                 <option value="0" <?= $editData['unavailable'] == 0 ? 'selected' : '' ?>>No</option>
                                 <option value="1" <?= $editData['unavailable'] == 1 ? 'selected' : '' ?>>Yes</option>
                             </select>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Inventory Fields -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                        <div>
+                        <!-- <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Committed</label>
                             <input type="number" name="committed"
                                 value="<?= htmlspecialchars($editData['committed']) ?>"
@@ -133,7 +133,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <label class="block text-sm font-medium text-gray-700 mb-1">On Hand</label>
                             <input type="number" name="on_hand" value="<?= htmlspecialchars($editData['on_hand']) ?>"
                                 class="w-full border border-gray-800 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500" />
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">

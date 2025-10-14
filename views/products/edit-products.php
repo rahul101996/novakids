@@ -1034,7 +1034,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
         function removeOption(id) {
             const optionDiv = document.getElementById(`option-${id}`);
+            const OptionValuesDiv = document.getElementById(`values-${id}`);
             optionDiv.remove();
+            OptionValuesDiv.remove();
             isFirst--;
         }
 
