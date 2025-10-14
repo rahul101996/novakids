@@ -1485,6 +1485,23 @@ class WebController extends LoginController
             // printWithPre($_POST);
             // printWithPre($_SESSION);
             // die();
+            if (isset($_POST['updateQuantity'])) {
+                $activity = $_POST['activity'];
+                $key = $_POST['key'];
+                $quantity = $_POST['updateQuantity'];
+
+                if ($activity == 'plus') {
+                    $_SESSION['cartData']['quantity'][$key] = $_SESSION['cartData']['quantity'][$key] + $quantity;
+                    echo json_encode(['success' => true, 'message' => 'Cart Updated Successfully']);
+                } elseif ($activity == 'minus') {
+                    $_SESSION['cartData']['quantity'][$key] = $_SESSION['cartData']['quantity'][$key] - $quantity;
+                    echo json_encode(['success' => true, 'message' => 'Cart Updated Successfully']);
+                } else {
+
+                    echo json_encode(['success' => false, 'message' => 'Something Went Wrong']);
+                }
+                exit();
+            }
             if (isset($_POST['couponSecret'])) {
                 $couponSecret = $_POST['couponSecret'];
                 $coupon = getData2("SELECT * FROM `tbl_coupons` WHERE `coupon_secret` = '$couponSecret'")[0];
@@ -1624,7 +1641,7 @@ class WebController extends LoginController
                     $_SESSION["new_order"] = $purchaseid;
                     $_SESSION['order_id'] = $order_id;
                     $token = $this->validshiprockettoken();
-                    $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid,$order_id);
+                    $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid, $order_id);
                     $placeordershiprocket = (array)$placeordershiprocket;
 
 
