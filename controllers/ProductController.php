@@ -219,15 +219,34 @@ class ProductController
                 $result[$variant] = array_combine($sizeType, $values);
             }
 
-            if (isset($_FILES["sizeImage"]) && $_FILES["sizeImage"]["error"] == 0) {
-                $sizeImage = uploadFile($_FILES["sizeImage"], $targetDir);
-            }
+            $data = [
+                'name' => $_POST['name'],
+                'description' => $_POST['description'],
+                'shortDescription' => $_POST['shortDescription'],
+                'category' => $_POST['category'],
+                'price' => $_POST['price'],
+                'compare_price' => $_POST['compare_price'],
+                'cost_per_item' => $_POST['cost_per_item'],
+                'profit' => $_POST['profit'],
+                'margin' => $_POST['margin'],
+                'track_quantity' => isset($_POST['track_quantity']) && $_POST['track_quantity'] ? 1 : 0,
+                'quantity' => $_POST['quantity'],
+                'continue_selling' => isset($_POST['continue_selling']) && $_POST['continue_selling'] ? 1 : 0,
+                'physical_product' => isset($_POST['physical_product']) && $_POST['physical_product'] ? 1 : 0,
+                'packaging' => $_POST['packaging'],
+                'status' => isset($_POST['status']) && $_POST['status'] == 'Active' ? 1 : 0,
+                'sizeDescription' => $_POST["sizeDescription"],
+            ];
 
             try {
-                // Begin transaction
                 $db->beginTransaction();
 
-                // Handle product images upload
+                // Upload size image
+                if (isset($_FILES["sizeImage"]) && $_FILES["sizeImage"]["error"] == 0) {
+                    $data['sizeImage'] = uploadFile($_FILES["sizeImage"], $targetDir);
+                }
+
+                // Upload product images
                 $productImages = [];
                 if (isset($_FILES['product_images'])) {
                     $images = $_FILES['product_images'];
@@ -240,123 +259,29 @@ class ProductController
                             'size' => $images['size'][$key]
                         ];
 
-                        if ($file['error'] == 0) {
-                            continue;
-                        }
+                       if ($file['error'] != 0) continue;
 
                         $uploadedFile = uploadFile($file, $targetDir);
-                        if ($uploadedFile) {
+                        if ($uploadedFile)
                             $productImages[] = $uploadedFile;
-                        }
                     }
                 }
 
-                if (!empty($productImages)) {
+                if (!empty($productImages))
                     $data['product_images'] = json_encode($productImages);
-                }
-
-                // Prepare product data
-                if (!empty($result)) {
+                if (!empty($result))
                     $data['sizeChart'] = json_encode($result);
-                }
-                // printWithPre($result);
 
-                $data = [
-                    'name' => $_POST['name'],
-                    'description' => $_POST['description'],
-                    'shortDescription' => $_POST['shortDescription'],
-                    'category' => $_POST['category'],
-                    'price' => $_POST['price'],
-                    'compare_price' => $_POST['compare_price'],
-                    'cost_per_item' => $_POST['cost_per_item'],
-                    'profit' => $_POST['profit'],
-                    'margin' => $_POST['margin'],
-                    'track_quantity' => isset($_POST['track_quantity']) && $_POST['track_quantity'] ? 1 : 0,
-                    'quantity' => $_POST['quantity'],
-                    'continue_selling' => isset($_POST['continue_selling']) && $_POST['continue_selling'] ? 1 : 0,
-                    'physical_product' => isset($_POST['physical_product']) && $_POST['physical_product'] ? 1 : 0,
-                    'packaging' => $_POST['packaging'],
-                    'status' => isset($_POST['status']) && $_POST['status'] == 'Active' ? 1 : 0,
-                    // 'product_images' => $productImagesJson,
-                    // 'sizeChart' => json_encode($result),
-                    'sizeDescription' => $_POST["sizeDescription"],
-                    'sizeImage' => $sizeImage
-                ];
+                // printWithPre($data);
 
-
-                // Insert into tbl_products
                 update($data, $id, "tbl_products");
-
-                // if (!$productId) {
-                //     throw new Exception("Failed to add product.");
-                // }
-
-                // Insert variants if available
-                // if (isset($_POST['variant_prices']) && isset($_POST['variant_quantities'])) {
-                //     $prices = $_POST['variant_prices'] ?? [];
-                //     $quantities = $_POST['variant_quantities'] ?? [];
-                //     $images = $_FILES['variant_images'] ?? [];
-                //     $options = $_POST['variant_options'] ?? [];
-
-                //     foreach ($prices as $index => $price) {
-                //         $price = floatval($price);
-                //         $quantity = intval($quantities[$index] ?? 0);
-
-                //         if ($price <= 0 || $quantity < 0) {
-                //             continue;
-                //         }
-
-                //         // Handle uploaded files for variant images
-                //         // $uploadedFiles = [];
-                //         // if (isset($images['name'][$index])) {
-                //         //     foreach ($images['name'][$index] as $key => $filename) {
-                //         //         $file = [
-                //         //             'name' => $images['name'][$index][$key],
-                //         //             'type' => $images['type'][$index][$key],
-                //         //             'tmp_name' => $images['tmp_name'][$index][$key],
-                //         //             'error' => $images['error'][$index][$key],
-                //         //             'size' => $images['size'][$index][$key]
-                //         //         ];
-                //         //         $targetDir = 'public/uploads/product-images/';
-                //         //         $uploadedFile = uploadFile($file, $targetDir);
-                //         //         if ($uploadedFile) {
-                //         //             $uploadedFiles[] = $uploadedFile;
-                //         //         }
-                //         //     }
-                //         // }
-
-                //         // $imagesJson = json_encode($uploadedFiles);
-                //         $optionDetail = isset($options[$index]) ? json_encode($options[$index]) : '';
-
-                //         // Prepare variant data
-                //         $variantData = [
-                //             'product_id' => $productId,
-                //             'price' => $price,
-                //             'quantity' => $quantity,
-                //             // 'images' => $imagesJson,
-                //             'options' => $optionDetail
-                //         ];
-
-                //         // Insert variant
-                //         $vresult = add($variantData, "tbl_variants");
-
-                //         if (!$vresult) {
-                //             throw new Exception("Failed to add variant at index $index.");
-                //         }
-                //     }
-                // }
-
-                // Commit transaction if all successful
                 $db->commit();
 
-                $_SESSION['success'] = "Product and variants added successfully.";
-
+                $_SESSION['success'] = "Product and variants updated successfully.";
             } catch (Exception $e) {
-                // Rollback on error
                 $db->rollBack();
-                echo $e->getMessage();
-                $_SESSION['err'] = "Error: " . $e->getMessage();
-                // Optionally redirect or log error
+                echo "Error: " . $e->getMessage();
+
             }
 
             redirect("/admin/products-list");

@@ -1,3 +1,38 @@
+<?php
+
+if (!empty($editData)) {
+    $variants = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
+    // printWithPre($variants);
+    // die();
+
+    $optionGroups = [];
+    foreach ($variants as $variant) {
+        $options = json_decode($variant['options'], true);
+
+        $optt = json_decode($options, true);
+        // printWithPre($optt);
+
+        foreach ($optt as $label => $value) {
+            if (!isset($optionGroups[$label])) {
+                $optionGroups[$label] = [];
+            }
+            if (!in_array($value, $optionGroups[$label])) {
+                $optionGroups[$label][] = $value;
+            }
+        }
+    }
+    // printWithPre($optionGroups);
+
+
+
+    $sizeChart = json_decode($editData["sizeChart"], true);
+    // printWithPre($sizeChart);
+    // die();
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -245,7 +280,50 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     class="flex flex-col items-center justify-center border border-gray-200 rounded-lg w-full">
                                     <div id="optionsContainer" class="space-y-6 w-full">
 
+                                        <?php
+                                        $optionCount = 0;
+                                        foreach ($optionGroups as $optionGrpkey => $optionGrpdata) { ?>
+                                            <div id="option-<?= $optionCount++ ?>"
+                                                class="w-full flex flex-col items-center justify-center mt-2 border-b border-gray-200  rounded-md p-4 OptionDiv">
+                                                <span class="w-full text-left">Option Name</span>
+                                                <div class="flex justify-between items-center mb-2 w-full">
+                                                    <input type="text" value="<?= $optionGrpkey ?>"
+                                                        class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2 mt-2"
+                                                        name="options_name[]" placeholder="Eg. Size" readonly>
+
+                                                </div>
+                                                <div id="values-<?= $optionCount++ ?>" class="space-y-2 w-full mt-3">
+                                                    <span class="w-full text-left mb-2">Option Values</span>
+                                                    <?php foreach ($optionGrpdata as $key => $value) { ?>
+                                                        <div
+                                                            class="flex items-center flex-col justify-center w-full OptionValues">
+                                                            <div class="w-full flex items-center justify-center w-full gap-3">
+                                                                <input placeholder="Eg. Small" type="text"
+                                                                    name="options_value[<?= $optionCount++ ?>][]"
+                                                                    value="<?= $value ?>"
+                                                                    class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                                                                <button onclick="removeValue(this)"><i
+                                                                        class="fa-solid fa-trash-can text-gray-500"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    <?php } ?>
+                                                </div>
+                                                <div class="w-full flex items-center justify-between mt-3">
+                                                    <!-- <button onclick="addValue(${optionCount})" type="button"
+                                                        class="text-white bg-gray-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add
+                                                        Option Values</button>
+                                                    <button onclick="addSizeChart()" type="button"
+                                                        class="text-blue-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Add
+                                                        Size Chart</button>
+                                                    <button onclick="removeOption(${optionCount})" type="button"
+                                                        class="text-red-800 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">Delete
+                                                        Option</button> -->
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+
                                     </div>
+
                                     <div class="flex items-center justify-between w-[95%] py-2">
                                         <button onclick="addOption()" type="button"
                                             class="text-white bg-blue-900 font-semibold text-sm py-2 px-4 rounded-md border shadow-sm">
@@ -288,7 +366,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                                             if (!empty($editData)) {
 
-                                                foreach (getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id") as $vkey => $vdata) {
+                                                foreach ($variants as $vkey => $vdata) {
 
                                                     $jsonData = json_decode($vdata['options'], true);
                                                     $lines = explode("\n", trim($jsonData));
@@ -309,6 +387,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                     // printWithPre($pvoptions);
                                                     // printWithPre($vvkeys);
                                                     // printWithPre($vvdd);
+                                                    // die();
                                                     // printWithPre($dtdtd);
                                             
                                                     ?>
@@ -406,10 +485,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                             class="hidden absolute mt-1 w-full bg-white shadow-lg rounded-md border border-gray-200 z-10 max-h-60 overflow-y-auto px-2 py-1">
                                             <?php
 
-                                            // $selectedPackage = "";
-                                            // if (!empty($editData) && !empty($editData['packaging'])) {
-                                            //     $selectedPackage = getData2("SELECT * FROM tbl_packaging WHERE id = " . $editData['packaging'])[0];
-                                            // }
+                                            $selectedPackage = "";
+                                            if (!empty($editData) && !empty($editData['packaging'])) {
+                                                $selectedPackage = getData2("SELECT * FROM tbl_packaging WHERE id = " . $editData['packaging'])[0];
+                                            }
 
                                             foreach ($packages as $package) { ?>
                                                 <div class="p-2 hover:bg-gray-100 cursor-pointer flex items-center space-x-2"
@@ -474,8 +553,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 <div id="imagePreview"
                                     class="<?= isset($editData['product_images']) ? '' : 'hidden' ?> mb-4">
                                     <!-- <input type="hidden" name="old_vdata_image" value=""> -->
-                                    <img src="/<?= isset($editData['product_images']) ? $editData['product_images'] : '' ?>"
-                                        alt="Preview" class="mx-auto h-32 object-cover">
+                                    <img src="" alt="Preview" class="mx-auto h-32 object-cover">
                                 </div>
                                 <svg class="mx-auto h-8 w-8 text-gray-400" stroke="currentColor" fill="none"
                                     viewBox="0 0 48 48">
@@ -570,7 +648,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                     <div class="flex items-center gap-2">
                                                         <input type="text" value="Chest" name="sizeType[]"
                                                             class="border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                                        <button type="button" onclick="(this)"
+                                                        <button type="button" onclick="removeMySize(this)"
                                                             class="text-red-600 hover:text-red-800 text-sm font-medium">✕</button>
                                                     </div>
                                                 </th>
@@ -666,6 +744,22 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             dropdownMenu.classList.toggle('hidden');
         });
 
+        let editData = <?= json_encode($editData) ?>;
+        console.log(editData);
+
+        let selectedPackage = <?= !empty($selectedPackage) ? json_encode($selectedPackage) : 'null' ?>;
+
+        window.addEventListener('load', () => {
+            if (selectedPackage) {
+                selectPackage(
+                    selectedPackage.package_name,
+                    `${selectedPackage.length} × ${selectedPackage.width} × ${selectedPackage.height} ${selectedPackage.dimentions_unit}, ${selectedPackage.weight} ${selectedPackage.weight_unit}`,
+                    selectedPackage.id
+                );
+            }
+        });
+
+
         function selectPackage(name, description, id) {
             dropdownButton.innerHTML = `
             <div class="flex items-center justify-between">
@@ -688,6 +782,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 dropdownMenu.classList.add('hidden');
             }
         });
+
         let optionCount = 0;
         let isFirst = 0;
 
@@ -745,6 +840,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             let trHtml = "";
             const modalTableTh = modal.querySelector("thead tr").querySelectorAll("th");
 
+            console.log(modalTableTh.length);
+
             if (sizeCount) {
                 // Build empty inputs for each column (except 'Size')
                 for (let i = 0; i < modalTableTh.length - 1; i++) {
@@ -775,7 +872,36 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             }
             modal.classList.remove("hidden");
             sizeCount = false;
+            setChartValues();
         }
+
+        function setChartValues() {
+            let modal = document.getElementById("myModal");
+            let sizeChart = <?= json_encode($sizeChart) ?>;
+
+            // Select all rows in table body
+            let rows = modal.querySelectorAll("tbody tr");
+
+            rows.forEach(row => {
+                // Get all cells in the row
+                let tds = row.querySelectorAll("td");
+
+                // Get the size value (first input)
+                let sizeInput = tds[0].querySelector("input");
+                let sizeValue = sizeInput.value.trim();
+
+                // Check if this size exists in sizeChart
+                if (sizeChart[sizeValue]) {
+                    // Fill the other inputs (Chest, Length, Sleeve)
+                    let keys = Object.keys(sizeChart[sizeValue]);
+                    for (let i = 0; i < keys.length; i++) {
+                        let colInput = tds[i + 1].querySelector("input");
+                        if (colInput) colInput.value = sizeChart[sizeValue][keys[i]];
+                    }
+                }
+            });
+        }
+
 
 
         function removeMySize(buttonOrEvent) {
@@ -1080,9 +1206,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             }
         });
 
-        let editData = <?= json_encode($editData) ?? '' ?>;
-        console.log(editData);
-
         document.getElementById('productForm').addEventListener('submit', function (e) {
             e.preventDefault(); // prevent actual submit first
             let tt = document.getElementById("variantsTableBody").querySelectorAll("tr")
@@ -1123,22 +1246,21 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
             console.log(modal)
 
-            if (editData.length == 0) {
 
-                if (modal.length === 0) {
-                    alert("Please create size chart")
+            if (modal.length === 0) {
+                alert("Please create size chart")
+                addSizeChart();
+                return;
+            }
+
+            for (let i = 0; i < trs.length; i++) {
+                if (modal[i].value == "" || modal[i].value == null) {
+                    alert("Please enter propper values in size chart")
                     addSizeChart();
                     return;
                 }
-
-                for (let i = 0; i < trs.length; i++) {
-                    if (modal[i].value == "" || modal[i].value == null) {
-                        alert("Please enter propper values in size chart")
-                        addSizeChart();
-                        return;
-                    }
-                }
             }
+
 
             // ✅ All validations passed — now submit
             console.log("Submitting....")
@@ -1146,7 +1268,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             this.submit();
         });
 
-        addOption();
+        // addOption();
     </script>
 </body>
 

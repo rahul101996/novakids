@@ -54,9 +54,9 @@ class Database
     {
         return  $this->base_url;
     }
-
+                                                                                                                                           
     public function getSiteName()
-    {
+                                                                                                                                                 {
         return  $this->siteName;
     }
     public function getSoftware()
