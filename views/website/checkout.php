@@ -607,7 +607,7 @@ $getallcoupons = getData("tbl_coupons");
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
-                    
+
                     const address = data.address;
                     const address1 = `${address.house_number || ''} ${address.road || ''}`.trim();
                     const address2 = `${address.suburb || ''}, ${address.city || address.town || ''}`.trim();
@@ -616,8 +616,13 @@ $getallcoupons = getData("tbl_coupons");
                     const country = address.country || '';
                     const postalCode = address.postcode || '';
 
+                    // document.getElementById("address1").value = address1;
+                    document.getElementById("address1").value = data.display_name;
+                    document.getElementById("address2").value = '';
 
                     document.getElementById("city").value = city;
+                    document.getElementById("pinTest").value = postalCode;
+
                     const stateSelect = document.getElementById("state");
                     for (let option of stateSelect.options) {
                         if (option.text === state) {
@@ -626,7 +631,6 @@ $getallcoupons = getData("tbl_coupons");
                         }
                     }
                     // document.getElementById("country").value = country;
-                    document.getElementById("pinTest").value = postalCode;
                     // deliveryCharges();
                 })
                 .catch(error => console.error("Error fetching geocoding data:", error));
