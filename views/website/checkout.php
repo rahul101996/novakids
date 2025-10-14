@@ -53,12 +53,19 @@ $getallcoupons = getData("tbl_coupons");
             <section class="md:col-span-3 space-y-6">
                 <!-- Step 1: Shipping -->
                 <div class="bg-white">
-                    <button onclick="openModal1()" type="button" class="bg-black text-white flex py-2 px-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                        </svg>
-                        Add New Address
-                    </button>
+                    <div class="w-full flex item-center justify-between">
+                        <button onclick="openModal1()" type="button" class="bg-black text-white flex py-2 px-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                            </svg>
+                            Add New Address
+                        </button>
+                        <button type="button" onclick="getLocation()" class="bg-[#f25b21] flex gap-2  text-white py-2 px-4 rounded  max-md:gap-0 max-md:px-1 max-md:py-1 max-md:text-xs">
+                            <svg class="max-md:w-5 max-md:ml-2" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF">
+                                <path d="M444-48v-98q-121-14-202.5-96T146-444H48v-72h98q14-120 95.5-202T444-814v-98h72v98q121 14 202.5 96T814-516h98v72h-98q-14 120-95.5 202T516-146v98h-72Zm36-168q110 0 187-77t77-187q0-110-77-187t-187-77q-110 0-187 77t-77 187q0 110 77 187t187 77Zm0-120q-60 0-102-42t-42-102q0-60 42-102t102-42q60 0 102 42t42 102q0 60-42 102t-102 42Zm0-65q32.59 0 55.79-23.21Q559-447.41 559-480t-23.21-55.79Q512.59-559 480-559t-55.79 23.21Q401-512.59 401-480t23.21 55.79Q447.41-401 480-401Zm1-80Z" />
+                            </svg>
+                            Get My Location</button>
+                    </div>
                     <h2 class="text-xl font-bold mb-4 flex items-center gap-2 mt-4">
                         <span
                             class="w-8 h-8 flex items-center justify-center bg-[#f25b21] text-white rounded-full text-sm">1</span>
@@ -582,5 +589,64 @@ $getallcoupons = getData("tbl_coupons");
 
         // Close modal when clicking outside
         backdrop.addEventListener('click', closeModal1);
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(getAddress, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function getAddress(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    
+                    const address = data.address;
+                    const address1 = `${address.house_number || ''} ${address.road || ''}`.trim();
+                    const address2 = `${address.suburb || ''}, ${address.city || address.town || ''}`.trim();
+                    const city = address.city || address.town || '';
+                    const state = address.state || '';
+                    const country = address.country || '';
+                    const postalCode = address.postcode || '';
+
+
+                    document.getElementById("city").value = city;
+                    const stateSelect = document.getElementById("state");
+                    for (let option of stateSelect.options) {
+                        if (option.text === state) {
+                            stateSelect.value = option.value; // Set the select to the corresponding value
+                            break; // Exit the loop once the option is found
+                        }
+                    }
+                    // document.getElementById("country").value = country;
+                    document.getElementById("pinTest").value = postalCode;
+                    // deliveryCharges();
+                })
+                .catch(error => console.error("Error fetching geocoding data:", error));
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
     </script>
 </body>
