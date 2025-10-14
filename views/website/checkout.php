@@ -1,5 +1,5 @@
 <?php
-printWithPre($_SESSION);
+// printWithPre($_SESSION);
 $allstates = getData("indian_states");
 $getallcoupons = getData("tbl_coupons");
 ?>
@@ -243,7 +243,7 @@ $getallcoupons = getData("tbl_coupons");
                             <div class="flex items-center gap-3">
                                 <img src="/<?= $images[0] ?>" class="w-16 h-20 object-cover">
                                 <div>
-                                    <h3 class="font-semibold text-base"><?= $vdata['product_name'] ?> x <span class="text-xs  px-3 bg-black text-white rounded-lg"> <?= $quantity ?></span></h3>
+                                    <h3 class="font-semibold text-base"><?= $vdata['product_name'] ?> x <span class="text-xs  px-3 bg-black text-white rounded-lg xquantity"> <?= $quantity ?></span></h3>
                                     <div class="flex gap-3 flex-wrap items-center justify-start">
                                         <?php
                                         foreach ($variants as $key1 => $variant) {
@@ -258,7 +258,7 @@ $getallcoupons = getData("tbl_coupons");
                                     </div>
                                 </div>
                             </div>
-                            <p class="font-semibold">₹<?= $totalprice ?></p>
+                            <p class="font-semibold xprice">₹<?= $totalprice ?></p>
                         </div>
                     <?php } ?>
                     <!-- Product 2 -->
@@ -488,7 +488,8 @@ $getallcoupons = getData("tbl_coupons");
         }
 
         async function checkoutPlus(ele, key, price) {
-
+            let parentElement = ele.parentElement.parentElement.parentElement.parentElement;
+            console.log(parentElement);
             let quantity = ele.parentElement.querySelector(".quantity");
             let quantityValue = quantity.innerText;
             quantityValue++;
@@ -496,23 +497,31 @@ $getallcoupons = getData("tbl_coupons");
             const result = await axios.post('', new URLSearchParams({
                 key: key,
                 activity: 'plus',
-                updateQuantity: quantityValue
+                updateQuantity: 1
             }));
-            quantity.innerText = quantityValue;
-            console.log(quantityValue);
-            let subtotal = document.getElementById('subtotal');
+            if (result.data.success) {
+                parentElement.querySelector(".xquantity").innerText = quantityValue;
+                parentElement.querySelector(".xprice").innerText = price * quantityValue;
+                quantity.innerText = quantityValue;
+                console.log(quantityValue);
+                let subtotal = document.getElementById('subtotal');
 
-            let subtotalspan = document.getElementById('subTotalSpan');
-            subtotal.value = parseFloat(subtotal.value) + parseFloat(price);
-            subtotalspan.innerText = '₹' + subtotal.value;
-            // console.log(subtotal);
-            let allTotal = parseFloat(document.getElementById('allTotal').value) + parseFloat(price);
-            document.getElementById('allTotal').value = allTotal;
-            console.log(allTotal);
-            document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
+                let subtotalspan = document.getElementById('subTotalSpan');
+                subtotal.value = parseFloat(subtotal.value) + parseFloat(price);
+                subtotalspan.innerText = '₹' + subtotal.value;
+                // console.log(subtotal);
+                let allTotal = parseFloat(document.getElementById('allTotal').value) + parseFloat(price);
+                document.getElementById('allTotal').value = allTotal;
+                console.log(allTotal);
+                document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
+                toastr.success(result.data.message);
+            } else {
+                toastr.error(result.data.message);
+            }
         }
 
         async function checkoutMinus(ele, key, price) {
+            let parentElement = ele.parentElement.parentElement.parentElement.parentElement;
 
             let quantity = ele.parentElement.querySelector(".quantity");
             let quantityValue = quantity.innerText;
@@ -522,20 +531,27 @@ $getallcoupons = getData("tbl_coupons");
                 const result = await axios.post('', new URLSearchParams({
                     key: key,
                     activity: 'minus',
-                    updateQuantity: quantityValue
+                    updateQuantity: 1
                 }));
-                quantity.innerText = quantityValue;
-                console.log(quantityValue);
-                let subtotal = document.getElementById('subtotal');
+                if (result.data.success) {
+                    parentElement.querySelector(".xquantity").innerText = quantityValue;
+                    parentElement.querySelector(".xprice").innerText = price * quantityValue;
+                    quantity.innerText = quantityValue;
+                    console.log(quantityValue);
+                    let subtotal = document.getElementById('subtotal');
 
-                let subtotalspan = document.getElementById('subTotalSpan');
-                subtotal.value = parseFloat(subtotal.value) - parseFloat(price);
-                subtotalspan.innerText = '₹' + subtotal.value;
-                // console.log(subtotal);
-                let allTotal = parseFloat(document.getElementById('allTotal').value) - parseFloat(price);
-                document.getElementById('allTotal').value = allTotal;
-                console.log(allTotal);
-                document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
+                    let subtotalspan = document.getElementById('subTotalSpan');
+                    subtotal.value = parseFloat(subtotal.value) - parseFloat(price);
+                    subtotalspan.innerText = '₹' + subtotal.value;
+                    // console.log(subtotal);
+                    let allTotal = parseFloat(document.getElementById('allTotal').value) - parseFloat(price);
+                    document.getElementById('allTotal').value = allTotal;
+                    console.log(allTotal);
+                    document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
+                    toastr.success(result.data.message);
+                } else {
+                    toastr.error(result.data.message);
+                }
             }
 
         }
