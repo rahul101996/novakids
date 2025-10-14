@@ -747,7 +747,30 @@ class WebController extends LoginController
     }
 
     public function cancelOrder($id){
-        
+        $orderData = getData2("SELECT * FROM tbl_purchase where id='$id'")[0];
+        $shipData = json_decode($orderData["shiprocketData"]);
+        $token = $this->validshiprockettoken();
+        $res = $this->ordercancel($token,$shipData->order_id);
+        // printWithPre($res);
+        if($res["status_code"]==200){
+            update([
+                                "status"=>"Cancel",
+                                "cancel_reason"=>$_POST["reason"],
+                                "cancel_by"=>isset($_SESSION["type"])?"User":"Admin",
+                                "cancel_date"=>date("Y-m-d H:i:s")
+                            ],
+            $id,"tbl_purchase");
+            echo json_encode([
+                "success"=>true,
+                "message"=>"Order Cancel successfully"
+            ]);
+            die();
+        }else{
+            echo json_encode([
+                "success"=>false,
+                "message"=>"Something wen't wrong"
+            ]);
+        }
     }
     public function OrderConfirmMail()
     {
@@ -804,12 +827,47 @@ class WebController extends LoginController
         $siteName = getDBObject()->getSiteName();
         $pageModule = "Thank You";
         $pageTitle = "Thank You";
-        $OrderData = getData2("SELECT * FROM `tbl_purchase` WHERE `orderid` = " . $_SESSION['order_id'] . " ORDER BY `id` DESC LIMIT 1")[0];
-        $PurchaseItems = getData2("SELECT * FROM `tbl_purchase_item` WHERE `purchase_id` = " . $OrderData['id']);
+        $orderIds = $_SESSION['order_id']; // This is an array
+
+        if (!empty($orderIds) && is_array($orderIds)) {
+
+            // Sanitize all order IDs (convert to integers)
+            $orderIds = array_map('intval', $orderIds);
+            $idList = implode(',', $orderIds);
+
+            // Step 1: Get Purchase records
+            $sql = "SELECT * FROM `tbl_purchase` WHERE `orderid` IN ($idList) ORDER BY `id` DESC";
+            $OrderData = getData2($sql);
+
+            // Step 2: Collect all purchase IDs and total amount
+            $purchaseIds = array_column($OrderData, 'id');
+            $totalAmount = array_sum(array_column($OrderData, 'total_amount'));
+
+            // Use the first order for display (if needed)
+            $OrderData = $OrderData[0] ?? [];
+
+            // Step 3: Fetch related purchase items
+            if (!empty($purchaseIds)) {
+                $purchaseIds = array_map('intval', $purchaseIds);
+                $idList2 = implode(',', $purchaseIds);
+
+                $sql2 = "SELECT * FROM `tbl_purchase_item` WHERE `purchase_id` IN ($idList2)";
+                $PurchaseItems = getData2($sql2);
+            } else {
+                $PurchaseItems = [];
+            }
+
+        } else {
+            $OrderData = [];
+            $PurchaseItems = [];
+            $totalAmount = 0;
+        }
+
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             require 'views/website/thankyou.php';
         }
     }
+
 
     public function deleteCart()
     {
@@ -1518,7 +1576,7 @@ class WebController extends LoginController
             }
             $id = $_SESSION["userid"];
             $mode = $_POST["payment_mode"];
-            $order_id = generateRandomString(16) . time();
+            
             $pp = 1;
             $fields = [
                 'fname' => 'fname',
@@ -1561,49 +1619,43 @@ class WebController extends LoginController
                 ];
                 add($addressId, "tbl_user_address");
             }
-
+            $token = $this->validshiprockettoken();
             if ($mode == "COD") {
                 // printWithPre($_POST);
                 // die();
                 $db = getDBCon(); // PDO instance
                 $db->beginTransaction();
                 // $db->beginTransaction();
-                $purchaseid = [
-                    "userid" => $_SESSION["userid"],
-                    "username" => $_SESSION["username"],
-                    "payment_mode" => $mode,
-                    "payment_status" => "Pending",
-                    "orderid" => $order_id,
-                    "status" => "Processing",
-                    "total_amount" => $_POST["allTotal"],
-                    "address_line1" => $_POST["address_line1"],
-                    "address_line2" => $_POST["address_line2"],
-                    "city" => $_POST["city"],
-                    "state" => $_POST["state"],
-                    "country" => "India",
-                    "pincode" => $_POST["pin_code"],
-                    "mobile" => $_POST["mobile"],
-                    "email" => $_POST["email"],
-                    "fname" => $_POST["fname"],
-                    "lname" => $_POST["lname"],
-                    "created_by" => $_SESSION["userid"],
-                    // "coupon_discount" => $_POST["coupenDiscount"],
-                    // "coupon_secret" => $_POST["newDiscount"],
-                    // "delivery_charges" => $_POST["deliveryCharges"],
-                    // "courier_company" => $_POST["deliveryCompany"],
-                    // "courier_company_id" => $_POST["shippingCheckbox"],
-                    // "expected_date" => $_POST["deliveryDate"],
-
-                ];
-
-                $purchaseid = add($purchaseid, "tbl_purchase");
+               
 
                 // printWithPre($purchaseid);
                 // die();
-                if ($purchaseid) {
+                $_SESSION['order_id'] = [];
                     // echo "Success";
                     foreach ($_SESSION["cartData"]["varient"] as $key => $varient) {
+                        $order_id = generateRandomString(16) . time();
+                            $purchaseid = [
+                            "userid" => $_SESSION["userid"],
+                            "username" => $_SESSION["username"],
+                            "payment_mode" => $mode,
+                            "payment_status" => "Pending",
+                            "orderid" => $order_id,
+                            "status" => "Processing",
+                            "total_amount" => $_SESSION["cartData"]["quantity"][$key] * $_SESSION["cartData"]["price"][$key],
+                            "address_line1" => $_POST["address_line1"],
+                            "address_line2" => $_POST["address_line2"],
+                            "city" => $_POST["city"],
+                            "state" => $_POST["state"],
+                            "country" => "India",
+                            "pincode" => $_POST["pin_code"],
+                            "mobile" => $_POST["mobile"],
+                            "email" => $_POST["email"],
+                            "fname" => $_POST["fname"],
+                            "lname" => $_POST["lname"],
+                            "created_by" => $_SESSION["userid"],
+                        ];
 
+                        $purchaseid = add($purchaseid, "tbl_purchase");
                         $quantity = getData2("SELECT * FROM tbl_variants where id='$varient'")[0]["quantity"];
                         if ($quantity >= $_SESSION["cartData"]["quantity"][$key]) {
                             update(["quantity" => $quantity - $_SESSION["cartData"]["quantity"][$key]], $varient, "tbl_variants");
@@ -1630,6 +1682,16 @@ class WebController extends LoginController
                             header("Location: /checkout");
                             exit();
                         }
+                        $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid, $order_id);
+                        $placeordershiprocket = (array)$placeordershiprocket;
+                        // print_r($placeordershiprocket);
+                        // die();
+
+                        update(["shiprocketData"=>json_encode($placeordershiprocket)],$purchaseid,"tbl_purchase");
+
+                        sendOrderMail($purchaseid);
+
+                        $_SESSION['order_id'][] = $order_id;
                     }
 
 
@@ -1638,27 +1700,19 @@ class WebController extends LoginController
                     delete($id, "tbl_cart", "userid");
                     // printWithPre($purchaseid);
                     // die();
-                    $_SESSION["new_order"] = $purchaseid;
-                    $_SESSION['order_id'] = $order_id;
-                    $token = $this->validshiprockettoken();
-                    $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid, $order_id);
-                    $placeordershiprocket = (array)$placeordershiprocket;
+                    
+                    
+                    
+                    
 
 
-                    sendOrderMail($purchaseid);
+                    
                     $_SESSION["success"] = "Order Placed Successfully";
                     $db->commit();
                     unset($_SESSION["cartData"]);
                     header("Location: /thank-you");
                     exit();
-                } else {
-                    // echo "Failed";
-                    // die();
-                    $_SESSION["err"] = "Can't Place Order";
-                    header("Location: /checkout");
-                    // printWithPre($purchaseid);
-                    exit();
-                }
+                
             } elseif ($mode = "Prepaid") {
 
                 if ($PaymentGateWay['name'] == "razorpay") {
@@ -1818,6 +1872,9 @@ class WebController extends LoginController
             return false;
         }
     }
+
+    // public function 
+
     public function Razorpay()
     {
         // printWithPre($_POST);
@@ -1872,7 +1929,6 @@ class WebController extends LoginController
                 delete($id, "tbl_cart", "userid");
                 // printWithPre($purchaseid);
                 // die();
-                $_SESSION["new_order"] = $purchaseid[0];
                 $_SESSION['order_id'] = $order_data["orderid"];
 
                 $token = $this->validshiprockettoken();

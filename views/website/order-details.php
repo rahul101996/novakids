@@ -46,9 +46,51 @@
                                 <h3 class="text-sm text-gray-600 mt-3"> <?= $product['quantity'] ?> x ₹<?= formatNumber($product['amount']) ?></h3>
                             </div>
                         </div>
+                        <div class="w-[20%] max-md:w-full flex items-center justify-center md:flex-col gap-2">
+                            <?php
+                            if($purchase["status"]=="Processing"){
+                                ?>
+                                <button onclick="openCancelModal('<?= $purchase['id'] ?>')" class="bg-red-700 py-2 px-4 text-white w-full">
+                                    <i class="fa-regular fa-circle-xmark"></i> &ensp;Cancel
+                                </button>
+                                <?php
 
+                            }else if($purchase["status"]=="Cancel"){
+                                ?>
+                                <span class="text-red-400">Order canceled on <?=formatDateTime($purchase["cancel_date"])?></span>
+                                <?php
+                            }else{
+                                ?>
+                                <button class="bg-gray-900 py-2 px-4 text-white w-full"><i class="fa-solid fa-right-left"></i> &ensp;Exchange</button>
+                                <button class="bg-gray-900 py-2 px-4 text-white w-full"><i class="fa-solid fa-arrow-left"></i> &ensp;Return</button>
+                                <?php
+                            }
+                            ?>
+                        </div>
                     </div>
+                    <?php
+                        if($purchase["status"]=="Processing"){
+                            ?>
+                        <div class="w-full bg-blue-50 p-4 flex items-center justify-between">
+                            <div class="flex items-center justify-center gap-3">
+                                <img src="/public/icons/clock.png" class="h-8" alt="">
+                                <div class="flex flex-col items-start justify-start">
+                                    <span class="text-sm">Exchange Before</span>
+                                    <span class="text-gray-500 text-xs">OCT 12th 2025</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-center gap-3">
+                                <img src="/public/icons/clock.png" class="h-8" alt="">
+                                <div class="flex flex-col items-start justify-start">
+                                    <span class="text-sm">Return Before</span>
+                                    <span class="text-gray-500 text-xs">OCT 12th 2025</span>
+                                </div>
+                            </div>
 
+                        </div>
+                        <?php
+                        }
+                        ?>
                 </div>
             <?php } ?>
 
@@ -75,116 +117,82 @@
                         <img src="/public/uploads/product-images/68cabe12e6a6e_1744389529_7123437.avif" class="h-24" alt="">
                     </div>
                 </div>
-                <div class="w-full bg-blue-50 p-4 flex items-center justify-between">
-                    <div class="flex items-center justify-center gap-3">
-                        <img src="/public/icons/clock.png" class="h-8" alt="">
-                        <div class="flex flex-col items-start justify-start">
-                            <span class="text-sm">Exchange Before</span>
-                            <span class="text-gray-500 text-xs">OCT 12th 2025</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-center gap-3">
-                        <img src="/public/icons/clock.png" class="h-8" alt="">
-                        <div class="flex flex-col items-start justify-start">
-                            <span class="text-sm">Return Before</span>
-                            <span class="text-gray-500 text-xs">OCT 12th 2025</span>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-
-            <div class="w-[20%] max-md:w-full flex items-center justify-center md:flex-col gap-2">
-                <?php
-                if ($purchase["status"] == "Processing") {
-                ?>
-                    <button onclick="openCancelModal('<?= $purchase['id'] ?>')" class="bg-red-700 py-2 px-4 text-white w-full">
-                        <i class="fa-regular fa-circle-xmark"></i> &ensp;Cancel
-                    </button>
-                <?php
-
-                } else {
-                ?>
-                    <button class="bg-gray-900 py-2 px-4 text-white w-full"><i class="fa-solid fa-right-left"></i> &ensp;Exchange</button>
-                    <button class="bg-gray-900 py-2 px-4 text-white w-full"><i class="fa-solid fa-arrow-left"></i> &ensp;Return</button>
-                <?php
-                }
-                ?>
             </div>
         </div>
     </div>
 
 
     <!-- Cancel Reason Modal -->
-    <div id="cancelModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
-            <h2 class="text-lg font-semibold mb-4">Cancel Order</h2>
-            <p class="text-sm text-gray-600 mb-4">Please tell us why you want to cancel this order:</p>
+<div id="cancelModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+    <h2 class="text-lg font-semibold mb-4">Cancel Order</h2>
+    <p class="text-sm text-gray-600 mb-4">Please tell us why you want to cancel this order:</p>
 
-            <form id="cancelForm" onsubmit="submitCancelReason(event)">
-                <textarea id="cancelReason" rows="4" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Enter your reason..." required></textarea>
+    <form id="cancelForm" onsubmit="submitCancelReason(event)">
+      <textarea id="cancelReason" rows="4" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Enter your reason..." required></textarea>
 
-                <div class="flex justify-end gap-3 mt-5">
-                    <button type="button" onclick="closeCancelModal()" class="px-4 py-2 rounded-lg border border-gray-400 text-gray-700 hover:bg-gray-100">Close</button>
-                    <button type="submit" class="px-4 py-2 rounded-lg bg-red-700 text-white hover:bg-red-800">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
+      <div class="flex justify-end gap-3 mt-5">
+        <button type="button" onclick="closeCancelModal()" class="px-4 py-2 rounded-lg border border-gray-400 text-gray-700 hover:bg-gray-100">Close</button>
+        <button type="submit" class="px-4 py-2 rounded-lg bg-red-700 text-white hover:bg-red-800">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 
-    <script>
-        let currentOrderId = null; // to track which order is being canceled
+<script>
+  let currentOrderId = null; // to track which order is being canceled
 
-        function openCancelModal(orderId) {
-            currentOrderId = orderId;
-            document.getElementById('cancelModal').classList.remove('hidden');
-        }
+  function openCancelModal(orderId) {
+    currentOrderId = orderId;
+    document.getElementById('cancelModal').classList.remove('hidden');
+  }
 
-        function closeCancelModal() {
-            document.getElementById('cancelModal').classList.add('hidden');
-            document.getElementById('cancelReason').value = '';
-        }
+  function closeCancelModal() {
+    document.getElementById('cancelModal').classList.add('hidden');
+    document.getElementById('cancelReason').value = '';
+  }
 
-        function submitCancelReason(event) {
-            event.preventDefault();
-            const reason = document.getElementById('cancelReason').value.trim();
-            if (!reason) {
-                alert("Please enter a reason for cancellation.");
-                return;
-            }
+  function submitCancelReason(event) {
+    event.preventDefault();
+    const reason = document.getElementById('cancelReason').value.trim();
+    if (!reason) {
+      alert("Please enter a reason for cancellation.");
+      return;
+    }
 
-            // ✅ Call your backend or JS function
-            cancelOrder(currentOrderId, reason);
+    // ✅ Call your backend or JS function
+    cancelOrder(currentOrderId, reason);
 
-            closeCancelModal();
-        }
+    closeCancelModal();
+  }
 
-        // Example JS function that handles the cancel logic
-        async function cancelOrder(orderId, reason) {
-            console.log("Cancelling order:", orderId, "Reason:", reason);
+  // Example JS function that handles the cancel logic
+  async function cancelOrder(orderId, reason) {
+    console.log("Cancelling order:", orderId, "Reason:", reason);
+    
+    try {
+        let f = new FormData();
+        f.append("reason",reason)
+      const res = await fetch(`/api/cancelOrder/${orderId}`, {
+        method: "POST",
+        body: f
+      });
 
-            try {
-                let f = new FormData();
-                f.append("reason", reason)
-                const res = await fetch(`/api/cancelOrder/${orderId}`, {
-                    method: "POST",
-                    body: f
-                });
-
-                const data = await res.json();
-                if (data.success) {
-                    alert("Order cancelled successfully.");
-                    location.reload();
-                } else {
-                    alert("Error cancelling order: " + data.message);
-                }
-            } catch (err) {
-                alert("Something went wrong!");
-                console.error(err);
-            }
-        }
-    </script>
+      const data = await res.json();
+      if (data.success) {
+        alert("Order cancelled successfully.");
+        location.reload();
+      } else {
+        alert("Error cancelling order: " + data.message);
+      }
+    } catch (err) {
+      alert("Something went wrong!");
+      console.error(err);
+    }
+  }
+</script>
 
 
 </body>
