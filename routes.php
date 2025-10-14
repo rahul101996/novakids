@@ -43,7 +43,7 @@ $route->group(['', 'WebController'], function ($route) {
 
 
     $route->route('thank-you', 'thankYou');
-    $route->route('/razorpay/[i:id]', 'Razorpay');
+    $route->route('/razorpay', 'Razorpay');
     $route->route('add-to-wishlist', 'AddToWishlist');
 
     $route->route('profile', 'MyProfile');

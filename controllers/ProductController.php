@@ -200,9 +200,9 @@ class ProductController
             require 'views/products/edit-products.php';
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            // printWithPre($_POST);
-            // printWithPre($_FILES);
-            // die();
+            printWithPre($_POST);
+            printWithPre($_FILES);
+            die();
 
 
             $sizeType = $_POST["sizeType"];
@@ -220,7 +220,7 @@ class ProductController
             }
 
             if (isset($_FILES["sizeImage"]) && $_FILES["sizeImage"]["error"] == 0) {
-                $sizeImage = uploadFile($_FILES["sizeImage"], $targetDir);
+                $data['sizeImage'] = uploadFile($_FILES["sizeImage"], $targetDir);
             }
 
             try {
@@ -280,7 +280,7 @@ class ProductController
                     // 'product_images' => $productImagesJson,
                     // 'sizeChart' => json_encode($result),
                     'sizeDescription' => $_POST["sizeDescription"],
-                    'sizeImage' => $sizeImage
+                    // 'sizeImage' => $sizeImage
                 ];
 
 

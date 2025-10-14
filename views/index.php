@@ -33,7 +33,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <div>
                                 <span class="text-sm text-gray-500 ">Total Orders</span>
                                 <h4 class="mt-2 text-title-sm font-bold text-gray-800 ">
-                                    5,359
+                                    <?= $Total_Orders ?>
                                 </h4>
                             </div>
                             <span class="flex items-center gap-1 rounded-full bg-error-50 py-0.5 pl-2 pr-2.5 text-sm font-medium text-error-600 ">
@@ -54,7 +54,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <div>
                                 <span class="text-sm text-gray-500 ">Todays Orders</span>
                                 <h4 class="mt-2 text-title-sm font-bold text-gray-800 ">
-                                    3,782
+                                    <?= $totalTodayOrders ?>
                                 </h4>
                             </div>
 
@@ -75,7 +75,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <div>
                                 <span class="text-sm text-gray-500 ">Total Users</span>
                                 <h4 class="mt-2 text-title-sm font-bold text-gray-800 ">
-                                    3,782
+                                    <?= $Total_Users ?>
                                 </h4>
                             </div>
 
@@ -98,7 +98,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <div>
                                 <span class="text-sm text-gray-500 ">Total Sales</span>
                                 <h4 class="mt-2 text-title-sm font-bold text-gray-800 ">
-                                    5,359
+                                    <?= formatNumber($Total_sales) ?>
                                 </h4>
                             </div>
                             <span class="flex items-center gap-1 rounded-full bg-error-50 py-0.5 pl-2 pr-2.5 text-sm font-medium text-error-600 ">
@@ -119,7 +119,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <div>
                                 <span class="text-sm text-gray-500 ">Todays Orders</span>
                                 <h4 class="mt-2 text-title-sm font-bold text-gray-800 ">
-                                    3,782
+                                    <?= $Total_Products ?>
                                 </h4>
                             </div>
 
@@ -140,7 +140,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <div>
                                 <span class="text-sm text-gray-500 ">Total Category</span>
                                 <h4 class="mt-2 text-title-sm font-bold text-gray-800 ">
-                                    3,782
+                                    <?= $Total_Category ?>
                                 </h4>
                             </div>
 
@@ -153,8 +153,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     </div>
                 </div>
             </div>
-            <div class="w-full flex items-center justify-center">
-                <div class="w-[90%] flex items-center justify-center gap-3">
+            <div class="w-full flex items-center justify-center pb-4">
+                <div class="w-[90%] flex items-start justify-center gap-3">
 
                     <div class="w-full flex items-start justify-center flex-col">
                         <span>Last 5 Customers</span>
@@ -168,40 +168,42 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             </div>
 
                             <!-- Table Row -->
-                            <a href="/admin/customer-info/1" class="block hover:bg-gray-50 transition-colors duration-200">
-                                <div class="grid grid-cols-[50px_3fr_2fr_3fr] items-center gap-4 px-4 py-3 text-gray-800 border-b">
-                                    <!-- Sr. No -->
-                                    <div class="flex items-center gap-2">
-                                        <span>1</span>
-                                        <svg class="h-4 w-4 text-gray-400 cursor-grab" viewBox="0 0 24 24" fill="currentColor">
-                                            <circle cx="9" cy="6" r="1.5"></circle>
-                                            <circle cx="15" cy="6" r="1.5"></circle>
-                                            <circle cx="9" cy="12" r="1.5"></circle>
-                                            <circle cx="15" cy="12" r="1.5"></circle>
-                                            <circle cx="9" cy="18" r="1.5"></circle>
-                                            <circle cx="15" cy="18" r="1.5"></circle>
-                                        </svg>
+                            <?php foreach ($Users as $key => $user) { ?>
+                                <a href="/admin/customer-info/1" class="block hover:bg-gray-50 transition-colors duration-200">
+                                    <div class="grid grid-cols-[50px_3fr_2fr_3fr] items-center gap-4 px-4 py-3 text-gray-800 border-b">
+                                        <!-- Sr. No -->
+                                        <div class="flex items-center gap-2">
+                                            <span><?= $key + 1 ?></span>
+                                            <svg class="h-4 w-4 text-gray-400 cursor-grab" viewBox="0 0 24 24" fill="currentColor">
+                                                <circle cx="9" cy="6" r="1.5"></circle>
+                                                <circle cx="15" cy="6" r="1.5"></circle>
+                                                <circle cx="9" cy="12" r="1.5"></circle>
+                                                <circle cx="15" cy="12" r="1.5"></circle>
+                                                <circle cx="9" cy="18" r="1.5"></circle>
+                                                <circle cx="15" cy="18" r="1.5"></circle>
+                                            </svg>
+                                        </div>
+
+                                        <!-- Customer Name -->
+                                        <div class="font-medium">
+                                            <?= $user['fname'] ?> <?= $user['lname'] ?>
+                                        </div>
+
+                                        <!-- Phone -->
+                                        <div class="text-gray-600">
+                                            <?= $user['mobile'] ?>
+                                        </div>
+
+                                        <!-- E-mail -->
+                                        <div class="text-green-600 font-medium truncate">
+                                            <?= $user['username'] ?>
+                                        </div>
+
+                                        <!-- User From -->
+
                                     </div>
-
-                                    <!-- Customer Name -->
-                                    <div class="font-medium">
-                                        Tushar Kandekar
-                                    </div>
-
-                                    <!-- Phone -->
-                                    <div class="text-gray-600">
-                                        +91 9876543210
-                                    </div>
-
-                                    <!-- E-mail -->
-                                    <div class="text-green-600 font-medium truncate">
-                                        tusharkandekars1@gmail.com
-                                    </div>
-
-                                    <!-- User From -->
-
-                                </div>
-                            </a>
+                                </a>
+                            <?php } ?>
                         </div>
 
                     </div>
@@ -214,44 +216,49 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 <span>Sr. No</span>
                                 <span>Customer Name</span>
                                 <span>Phone</span>
-                                <span>E-mail</span>
+                                <span>Price</span>
                             </div>
 
                             <!-- Table Row -->
-                            <a href="/admin/customer-info/1" class="block hover:bg-gray-50 transition-colors duration-200">
-                                <div class="grid grid-cols-[50px_3fr_2fr_3fr] items-center gap-4 px-4 py-3 text-gray-800 border-b">
-                                    <!-- Sr. No -->
-                                    <div class="flex items-center gap-2">
-                                        <span>1</span>
-                                        <svg class="h-4 w-4 text-gray-400 cursor-grab" viewBox="0 0 24 24" fill="currentColor">
-                                            <circle cx="9" cy="6" r="1.5"></circle>
-                                            <circle cx="15" cy="6" r="1.5"></circle>
-                                            <circle cx="9" cy="12" r="1.5"></circle>
-                                            <circle cx="15" cy="12" r="1.5"></circle>
-                                            <circle cx="9" cy="18" r="1.5"></circle>
-                                            <circle cx="15" cy="18" r="1.5"></circle>
-                                        </svg>
+                            <?php
+                            foreach ($Orders as $key => $order) { 
+                                if($key > 4) break;
+                                ?>
+                                <div class="block hover:bg-gray-50 transition-colors duration-200">
+                                    <div class="grid grid-cols-[50px_3fr_2fr_3fr] items-center gap-4 px-4 py-3 text-gray-800 border-b">
+                                        <!-- Sr. No -->
+                                        <div class="flex items-center gap-2">
+                                            <span><?= $key + 1 ?></span>
+                                            <svg class="h-4 w-4 text-gray-400 cursor-grab" viewBox="0 0 24 24" fill="currentColor">
+                                                <circle cx="9" cy="6" r="1.5"></circle>
+                                                <circle cx="15" cy="6" r="1.5"></circle>
+                                                <circle cx="9" cy="12" r="1.5"></circle>
+                                                <circle cx="15" cy="12" r="1.5"></circle>
+                                                <circle cx="9" cy="18" r="1.5"></circle>
+                                                <circle cx="15" cy="18" r="1.5"></circle>
+                                            </svg>
+                                        </div>
+
+                                        <!-- Customer Name -->
+                                        <div class="font-medium">
+                                            <?= $order['fname'] ?> <?= $order['lname'] ?>
+                                        </div>
+
+                                        <!-- Phone -->
+                                        <div class="text-gray-600">
+                                            +91 <?= $order['mobile'] ?>
+                                        </div>
+
+                                        <!-- E-mail -->
+                                        <div class="text-green-600 font-medium truncate">
+                                           ₹<?= formatNumber($order['total_amount']) ?>
+                                        </div>
+
+                                        <!-- User From -->
+
                                     </div>
-
-                                    <!-- Customer Name -->
-                                    <div class="font-medium">
-                                        Tushar Kandekar
-                                    </div>
-
-                                    <!-- Phone -->
-                                    <div class="text-gray-600">
-                                        +91 9876543210
-                                    </div>
-
-                                    <!-- E-mail -->
-                                    <div class="text-green-600 font-medium truncate">
-                                        tusharkandekars1@gmail.com
-                                    </div>
-
-                                    <!-- User From -->
-
                                 </div>
-                            </a>
+                            <?php } ?>
                         </div>
 
                     </div>

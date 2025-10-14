@@ -263,37 +263,8 @@ class GeneralController
         $order_data['email'] = (!empty($order_data['email'])) ? $order_data['email'] : $_SESSION['username'];
 
 
-        // $sql1 = "SELECT
-        //             tpi.*,
-        //             tp.product AS product_name,
-        //             tv.id AS varient_id,
-        //             tv.unique_id,
-        //             tv.category,
-        //             tv.product,
-        //             tv.size,
-        //             tv.color,
-        //             tv.length,
-        //             tv.breadth,
-        //             tv.height,
-        //             tv.weight,
-        //             tc.name AS color_name,
-        //             ts.name AS Size
-        //         FROM
-        //             `tbl_purchase_item` tpi
-        //         LEFT JOIN `new_tbl_product` tp ON
-        //             tp.id = tpi.product
-        //         LEFT JOIN `new_tbl_varient` tv ON
-        //             tv.id = tpi.varient
-        //         LEFT JOIN `tbl_size` ts ON
-        //             ts.id = tv.size
-        //         LEFT JOIN `tbl_color` tc ON
-        //             tc.id = tv.color
-        //         WHERE
-        //             tpi.purchase_id = '$order_data[id]';";
-        // $stmt1 = $this->db->prepare($sql1);
-        // $stmt1->execute();
-        // $order_items = $stmt1->fetchAll(PDO::FETCH_ASSOC);
-        $sql = "SELECT ti.*,tp.name,tpk.length,tpk.width,tpk.height,tpk.dimentions_unit,tpk.weight,tpk.weight_unit as product_name from tbl_purchase_item ti
+        
+        $sql = "SELECT ti.*,tp.name as product_name,tpk.length,tpk.width,tpk.height,tpk.dimentions_unit,tpk.weight,tpk.weight_unit  from tbl_purchase_item ti
             LEFT JOIN tbl_products tp on tp.id = ti.product
             LEFT JOIN tbl_variants tv on tv.id = ti.product
             LEFT JOIN tbl_packaging tpk on tpk.id=tp.packaging
@@ -302,7 +273,7 @@ class GeneralController
         // echo "<br>";
         // echo $sql;
         $order_items = getData2($sql);
-        printWithPre($order_items);
+        // printWithPre($order_items);
         // die();
         // return $order_items;
         // die();
@@ -312,55 +283,143 @@ class GeneralController
         $breadth = 0;
         $height = 0;
         $weight = 0;
-        if (count($order_items) > 1) {
-            foreach ($order_items as $value) {
-                $orderitems .= '{
-                "name": "' . $value['product_name'] . '",
-                "sku": "product_' . $value['varient_id'] . '",
-                "units": ' . $value['quantity'] . ',
-                "selling_price": "' . $value['amount'] . '",
-                "discount": "",
-                "tax": "",
-                "hsn": ""
-                },';
-                $orderQty += (int) $value['quantity'];
-                $length += (float) $value['length'];
-                $breadth += (float) $value['width'];
-                $height += (float) $value['height'];
-                $weight += (float) $value['weight'];
-            }
-            $orderitems = rtrim($orderitems, ",");
-        } else {
-            $orderitems .= '{
-                    "name": "' . $order_items[0]['product_name'] . '",
-                    "sku": "product_' . $order_items[0]['varient_id'] . '",
-                    "units": ' . $order_items[0]['quantity'] . ',
-                    "selling_price": "' . $order_items[0]['amount'] . '",
-                    "discount": "",
-                    "tax": "",
-                    "hsn": ""
-            }';
-            $orderQty = (int) $order_items[0]['quantity'];
-            $length += (float) $order_items[0]['length'];
-            $breadth += (float) $order_items[0]['width'];
-            $height += (float) $order_items[0]['height'];
-            $weight += (float) $order_items[0]['weight'];
+    if (count($order_items) > 1) {
+    foreach ($order_items as $value) {
+
+        $orderitems .= '{
+            "name": "' . $value['product_name'] . '",
+            "sku": "product_' . $value['varient'] . '",
+            "units": ' . $value['quantity'] . ',
+            "selling_price": "' . $value['amount'] . '",
+            "discount": "",
+            "tax": "",
+            "hsn": ""
+        },';
+
+        $orderQty += (int)$value['quantity'];
+
+        // ✅ Convert dimensions to cm if needed
+        $itemLength = (float)$value['length'];
+        $itemBreadth = (float)$value['width'];
+        $itemHeight = (float)$value['height'];
+
+        $unit = strtolower(trim($value['dimentions_unit'] ?? 'cm'));
+        if ($unit === 'in' || $unit === 'inch' || $unit === 'inches') {
+            // 1 inch = 2.54 cm
+            $itemLength *= 2.54;
+            $itemBreadth *= 2.54;
+            $itemHeight *= 2.54;
         }
-        // return ["order_data" => $order_data,"order_items" => $order_items, "orderitems" => $orderitems];
-        // return ["orderitems" => $order_items];
-        // return $order_data;
+
+        $length  += $itemLength;
+        $breadth += $itemBreadth;
+        $height  += $itemHeight;
+
+        // ✅ Convert gm → kg if needed
+        $itemWeight = (float)$value['weight'];
+        $weightUnit = strtolower(trim($value['weight_unit'] ?? 'kg'));
+        if ($weightUnit === 'gm' || $weightUnit === 'g' || $weightUnit === 'gram' || $weightUnit === 'grams') {
+            $itemWeight /= 1000;
+        }
+
+        $weight += $itemWeight;
+    }
+
+    $orderitems = rtrim($orderitems, ",");
+} else {
+    $item = $order_items[0];
+
+    $orderitems .= '{
+        "name": "' . $item['product_name'] . '",
+        "sku": "product_' . $item['varient'] . '",
+        "units": ' . $item['quantity'] . ',
+        "selling_price": "' . $item['amount'] . '",
+        "discount": "",
+        "tax": "",
+        "hsn": ""
+    }';
+
+    $orderQty = (int)$item['quantity'];
+
+    // ✅ Convert dimensions to cm if needed
+    $itemLength = (float)$item['length'];
+    $itemBreadth = (float)$item['width'];
+    $itemHeight = (float)$item['height'];
+
+    $unit = strtolower(trim($item['dimentions_unit'] ?? 'cm'));
+    if ($unit === 'in' || $unit === 'inch' || $unit === 'inches') {
+        $itemLength *= 2.54;
+        $itemBreadth *= 2.54;
+        $itemHeight *= 2.54;
+    }
+
+    $length  += $itemLength;
+    $breadth += $itemBreadth;
+    $height  += $itemHeight;
+
+    // ✅ Convert gm → kg if needed
+    $itemWeight = (float)$item['weight'];
+    $weightUnit = strtolower(trim($item['weight_unit'] ?? 'kg'));
+    if ($weightUnit === 'gm' || $weightUnit === 'g' || $weightUnit === 'gram' || $weightUnit === 'grams') {
+        $itemWeight /= 1000;
+    }
+
+    $weight += $itemWeight;
+}
+
         foreach ($order_items as $value) {
             $order_items['sub_total'] += $value['total_amount'];
         }
 
+        // printWithPre($orderitems);
+        // printWithPre($weight);
         // return [$orderitems, $order_items, $orderQty];
         // return [$orderQty, $length, $breadth, $height, $weight];
         // die();
         $totallength = $length * $orderQty;
         $totalbreadth = $breadth * $orderQty;
         $totalheight = $height * $orderQty;
-        $totalWeight = $weight * $orderQty;
+        $totalWeight = $weight;
         $curl = curl_init();
+        // echo '{"order_id": "' . $orderid . '",
+        //                             "order_date": "' . $order_data['created_at'] . '",
+        //                             "pickup_location": "Home",
+        //                             "billing_customer_name": "' . $order_data['fname'] . '",
+        //                             "billing_last_name": "' . $order_data['lname'] . '",
+        //                             "billing_address": "' . $order_data['address_line1'] . '",
+        //                             "billing_address_2": "' . $order_data['address_line2'] . '",
+        //                             "billing_city": "' . $order_data['city'] . '",
+        //                             "billing_pincode": "' . $order_data['pincode'] . '",
+        //                             "billing_state": "' . $order_data['state'] . '",
+        //                             "billing_country": "' . $order_data['country'] . '",
+        //                             "billing_email": "' . $order_data['email'] . '",
+        //                             "billing_phone": "' . $order_data['mobile'] . '",
+        //                             "shipping_is_billing": true,
+        //                             "shipping_customer_name": "",
+        //                             "shipping_last_name": "",
+        //                             "shipping_address": "",
+        //                             "shipping_address_2": "",
+        //                             "shipping_city": "",
+        //                             "shipping_pincode": "",
+        //                             "shipping_country": "",
+        //                             "shipping_state": "",
+        //                             "shipping_email": "",
+        //                             "shipping_phone": "",
+        //                             "order_items": [
+        //                                 ' . $orderitems . '
+        //                             ],
+        //                             "payment_method": "' . $order_data['payment_mode'] . '",
+        //                             "shipping_charges": 0,
+        //                             "giftwrap_charges": 0,
+        //                             "transaction_charges": 0,
+        //                             "total_discount": 0,
+        //                             "sub_total": "' . $order_data['total_amount'] . '",
+        //                             "length": ' . $totallength . ',
+        //                             "breadth": ' . $totalbreadth . ',
+        //                             "height": ' . $totalheight . ',
+        //                             "weight": ' . $totalWeight . '
+        //                                 }';
+        // die();
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc",
             CURLOPT_RETURNTRANSFER => true,
