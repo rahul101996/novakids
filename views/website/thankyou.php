@@ -72,7 +72,7 @@ $encodedAddress = urlencode($OrderData['address_line2'] . ", " . $OrderData['add
                         <div class="space-y-8 max-md:col-span-2">
                             <div>
                                 <h3 class="text-gray-600 text-sm font-semibold md:mb-3">Payment method</h3>
-                                <p class="text-gray-800"><?= $OrderData['payment_mode'] ?> - ₹<?= formatNumber($OrderData['total_amount'])  ?></p>
+                                <p class="text-gray-800"><?= $OrderData['payment_mode'] ?> - ₹<?= formatNumber($totalAmount)  ?></p>
                             </div>
                         </div>
                     </div>

@@ -9,7 +9,7 @@ require 'vendor/autoload.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . "/Helper/generalHelper.php";
 //  printWithPre($_SESSION);
 date_default_timezone_set('Asia/Kolkata');
-
+// printWithPre($_SESSION);
 // die();
 // Load custom routing system
 require_once 'app/RouteController.php';
