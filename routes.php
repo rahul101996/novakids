@@ -96,6 +96,7 @@ $route->group(['', 'PopupController', 'auth'], function ($route) {
 $route->group(['', 'ProductController', 'auth'], function ($route) {
     $route->route('/admin/add-product', 'AddProducts');
     $route->route('/admin/edit-product/[i:id]', 'EditProducts');
+    $route->route('/admin/edit-product-variant/[i:id]', 'EditProductVariants');
     $route->route('/admin/products-list', 'ProductsList');
     $route->route('/admin/inventory', 'Inventory');
 
@@ -108,7 +109,7 @@ $route->group(['', 'ProductController', 'auth'], function ($route) {
 
 
     $route->route('/api/new_arrival/status', 'ChangeNewArrivalStatus');
-    
+
 
     $route->route('/api/product/status', 'ChangeProductStatus');
 });

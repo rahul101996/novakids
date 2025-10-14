@@ -259,7 +259,8 @@ class ProductController
                             'size' => $images['size'][$key]
                         ];
 
-                       if ($file['error'] != 0) continue;
+                        if ($file['error'] != 0)
+                            continue;
 
                         $uploadedFile = uploadFile($file, $targetDir);
                         if ($uploadedFile)
@@ -287,6 +288,97 @@ class ProductController
             redirect("/admin/products-list");
         }
     }
+
+    public function EditProductVariants($id = null)
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageTitle = "Edit Product Variants";
+        $pageModule = "Edit Product Variants";
+
+        $db = getDBCon(); // PDO instance
+
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $editData = [];
+            if ($id != null) {
+                $editData = getData2("SELECT * from tbl_variants where id='$id'")[0];
+            }
+
+            require $_SERVER['DOCUMENT_ROOT'] . "/views/products/edit-product-variants.php";
+
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            // printWithPre($_POST);
+            // printWithPre($_FILES);
+            // die();
+
+            try {
+                $db->beginTransaction();
+
+                $targetDir = 'public/uploads/product-images/';
+
+                $data = [
+                    'product_id' => $_POST['product_id'],
+                    'price' => $_POST['price'],
+                    'quantity' => $_POST['quantity'],
+                    'unavailable' => $_POST['unavailable'],
+                    'committed' => $_POST['committed'],
+                    'on_hand' => $_POST['on_hand'],
+                    'options' => json_encode(json_encode($_POST['options'])),
+                    'updated_at' => date('Y-m-d H:i:s') // optional timestamp
+                ];
+
+
+                // Delete selected images
+                if (!empty($_POST['delete_images'])) {
+                    foreach ($_POST['delete_images'] as $imgPath) {
+                        if (file_exists($imgPath))
+                            unlink($imgPath);
+                    }
+                }
+
+                // Upload new images
+                $uploadedImages = [];
+                if (isset($_FILES['variant_images'])) {
+                    $images = $_FILES['variant_images'];
+                    foreach ($images['name'] as $key => $filename) {
+                        $file = [
+                            'name' => $images['name'][$key],
+                            'type' => $images['type'][$key],
+                            'tmp_name' => $images['tmp_name'][$key],
+                            'error' => $images['error'][$key],
+                            'size' => $images['size'][$key]
+                        ];
+
+                        if ($file['error'] != 0)
+                            continue;
+
+                        $uploadedFile = uploadFile($file, $targetDir);
+                        if ($uploadedFile)
+                            $uploadedImages[] = $uploadedFile;
+                    }
+                }
+
+                // Combine old + new images
+                $finalImages = array_merge(array_diff($_POST['allImages'], $_POST['delete_images'] ?? []), $uploadedImages);
+
+                $data['images'] = json_encode($finalImages);
+
+                printWithPre($data);
+
+                // Update in DB
+                update($data, $id, "tbl_variants");
+
+                // $db->commit();
+                // $_SESSION['success'] = "Product and variants updated successfully.";
+            } catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
+
+            // redirect("/admin/products-list");
+        }
+    }
+
 
     public function Inventory()
     {

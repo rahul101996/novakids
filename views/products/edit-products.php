@@ -384,12 +384,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                     }
                                                     $dtdtd = substr($dtdtd, 0, -1);
 
-                                                    // printWithPre($pvoptions);
-                                                    // printWithPre($vvkeys);
-                                                    // printWithPre($vvdd);
-                                                    // die();
-                                                    // printWithPre($dtdtd);
-                                            
                                                     ?>
 
                                                     <tr class="hover:bg-gray-50 border border-gray-200">
@@ -422,9 +416,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                         </td>
                                                         <td class="px-3 py-3">
                                                             <div class="gap-4">
-                                                                <button type="button" class="text-indigo-600 text-lg "><i
+                                                                <a href="/admin/edit-product-variant/<?= $vdata['id'] ?>" target="_blank" class="text-indigo-600 text-lg "><i
                                                                         class="fa fa-edit"></i></button>
-                                                                <button type="button" class="text-red-600 text-lg "><i
+                                                                <a href="/admin/edit-product-variant/<?= $vdata['id'] ?>" target="_blank" class="text-red-600 text-lg "><i
                                                                         class="fa fa-trash"></i></button>
                                                             </div>
                                                         </td>
