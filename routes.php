@@ -60,6 +60,10 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('/addReview', 'addReview');
     $route->route('/api/saveToken', 'saveToken');
     $route->route('/api/getSizeChart', 'getSizeChart');
+    $route->route('/api/cancelOrder/[i:id]', 'cancelOrder');
+    
+
+
     $route->route('/shipping-policy', 'shippingPolicy');
     $route->route('/terms-and-policy', 'TermsAndPolicy');
     $route->route('/cancellation-and-refunds', 'CancellationAndRefunds');
