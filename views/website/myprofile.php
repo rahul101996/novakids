@@ -89,6 +89,42 @@ if (isset($_POST['update_profile'])) {
         color: #f25b21 !important;
         /* border-width: 5px; */
     }
+
+    /* ===== Base Toast Style ===== */
+    .toast {
+        border-radius: 10px !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        padding: 14px 18px !important;
+        font-weight: 500;
+    }
+
+    /* ===== SUCCESS TOAST ===== */
+    .toast-success {
+        background-color: #ffffff !important;
+        /* white background */
+        color: #16a34a !important;
+        /* green text (#16a34a = Tailwind green-600) */
+        border-left: 4px solid #16a34a !important;
+    }
+
+    /* Green progress bar */
+    .toast-success .toast-progress {
+        background-color: #16a34a !important;
+    }
+
+    /* ===== ERROR TOAST ===== */
+    .toast-error {
+        background-color: #ffffff !important;
+        /* white background */
+        color: #dc2626 !important;
+        /* red text (#dc2626 = Tailwind red-600) */
+        border-left: 4px solid #dc2626 !important;
+    }
+
+    /* Red progress bar */
+    .toast-error .toast-progress {
+        background-color: #dc2626 !important;
+    }
 </style>
 
 <body class="">
@@ -183,7 +219,7 @@ if (isset($_POST['update_profile'])) {
 
                     </div>
                     <div onclick="showPart('setting',this)" id="ShowSetting"
-                        class="flex items-center justify-between gap-3 px-5 py-2 hover:bg-gray-100  sidenav">
+                        class="flex items-center justify-between gap-3 px-5 py-2 hover:bg-gray-100  sidenav hidden">
                         <div class="flex items-center justify-center gap-3">
                             <div class="text-2xl"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 50 50">
                                     <path d="M 22.205078 2 A 1.0001 1.0001 0 0 0 21.21875 2.8378906 L 20.246094 8.7929688 C 19.076509 9.1331971 17.961243 9.5922728 16.910156 10.164062 L 11.996094 6.6542969 A 1.0001 1.0001 0 0 0 10.708984 6.7597656 L 6.8183594 10.646484 A 1.0001 1.0001 0 0 0 6.7070312 11.927734 L 10.164062 16.873047 C 9.583454 17.930271 9.1142098 19.051824 8.765625 20.232422 L 2.8359375 21.21875 A 1.0001 1.0001 0 0 0 2.0019531 22.205078 L 2.0019531 27.705078 A 1.0001 1.0001 0 0 0 2.8261719 28.691406 L 8.7597656 29.742188 C 9.1064607 30.920739 9.5727226 32.043065 10.154297 33.101562 L 6.6542969 37.998047 A 1.0001 1.0001 0 0 0 6.7597656 39.285156 L 10.648438 43.175781 A 1.0001 1.0001 0 0 0 11.927734 43.289062 L 16.882812 39.820312 C 17.936999 40.39548 19.054994 40.857928 20.228516 41.201172 L 21.21875 47.164062 A 1.0001 1.0001 0 0 0 22.205078 48 L 27.705078 48 A 1.0001 1.0001 0 0 0 28.691406 47.173828 L 29.751953 41.1875 C 30.920633 40.838997 32.033372 40.369697 33.082031 39.791016 L 38.070312 43.291016 A 1.0001 1.0001 0 0 0 39.351562 43.179688 L 43.240234 39.287109 A 1.0001 1.0001 0 0 0 43.34375 37.996094 L 39.787109 33.058594 C 40.355783 32.014958 40.813915 30.908875 41.154297 29.748047 L 47.171875 28.693359 A 1.0001 1.0001 0 0 0 47.998047 27.707031 L 47.998047 22.207031 A 1.0001 1.0001 0 0 0 47.160156 21.220703 L 41.152344 20.238281 C 40.80968 19.078827 40.350281 17.974723 39.78125 16.931641 L 43.289062 11.933594 A 1.0001 1.0001 0 0 0 43.177734 10.652344 L 39.287109 6.7636719 A 1.0001 1.0001 0 0 0 37.996094 6.6601562 L 33.072266 10.201172 C 32.023186 9.6248101 30.909713 9.1579916 29.738281 8.8125 L 28.691406 2.828125 A 1.0001 1.0001 0 0 0 27.705078 2 L 22.205078 2 z M 23.056641 4 L 26.865234 4 L 27.861328 9.6855469 A 1.0001 1.0001 0 0 0 28.603516 10.484375 C 30.066026 10.848832 31.439607 11.426549 32.693359 12.185547 A 1.0001 1.0001 0 0 0 33.794922 12.142578 L 38.474609 8.7792969 L 41.167969 11.472656 L 37.835938 16.220703 A 1.0001 1.0001 0 0 0 37.796875 17.310547 C 38.548366 18.561471 39.118333 19.926379 39.482422 21.380859 A 1.0001 1.0001 0 0 0 40.291016 22.125 L 45.998047 23.058594 L 45.998047 26.867188 L 40.279297 27.871094 A 1.0001 1.0001 0 0 0 39.482422 28.617188 C 39.122545 30.069817 38.552234 31.434687 37.800781 32.685547 A 1.0001 1.0001 0 0 0 37.845703 33.785156 L 41.224609 38.474609 L 38.53125 41.169922 L 33.791016 37.84375 A 1.0001 1.0001 0 0 0 32.697266 37.808594 C 31.44975 38.567585 30.074755 39.148028 28.617188 39.517578 A 1.0001 1.0001 0 0 0 27.876953 40.3125 L 26.867188 46 L 23.052734 46 L 22.111328 40.337891 A 1.0001 1.0001 0 0 0 21.365234 39.53125 C 19.90185 39.170557 18.522094 38.59371 17.259766 37.835938 A 1.0001 1.0001 0 0 0 16.171875 37.875 L 11.46875 41.169922 L 8.7734375 38.470703 L 12.097656 33.824219 A 1.0001 1.0001 0 0 0 12.138672 32.724609 C 11.372652 31.458855 10.793319 30.079213 10.427734 28.609375 A 1.0001 1.0001 0 0 0 9.6328125 27.867188 L 4.0019531 26.867188 L 4.0019531 23.052734 L 9.6289062 22.117188 A 1.0001 1.0001 0 0 0 10.435547 21.373047 C 10.804273 19.898143 11.383325 18.518729 12.146484 17.255859 A 1.0001 1.0001 0 0 0 12.111328 16.164062 L 8.8261719 11.46875 L 11.523438 8.7734375 L 16.185547 12.105469 A 1.0001 1.0001 0 0 0 17.28125 12.148438 C 18.536908 11.394293 19.919867 10.822081 21.384766 10.462891 A 1.0001 1.0001 0 0 0 22.132812 9.6523438 L 23.056641 4 z M 25 17 C 20.593567 17 17 20.593567 17 25 C 17 29.406433 20.593567 33 25 33 C 29.406433 33 33 29.406433 33 25 C 33 20.593567 29.406433 17 25 17 z M 25 19 C 28.325553 19 31 21.674447 31 25 C 31 28.325553 28.325553 31 25 31 C 21.674447 31 19 28.325553 19 25 C 19 21.674447 21.674447 19 25 19 z"></path>
@@ -195,7 +231,7 @@ if (isset($_POST['update_profile'])) {
                     <!-- <div class="h-[1px] bg-gray-200"></div> -->
 
                     <div onclick="showPart('Addresses',this)"
-                        class="flex items-center justify-between gap-3 px-5 py-3 hover:bg-gray-100 sidenav" id="ShowAddress">
+                        class="flex items-center justify-between gap-3 px-5 py-3 hover:bg-gray-100 sidenav hidden" id="ShowAddress">
                         <div class="flex items-center justify-center gap-3">
 
                             <div class="text-2xl">
@@ -233,47 +269,119 @@ if (isset($_POST['update_profile'])) {
                         <h1 class="text-2xl uppercase font-semibold">My Profile</h1>
 
                     </div>
-                    <div class="w-[80%] max-md:w-[90%] mx-auto max-lg:overflow-x-auto bg-white overflow-hidden border border-gray-300">
-                        <table class="min-w-full divide-y divide-gray-200 text-sm text-gray-700 ">
-                            <tbody class="divide-y divide-gray-100">
-                                <tr>
-                                    <td class="bg-gray-50 font-medium px-6 py-4 max-lg:px-4 max-lg:py-3 w-1/3">
-                                        Registration Date</td>
-                                    <td class="px-6 py-4 max-lg:px-4 max-lg:py-3 font-semibold text-gray-900"><?= formatDate($userData['created_at']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td class="bg-gray-50 font-medium px-6 py-4 max-lg:px-4 max-lg:py-3"> Name</td>
-                                    <td class="px-6 py-4 max-lg:px-4 max-lg:py-3"><?= $userData['fname'] ?>
-                                        <?= $userData['lname'] ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="bg-gray-50 font-medium px-6 py-4 max-lg:px-4 max-lg:py-3">Email</td>
-                                    <td class="px-6 py-4 max-lg:px-4 max-lg:py-3"><?= $userData['username'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td class="bg-gray-50 font-medium px-6 py-4 max-lg:px-4 max-lg:py-3">Phone Number
-                                    </td>
-                                    <td class="px-6 py-4 max-lg:px-4 max-lg:py-3 "><?= $userData['mobile'] ?></td>
-                                </tr>
+                    <div class="w-[80%] max-md:w-[90%] mx-auto max-lg:overflow-x-auto bg-white overflow-hidden ">
+                        <form action="" method="POST" class="w-full" id="profileForm">
+                            <div class="w-full max-md:w-[90%] mx-auto py-6  bg-white rounded-md  space-y-6">
+                                <div class="grid grid-cols-2 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                                        <input type="text" value="<?= $userData['fname'] ?>" name="fname"
+                                            class="w-full border border-gray-300  px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            required />
+
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+
+                                        <input type="text" value="<?= $userData['lname'] ?>" name="lname"
+                                            class="w-full border border-gray-300  px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            required />
+                                    </div>
+
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                        <input type="text" value="<?= $userData['username'] ?>" name="email"
+                                            class="w-full border border-gray-300  px-4 py-2" required />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                        <input type="text" placeholder="Phone Number"
+                                            value="<?= $userData['mobile'] ?>" readonly
+                                            class="w-full border bg-gray-100 border-gray-300  px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            required />
+                                    </div>
+
+                                </div>
 
 
-                                <tr>
-                                    <td class="bg-gray-50 font-medium px-6 py-4 max-lg:px-4 max-lg:py-3">Address</td>
-                                    <td class="px-6 py-4 max-lg:px-4 max-lg:py-3 ">
-                                        <div class="flex items-start justify-start flex-col">
-                                            <p><?= $ActiveuserAddress['address_line1'] ?> <?= $ActiveuserAddress['address_line2'] ?></p>
-                                            <p><?= $ActiveuserAddress['city'] ?> -- <?= $ActiveuserAddress['pincode'] ?></p>
-                                            <p class="mt-2"><?= $ActiveuserAddress['state_name'] ?></p>
+                                <div class="mt-4">
+                                    <button
+                                        class="bg-[#f25b21] border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white  "
+                                        name="update_profile">
+                                        Update Profile
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="w-[80%] h-[1px] bg-gray-200 my-4"></div>
+                    <div class="flex flex-col items-center justify-center w-full mt-3">
+                        <div class="flex justify-start items-left mb-6 w-full md:hidden border-b border-gray-300 shadow px-4 py-5">
+                            <!-- Back button (only visible on mobile) -->
+                            <button onclick="goBackToSidebar()" class="max-lg:flex hidden flex items-center gap-1 text-sm">
+                                <i class="fas fa-chevron-left"></i> Back
+                            </button>
+                        </div>
+                        <div class="w-[80%] flex max-md:flex-col max-md:gap-3 items-center justify-between">
+                            <h2 class="text-2xl max-md:text-xl uppercase font-semibold">Saved Addresses</h2>
+                            <button class="bg-[#f25b21] max-md:text-sm text-white py-2 px-4" onclick="openModal1()">Add New Address</button>
+                        </div>
+                        <?php
+                        // $userAddress =[];
+                        if (!empty($userAddress)) {
+
+
+
+
+                        ?>
+                            <div class="w-[80%] max-md:w-[90%] grid grid-cols-2 max-md:grid-cols-1 gap-2 items-center justify-center">
+                                <?php
+                                foreach ($userAddress as $address) {
+                                ?>
+                                    <div class="w-full flex flex-col border border-gray-300 mt-6 ">
+                                        <div class="w-full flex items-start justify-between p-4">
+                                            <div class="flex items-start justify-start flex-col text-gray-500">
+                                                <p><?= $address['address_line1'] ?> <?= $address['address_line2'] ?></p>
+                                                <p><?= $address['city'] ?> -- <?= $address['pincode'] ?></p>
+                                                <p class="mt-2"><?= $address['state_name'] ?></p>
+
+                                            </div>
+                                            <?php
+                                            if ($address['status'] == 1) {
+
+
+                                            ?>
+                                                <div class="flex items-center justify-center">
+                                                    <span class="text-sm text-white bg-black px-2">Default</span>
+                                                </div>
+                                            <?php } ?>
 
                                         </div>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
+                                        <div class="w-full py-2 flex items-center justify-center border-t border-gray-300 px-4">
+                                            <div class="w-full flex items-center justify-center border-r border-gray-300 cursor-pointer" onclick="EditAddress(<?= $address['id'] ?>)">
+                                                <span class="text-sm text-blue-500"><i class="fa-regular fa-pen-to-square"></i></span>
+                                            </div>
+                                            <div class="w-full flex items-center justify-center cursor-pointer" onclick="removeAddress(<?= $address['id'] ?>)">
+                                                <span class="text-sm text-red-500"><i class="fa-regular fa-trash-can"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php }
+                                ?>
+                            </div>
+                        <?php
+                        } else { ?>
+                            <div class="w-[80%] flex items-center justify-center flex-col min-h-[50vh]">
+                                <img src="/public/icons/empty-address.png" class="h-[150px]" alt="">
+                                <h2 class="font-semibold uppercase">No Address Found</h2>
+                                <p class="text-sm text-gray-500 mt-3 text-center">You have not added any address yet</p>
+                            </div>
+                        <?php } ?>
                     </div>
-
                 </div>
                 <div class="w-full flex flex-col items-center justify-center overview showpart">
                     <div class="flex justify-start items-left w-full md:hidden border-b border-gray-300 shadow px-4 py-5">
@@ -348,7 +456,7 @@ if (isset($_POST['update_profile'])) {
                             <h3 class="font-semibold text-lg max-md:text-base text-gray-800">Addresses</h3>
                             <p class="text-gray-500 text-sm mt-1 text-center">Find nearest stores and directions</p>
                         </div>
-                        <div onclick="showPart('setting',document.getElementById('ShowSetting'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 max-md:p-4 hover:shadow-md transition">
+                        <div onclick="showPart('setting',document.getElementById('ShowSetting'))" class="flex flex-col items-center justify-center border border-gray-200 rounded-lg p-8 max-md:p-4 hover:shadow-md transition hidden">
                             <i class="fas fa-cog text-3xl max-md:text-2xl mb-3 max-md:mb-2"></i>
                             <h3 class="font-semibold text-lg max-md:text-base text-gray-800">Settings</h3>
                             <p class="text-gray-500 text-sm mt-1 text-center">Find nearest stores and directions</p>
@@ -366,53 +474,54 @@ if (isset($_POST['update_profile'])) {
                     <h2 class="text-2xl font-semibold uppercase">Rate & Review</h2>
                     <?php
                     $UserReview = getData2("SELECT tbl_product_review.*, tbl_products.name as product_name  FROM `tbl_product_review` LEFT JOIN tbl_products ON tbl_product_review.product_id = tbl_products.id where tbl_product_review.userid= $_SESSION[userid]");
-         
-                    if(!empty($UserReview)){
-                    foreach ($UserReview as $review) {
-                        $name = str_replace(' ', '-', $review['product_name']);
-                        $name = str_replace("'", '', $name);
+
+                    if (!empty($UserReview)) {
+                        foreach ($UserReview as $review) {
+                            $name = str_replace(' ', '-', $review['product_name']);
+                            $name = str_replace("'", '', $name);
                     ?>
-                        <div class="border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition mt-2 w-full max-md:w-[90%]">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-3">
-                                    <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-medium">
-                                        R
+                            <div class="border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition mt-2 w-full max-md:w-[90%]">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-medium">
+                                            R
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-800"><?= $_SESSION['fname'] ?> <?= $_SESSION['lname'] ?></h4>
+                                            <p class="text-sm text-gray-500">Reviewed on <?= formatDate($review['created_at']) ?></p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h4 class="font-semibold text-gray-800"><?= $_SESSION['fname'] ?> <?= $_SESSION['lname'] ?></h4>
-                                        <p class="text-sm text-gray-500">Reviewed on <?= formatDate($review['created_at']) ?></p>
+                                    <!-- Rating Stars -->
+                                    <div class="flex items-center text-yellow-500">
+                                        <?php
+                                        $averageRating = round($review['rating'], 1);
+                                        for ($i = 0; $i < floor($averageRating); $i++): ?>
+                                            <i class="fas fa-star"></i>
+                                        <?php endfor; ?>
                                     </div>
                                 </div>
-                                <!-- Rating Stars -->
-                                <div class="flex items-center text-yellow-500">
-                                    <?php
-                                    $averageRating = round($review['rating'], 1);
-                                    for ($i = 0; $i < floor($averageRating); $i++): ?>
-                                        <i class="fas fa-star"></i>
-                                    <?php endfor; ?>
+
+                                <p class="mt-4 text-gray-700 leading-relaxed">
+                                    <?= $review['reviewText'] ?>
+                                </p>
+
+                                <div class="mt-4 flex items-center gap-4 text-sm text-gray-500">
+                                    <a href="/products/product-details/<?= $name ?>" class="flex items-center hover:text-custom-pink transition bg-black text-white py-2 px-4 rounded-md">
+                                        View Product
+                                    </a>
+
                                 </div>
                             </div>
-
-                            <p class="mt-4 text-gray-700 leading-relaxed">
-                                <?= $review['reviewText'] ?>
-                            </p>
-
-                            <div class="mt-4 flex items-center gap-4 text-sm text-gray-500">
-                                <a href="/products/product-details/<?= $name ?>" class="flex items-center hover:text-custom-pink transition bg-black text-white py-2 px-4 rounded-md">
-                                    View Product
-                                </a>
-
-                            </div>
-                        </div>
-                    <?php } }else{?>
+                        <?php }
+                    } else { ?>
                         <div class="w-full flex items-center justify-center flex-col min-h-[50vh]">
                             <img src="/public/icons/star-rating.png" class="h-[110px] " alt="">
                             <h2 class="font-semibold mt-3">NO PRODUCTS TO REVIEW YET</h2>
                             <p class="text-sm text-gray-500 w-[50%] mt-3 text-center">You've reviewed all your past orders or haven't ordered yet. Shop now and share your feedback
 
-</p>
+                            </p>
                         </div>
-                        <?php } ?>
+                    <?php } ?>
                 </div>
                 <div class="w-full flex flex-col items-center justify-center Wishlist showpart hidden">
                     <div class="flex justify-start items-left mb-6 w-full md:hidden border-b border-gray-300 shadow px-4 py-5">
@@ -721,105 +830,7 @@ if (isset($_POST['update_profile'])) {
                 </div>
 
 
-                <div class="showpart setting flex flex-col items-center justify-center w-full hidden">
-                    <div class="flex justify-start items-left mb-6 w-full md:hidden border-b border-gray-300 shadow px-4 py-5">
-                        <!-- Back button (only visible on mobile) -->
-                        <button onclick="goBackToSidebar()" class="max-lg:flex hidden flex items-center gap-1 text-sm">
-                            <i class="fas fa-chevron-left"></i> Back
-                        </button>
-                    </div>
-                    <div
-                        class="flex justify-center flex-col items-center font-semibold  w-full bg-white  rounded-lg ">
-                        <h1 class="text-2xl uppercase">Profile
-                            Setting
-                        </h1>
-                    </div>
 
-                    <form action="" method="POST" class="w-full" id="profileForm">
-                        <div class="w-[80%] max-md:w-[90%] mx-auto py-6  bg-white rounded-md  space-y-6">
-                            <div class="grid grid-cols-2 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                                    <input type="text" value="<?= $userData['fname'] ?>" name="fname"
-                                        class="w-full border border-gray-300  px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        required />
-
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-
-                                    <input type="text" value="<?= $userData['lname'] ?>" name="lname"
-                                        class="w-full border border-gray-300  px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        required />
-                                </div>
-
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                                    <input type="text" value="<?= $userData['username'] ?>" name="email"
-                                        class="w-full border border-gray-300  px-4 py-2" required />
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                                    <input type="text" placeholder="Phone Number"
-                                        value="<?= $userData['mobile'] ?>" readonly
-                                        class="w-full border bg-gray-100 border-gray-300  px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        required />
-                                </div>
-
-                            </div>
-
-
-                            <div class="mt-4">
-                                <button
-                                    class="bg-[#f25b21] border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white  "
-                                    name="update_profile">
-                                    Update Profile
-                                </button>
-                            </div>
-                        </div>
-
-                    </form>
-
-                    <form action="" method="POST" class="w-full hidden" id="passwordForm">
-                        <div class="w-full mx-auto p-6 bg-white rounded-md shadow-md space-y-6">
-
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
-                                <input type="password" value="" name="current_password"
-                                    class="w-[50%] max-lg:w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required />
-                            </div>
-                            <div class="relative w-[50%] max-lg:w-full">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
-                                <input type="password" name="new_password" id="newpassword"
-                                    class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                <i class="fa-regular fa-eye absolute right-2 top-[70%] transform -translate-y-1/2 cursor-pointer"
-                                    id="togglePassword"></i>
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Repeat Password</label>
-                                <input type="password" name="repeat_password" id="repeatpassword"
-                                    class="w-[50%] max-lg:w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                <p id="passwordError" class="text-red-500 text-sm mt-1 hidden">Passwords do not match.
-                                </p>
-                            </div>
-
-                            <div class="mt-4">
-                                <button id="submitBtn" disabled
-                                    class="bg-[#f25b21] opacity-50 cursor-not-allowed border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white"
-                                    name="update_password">
-                                    Update Password
-                                </button>
-                            </div>
-
-                        </div>
-                    </form>
-
-                </div>
             </main>
         </div>
         <div id="addressModal" class=" h-full w-full fixed inset-0 top-1/2 transform -translate-y-1/2 z-[9999]  overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center   items-center justify-center hidden">

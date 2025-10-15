@@ -746,29 +746,33 @@ class WebController extends LoginController
         }
     }
 
-    public function cancelOrder($id){
+    public function cancelOrder($id)
+    {
         $orderData = getData2("SELECT * FROM tbl_purchase where id='$id'")[0];
         $shipData = json_decode($orderData["shiprocketData"]);
         $token = $this->validshiprockettoken();
-        $res = $this->ordercancel($token,$shipData->order_id);
+        $res = $this->ordercancel($token, $shipData->order_id);
         // printWithPre($res);
-        if($res["status_code"]==200){
-            update([
-                                "status"=>"Cancel",
-                                "cancel_reason"=>$_POST["reason"],
-                                "cancel_by"=>isset($_SESSION["type"])?"User":"Admin",
-                                "cancel_date"=>date("Y-m-d H:i:s")
-                            ],
-            $id,"tbl_purchase");
+        if ($res["status_code"] == 200) {
+            update(
+                [
+                    "status" => "Cancel",
+                    "cancel_reason" => $_POST["reason"],
+                    "cancel_by" => isset($_SESSION["type"]) ? "User" : "Admin",
+                    "cancel_date" => date("Y-m-d H:i:s")
+                ],
+                $id,
+                "tbl_purchase"
+            );
             echo json_encode([
-                "success"=>true,
-                "message"=>"Order Cancel successfully"
+                "success" => true,
+                "message" => "Order Cancel successfully"
             ]);
             die();
-        }else{
+        } else {
             echo json_encode([
-                "success"=>false,
-                "message"=>"Something wen't wrong"
+                "success" => false,
+                "message" => "Something wen't wrong"
             ]);
         }
     }
@@ -856,7 +860,6 @@ class WebController extends LoginController
             } else {
                 $PurchaseItems = [];
             }
-
         } else {
             $OrderData = [];
             $PurchaseItems = [];
@@ -1557,7 +1560,6 @@ class WebController extends LoginController
                 }
                 echo json_encode(['success' => true, 'message' => 'Cart Updated Successfully']);
                 exit();
-
             }
             if (isset($_POST['updateQuantity'])) {
                 $activity = $_POST['activity'];
@@ -1592,7 +1594,7 @@ class WebController extends LoginController
             }
             $id = $_SESSION["userid"];
             $mode = $_POST["payment_mode"];
-            
+
             $pp = 1;
             $fields = [
                 'fname' => 'fname',
@@ -1642,91 +1644,90 @@ class WebController extends LoginController
                 $db = getDBCon(); // PDO instance
                 $db->beginTransaction();
                 // $db->beginTransaction();
-               
+
 
                 // printWithPre($purchaseid);
                 // die();
                 $_SESSION['order_id'] = [];
-                    // echo "Success";
-                    foreach ($_SESSION["cartData"]["varient"] as $key => $varient) {
-                        $order_id = generateRandomString(16) . time();
-                            $purchaseid = [
+                // echo "Success";
+                foreach ($_SESSION["cartData"]["varient"] as $key => $varient) {
+                    $order_id = generateRandomString(16) . time();
+                    $purchaseid = [
+                        "userid" => $_SESSION["userid"],
+                        "username" => $_SESSION["username"],
+                        "payment_mode" => $mode,
+                        "payment_status" => "Pending",
+                        "orderid" => $order_id,
+                        "status" => "Processing",
+                        "total_amount" => $_SESSION["cartData"]["quantity"][$key] * $_SESSION["cartData"]["price"][$key],
+                        "address_line1" => $_POST["address_line1"],
+                        "address_line2" => $_POST["address_line2"],
+                        "city" => $_POST["city"],
+                        "state" => $_POST["state"],
+                        "country" => "India",
+                        "pincode" => $_POST["pin_code"],
+                        "mobile" => $_POST["mobile"],
+                        "email" => $_POST["email"],
+                        "fname" => $_POST["fname"],
+                        "lname" => $_POST["lname"],
+                        "created_by" => $_SESSION["userid"],
+                    ];
+
+                    $purchaseid = add($purchaseid, "tbl_purchase");
+                    $quantity = getData2("SELECT * FROM tbl_variants where id='$varient'")[0]["quantity"];
+                    if ($quantity >= $_SESSION["cartData"]["quantity"][$key]) {
+                        update(["quantity" => $quantity - $_SESSION["cartData"]["quantity"][$key]], $varient, "tbl_variants");
+                        $insertData = [
+                            "purchase_id" => $purchaseid,
+                            "varient" => $varient,
+                            "product" => $_SESSION["cartData"]["product"][$key],
+                            "category" => $_SESSION["cartData"]["category"][$key],
+                            "quantity" => $_SESSION["cartData"]["quantity"][$key],
+                            "amount" => $_SESSION["cartData"]["price"][$key],
+                            "total_amount" => $_SESSION["cartData"]["quantity"][$key] * $_SESSION["cartData"]["price"][$key],
                             "userid" => $_SESSION["userid"],
                             "username" => $_SESSION["username"],
-                            "payment_mode" => $mode,
-                            "payment_status" => "Pending",
-                            "orderid" => $order_id,
                             "status" => "Processing",
-                            "total_amount" => $_SESSION["cartData"]["quantity"][$key] * $_SESSION["cartData"]["price"][$key],
-                            "address_line1" => $_POST["address_line1"],
-                            "address_line2" => $_POST["address_line2"],
-                            "city" => $_POST["city"],
-                            "state" => $_POST["state"],
-                            "country" => "India",
-                            "pincode" => $_POST["pin_code"],
-                            "mobile" => $_POST["mobile"],
-                            "email" => $_POST["email"],
-                            "fname" => $_POST["fname"],
-                            "lname" => $_POST["lname"],
+                            "created_date" => date("Y-m-d"),
+                            "created_time" => date("H:i:s"),
+                            "created_at" => date("Y-m-d H:i"),
                             "created_by" => $_SESSION["userid"],
                         ];
-
-                        $purchaseid = add($purchaseid, "tbl_purchase");
-                        $quantity = getData2("SELECT * FROM tbl_variants where id='$varient'")[0]["quantity"];
-                        if ($quantity >= $_SESSION["cartData"]["quantity"][$key]) {
-                            update(["quantity" => $quantity - $_SESSION["cartData"]["quantity"][$key]], $varient, "tbl_variants");
-                            $insertData = [
-                                "purchase_id" => $purchaseid,
-                                "varient" => $varient,
-                                "product" => $_SESSION["cartData"]["product"][$key],
-                                "category" => $_SESSION["cartData"]["category"][$key],
-                                "quantity" => $_SESSION["cartData"]["quantity"][$key],
-                                "amount" => $_SESSION["cartData"]["price"][$key],
-                                "total_amount" => $_SESSION["cartData"]["quantity"][$key] * $_SESSION["cartData"]["price"][$key],
-                                "userid" => $_SESSION["userid"],
-                                "username" => $_SESSION["username"],
-                                "status" => "Processing",
-                                "created_date" => date("Y-m-d"),
-                                "created_time" => date("H:i:s"),
-                                "created_at" => date("Y-m-d H:i"),
-                                "created_by" => $_SESSION["userid"],
-                            ];
-                            add($insertData, "tbl_purchase_item");
-                        } else {
-                            $db->rollBack();
-                            $_SESSION["err"] = "Product Out Of Stock";
-                            header("Location: /checkout");
-                            exit();
-                        }
-                        $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid, $order_id);
-                        $placeordershiprocket = (array)$placeordershiprocket;
-
-                        update(["shiprocketData"=>json_encode($placeordershiprocket)],$purchaseid,"tbl_purchase");
-
-                        sendOrderMail($purchaseid);
-
-                        $_SESSION['order_id'][] = $order_id;
+                        add($insertData, "tbl_purchase_item");
+                    } else {
+                        $db->rollBack();
+                        $_SESSION["err"] = "Product Out Of Stock";
+                        header("Location: /checkout");
+                        exit();
                     }
+                    $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid, $order_id);
+                    $placeordershiprocket = (array)$placeordershiprocket;
+
+                    update(["shiprocketData" => json_encode($placeordershiprocket)], $purchaseid, "tbl_purchase");
+
+                    sendOrderMail($purchaseid);
+
+                    $_SESSION['order_id'][] = $order_id;
+                }
 
 
 
-                    // echo $purchaseid[1];
-                    delete($id, "tbl_cart", "userid");
-                    // printWithPre($purchaseid);
-                    // die();
-                    
-                    
-                    
-                    
+                // echo $purchaseid[1];
+                delete($id, "tbl_cart", "userid");
+                // printWithPre($purchaseid);
+                // die();
 
 
-                    
-                    $_SESSION["success"] = "Order Placed Successfully";
-                    $db->commit();
-                    unset($_SESSION["cartData"]);
-                    header("Location: /thank-you");
-                    exit();
-                
+
+
+
+
+
+                $_SESSION["success"] = "Order Placed Successfully";
+                $db->commit();
+                unset($_SESSION["cartData"]);
+                header("Location: /thank-you");
+                exit();
             } elseif ($mode = "Prepaid") {
 
                 if ($PaymentGateWay['name'] == "razorpay") {
@@ -1885,7 +1886,7 @@ class WebController extends LoginController
                 $placeordershiprocket = $this->placeordershiprocket($token, $purchaseid, $order_id);
                 $placeordershiprocket = (array)$placeordershiprocket;
 
-                update(["shiprocketData"=>json_encode($placeordershiprocket)],$purchaseid,"tbl_purchase");
+                update(["shiprocketData" => json_encode($placeordershiprocket)], $purchaseid, "tbl_purchase");
                 sendOrderMail($purchaseid);
             }
 
@@ -2351,7 +2352,7 @@ ORDER BY id DESC LIMIT 5");
         require 'views/website/privacy-policy.php';
     }
 
-    public function addReview()
+   public function addReview()
     {
         $response = [
             "success" => false,
@@ -2361,25 +2362,40 @@ ORDER BY id DESC LIMIT 5");
         try {
             $this->db->beginTransaction();
 
-            $_POST = json_decode(file_get_contents('php://input'), true);
-            // printWithPre($_POST);
-            // die();
-
-            $uname = $_POST['name'];
+            $uname = $_POST['name'] ?? '';
             unset($_POST['name']);
 
+            // Handle file upload (optional)
+            $uploadedFileName = null;
+            if (isset($_FILES['review_image']) && $_FILES['review_image']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = __DIR__ . '/../public/images/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+
+                $originalName = basename($_FILES['review_image']['name']);
+                $ext = pathinfo($originalName, PATHINFO_EXTENSION);
+                $safeName = 'review_' . time() . '_' . rand(1000, 9999) . '.' . $ext;
+                $uploadPath = $uploadDir . $safeName;
+
+                if (move_uploaded_file($_FILES['review_image']['tmp_name'], $uploadPath)) {
+                    $uploadedFileName = $safeName;
+                    $_POST['image'] = $uploadedFileName;
+                } else {
+                    throw new Exception("Image upload failed");
+                }
+            }
+
+            // Insert review
             add($_POST, "tbl_product_review");
 
-            $userName = getData2("SELECT * FROM online_users WHERE id = " . $_POST['userid'] . " LIMIT 1")[0]['fname'];
-            if (empty($userName)) {
+            // Check if user’s name is missing in online_users
+            $userData = getData2("SELECT * FROM online_users WHERE id = " . $_POST['userid'] . " LIMIT 1");
+            $userName = $userData[0]['fname'] ?? '';
+
+            if (empty($userName) && !empty($uname)) {
                 $_SESSION['fname'] = $uname;
-                update(
-                    [
-                        "fname" => $uname,
-                    ],
-                    $_POST['userid'],
-                    "online_users"
-                );
+                update(["fname" => $uname], $_POST['userid'], "online_users");
             }
 
             $this->db->commit();
@@ -2398,6 +2414,7 @@ ORDER BY id DESC LIMIT 5");
             echo json_encode($response);
         }
     }
+
 
     public function saveToken()
     {

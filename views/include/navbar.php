@@ -1,5 +1,5 @@
-<header class="bg-white border-b flex items-center justify-between p-4 w-full">
-    <div class="relative w-full max-w-md">
+<header class="bg-white border-b flex items-center justify-between p-2 w-full">
+    <div class="relative w-full max-w-md hidden">
         <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
             fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="flex items-center space-x-5">
-        <button class="text-gray-500 hover:text-gray-700">
+        <button class="text-gray-500 hover:text-gray-700 hidden">
             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

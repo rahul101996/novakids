@@ -61,7 +61,7 @@ $route->group(['', 'WebController'], function ($route) {
     $route->route('/api/saveToken', 'saveToken');
     $route->route('/api/getSizeChart', 'getSizeChart');
     $route->route('/api/cancelOrder/[i:id]', 'cancelOrder');
-    
+
 
 
     $route->route('/shipping-policy', 'shippingPolicy');
@@ -121,8 +121,7 @@ $route->group(['', 'ProductController', 'auth'], function ($route) {
 $route->group(['', 'CustomerController', 'auth'], function ($route) {
     $route->route('admin/customers-list', 'CustomersList');
     $route->route('admin/customer-info/[i:id]', 'CustomersInfo');
-
-
+    $route->route('admin/customer-orders/[i:id]', 'CustomersOrders');
     $route->route('admin/customer-reviews', 'CustomerReviews');
     $route->route('api/customer-reviews/status', 'CustomerReviewsStatus');
 

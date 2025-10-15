@@ -8,6 +8,17 @@ class CustomerController
         $this->db = $db;
     }
 
+    public function CustomersOrders($id = null)
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageTitle = "Products List";
+        $pageModule = "Products List";
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $PurchaseData = getData2("SELECT * FROM `tbl_purchase` WHERE `userid` = $id ORDER BY `id` DESC ");
+            require 'views/customers/customer-orders.php';
+        }
+    }
     public function CustomersList($id = null)
     {
         $siteName = getDBObject()->getSiteName();
@@ -55,7 +66,7 @@ class CustomerController
             if (!empty($PurchaseData)) {
                 $LastOrder = $PurchaseData[0];
                 $LastOrderid = $LastOrder["id"];
-                $products = getData2("SELECT tbl_purchase_item.*, tbl_products.name as product_name tbl_variants.images as variant_images, tbl_variants.options as variant_options, tbl_variants.price as variant_price FROM `tbl_purchase_item` LEFT JOIN tbl_products ON tbl_purchase_item.product = tbl_products.id LEFT JOIN tbl_variants ON tbl_purchase_item.varient = tbl_variants.id WHERE tbl_purchase_item.purchase_id = $LastOrderid ORDER BY tbl_purchase_item.id DESC");
+                $products = getData2("SELECT tbl_purchase_item.*, tbl_products.name as product_name, tbl_variants.images as variant_images, tbl_variants.options as variant_options, tbl_variants.price as variant_price FROM `tbl_purchase_item` LEFT JOIN tbl_products ON tbl_purchase_item.product = tbl_products.id LEFT JOIN tbl_variants ON tbl_purchase_item.varient = tbl_variants.id WHERE tbl_purchase_item.purchase_id = $LastOrderid ORDER BY tbl_purchase_item.id DESC");
             }
 
             // printWithPre($LastOrder);
@@ -130,7 +141,6 @@ class CustomerController
                 "success" => true,
                 "message" => "Status Updated Successfully"
             ];
-
         } catch (Exception $e) {
             $this->db->rollBack();
 

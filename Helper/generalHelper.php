@@ -798,6 +798,8 @@ function getData($table, $desc = false, $table2 = null)
 function getData2($query)
 {
     try {
+        // echo $query;
+        // echo "<br>";
         $db = getDBCon();
         $sql = "$query";
         $stmt = $db->prepare($sql);

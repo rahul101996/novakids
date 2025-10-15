@@ -156,7 +156,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <tr>
                                 <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Sr no.</th>
                                 <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Order Id</th>
-                                <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Purchase<br>Date</th>
+                                <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Purchase Date</th>
                                 <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Email</th>
                                 <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Mobile</th>
                                 <th class="px-4 py-3 text-sm font-bold text-gray-800 border border-gray-300">Delivery Address</th>
@@ -186,7 +186,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         </div>
                                     </td>
                                     <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300"><?= $value['orderid'] ?></td>
-                                    <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300"><?= formatDate($value['created_date']) ?></td>
+                                    <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300 text-nowrap"><?= formatDate($value['created_date']) ?></td>
                                     <!-- <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">Bhavna  Sodi</td> -->
                                     <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300"><?= $value['email'] ?></td>
                                     <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300"><?= $value['mobile'] ?></td>
@@ -221,9 +221,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         <span class="text-green-600">
                                             <?= $value['status'] ?> </span>
                                     </td>
-                                    <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300">
-                                        <form action="" method="post">
-                                            <select name="order_status" id="" class="form-control w-52">
+                                    <td class="px-4 py-3 text-sm text-gray-800 border border-gray-300 ">
+                                        <form action="" method="post" class="flex items-center justify-center gap-2">
+                                            <select name="order_status" id="" class="form-control !w-[150px]">
                                                 <!-- <option value="Pending" class="text-md">Pending</option> -->
                                                 <option value="Processing" selected="" class="text-md"
                                                     <?= $value['status'] == 'Processing' ?>>Processing</option>
@@ -238,7 +238,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                             <input type="hidden" name="orderid" value="5431758386371">
                                             <input type="hidden" name="shipment_order_id" value="">
                                             <input type="hidden" name="shipment_id" value="">
-                                            <button type="button" class="btn btn-primary mt-3">Submit</button>
+                                            <button type="button" class="btn btn-primary ">Submit</button>
                                         </form>
                                     </td>
                                 </tr>

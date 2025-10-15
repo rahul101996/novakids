@@ -250,7 +250,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                             $name = str_replace(' ', '-', $product['name']);
                             $name = str_replace("'", '', $name);
-                           
+
                             // printWithPre($images);
                         ?>
                             <a href="/products/product-details/<?= $name ?>" class="block">
@@ -659,7 +659,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             <?php
                             foreach ($reviws as $key => $value) { ?>
 
-                                <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                                <div class="p-2 bg-white border rounded-md relative m-1 min-h-[28vh] flex flex-col justify-between">
                                     <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
                                         <span> <?php for ($i = 0; $i < 5; $i++) {
                                                     if ($value['rating'] > $i) {
@@ -681,6 +681,15 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                         <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
                                             "<?= $value['reviewText'] ?>"
                                         </p>
+                                        <?php
+                                        if ($value['image'] != null) {
+
+                                        ?>
+                                            <img src="/public/images/<?= $value['image'] ?>"
+                                                alt="Review Image" class=" h-20 !w-auto mt-2">
+                                        <?php
+                                        }
+                                        ?>
                                     </div>
 
 
@@ -699,202 +708,190 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
 
-                                <div class="flex gap-4 items-center">
-                                    <div class="flex items-center w-10 h-10">
-                                        <img src="/public/images/dp.png" alt="John D."
-                                            class="w-full h-full rounded-full object-cover border mr-3">
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-gray-800">
-                                            <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
-                                        </p>
-                                    </div>
-                                </div>
+
+
+                            <?php } ?>
+
                         </div>
-
-                        >>>>>>> 20ecea29837686308243f7e6b693640c1ade1e4b
-                    <?php } ?>
-
-                </div>
-            <?php
+                    <?php
                     } else if (count($reviws) == 1) {
                         $value = $reviws[0];
-            ?>
-                <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
-                    <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
-                        <span> <?php for ($i = 0; $i < 5; $i++) {
-                                    if ($value['rating'] > $i) {
-                                        echo '★';
-                                    } else {
-                                        echo '☆';
+                    ?>
+                        <div class="p-2 bg-white border rounded-md relative m-1 h-[28vh] flex flex-col justify-between">
+                            <div class="flex flex-col gap-1 items-start mb-2 text-[#f25b21]">
+                                <span> <?php for ($i = 0; $i < 5; $i++) {
+                                            if ($value['rating'] > $i) {
+                                                echo '★';
+                                            } else {
+                                                echo '☆';
+                                            }
+                                        } ?></span>
+                                <style>
+                                    .review-text {
+                                        display: -webkit-box;
+                                        -webkit-line-clamp: 4;
+                                        /* show only 4 lines */
+                                        -webkit-box-orient: vertical;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
                                     }
-                                } ?></span>
-                        <style>
-                            .review-text {
-                                display: -webkit-box;
-                                -webkit-line-clamp: 4;
-                                /* show only 4 lines */
-                                -webkit-box-orient: vertical;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                            }
-                        </style>
-                        <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
-                            "<?= $value['reviewText'] ?>"
-                        </p>
-                    </div>
+                                </style>
+                                <p class="review-text text-gray-700 italic leading-relaxed md:text-sm lg:text-base">
+                                    "<?= $value['reviewText'] ?>"
+                                </p>
+                            </div>
 
-                    <div class="flex gap-4 items-center">
-                        <div class="flex items-center w-10 h-10">
-                            <img src="/public/images/dp.png" alt="John D."
-                                class="w-full h-full rounded-full object-cover border mr-3">
+                            <div class="flex gap-4 items-center">
+                                <div class="flex items-center w-10 h-10">
+                                    <img src="/public/images/dp.png" alt="John D."
+                                        class="w-full h-full rounded-full object-cover border mr-3">
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">
+                                        <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <p class="font-semibold text-gray-800">
-                                <?= !empty($value['fname']) ? $value['fname'] . ' ' . $value['lname'] : 'Anonymous' ?>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            <?php
+                    <?php
                     }
-            ?>
+                    ?>
 
+                </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        $(document).ready(function() {
-            $(".reviews-sliders").owlCarousel({
-                loop: true,
-                autoplay: true,
-                autoplayTimeout: 3000,
-                smartSpeed: 1000,
-                // slideTransition: "linear",
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    768: {
-                        items: 2
+        <script>
+            $(document).ready(function() {
+                $(".reviews-sliders").owlCarousel({
+                    loop: true,
+                    autoplay: true,
+                    autoplayTimeout: 3000,
+                    smartSpeed: 1000,
+                    // slideTransition: "linear",
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        768: {
+                            items: 2
+                        }
                     }
-                }
+                });
             });
-        });
-    </script>
+        </script>
 
 
-    <section class="bg-white py-14 max-md:py-8 w-full">
-        <div class="w-[90vw] max-md:w-[90vw] mx-auto">
-            <div class="relative">
-                <div class="flex flex items-center justify-between mb-6">
-                    <h3 class="text-left text-3xl max-md:text-xl font-extrabold uppercase">YOU MAY ALSO LIKE</h3>
-                    <div class="flex flex items-center gap-2 justify-center">
-                        <div onclick="banner_forward(this)"
-                            class=" border bg-black border-white p-2 rounded-full cursor-pointer">
-                            <img src="/public/icons/backward.png"
-                                class="w-[25px] h-[25px] max-md:w-[12px] max-md:h-[12px]" alt="">
-                        </div>
+        <section class="bg-white py-14 max-md:py-8 w-full">
+            <div class="w-[90vw] max-md:w-[90vw] mx-auto">
+                <div class="relative">
+                    <div class="flex flex items-center justify-between mb-6">
+                        <h3 class="text-left text-3xl max-md:text-xl font-extrabold uppercase">YOU MAY ALSO LIKE</h3>
                         <div class="flex flex items-center gap-2 justify-center">
-                            <div onclick="banner_backward(this)"
+                            <div onclick="banner_forward(this)"
                                 class=" border bg-black border-white p-2 rounded-full cursor-pointer">
                                 <img src="/public/icons/backward.png"
-                                    class="w-[25px] h-[25px] max-md:w-[12px] max-md:h-[12px] rotate-180" alt="">
+                                    class="w-[25px] h-[25px] max-md:w-[12px] max-md:h-[12px]" alt="">
+                            </div>
+                            <div class="flex flex items-center gap-2 justify-center">
+                                <div onclick="banner_backward(this)"
+                                    class=" border bg-black border-white p-2 rounded-full cursor-pointer">
+                                    <img src="/public/icons/backward.png"
+                                        class="w-[25px] h-[25px] max-md:w-[12px] max-md:h-[12px] rotate-180" alt="">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="owl-carousel owl-theme like-carousel">
+                    <div class="owl-carousel owl-theme like-carousel">
 
-                    <?php foreach ($uniqueProducts as $key => $product) {
-                        // $images = json_decode($product['product_images'], true);
-                        // $images = array_reverse($images);
-                        $SecondImage = true;
-                        $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
-                        // printWithPre($varients);
-                        $images = json_decode($varients['images'], true);
-                        $images = array_reverse($images);
-                        (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
-                        $comparePrice = floatval($product['compare_price']);
-                        $price = floatval($varients['price']);
-                        $discountAmount = $comparePrice - $price;
-                        $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
+                        <?php foreach ($uniqueProducts as $key => $product) {
+                            // $images = json_decode($product['product_images'], true);
+                            // $images = array_reverse($images);
+                            $SecondImage = true;
+                            $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
+                            // printWithPre($varients);
+                            $images = json_decode($varients['images'], true);
+                            $images = array_reverse($images);
+                            (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
+                            $comparePrice = floatval($product['compare_price']);
+                            $price = floatval($varients['price']);
+                            $discountAmount = $comparePrice - $price;
+                            $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
-                        $name = str_replace(' ', '-', $product['name']);
-                        $name = str_replace("'", '', $name);
-                        if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
+                            $name = str_replace(' ', '-', $product['name']);
+                            $name = str_replace("'", '', $name);
+                            if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
-                            $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $product['id'] . " AND `userid` = " . $_SESSION["userid"])[0];
-                        } else {
-
-                            $data = checkExisteingWishlistSession($product['id']);
-                            if ($data) {
-                                $data = ['id' => $data];
+                                $data = getData2("SELECT * FROM `tbl_wishlist` WHERE `product` = " . $product['id'] . " AND `userid` = " . $_SESSION["userid"])[0];
                             } else {
-                                $data = [];
+
+                                $data = checkExisteingWishlistSession($product['id']);
+                                if ($data) {
+                                    $data = ['id' => $data];
+                                } else {
+                                    $data = [];
+                                }
                             }
-                        }
 
-                        // printWithPre($images);
-                    ?>
-                        <a href="/products/product-details/<?= $name ?>" class="block">
-                            <div class="group relative md:m-2 max-md:m-1 md:p-2 cursor-pointer transition overflow-hidden">
-                                <!-- Discount Badge -->
-                                <span
-                                    class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">
-                                    SAVE <?= $discountPercentage ?>%
-                                </span>
+                            // printWithPre($images);
+                        ?>
+                            <a href="/products/product-details/<?= $name ?>" class="block">
+                                <div class="group relative md:m-2 max-md:m-1 md:p-2 cursor-pointer transition overflow-hidden">
+                                    <!-- Discount Badge -->
+                                    <span
+                                        class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">
+                                        SAVE <?= $discountPercentage ?>%
+                                    </span>
 
-                                <!-- Product Images -->
-                                <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
-                                    <!-- Default Image -->
-                                    <img src="/<?= $images[0] ?>" alt="Product 1"
-                                        class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+                                    <!-- Product Images -->
+                                    <div class="relative w-full h-[450px] max-md:h-[250px] overflow-hidden group">
+                                        <!-- Default Image -->
+                                        <img src="/<?= $images[0] ?>" alt="Product 1"
+                                            class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
 
-                                    <!-- Hover Image -->
+                                        <!-- Hover Image -->
 
-                                    <img src="/<?= $SecondImage ?>" alt="Product 1 Hover"
-                                        class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                                        <img src="/<?= $SecondImage ?>" alt="Product 1 Hover"
+                                            class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
 
-                                    <!-- Add to favorites Icon (top-right) -->
-                                    <button
-                                        class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 max-md:h-6 max-md:w-6 flex items-center justify-center rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
-                                        <i class="fas fa-heart max-md:text-xs"></i>
-                                    </button>
+                                        <!-- Add to favorites Icon (top-right) -->
+                                        <button
+                                            class="addToWishlistBtn absolute top-2 right-3 h-10 w-10 max-md:h-6 max-md:w-6 flex items-center justify-center rounded-full transition-all duration-500  z-20 stop-link <?= !empty($data) ? 'bg-[#f25b21] text-white' : 'bg-black/70 text-white  hover:bg-[#f25b21]' ?>">
+                                            <i class="fas fa-heart max-md:text-xs"></i>
+                                        </button>
 
-                                    <!-- Add to Cart Icon -->
-                                    <button
-                                        class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full max-md:bg-black/90 max-md:py-1 max-md:text-sm max-md:opacity-100 max-md:translate-y-0 opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
-                                        <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                                    </button>
-                                    <input type="text" value="<?= $product['id'] ?>" class="ProductId">
-                                </div>
-
-                                <!-- Product Details -->
-                                <div class="pt-4 w-full ">
-                                    <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?>
-                                    </h3>
-                                    <div class="flex items-center justify-start gap-3 w-full">
-                                        <p class="text-gray-500 line-through text-sm">₹
-                                            <?= formatNumber($product['compare_price']) ?>.00
-                                        </p>
-                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?>.00</p>
+                                        <!-- Add to Cart Icon -->
+                                        <button
+                                            class="openCartBtn absolute py-1.5 bottom-0 right-0 bg-black/70 text-white w-full max-md:bg-black/90 max-md:py-1 max-md:text-sm max-md:opacity-100 max-md:translate-y-0 opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 hover:bg-[#f25b21] z-20 stop-link">
+                                            <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                                        </button>
+                                        <input type="text" value="<?= $product['id'] ?>" class="ProductId">
                                     </div>
-                                    <!-- reviews -->
-                                    <div class="flex items-center justify-start space-x-1 hidden">
-                                        <span class="text-yellow-500">★★★★★</span>
+
+                                    <!-- Product Details -->
+                                    <div class="pt-4 w-full ">
+                                        <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?>
+                                        </h3>
+                                        <div class="flex items-center justify-start gap-3 w-full">
+                                            <p class="text-gray-500 line-through text-sm">₹
+                                                <?= formatNumber($product['compare_price']) ?>.00
+                                            </p>
+                                            <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?>.00</p>
+                                        </div>
+                                        <!-- reviews -->
+                                        <div class="flex items-center justify-start space-x-1 hidden">
+                                            <span class="text-yellow-500">★★★★★</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    <?php } ?>
+                            </a>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
     </div>
 
@@ -943,8 +940,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
 
     <div id="reviewModal"
-        class="hidden fixed inset-0 bg-gradient-to-br from-black/70 via-blue-900/30 to-purple-900/30 backdrop-blur-sm flex justify-center items-center z-50 p-4">
-        <div class="bg-white rounded-md w-full max-w-lg relative shadow-2xl animate-slideDown overflow-hidden">
+        class="hidden fixed inset-0 bg-gradient-to-br from-black/70 via-blue-900/30 to-purple-900/30 backdrop-blur-sm flex justify-center items-center z-50 p-4 overflow-y-auto">
+        <div class="bg-white rounded-md w-full max-w-lg relative shadow-2xl animate-slideDown ">
             <!-- Decorative Background Pattern -->
             <div
                 class="absolute top-0 right-0 w-64 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full filter blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2">
@@ -956,10 +953,10 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             <!-- Content Container -->
             <div class="relative z-10">
                 <!-- Header with Gradient -->
-                <div class="bg-black to-pink-600 px-8 py-6 max-md:py-4 max-md:px-4">
+                <div class="bg-black to-pink-600 px-8 py-2 max-md:py-4 max-md:px-4">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h2 class="text-3xl max-md:text-xl font-bold text-white mb-1">Share Your Experience</h2>
+                            <h2 class="text-xl  max-md:text-xl font-bold text-white mb-1">Share Your Experience</h2>
                             <p class="text-blue-100 text-sm">We value your feedback</p>
                         </div>
                         <button onclick="closeReviewModal()"
@@ -984,7 +981,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </svg>
                             Your Name
                         </label>
-                        <input type="text" id="name" placeholder="John Doe"
+                        <input type="text" id="name" value="<?= isset($_SESSION['fname']) ? $_SESSION['fname'] . ' ' . $_SESSION['lname'] : '' ?>" placeholder="John Doe"
                             class="w-full px-4 py-2 max-md:py-1 border-2 border-gray-200 rounded-md focus:ring focus:ring-orange-500 focus:border-orange-500 outline-none transition-all duration-300 bg-gray-50 focus:bg-white group-hover:border-gray-300"
                             required>
                     </div>
@@ -1002,39 +999,39 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         </label>
 
                         <!-- Star Rating Container -->
-                        <div class="bg-gradient-to-r from-gray-50 to-blue-50 p-6 max-md:p-3 rounded-md border-2 border-gray-200">
-                            <div class="flex justify-center items-center gap-3 mb-3 max-md:mb-0">
+                        <div class="bg-gradient-to-r from-gray-50 to-blue-50 p-3 max-md:p-3 rounded-md border-2 border-gray-200">
+                            <div class="flex justify-center items-center gap-3 mb-1 max-md:mb-0">
                                 <button type="button" onclick="setRating(1)"
                                     class="star-icon text-gray-300 hover:text-orange-500 transition-all duration-200 transform hover:scale-125">
-                                    <svg class="w-12 h-12 max-md:w-8 max-md:h-8" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-10 h-10 max-md:w-8 max-md:h-8" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
                                 </button>
                                 <button type="button" onclick="setRating(2)"
                                     class="star-icon text-gray-300 hover:text-orange-500 transition-all duration-200 transform hover:scale-125">
-                                    <svg class="w-12 h-12 max-md:w-8 max-md:h-8" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-10 h-10 max-md:w-8 max-md:h-8" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
                                 </button>
                                 <button type="button" onclick="setRating(3)"
                                     class="star-icon text-gray-300 hover:text-orange-500 transition-all duration-200 transform hover:scale-125">
-                                    <svg class="w-12 h-12 max-md:w-8 max-md:h-8" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-10 h-10 max-md:w-8 max-md:h-8" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
                                 </button>
                                 <button type="button" onclick="setRating(4)"
                                     class="star-icon text-gray-300 hover:text-orange-500 transition-all duration-200 transform hover:scale-125">
-                                    <svg class="w-12 h-12 max-md:w-8 max-md:h-8" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-10 h-10 max-md:w-8 max-md:h-8" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
                                 </button>
                                 <button type="button" onclick="setRating(5)"
                                     class="star-icon text-orange-500 hover:text-orange-500 transition-all duration-200 transform hover:scale-125">
-                                    <svg class="w-12 h-12 max-md:w-8 max-md:h-8" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-10 h-10 max-md:w-8 max-md:h-8" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
@@ -1059,12 +1056,29 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                             </span>
                             <span class="text-xs text-gray-400" id="charCount">0/500</span>
                         </label>
-                        <textarea id="reviewText" rows="4" maxlength="500" oninput="updateCharCount()"
+                        <textarea id="reviewText" rows="2" maxlength="500" oninput="updateCharCount()"
                             placeholder="Tell us about your experience. What did you like? What could be improved?"
                             class="w-full px-4 py-2 max-md:py-1 border-2 border-gray-200 rounded-md focus:ring focus:ring-orange-500 focus:border-orange-500 outline-none transition-all duration-300 resize-none bg-gray-50 focus:bg-white group-hover:border-gray-300"
                             required></textarea>
                     </div>
+                    <div class="space-y-1 text-center flex flex-col items-center border-2 border-gray-300 border-dashed rounded-lg p-4">
 
+                        <div id="imagePreview" class="hidden mb-4">
+                            <input type="" name="old_vdata_image" value="">
+                            <img src="/" alt="Preview" class="mx-auto h-32 object-cover">
+                        </div>
+                        <svg class="mx-auto h-8 w-8 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <div class="flex text-sm text-gray-600">
+                            <label for="vdata_image" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none">
+                                <span>Upload a file</span>
+                                <input id="vdata_image" name="review_image" type="file" class="sr-only" accept="image/*">
+                            </label>
+                            <p class="pl-1">or drag and drop</p>
+                        </div>
+                        <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                    </div>
                     <!-- Submit Button with Gradient -->
                     <div class="md:pt-2">
                         <button type="submit"
@@ -1090,16 +1104,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 </form>
 
                 <!-- Footer -->
-                <div class="px-8 py-5 bg-gradient-to-r from-gray-50 to-blue-50 border-t border-gray-100">
-                    <div class="flex items-center justify-center gap-2 text-sm text-gray-600">
-                        <svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        Your review is secure and helps us improve
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -1199,43 +1204,38 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         document.getElementById("reviewForm").addEventListener("submit", async function(e) {
             e.preventDefault();
 
-            const name = document.getElementById("name").value;
-            const userid = document.getElementById("userid").value;
-            const product_id = document.getElementById("product_id").value;
-            const reviewText = document.getElementById("reviewText").value;
-            const rating = document.getElementById("rating").value;
+            const formData = new FormData();
+            formData.append('userid', document.getElementById('userid').value);
+            formData.append('product_id', document.getElementById('product_id').value);
+            formData.append('rating', document.getElementById('rating').value);
+            formData.append('reviewText', document.getElementById('reviewText').value);
+            formData.append('name', document.getElementById('name').value);
 
-            console.log(name, reviewText, rating);
-
-            if (reviewText.length >= 0) {
-                let res = await fetch("/addReview", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        name,
-                        userid,
-                        product_id,
-                        reviewText,
-                        rating,
-                    }),
-                })
-
-                let data = await res.json();
-
-                if (data.success) {
-                    toastr.success(data.message);
-                    closeReviewModal();
-                    this.reset();
-                } else {
-                    toastr.error(data.message);
-                }
-            } else {
-                toastr.error("Please Write review");
+            const fileInput = document.getElementById('vdata_image');
+            if (fileInput.files.length > 0) {
+                formData.append('review_image', fileInput.files[0]);
             }
 
+            try {
+                const response = await axios.post('/addReview', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+
+                if (response.data.success) {
+                    alert(response.data.message);
+                    document.getElementById("reviewForm").reset();
+                    location.reload();
+                } else {
+                    alert("Error: " + response.data.message);
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Something went wrong. Please try again.");
+            }
         });
+
 
 
 
@@ -1703,6 +1703,25 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                 el: '.swiper-pagination',
                 clickable: true,
             },
+        });
+    </script>
+    <script>
+        const imageInput = document.getElementById('vdata_image');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewImg = imagePreview.querySelector('img');
+
+
+
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    imagePreview.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
         });
     </script>
 </body>
