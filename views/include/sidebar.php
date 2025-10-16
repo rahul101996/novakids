@@ -1,4 +1,4 @@
-<aside class="w-60 bg-[#1e293b] text-gray-300 flex flex-col fixed h-full z-10 hidden md:flex">
+<aside class="w-60 bg-[#1e293b] text-gray-300 flex flex-col fixed h-full z-10 hidden md:flex hidden">
     <div class="px-6 py-2 border-b border-gray-700 flex items-center justify-center">
         <a href="#" class="flex items-center space-x-2 text-white">
             <img src="/public/logos/logo-white.png" class="w-24" alt="Logo">
@@ -244,4 +244,7 @@
             Log Out
         </a>
     </div>
+</aside>
+<aside class="w-60 bg-[#ebebeb] text-gray-300 flex flex-col fixed h-full z-10  md:flex">
+   
 </aside>

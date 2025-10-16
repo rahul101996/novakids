@@ -343,9 +343,8 @@ if (!empty($_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NovaKids</title>
     <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-/>
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <link rel="icon" href="/public/logos/nova_favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="/public/css/style.css">
@@ -353,7 +352,7 @@ if (!empty($_POST)) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -399,6 +398,42 @@ if (!empty($_POST)) {
         .g_id_signin {
             display: flex ! important;
             justify-content: center ! important;
+        }
+
+        .toast {
+            border-radius: 10px !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 14px 18px !important;
+            font-weight: 500;
+        }
+
+        /* ===== SUCCESS TOAST ===== */
+        .toast-success {
+            background-color: #ffffff !important;
+            opacity: 100% !important;
+            /* white background */
+            color: #16a34a !important;
+            /* green text (#16a34a = Tailwind green-600) */
+            border-left: 4px solid #16a34a !important;
+        }
+
+        /* Green progress bar */
+        .toast-success .toast-progress {
+            background-color: #16a34a !important;
+        }
+
+        /* ===== ERROR TOAST ===== */
+        .toast-error {
+            background-color: #ffffff !important;
+            /* white background */
+            color: #dc2626 !important;
+            /* red text (#dc2626 = Tailwind red-600) */
+            border-left: 4px solid #dc2626 !important;
+        }
+
+        /* Red progress bar */
+        .toast-error .toast-progress {
+            background-color: #dc2626 !important;
         }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">

@@ -162,7 +162,22 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             <li class="text-black font-semibold">Product Details</li>
         </ol>
     </div>
+    <div id="image_modal" class="w-[100vw] h-full fixed bg-black/50 flex items-center justify-center top-0 z-[11111] hidden">
+        <input type="number" value="0" id="img_index" class="hidden">
+        <input type="text" value="0" id="img_container" class="hidden">
 
+
+        <div class="absolute top-[5vh] right-[5vw] bg-white flex items-center justify-center p-1" onclick="close_main_img()"> <button class="text-xl text-gray-500"> <img src="/public/icons/cross.png" class="w-[35px] h-[35px]" alt="">
+            </button></div>
+        <div id="prevclass" class="absolute top-1/2 left-[5vw] bg-white flex items-center justify-center p-1" onclick="backimg()"> <button class="text-xl text-gray-500"> <img src="/public/icons/backward-black.png" class="w-[35px] h-[35px] max-lg:w-[25px] max-lg:h-[25px]" alt="">
+            </button></div>
+        <div class="w-[50vw] h-[75vh] overflow-hidden rounded max-lg:w-[70%] max-lg:h-[40vh]">
+            <img id="modal_img" src="" class="w-full h-full object-contain" alt="">
+        </div>
+        <input type="number" value="0" id="img_index" class="hidden">
+        <div id="nextclass" class="absolute top-1/2  right-[3vw] bg-white flex items-center justify-center p-1" onclick="nextimg(this);"> <button class="text-xl text-gray-500"> <img src="/public/icons/forward-black.png" class="w-[35px] h-[35px] max-lg:w-[25px] max-lg:h-[25px]" alt="">
+            </button></div>
+    </div>
     <div class="w-full mx-auto mt-6 flex flex-col items-center justify-center">
         <section class="flex max-md:flex-col items-start justify-center relative w-[90%] gap-0 max-md:gap-6">
 
@@ -176,8 +191,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                     ?>
                             <div class=" overflow-hidden  cursor-pointer">
-                                <img src="/<?= $image ?>" alt="View 1"
-                                    class="w-full h-full object-cover image-hover cursor-zoom-in">
+                                <img src="/<?= $image ?>" alt="View 1" onclick="open_main_img(this,<?= $key ?>,'ProductDetailImg')"
+                                    class="w-full h-full object-cover image-hover cursor-zoom-in design_image">
                             </div>
                     <?php }
                     } ?>
@@ -199,7 +214,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         ?>
                                 <div class="swiper-slide">
                                     <img src="/<?= $image ?>" alt="View 1"
-                                        class="w-full h-[400px] object-cover shadow-lg cursor-zoom-in">
+                                        class="w-full h-[400px] object-cover shadow-lg cursor-zoom-in design_image" onclick="open_main_img(this,<?= $key ?>,'mobileProductDetailImg')">
                                 </div>
                         <?php }
                         } ?>
@@ -1459,6 +1474,106 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
     include $_SERVER['DOCUMENT_ROOT'] . "/views/website/include/footer.php"; ?>
 
     <script>
+        function open_main_img(element, index, container) {
+            let real_index = index;
+            document.getElementById("img_index").value = real_index;
+            document.getElementById("img_container").value = container;
+
+            if (document.getElementById("img_index").value == 0) {
+                document.getElementById("prevclass").classList.add("hidden");
+            } else {
+                if (document.getElementById("prevclass").classList.contains("hidden"))
+                    document.getElementById("prevclass").classList.remove("hidden");
+            }
+            if (document.getElementById("image_modal").classList.contains("hidden")) {
+                document.getElementById("image_modal").classList.remove("hidden");
+            }
+
+            let main_src = element.src;
+            document.getElementById("modal_img").src = main_src;
+        }
+
+        function close_main_img() {
+            document.getElementById("image_modal").classList.add("hidden");
+        }
+
+        function nextimg(nextbtn) {
+            let img_index = parseInt(document.getElementById("img_index").value);
+            let image_container = document.getElementById("img_container").value;
+            let image_grid = document.getElementById(image_container);
+
+            let all_images = image_grid.querySelectorAll(".design_image");
+            console.log(image_grid);
+            img_index = img_index + 1;
+            console.log(all_images.length, img_index);
+            if (all_images.length - 1 == img_index) {
+                nextbtn.classList.add("hidden");
+            } else {
+                if (nextbtn.classList.contains("hidden")) {
+                    nextbtn.classList.remove("hidden");
+                }
+            }
+
+            if (img_index == 0) {
+                document.getElementById("prevclass").classList.add("hidden");
+            } else {
+                if (document.getElementById("prevclass").classList.contains("hidden")) {
+                    document.getElementById("prevclass").classList.remove("hidden");
+                }
+            }
+
+            all_images.forEach((element, index) => {
+                if (index == img_index) {
+                    let modla_img = document.getElementById("modal_img");
+                    let elemnet_img = element.src;
+
+                    if ((modla_img.src = elemnet_img)) {
+                        document.getElementById("img_index").value = img_index;
+                    }
+                }
+            });
+
+            // console.log(img_index);
+            // console.log(all_images.length);
+        }
+
+        function backimg() {
+            let img_index = parseInt(document.getElementById("img_index").value);
+            let image_container = document.getElementById("img_container").value;
+            let image_grid = document.getElementById(image_container);
+
+            let all_images = image_grid.querySelectorAll(".design_image");
+            console.log(image_grid);
+
+            // console.log(img_index);
+            img_index = img_index - 1;
+            all_images.forEach((element, index) => {
+                if (index == img_index) {
+                    let modla_img = document.getElementById("modal_img");
+                    let elemnet_img = element.src;
+
+                    if ((modla_img.src = elemnet_img)) {
+                        document.getElementById("img_index").value = img_index;
+                    }
+                }
+            });
+            if (img_index == 0) {
+                document.getElementById("prevclass").classList.add("hidden");
+            } else {
+                if (document.getElementById("prevclass").classList.contains("hidden")) {
+                    document.getElementById("prevclass").classList.remove("hidden");
+                }
+            }
+            console.log(all_images.length, img_index);
+
+            if (all_images.length == img_index) {
+                if (document.getElementById("nextvclass").classList.contains("hidden")) {
+                    document.getElementById("nextclass").classList.remove("hidden");
+                }
+            } else {
+                document.getElementById("nextclass").classList.remove("hidden");
+            }
+        }
         const GLOBAL_product_VARIANT = {
             variants: {},
             selected: {}

@@ -91,40 +91,6 @@ if (isset($_POST['update_profile'])) {
     }
 
     /* ===== Base Toast Style ===== */
-    .toast {
-        border-radius: 10px !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        padding: 14px 18px !important;
-        font-weight: 500;
-    }
-
-    /* ===== SUCCESS TOAST ===== */
-    .toast-success {
-        background-color: #ffffff !important;
-        /* white background */
-        color: #16a34a !important;
-        /* green text (#16a34a = Tailwind green-600) */
-        border-left: 4px solid #16a34a !important;
-    }
-
-    /* Green progress bar */
-    .toast-success .toast-progress {
-        background-color: #16a34a !important;
-    }
-
-    /* ===== ERROR TOAST ===== */
-    .toast-error {
-        background-color: #ffffff !important;
-        /* white background */
-        color: #dc2626 !important;
-        /* red text (#dc2626 = Tailwind red-600) */
-        border-left: 4px solid #dc2626 !important;
-    }
-
-    /* Red progress bar */
-    .toast-error .toast-progress {
-        background-color: #dc2626 !important;
-    }
 </style>
 
 <body class="">

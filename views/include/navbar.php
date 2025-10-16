@@ -1,4 +1,4 @@
-<header class="bg-white border-b flex items-center justify-between p-2 w-full">
+<header class="bg-white border-b flex items-center justify-between p-2 w-full hidden">
     <div class="relative w-full max-w-md hidden">
         <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
             fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -29,4 +29,7 @@
             </div>
         </div>
     </div>
+</header>
+<header class="w-full flex bg-[#1a1a1a] fixed top-0 left-0 z-[9999] ">
+
 </header>
