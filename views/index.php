@@ -6,22 +6,22 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
 ?>
 
-<body class="bg-gray-50">
+<body class="bg-[#1a1a1a]">
 
-    <div class="flex h-screen bg-gray-100">
+    <div class="flex h-screen">
         <?php
         include $_SERVER['DOCUMENT_ROOT'] . "/views/include/sidebar.php";
 
         $date = date('Y-m-d');
 
         ?>
- <?php
+
+        <main class="flex-1 md:ml-[16.5rem] md:mt-[3.7rem] bg-[#f1f1f1] rounded-tr-3xl">
+
+            <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
             ?>
 
-        <main class="flex-1 md:ml-60">
-
-           
             <div class="w-full flex items-center justify-center p-4">
                 <div class="w-[93%] grid grid-cols-3 items-center justify-center gap-3">
                     <div class="rounded-2xl border border-gray-200 bg-white p-3 md:p-6">
@@ -221,9 +221,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                             <!-- Table Row -->
                             <?php
-                            foreach ($Orders as $key => $order) { 
-                                if($key > 4) break;
-                                ?>
+                            foreach ($Orders as $key => $order) {
+                                if ($key > 4) break;
+                            ?>
                                 <div class="block hover:bg-gray-50 transition-colors duration-200">
                                     <div class="grid grid-cols-[50px_3fr_2fr_3fr] items-center gap-4 px-4 py-3 text-gray-800 border-b">
                                         <!-- Sr. No -->
@@ -251,7 +251,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                                         <!-- E-mail -->
                                         <div class="text-green-600 font-medium truncate">
-                                           ₹<?= formatNumber($order['total_amount']) ?>
+                                            ₹<?= formatNumber($order['total_amount']) ?>
                                         </div>
 
                                         <!-- User From -->
