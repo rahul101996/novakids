@@ -140,31 +140,31 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     </div>
                     <div class="w-full flex items-start justify-center flex-col  p-2 px-3 border-r border-gray-300 h-full">
                         <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
-                            Todays Orders
+                            Items Ordered
                         </span>
 
                         <span class="mt-1 font-semibold"><?= $totalTodayOrders ?> --</span>
                     </div>
                     <div class="w-full flex items-start justify-start flex-col  p-2 px-3 border-r border-gray-300 h-full">
                         <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
-                            Conversation rate
+                            Returns
                         </span>
 
-                        <span class="mt-1 font-semibold">0% --</span>
+                        <span class="mt-1 font-semibold">0 --</span>
                     </div>
                     <div class="w-full flex items-start justify-start flex-col  p-2 px-3 border-r border-gray-300 h-full">
                         <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
-                            Conversation rate
+                            Orders Complete
                         </span>
 
-                        <span class="mt-1 font-semibold">0% --</span>
+                        <span class="mt-1 font-semibold">0 --</span>
                     </div>
                     <div class="w-full flex items-start justify-start flex-col  p-2 px-3 border-r border-gray-300 h-full">
                         <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
-                            Conversation rate
+                            Cancel Orders
                         </span>
 
-                        <span class="mt-1 font-semibold">0% --</span>
+                        <span class="mt-1 font-semibold">0 --</span>
                     </div>
                 </div>
             </div>

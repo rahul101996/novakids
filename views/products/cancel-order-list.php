@@ -6,22 +6,31 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
 ?>
 
-<body class="bg-gray-100">
+<body class="bg-[#1a1a1a] overflow-hidden">
 
-    <div class="flex h-screen">
+    <div class="flex">
         <?php
         include $_SERVER['DOCUMENT_ROOT'] . "/views/include/sidebar.php";
 
         $date = date('Y-m-d');
 
-
         ?>
 
-        <main class="flex-1 md:ml-60">
+        <main class="flex-1 md:ml-[16.5rem] md:mt-[3.7rem] bg-[#f1f1f1] rounded-tr-3xl  h-[92vh] overflow-y-scroll">
             <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
             ?>
+            <div class="w-full flex items-center justify-between p-3">
+                <span class="text-xl font-semibold text-gray-800 flex">
+                    <svg class="h-6 w-6 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2"></path>
+                    </svg>Cancel 
+                    Orders</span>
+                <div>
 
+                    <button class="bg-gray-800 text-xs font-semibold py-1 px-4 rounded-lg text-white">Export</button>
+                </div>
+            </div>
             <div class="p-6">
 
                 <div class="w-full flex items-center justify-between mb-4">
