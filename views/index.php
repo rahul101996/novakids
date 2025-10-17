@@ -6,9 +6,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
 ?>
 
-<body class="bg-[#1a1a1a]">
+<body class="bg-[#1a1a1a] overflow-hidden">
 
-    <div class="flex h-screen">
+    <div class="flex">
         <?php
         include $_SERVER['DOCUMENT_ROOT'] . "/views/include/sidebar.php";
 
@@ -16,252 +16,95 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
         ?>
 
-        <main class="flex-1 md:ml-[16.5rem] md:mt-[3.7rem] bg-[#f1f1f1] rounded-tr-3xl">
+        <main class="flex-1 md:ml-[16.5rem] md:mt-[3.7rem] bg-[#f1f1f1] rounded-tr-3xl py-7 h-[95vh] overflow-y-scroll">
 
             <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
             ?>
-
-            <div class="w-full flex items-center justify-center p-4">
-                <div class="w-[93%] grid grid-cols-3 items-center justify-center gap-3">
-                    <div class="rounded-2xl border border-gray-200 bg-white p-3 md:p-6">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 ">
-                            <img src="/public/icons/order.png" class="h-7" alt="">
-                        </div>
-
-                        <div class="mt-2 flex items-end justify-between">
-                            <div>
-                                <span class="text-sm text-gray-500 ">Total Orders</span>
-                                <h4 class="mt-2 text-title-sm font-bold text-gray-800 ">
-                                    <?= $Total_Orders ?>
-                                </h4>
-                            </div>
-                            <span class="flex items-center gap-1 rounded-full bg-error-50 py-0.5 pl-2 pr-2.5 text-sm font-medium text-error-600 ">
-
-
-                                View
-                            </span>
-
-                        </div>
+            <div class="w-full flex items-center justify-center px-4">
+                <div class="w-[73%] flex items-start justify-start text-[#4a4a4a] gap-3">
+                    <div class="px-2 py-1 rounded-lg flex items-center justify-center bg-white text-sm font-semibold gap-2 border border-gray-500 border-b border-gray-700">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>Last 30 days</span>
                     </div>
-                    <div class="rounded-2xl border border-gray-200 bg-white p-3 md:p-6">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 ">
-                            <img src="/public/icons/order.png" class="h-7" alt="">
-
-                        </div>
-
-                        <div class="mt-2 flex items-end justify-between">
-                            <div>
-                                <span class="text-sm text-gray-500 ">Todays Orders</span>
-                                <h4 class="mt-2 text-title-sm font-bold text-gray-800 ">
-                                    <?= $totalTodayOrders ?>
-                                </h4>
-                            </div>
-
-                            <span class="flex items-center gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm font-medium text-success-600 ">
-
-
-                                View
-                            </span>
-                        </div>
+                    <div class="px-2 py-1 rounded-lg flex items-center justify-center bg-white text-sm font-semibold gap-2 border border-gray-500 border-b border-gray-700">
+                        <span>All Channels</span>
                     </div>
-                    <div class="rounded-2xl border border-gray-200 bg-white p-3 md:p-6">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 ">
-                            <img src="/public/icons/users.png" class="h-7" alt="">
 
-                        </div>
-
-                        <div class="mt-2 flex items-end justify-between">
-                            <div>
-                                <span class="text-sm text-gray-500 ">Total Users</span>
-                                <h4 class="mt-2 text-title-sm font-bold text-gray-800 ">
-                                    <?= $Total_Users ?>
-                                </h4>
-                            </div>
-
-                            <span class="flex items-center gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm font-medium text-success-600 ">
-
-
-                                View
-                            </span>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl border border-gray-200 bg-white p-3 md:p-6">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 ">
-                            <svg class="shopBag anarkali-svg-icon" width="24px" height="24px" fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m26 8.9a1 1 0 0 0 -1-.9h-3a6 6 0 0 0 -12 0h-3a1 1 0 0 0 -1 .9l-1.78 17.8a3 3 0 0 0 .78 2.3 3 3 0 0 0 2.22 1h17.57a3 3 0 0 0 2.21-1 3 3 0 0 0 .77-2.31zm-10-4.9a4 4 0 0 1 4 4h-8a4 4 0 0 1 4-4zm9.53 23.67a1 1 0 0 1 -.74.33h-17.58a1 1 0 0 1 -.74-.33 1 1 0 0 1 -.26-.77l1.7-16.9h2.09v3a1 1 0 0 0 2 0v-3h8v3a1 1 0 0 0 2 0v-3h2.09l1.7 16.9a1 1 0 0 1 -.26.77z">
-                                </path>
-                            </svg>
-                        </div>
-
-                        <div class="mt-2 flex items-end justify-between">
-                            <div>
-                                <span class="text-sm text-gray-500 ">Total Sales</span>
-                                <h4 class="mt-2 text-title-sm font-bold text-gray-800 ">
-                                    <?= formatNumber($Total_sales) ?>
-                                </h4>
-                            </div>
-                            <span class="flex items-center gap-1 rounded-full bg-error-50 py-0.5 pl-2 pr-2.5 text-sm font-medium text-error-600 ">
-
-
-                                View
-                            </span>
-
-                        </div>
-                    </div>
-                    <div class="rounded-2xl border border-gray-200 bg-white p-3 md:p-6">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 ">
-                            <img src="/public/icons/t-shirt.png" class="h-7" alt="">
-
-                        </div>
-
-                        <div class="mt-2 flex items-end justify-between">
-                            <div>
-                                <span class="text-sm text-gray-500 ">Todays Orders</span>
-                                <h4 class="mt-2 text-title-sm font-bold text-gray-800 ">
-                                    <?= $Total_Products ?>
-                                </h4>
-                            </div>
-
-                            <span class="flex items-center gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm font-medium text-success-600 ">
-
-
-                                View
-                            </span>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl border border-gray-200 bg-white p-3 md:p-6">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 ">
-                            <img src="/public/icons/category.png" class="h-7" alt="">
-
-                        </div>
-
-                        <div class="mt-2 flex items-end justify-between">
-                            <div>
-                                <span class="text-sm text-gray-500 ">Total Category</span>
-                                <h4 class="mt-2 text-title-sm font-bold text-gray-800 ">
-                                    <?= $Total_Category ?>
-                                </h4>
-                            </div>
-
-                            <span class="flex items-center gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm font-medium text-success-600 ">
-
-
-                                View
-                            </span>
-                        </div>
-                    </div>
                 </div>
             </div>
+            <div class="w-full flex items-center justify-center p-4">
+                <div class="w-[73%] flex items-start justify-start bg-white flex-col rounded-2xl border border-gray-200 p-2">
+                    <div class="w-[100%] grid grid-cols-4 items-center justify-start gap-1">
+                        <div class="w-full flex items-start justify-start flex-col bg-gray-100 p-2 px-3 rounded-xl">
+                            <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
+                                Total Orders
+                            </span>
+
+                            <span class="mt-1 font-semibold"><?= $Total_Orders ?> --</span>
+                        </div>
+                        <div class="w-full flex items-start justify-start flex-col  p-2 px-3 rounded-xl">
+                            <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
+                                Total Sales
+                            </span>
+
+                            <span class="mt-1 font-semibold">₹<?= formatNumber($Total_sales) ?> --</span>
+                        </div>
+                        <div class="w-full flex items-start justify-start flex-col  p-2 px-3 rounded-xl">
+                            <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
+                                Todays Orders
+                            </span>
+
+                            <span class="mt-1 font-semibold"><?= $totalTodayOrders ?> --</span>
+                        </div>
+                        <div class="w-full flex items-start justify-start flex-col  p-2 px-3 rounded-xl">
+                            <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
+                                Conversation rate
+                            </span>
+
+                            <span class="mt-1 font-semibold">0% --</span>
+                        </div>
+                    </div>
+                    <canvas id="comparisonChart" class="!w-[100%] !h-[200px] mt-4"></canvas>
+                </div>
+            </div>
+
             <div class="w-full flex items-center justify-center pb-4">
-                <div class="w-[90%] flex items-start justify-center gap-3">
-
-                    <div class="w-full flex items-start justify-center flex-col">
-                        <span>Last 5 Customers</span>
-                        <div class="w-full text-sm overflow-x-auto border rounded-lg bg-white mt-3">
-                            <!-- Table Header -->
-                            <div class="grid grid-cols-[50px_3fr_2fr_3fr] items-center gap-4 px-4 py-3 bg-gray-100 text-gray-600 font-semibold border-b">
-                                <span>Sr. No</span>
-                                <span>Customer Name</span>
-                                <span>Phone</span>
-                                <span>E-mail</span>
-                            </div>
-
-                            <!-- Table Row -->
-                            <?php foreach ($Users as $key => $user) { ?>
-                                <a href="/admin/customer-info/1" class="block hover:bg-gray-50 transition-colors duration-200">
-                                    <div class="grid grid-cols-[50px_3fr_2fr_3fr] items-center gap-4 px-4 py-3 text-gray-800 border-b">
-                                        <!-- Sr. No -->
-                                        <div class="flex items-center gap-2">
-                                            <span><?= $key + 1 ?></span>
-                                            <svg class="h-4 w-4 text-gray-400 cursor-grab" viewBox="0 0 24 24" fill="currentColor">
-                                                <circle cx="9" cy="6" r="1.5"></circle>
-                                                <circle cx="15" cy="6" r="1.5"></circle>
-                                                <circle cx="9" cy="12" r="1.5"></circle>
-                                                <circle cx="15" cy="12" r="1.5"></circle>
-                                                <circle cx="9" cy="18" r="1.5"></circle>
-                                                <circle cx="15" cy="18" r="1.5"></circle>
-                                            </svg>
-                                        </div>
-
-                                        <!-- Customer Name -->
-                                        <div class="font-medium">
-                                            <?= $user['fname'] ?> <?= $user['lname'] ?>
-                                        </div>
-
-                                        <!-- Phone -->
-                                        <div class="text-gray-600">
-                                            <?= $user['mobile'] ?>
-                                        </div>
-
-                                        <!-- E-mail -->
-                                        <div class="text-green-600 font-medium truncate">
-                                            <?= $user['username'] ?>
-                                        </div>
-
-                                        <!-- User From -->
-
-                                    </div>
-                                </a>
-                            <?php } ?>
-                        </div>
-
+                <div class="w-[70%] flex items-start justify-center gap-3 flex-col bg-white py-3 rounded-2xl">
+                    <div class="w-full flex items-center justify-between">
+                    <span class="flex items-center px-2 font-semibold">
+                        <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2"></path>
+                        </svg>
+                        Last 5 Orders
+                    </span>
+                    <a href="/admin/orders" class="bg-[#1a1a1a] mx-2 text-white text-sm px-3 py-1 rounded-lg text-decoration-none cursor-pointer font-semibold">View all</a>
                     </div>
-                    <div class="w-full flex items-start justify-center flex-col">
-                        <span>Last 5 Orders</span>
-                        <div class="w-full text-sm overflow-x-auto border rounded-lg bg-white
-                        mt-3">
-                            <!-- Table Header -->
-                            <div class="grid grid-cols-[50px_3fr_2fr_3fr] items-center gap-4 px-4 py-3 bg-gray-100 text-gray-600 font-semibold border-b">
-                                <span>Sr. No</span>
-                                <span>Customer Name</span>
-                                <span>Phone</span>
-                                <span>Price</span>
-                            </div>
+                    <table class="w-full border border-gray-200">
+                        <tr class="bg-[#f7f7f7] text-[#616161] border-y border-gray-200">
+                            <th class="font-semibold py-2 px-3">Order</th>
+                            <th class="font-semibold py-2 px-3">Date</th>
+                            <th class="font-semibold py-2 px-3">Customer</th>
+                            <th class="font-semibold py-2 px-3">Total</th>
+                            <th class="font-semibold py-2 px-3">Delivery method</th>
+                        </tr>
+                        <?php
+                        // printWithPre($Orders);
+                        foreach ($Orders as $key => $order) {
+                            if ($key > 4) break;
+                        ?>
+                            <tr class="bg-white text-black  border-b border-gray-200 group">
+                                <td class="font-semibold text-sm py-2 px-3 group-hover:bg-[#f7f7f7]">#<?= $order['orderid'] ?></td>
+                                <td class="font-normal text-sm py-2 px-3 text-[#303030] group-hover:bg-[#f7f7f7]"><?= formatDateTime($order['created_at']) ?></td>
+                                <td class="font-normal text-sm py-2 px-3 text-[#303030] group-hover:bg-[#f7f7f7]"><?= $order['fname'] ?> <?= $order['lname'] ?></td>
+                                <td class="font-semibold text-sm py-2 px-3 text-[#303030] group-hover:bg-[#f7f7f7]">₹<?= formatNumber($order['total_amount']) ?></td>
+                                <td class="font-normal text-sm py-2 px-3 text-[#303030] group-hover:bg-[#f7f7f7]"><?= $order['payment_mode'] ?></td>
+                            </tr>
+                        <?php } ?>
 
-                            <!-- Table Row -->
-                            <?php
-                            foreach ($Orders as $key => $order) {
-                                if ($key > 4) break;
-                            ?>
-                                <div class="block hover:bg-gray-50 transition-colors duration-200">
-                                    <div class="grid grid-cols-[50px_3fr_2fr_3fr] items-center gap-4 px-4 py-3 text-gray-800 border-b">
-                                        <!-- Sr. No -->
-                                        <div class="flex items-center gap-2">
-                                            <span><?= $key + 1 ?></span>
-                                            <svg class="h-4 w-4 text-gray-400 cursor-grab" viewBox="0 0 24 24" fill="currentColor">
-                                                <circle cx="9" cy="6" r="1.5"></circle>
-                                                <circle cx="15" cy="6" r="1.5"></circle>
-                                                <circle cx="9" cy="12" r="1.5"></circle>
-                                                <circle cx="15" cy="12" r="1.5"></circle>
-                                                <circle cx="9" cy="18" r="1.5"></circle>
-                                                <circle cx="15" cy="18" r="1.5"></circle>
-                                            </svg>
-                                        </div>
+                    </table>
 
-                                        <!-- Customer Name -->
-                                        <div class="font-medium">
-                                            <?= $order['fname'] ?> <?= $order['lname'] ?>
-                                        </div>
 
-                                        <!-- Phone -->
-                                        <div class="text-gray-600">
-                                            +91 <?= $order['mobile'] ?>
-                                        </div>
-
-                                        <!-- E-mail -->
-                                        <div class="text-green-600 font-medium truncate">
-                                            ₹<?= formatNumber($order['total_amount']) ?>
-                                        </div>
-
-                                        <!-- User From -->
-
-                                    </div>
-                                </div>
-                            <?php } ?>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </main>
@@ -269,6 +112,97 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/views/include/footer.php";
     ?>
+    <script>
+        const ctx = document.getElementById("comparisonChart");
+
+        const labels = [
+            "Sep 16", "Sep 20", "Sep 24", "Sep 28",
+            "Oct 2", "Oct 6", "Oct 10", "Oct 14"
+        ];
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                    label: "Sep 16–Oct 16, 2025",
+                    data: [2, 4, 5, 6, 9, 7, 5, 3],
+                    borderColor: "#0096F2",
+                    backgroundColor: "#0096F2",
+                    borderWidth: 2.5,
+                    pointRadius: 3,
+                    pointHoverRadius: 5,
+                    tension: 0.35,
+                    fill: false,
+                },
+                {
+                    label: "Aug 16–Sep 15, 2025",
+                    data: [3, 8, 11, 7, 10, 8, 6, 4],
+                    borderColor: "rgba(0,150,242,0.4)",
+                    backgroundColor: "rgba(0,150,242,0.4)",
+                    borderWidth: 2,
+                    borderDash: [6, 4],
+                    pointRadius: 3,
+                    pointHoverRadius: 5,
+                    tension: 0.35,
+                    fill: false,
+                },
+            ],
+        };
+
+        const config = {
+            type: "line",
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: "bottom",
+                        labels: {
+                            usePointStyle: true,
+                            pointStyle: "circle",
+                            boxWidth: 6, // smaller legend circle
+                            boxHeight: 6,
+                            padding: 20, // adds space between items
+                            font: {
+                                size: 13,
+                            },
+                            color: "#9ca3af",
+                        },
+                    },
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: "#9ca3af",
+                            font: {
+                                size: 12
+                            }
+                        },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: "#f3f4f6",
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: "#9ca3af",
+                            font: {
+                                size: 12
+                            },
+                            stepSize: 5
+                        },
+                    },
+                },
+            },
+        };
+
+        new Chart(ctx, config);
+    </script>
 </body>
 
 </html>

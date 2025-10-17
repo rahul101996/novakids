@@ -6,9 +6,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
 ?>
 
-<body class="bg-gray-100">
+<body class="bg-[#1a1a1a] overflow-hidden">
 
-    <div class="flex h-screen ">
+    <div class="flex">
         <?php
         include $_SERVER['DOCUMENT_ROOT'] . "/views/include/sidebar.php";
 
@@ -16,58 +16,50 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
         ?>
 
-        <main class="flex-1 md:ml-60">
+        <main class="flex-1 md:ml-[16.5rem] md:mt-[3.7rem] bg-[#f1f1f1] rounded-tr-3xl  h-[92vh] overflow-y-scroll">
             <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
             ?>
             <div class="w-full flex items-center justify-between p-3">
-                <span class="text-xl font-semibold text-gray-800">Customers</span>
-                <!-- <div>
-                    <button class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Import</button>
-                    <button class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Export</button>
-                </div> -->
+                <span class="text-xl font-semibold text-gray-800 flex">
+                    <svg class="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    Customers Reviews</span>
+                <div>
+                   
+                </div>
             </div>
-            <div class="p-3 border-b border-gray-200">
-                <div class="flex justify-between items-center">
+            <div class="w-full flex items-center justify-center pb-4">
+                <div class="w-[97%] flex items-start justify-center gap-3 flex-col bg-white rounded-2xl">
+                    <div class="w-full flex items-center justify-between mt-2 px-2">
+                        <div class="relative w-[45vw]">
+                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#626262">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            <input type="text" placeholder="Search Customers" class="bg-white w-full pl-10 pr-4 py-1 rounded-xl border border-gray-300 focus:border-gray-600 focus:bg-gray-200 placeholder:text-[#626262] outline-none transition">
 
-                    <div class="flex items-center space-x-1">
-                        <button
-                            class="bg-gray-200 text-gray-800 px-3 py-1.5 rounded-md text-sm font-medium">All</button>
+                        </div>
 
                     </div>
-                    <!-- <div class="flex items-center space-x-1">
-                        <button class="text-gray-500 hover:bg-gray-100 p-2 rounded-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </button>
-                        <button class="text-gray-500 hover:bg-gray-100 p-2 rounded-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M3 8h18M3 12h18M3 16h18"
-                                    stroke-opacity="0.5" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M3 8h12M3 12h6" />
-                            </svg>
-                        </button>
-                    </div> -->
-                </div>
-            </div>
+                    <table class="w-full text-sm">
+                        <!-- Table Header -->
+                        <thead class="sticky top-0 left-0 shadow-sm z-10">
+                            <tr class="bg-[#f7f7f7] text-[#616161] border-y border-gray-200">
+                                <?php
+                                $headers = ['Customer name', 'Product name', 'Rating', 'review', 'Status'];
+                                foreach ($headers as $header): ?>
+                                    <th class="font-semibold py-2 px-3 w-[20%] <?= ($header == 'Status' ? 'text-right' : 'text-left') ?>">
+                                        <?= $header ?>
+                                    </th>
+                                <?php endforeach; ?>
+                            </tr>
+                        </thead>
 
-            <div class="w-full text-sm overflow-x-scroll">
-                <!-- Table Header -->
-                <div
-                    class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,2fr)_minmax(0,3fr)_minmax(0,1fr)_minmax(0,0.5fr)_minmax(0,0.5fr)] items-center gap-4 px-4 py-2 text-gray-500">
-                    <span>Sr. No</span>
-                    <span>Customer Name</span>
-                    <span>Product</span>
-                    <span>Rating</span>
-                    <span>Review</span>
-                    <span>Actions</span>
-                </div>
-
-                <?php foreach (getData2("SELECT
+                        <!-- Table Body -->
+                        <tbody>
+                            <?php foreach (
+                                getData2("SELECT
                                                     tpr.*,
                                                     tp.name AS product_name,
                                                     tc.fname,
@@ -80,80 +72,63 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                     tpr.userid = tc.id
                                                 LEFT JOIN tbl_products tp ON
                                                     tpr.product_id = tp.id
-                                                ORDER BY tpr.id DESC") as $key => $customer) { ?>
+                                                ORDER BY tpr.id DESC") as $key => $customer
+                            ):
+                                $id = $customer['id'];
+                            ?>
+                                <tr
+                                    class="cursor-pointer bg-white text-[#4b4b4b] border-b border-gray-200 
+                           hover:bg-[#f7f7f7] hover:shadow-md hover:scale-[1.01] 
+                           transition-all duration-200 ease-in-out">
+                                    <td class="font-semibold py-2 px-3 text-left"><?= htmlspecialchars($customer['fname'] . ' ' . $customer['lname']) ?></td>
+                                    <td class="font-semibold py-2 px-3 text-left"><?= $customer['product_name'] ?></td>
+                                    <td class="font-semibold py-2 px-3 text-left capitalize"><?= $customer['rating'] ?> Star</td>
+                                    <td class="font-semibold py-2 px-3 text-left"><?= $customer['rating'] ?> Star</td>
+                                    <td class="font-semibold py-2 px-3 text-right">
+                                        <div
+                                            class="relative inline-block w-14 mr-2 align-middle select-none">
+                                            <input type="checkbox" id="togglr_<?= $customer['id'] ?>"
+                                                <?= $customer['status'] == 1 ? 'checked' : '' ?>
+                                                onchange="updateStatus(this, <?= $customer['id'] ?>)"
+                                                class="sr-only peer">
 
-                    <!-- Table Row -->
-                    <div
-                        class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,2fr)_minmax(0,3fr)_minmax(0,1fr)_minmax(0,0.5fr)_minmax(0,0.5fr)] items-center gap-4 px-4 py-3 hover:bg-gray-50 text-gray-800">
-                        <!-- Sr. No -->
-                        <div class="flex items-center space-x-3">
-                            <span><?= $key + 1 ?></span>
-                            <svg class="h-4 w-4 text-gray-400 cursor-grab" viewBox="0 0 24 24" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="9" cy="6" r="1.5" />
-                                <circle cx="15" cy="6" r="1.5" />
-                                <circle cx="9" cy="12" r="1.5" />
-                                <circle cx="15" cy="12" r="1.5" />
-                                <circle cx="9" cy="18" r="1.5" />
-                                <circle cx="15" cy="18" r="1.5" />
-                            </svg>
-                        </div>
+                                            <label for="togglr_<?= $customer['id'] ?>"
+                                                class="block overflow-hidden h-7 rounded-full bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out peer-checked:bg-black before:content-[''] before:absolute before:top-0.5 before:left-0.5 before:bg-sky-50 before:border-2 before:border-gray-300 before:h-6 before:w-6 before:rounded-full before:transition-all before:duration-300 before:shadow-md peer-checked:before:translate-x-7 peer-checked:before:border-gray-500">
+                                                <span
+                                                    class="absolute inset-y-0 left-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-sky-50 peer-checked:translate-x-7">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                                        viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd"
+                                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </span>
+                                                <span
+                                                    class="absolute inset-y-0 right-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-white">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                                        viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd"
+                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
 
-                        <div class="font-medium">
-                            <div class="flex items-center justify-start gap-5">
-                                <?= $customer['fname'] ?>     <?= $customer['lname'] ?> ( <?= $customer['mobile'] ?> )
-                            </div>
-                        </div>
+                        <!-- Table Footer (Pagination) -->
 
-                        <div>
-                            <span class="text-gray-700 font-semibold"><?= $customer['product_name'] ?> </span>
-                        </div>
-
-                        <div class="w-24">
-                            <span class="text-green-500 font-semibold"><?= $customer['rating'] ?> Stars</span>
-                        </div>
-
-                        <div class="h-40 w-40 overflow-x-scroll">
-                            <p class="text-gray-500 font-semibold"><?= $customer['reviewText'] ?></p>
-                        </div>
-
-
-                        <div class="">
-                            <div
-                                class="relative inline-block w-14 mr-2 align-middle select-none">
-                                <input type="checkbox" id="togglr_<?= $customer['id'] ?>"
-                                    <?= $customer['status'] == 1 ? 'checked' : '' ?>
-                                    onchange="updateStatus(this, <?= $customer['id'] ?>)"
-                                    class="sr-only peer">
-
-                                <label for="togglr_<?= $customer['id'] ?>"
-                                    class="block overflow-hidden h-7 rounded-full bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out peer-checked:bg-sky-800 before:content-[''] before:absolute before:top-0.5 before:left-0.5 before:bg-sky-50 before:border-2 before:border-gray-300 before:h-6 before:w-6 before:rounded-full before:transition-all before:duration-300 before:shadow-md peer-checked:before:translate-x-7 peer-checked:before:border-sky-800">
-                                    <span
-                                        class="absolute inset-y-0 left-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-sky-50 peer-checked:translate-x-7">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
-                                            viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </span>
-                                    <span
-                                        class="absolute inset-y-0 right-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-white">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
-                                            viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
+                    </table>
 
 
-                    </div>
-                <?php } ?>
+
+                </div>
             </div>
+
+
         </main>
     </div>
 
@@ -176,7 +151,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             try {
                 let res = await fetch('/api/customer-reviews/status', {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
                     body: JSON.stringify(data),
                 });
 
@@ -200,6 +177,34 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             }
         }
     </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.querySelector('input[placeholder="Search Customers"]');
+        const tableBody = document.querySelector("tbody");
+        const tableRows = tableBody.querySelectorAll("tr");
+
+        // Create "no results" row
+        const noResultRow = document.createElement("tr");
+        noResultRow.innerHTML = `<td colspan="5" class="text-center py-3 text-gray-500">No matching customers found</td>`;
+        noResultRow.style.display = "none";
+        tableBody.appendChild(noResultRow);
+
+        searchInput.addEventListener("keyup", function () {
+            const searchTerm = this.value.toLowerCase().trim();
+            let matchCount = 0;
+
+            tableRows.forEach(row => {
+                const rowText = row.textContent.toLowerCase();
+                const isMatch = rowText.includes(searchTerm);
+                row.style.display = isMatch ? "" : "none";
+                if (isMatch) matchCount++;
+            });
+
+            // Show/hide "no results"
+            noResultRow.style.display = matchCount === 0 ? "" : "none";
+        });
+    });
+</script>
 
 </body>
 
