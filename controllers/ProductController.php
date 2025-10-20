@@ -16,9 +16,189 @@ class ProductController
 
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $products = getData("tbl_products");
+            $products = getData2("SELECT tp.*, tc.category AS category_name FROM `tbl_products` tp LEFT JOIN tbl_category tc ON tp.category = tc.id");
+            $Active_products = 0;
+            $New_arrivals = 0;
+            $Out_of_stock = 0;
+            foreach ($products as $key => $product) {
+                $status = trim(strtolower($product['status'] ?? 0));
+                $new = trim(strtolower($product['new_arrival'] ?? 0));
+                if ($status == '1') {
+                    $Active_products++;
+                }
+                if ($new == '1') {
+                    $New_arrivals++;
+                }
+
+                $variants = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = '$product[id]'");
+
+                foreach ($variants as $variant) {
+                    if ((int)$variant['quantity'] <= 0) {
+                        $Out_of_stock++;
+                        break; // Stop checking once one variant is out of stock
+                    }
+                }
+            }
 
             require 'views/products/products-list.php';
+        } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // $this->OrderDetails($_POST['id']);
+            if (isset($_POST['time_period'])) {
+                $date = date('Y-m-d');
+                $timePeriod = $_POST['time_period'];
+
+                // Default value for fromdate
+                $fromdate = $date;
+
+                if (trim(strtolower($timePeriod)) == 'today') {
+                    $fromdate = date('Y-m-d');
+                } elseif ($timePeriod == 'week') {
+                    $fromdate = date('Y-m-d', strtotime('-7 days'));
+                } elseif ($timePeriod == 'month') {
+                    $fromdate = date('Y-m-d', strtotime('-30 days'));
+                }
+
+                $data = getData2("SELECT tp.*, tc.category AS category_name FROM `tbl_products` tp LEFT JOIN tbl_category tc ON tp.category = tc.id WHERE tp.created_date BETWEEN '$fromdate' AND '$date'");
+
+                $Active_products = 0;
+                $New_arrivals = 0;
+                $Out_of_stock = 0;
+
+
+                ob_start();
+                if (!empty($data)) {
+
+
+                    foreach ($data as $key => $product) :
+                        $status = trim(strtolower($product['status'] ?? 0));
+                        $new = trim(strtolower($product['new_arrival'] ?? 0));
+
+                        $images = json_decode($product['product_images'], true);
+                        $images = array_reverse($images);
+                        if ($status == '1') {
+                            $Active_products++;
+                        }
+                        if ($new == '1') {
+                            $New_arrivals++;
+                        }
+
+                        $variants = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = '$product[id]'");
+                        $TotalVariants = count($variants);
+                        $quantity = 0;
+                        foreach ($variants as $variant) {
+
+                            $quantity += $variant['quantity'];
+                        }
+                        foreach ($variants as $variant) {
+                            if ((int)$variant['quantity'] <= 0) {
+                                $Out_of_stock++;
+                                break; // Stop checking once one variant is out of stock
+                            }
+                        }
+
+                        //  printWithPre($PurchaseItems);
+?>
+                        <tr
+                            class="cursor-pointer bg-white text-[#4b4b4b] border-b border-gray-200 
+                           hover:bg-[#f7f7f7] hover:shadow-md hover:scale-[1.01] 
+                           transition-all duration-200 ease-in-out">
+                            <td class="font-semibold py-2 px-3 text-left">
+                                <div class="flex items-center justify-start gap-6">
+                                    <img src="/<?= $images[0] ?>" class="h-10 rounded" alt="">
+                                    <?= $product['name'] ?>
+                                </div>
+                            </td>
+                            <td class="font-semibold py-2 px-3 text-left">
+                                <div class="relative inline-block w-14 mr-2 align-middle select-none">
+                                    <input type="checkbox" id="togglr_status_<?= $product['id'] ?>"
+                                        <?= $product['status'] == 1 ? 'checked' : '' ?>
+                                        onchange="updateProductStatus(this, <?= $product['id'] ?>)"
+                                        class="sr-only peer">
+
+                                    <label for="togglr_status_<?= $product['id'] ?>"
+                                        class="block overflow-hidden h-7 rounded-full bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out peer-checked:bg-[#06402b] before:content-[''] before:absolute before:top-0.5 before:left-0.5 before:bg-sky-50 before:border-2 before:border-gray-300 before:h-6 before:w-6 before:rounded-full before:transition-all before:duration-300 before:shadow-md peer-checked:before:translate-x-7 peer-checked:before:border-sky-800">
+                                        <span
+                                            class="absolute inset-y-0 left-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-sky-50 peer-checked:translate-x-7">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </span>
+                                        <span
+                                            class="absolute inset-y-0 right-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-white">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td class="font-semibold py-2 px-3 text-left"><?= $quantity ?> in stock for <?= $TotalVariants ?> variants</td>
+                            <td class="font-semibold py-2 px-3 text-left"><?= $product['category_name'] ?></td>
+                            <td class="font-semibold py-2 px-3 text-left text-nowrap">₹ <?= formatNumber($product['price']) ?></td>
+
+                            <td class="font-semibold py-2 px-3 text-left">
+                                <div class="relative inline-block w-14 mr-2 align-middle select-none">
+                                    <input type="checkbox" id="togglr_arrival_<?= $product['id'] ?>"
+                                        <?= $product['new_arrival'] == 1 ? 'checked' : '' ?>
+                                        onchange="updateNewArrival(this, <?= $product['id'] ?>)"
+                                        class="sr-only peer">
+
+                                    <label for="togglr_arrival_<?= $product['id'] ?>"
+                                        class="block overflow-hidden h-7 rounded-full bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out peer-checked:bg-[#06402b] before:content-[''] before:absolute before:top-0.5 before:left-0.5 before:bg-sky-50 before:border-2 before:border-gray-300 before:h-6 before:w-6 before:rounded-full before:transition-all before:duration-300 before:shadow-md peer-checked:before:translate-x-7 peer-checked:before:border-sky-800">
+                                        <span
+                                            class="absolute inset-y-0 left-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-sky-50 peer-checked:translate-x-7">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </span>
+                                        <span
+                                            class="absolute inset-y-0 right-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-white">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td class="font-semibold py-2 px-3 text-right"><a href="/admin/edit-product/<?= $product['id'] ?>"
+                                    class="text-blue-500 hover:text-blue-600"><i class="fa-solid fa-pen"></i></a>
+                            </td>
+                        </tr>
+                    <?php endforeach;
+                } else {
+                    ?>
+                    <tr style="">
+                        <td colspan="8" class="text-center py-3 text-gray-500">No matching customers found</td>
+                    </tr>
+                    <?php
+                }
+                $html = ob_get_clean();
+                echo json_encode([
+                    'html' => $html,
+                    'data' => $data,
+                    'success' => true,
+                    'time_period' => $timePeriod,
+                    'fromdate' => $fromdate,
+                    'new_arrivals' => $New_arrivals,
+                    'active_products' => $Active_products,
+                    'out_of_stock' => $Out_of_stock,
+
+                ]);
+            }
+
+            exit();
         }
     }
 
@@ -547,7 +727,7 @@ class ProductController
                         }
                         $PurchaseItems = getData2("SELECT * FROM `tbl_purchase_item` WHERE `purchase_id` = $value[id]");
                         //  printWithPre($PurchaseItems);
-?>
+                    ?>
                         <tr
                             class="cursor-pointer bg-white text-[#4b4b4b] border-b border-gray-200 
                            hover:bg-[#f7f7f7] hover:shadow-md hover:scale-[1.01] 

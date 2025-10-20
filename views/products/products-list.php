@@ -28,39 +28,61 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     Products
                 </span>
                 <div>
-                    <button class="bg-[#d4d4d4] text-xs font-semibold py-2 px-3 rounded-lg text-gray-800">Import</button>
-                    <button class="bg-[#d4d4d4] text-xs font-semibold py-2 px-3 rounded-lg text-gray-800">Export</button>
-                    <button class="bg-gray-800 text-xs font-semibold py-2 px-3 rounded-lg text-white">Add Product</button>
+                    <!-- <button class="bg-[#d4d4d4] text-xs font-semibold py-2 px-3 rounded-lg text-gray-800">Import</button>
+                    <button class="bg-[#d4d4d4] text-xs font-semibold py-2 px-3 rounded-lg text-gray-800">Export</button> -->
+                    <a href="/admin/add-product" class="bg-gray-800 text-xs font-semibold py-2 px-3 rounded-lg text-white">Add Product</a>
                 </div>
             </div>
             <div class="w-full flex items-center justify-center">
                 <div class="w-[97%] grid grid-cols-4 items-center justify-start gap-1 bg-white rounded-xl border border-gray-300 shadow-sm">
-                    <div class="w-full flex items-start justify-start flex-col  p-2 px-3  border-r border-gray-300">
-                        <span class="text-sm  font-semibold ">
-                            <i class="fa-regular fa-calendar" aria-hidden="true"></i> 30 Days
+                    <div class="w-full flex items-start justify-start flex-col  p-2 px-3  relative hover:bg-gray-100 ">
+                        <span class="text-sm font-semibold cursor-pointer time-toggle">
+                            <i class="fa-regular fa-calendar" aria-hidden="true"></i> Today
                         </span>
-
+                        <div class="w-[150%] flex items-start flex-col bg-white p-3 rounded-xl justify-center  absolute top-[153%] gap-3 z-50 left-0 shadow-md border border-gray-300 hidden" id="Timefilter">
+                            <div class="w-full flex items-center justify-start gap-3">
+                                <input type="radio" name="Timeperiod" value="today" class="accent-black hover:accent-pink-500 scale-150 cursor-pointer">
+                                <div class="flex flex-col items-start justify-center">
+                                    <span class="font-bold">Today</span>
+                                    <span class="text-sm text-gray-500">compared to yesterday up to current hour</span>
+                                </div>
+                            </div>
+                            <div class="w-full flex items-center justify-start gap-3">
+                                <input type="radio" name="Timeperiod" value="week" class="accent-black hover:accent-pink-500 scale-150 cursor-pointer">
+                                <div class="flex flex-col items-start justify-center">
+                                    <span class="font-bold">Last 7 days</span>
+                                    <span class="text-sm text-gray-500">compared to the previous 7 days</span>
+                                </div>
+                            </div>
+                            <div class="w-full flex items-center justify-start gap-3">
+                                <input type="radio" name="Timeperiod" value="month" class="accent-black hover:accent-pink-500 scale-150 cursor-pointer">
+                                <div class="flex flex-col items-start justify-center">
+                                    <span class="font-bold">Last 30 days</span>
+                                    <span class="text-sm text-gray-500">compared to the previous 30 days</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="w-full flex items-start justify-start flex-col  p-2 px-3 border-r border-gray-300 h-full">
                         <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
                             Active Products
                         </span>
 
-                        <span class="mt-1 font-semibold">0 --</span>
+                        <span class="mt-1 font-semibold" id="active_products"><?= $Active_products ?> --</span>
                     </div>
                     <div class="w-full flex items-start justify-center flex-col  p-2 px-3 border-r border-gray-300 h-full">
                         <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
                             New Arrivals
                         </span>
 
-                        <span class="mt-1 font-semibold"><?= $totalTodayOrders ?>0 --</span>
+                        <span class="mt-1 font-semibold" id="new_arrivals"><?= $New_arrivals ?> --</span>
                     </div>
                     <div class="w-full flex items-start justify-start flex-col  p-2 px-3 border-r border-gray-300 h-full">
                         <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
                             Out of stock
                         </span>
 
-                        <span class="mt-1 font-semibold">0 --</span>
+                        <span class="mt-1 font-semibold" id="out_of_stock"><?= $Out_of_stock ?> --</span>
                     </div>
 
                 </div>
@@ -94,15 +116,15 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         </thead>
 
                         <!-- Table Body -->
-                        <tbody>
-                            <?php foreach (getData2("SELECT tp.*, tc.category AS category_name FROM `tbl_products` tp LEFT JOIN tbl_category tc ON tp.category = tc.id") as $key => $product):
+                        <tbody id="TableBody">
+                            <?php foreach ($products as $key => $product):
                                 $images = json_decode($product['product_images'], true);
                                 $images = array_reverse($images);
                                 $variants = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = '$product[id]'");
                                 $TotalVariants = count($variants);
                                 $quantity = 0;
-                                foreach($variants as $variant){
-                                    
+                                foreach ($variants as $variant) {
+
                                     $quantity += $variant['quantity'];
                                 }
                                 //  printWithPre($PurchaseItems);
@@ -119,12 +141,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     </td>
                                     <td class="font-semibold py-2 px-3 text-left">
                                         <div class="relative inline-block w-14 mr-2 align-middle select-none">
-                                            <input type="checkbox" id="togglr_arrival_<?= $product['id'] ?>"
-                                                <?= $product['new_arrival'] == 1 ? 'checked' : '' ?>
-                                                onchange="updateNewArrival(this, <?= $product['id'] ?>)"
+                                            <input type="checkbox" id="togglr_status_<?= $product['id'] ?>"
+                                                <?= $product['status'] == 1 ? 'checked' : '' ?>
+                                                onchange="updateProductStatus(this, <?= $product['id'] ?>)"
                                                 class="sr-only peer">
 
-                                            <label for="togglr_arrival_<?= $product['id'] ?>"
+                                            <label for="togglr_status_<?= $product['id'] ?>"
                                                 class="block overflow-hidden h-7 rounded-full bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out peer-checked:bg-[#06402b] before:content-[''] before:absolute before:top-0.5 before:left-0.5 before:bg-sky-50 before:border-2 before:border-gray-300 before:h-6 before:w-6 before:rounded-full before:transition-all before:duration-300 before:shadow-md peer-checked:before:translate-x-7 peer-checked:before:border-sky-800">
                                                 <span
                                                     class="absolute inset-y-0 left-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-sky-50 peer-checked:translate-x-7">
@@ -153,12 +175,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                                     <td class="font-semibold py-2 px-3 text-left">
                                         <div class="relative inline-block w-14 mr-2 align-middle select-none">
-                                            <input type="checkbox" id="togglr_status_<?= $product['id'] ?>"
-                                                <?= $product['status'] == 1 ? 'checked' : '' ?>
-                                                onchange="updateProductStatus(this, <?= $product['id'] ?>)"
+                                            <input type="checkbox" id="togglr_arrival_<?= $product['id'] ?>"
+                                                <?= $product['new_arrival'] == 1 ? 'checked' : '' ?>
+                                                onchange="updateNewArrival(this, <?= $product['id'] ?>)"
                                                 class="sr-only peer">
 
-                                            <label for="togglr_status_<?= $product['id'] ?>"
+                                            <label for="togglr_arrival_<?= $product['id'] ?>"
                                                 class="block overflow-hidden h-7 rounded-full bg-gray-200 cursor-pointer transition-all duration-300 ease-in-out peer-checked:bg-[#06402b] before:content-[''] before:absolute before:top-0.5 before:left-0.5 before:bg-sky-50 before:border-2 before:border-gray-300 before:h-6 before:w-6 before:rounded-full before:transition-all before:duration-300 before:shadow-md peer-checked:before:translate-x-7 peer-checked:before:border-sky-800">
                                                 <span
                                                     class="absolute inset-y-0 left-0 flex items-center justify-center w-7 h-7 text-gray-400 transition-all duration-300 ease-in-out peer-checked:text-sky-50 peer-checked:translate-x-7">
@@ -219,6 +241,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
     ?>
 
     <script>
+        const ActiveProducts = document.getElementById('active_products');
+        const NewArriavals = document.getElementById('new_arrivals');
+        const OutofStock = document.getElementById('out_of_stock');
+
         async function updateStatusGeneric(ele, id, endpoint) {
             let data = {
                 id,
@@ -263,6 +289,47 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
         function updateProductStatus(ele, id) {
             updateStatusGeneric(ele, id, '/api/product/status');
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.querySelector('.time-toggle'); // span trigger
+            const timeFilter = document.getElementById('Timefilter');
+
+            toggleBtn.addEventListener('click', function(event) {
+                event.stopPropagation(); // stop click from bubbling up
+                timeFilter.classList.toggle('hidden');
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!timeFilter.contains(event.target) && !toggleBtn.contains(event.target)) {
+                    timeFilter.classList.add('hidden');
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+
+            document.querySelectorAll('input[name="Timeperiod"]').forEach(element => {
+                element.addEventListener('click', async function() {
+                    // console.log(this.value);
+                    let time_period = this.value;
+                    const request = await axios.post("", new URLSearchParams({
+                        time_period: time_period
+                    }));
+                    console.log(request.data)
+                    if (request.data.success) {
+
+                        ActiveProducts.innerHTML = request.data.active_products;
+                        NewArriavals.innerHTML = request.data.new_arrivals;
+                        OutofStock.innerHTML = request.data.out_of_stock;
+                        document.getElementById('TableBody').innerHTML = '';
+                        document.getElementById('TableBody').innerHTML = request.data.html;
+                    }
+                    // getbillproduct(this.value);
+                })
+            })
+        })
     </script>
 </body>
 
