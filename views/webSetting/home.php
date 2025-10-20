@@ -6,18 +6,17 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
 ?>
 
-<body class="bg-gray-50">
+<body class="bg-[#1a1a1a] overflow-hidden">
 
-    <div class="flex h-screen bg-gray-100">
+    <div class="flex">
         <?php
         include $_SERVER['DOCUMENT_ROOT'] . "/views/include/sidebar.php";
 
         $date = date('Y-m-d');
 
-
         ?>
 
-        <main class="flex-1 md:ml-60">
+        <main class="flex-1 md:ml-[16.5rem] md:mt-[3.7rem] bg-[#f1f1f1] rounded-tr-3xl  h-[92vh] overflow-y-scroll">
             <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
             ?>
