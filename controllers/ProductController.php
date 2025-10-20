@@ -17,6 +17,7 @@ class ProductController
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $products = getData("tbl_products");
+
             require 'views/products/products-list.php';
         }
     }
@@ -335,7 +336,6 @@ class ProductController
                             // echo "hello" . $index;
                             add($variantData, "tbl_variants");
                         }
-
                     }
                 }
 
@@ -345,7 +345,6 @@ class ProductController
             } catch (Exception $e) {
                 $db->rollBack();
                 echo "Error: " . $e->getMessage();
-
             }
 
             redirect("/admin/products-list");
@@ -367,7 +366,6 @@ class ProductController
             }
 
             require $_SERVER['DOCUMENT_ROOT'] . "/views/products/edit-product-variants.php";
-
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // printWithPre($_POST);
@@ -483,9 +481,117 @@ class ProductController
         $pageModule = "Order List";
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $date = date('Y-m-d');
+            $orders = getData2("SELECT * FROM `tbl_purchase` WHERE `created_date` = '$date'");
+
+            $Total_orders = count($orders) ?? 0;
+            $Total_items = $Total_orders;
+            $Pending_orders = 0;
+            $Orders_complete = 0;
+            $Cancel_orders = 0;
+
+            if (!empty($orders)) {
+                foreach ($orders as $order) {
+                    $status = trim(strtolower($order['status'] ?? ''));
+
+                    if ($status === 'Processing') {
+                        $Pending_orders++;
+                    } elseif ($status === 'cancel' || $status === 'Cancelled') {
+                        $Cancel_orders++;
+                    } elseif ($status === 'complete' || $status === 'Completed') {
+                        $Orders_complete++;
+                    }
+                }
+            }
+
+
             require 'views/products/order-list.php';
+        } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // $this->OrderDetails($_POST['id']);
+            if (isset($_POST['time_period'])) {
+                $date = date('Y-m-d');
+                $timePeriod = $_POST['time_period'];
+
+                // Default value for fromdate
+                $fromdate = $date;
+
+                if (trim(strtolower($timePeriod)) == 'today') {
+                    $fromdate = date('Y-m-d');
+                } elseif ($timePeriod == 'week') {
+                    $fromdate = date('Y-m-d', strtotime('-7 days'));
+                } elseif ($timePeriod == 'month') {
+                    $fromdate = date('Y-m-d', strtotime('-30 days'));
+                }
+
+                $data = getData2("SELECT * FROM `tbl_purchase` WHERE `created_date` BETWEEN '$fromdate' AND '$date'");
+                $Total_orders = count($data) ?? 0;
+                $Total_items = $Total_orders;
+                $Pending_orders = 0;
+                $Orders_complete = 0;
+                $Cancel_orders = 0;
+
+
+                ob_start();
+                if (!empty($data)) {
+
+
+                    foreach ($data as $key => $value) :
+                        $status = trim(strtolower($order['status'] ?? ''));
+
+                        if ($status === 'Processing') {
+                            $Pending_orders++;
+                        } elseif ($status === 'cancel' || $status === 'Cancelled') {
+                            $Cancel_orders++;
+                        } elseif ($status === 'complete' || $status === 'Completed') {
+                            $Orders_complete++;
+                        }
+                        $PurchaseItems = getData2("SELECT * FROM `tbl_purchase_item` WHERE `purchase_id` = $value[id]");
+                        //  printWithPre($PurchaseItems);
+?>
+                        <tr
+                            class="cursor-pointer bg-white text-[#4b4b4b] border-b border-gray-200 
+                           hover:bg-[#f7f7f7] hover:shadow-md hover:scale-[1.01] 
+                           transition-all duration-200 ease-in-out"
+                            onclick="window.location.href='/admin/customer-info/<?= $id ?>'">
+                            <td class="font-semibold py-2 px-3 text-left">#<?= $value['orderid'] ?></td>
+                            <td class="font-semibold py-2 px-3 text-left"><?= formatDate($value['created_date']) ?></td>
+                            <td class="font-semibold py-2 px-3 text-left"><?= $value['fname'] ?> <?= $value['lname'] ?></td>
+                            <td class="font-semibold py-2 px-3 text-left">₹<?= formatNumber($value['total_amount']) ?></td>
+                            <td class="font-semibold py-2 px-3 text-left"><?= $value['payment_status'] == 'Pending' ? '<span class="text-[#5e421a] bg-[#ffd6a4] px-2 rounded-md text-xs py-1"> Payment' . $value['payment_status'] . '</span>' : '<span class="text-green-800 bg-[#d1e7dd] px-2 rounded-md text-xs py-1">Payment' . $value['payment_status'] . '</span>' ?></td>
+                            <td class="font-semibold py-2 px-3 text-left text-nowrap"><span class="flex"><?= count($PurchaseItems) ?> Items</span></td>
+
+                            <td class="font-semibold py-2 px-3 text-left"><?= $value['status'] ?></td>
+                            <td class="font-semibold py-2 px-3 text-right"><?= $value['payment_mode'] ?></td>
+                        </tr>
+                    <?php endforeach;
+                } else {
+                    ?>
+                    <tr style="">
+                        <td colspan="8" class="text-center py-3 text-gray-500">No matching customers found</td>
+                    </tr>
+<?php
+                }
+                $html = ob_get_clean();
+                echo json_encode([
+                    'html' => $html,
+                    'data' => $data,
+                    'success' => true,
+                    'sql' => "SELECT * FROM `tbl_purchase` WHERE `created_date` BETWEEN '$fromdate' AND '$date'",
+                    'time_period' => $timePeriod,
+                    'fromdate' => $fromdate,
+                    'todate' => $date,
+                    'total_orders' => $Total_orders,
+                    'total_items' => $Total_items,
+                    'pending_orders' => $Pending_orders,
+                    'orders_complete' => $Orders_complete,
+                    'cancel_orders' => $Cancel_orders
+                ]);
+            }
+
+            exit();
         }
     }
+
 
     public function OrderDetails($order_id = null)
     {
@@ -549,7 +655,6 @@ class ProductController
                 "success" => true,
                 "message" => "Status Updated Successfully"
             ];
-
         } catch (Exception $e) {
             $this->db->rollBack();
 
@@ -588,7 +693,6 @@ class ProductController
                 "success" => true,
                 "message" => "Status Updated Successfully"
             ];
-
         } catch (Exception $e) {
             $this->db->rollBack();
 
@@ -600,6 +704,4 @@ class ProductController
             echo json_encode($response);
         }
     }
-
-
 }

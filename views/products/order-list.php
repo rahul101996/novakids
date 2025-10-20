@@ -124,47 +124,69 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 </div>
             </div>
             <div class="w-full flex items-center justify-center">
-                <div class="w-[97%] grid grid-cols-6 items-center justify-start gap-1 bg-white rounded-xl border border-gray-300 shadow-sm">
-                    <div class="w-full flex items-start justify-start flex-col  p-2 px-3  border-r border-gray-300">
-                        <span class="text-sm  font-semibold ">
+                <div class="w-[97%] grid grid-cols-6 items-center justify-start gap-1 bg-white rounded-xl border border-gray-300 shadow-sm pl-1">
+                    <div class="w-full flex items-start justify-start flex-col  p-2 px-3  relative hover:bg-gray-100 ">
+                        <span class="text-sm font-semibold cursor-pointer time-toggle">
                             <i class="fa-regular fa-calendar" aria-hidden="true"></i> Today
                         </span>
-
+                        <div class="w-[150%] flex items-start flex-col bg-white p-3 rounded-xl justify-center  absolute top-[153%] gap-3 z-50 left-0 shadow-md border border-gray-300 hidden" id="Timefilter">
+                            <div class="w-full flex items-center justify-start gap-3">
+                                <input type="radio" name="Timeperiod" value="today" class="accent-black hover:accent-pink-500 scale-150 cursor-pointer" checked>
+                                <div class="flex flex-col items-start justify-center">
+                                    <span class="font-bold">Today</span>
+                                    <span class="text-sm text-gray-500">compared to yesterday up to current hour</span>
+                                </div>
+                            </div>
+                            <div class="w-full flex items-center justify-start gap-3">
+                                <input type="radio" name="Timeperiod" value="week" class="accent-black hover:accent-pink-500 scale-150 cursor-pointer">
+                                <div class="flex flex-col items-start justify-center">
+                                    <span class="font-bold">Last 7 days</span>
+                                    <span class="text-sm text-gray-500">compared to the previous 7 days</span>
+                                </div>
+                            </div>
+                            <div class="w-full flex items-center justify-start gap-3">
+                                <input type="radio" name="Timeperiod" value="month" class="accent-black hover:accent-pink-500 scale-150 cursor-pointer">
+                                <div class="flex flex-col items-start justify-center">
+                                    <span class="font-bold">Last 30 days</span>
+                                    <span class="text-sm text-gray-500">compared to the previous 30 days</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="w-full flex items-start justify-start flex-col  p-2 px-3 border-r border-gray-300 h-full">
+                    <div class="w-full flex items-start justify-start flex-col  p-2 px-3 border-x border-gray-300 h-full">
                         <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
                             Orders
                         </span>
 
-                        <span class="mt-1 font-semibold">₹<?= formatNumber($Total_sales) ?> --</span>
+                        <span class="mt-1 font-semibold" id="total-orders"><?= $Total_orders ?> --</span>
                     </div>
                     <div class="w-full flex items-start justify-center flex-col  p-2 px-3 border-r border-gray-300 h-full">
                         <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
                             Items Ordered
                         </span>
 
-                        <span class="mt-1 font-semibold"><?= $totalTodayOrders ?> --</span>
+                        <span class="mt-1 font-semibold" id="total-items"><?= $Total_items ?> --</span>
                     </div>
                     <div class="w-full flex items-start justify-start flex-col  p-2 px-3 border-r border-gray-300 h-full">
                         <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
-                            Returns
+                            Pending Orders
                         </span>
 
-                        <span class="mt-1 font-semibold">0 --</span>
+                        <span class="mt-1 font-semibold " id="pending-orders"><?= $Pending_orders ?> --</span>
                     </div>
                     <div class="w-full flex items-start justify-start flex-col  p-2 px-3 border-r border-gray-300 h-full">
                         <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
                             Orders Complete
                         </span>
 
-                        <span class="mt-1 font-semibold">0 --</span>
+                        <span class="mt-1 font-semibold" id="complete-orders"><?= $Orders_complete ?> --</span>
                     </div>
                     <div class="w-full flex items-start justify-start flex-col  p-2 px-3 border-r border-gray-300 h-full">
                         <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
                             Cancel Orders
                         </span>
 
-                        <span class="mt-1 font-semibold">0 --</span>
+                        <span class="mt-1 font-semibold" id="cancel-orders"><?= $Cancel_orders ?> --</span>
                     </div>
                 </div>
             </div>
@@ -195,27 +217,32 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         </thead>
 
                         <!-- Table Body -->
-                        <tbody>
-                            <?php foreach (getData2("Select * FROM `tbl_purchase` ORDER BY id desc") as $key => $value):
-                                $PurchaseItems = getData2("SELECT * FROM `tbl_purchase_item` WHERE `purchase_id` = $value[id]");
-                                //  printWithPre($PurchaseItems);
+                        <tbody id="TableBody">
+                            <?php
+                            if (!empty($orders)) {
+                                foreach ($orders as $key => $value):
+                                    $PurchaseItems = getData2("SELECT * FROM `tbl_purchase_item` WHERE `purchase_id` = $value[id]");
+                                    //  printWithPre($PurchaseItems);
                             ?>
-                                <tr
-                                    class="cursor-pointer bg-white text-[#4b4b4b] border-b border-gray-200 
+                                    <tr
+                                        class="cursor-pointer bg-white text-[#4b4b4b] border-b border-gray-200 
                            hover:bg-[#f7f7f7] hover:shadow-md hover:scale-[1.01] 
                            transition-all duration-200 ease-in-out"
-                                    onclick="window.location.href='/admin/customer-info/<?= $id ?>'">
-                                    <td class="font-semibold py-2 px-3 text-left">#<?= $value['orderid'] ?></td>
-                                    <td class="font-semibold py-2 px-3 text-left"><?= formatDate($value['created_date']) ?></td>
-                                    <td class="font-semibold py-2 px-3 text-left"><?= $value['fname'] ?> <?= $value['lname'] ?></td>
-                                    <td class="font-semibold py-2 px-3 text-left">₹<?= formatNumber($value['total_amount']) ?></td>
-                                    <td class="font-semibold py-2 px-3 text-left"><?= $value['payment_status'] == 'Pending' ? '<span class="text-[#5e421a] bg-[#ffd6a4] px-2 rounded-md text-xs py-1"> Payment' . $value['payment_status'] . '</span>' : '<span class="text-green-800 bg-[#d1e7dd] px-2 rounded-md text-xs py-1">Payment' . $value['payment_status'] . '</span>' ?></td>
-                                    <td class="font-semibold py-2 px-3 text-left text-nowrap"><span class="flex"><?= count($PurchaseItems) ?> Items</span></td>
+                                        onclick="window.location.href='/admin/customer-info/<?= $id ?>'">
+                                        <td class="font-semibold py-2 px-3 text-left">#<?= $value['orderid'] ?></td>
+                                        <td class="font-semibold py-2 px-3 text-left"><?= formatDate($value['created_date']) ?></td>
+                                        <td class="font-semibold py-2 px-3 text-left"><?= $value['fname'] ?> <?= $value['lname'] ?></td>
+                                        <td class="font-semibold py-2 px-3 text-left">₹<?= formatNumber($value['total_amount']) ?></td>
+                                        <td class="font-semibold py-2 px-3 text-left"><?= $value['payment_status'] == 'Pending' ? '<span class="text-[#5e421a] bg-[#ffd6a4] px-2 rounded-md text-xs py-1"> Payment' . $value['payment_status'] . '</span>' : '<span class="text-green-800 bg-[#d1e7dd] px-2 rounded-md text-xs py-1">Payment' . $value['payment_status'] . '</span>' ?></td>
+                                        <td class="font-semibold py-2 px-3 text-left text-nowrap"><span class="flex"><?= count($PurchaseItems) ?> Items</span></td>
 
-                                    <td class="font-semibold py-2 px-3 text-left"><?= $value['status'] ?></td>
-                                    <td class="font-semibold py-2 px-3 text-right"><?= $value['payment_mode'] ?></td>
-                                </tr>
-                            <?php endforeach; ?>
+                                        <td class="font-semibold py-2 px-3 text-left"><?= $value['status'] ?></td>
+                                        <td class="font-semibold py-2 px-3 text-right"><?= $value['payment_mode'] ?></td>
+                                    </tr>
+                            <?php endforeach;
+                            } else {
+                                echo '<tr style=""><td colspan="8" class="text-center py-3 text-gray-500">No matching customers found</td></tr>';
+                            } ?>
                         </tbody>
 
                         <!-- Table Footer (Pagination) -->
@@ -247,6 +274,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
     include $_SERVER['DOCUMENT_ROOT'] . "/views/include/footer.php";
     ?>
     <script>
+        const totalOrders = document.getElementById("total-orders");
+        const itemsOrdered = document.getElementById("total-items");
+        const pendingOrders = document.getElementById("pending-orders");
+        const completedOrders = document.getElementById("complete-orders");
+        const canceledOrders = document.getElementById("cancel-orders");
+
         document.addEventListener("DOMContentLoaded", function() {
             const searchInput = document.querySelector('input[placeholder="Search Customers"]');
             const tableBody = document.querySelector("tbody");
@@ -275,6 +308,47 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
         });
     </script>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.querySelector('.time-toggle'); // span trigger
+            const timeFilter = document.getElementById('Timefilter');
+
+            toggleBtn.addEventListener('click', function(event) {
+                event.stopPropagation(); // stop click from bubbling up
+                timeFilter.classList.toggle('hidden');
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!timeFilter.contains(event.target) && !toggleBtn.contains(event.target)) {
+                    timeFilter.classList.add('hidden');
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+
+            document.querySelectorAll('input[name="Timeperiod"]').forEach(element => {
+                element.addEventListener('click', async function() {
+                    // console.log(this.value);
+                    let time_period = this.value;
+                    const request = await axios.post("", new URLSearchParams({
+                        time_period: time_period
+                    }));
+                    console.log(request.data)
+                    if (request.data.success) {
+                        totalOrders.innerHTML = request.data.total_orders + ' ' + '--';
+                        itemsOrdered.innerHTML = request.data.total_items + ' ' + '--';
+                        pendingOrders.innerHTML = request.data.pending_orders + ' ' + '--';
+                        completedOrders.innerHTML = request.data.orders_complete + ' ' + '--';
+                        canceledOrders.innerHTML = request.data.cancel_orders + ' ' + '--';
+                        document.getElementById('TableBody').innerHTML = '';
+                        document.getElementById('TableBody').innerHTML = request.data.html;
+                    }
+                    // getbillproduct(this.value);
+                })
+            })
+        })
         async function getbillproduct(orderid) {
 
             console.log(orderid);

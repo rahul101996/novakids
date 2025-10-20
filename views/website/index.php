@@ -684,7 +684,7 @@ $ppimg = array_reverse($imags);
     // die();
     ?>
 
-    <div class="w-full overflow-hidden bg-white mb-8">
+    <div class="w-full overflow-hidden bg-white mb-8 my-16">
         <div id="bottomRow" class="marquee bg-black">
             <div class="marquee-content text-grey-700 max-md:text-sm py-1 text-nowrap">
                 <div
