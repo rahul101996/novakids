@@ -102,11 +102,7 @@
                     <img src="/public/icons/arrow-right.png" class="h-5" alt="">
                     Inventory
                 </a>
-                <a href="#categories"
-                    class="block px-2 py-1 text-[#686868] rounded hover:bg-[#f1f1f1] hover:text-[#303030] text-decoration-none rounded-xl flex items-center justify-start gap-2 w-full">
-                    <img src="/public/icons/arrow-right.png" class="h-5" alt="">
-                    Categories
-                </a>
+
             </div>
         </div>
         <a href="/admin/coupons-list" class="flex items-center px-2 py-1 text-[#303030] hover:text-[#303030] text-decoration-none rounded-xl font-semibold hover:bg-[#f1f1f1]">

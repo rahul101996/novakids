@@ -20,54 +20,53 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
             ?>
-            <div class="w-[85%]">
-                <div class="flex items-center my-6">
-                    <button class="text-gray-500 hover:text-gray-700">
-                        <span class="material-icons">arrow_back</span>
-                    </button>
-                    <h1 class="text-2xl font-semibold ml-2">Add Coupon</h1>
-                </div>
+            <div class="w-full flex items-center justify-center p-3">
+                <span class="text-xl font-semibold text-gray-800 w-[85%] text-start">Add Coupon</span>
+                <!-- <a href="/admin/add-collections" class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add Collection</a> -->
             </div>
-            <form action="" method="POST" class="w-[85%]" enctype="multipart/form-data">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full pb-10">
-                    <div class="lg:col-span-2 flex flex-col gap-6">
+            <div class="w-full flex items-center justify-center pb-4 ">
 
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                <form action="" method="POST" class="w-[85%]" enctype="multipart/form-data">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full pb-10">
+                        <div class="lg:col-span-2 flex flex-col gap-6">
 
-                            <div class="w-full flex items-center justify-center gap-6">
-                                <div class="w-full">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Coupon Name</label>
-                                    <input
-                                        class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($coupon['coupon_name']) ? $coupon['coupon_name'] : '' ?>" name="coupon_name"
-                                        id="title" placeholder="e.g. GRAB 20% OFF" type="text" />
-                                </div>
-                                <div class="w-full">
-                                    <label class="block text-sm font-medium text-gray-700  mb-1"
-                                        for="description">Coupon Code</label>
-                                    <div class="border border-gray-300 rounded-md">
+                            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+
+                                <div class="w-full flex items-center justify-center gap-6">
+                                    <div class="w-full">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Coupon Name</label>
                                         <input
-                                            class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($coupon['coupon_secret']) ? $coupon['coupon_secret'] : '' ?>" name="coupon_secret"
-                                            id="title" placeholder="e.g., GRAM, NOVA" type="text" />
+                                            class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($coupon['coupon_name']) ? $coupon['coupon_name'] : '' ?>" name="coupon_name"
+                                            id="title" placeholder="e.g. GRAB 20% OFF" type="text" />
                                     </div>
-                                </div>
+                                    <div class="w-full">
+                                        <label class="block text-sm font-medium text-gray-700  mb-1"
+                                            for="description">Coupon Code</label>
+                                        <div class="border border-gray-300 rounded-md">
+                                            <input
+                                                class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($coupon['coupon_secret']) ? $coupon['coupon_secret'] : '' ?>" name="coupon_secret"
+                                                id="title" placeholder="e.g., GRAM, NOVA" type="text" />
+                                        </div>
+                                    </div>
 
-                            </div>
-                            <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
-                                for="description">Discount Price</label>
-                            <div class="border border-gray-300 rounded-md">
-                                <input
-                                    class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($coupon['discount']) ? $coupon['discount'] : '' ?>" name="discount"
-                                    id="title" placeholder="₹ 0.00" type="text" />
+                                </div>
+                                <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
+                                    for="description">Discount Price</label>
+                                <div class="border border-gray-300 rounded-md">
+                                    <input
+                                        class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($coupon['discount']) ? $coupon['discount'] : '' ?>" name="discount"
+                                        id="title" placeholder="₹ 0.00" type="text" />
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
-
-
-                </div>
-                <div class="w-[85%]">
-                    <button class="bg-black border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" name="<?= isset($coupon['id']) ? 'update' : 'add' ?>">Save</button>
-                </div>
-            </form>
+                    <div class="w-[85%]">
+                        <button class="bg-black border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" name="<?= isset($coupon['id']) ? 'update' : 'add' ?>">Save</button>
+                    </div>
+                </form>
+            </div>
         </main>
     </div>
     <?php

@@ -23,21 +23,28 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
 
             <div class="container mx-auto p-4 md:p-8">
-                <div class="flex items-center mb-6">
-                    <button class="text-gray-500 hover:text-gray-700">
-                        <span class="material-icons">arrow_back</span>
-                    </button>
-                    <h1 class="text-2xl font-semibold ml-2">Add collection</h1>
+                <div class="flex items-center mb-2">
+
+                    <h1 class="text-lg font-semibold ml-2 flex items-center">
+                        <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg> <img src="/public/icons/forward-black.png" class="h-3 mr-2" alt=""> Add collection
+                    </h1>
                 </div>
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         <div class="lg:col-span-2 space-y-8">
-                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
                                 <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Title</label>
                                 <input
-                                    class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($collection['name']) ? $collection['name'] : '' ?>" name="name"
-                                    id="title" placeholder="e.g., Summer collection, Under $100, Staff picks" type="text" />
-                                <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
+                                    class="w-full border-2 border-[#8a8a8a] rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1"
+                                    value="<?= isset($collection['name']) ? $collection['name'] : '' ?>"
+                                    name="name"
+                                    id="title"
+                                    placeholder="e.g., Summer collection, Under $100, Staff picks"
+                                    type="text" />
+
+                                <label class="block text-sm font-medium text-gray-700 mt-4 mb-1"
                                     for="description">Description</label>
                                 <div class="border border-gray-300 rounded-md">
                                     <textarea class="w-full h-40 border-0 focus:ring-0 resize-y p-3 summernote"
@@ -45,10 +52,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 </div>
                             </div>
 
-                            <div class="bg-white p-6 rounded-lg shadow-sm">
-                                <h2 class="text-lg font-medium">Products</h2>
+                            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                                <h2 class="text-sm font-medium">Products</h2>
                                 <div class="w-[100%] flex items-center justify-start">
-                                    <select name="products[]" class="selectElement" multiple>
+                                    <select name="products[]" class="selectElement " multiple>
                                         <?php
                                         foreach ($products as $key => $product) {
                                             $images = json_decode($product['product_images'], true);
@@ -78,12 +85,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                             <ul class="w-full ">
 
                                                 <!-- Single Item -->
-                                                 
+
                                                 <?php
                                                 $sr = 1;
                                                 foreach ($inProducts as $key => $product) {
                                                     $images = json_decode($product['product_images'], true);
-                                                    $images = array_reverse($images);   
+                                                    $images = array_reverse($images);
                                                     $active = $product['status'] == '1' ? true : false;
 
                                                 ?>
@@ -125,8 +132,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         </div>
                         <div class="space-y-8">
 
-                            <div class="bg-white p-6 rounded-lg shadow-sm">
-                                <h2 class="text-lg font-medium mb-4">Image</h2>
+                            <div class="bg-white p-6 rounded-2xl shadow-sm">
+                                <h2 class="text-sm font-medium mb-4">Image</h2>
                                 <div class="space-y-1 text-center flex flex-col items-center border-2 border-gray-300 border-dashed rounded-lg p-8">
 
                                     <div id="imagePreview" class="<?= isset($collection['image']) ? '' : 'hidden' ?> mb-4">
@@ -174,20 +181,20 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 reader.readAsDataURL(file);
             }
         });
-       async function RemoveProduct(collection_id, product_id, element) {
-           
+        async function RemoveProduct(collection_id, product_id, element) {
+
             const request = await axios.post("/api/removeProductFromCollection", new URLSearchParams({
-            id : collection_id,
-            product_id : product_id
-        }));
-        console.log(request.data)
-        if (request.data.success) {
-           
-            toastr.success(request.data.data);
-            // element.closest(".product-card").remove();
-            location.reload()
+                id: collection_id,
+                product_id: product_id
+            }));
+            console.log(request.data)
+            if (request.data.success) {
+
+                toastr.success(request.data.data);
+                // element.closest(".product-card").remove();
+                location.reload()
+            }
         }
-    }
     </script>
 </body>
 

@@ -23,28 +23,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 <span class="text-xl font-semibold text-gray-800">Inventory</span>
                 <!-- <a href="/admin/add-collections" class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add Collection</a> -->
             </div>
-            <div class="p-3 border-b border-gray-200">
-                <div class="flex justify-between items-center">
-
-                    <div class="flex items-center space-x-1">
-                        <button class="bg-gray-200 text-gray-800 px-3 py-1.5 rounded-md text-sm font-medium">All</button>
-
-                    </div>
-                    <div class="flex items-center space-x-1">
-                        <button class="text-gray-500 hover:bg-gray-100 p-2 rounded-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </button>
-                        <button class="text-gray-500 hover:bg-gray-100 p-2 rounded-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M3 8h18M3 12h18M3 16h18" stroke-opacity="0.5" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M3 8h12M3 12h6" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
+            
 
             <div class="w-full flex items-center justify-center pb-4">
                 <div class="w-[97%] flex items-start justify-center gap-3 flex-col bg-white rounded-2xl">
