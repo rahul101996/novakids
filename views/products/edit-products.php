@@ -72,12 +72,13 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
             ?>
-            <div class="w-[85%]">
-                <div class="flex items-center my-6">
-                    <button class="text-gray-500 hover:text-gray-700">
-                        <span class="material-icons">arrow_back</span>
-                    </button>
-                    <h1 class="text-2xl font-semibold ml-2">Add Product</h1>
+            <div class="w-[84%]">
+                <div class="flex items-center justify-center my-6">
+                    <span class="text-xl font-semibold text-gray-800 flex w-[85%] flex items-center justify-start">
+                        <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        Edit Product</span>
                 </div>
             </div>
             <form action="" id="productForm" method="POST" enctype="multipart/form-data"
@@ -85,17 +86,17 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-[85%] pb-10">
                     <div class="lg:col-span-2 flex flex-col gap-6">
 
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
                             <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Title</label>
                             <input
-                                class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1 "
                                 name="name" value="<?= isset($editData['name']) ? $editData['name'] : '' ?>" id="title"
                                 placeholder="e.g., Summer collection, Under $100, Staff picks" type="text" required />
 
                             <label class="block text-sm font-medium text-gray-700 mt-6 mb-1" for="description">Short
                                 Description</label>
                             <div class="border border-gray-800 rounded-md">
-                                <textarea class="w-full border-0 focus:ring-0 resize-y p-3" placeholder=""
+                                <textarea class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1" placeholder=""
                                     name="shortDescription" id="shortDescription"
                                     required><?= !empty($editData) && !empty($editData['shortDescription']) ? $editData['shortDescription'] : '' ?></textarea>
                             </div>
@@ -113,7 +114,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 <select name="category" class="selectElement" required>
                                     <?php
                                     foreach ($categories as $category) {
-                                        ?>
+                                    ?>
                                         <option value="<?= $category['id'] ?>" <?= $editData['category'] == $category['id'] ? 'selected' : '' ?>><?= $category['category'] ?></option>
 
                                     <?php } ?>
@@ -125,7 +126,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 search, filters, and cross-channel sales</p>
                             <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Product Tag</label>
                             <input
-                                class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1"
                                 value="<?= isset($editData['product_tag']) ? $editData['product_tag'] : '' ?>"
                                 name="product_tag" id="title" placeholder="e.g., Only few left" type="text" />
                         </div>
@@ -154,7 +155,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         <input type="number"
                                             value="<?= !empty($editData) && !empty($editData['compare_price']) ? $editData['compare_price'] : '' ?>"
                                             name="compare_price" id="compare-price"
-                                            class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                            class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1"
                                             placeholder="₹0.00" oninput="CalculateProfitMargin()">
                                     </div>
                                 </div>
@@ -169,7 +170,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         <input type="number"
                                             value="<?= !empty($editData) && !empty($editData['price']) ? $editData['price'] : '' ?>"
                                             step="0.1" name="price" id="price"
-                                            class="w-full border border-gray-800 rounded-md  focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                            class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1"
                                             placeholder="₹0.00" oninput="CalculateProfitMargin()">
                                     </div>
                                 </div>
@@ -202,7 +203,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         <input type="text"
                                             value="<?= !empty($editData) && !empty($editData['cost_per_item']) ? $editData['cost_per_item'] : '' ?>"
                                             name="cost_per_item" id="cost-per-item" oninput="CalculateProfitMargin()"
-                                            class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                            class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1"
                                             placeholder="₹0.00">
                                     </div>
                                 </div>
@@ -211,7 +212,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     <input type="text"
                                         value="<?= !empty($editData) && !empty($editData['profit']) ? $editData['profit'] : '' ?>"
                                         name="profit" id="profit"
-                                        class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                        class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1"
                                         placeholder="₹0.00" readonly>
                                 </div>
                                 <div>
@@ -219,7 +220,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     <input type="text"
                                         value="<?= !empty($editData) && !empty($editData['margin']) ? $editData['margin'] : '' ?>"
                                         name="margin" id="margin"
-                                        class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                        class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1"
                                         placeholder="₹0.00" readonly>
                                 </div>
                             </div>
@@ -285,13 +286,13 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         foreach ($optionGroups as $optionGrpkey => $optionGrpdata) {
 
                                             $srs = $optionCount++;
-                                            ?>
+                                        ?>
                                             <div id="option-<?= $srs ?>"
                                                 class="w-full flex flex-col items-center justify-center mt-2 border-b border-gray-200  rounded-md p-4 OptionDiv">
                                                 <span class="w-full text-left">Option Name</span>
                                                 <div class="flex justify-between items-center mb-2 w-full">
                                                     <input type="text" value="<?= $optionGrpkey ?>"
-                                                        class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2 mt-2"
+                                                        class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1 mt-2"
                                                         name="options_name[]" placeholder="Eg. Size" readonly>
 
                                                 </div>
@@ -303,7 +304,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                             <div class="w-full flex items-center justify-center w-full gap-3">
                                                                 <input placeholder="Eg. Small" type="text"
                                                                     name="options_value[<?= $srs ?>][]" value="<?= $value ?>"
-                                                                    class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                                                                    class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1">
                                                                 <!-- <button onclick="removeValue(this)"><i
                                                                         class="fa-solid fa-trash-can text-gray-500"></i></button> -->
                                                             </div>
@@ -374,7 +375,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                     $jsonData = json_decode($vdata['options'], true);
 
                                                     // printWithPre($jsonData);
-                                            
+
                                                     $lines = explode("\n", trim($jsonData));
                                                     $pvoptions = [];
                                                     foreach ($lines as $kkey => $line) {
@@ -386,7 +387,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                                                     // printWithPre($vvkeys);
                                                     // printWithPre($vvdd);
-                                            
+
                                                     $dtdtd = "";
                                                     foreach ($vvkeys as $keyskey => $keysvalue) {
                                                         $dtdtd .= $vvdd[$keyskey] . "/";
@@ -394,8 +395,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                     $dtdtd = substr($dtdtd, 0, -1);
 
                                                     // printWithPre($dtdtd);
-                                            
-                                                    ?>
+
+                                            ?>
 
                                                     <tr class="hover:bg-gray-50 border border-gray-200">
                                                         <td class="px-3 py-3">
@@ -438,7 +439,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <?php
+                                            <?php
                                                 }
                                             } ?>
 
@@ -1048,7 +1049,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
             valueInput.innerHTML = `
                                 <div class="w-full flex items-center justify-center w-full gap-3">
-                                    <input placeholder="Eg. Small" type="text" name="options_value[${optionId}][]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" />
+                                    <input placeholder="Eg. Small" type="text" name="options_value[${optionId}][]" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1" />
                                     <button onclick="removeValue(this)"><i class="fa-solid fa-trash-can text-gray-500"></i></button>
                                 </div>
                 
@@ -1168,7 +1169,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
             // Add event listeners for remove buttons
             document.querySelectorAll('.remove-variant').forEach(button => {
-                button.addEventListener('click', function () {
+                button.addEventListener('click', function() {
                     this.closest('tr').remove();
                 });
             });
@@ -1191,7 +1192,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
         }
         // toastr.error("Product added successfully");
 
-        document.addEventListener('click', function (e) {
+        document.addEventListener('click', function(e) {
             const modals = document.querySelectorAll('[id^="myModal"]');
             modals.forEach(modal => {
                 if (!modal.classList.contains('hidden') && e.target === modal) {
@@ -1200,7 +1201,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             });
         });
 
-        document.getElementById('sizeImage').addEventListener('change', function (e) {
+        document.getElementById('sizeImage').addEventListener('change', function(e) {
             const file = e.target.files[0];
             const previewContainer = document.getElementById('previewContainer');
             const previewImage = document.getElementById('sizeImagePreview');
@@ -1208,7 +1209,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
             if (file && file.type.startsWith('image/')) {
                 const reader = new FileReader();
-                reader.onload = function (e) {
+                reader.onload = function(e) {
                     previewImage.src = e.target.result;
                     previewImage.style.display = "block";
                     defaultIcon.style.display = "none";
@@ -1227,11 +1228,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
 
 
-        imageInput.addEventListener('change', function (e) {
+        imageInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function (e) {
+                reader.onload = function(e) {
                     previewImg.src = e.target.result;
                     imagePreview.classList.remove('hidden');
                 };
@@ -1239,7 +1240,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             }
         });
 
-        document.getElementById('productForm').addEventListener('submit', function (e) {
+        document.getElementById('productForm').addEventListener('submit', function(e) {
             e.preventDefault(); // prevent actual submit first
             let tt = document.getElementById("variantsTableBody").querySelectorAll("tr")
 

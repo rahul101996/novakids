@@ -20,22 +20,20 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
             ?>
-            <div class="w-[85%]">
-                <div class="flex items-center my-6">
-                    <button class="text-gray-500 hover:text-gray-700">
-                        <span class="material-icons">arrow_back</span>
-                    </button>
-                    <h1 class="text-2xl font-semibold ml-2">Add Packaging</h1>
-                </div>
+            <div class="w-full flex items-center justify-center p-3">
+                <span class="text-xl font-semibold text-gray-800 w-[87%]">Add Packaging</span>
+                <!-- <a href="/admin/add-collections" class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add Collection</a> -->
             </div>
-            <form action="" method="POST" class="w-[85%]" enctype="multipart/form-data">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full pb-10">
+             <div class="w-full flex items-center justify-center pb-4 ">
+
+                <form action="" method="POST" class="w-[85%]" enctype="multipart/form-data">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-[95%] pb-10">
                     <div class="lg:col-span-2 flex flex-col gap-6">
 
                         <div class="bg-white p-6 rounded-lg shadow-sm">
                             <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Package Type</label>
                             <div class="w-full flex items-center justify-start mt-2">
-                                <select name="package_type" id="package_type" class="selectElement">
+                                <select name="package_type" id="package_type" class="selectElement w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1">
                                     <option value="">-- Select a Product --</option>
                                     <option value="box" <?= ($package['package_type'] == 'box') ? 'selected' : '' ?>>BOX</option>
                                     <option value="envelope" <?= ($package['package_type'] == 'envelope') ? 'selected' : '' ?>>ENVELOPE</option>
@@ -48,29 +46,29 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 <div class="w-full flex flex-col items-start justify-start">
                                     <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
                                         for="description">Length</label>
-                                    <div class="border border-gray-300 rounded-md">
-                                        <input type="text" name="length" value="<?= $package['length'] ?>" id="length" class="w-full p-2 rounded-md">
+                                    <div class="">
+                                        <input type="text" name="length" value="<?= $package['length'] ?>" id="length" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1">
                                     </div>
                                 </div>
                                 <div class="w-full flex flex-col items-start justify-start">
                                     <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
                                         for="description">Width</label>
-                                    <div class="border border-gray-300 rounded-md">
-                                        <input type="text" name="width" value="<?= $package['width'] ?>" id="width" class="w-full p-2 rounded-md">
+                                    <div class="">
+                                        <input type="text" name="width" value="<?= $package['width'] ?>" id="width" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1">
                                     </div>
                                 </div>
                                 <div class="w-full flex flex-col items-start justify-start">
                                     <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
                                         for="description">Height</label>
-                                    <div class="border border-gray-300 rounded-md">
-                                        <input type="text" name="height" value="<?= $package['height'] ?>" id="height" class="w-full p-2 rounded-md">
+                                    <div class="">
+                                        <input type="text" name="height" value="<?= $package['height'] ?>" id="height" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1">
                                     </div>
                                 </div>
                                 <div class="w-full flex flex-col items-start justify-start">
                                     <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
                                         for="description">Unit</label>
-                                    <div class="border border-gray-300 rounded-md">
-                                        <select name="dimentions_unit" class="px-2 py-2">
+                                    <div class="">
+                                        <select name="dimentions_unit" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1">
                                             <option value="cm" <?= ($package['dimentions_unit'] == 'cm') ? 'selected' : '' ?>>CM</option>
                                             <option value="in" <?= ($package['dimentions_unit'] == 'in') ? 'selected' : '' ?>>IN</option>
 
@@ -83,15 +81,15 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 <div class="w-[33%] flex flex-col items-start justify-start">
                                     <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
                                         for="description">Weight</label>
-                                    <div class="border border-gray-300 rounded-md">
-                                        <input type="text" value="<?= $package['weight'] ?>" name="weight" id="weight" class="w-full p-2 rounded-md">
+                                    <div class="">
+                                        <input type="text" value="<?= $package['weight'] ?>" name="weight" id="weight" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1">
                                     </div>
                                 </div>
                                 <div class="w-full flex flex-col items-start justify-start">
                                     <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
                                         for="description">Unit</label>
-                                    <div class="border border-gray-300 rounded-md">
-                                        <select name="weight_unit" class="px-2 py-2">
+                                    <div class="">
+                                        <select name="weight_unit" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1">
                                             <option value="gm" <?= ($package['weight_unit'] == 'gm') ? 'selected' : '' ?>>gm</option>
                                             <option value="kg" <?= ($package['weight_unit'] == 'kg') ? 'selected' : '' ?>>kg</option>
 
@@ -101,7 +99,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             </div>
                             <label class="block text-sm font-medium text-gray-700 mt-4" for="title">Package Name</label>
                             <div class="w-full flex items-center justify-start mt-2">
-                                <input type="text" value="<?= $package['package_name'] ?>" name="package_name" id="package_name" class="w-full p-2 border border-gray-300 rounded-md">
+                                <input type="text" value="<?= $package['package_name'] ?>" name="package_name" id="package_name" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1">
                             </div>
                             <div class="w-full flex items-start justify-start mt-4 gap-3">
                                 <input type="checkbox" name="is_default" <?= ($package['is_default'] == 1) ? 'checked' : '' ?> class="h-4 w-4 mt-2">

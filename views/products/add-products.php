@@ -38,32 +38,33 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
             ?>
             <div class="w-[85%]">
-                <div class="flex items-center my-6">
-                    <button class="text-gray-500 hover:text-gray-700">
-                        <span class="material-icons">arrow_back</span>
-                    </button>
-                    <h1 class="text-2xl font-semibold ml-2">Add Product</h1>
+                <div class="flex items-center justify-center my-6">
+                    <span class="text-xl font-semibold text-gray-800 flex w-[85%] flex items-center justify-start">
+                        <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        Add Product</span>
                 </div>
             </div>
             <form action="" id="productForm" method="POST" enctype="multipart/form-data" class="w-full flex flex-col items-center justify-center">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-[85%] pb-10">
                     <div class="lg:col-span-2 flex flex-col gap-6">
 
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
                             <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Title</label>
                             <input
-                                class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($collection['name']) ? $collection['name'] : '' ?>" name="name"
+                                class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1" value="<?= isset($collection['name']) ? $collection['name'] : '' ?>" name="name"
                                 id="title" placeholder="e.g., Summer collection, Under $100, Staff picks" type="text" required />
 
-                            <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
+                            <label class="block text-sm font-medium text-gray-700 mt-3 mb-1"
                                 for="description">Short Description</label>
                             <div class="border border-gray-800 rounded-md">
-                                <textarea class="w-full border-0 focus:ring-0 resize-y p-3 "
+                                <textarea class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1"
                                     placeholder="" name="shortDescription" id="shortDescription" required></textarea>
                             </div>
 
 
-                            <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
+                            <label class="block text-sm font-medium text-gray-700 mt-3 mb-1"
                                 for="description">Description</label>
                             <div class="border border-gray-800 rounded-md">
                                 <textarea class="w-full h-40 border-0 focus:ring-0 resize-y p-3 summernote"
@@ -85,13 +86,13 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <p class="mt-2 text-sm text-gray-500">Determines tax rates and adds metafields to improve search, filters, and cross-channel sales</p>
                             <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Product Tag</label>
                             <input
-                                class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($collection['product_tag']) ? $collection['product_tag'] : '' ?>" name="product_tag"
+                                class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1" value="<?= isset($collection['product_tag']) ? $collection['product_tag'] : '' ?>" name="product_tag"
                                 id="title" placeholder="e.g., Only few left" type="text" />
                         </div>
 
 
 
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
                             <h2 class="text-base font-medium text-gray-900">Pricing</h2>
                             <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6">
 
@@ -106,7 +107,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                             <!-- <span class="text-gray-500 sm:text-sm">₹</span> -->
                                         </div>
-                                        <input type="number" name="compare_price" id="compare-price" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00" oninput="CalculateProfitMargin()">
+                                        <input type="number" name="compare_price" id="compare-price" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1" placeholder="₹0.00" oninput="CalculateProfitMargin()">
                                     </div>
                                 </div>
 
@@ -116,7 +117,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                             <!-- <span class="text-gray-500 sm:text-sm">₹</span> -->
                                         </div>
-                                        <input type="number" step="0.1" name="price" id="price" class="w-full border border-gray-800 rounded-md  focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00" oninput="CalculateProfitMargin()">
+                                        <input type="number" step="0.1" name="price" id="price" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1" placeholder="₹0.00" oninput="CalculateProfitMargin()">
                                     </div>
                                 </div>
 
@@ -140,16 +141,16 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     </label>
                                     <div class="relative mt-1 rounded-md">
 
-                                        <input type="text" name="cost_per_item" id="cost-per-item" oninput="CalculateProfitMargin()" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00">
+                                        <input type="text" name="cost_per_item" id="cost-per-item" oninput="CalculateProfitMargin()" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1" placeholder="₹0.00">
                                     </div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Profit</label>
-                                    <input type="text" name="profit" id="profit" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00" readonly>
+                                    <input type="text" name="profit" id="profit" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1" placeholder="₹0.00" readonly>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Margin (%)</label>
-                                    <input type="text" name="margin" id="margin" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" placeholder="₹0.00" readonly>
+                                    <input type="text" name="margin" id="margin" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1" placeholder="₹0.00" readonly>
                                 </div>
                             </div>
                         </div>
@@ -279,13 +280,13 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                         </button>
 
                                         <div id="dropdownMenu" class="hidden absolute mt-1 w-full bg-white shadow-lg rounded-md border border-gray-200 z-10 max-h-60 overflow-y-auto px-2 py-1">
-                                            <?php 
-                                            
+                                            <?php
+
                                             // $selectedPackage = "";
                                             // if (!empty($editData) && !empty($editData['packaging'])) {
                                             //     $selectedPackage = getData2("SELECT * FROM tbl_packaging WHERE id = " . $editData['packaging'])[0];
                                             // }
-                                            
+
                                             foreach ($packages as $package) { ?>
                                                 <div class="p-2 hover:bg-gray-100 cursor-pointer flex items-center space-x-2" onclick="selectPackage('<?= $package['package_name'] ?>', '<?= $package['length'] ?> × <?= $package['width'] ?> × <?= $package['height'] ?> <?= $package['dimentions_unit'] ?>, <?= $package['weight'] ?> <?= $package['weight_unit'] ?>', '<?= $package['id'] ?>')">
                                                     <?php
@@ -327,7 +328,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         <div class="bg-white p-6 rounded-lg shadow-sm">
                             <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
                             <div class="mt-1 relative">
-                                <select id="status" name="status" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                                <select id="status" name="status" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1 ">
                                     <option class="">Active</option>
                                     <option class="">Draft</option>
                                 </select>
@@ -554,9 +555,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             }
 
             optionDiv.innerHTML = `
-            <span class="w-full text-left">Option Name</span>
+            <span class="w-full text-left text-sm font-semibold">Option Name</span>
                 <div class="flex justify-between items-center mb-2 w-full">
-                    <input type="text" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2 mt-2" name="options_name[]" placeholder="Eg. Size" ${val}>
+                    <input type="text" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1 mt-2" name="options_name[]" placeholder="Eg. Size" ${val}>
                     
                 </div>
                 <div id="values-${optionCount}" class="space-y-2 w-full mt-3">
@@ -756,7 +757,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
             valueInput.innerHTML = `
             <div class="w-full flex items-center justify-center w-full gap-3">
-                                <input placeholder="Eg. Small" type="text" name="options_value[${optionId}][]" class="w-full border border-gray-800 rounded-md focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                                <input placeholder="Eg. Small" type="text" name="options_value[${optionId}][]" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1 mt-2">
                                 <button onclick="removeValue(this)"><i class="fa-solid fa-trash-can text-gray-500"></i></button>
                                 </div>
                 

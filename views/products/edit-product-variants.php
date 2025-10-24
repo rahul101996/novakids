@@ -60,24 +60,23 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
         ?>
 
-        <main class="flex-1 md:ml-[16.5rem] md:mt-[3.7rem] bg-[#f1f1f1] rounded-tr-3xl  h-[92vh] overflow-y-scroll">
+        <main class="flex-1 md:ml-[16.5rem] md:mt-[3.7rem] bg-[#f1f1f1] rounded-tr-3xl  h-[92vh] overflow-y-scroll pb-5">
             <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
             ?>
             <div class="w-[85%]">
-                <div class="flex items-center my-6">
-                    <button class="text-gray-500 hover:text-gray-700">
-                        <span class="material-icons">arrow_back</span>
-                    </button>
-                    <h1 class="text-2xl font-semibold ml-2">Add Product</h1>
+                <div class="flex items-center justify-center my-6">
+                    <span class="text-xl font-semibold text-gray-800 flex w-[85%] flex items-center justify-start">
+                        <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        Edit Variant</span>
                 </div>
             </div>
             <form action="" method="POST" enctype="multipart/form-data"
                 class="w-full flex flex-col items-center justify-center">
 
-                <div class="bg-white p-6 rounded-lg shadow-sm w-[85%]">
-                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Edit Variant</h2>
-
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm w-[85%]">
                     <!-- Hidden Fields -->
                     <input type="hidden" name="id" value="<?= htmlspecialchars($editData['id']) ?>">
                     <input type="hidden" name="product_id" value="<?= htmlspecialchars($editData['product_id']) ?>">
@@ -90,7 +89,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     class="block text-sm font-medium text-gray-700 mb-1"><?= htmlspecialchars($key) ?></label>
                                 <input type="text" name="options[<?= htmlspecialchars($key) ?>]"
                                     value="<?= htmlspecialchars($value) ?>"
-                                    class="w-full border border-gray-800 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                                    class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1 " />
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -101,13 +100,13 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <label class="block text-sm font-medium text-gray-700 mb-1">Price (₹)</label>
                             <input type="number" step="0.01" name="price"
                                 value="<?= htmlspecialchars($editData['price']) ?>"
-                                class="w-full border border-gray-800 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                                class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1 " />
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Quantity</label>
                             <input type="number" name="quantity" value="<?= htmlspecialchars($editData['quantity']) ?>"
-                                class="w-full border border-gray-800 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                                class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1 " />
                         </div>
 
                         <!-- <div>
@@ -120,26 +119,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         </div> -->
                     </div>
 
-                    <!-- Inventory Fields -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                        <!-- <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Committed</label>
-                            <input type="number" name="committed"
-                                value="<?= htmlspecialchars($editData['committed']) ?>"
-                                class="w-full border border-gray-800 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500" />
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">On Hand</label>
-                            <input type="number" name="on_hand" value="<?= htmlspecialchars($editData['on_hand']) ?>"
-                                class="w-full border border-gray-800 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500" />
-                        </div> -->
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
 
                         <!-- Existing Images -->
-                        <div class="col-span-2 mb-6">
+                        <div class="col-span-2 mb-0">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Existing Images</label>
                             <div class="flex gap-4 flex-wrap">
                                 <?php if (!empty($iimages)): ?>
@@ -148,7 +132,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                             <img src="/<?= htmlspecialchars($img) ?>" alt="Variant Image"
                                                 class="w-28 h-28 object-cover rounded-md border border-gray-300">
                                             <input type="checkbox" name="delete_images[]" value="<?= htmlspecialchars($img) ?>"
-                                                class="absolute top-1 right-1 w-5 h-5 text-red-600">
+                                                class="absolute top-1 right-1 w-5 h-5 text-red-600 accent-red-600">
                                             <input type="hidden" name="allImages[]" value="<?= htmlspecialchars($img) ?>">
                                         </div>
                                     <?php endforeach; ?>
@@ -156,11 +140,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     <p class="text-gray-500 text-sm">No images uploaded.</p>
                                 <?php endif; ?>
                             </div>
-                            <p class="text-xs text-gray-500 mt-2">Tick the images you want to delete.</p>
+                            <p class="text-xs text-red-500 mt-2">Tick the images you want to delete.</p>
                         </div>
 
                         <!-- Upload New Images -->
-                        <div class="bg-white p-6 rounded-lg shadow-sm ">
+                        <div class="bg-white  rounded-lg shadow-sm ">
                             <h2 class="text-base font-medium text-gray-900">Media</h2>
                             <div
                                 class="space-y-1 text-center flex flex-col items-center border-2 border-gray-800 border-dashed rounded-lg p-8">
@@ -194,13 +178,14 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
 
                     <!-- Submit Button -->
-                    <div class="flex justify-end">
+                    
+                </div>
+                <div class="w-[85%] flex justify-start mt-5">
                         <button type="submit"
                             class="bg-gray-900 hover:bg-gray-800 text-white font-medium py-2 px-6 rounded-md">
                             Update Variant
                         </button>
                     </div>
-                </div>
             </form>
 
         </main>
@@ -215,11 +200,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
         const imagePreview = document.getElementById('imagePreview');
         const previewImg = imagePreview.querySelector('img');
 
-        imageInput.addEventListener('change', function (e) {
+        imageInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function (e) {
+                reader.onload = function(e) {
                     previewImg.src = e.target.result;
                     imagePreview.classList.remove('hidden');
                 };
