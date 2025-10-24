@@ -20,22 +20,20 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/views/include/navbar.php";
             ?>
-            <div class="w-[85%]">
-                <div class="flex items-center my-6">
-                    <button class="text-gray-500 hover:text-gray-700">
-                        <span class="material-icons">arrow_back</span>
-                    </button>
-                    <h1 class="text-2xl font-semibold ml-2">Add Pop Up</h1>
-                </div>
+            <div class="w-full flex items-center justify-center p-3">
+                <span class="text-xl font-semibold text-gray-800 w-[87%]">Add navbar heading</span>
+                <!-- <a href="/admin/add-collections" class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add Collection</a> -->
             </div>
-            <form action="" method="POST" class="w-[85%]" enctype="multipart/form-data">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full pb-10">
+             <div class="w-full flex items-center justify-center pb-4 ">
+
+                <form action="" method="POST" class="w-[85%]" enctype="multipart/form-data">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-[65%] pb-10">
                     <div class="lg:col-span-2 flex flex-col gap-6">
 
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Title</label>
-                            <input placeholder="Enter Title"
-                                class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($editData['title']) ? $editData['title'] : '' ?>" name="title"
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Heading</label>
+                            <input placeholder="Enter heading"
+                                class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1" value="<?= isset($editData['title']) ? $editData['title'] : '' ?>" name="title"
                                 id="title" type="text" />
                             <!-- <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
                                 for="description">Description</label>
@@ -76,6 +74,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     <button class="bg-black border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"><?= isset($popup['id']) ? 'Update' : 'Save' ?></button>
                 </div>
             </form>
+             </div>
         </main>
     </div>
     <?php

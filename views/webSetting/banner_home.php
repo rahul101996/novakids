@@ -25,84 +25,81 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 <a href="/admin/front-cms/home-banner/add" class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add
                     Home Banner</a>
             </div>
-            <div class="p-3 border-b border-gray-200">
-                <div class="flex justify-between items-center">
-
-                    <div class="flex items-center space-x-1">
-                        <button
-                            class="bg-gray-200 text-gray-800 px-3 py-1.5 rounded-md text-sm font-medium">All</button>
-
-                    </div>
-                    <div class="flex items-center space-x-1">
-                        <button class="text-gray-500 hover:bg-gray-100 p-2 rounded-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <div class="w-full flex items-center justify-center pb-4">
+                <div class="w-[97%] flex items-start justify-center gap-3 flex-col bg-white rounded-2xl">
+                    <div class="w-full flex items-center justify-between mt-2 px-2">
+                        <div class="relative w-[45vw]">
+                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#626262">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
-                        </button>
-                        <button class="text-gray-500 hover:bg-gray-100 p-2 rounded-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M3 8h18M3 12h18M3 16h18"
-                                    stroke-opacity="0.5" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18M3 8h12M3 12h6" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
+                            <input type="text" placeholder="Search Customers" class="bg-white w-full pl-10 pr-4 py-1 rounded-xl border border-gray-300 focus:border-gray-600 focus:bg-gray-200 placeholder:text-[#626262] outline-none transition">
 
-            <div class="w-full text-sm">
-                <!-- Table Header -->
-                <div class="space-y-2">
-                    <!-- Table Header -->
-                    <div
-                        class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-2 text-gray-500 bg-gray-100 rounded">
-                        <span>Sr. No</span>
-                        <span>Title</span>
-                        <span>Banner</span>
-                        <span>Action</span>
-                    </div>
-
-                    <!-- Table Rows -->
-                    <?php foreach (getData2("SELECT * FROM `tbl_home_banner` WHERE 1") as $key => $banner) { ?>
-                        <div
-                            class="grid grid-cols-[auto_minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-4 px-4 py-3 hover:bg-gray-50 text-gray-800 rounded">
-                            <!-- Sr. No -->
-                            <div class="flex items-center space-x-3">
-                                <span><?= $key + 1 ?></span>
-                                <svg class="h-4 w-4 text-gray-400 cursor-grab" viewBox="0 0 24 24" fill="currentColor"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="9" cy="6" r="1.5" />
-                                    <circle cx="15" cy="6" r="1.5" />
-                                    <circle cx="9" cy="12" r="1.5" />
-                                    <circle cx="15" cy="12" r="1.5" />
-                                    <circle cx="9" cy="18" r="1.5" />
-                                    <circle cx="15" cy="18" r="1.5" />
-                                </svg>
-                            </div>
-
-                            <!-- Category Title -->
-                            <div class="font-medium"><?= htmlspecialchars($banner['title']) ?></div>
-
-                            <!-- Image -->
-                            <div>
-                                <img src="/<?= htmlspecialchars($banner['file']) ?>" class="w-24 rounded"
-                                    alt="Category Image">
-                            </div>
-
-                            <!-- Action -->
-                            <div class="flex space-x-2">
-                                <a href="home-banner/edit/<?= $banner['id'] ?>"
-                                    class="text-blue-500 text-xl hover:text-blue-600"><i class="fa-solid fa-pen"></i></a>
-                                <!-- <a href="/delete/<?= $banner['id'] ?>" class="text-red-500 hover:text-red-600"><i
-                                        class="fa-solid fa-trash"></i></a> -->
-                            </div>
                         </div>
-                    <?php } ?>
+
+                    </div>
+                    <table class="w-full text-sm">
+                        <!-- Table Header -->
+                        <thead class="sticky top-0 left-0 shadow-sm z-10">
+                            <tr class="bg-[#f7f7f7] text-[#616161] border-y border-gray-200">
+                                <?php
+                                $headers = ['Sr. No.', 'Title', 'Banner', 'Action'];
+                                foreach ($headers as $header): ?>
+                                    <th class="font-semibold py-2 px-3 w-[20%] <?= ($header == 'Action' ? 'text-right' : 'text-left') ?>">
+                                        <?= $header ?>
+                                    </th>
+                                <?php endforeach; ?>
+                            </tr>
+                        </thead>
+
+                        <!-- Table Body -->
+                        <tbody>
+                            <?php foreach (getData2("SELECT * FROM `tbl_home_banner` WHERE 1") as $key => $banner):
+                               
+                            ?>
+                                <tr
+                                    class="cursor-pointer bg-white text-[#4b4b4b] border-b border-gray-200 hover:bg-[#f7f7f7] hover:shadow-md hover:scale-[1.01] transition-all duration-200 ease-in-out">
+                                    <td class="font-semibold py-2 px-3 text-left"><?= $key + 1 ?></td>
+                                    <td class="font-semibold py-2 px-3 text-left">
+                                        <?= htmlspecialchars($banner['title']) ?>
+                                    </td>
+                                    <td class="font-semibold py-2 px-3 text-left">
+                                        <img src="/<?= htmlspecialchars($banner['file']) ?>" class="h-24 rounded"
+                                            alt="Category Image">
+                                    </td>
+
+                                    <td class="font-semibold py-2 px-3 text-right">
+                                        <div class="flex space-x-2 justify-end">
+                                            <a href="home-banner/edit/<?= $banner['id'] ?>"
+                                                class="text-black text-sm hover:text-gray-800"><i class="fa-solid fa-pen"></i></a>
+                                            <!-- <a href="/delete/<?= $banner['id'] ?>" class="text-red-500 hover:text-red-600"><i
+                                        class="fa-solid fa-trash"></i></a> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+
+                        <!-- Table Footer (Pagination) -->
+                        <tfoot class="sticky bg-[#f7f7f7] bottom-0 left-0 border-t border-gray-200 shadow-sm z-10">
+                            <tr>
+                                <td colspan="5" class="py-3 px-4">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm text-gray-500">Showing 1–10 of 100 customers</span>
+                                        <div class="flex items-center gap-1">
+                                            <button class="px-3 py-1 text-sm border border-gray-300 rounded-lg hover:bg-gray-100 transition">Prev</button>
+                                            <button class="px-3 py-1 text-sm border border-gray-300 rounded-lg bg-gray-100 font-medium">1</button>
+                                            <button class="px-3 py-1 text-sm border border-gray-300 rounded-lg hover:bg-gray-100 transition">2</button>
+                                            <button class="px-3 py-1 text-sm border border-gray-300 rounded-lg hover:bg-gray-100 transition">Next</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
+
+
         </main>
     </div>
     <?php
