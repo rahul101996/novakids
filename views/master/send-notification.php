@@ -22,7 +22,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             ?>
             <div class="w-[85%]">
                 <div class="flex items-center justify-center my-6">
-                    <span class="text-xl w-[85%]  font-semibold text-gray-800 flex __web-inspector-hide-shortcut__">
+                    <span class="text-xl w-[85%] flex items-center justify-start font-semibold text-gray-800 flex __web-inspector-hide-shortcut__">
                         <img src="/public/icons/notification.png" class="h-6 mr-2" alt="">
                         Send Firebase Notification</span>
                 </div>
@@ -64,7 +64,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 <div class="w-full mb-6">
                                     <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Notification Title</label>
                                     <input
-                                        class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                        class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1"
                                         value="" name="title" id="title" placeholder="e.g., New Update Available!" type="text" required />
                                 </div>
 
@@ -72,7 +72,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 <div class="w-full mb-6">
                                     <label class="block text-sm font-medium text-gray-700 mb-1" for="body">Notification Body</label>
                                     <textarea
-                                        class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                        class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1"
                                         name="body" id="body" rows="4" placeholder="e.g., Discover what's new in our latest release." required></textarea>
                                 </div>
 
@@ -80,7 +80,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 <div class="w-full mb-6">
                                     <label class="block text-sm font-medium text-gray-700 mb-1" for="image_url">Image URL (Optional)</label>
                                     <input
-                                        class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                        class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1"
                                         value="" name="image_url" id="image_url" placeholder="e.g., https://example.com/notification-banner.jpg" type="text" />
                                     <small class="text-gray-500 text-xs mt-1 block">This image will appear in the notification. Must be publicly accessible.</small>
                                 </div>
@@ -89,7 +89,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 <div class="w-full mb-6">
                                     <label class="block text-sm font-medium text-gray-700 mb-1" for="click_action_url">Click Action URL (Optional)</label>
                                     <input
-                                        class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                        class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1"
                                         value="" name="click_action_url" id="click_action_url" placeholder="e.g., https://your-app.com/news" type="text" />
                                     <small class="text-gray-500 text-xs mt-1 block">The URL to open when the user clicks the notification.</small>
                                 </div>

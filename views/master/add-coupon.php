@@ -36,7 +36,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     <div class="w-full">
                                         <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Coupon Name</label>
                                         <input
-                                            class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($coupon['coupon_name']) ? $coupon['coupon_name'] : '' ?>" name="coupon_name"
+                                            class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1" value="<?= isset($coupon['coupon_name']) ? $coupon['coupon_name'] : '' ?>" name="coupon_name"
                                             id="title" placeholder="e.g. GRAB 20% OFF" type="text" />
                                     </div>
                                     <div class="w-full">
@@ -44,17 +44,17 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                             for="description">Coupon Code</label>
                                         <div class="border border-gray-300 rounded-md">
                                             <input
-                                                class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($coupon['coupon_secret']) ? $coupon['coupon_secret'] : '' ?>" name="coupon_secret"
+                                                class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1" value="<?= isset($coupon['coupon_secret']) ? $coupon['coupon_secret'] : '' ?>" name="coupon_secret"
                                                 id="title" placeholder="e.g., GRAM, NOVA" type="text" />
                                         </div>
                                     </div>
 
                                 </div>
-                                <label class="block text-sm font-medium text-gray-700 mt-6 mb-1"
+                                <label class="block text-sm font-medium text-gray-700 mt-4 mb-1"
                                     for="description">Discount Price</label>
                                 <div class="border border-gray-300 rounded-md">
                                     <input
-                                        class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2" value="<?= isset($coupon['discount']) ? $coupon['discount'] : '' ?>" name="discount"
+                                        class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1" value="<?= isset($coupon['discount']) ? $coupon['discount'] : '' ?>" name="discount"
                                         id="title" placeholder="₹ 0.00" type="text" />
                                 </div>
                             </div>

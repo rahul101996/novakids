@@ -22,10 +22,15 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             ?>
             <div class="w-full flex items-center justify-between p-3">
                 <span class="text-xl font-semibold text-gray-800">Collections</span>
-                <a href="/admin/add-collections"
-                    class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add Collection</a>
+                <div class="flex items-center justify-center gap-3">
+                    <button id="exportCollectionsBtn" class="bg-gray-800 text-sm font-semibold py-1 px-4 rounded-lg text-white">
+                        Export
+                    </button>
+                    <a href="/admin/add-collections"
+                        class="bg-gray-800 text-sm font-semibold py-1 px-4 rounded-lg text-white">Add Collection</a>
+                </div>
             </div>
-            <div class="w-full flex items-center justify-center pb-4 mt-4">
+            <div class="w-full flex items-center justify-center pb-4 mt-2">
                 <div class="w-[97%] flex items-start justify-center gap-3 flex-col bg-white rounded-2xl overflow-y-auto">
                     <div class="w-full flex items-center justify-between mt-2 px-2">
                         <div class="relative w-[45vw]">
@@ -42,10 +47,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         <thead class="sticky top-0 left-0 shadow-sm z-10">
                             <tr class="bg-[#f7f7f7] text-[#616161] border-y border-gray-200">
                                 <?php
-                                $headers = ['Sr. No', 'Image', 'Title', 'Status', 'Price'];
+                                $headers = ['Image', 'Title', 'Status', 'Action'];
 
                                 foreach ($headers as $header): ?>
-                                    <th class="font-semibold py-2 px-3 w-[20%] <?= ($header == 'Price' ? 'text-right' : 'text-left') ?> text-nowrap">
+                                    <th class="font-semibold py-2 px-3 w-[20%] <?= ($header == 'Action' ? 'text-right' : 'text-left') ?> text-nowrap">
                                         <?= $header ?>
                                     </th>
                                 <?php endforeach; ?>
@@ -96,10 +101,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                             </label>
                                         </div>
                                     </td>
-                                    <td class="font-semibold py-2 px-3 text-left"><a href="/edit-collection/<?= $collection['id'] ?>"
-                                            class="text-blue-500 hover:text-blue-600"><i class="fa-solid fa-pen"></i></a>
+                                    <td class="font-semibold py-2 px-3 text-right"><a href="/edit-collection/<?= $collection['id'] ?>"
+                                            class="text-black hover:text-black"><i class="fa-solid fa-pen"></i></a>
                                         <a onclick="return confirm('Are you sure you want to delete this collection?')" href="/delete-collection/<?= $collection['id'] ?>"
-                                            class="text-red-500 hover:text-red-600"><i class="fa-solid fa-trash"></i></a>
+                                            class="text-red-700 hover:text-red-700"><i class="fa-solid fa-trash"></i></a>
                                     </td>
 
                                 </tr>
@@ -128,9 +133,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                 </div>
             </div>
-            
 
-            
+
+
         </main>
     </div>
     <?php
@@ -178,6 +183,31 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             }
         }
     </script>
+<script>
+document.getElementById("exportCollectionsBtn").addEventListener("click", async () => {
+    try {
+        const response = await axios({
+            url: "/admin/export-collections",
+            method: "POST",
+            responseType: "blob"
+        });
+
+        const blob = new Blob([response.data], { type: "text/csv" });
+        const url = window.URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "collections.csv";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error("Export failed:", error);
+        toastr.error("Something went wrong while exporting collections.");
+    }
+});
+</script>
 
 </body>
 

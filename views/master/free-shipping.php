@@ -39,11 +39,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
                                 <label class="block text-sm font-medium text-gray-700 mb-1" for="title">Price</label>
                                 <input
-                                    class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2"
+                                    class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1"
                                     value="<?= isset($freeshipping['price']) && !empty($freeshipping['price']) ? $freeshipping['price'] : '' ?>" name="price" id="price" type="text" />
 
                                 <label class="block text-sm font-medium text-gray-700 mt-6 mb-1" for="description">Active Free Shipping</label>
-                                <div class="border border-gray-300 rounded-md px-4 py-3">
+                                <div class="border-[1px] border-gray-600 rounded-md px-4 py-3">
                                     <div class="flex items-center gap-2">
                                         <input id="free_shipping" name="free_shipping" type="checkbox"
                                             class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" <?= isset($freeshipping['free_shipping']) && ($freeshipping['free_shipping'] == '1') ? 'checked' : '' ?> />

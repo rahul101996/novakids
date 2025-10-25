@@ -8,6 +8,106 @@ class ProductController
         $this->db = $db;
     }
 
+    public function ExportCollections($id = null)
+    {
+        $siteName = getDBObject()->getSiteName();
+        $pageTitle = "Products List";
+        $pageModule = "Products List";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            header("Content-Type: text/csv; charset=UTF-8");
+            header("Content-Disposition: attachment; filename=collections.csv");
+            header("Pragma: no-cache");
+            header("Expires: 0");
+
+            // Add UTF-8 BOM to fix ₹ and other Unicode chars
+            echo "\xEF\xBB\xBF";
+
+            $output = fopen("php://output", "w");
+
+            // Write header row
+            fputcsv($output, ['Collection ID', 'Collection Name', 'Products', 'Status', 'Created Date']);
+
+            // Fetch all collections
+            $collections = getData2("SELECT * FROM `tbl_collection` ORDER BY id DESC");
+
+            foreach ($collections as $collection) {
+                // Decode product IDs (they are stored as JSON)
+                $productIds = json_decode($collection['products'], true);
+                $productNames = [];
+
+                if (!empty($productIds) && is_array($productIds)) {
+                    // Get product names for these IDs
+                    $ids = implode(',', array_map('intval', $productIds));
+                    $products = getData2("SELECT name FROM `tbl_products` WHERE id IN ($ids)");
+                    $productNames = array_column($products, 'name');
+                }
+
+                // Prepare CSV row
+                fputcsv($output, [
+                    $collection['id'],
+                    $collection['name'],
+                    !empty($productNames) ? implode(', ', $productNames) : 'No Products',
+                    $collection['status'] == 1 ? 'Active' : 'Inactive',
+                    $collection['created_at']
+                ]);
+            }
+
+            fclose($output);
+            exit;
+        }
+    }
+    public function ExportProductsStock($id = null)
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            header("Content-Type: text/csv; charset=UTF-8");
+            header("Content-Disposition: attachment; filename=products_stock.csv");
+            header("Pragma: no-cache");
+            header("Expires: 0");
+
+            // Fix rupee/Unicode display issues
+            echo "\xEF\xBB\xBF";
+
+            $output = fopen("php://output", "w");
+
+            // Write CSV header row
+            fputcsv($output, ['Product Name', 'Variants', 'Unavailable', 'Committed', 'Available', 'On Hand']);
+
+            // Fetch all products
+            $products = getData2("SELECT tbl_variants.* , tbl_products.name as product_name FROM `tbl_variants` LEFT JOIN tbl_products ON tbl_variants.product_id = tbl_products.id WHERE 1 ORDER BY tbl_variants.id DESC");
+
+            foreach ($products as $product) {
+                // Decode images and variants
+                $variants = json_decode($product['options'], true);
+                $variants = json_decode($variants, true);
+
+                $variantText = '';
+                if (!empty($variants) && is_array($variants)) {
+                    $parts = [];
+                    foreach ($variants as $key => $value) {
+                        $parts[] = "$key: $value";
+                    }
+                    $variantText = implode(', ', $parts);
+                } else {
+                    $variantText = 'N/A';
+                }
+
+                // Write row
+                fputcsv($output, [
+                    $product['product_name'],
+                    $variantText,
+                    $product['unavailable'],
+                    $product['committed'],
+                    $product['quantity'],
+                    $product['on_hand']
+                ]);
+            }
+
+            fclose($output);
+            exit;
+        }
+    }
     public function ProductsList($id = null)
     {
         $siteName = getDBObject()->getSiteName();

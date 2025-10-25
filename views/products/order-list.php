@@ -120,7 +120,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     Orders</span>
                 <div>
 
-                    <button class="bg-gray-800 text-xs font-semibold py-1 px-4 rounded-lg text-white">Export</button>
+                    <button id="exportOrdersBtn" class="bg-gray-800 text-sm font-semibold py-1 px-4 rounded-lg text-white">
+                        Export
+                    </button>
+
                 </div>
             </div>
             <div class="w-full flex items-center justify-center">
@@ -402,6 +405,32 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 console.error("Error:", e);
             }
         }
+        document.getElementById("exportOrdersBtn").addEventListener("click", async () => {
+            try {
+                const response = await axios({
+                    url: "/admin/export-orders",
+                    method: "POST",
+                    responseType: "blob",
+                });
+
+                // Create Blob URL for download
+                const blob = new Blob([response.data], {
+                    type: "text/csv"
+                });
+                const url = window.URL.createObjectURL(blob);
+
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = "orders.csv";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error("Export failed:", error);
+                toastr.error("Something went wrong while exporting orders.");
+            }
+        });
     </script>
 
 </body>

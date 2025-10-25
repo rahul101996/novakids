@@ -41,7 +41,6 @@ $route->group(['', 'WebController'], function ($route) {
 
     $route->route('api/get-products/[:category_name]', 'getFilteredProducts');
 
-
     $route->route('thank-you', 'thankYou');
     $route->route('/razorpay', 'Razorpay');
     $route->route('add-to-wishlist', 'AddToWishlist');
@@ -113,7 +112,8 @@ $route->group(['', 'ProductController', 'auth'], function ($route) {
 
 
     $route->route('/api/new_arrival/status', 'ChangeNewArrivalStatus');
-
+    $route->route('/admin/export-collections', 'ExportCollections');
+    $route->route('/admin/export-products-stock', 'ExportProductsStock');
 
     $route->route('/api/product/status', 'ChangeProductStatus');
 });
@@ -124,6 +124,8 @@ $route->group(['', 'CustomerController', 'auth'], function ($route) {
     $route->route('admin/customer-orders/[i:id]', 'CustomersOrders');
     $route->route('admin/customer-reviews', 'CustomerReviews');
     $route->route('api/customer-reviews/status', 'CustomerReviewsStatus');
+    $route->route('/admin/export-customers', 'ExportCustomers');
+    $route->route('/admin/export-orders', 'ExportOrders');
 
     // $route->route('/admin/products-list', 'ProductsList');
 

@@ -78,7 +78,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             </div>
 
                         </div>
+                       <div class="w-full flex items-center justify-center">
+                        <div class="flex flex-col items-center justify-center">
 
+                        </div>
+                       </div>
                     </div>
                     <div class="w-[85%]">
                         <button

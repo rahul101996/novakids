@@ -21,9 +21,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             ?>
             <div class="w-full flex items-center justify-between p-3">
                 <span class="text-xl font-semibold text-gray-800">Inventory</span>
-                <!-- <a href="/admin/add-collections" class="bg-gray-800 text-sm font-semibold py-2 px-4 rounded-lg text-white">Add Collection</a> -->
+                <button id="exportStockBtn" class="bg-gray-800 text-sm font-semibold py-1 px-4 rounded-lg text-white">
+                    Export
+                </button>
+
             </div>
-            
+
 
             <div class="w-full flex items-center justify-center pb-4">
                 <div class="w-[97%] flex items-start justify-center gap-3 flex-col bg-white rounded-2xl">
@@ -61,7 +64,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             ?>
                                 <tr
                                     class="cursor-pointer bg-white text-[#4b4b4b] border-b border-gray-200 hover:bg-[#f7f7f7] hover:shadow-md hover:scale-[1.01] transition-all duration-200 ease-in-out">
-                                    
+
                                     <td class="font-semibold py-2 px-3 text-left">
                                         <div class="flex items-center justify-start gap-1">
                                             <img src="/<?= $images[0] ?>" class="w-16 rounded" alt="">
@@ -126,7 +129,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
 
             <!-- old -->
-            
+
         </main>
     </div>
     <?php
@@ -161,6 +164,31 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             }
         }
     </script>
+<script>
+document.getElementById("exportStockBtn").addEventListener("click", async () => {
+    try {
+        const response = await axios({
+            url: "/admin/export-products-stock",
+            method: "POST",
+            responseType: "blob"
+        });
+
+        const blob = new Blob([response.data], { type: "text/csv" });
+        const url = window.URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "products_stock.csv";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error("Export failed:", error);
+        toastr.error("Something went wrong while exporting product stock.");
+    }
+});
+</script>
 
 </body>
 

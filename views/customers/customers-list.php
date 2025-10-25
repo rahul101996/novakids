@@ -30,8 +30,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                     </svg>
                     Customers</span>
                 <div>
-                    <button class="bg-gray-800 text-sm font-semibold py-1 px-4 rounded-lg text-white">Import</button>
-                    <button class="bg-gray-800 text-sm font-semibold py-1 px-4 rounded-lg text-white">Export</button>
+
+                    <button id="exportBtn" class="bg-gray-800 text-sm font-semibold py-1 px-4 rounded-lg text-white">
+                        Export
+                    </button>
+
                 </div>
             </div>
             <div class="w-full flex items-center justify-center pb-4">
@@ -72,12 +75,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                                 // Fetch address (active or latest)
                                 $addressQuery = "
-                SELECT a.city, s.name AS state_name 
-                FROM `tbl_user_address` a
-                LEFT JOIN indian_states s ON a.state = s.id
-                WHERE a.userid = $id 
-                ORDER BY a.status DESC, a.id DESC 
-                LIMIT 1";
+                                            SELECT a.city, s.name AS state_name 
+                                            FROM `tbl_user_address` a
+                                            LEFT JOIN indian_states s ON a.state = s.id
+                                            WHERE a.userid = $id 
+                                            ORDER BY a.status DESC, a.id DESC 
+                                            LIMIT 1";
                                 $address = getData2($addressQuery)[0] ?? ['city' => 'N/A', 'state_name' => 'N/A'];
                             ?>
                                 <tr
@@ -128,33 +131,64 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
     include $_SERVER['DOCUMENT_ROOT'] . "/views/include/footer.php";
     ?>
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const searchInput = document.querySelector('input[placeholder="Search Customers"]');
-        const tableBody = document.querySelector("tbody");
-        const tableRows = tableBody.querySelectorAll("tr");
+        document.getElementById("exportBtn").addEventListener("click", async () => {
+            try {
+                const response = await axios({
+                    url: "/admin/export-customers", // PHP file that does export
+                    method: "POST",
+                    responseType: "blob", // important for file download
+                });
 
-        // Create "no results" row
-        const noResultRow = document.createElement("tr");
-        noResultRow.innerHTML = `<td colspan="5" class="text-center py-3 text-gray-500">No matching customers found</td>`;
-        noResultRow.style.display = "none";
-        tableBody.appendChild(noResultRow);
+                // Create a blob URL for the downloaded file
+                const blob = new Blob([response.data], {
+                    type: "text/csv"
+                });
+                const url = window.URL.createObjectURL(blob);
 
-        searchInput.addEventListener("keyup", function () {
-            const searchTerm = this.value.toLowerCase().trim();
-            let matchCount = 0;
+                // Create temporary link to trigger download
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = "customers.csv"; // name of the file
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
 
-            tableRows.forEach(row => {
-                const rowText = row.textContent.toLowerCase();
-                const isMatch = rowText.includes(searchTerm);
-                row.style.display = isMatch ? "" : "none";
-                if (isMatch) matchCount++;
-            });
-
-            // Show/hide "no results"
-            noResultRow.style.display = matchCount === 0 ? "" : "none";
+                window.URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error("Export failed:", error);
+                toastr.error("Something went wrong while exporting.");
+            }
         });
-    });
-</script>
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const searchInput = document.querySelector('input[placeholder="Search Customers"]');
+            const tableBody = document.querySelector("tbody");
+            const tableRows = tableBody.querySelectorAll("tr");
+
+            // Create "no results" row
+            const noResultRow = document.createElement("tr");
+            noResultRow.innerHTML = `<td colspan="5" class="text-center py-3 text-gray-500">No matching customers found</td>`;
+            noResultRow.style.display = "none";
+            tableBody.appendChild(noResultRow);
+
+            searchInput.addEventListener("keyup", function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                let matchCount = 0;
+
+                tableRows.forEach(row => {
+                    const rowText = row.textContent.toLowerCase();
+                    const isMatch = rowText.includes(searchTerm);
+                    row.style.display = isMatch ? "" : "none";
+                    if (isMatch) matchCount++;
+                });
+
+                // Show/hide "no results"
+                noResultRow.style.display = matchCount === 0 ? "" : "none";
+            });
+        });
+    </script>
 
 </body>
 
