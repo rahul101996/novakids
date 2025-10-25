@@ -1,3 +1,8 @@
+<?php
+$companyData = getData2("SELECT * FROM `company` Order By `id` DESC Limit 1")[0];
+// printWithPre($companyData);
+
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

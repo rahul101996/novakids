@@ -8,7 +8,7 @@ class CompanyController
         $this->db = $db;
     }
 
-        public function index()
+    public function index()
     {
         $siteName = getDBObject()->getSiteName();
         $pageTitle = "Company";
@@ -19,8 +19,11 @@ class CompanyController
 
             require 'views/master/company.php';
         } else {
+            // printWithPre($_POST);
+            // printWithPre($_FILES);
+            // die();
             if (isset($_FILES['logo']) && $_FILES['logo']['error'] == 0) {
-
+                unset($_POST['old_image']);
                 $file = [
                     'name' => $_FILES['logo']['name'],
                     'full_path' => $_FILES['logo']['tmp_name'],
@@ -32,16 +35,19 @@ class CompanyController
 
                 $_POST['logo'] = uploadFile($file, "public/logos/");
             } else {
-                $_POST['logo'] = $company["logo"];
+                $_POST['logo'] = $_POST["old_image"];
+                unset($_POST['old_image']);
             }
-
+            // printWithPre($_POST);
+            // printWithPre($_FILES);
+            // die();
             if (add($_POST, 'company')) {
                 $_SESSION["success"] = "Company Updated";
             } else {
                 $_SESSION["err"] = "Something Went Wrong";
             }
 
-            redirect("/master/company");
+            redirect("/admin/setting");
         }
     }
 
@@ -61,18 +67,18 @@ class CompanyController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-            if(isset($_GET["del"]) && !empty($_GET["del"])){
-                try{
-                    if(delete($_GET["del"],"biomax_machines")){
-                        $_SESSION["success"]="Machine Dleeted Successfully";
-                    }else{
-                        $_SESSION["err"]="Can't Dleet Machine";
+            if (isset($_GET["del"]) && !empty($_GET["del"])) {
+                try {
+                    if (delete($_GET["del"], "biomax_machines")) {
+                        $_SESSION["success"] = "Machine Dleeted Successfully";
+                    } else {
+                        $_SESSION["err"] = "Can't Dleet Machine";
                     }
-                }catch(Exception $e){
-                    $_SESSION["err"]="Cant Delet Machine";
+                } catch (Exception $e) {
+                    $_SESSION["err"] = "Cant Delet Machine";
                 }
                 redirect("machine");
-            }else{
+            } else {
                 $siteName = getDBObject()->getSiteName();
                 $pageTitle = "Machine";
                 $machines = getData("biomax_machines");
@@ -80,7 +86,7 @@ class CompanyController
             }
         } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
-                if (add($_POST, 'biomax_machines',false)) {
+                if (add($_POST, 'biomax_machines', false)) {
                     $_SESSION["success"] = "Machine Added";
                 } else {
                     $_SESSION["err"] = "Something Went Wrong";
@@ -92,5 +98,4 @@ class CompanyController
             redirect("machine");
         }
     }
-    
 }
