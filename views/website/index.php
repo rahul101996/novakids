@@ -446,70 +446,45 @@ $ppimg = array_reverse($imags);
         <img src="/<?= $product_imge['file'] ?>" alt="" class="w-full h-auto max-md:h-[72vh] max-md:object-cover">
 
         <!-- Hotspot 1 (bottom-left) -->
-        <div class="absolute bottom-[20%] left-[30%] group max-md:hidden">
-            <!-- Animated Dot -->
-            <div class="relative flex items-center justify-center">
-                <!-- Outer Ping -->
-                <span class="absolute inline-flex h-6 w-6 rounded-full bg-orange-500 opacity-75 animate-ping"></span>
-                <!-- Inner Dot -->
-                <span class="relative inline-flex h-4 w-4 rounded-full bg-orange-500 border-2 border-white"></span>
-            </div>
+        <?php
 
-            <!-- Tooltip -->
-            <div
-                class="absolute bottom-10 -left-[120px] opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                <div class="relative bg-white shadow-lg p-2 w-64 flex items-center space-x-2">
-                    <!-- Pointer -->
-                    <div
-                        class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white">
-                    </div>
+        foreach (getData2("SELECT * FROM `product_banner_anchors` WHERE `product_banner_id` = " . $product_imge['id']) as $key => $value) {
 
-                    <img src="/<?= $ppimg[0] ?>" alt="<?= $product_imge['product_name'] ?>"
-                        class="w-20 h-20 object-cover">
-                    <div>
-                        <p class="text-sm font-semibold text-gray-800"><?= $product_imge['product_name'] ?></p>
-                        <p class="text-sm font-semibold text-[#f25b21]">₹ <?= formatNumber($product_imge['price']) ?>
-                        </p>
-                        <a href="/products/product-details/<?= $ppname ?>" class="text-sm text-gray-800 underline">View
-                            Product</a>
+        ?>
+            <div class="absolute top-[<?= $value['top_position'] ?>%] left-[<?= $value['left_position'] ?>%] group max-md:hidden">
+                <!-- Animated Dot -->
+                <div class="relative flex items-center justify-center">
+                    <!-- Outer Ping -->
+                    <span class="absolute inline-flex h-6 w-6 rounded-full bg-orange-500 opacity-75 animate-ping"></span>
+                    <!-- Inner Dot -->
+                    <span class="relative inline-flex h-4 w-4 rounded-full bg-orange-500 border-2 border-white"></span>
+                </div>
+
+                <!-- Tooltip -->
+                <div
+                    class="absolute bottom-10 -left-[120px] opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                    <div class="relative bg-white shadow-lg p-2 w-64 flex items-center space-x-2">
+                        <!-- Pointer -->
+                        <div
+                            class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white">
+                        </div>
+
+                        <img src="/<?= $ppimg[0] ?>" alt="<?= $product_imge['product_name'] ?>"
+                            class="w-20 h-20 object-cover">
+                        <div>
+                            <p class="text-sm font-semibold text-gray-800"><?= $product_imge['product_name'] ?></p>
+                            <p class="text-sm font-semibold text-[#f25b21]">₹ <?= formatNumber($product_imge['price']) ?>
+                            </p>
+                            <a href="/products/product-details/<?= $ppname ?>" class="text-sm text-gray-800 underline">View
+                                Product</a>
+                        </div>
                     </div>
                 </div>
+
             </div>
-
-        </div>
-
+        <?php } ?>
         <!-- Hotspot 2 (center) -->
-        <div class="absolute top-[27%] left-[52%] transform -translate-x-1/2 group">
-            <!-- Animated Dot -->
-            <div class="relative flex items-center justify-center">
-                <!-- Outer Ping -->
-                <span class="absolute inline-flex h-6 w-6 rounded-full bg-orange-500 opacity-75 animate-ping"></span>
-                <!-- Inner Dot -->
-                <span class="relative inline-flex h-4 w-4 rounded-full bg-orange-500 border-2 border-white"></span>
-            </div>
-
-            <!-- Tooltip -->
-            <div
-                class="absolute bottom-10 -left-[120px] opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                <div class="relative bg-white shadow-lg p-2 w-64 flex items-center space-x-2">
-                    <!-- Pointer -->
-                    <div
-                        class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white">
-                    </div>
-
-                    <img src="/<?= $ppimg[1] ?>" alt="<?= $product_imge['product_name'] ?>"
-                        class="w-20 h-20 object-cover">
-                    <div>
-                        <p class="text-sm font-semibold text-gray-800"><?= $product_imge['product_name'] ?></p>
-                        <p class="text-sm font-semibold text-[#f25b21]">₹ <?= formatNumber($product_imge['price']) ?>
-                        </p>
-                        <a href="/products/product-details/<?= $ppname ?>" class="text-sm text-gray-800 underline">View
-                            Product</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        
 
     </section>
 

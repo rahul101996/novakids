@@ -27,10 +27,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             <div class="w-full flex items-center justify-center pb-4 ">
 
                 <form action="" method="POST" class="w-[85%]" enctype="multipart/form-data">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-[65%] pb-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-[65%] pb-10 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
                         <div class="lg:col-span-2 flex flex-col gap-6">
 
-                            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <div class="">
                                 <label class="block text-sm font-medium text-gray-700 mb-1" for="product_id">Product</label>
                                 <select name="product_id" class="selectElement" id="product_id">
                                     <option value="" selected disabled>Select Product</option>
@@ -47,7 +47,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
                         <div class="lg:col-span-2 flex flex-col gap-6">
 
-                            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <div class="">
                                 <h2 class="text-base font-medium text-gray-900">Home Banner</h2>
                                 <div
                                     class="space-y-1 text-center flex flex-col items-center border-2 border-gray-300 border-dashed rounded-lg p-8">
@@ -71,20 +71,76 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                             <input id="vdata_image" name="img" type="file" class="sr-only" accept="image/*"
                                                 <?= isset($editData['file']) ? '' : 'required' ?>>
                                         </label>
-                                        <p class="pl-1">or drag and drop</p>
+                                        <p class="pl-1">select Image</p>
                                     </div>
                                     <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                 </div>
                             </div>
 
                         </div>
-                       <div class="w-full flex items-center justify-center">
-                        <div class="flex flex-col items-center justify-center">
+                        <div class="w-full flex items-center justify-center relative col-span-2 border rounded-md overflow-hidden">
+                            <img src="/<?= isset($editData['file']) ? $editData['file'] : '' ?>"
+                                id="frontImage" class="w-full select-none pointer-events-none" alt="">
+
+                            <!-- Dynamic circles appear here -->
+                            <div id="anchorPoints" class="absolute top-0 left-0 w-full h-full"></div>
+                        </div>
+                        <div class="w-full flex items-center justify-center col-span-2">
+                            <div class="w-full">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="text-gray-700 font-semibold text-base">Anchors</h3>
+                                    <button id="addRowBtn" type="button"
+                                        class="px-3 py-1.5 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 transition">
+                                        + Add Row
+                                    </button>
+                                </div>
+
+                                <table class="w-full border border-gray-200 rounded-lg overflow-hidden text-sm">
+                                    <thead class="bg-gray-100 text-gray-700">
+                                        <tr>
+                                            <th class="px-4 py-2 text-left font-semibold">Anchor Name</th>
+                                            <th class="px-4 py-2 text-left font-semibold">Top (%)</th>
+                                            <th class="px-4 py-2 text-left font-semibold">Left (%)</th>
+                                            <th class="px-4 py-2 text-center font-semibold w-20">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="anchorsBody" class="divide-y divide-gray-200 text-gray-700">
+                                        <?php if (isset($editData['id'])): ?>
+                                            <?php
+                                            // echo $product_imge['id'];
+                                            $anchors = getData2("SELECT * FROM `product_banner_anchors` WHERE `product_banner_id` = " . $editData['id']);
+                                            foreach ($anchors as $key => $anchor):
+                                                $anchorId = "anchor-" . $key;
+                                            ?>
+                                                <tr>
+                                                    <td class="px-4 py-3">
+                                                        <input type="text" name="anchor_name[]" value="<?= htmlspecialchars($anchor['anchor_name']) ?>" placeholder="e.g. Point A"
+                                                            class="w-full border border-gray-300 rounded-md px-2 py-1 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                                    </td>
+                                                    <td class="px-4 py-3">
+                                                        <input type="float" name="top_position[]" value="<?= htmlspecialchars($anchor['top_position']) ?>" placeholder="Top %"
+                                                            data-id="<?= $anchorId ?>" data-pos="top"
+                                                            class="positionInput w-full border border-gray-300 rounded-md px-2 py-1 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                                    </td>
+                                                    <td class="px-4 py-3">
+                                                        <input type="float" name="left_position[]" value="<?= htmlspecialchars($anchor['left_position']) ?>" placeholder="Left %"
+                                                            data-id="<?= $anchorId ?>" data-pos="left"
+                                                            class="positionInput w-full border border-gray-300 rounded-md px-2 py-1 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                                    </td>
+                                                    <td class="px-4 py-3 text-center">
+                                                        <button type="button" class="removeRow text-red-500 hover:text-red-700 text-sm font-semibold">✕</button>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </tbody>
+
+                                </table>
+                            </div>
 
                         </div>
-                       </div>
                     </div>
-                    <div class="w-[85%]">
+                    <div class="w-[85%] mt-4">
                         <button
                             class="bg-black border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             name="<?= isset($homeBanner['id']) ? 'update' : 'add' ?>">Save</button>
@@ -100,6 +156,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
         const imageInput = document.getElementById('vdata_image');
         const imagePreview = document.getElementById('imagePreview');
         const previewImg = imagePreview.querySelector('img');
+        const frontImage = document.getElementById('frontImage');
 
         imageInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
@@ -107,12 +164,153 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     previewImg.src = e.target.result;
+                    frontImage.src = e.target.result;
                     imagePreview.classList.remove('hidden');
                 };
                 reader.readAsDataURL(file);
             }
         });
     </script>
+    <script>
+        const tbody = document.getElementById("anchorsBody");
+        const addBtn = document.getElementById("addRowBtn");
+        const anchorPoints = document.getElementById("anchorPoints");
+        const imgContainer = document.querySelector(".col-span-2");
+        let anchorIndex = document.querySelectorAll("input[data-id]").length;
+
+        // Function to generate truly unique IDs
+        function generateAnchorId() {
+            return `anchor-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+        }
+
+        // Add a new anchor row and circle
+        addBtn.addEventListener("click", () => {
+            const id = generateAnchorId();
+
+            // Create draggable circle
+            const circle = document.createElement("div");
+            circle.className = "absolute w-3 h-3 bg-red-500 rounded-full border border-white shadow-md cursor-pointer";
+            circle.style.top = "0%";
+            circle.style.left = "0%";
+            circle.dataset.id = id;
+            anchorPoints.appendChild(circle);
+
+            // Create row
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+        <td class="px-4 py-3">
+            <input type="text" name="anchor_name[]" placeholder="e.g. Point A"
+                class="w-full border border-gray-300 rounded-md px-2 py-1 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </td>
+        <td class="px-4 py-3">
+            <input type="float" name="top_position[]" value="0" placeholder="Top %"
+                data-id="${id}" data-pos="top"
+                class="positionInput w-full border border-gray-300 rounded-md px-2 py-1 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </td>
+        <td class="px-4 py-3">
+            <input type="float" name="left_position[]" value="0" placeholder="Left %"
+                data-id="${id}" data-pos="left"
+                class="positionInput w-full border border-gray-300 rounded-md px-2 py-1 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </td>
+        <td class="px-4 py-3 text-center">
+            <button type="button" class="removeRow text-red-500 hover:text-red-700 text-sm font-semibold">✕</button>
+        </td>
+    `;
+            tbody.appendChild(tr);
+
+            makeDraggable(circle, id);
+        });
+
+        // Update circle position when inputs change
+        tbody.addEventListener("input", (e) => {
+            if (e.target.classList.contains("positionInput")) {
+                const id = e.target.dataset.id;
+                const posType = e.target.dataset.pos;
+                const value = e.target.value || 0;
+
+                const circle = anchorPoints.querySelector(`[data-id="${id}"]`);
+                if (circle) {
+                    if (posType === "top") circle.style.top = `${value}%`;
+                    if (posType === "left") circle.style.left = `${value}%`;
+                }
+            }
+        });
+
+        // Remove row + circle
+        tbody.addEventListener("click", (e) => {
+            if (e.target.classList.contains("removeRow")) {
+                const row = e.target.closest("tr");
+                const topInput = row.querySelector('[data-pos="top"]');
+                const id = topInput?.dataset.id;
+                if (id) {
+                    const circle = anchorPoints.querySelector(`[data-id="${id}"]`);
+                    if (circle) circle.remove();
+                }
+                row.remove();
+            }
+        });
+
+        // Draggable circle functionality
+        function makeDraggable(circle, id) {
+            let isDragging = false;
+
+            circle.addEventListener("mousedown", (e) => {
+                isDragging = true;
+                e.preventDefault();
+            });
+
+            document.addEventListener("mouseup", () => {
+                isDragging = false;
+            });
+
+            document.addEventListener("mousemove", (e) => {
+                if (!isDragging) return;
+
+                const rect = imgContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // Clamp within bounds
+                const leftPercent = Math.min(Math.max((x / rect.width) * 100, 0), 100);
+                const topPercent = Math.min(Math.max((y / rect.height) * 100, 0), 100);
+
+                circle.style.left = `${leftPercent}%`;
+                circle.style.top = `${topPercent}%`;
+
+                // Update the corresponding input fields
+                const topInput = tbody.querySelector(`input[data-id="${id}"][data-pos="top"]`);
+                const leftInput = tbody.querySelector(`input[data-id="${id}"][data-pos="left"]`);
+                if (topInput && leftInput) {
+                    topInput.value = topPercent.toFixed(2);
+                    leftInput.value = leftPercent.toFixed(2);
+                }
+            });
+        }
+        // On page load, create circles for existing anchors from DB
+        window.addEventListener("DOMContentLoaded", () => {
+            const existingInputs = document.querySelectorAll("input[data-id][data-pos='top']");
+            existingInputs.forEach((topInput) => {
+                const id = topInput.dataset.id;
+                const topValue = parseFloat(topInput.value) || 0;
+
+                const leftInput = document.querySelector(`input[data-id="${id}"][data-pos="left"]`);
+                const leftValue = parseFloat(leftInput?.value || 0);
+
+                // Create a circle for each anchor
+                const circle = document.createElement("div");
+                circle.className = "absolute w-3 h-3 bg-red-500 rounded-full border border-white shadow-md cursor-pointer";
+                circle.style.top = `${topValue}%`;
+                circle.style.left = `${leftValue}%`;
+                circle.dataset.id = id;
+
+                anchorPoints.appendChild(circle);
+
+                // Make it draggable
+                makeDraggable(circle, id);
+            });
+        });
+    </script>
+
 </body>
 
 </html>

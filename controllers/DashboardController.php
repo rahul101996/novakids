@@ -28,7 +28,24 @@ class DashboardController extends LoginController
             $employees = getData2("SELECT * FROM admin");
 
 
-            $Orders = getData2("SELECT * FROM `tbl_purchase` WHERE `status` != 'Cancelled' ");
+            $Orders = getData2("SELECT created_date FROM `tbl_purchase` WHERE `status` != 'Cancelled'");
+
+            $orderCounts = [];
+            foreach ($Orders as $order) {
+                $date = date('Y-m-d', strtotime($order['created_date'])); // format date
+                if (!isset($orderCounts[$date])) {
+                    $orderCounts[$date] = 0;
+                }
+                $orderCounts[$date]++;
+            }
+
+            $labels = array_keys($orderCounts);
+            $orders_data = array_values($orderCounts);
+        //     printWithPre($labels);
+        //     printWithPre($data);
+        //    echo json_encode($labels) ;
+        //    echo json_encode($data);
+        //     die();
             $Total_Orders = count($Orders);
             $today = date('Y-m-d'); // Current date (e.g., 2025-10-13)
             $todaysOrders = [];

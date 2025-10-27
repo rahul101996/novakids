@@ -72,13 +72,13 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             <div class="w-full flex items-center justify-center pb-4">
                 <div class="w-[70%] flex items-start justify-center gap-3 flex-col bg-white py-3 rounded-2xl">
                     <div class="w-full flex items-center justify-between">
-                    <span class="flex items-center px-2 font-semibold">
-                        <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2"></path>
-                        </svg>
-                        Last 5 Orders
-                    </span>
-                    <a href="/admin/orders" class="bg-[#1a1a1a] mx-2 text-white text-sm px-3 py-1 rounded-lg text-decoration-none cursor-pointer font-semibold">View all</a>
+                        <span class="flex items-center px-2 font-semibold">
+                            <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2"></path>
+                            </svg>
+                            Last 5 Orders
+                        </span>
+                        <a href="/admin/orders" class="bg-[#1a1a1a] mx-2 text-white text-sm px-3 py-1 rounded-lg text-decoration-none cursor-pointer font-semibold">View all</a>
                     </div>
                     <table class="w-full border border-gray-200">
                         <tr class="bg-[#f7f7f7] text-[#616161] border-y border-gray-200">
@@ -112,40 +112,36 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/views/include/footer.php";
     ?>
+    <?php
+            // printWithPre($labels);
+            // printWithPre($data);
+            // die();
+    ?>
     <script>
+       
+        function generateGraph(initiallabels, initialdata) {
+            
+        
         const ctx = document.getElementById("comparisonChart");
 
-        const labels = [
-            "Sep 16", "Sep 20", "Sep 24", "Sep 28",
-            "Oct 2", "Oct 6", "Oct 10", "Oct 14"
-        ];
-
+        // PHP data → JS
+        const labels = initiallabels;
+        const orderCounts = initialdata;
+    //    console.log(orderCounts);
+    //    console.log(labels);
         const data = {
             labels: labels,
             datasets: [{
-                    label: "Sep 16–Oct 16, 2025",
-                    data: [2, 4, 5, 6, 9, 7, 5, 3],
-                    borderColor: "#0096F2",
-                    backgroundColor: "#0096F2",
-                    borderWidth: 2.5,
-                    pointRadius: 3,
-                    pointHoverRadius: 5,
-                    tension: 0.35,
-                    fill: false,
-                },
-                {
-                    label: "Aug 16–Sep 15, 2025",
-                    data: [3, 8, 11, 7, 10, 8, 6, 4],
-                    borderColor: "rgba(0,150,242,0.4)",
-                    backgroundColor: "rgba(0,150,242,0.4)",
-                    borderWidth: 2,
-                    borderDash: [6, 4],
-                    pointRadius: 3,
-                    pointHoverRadius: 5,
-                    tension: 0.35,
-                    fill: false,
-                },
-            ],
+                label: "Orders per Day",
+                data: orderCounts,
+                borderColor: "#0096F2",
+                backgroundColor: "#0096F2",
+                borderWidth: 2.5,
+                pointRadius: 3,
+                pointHoverRadius: 5,
+                tension: 0.35,
+                fill: false,
+            }],
         };
 
         const config = {
@@ -160,11 +156,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         labels: {
                             usePointStyle: true,
                             pointStyle: "circle",
-                            boxWidth: 6, // smaller legend circle
+                            boxWidth: 6,
                             boxHeight: 6,
-                            padding: 20, // adds space between items
+                            padding: 20,
                             font: {
-                                size: 13,
+                                size: 13
                             },
                             color: "#9ca3af",
                         },
@@ -194,7 +190,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             font: {
                                 size: 12
                             },
-                            stepSize: 5
+                            stepSize: 1
                         },
                     },
                 },
@@ -202,6 +198,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
         };
 
         new Chart(ctx, config);
+    }
+   
+    generateGraph(<?= json_encode($labels) ?>, <?= json_encode($orders_data) ?>);
+
     </script>
 </body>
 

@@ -60,7 +60,6 @@ class WebsettingController
                     );
 
                     $_SESSION['success'] = "Home Banner Added Successfully";
-
                 } else {
                     update(
                         [
@@ -120,9 +119,7 @@ class WebsettingController
             require 'views/websetting/product_banner_add.php';
         } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            // printWithPre($_POST);
-            // printWithPre($_FILES);
-            // die();
+
 
             try {
                 // Begin transaction
@@ -135,7 +132,7 @@ class WebsettingController
                 }
 
                 if ($id == null) {
-                    add(
+                    $add = add(
                         [
                             "product_id" => $_POST['product_id'],
                             "file" => $_POST['file']
@@ -143,11 +140,26 @@ class WebsettingController
                         "tbl_product_banner",
                         false
                     );
+                    if ($add) {
+                        // $this->db->commit();
+                        foreach ($_POST['anchor_name'] as $key => $value) {
+                            add(
+                                [
+                                    "anchor_name" => $_POST['anchor_name'][$key],
+                                    "top_position" => $_POST['top_position'][$key],
+                                    "left_position" => $_POST['left_position'][$key],
+                                    "product_banner_id" => $add
+                                ],
+                                "product_banner_anchors",
+                                false
+
+                            );
+                        }
+                    }
 
                     $_SESSION['success'] = "Product Banner Added Successfully";
-
                 } else {
-                    update(
+                    $update = update(
                         [
                             "product_id" => $_POST['product_id'],
                             "file" => $_POST['file']
@@ -155,6 +167,25 @@ class WebsettingController
                         $id,
                         "tbl_product_banner"
                     );
+                    // die();
+                    // die();
+                    // $this->db->commit();
+                    $delete = deleteSQL("product_banner_anchors", "product_banner_id = $id");
+                    // die();
+                    foreach ($_POST['anchor_name'] as $key => $value) {
+                        add(
+                            [
+                                "anchor_name" => $_POST['anchor_name'][$key],
+                                "top_position" => $_POST['top_position'][$key],
+                                "left_position" => $_POST['left_position'][$key],
+                                "product_banner_id" => $id
+                            ],
+                            "product_banner_anchors",
+                            false
+
+                        );
+                    }
+
 
                     $_SESSION['success'] = "Product Banner Updated Successfully";
                 }
@@ -305,5 +336,4 @@ class WebsettingController
         delete($id, "tbl_offer_heading");
         redirect('/admin/front-cms/offer-heading');
     }
-
 }

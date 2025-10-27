@@ -769,7 +769,7 @@ function deleteSQL($table, $sql)
 
     $sql = "DELETE FROM `$table` WHERE $sql";
     $stmt = $db->prepare($sql);
-
+    echo $sql;
     // Bind the id parameter
     // $stmt->bindValue(':id', $id);
 
