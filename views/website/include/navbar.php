@@ -29,6 +29,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid']) && $_SESSION['type
 }
 $currency = '₹';
 $categories = getData("tbl_category");
+$companyData = getData2("SELECT * FROM `company` Order By `id` DESC Limit 1")[0];
 
 ?>
 <style>
@@ -132,7 +133,7 @@ $categories = getData("tbl_category");
         <div class="flex items-center space-x-7 ml-5 max-md:hidden">
             <a href="/" class="block">
                 <div class="flex items-center gap-1 relative">
-                    <img src="/public/logos/nova_logo-brnd-name.png" alt="Brand Logo"
+                    <img src="/<?= $companyData['logo'] ?>" alt="Brand Logo"
                         class="w-auto h-[6vh] rounded-md object-cover my-2 max-md:hidden">
                 </div>
             </a>

@@ -28,7 +28,7 @@ class DashboardController extends LoginController
             $employees = getData2("SELECT * FROM admin");
 
 
-            $Orders = getData2("SELECT created_date FROM `tbl_purchase` WHERE `status` != 'Cancelled'");
+            $Orders = getData2("SELECT * FROM `tbl_purchase` WHERE `status` != 'Cancelled'");
 
             $orderCounts = [];
             foreach ($Orders as $order) {
@@ -41,11 +41,11 @@ class DashboardController extends LoginController
 
             $labels = array_keys($orderCounts);
             $orders_data = array_values($orderCounts);
-        //     printWithPre($labels);
-        //     printWithPre($data);
-        //    echo json_encode($labels) ;
-        //    echo json_encode($data);
-        //     die();
+            //     printWithPre($labels);
+            //     printWithPre($data);
+            //    echo json_encode($labels) ;
+            //    echo json_encode($data);
+            //     die();
             $Total_Orders = count($Orders);
             $today = date('Y-m-d'); // Current date (e.g., 2025-10-13)
             $todaysOrders = [];
@@ -62,14 +62,7 @@ class DashboardController extends LoginController
             // Count total today's orders
             $totalTodayOrders = count($todaysOrders);
 
-            $Users = getData2("SELECT * FROM `online_users`");
-            $Total_Users = count($Users);
 
-            $Products = getData2("SELECT * FROM `tbl_products`");
-            $Total_Products = count($Products);
-
-            $Category = getData2("SELECT * FROM `tbl_category`");
-            $Total_Category = count($Category);
             // printWithPre($Total_Orders);
             require 'views/index.php';
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -78,6 +71,59 @@ class DashboardController extends LoginController
             // die();
 
 
+        }
+    }
+    public function getDashboardData()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $startDate = $_POST['start_date'] ?? '';
+            $endDate = $_POST['end_date'] ?? '';
+
+            // Convert from "Sep 29, 2025" → "2025-09-29"
+            $start = DateTime::createFromFormat('M d, Y', $startDate);
+            $end = DateTime::createFromFormat('M d, Y', $endDate);
+
+            $startFormatted = $start ? $start->format('Y-m-d') : null;
+            $endFormatted = $end ? $end->format('Y-m-d') : null;
+
+            // Example: use in SQL query
+            $Orders = getData2("SELECT * FROM `tbl_purchase` WHERE `status` != 'Cancelled' AND  created_date BETWEEN '$startFormatted' AND '$endFormatted'");
+            $orderCounts = [];
+            foreach ($Orders as $order) {
+                $date = date('Y-m-d', strtotime($order['created_date'])); // format date
+                if (!isset($orderCounts[$date])) {
+                    $orderCounts[$date] = 0;
+                }
+                $orderCounts[$date]++;
+            }
+
+            $labels = array_keys($orderCounts);
+            $orders_data = array_values($orderCounts);
+            //     printWithPre($labels);
+            //     printWithPre($data);
+            //    echo json_encode($labels) ;
+            //    echo json_encode($data);
+            //     die();
+            $Total_Orders = count($Orders);
+            $today = date('Y-m-d'); // Current date (e.g., 2025-10-13)
+            $todaysOrders = [];
+            $Total_sales = 0;
+            foreach ($Orders as $order) {
+
+                $Total_sales += $order['total_amount'];
+                // assuming created_date is in 'Y-m-d H:i:s' format
+
+            }
+            echo json_encode([
+                'success' => true,
+                'labels' => $labels,
+                'data' => $orders_data,
+                'total_Orders' => $Total_Orders,
+                'total_sales' =>  formatNumber($Total_sales)
+            ]);
+            exit();
+            // Count total today's orders
+            // $totalTodayOrders = count($todaysOrders);
         }
     }
 }

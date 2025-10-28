@@ -181,6 +181,7 @@ $route->group(['', 'PackageController', 'auth'], function ($route) {
 
 $route->group(['', 'DashboardController', 'auth'], function ($route) {
     $route->route('dashboard', 'index');
+    $route->route('/get-dashboard-data', 'getDashboardData');
 });
 
 $route->group(['', 'WebsettingController', 'auth'], function ($route) {

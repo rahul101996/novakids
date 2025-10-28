@@ -38,6 +38,22 @@ class CompanyController
                 $_POST['logo'] = $_POST["old_image"];
                 unset($_POST['old_image']);
             }
+             if (isset($_FILES['footer_logo']) && $_FILES['footer_logo']['error'] == 0) {
+                unset($_POST['old_footer_logo']);
+                $file = [
+                    'name' => $_FILES['footer_logo']['name'],
+                    'full_path' => $_FILES['footer_logo']['tmp_name'],
+                    'type' => $_FILES['footer_logo']['type'],
+                    'tmp_name' => $_FILES['footer_logo']['tmp_name'],
+                    'error' => $_FILES['footer_logo']['error'],
+                    'size' => $_FILES['footer_logo']['size'],
+                ];
+
+                $_POST['footer_logo'] = uploadFile($file, "public/logos/");
+            } else {
+                $_POST['footer_logo'] = $_POST["old_footer_logo"];
+                unset($_POST['old_footer_logo']);
+            }
             // printWithPre($_POST);
             // printWithPre($_FILES);
             // die();

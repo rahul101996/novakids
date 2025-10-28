@@ -27,10 +27,38 @@ $companyData = getData2("SELECT * FROM `company` Order By `id` DESC Limit 1")[0]
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/e645c402e0.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <!-- Litepicker CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" />
+
+  <!-- Litepicker JS -->
+  <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
 <style>
      .chartjs-legend li {
       margin-right: 20px !important; /* spacing between legend items */
     }
     
 </style>
+ <style>
+    .litepicker .is-in-range {
+      background-color: #f3f4f6 !important;
+      color: #111827 !important;
+    }
+    .litepicker .is-start-date,
+    .litepicker .is-end-date {
+      background-color: #111827 !important;
+      color: white !important;
+    }
+    .litepicker{
+            width: 100%;
+    }
+    .container__main{
+        width: 100%;
+    }
+    .container__months .columns-2{
+        width: 100%;
+    }
+    .month-item{
+        width: 50%;
+    }
+  </style>
 </head>

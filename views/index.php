@@ -5,6 +5,16 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
 
 ?>
+<style>
+    #comparisonChart {
+        opacity: 0;
+        transition: opacity 0.6s ease;
+    }
+
+    #comparisonChart.rendered {
+        opacity: 1;
+    }
+</style>
 
 <body class="bg-[#1a1a1a] overflow-hidden">
 
@@ -23,16 +33,76 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             ?>
             <div class="w-full flex items-center justify-center px-4">
                 <div class="w-[73%] flex items-start justify-start text-[#4a4a4a] gap-3">
-                    <div class="px-2 py-1 rounded-lg flex items-center justify-center bg-white text-sm font-semibold gap-2 border border-gray-500 border-b border-gray-700">
+                    <div id="dateRangeWrapper"
+                        class="px-2 py-1 rounded-lg flex items-center justify-center bg-white text-sm font-semibold gap-2 border border-gray-500 border-b border-gray-700 cursor-pointer relative">
                         <i class="fa-regular fa-calendar"></i>
-                        <span>Last 30 days</span>
+                        <span id="selectedRangeText">Last 30 days</span>
+
+                        <!-- Dropdown -->
+                        <div id="calendarDropdown"
+                            class="hidden bg-white shadow-lg rounded-xl w-[820px] flex flex-col overflow-hidden border border-gray-200 absolute top-10 left-0 z-50">
+
+                            <!-- Sidebar + Calendar -->
+                            <div class="w-full flex">
+                                <!-- Sidebar -->
+                                <div class="w-[30%] border-r border-gray-200 overflow-y-auto max-h-[500px]">
+                                    <span
+                                        class="text-gray-700 font-semibold mb-3 bg-gray-100 flex p-2 w-full  border-b border-gray-200">Quick
+                                        Ranges</span>
+                                    <ul class="space-y-2 text-sm px-2" id="rangeList">
+                                        <li><button class="w-full text-left hover:bg-gray-100 p-2 rounded-md"
+                                                data-range="today">Today</button></li>
+                                        <li><button class="w-full text-left hover:bg-gray-100 p-2 rounded-md"
+                                                data-range="yesterday">Yesterday</button></li>
+                                        <li class="h-[1px] w-full bg-gray-300"></li>
+                                        <li><button class="w-full text-left hover:bg-gray-100 p-2 rounded-md" data-range="last7">Last 7
+                                                days</button></li>
+                                        <li><button
+                                                class="w-full text-left bg-gray-200 font-medium p-2 rounded-md"
+                                                data-range="last30">Last 30 days</button></li>
+                                        <li><button class="w-full text-left hover:bg-gray-100 p-2 rounded-md" data-range="last90">Last 90
+                                                days</button></li>
+                                        <li><button class="w-full text-left hover:bg-gray-100 p-2 rounded-md" data-range="last365">Last 365
+                                                days</button></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Calendar + Inputs -->
+                                <div class="w-[70%] flex flex-col justify-start">
+                                    <span
+                                        class="text-gray-700 font-semibold mb-3 bg-gray-100 flex p-2 w-full  border-b border-gray-200"><span
+                                            class="flex-1">Custom Range</span></span>
+
+                                    <!-- Inputs -->
+                                    <div class="flex space-x-3 mb-3 px-2">
+                                        <input id="start-date" type="text" placeholder="Start date"
+                                            class="border border-gray-300 rounded-md px-3 py-2 w-full focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+                                        <span class="text-gray-500 self-center">→</span>
+                                        <input id="end-date" type="text" placeholder="End date"
+                                            class="border border-gray-300 rounded-md px-3 py-2 w-full focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+                                    </div>
+
+                                    <!-- Calendar -->
+                                    <div id="litepicker" class="w-full px-2 pb-4"></div>
+                                </div>
+                            </div>
+
+                            <!-- Footer -->
+                            <div class="flex justify-end space-x-3 mt-auto border-t border-gray-300 p-2">
+                                <button id="cancelBtn"
+                                    class="px-4 py-1 text-xs rounded-md bg-white hover:bg-gray-100 text-gray-800 border border-gray-400">Cancel</button>
+                                <button id="applyBtn" class="px-4 py-1 text-xs rounded-md bg-black text-white">Apply</button>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="px-2 py-1 rounded-lg flex items-center justify-center bg-white text-sm font-semibold gap-2 border border-gray-500 border-b border-gray-700">
                         <span>All Channels</span>
                     </div>
 
                 </div>
             </div>
+
             <div class="w-full flex items-center justify-center p-4">
                 <div class="w-[73%] flex items-start justify-start bg-white flex-col rounded-2xl border border-gray-200 p-2">
                     <div class="w-[100%] grid grid-cols-4 items-center justify-start gap-1">
@@ -41,14 +111,14 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                 Total Orders
                             </span>
 
-                            <span class="mt-1 font-semibold"><?= $Total_Orders ?> --</span>
+                            <span class="mt-1 font-semibold" id="totalorders"><?= $Total_Orders ?> --</span>
                         </div>
                         <div class="w-full flex items-start justify-start flex-col  p-2 px-3 rounded-xl">
                             <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
                                 Total Sales
                             </span>
 
-                            <span class="mt-1 font-semibold">₹<?= formatNumber($Total_sales) ?> --</span>
+                            <span class="mt-1 font-semibold" id="totalsales">₹<?= formatNumber($Total_sales) ?> --</span>
                         </div>
                         <div class="w-full flex items-start justify-start flex-col  p-2 px-3 rounded-xl">
                             <span class="text-sm border-b  border-dashed border-gray-500 font-semibold py-1 rounded">
@@ -113,95 +183,256 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
     include $_SERVER['DOCUMENT_ROOT'] . "/views/include/footer.php";
     ?>
     <?php
-            // printWithPre($labels);
-            // printWithPre($data);
-            // die();
+    // printWithPre($labels);
+    // printWithPre($data);
+    // die();
     ?>
     <script>
-       
+        let chartInstance = null; // global variable
+
         function generateGraph(initiallabels, initialdata) {
-            
-        
-        const ctx = document.getElementById("comparisonChart");
+            const ctx = document.getElementById("comparisonChart");
 
-        // PHP data → JS
-        const labels = initiallabels;
-        const orderCounts = initialdata;
-    //    console.log(orderCounts);
-    //    console.log(labels);
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: "Orders per Day",
-                data: orderCounts,
-                borderColor: "#0096F2",
-                backgroundColor: "#0096F2",
-                borderWidth: 2.5,
-                pointRadius: 3,
-                pointHoverRadius: 5,
-                tension: 0.35,
-                fill: false,
-            }],
-        };
+            // Destroy previous instance if exists
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
 
-        const config = {
-            type: "line",
-            data: data,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: "bottom",
-                        labels: {
-                            usePointStyle: true,
-                            pointStyle: "circle",
-                            boxWidth: 6,
-                            boxHeight: 6,
-                            padding: 20,
-                            font: {
-                                size: 13
-                            },
-                            color: "#9ca3af",
-                        },
-                    },
-                },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        ticks: {
-                            color: "#9ca3af",
-                            font: {
-                                size: 12
+            const data = {
+                labels: initiallabels,
+                datasets: [{
+                    label: "Orders per Day",
+                    data: initialdata,
+                    borderColor: "#0096F2",
+                    backgroundColor: "#0096F2",
+                    borderWidth: 2.5,
+                    pointRadius: 3,
+                    pointHoverRadius: 6,
+                    tension: 0.35,
+                    fill: false,
+                }],
+            };
+
+            const config = {
+                type: "line",
+                data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+
+                    // ✅ This makes sure it always animates
+                    animations: {
+                        y: {
+                            duration: 800,
+                            easing: 'easeOutBack',
+                            from: (ctx) => {
+                                // Start animation from zero each time
+                                if (ctx.type === 'data') {
+                                    return 0;
+                                }
                             }
                         },
+                        x: {
+                            duration: 800,
+                            easing: 'easeOutBack'
+                        }
                     },
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: "#f3f4f6",
-                            drawBorder: false
+
+                    plugins: {
+                        legend: {
+                            position: "bottom",
+                            labels: {
+                                usePointStyle: true,
+                                pointStyle: "circle",
+                                boxWidth: 6,
+                                boxHeight: 6,
+                                padding: 20,
+                                font: {
+                                    size: 13
+                                },
+                                color: "#9ca3af",
+                            },
                         },
-                        ticks: {
-                            color: "#9ca3af",
-                            font: {
+                        tooltip: {
+                            usePointStyle: true,
+                            backgroundColor: "#111827",
+                            titleFont: {
+                                size: 13
+                            },
+                            bodyFont: {
                                 size: 12
                             },
-                            stepSize: 1
+                            padding: 10,
+                            cornerRadius: 6,
+                        },
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: "#9ca3af",
+                                font: {
+                                    size: 12
+                                },
+                            },
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: "#f3f4f6",
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                color: "#9ca3af",
+                                font: {
+                                    size: 12
+                                },
+                                stepSize: 1,
+                            },
                         },
                     },
                 },
-            },
-        };
+            };
 
-        new Chart(ctx, config);
-    }
-   
-    generateGraph(<?= json_encode($labels) ?>, <?= json_encode($orders_data) ?>);
+            // ✅ Assign chart instance
+            chartInstance = new Chart(ctx, config);
+            setTimeout(() => {
+                ctx.classList.add('rendered');
+            }, 50);
+        }
 
+
+        generateGraph(<?= json_encode($labels) ?>, <?= json_encode($orders_data) ?>);
+    </script>
+    <script>
+        const dropdown = document.getElementById("calendarDropdown");
+        const trigger = document.getElementById("dateRangeWrapper");
+        const startInput = document.getElementById("start-date");
+        const endInput = document.getElementById("end-date");
+        const rangeText = document.getElementById("selectedRangeText");
+        const cancelBtn = document.getElementById("cancelBtn");
+        const applyBtn = document.getElementById("applyBtn");
+
+        // Toggle dropdown visibility
+        rangeText.addEventListener("click", () => {
+            dropdown.classList.toggle("hidden");
+        });
+
+        cancelBtn.addEventListener("click", () => dropdown.classList.add("hidden"));
+        applyBtn.addEventListener("click", async () => {
+            dropdown.classList.add("hidden");
+
+            const startDate = startInput.value;
+            const endDate = endInput.value;
+            console.log(startDate);
+            console.log(endDate);
+            // Fire Axios POST request
+            const request = await axios.post("/get-dashboard-data", new URLSearchParams({
+                start_date: startDate,
+                end_date: endDate
+            }));
+            console.log(request);
+            if (request.data.success) {
+
+                const labels = request.data.labels;
+                const data = request.data.data;
+                document.getElementById('totalorders').innerHTML = request.data.total_Orders + " --";
+                document.getElementById('totalsales').innerHTML = "₹" + request.data.total_sales + " --";
+
+                generateGraph(labels, data);
+            }
+        });
+
+        // Default last 30 days
+        const end = new Date();
+        const start = new Date();
+        start.setDate(end.getDate() - 29);
+
+        startInput.value = start.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric"
+        });
+        endInput.value = end.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric"
+        });
+
+        // Initialize Litepicker
+        const picker = new Litepicker({
+            element: document.getElementById("litepicker"),
+            inlineMode: true,
+            singleMode: false,
+            startDate: start,
+            endDate: end,
+            numberOfMonths: 2,
+            numberOfColumns: 2,
+            setup: (picker) => {
+                picker.on('selected', (date1, date2) => {
+                    startInput.value = date1.format('MMM D, YYYY');
+                    endInput.value = date2.format('MMM D, YYYY');
+                });
+            }
+        });
+
+        // Update when user clicks quick range
+        document.getElementById("rangeList").addEventListener("click", (e) => {
+            if (e.target.tagName === "BUTTON") {
+                const range = e.target.dataset.range;
+                const now = new Date();
+                let s, en;
+                switch (range) {
+                    case "today":
+                        s = en = now;
+                        rangeText.textContent = "Today";
+                        break;
+                    case "yesterday":
+                        s = en = new Date(now.setDate(now.getDate() - 1));
+                        rangeText.textContent = "Yesterday";
+                        break;
+                    case "last7":
+                        en = new Date();
+                        s = new Date();
+                        s.setDate(en.getDate() - 6);
+                        rangeText.textContent = "Last 7 days";
+                        break;
+                    case "last30":
+                        en = new Date();
+                        s = new Date();
+                        s.setDate(en.getDate() - 29);
+                        rangeText.textContent = "Last 30 days";
+                        break;
+                    case "last90":
+                        en = new Date();
+                        s = new Date();
+                        s.setDate(en.getDate() - 89);
+                        rangeText.textContent = "Last 90 days";
+                        break;
+                    case "last365":
+                        en = new Date();
+                        s = new Date();
+                        s.setDate(en.getDate() - 364);
+                        rangeText.textContent = "Last 365 days";
+                        break;
+                }
+
+                picker.setDateRange(s, en);
+                startInput.value = s.toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric"
+                });
+                endInput.value = en.toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric"
+                });
+            }
+        });
     </script>
 </body>
 
