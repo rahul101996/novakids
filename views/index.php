@@ -383,6 +383,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
         document.getElementById("rangeList").addEventListener("click", (e) => {
             if (e.target.tagName === "BUTTON") {
                 const range = e.target.dataset.range;
+                document.querySelectorAll("#rangeList button").forEach(btn => {
+                    btn.classList.remove("bg-gray-200");
+                });
+
+                // Add active class to clicked button
+                e.target.classList.add("bg-gray-200");
                 const now = new Date();
                 let s, en;
                 switch (range) {

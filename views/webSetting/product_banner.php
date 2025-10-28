@@ -60,7 +60,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     class="cursor-pointer bg-white text-[#4b4b4b] border-b border-gray-200 hover:bg-[#f7f7f7] hover:shadow-md hover:scale-[1.01] transition-all duration-200 ease-in-out">
                                     <td class="font-semibold py-2 px-3 text-left"><?= $key + 1 ?></td>
                                     <td class="font-semibold py-2 px-3 text-left">
-                                        <?= htmlspecialchars($banner['product_name']) ?>
+                                        <?= htmlspecialchars($banner['product_id']) ?>
                                     </td>
                                     <td class="font-semibold py-2 px-3 text-left">
                                         <img src="/<?= htmlspecialchars($banner['file']) ?>" class="h-24 rounded"

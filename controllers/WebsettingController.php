@@ -142,10 +142,10 @@ class WebsettingController
                     );
                     if ($add) {
                         // $this->db->commit();
-                        foreach ($_POST['anchor_name'] as $key => $value) {
+                        foreach ($_POST['product_name'] as $key => $value) {
                             add(
                                 [
-                                    "anchor_name" => $_POST['anchor_name'][$key],
+                                    "product_name" => $_POST['product_name'][$key],
                                     "top_position" => $_POST['top_position'][$key],
                                     "left_position" => $_POST['left_position'][$key],
                                     "product_banner_id" => $add
@@ -172,10 +172,10 @@ class WebsettingController
                     // $this->db->commit();
                     $delete = deleteSQL("product_banner_anchors", "product_banner_id = $id");
                     // die();
-                    foreach ($_POST['anchor_name'] as $key => $value) {
+                    foreach ($_POST['product_name'] as $key => $value) {
                         add(
                             [
-                                "anchor_name" => $_POST['anchor_name'][$key],
+                                "product_name" => $_POST['product_name'][$key],
                                 "top_position" => $_POST['top_position'][$key],
                                 "left_position" => $_POST['left_position'][$key],
                                 "product_banner_id" => $id

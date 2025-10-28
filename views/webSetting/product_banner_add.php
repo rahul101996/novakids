@@ -31,17 +31,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         <div class="lg:col-span-2 flex flex-col gap-6">
 
                             <div class="">
-                                <label class="block text-sm font-medium text-gray-700 mb-1" for="product_id">Product</label>
-                                <select name="product_id" class="selectElement" id="product_id">
-                                    <option value="" selected disabled>Select Product</option>
-                                    <?php foreach (getData2("SELECT * FROM `tbl_products` WHERE `status` = 1") as $key => $value) { ?>
-                                        <option
-                                            value="<?= $value['id'] ?>"
-                                            <?= isset($editData['product_id']) && $editData['product_id'] == $value['id'] ? 'selected' : '' ?>>
-                                            <?= $value['name'] ?>
-                                        </option>
-                                    <?php } ?>
-                                </select>
+                                <label class="block text-sm font-medium text-gray-700 mb-1" for="product_id">
+                                    Pointer Name
+                                </label>
+                                <input type="text" name="product_id" class="w-full border-[1px] border-gray-600 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 px-3 py-1" value="<?= $editData['product_id'] ?>">
                             </div>
                         </div>
 
@@ -95,7 +88,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                     </button>
                                 </div>
 
-                                <table class="w-full border border-gray-200 rounded-lg overflow-hidden text-sm">
+                                <table class="w-full border border-gray-200 rounded-lg overflow-auto text-sm">
                                     <thead class="bg-gray-100 text-gray-700">
                                         <tr>
                                             <th class="px-4 py-2 text-left font-semibold">Anchor Name</th>
@@ -114,8 +107,16 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                                             ?>
                                                 <tr>
                                                     <td class="px-4 py-3">
-                                                        <input type="text" name="anchor_name[]" value="<?= htmlspecialchars($anchor['anchor_name']) ?>" placeholder="e.g. Point A"
-                                                            class="w-full border border-gray-300 rounded-md px-2 py-1 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                                        <select name="product_name[]" class="selectElement" required>
+                                                            <option value="" selected disabled>Select Product</option>
+                                                            <?php foreach (getData2("SELECT * FROM `tbl_products` WHERE `status` = 1") as $key => $value) { ?>
+                                                                <option
+                                                                    value="<?= $value['id'] ?>"
+                                                                    <?= isset($anchor['product_name']) && $anchor['product_name'] == $value['id'] ? 'selected' : '' ?>>
+                                                                    <?= $value['name'] ?>
+                                                                </option>
+                                                            <?php } ?>
+                                                        </select>
                                                     </td>
                                                     <td class="px-4 py-3">
                                                         <input type="float" name="top_position[]" value="<?= htmlspecialchars($anchor['top_position']) ?>" placeholder="Top %"
@@ -199,8 +200,17 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             const tr = document.createElement("tr");
             tr.innerHTML = `
         <td class="px-4 py-3">
-            <input type="text" name="anchor_name[]" placeholder="e.g. Point A"
-                class="w-full border border-gray-300 rounded-md px-2 py-1 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <label class="block text-sm font-medium text-gray-700 mb-1" for="product_id_${id}">Product</label>
+            <select name="product_name[]" class="selectElement w-full " id="product_id_${id}">
+                <option value="" selected disabled>Select Product</option>
+                <?php foreach (getData2("SELECT * FROM tbl_products WHERE status = 1") as $key => $value) { ?>
+                    <option
+                        value="<?= $value['id'] ?>"
+                        <?= isset($editData['product_id']) && $editData['product_id'] == $value['id'] ? 'selected' : '' ?>>
+                        <?= $value['name'] ?>
+                    </option>
+                <?php } ?>
+            </select>
         </td>
         <td class="px-4 py-3">
             <input type="float" name="top_position[]" value="0" placeholder="Top %"
@@ -219,7 +229,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             tbody.appendChild(tr);
 
             makeDraggable(circle, id);
+            const newSelect = tr.querySelector('.selectElement');
+    if (newSelect) {
+        new SlimSelect({ select: newSelect });
+    }
         });
+
 
         // Update circle position when inputs change
         tbody.addEventListener("input", (e) => {
@@ -288,6 +303,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
         }
         // On page load, create circles for existing anchors from DB
         window.addEventListener("DOMContentLoaded", () => {
+
             const existingInputs = document.querySelectorAll("input[data-id][data-pos='top']");
             existingInputs.forEach((topInput) => {
                 const id = topInput.dataset.id;

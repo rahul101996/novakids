@@ -8,17 +8,8 @@
 $home_imges = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC");
 
 
-$product_imge = getData2("SELECT tpb.*, tp.name as product_name, tp.price, tp.product_images FROM tbl_product_banner tpb LEFT JOIN tbl_products tp ON tpb.product_id = tp.id ORDER BY tpb.id DESC Limit 1")[0];
-$product_variants = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product_imge[product_id] ORDER BY `id` DESC LIMIT 1")[0];
+$product_imge = getData2("SELECT * FROM tbl_product_banner ORDER BY id DESC Limit 1")[0];
 
-// printWithPre($product_imge);
-// die();
-
-$ppname = str_replace(' ', '-', $product_imge['product_name']);
-$ppname = str_replace("'", '', $ppname);
-
-$imags = json_decode($product_variants['images'], true);
-$ppimg = array_reverse($imags);
 
 // printWithPre($product_variants);
 // die();
@@ -449,7 +440,17 @@ $ppimg = array_reverse($imags);
         <?php
 
         foreach (getData2("SELECT * FROM `product_banner_anchors` WHERE `product_banner_id` = " . $product_imge['id']) as $key => $value) {
+$product_variants = getData2("SELECT tv.*,tp.name as product_name, tp.price, tp.product_images FROM `tbl_variants` as tv LEFT JOIN 
+tbl_products as tp ON tp.id = tv.product_id WHERE tv.product_id = $value[product_name] ORDER BY `id` DESC LIMIT 1")[0];
 
+// printWithPre($product_imge);
+// die();
+
+$ppname = str_replace(' ', '-', $product_variants['product_name']);
+$ppname = str_replace("'", '', $ppname);
+
+$imags = json_decode($product_variants['images'], true);
+$ppimg = array_reverse($imags);
         ?>
             <div class="absolute top-[<?= $value['top_position'] ?>%] left-[<?= $value['left_position'] ?>%] group max-md:hidden">
                 <!-- Animated Dot -->
@@ -469,11 +470,11 @@ $ppimg = array_reverse($imags);
                             class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white">
                         </div>
 
-                        <img src="/<?= $ppimg[0] ?>" alt="<?= $product_imge['product_name'] ?>"
+                        <img src="/<?= $ppimg[0] ?>" alt="<?= $product_variants['product_name'] ?>"
                             class="w-20 h-20 object-cover">
                         <div>
-                            <p class="text-sm font-semibold text-gray-800"><?= $product_imge['product_name'] ?></p>
-                            <p class="text-sm font-semibold text-[#f25b21]">₹ <?= formatNumber($product_imge['price']) ?>
+                            <p class="text-sm font-semibold text-gray-800"><?= $product_variants['product_name'] ?></p>
+                            <p class="text-sm font-semibold text-[#f25b21]">₹ <?= formatNumber($product_variants['price']) ?>
                             </p>
                             <a href="/products/product-details/<?= $ppname ?>" class="text-sm text-gray-800 underline">View
                                 Product</a>
