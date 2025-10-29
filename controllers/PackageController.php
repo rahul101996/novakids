@@ -83,7 +83,7 @@ class PackageController
             }
         }
     }
-   
+
 
 
     public  function PackageList()
@@ -110,12 +110,34 @@ class PackageController
             }
         }
     }
-   
-    public function Discount($id = null){
+
+    public function Discount($id = null)
+    {
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            // $discount = getData2("SELECT * FROM `tbl_discount` WHERE `id` = 1 ORDER BY `id` DESC LIMIT 1")[0];
+            $discount = getData2("SELECT * FROM `tbl_discount` ORDER BY `id` DESC LIMIT 1")[0];
+            $products = getData2("SELECT tp.*, tc.category AS category_name FROM `tbl_products` tp LEFT JOIN tbl_category tc ON tp.category = tc.id");
             require 'views/master/discount.php';
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // printWithPre($_POST);
+
+            if (isset($_POST['add'])) {
+
+                unset($_POST['add']);
+                $productIdsJson = json_encode($_POST['product_id']);
+                unset($_POST['product_id']);
+                $_POST['product_id'] = $productIdsJson;
+                $package = add($_POST, "tbl_discount", false);
+
+                if ($package) {
+                    $_SESSION['success'] = "Discount Added Successfully";
+                } else {
+                    $_SESSION['err'] = "Failed to add Discount";
+                }
+
+                header('Location:/admin/discount');
+                exit();
+            }
         }
     }
     public function FreeShipping($id = null)

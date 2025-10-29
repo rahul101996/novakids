@@ -305,6 +305,10 @@ $page = "shop";
         function renderProductHTML(product) {
             const images = JSON.parse(product.variants[0].images || "[]").reverse();
             const SecondImage = images[1] || images[0];
+
+            if (product.variants[0].actual_price) {
+                product.compare_price = product.variants[0].actual_price
+            }
             const comparePrice = parseFloat(product.compare_price) || 0;
             // console.log(product.variants[0].price);
             const price = parseFloat(product.variants[0].price) || 0;
@@ -330,7 +334,9 @@ $page = "shop";
                                 <h3 class="text-base max-md:text-sm font-semibold uppercase">${product.name}</h3>
                                 <div class="flex items-center justify-start gap-3 w-full">
                                     <p class="text-gray-500 line-through text-sm">₹ ${formatNumber(product.compare_price)}.00</p>
-                                    <p class="text-[#f25b21] font-bold">₹ ${formatNumber(price)}.00</p>
+                                    <p class="text-[#f25b21] font-bold">
+                                    ₹ ${formatNumber(Math.floor(price))}.00
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -446,7 +452,10 @@ $page = "shop";
             const max = parseInt(priceRange.value);
             const sortValue = document.getElementById("sortSelect")?.value || "";
 
-            setProducts(activeFilters, { min, max }, sortValue);
+            setProducts(activeFilters, {
+                min,
+                max
+            }, sortValue);
             setActiveFilter(activeFilters);
         }
 
@@ -480,7 +489,10 @@ $page = "shop";
 
             document.querySelectorAll('.remove-filter').forEach(btn => {
                 btn.addEventListener('click', e => {
-                    const { key, value } = e.currentTarget.dataset;
+                    const {
+                        key,
+                        value
+                    } = e.currentTarget.dataset;
 
                     document.querySelectorAll(`.filter-checkbox[data-key="${key}"][data-value="${value}"]`)
                         .forEach(cb => cb.checked = false);

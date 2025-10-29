@@ -1075,9 +1075,21 @@ class WebController extends LoginController
             $price_query
         ");
         }
+        $discount = getData2("SELECT * FROM `tbl_discount` ORDER BY `id` DESC LIMIT 1")[0];
 
         // ✅ Filter variants, wishlist, and apply dynamic filters
         foreach ($products as $key => $product) {
+
+            $ids = json_decode($discount['product_id'], true);
+            // printWithPre($ids)
+            foreach ($ids as $id) {
+                if ($id == $product['id']) {
+                    $checked = true;
+                    break;
+                } else {
+                    $checked = false;
+                }
+            }
             $variants = getData2("SELECT * FROM tbl_variants WHERE product_id = '$product[id]'");
 
             // If min/max price is set, only keep variants within range
@@ -1096,12 +1108,36 @@ class WebController extends LoginController
 
             // ✅ Apply dynamic filters
             $matchAll = true;
+            if(empty($filters)) {
+                
+                foreach ($variants as $varkey => $variant) {
+                    if ($checked) {
+                        $price = $variants[$varkey]['price'];
+                        $discountPercent = $discount['discount'];
+
+                        // Subtract the discount percentage from the original price
+                        $variants[$varkey]['price'] = $price - (($discountPercent / 100) * $price);
+                        $variants[$varkey]['actual_price'] = $price;
+                    }
+
+                   
+                }
+            }else{
             foreach ($filters as $filterKey => $filterValues) {
                 $filterKey = strtoupper($filterKey);
                 $normalizedFilterValues = array_map('strtoupper', $filterValues);
                 $matchKey = false;
 
-                foreach ($variants as $variant) {
+                foreach ($variants as $varkey => $variant) {
+                    if ($checked) {
+                        $price = $variants[$varkey]['price'];
+                        $discountPercent = $discount['discount'];
+
+                        // Subtract the discount percentage from the original price
+                        $variants[$varkey]['price'] = $price - (($discountPercent / 100) * $price);
+                        $variants[$varkey]['actual_price'] = $price;
+                    }
+
                     $opts = $variant['options'];
                     while (is_string($opts)) {
                         $opts = json_decode($opts, true);
@@ -1122,6 +1158,7 @@ class WebController extends LoginController
                     break;
                 }
             }
+        }
 
             if (!$matchAll) {
                 unset($products[$key]);
@@ -2352,7 +2389,7 @@ ORDER BY id DESC LIMIT 5");
         require 'views/website/privacy-policy.php';
     }
 
-   public function addReview()
+    public function addReview()
     {
         $response = [
             "success" => false,
