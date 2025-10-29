@@ -120,6 +120,11 @@
 
             Free Shipping
         </a>
+        <a href="/admin/discount" class="flex items-center px-2 py-1 text-[#303030] hover:text-[#303030] text-decoration-none rounded-xl font-semibold hover:bg-[#f1f1f1]">
+            <img src="/public/icons/discount.png" class="h-6 mr-2" alt="">
+
+            Sales
+        </a>
         <div class="text-[#303030] font-semibold mt-1 w-full">
             <button @click="open === 'front_cms' ? open = null : open = 'front_cms'"
                 class="w-full flex items-center justify-between px-2 py-1  rounded-lg hover:bg-[#f1f1f1] focus:outline-none">

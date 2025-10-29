@@ -96,9 +96,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         </div>
                     </div>
 
-                    <div class="px-2 py-1 rounded-lg flex items-center justify-center bg-white text-sm font-semibold gap-2 border border-gray-500 border-b border-gray-700">
+                    <!-- <div class="px-2 py-1 rounded-lg flex items-center justify-center bg-white text-sm font-semibold gap-2 border border-gray-500 border-b border-gray-700">
                         <span>All Channels</span>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>

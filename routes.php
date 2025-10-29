@@ -177,6 +177,7 @@ $route->group(['', 'PackageController', 'auth'], function ($route) {
     $route->route('/edit-package/[i:id]', 'index');
     $route->route('/delete-package/[i:id]', 'DeleteCategory');
     $route->route('/admin/free-shipping', 'FreeShipping');
+    $route->route('/admin/discount', 'Discount');
 });
 
 $route->group(['', 'DashboardController', 'auth'], function ($route) {

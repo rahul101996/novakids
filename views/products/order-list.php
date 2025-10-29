@@ -283,7 +283,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
         const completedOrders = document.getElementById("complete-orders");
         const canceledOrders = document.getElementById("cancel-orders");
 
-        document.addEventListener("DOMContentLoaded", function() {
+        function search() {
             const searchInput = document.querySelector('input[placeholder="Search Customers"]');
             const tableBody = document.querySelector("tbody");
             const tableRows = tableBody.querySelectorAll("tr");
@@ -308,7 +308,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                 // Show/hide "no results"
                 noResultRow.style.display = matchCount === 0 ? "" : "none";
             });
-        });
+        }
+        search();
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -347,6 +348,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         canceledOrders.innerHTML = request.data.cancel_orders + ' ' + '--';
                         document.getElementById('TableBody').innerHTML = '';
                         document.getElementById('TableBody').innerHTML = request.data.html;
+                        search();
+
                     }
                     // getbillproduct(this.value);
                 })

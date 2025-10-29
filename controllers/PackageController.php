@@ -83,6 +83,7 @@ class PackageController
             }
         }
     }
+   
 
 
     public  function PackageList()
@@ -109,7 +110,14 @@ class PackageController
             }
         }
     }
+   
+    public function Discount($id = null){
 
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            // $discount = getData2("SELECT * FROM `tbl_discount` WHERE `id` = 1 ORDER BY `id` DESC LIMIT 1")[0];
+            require 'views/master/discount.php';
+        }
+    }
     public function FreeShipping($id = null)
     {
 

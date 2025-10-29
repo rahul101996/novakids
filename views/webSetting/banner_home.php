@@ -32,7 +32,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                             <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#626262">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
-                            <input type="text" placeholder="Search Customers" class="bg-white w-full pl-10 pr-4 py-1 rounded-xl border border-gray-300 focus:border-gray-600 focus:bg-gray-200 placeholder:text-[#626262] outline-none transition">
+                            <input type="text" placeholder="Search Banner" class="bg-white w-full pl-10 pr-4 py-1 rounded-xl border border-gray-300 focus:border-gray-600 focus:bg-gray-200 placeholder:text-[#626262] outline-none transition">
 
                         </div>
 
@@ -105,6 +105,35 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/views/include/footer.php";
     ?>
+    <script>
+         function search() {
+            const searchInput = document.querySelector('input[placeholder="Search Banner"]');
+            const tableBody = document.querySelector("tbody");
+            const tableRows = tableBody.querySelectorAll("tr");
+            console.log(tableRows);
+            // Create "no results" row
+            const noResultRow = document.createElement("tr");
+            noResultRow.innerHTML = `<td colspan="5" class="text-center py-3 text-gray-500">No matching customers found</td>`;
+            noResultRow.style.display = "none";
+            tableBody.appendChild(noResultRow);
+
+            searchInput.addEventListener("keyup", function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                let matchCount = 0;
+
+                tableRows.forEach(row => {
+                    const rowText = row.textContent.toLowerCase();
+                    const isMatch = rowText.includes(searchTerm);
+                    row.style.display = isMatch ? "" : "none";
+                    if (isMatch) matchCount++;
+                });
+
+                // Show/hide "no results"
+                noResultRow.style.display = matchCount === 0 ? "" : "none";
+            });
+        }
+        search();
+    </script>
 </body>
 
 </html>

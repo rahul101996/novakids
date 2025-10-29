@@ -241,6 +241,33 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
     ?>
 
     <script>
+         function search() {
+            const searchInput = document.querySelector('input[placeholder="Search Products"]');
+            const tableBody = document.querySelector("tbody");
+            const tableRows = tableBody.querySelectorAll("tr");
+            console.log(tableRows);
+            // Create "no results" row
+            const noResultRow = document.createElement("tr");
+            noResultRow.innerHTML = `<td colspan="5" class="text-center py-3 text-gray-500">No matching customers found</td>`;
+            noResultRow.style.display = "none";
+            tableBody.appendChild(noResultRow);
+
+            searchInput.addEventListener("keyup", function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                let matchCount = 0;
+
+                tableRows.forEach(row => {
+                    const rowText = row.textContent.toLowerCase();
+                    const isMatch = rowText.includes(searchTerm);
+                    row.style.display = isMatch ? "" : "none";
+                    if (isMatch) matchCount++;
+                });
+
+                // Show/hide "no results"
+                noResultRow.style.display = matchCount === 0 ? "" : "none";
+            });
+        }
+        search();
         const ActiveProducts = document.getElementById('active_products');
         const NewArriavals = document.getElementById('new_arrivals');
         const OutofStock = document.getElementById('out_of_stock');
@@ -325,6 +352,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
                         OutofStock.innerHTML = request.data.out_of_stock;
                         document.getElementById('TableBody').innerHTML = '';
                         document.getElementById('TableBody').innerHTML = request.data.html;
+                        search();
                     }
                     // getbillproduct(this.value);
                 })

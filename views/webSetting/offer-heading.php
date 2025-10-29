@@ -26,16 +26,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/views/include/header.php";
             </div>
             <div class="w-full flex items-center justify-center pb-4">
                 <div class="w-[97%] flex items-start justify-center gap-3 flex-col bg-white rounded-2xl">
-                    <div class="w-full flex items-center justify-between mt-2 px-2">
-                        <div class="relative w-[45vw]">
-                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#626262">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
-                            <input type="text" placeholder="Search Customers" class="bg-white w-full pl-10 pr-4 py-1 rounded-xl border border-gray-300 focus:border-gray-600 focus:bg-gray-200 placeholder:text-[#626262] outline-none transition">
-
-                        </div>
-
-                    </div>
+                    
                     <table class="w-full text-sm">
                         <!-- Table Header -->
                         <thead class="sticky top-0 left-0 shadow-sm z-10">
