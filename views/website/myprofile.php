@@ -49,7 +49,7 @@ if (isset($_POST['update_profile'])) {
 
     redirect('/profile');
 }
-
+$discount = GetDiscount();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -537,10 +537,28 @@ if (isset($_POST['update_profile'])) {
 
                             foreach ($wishlists as $key => $wishlist) {
                                 $product = getData2("SELECT * FROM `tbl_products` WHERE `id` = " . $wishlist['product'])[0];
+                                                        $ids = json_decode($discount['product_id'], true);
+
+                                foreach ($ids as $id) {
+                            if ($id == $product['id']) {
+                                $checked = true;
+                                break;
+                            } else {
+                                $checked = false;
+                            }
+                        }
                                 // $images = json_decode($product['product_images'], true);
                                 // $images = array_reverse($images);
                                 $SecondImage = true;
                                 $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
+                                if ($checked) {
+                            $price = $varients['price'];
+                            $discountPercent = $discount['discount'];
+
+                            // Subtract the discount percentage from the original price
+                            $varients['price'] = $price - (($discountPercent / 100) * $price);
+                            $product['compare_price'] = $price;
+                        }
                                 // printWithPre($varients);
                                 $images = json_decode($varients['images'], true);
                                 $images = array_reverse($images);

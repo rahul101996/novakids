@@ -7,6 +7,8 @@ error_reporting(E_ALL);
 session_start();
 require 'vendor/autoload.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . "/Helper/generalHelper.php";
+$discount = getData2("SELECT * FROM `tbl_discount` ORDER BY `id` DESC LIMIT 1")[0];
+
 //  printWithPre($_SESSION);
 date_default_timezone_set('Asia/Kolkata');
 // printWithPre($_SESSION);

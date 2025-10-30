@@ -16,9 +16,36 @@ class WebController extends LoginController
 
     public function getProductData()
     {
+        $discount = GetDiscount();
+        $ids = json_decode($discount['product_id'], true);
         $id = $_POST['productid'];
+        foreach ($ids as $vid) {
+            if ($vid == $id) {
+                $checked = true;
+                break;
+            } else {
+                $checked = false;
+            }
+        }
         $ProductData = getData2("SELECT tbl_products.*, tbl_category.category as category_name FROM `tbl_products` LEFT JOIN tbl_category ON tbl_products.category = tbl_category.id WHERE tbl_products.id = $id")[0];
         $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
+        foreach ($varients as $key => $variant) {
+
+
+            if ($checked) {
+                $price = $variant['price'];
+                $discountPercent = $discount['discount'];
+
+                // Subtract the discount percentage from the original price
+                $varients[$key]['price'] = round(
+                    $price - (($discountPercent / 100) * $price),
+                    0,
+                    PHP_ROUND_HALF_UP
+                );
+                $varients[$key]['actual_price'] = $price;
+                $ProductData['compare_price'] = $price;
+            }
+        }
         $ProductData['varients'] = $varients;
 
         // Start output buffering
@@ -110,9 +137,9 @@ class WebController extends LoginController
                         <h2 class="w-full text-[1.7rem] max-md:text-lg leading-[2rem] uppercase "><?= $ProductData['name'] ?></h2>
                         <div class="flex items-center justify-center gap-3 mt-1 prices">
                             <span
-                                class="text-gray-300 text-xl line-through whitespace-nowrap">Rs.<?= formatNumber($ProductData['compare_price']) ?>.00</span>
+                                class="text-gray-300 text-xl line-through whitespace-nowrap">Rs.<?= formatNumber($ProductData['compare_price']) ?></span>
                             <span
-                                class="text-[#f25b21] text-xl whitespace-nowrap">Rs.<?= formatNumber($ProductData['varients'][0]["price"]) ?>.00</span>
+                                class="text-[#f25b21] text-xl whitespace-nowrap">Rs.<?= formatNumber($ProductData['varients'][0]["price"]) ?></span>
                             <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg whitespace-nowrap">SAVE
                                 <?= $discountPercentage ?>%</span>
 
@@ -554,7 +581,8 @@ class WebController extends LoginController
 
     public function getCartData()
     {
-
+        $discount = GetDiscount();
+        $ids = json_decode($discount['product_id'], true);
         if (isset($_SESSION["userid"]) && !empty($_SESSION["userid"])) {
             // $cartData = $cartController->getAllCartsByUserId($_SESSION["userid"]);
             // printWithPre($cartData);
@@ -567,9 +595,27 @@ class WebController extends LoginController
 
                 foreach ($cartproducts as $key1 => $c) {
                     $id = $c["product"];
+
+                    foreach ($ids as $vid) {
+                        if ($vid == $id) {
+                            $checked = true;
+                            break;
+                        } else {
+                            $checked = false;
+                        }
+                    }
+
                     $variant_id = $c['varient'];
                     $quantity = $c['quantity'];
                     $vdata = getData2("SELECT tbl_variants.* , tbl_products.name as product_name, tbl_products.id as product_id, tbl_products.category as category FROM `tbl_variants` LEFT JOIN tbl_products ON tbl_variants.product_id = tbl_products.id WHERE tbl_variants.id = '$variant_id'")[0];
+                    if ($checked) {
+                        $price = $vdata['price'];
+                        $discountPercent = $discount['discount'];
+
+                        // Subtract the discount percentage from the original price
+                        $vdata['price'] = round($price - (($discountPercent / 100) * $price), 0, PHP_ROUND_HALF_UP);
+                        // $ProductData['compare_price'] = $price;
+                    }
                     // echo $vdata['image'];
                     $images = array_reverse(json_decode($vdata['images'], true));
                     $variants = json_decode($vdata['options'], true);
@@ -651,9 +697,26 @@ class WebController extends LoginController
 
                 foreach ($_SESSION["cart"] as $key1 => $c) {
                     $id = $c["product"];
+                    foreach ($ids as $vid) {
+                        if ($vid == $id) {
+                            $checked = true;
+                            break;
+                        } else {
+                            $checked = false;
+                        }
+                    }
+
                     $variant_id = $c['varient'];
                     $quantity = $c['quantity'];
                     $vdata = getData2("SELECT tbl_variants.* , tbl_products.name as product_name, tbl_products.id as product_id, tbl_products.category as category FROM `tbl_variants` LEFT JOIN tbl_products ON tbl_variants.product_id = tbl_products.id WHERE tbl_variants.id = '$variant_id'")[0];
+                    if ($checked) {
+                        $price = $vdata['price'];
+                        $discountPercent = $discount['discount'];
+
+                        // Subtract the discount percentage from the original price
+                        $vdata['price'] = round($price - (($discountPercent / 100) * $price), 0, PHP_ROUND_HALF_UP);
+                        // $ProductData['compare_price'] = $price;
+                    }
                     // echo $vdata['image'];
                     $images = array_reverse(json_decode($vdata['images'], true));
                     $variants = json_decode($vdata['options'], true);
@@ -1108,8 +1171,8 @@ class WebController extends LoginController
 
             // ✅ Apply dynamic filters
             $matchAll = true;
-            if(empty($filters)) {
-                
+            if (empty($filters)) {
+
                 foreach ($variants as $varkey => $variant) {
                     if ($checked) {
                         $price = $variants[$varkey]['price'];
@@ -1119,46 +1182,44 @@ class WebController extends LoginController
                         $variants[$varkey]['price'] = $price - (($discountPercent / 100) * $price);
                         $variants[$varkey]['actual_price'] = $price;
                     }
-
-                   
                 }
-            }else{
-            foreach ($filters as $filterKey => $filterValues) {
-                $filterKey = strtoupper($filterKey);
-                $normalizedFilterValues = array_map('strtoupper', $filterValues);
-                $matchKey = false;
+            } else {
+                foreach ($filters as $filterKey => $filterValues) {
+                    $filterKey = strtoupper($filterKey);
+                    $normalizedFilterValues = array_map('strtoupper', $filterValues);
+                    $matchKey = false;
 
-                foreach ($variants as $varkey => $variant) {
-                    if ($checked) {
-                        $price = $variants[$varkey]['price'];
-                        $discountPercent = $discount['discount'];
+                    foreach ($variants as $varkey => $variant) {
+                        if ($checked) {
+                            $price = $variants[$varkey]['price'];
+                            $discountPercent = $discount['discount'];
 
-                        // Subtract the discount percentage from the original price
-                        $variants[$varkey]['price'] = $price - (($discountPercent / 100) * $price);
-                        $variants[$varkey]['actual_price'] = $price;
+                            // Subtract the discount percentage from the original price
+                            $variants[$varkey]['price'] = $price - (($discountPercent / 100) * $price);
+                            $variants[$varkey]['actual_price'] = $price;
+                        }
+
+                        $opts = $variant['options'];
+                        while (is_string($opts)) {
+                            $opts = json_decode($opts, true);
+                        }
+                        if (!is_array($opts))
+                            $opts = [];
+                        $opts = array_change_key_case($opts, CASE_UPPER);
+                        $variantValue = !empty($opts[$filterKey]) ? strtoupper($opts[$filterKey]) : null;
+
+                        if ($variantValue && in_array($variantValue, $normalizedFilterValues)) {
+                            $matchKey = true;
+                            break;
+                        }
                     }
 
-                    $opts = $variant['options'];
-                    while (is_string($opts)) {
-                        $opts = json_decode($opts, true);
-                    }
-                    if (!is_array($opts))
-                        $opts = [];
-                    $opts = array_change_key_case($opts, CASE_UPPER);
-                    $variantValue = !empty($opts[$filterKey]) ? strtoupper($opts[$filterKey]) : null;
-
-                    if ($variantValue && in_array($variantValue, $normalizedFilterValues)) {
-                        $matchKey = true;
+                    if (!$matchKey) {
+                        $matchAll = false;
                         break;
                     }
                 }
-
-                if (!$matchKey) {
-                    $matchAll = false;
-                    break;
-                }
             }
-        }
 
             if (!$matchAll) {
                 unset($products[$key]);

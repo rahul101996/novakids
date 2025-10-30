@@ -17,7 +17,28 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         $data = [];
     }
 }
+$discount = GetDiscount();
+$ids = json_decode($discount['product_id'], true);
+// printWithPre($ids)
+foreach ($ids as $id) {
+    if ($id == $ProductData['id']) {
+        $checked = true;
+        break;
+    } else {
+        $checked = false;
+    }
+}
+if ($checked) {
+    $price = $ProductData['varients'][0]["price"];
+    $discountPercent = $discount['discount'];
 
+    // Subtract the discount percentage from the original price
+    $ProductData['varients'][0]["price"] = round($price - (($discountPercent / 100) * $price), 0, PHP_ROUND_HALF_UP);
+    $ProductData['compare_price'] = $price;
+    // $price = round($price, 0, PHP_ROUND_HALF_UP);
+
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -251,9 +272,25 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         foreach ($similarProducts as $key => $product) {
                             // $images = json_decode($product['product_images'], true);
                             // $images = array_reverse($images);
+                            foreach ($ids as $id) {
+                                if ($id == $product['id']) {
+                                    $checked = true;
+                                    break;
+                                } else {
+                                    $checked = false;
+                                }
+                            }
                             if ($product['id'] == $ProductData['id']) continue;
                             $SecondImage = true;
                             $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
+                            if ($checked) {
+                                $price = $varients['price'];
+                                $discountPercent = $discount['discount'];
+
+                                // Subtract the discount percentage from the original price
+                                $varients['price'] = $price - (($discountPercent / 100) * $price);
+                                $product['compare_price'] = $price;
+                            }
                             // printWithPre($varients);
                             $images = json_decode($varients['images'], true);
                             $images = array_reverse($images);
@@ -265,6 +302,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
                             $name = str_replace(' ', '-', $product['name']);
                             $name = str_replace("'", '', $name);
+                            $price = round($price, 0, PHP_ROUND_HALF_UP);
 
                             // printWithPre($images);
                         ?>
@@ -298,9 +336,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                         </h3>
                                         <div class="flex items-center justify-start gap-3 w-full">
                                             <p class="text-gray-500 line-through text-sm">₹
-                                                <?= formatNumber($product['compare_price']) ?>.00
+                                                <?= formatNumber($product['compare_price']) ?>
                                             </p>
-                                            <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?>.00</p>
+                                            <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?></p>
                                         </div>
                                         <!-- reviews -->
                                         <div class="flex items-center justify-start space-x-1 hidden">
@@ -823,8 +861,24 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         <?php foreach ($uniqueProducts as $key => $product) {
                             // $images = json_decode($product['product_images'], true);
                             // $images = array_reverse($images);
+                            foreach ($ids as $id) {
+                                if ($id == $product['id']) {
+                                    $checked = true;
+                                    break;
+                                } else {
+                                    $checked = false;
+                                }
+                            }
                             $SecondImage = true;
                             $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
+                            if ($checked) {
+                                $price = $varients['price'];
+                                $discountPercent = $discount['discount'];
+
+                                // Subtract the discount percentage from the original price
+                                $varients['price'] = $price - (($discountPercent / 100) * $price);
+                                $product['compare_price'] = $price;
+                            }
                             // printWithPre($varients);
                             $images = json_decode($varients['images'], true);
                             $images = array_reverse($images);
@@ -849,6 +903,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                     $data = [];
                                 }
                             }
+                            $price = round($price, 0, PHP_ROUND_HALF_UP);
 
                             // printWithPre($images);
                         ?>
@@ -891,9 +946,9 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                         </h3>
                                         <div class="flex items-center justify-start gap-3 w-full">
                                             <p class="text-gray-500 line-through text-sm">₹
-                                                <?= formatNumber($product['compare_price']) ?>.00
+                                                <?= formatNumber($product['compare_price']) ?>
                                             </p>
-                                            <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?>.00</p>
+                                            <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?></p>
                                         </div>
                                         <!-- reviews -->
                                         <div class="flex items-center justify-start space-x-1 hidden">
@@ -1748,9 +1803,13 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         // console.warn("No .sideVarientId element found inside:", ele.parentElement.parentElement);
                     }
                     document.querySelectorAll(".prices").forEach(el => {
-                        el.innerHTML = `<span class="text-[#f25b21] text-xl prices">Rs. ${ar.price}</span>`;
+                        el.innerHTML = `<span class="text-[#f25b21] text-xl prices">Rs. ${ar.price}.0</span>`;
                     });
-                    let comparePrice99 = document.getElementById('comparePrice99');
+                    if (ar.actual_price) {
+                        document.getElementById('comparePrice99').innerHTML = `${ar.actual_price}`
+
+                    }
+                    // let comparePrice99 = document.getElementById('comparePrice99');
                     // console.log(comparePrice99)
 
                     if (comparePrice99) {

@@ -11,6 +11,8 @@ $home_imges = getData2("SELECT * FROM tbl_home_banner WHERE 1 ORDER BY `id` DESC
 $product_imge = getData2("SELECT * FROM tbl_product_banner ORDER BY id DESC Limit 1")[0];
 
 
+$discount = GetDiscount();
+
 // printWithPre($product_variants);
 // die();
 
@@ -263,16 +265,34 @@ $product_imge = getData2("SELECT * FROM tbl_product_banner ORDER BY id DESC Limi
             <div class="relative">
                 <div class="owl-carousel owl-theme newarrivalcarousel">
                     <?php
-
                     foreach (getData2("SELECT * FROM `tbl_products` WHERE `status` = 1 AND `new_arrival` = 1 ORDER BY `id` DESC LIMIT 8") as $key => $product) {
                         // $images = json_decode($product['product_images'], true);
                         // $images = array_reverse($images);
+                        $ids = json_decode($discount['product_id'], true);
+                        // printWithPre($ids)
+                        foreach ($ids as $id) {
+                            if ($id == $product['id']) {
+                                $checked = true;
+                                break;
+                            } else {
+                                $checked = false;
+                            }
+                        }
                         $SecondImage = true;
                         $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
                         // printWithPre($varients);
                         $images = json_decode($varients['images'], true);
                         $images = array_reverse($images);
                         (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
+                        if ($checked) {
+                            $price = $varients['price'];
+                            $discountPercent = $discount['discount'];
+
+                            // Subtract the discount percentage from the original price
+                            $varients['price'] = $price - (($discountPercent / 100) * $price);
+                            $product['compare_price'] = $price;
+                        }
+
                         $comparePrice = floatval($product['compare_price']);
                         $price = floatval($varients['price']);
                         $discountAmount = $comparePrice - $price;
@@ -293,6 +313,7 @@ $product_imge = getData2("SELECT * FROM tbl_product_banner ORDER BY id DESC Limi
                                 $data = [];
                             }
                         }
+                        $price = round($price, 0, PHP_ROUND_HALF_UP);
 
                         // printWithPre($images);
                     ?>
@@ -335,9 +356,9 @@ $product_imge = getData2("SELECT * FROM tbl_product_banner ORDER BY id DESC Limi
                                     </h3>
                                     <div class="flex items-center justify-start gap-3 w-full">
                                         <p class="text-gray-500 line-through text-sm">₹
-                                            <?= formatNumber($product['compare_price']) ?>.00
+                                            <?= formatNumber($product['compare_price']) ?>
                                         </p>
-                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?>.00</p>
+                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?></p>
                                     </div>
                                     <!-- reviews -->
                                     <div class="flex items-center justify-start space-x-1 hidden">
@@ -440,17 +461,17 @@ $product_imge = getData2("SELECT * FROM tbl_product_banner ORDER BY id DESC Limi
         <?php
 
         foreach (getData2("SELECT * FROM `product_banner_anchors` WHERE `product_banner_id` = " . $product_imge['id']) as $key => $value) {
-$product_variants = getData2("SELECT tv.*,tp.name as product_name, tp.price, tp.product_images FROM `tbl_variants` as tv LEFT JOIN 
+            $product_variants = getData2("SELECT tv.*,tp.name as product_name, tp.price, tp.product_images FROM `tbl_variants` as tv LEFT JOIN 
 tbl_products as tp ON tp.id = tv.product_id WHERE tv.product_id = $value[product_name] ORDER BY `id` DESC LIMIT 1")[0];
 
-// printWithPre($product_imge);
-// die();
+            // printWithPre($product_imge);
+            // die();
 
-$ppname = str_replace(' ', '-', $product_variants['product_name']);
-$ppname = str_replace("'", '', $ppname);
+            $ppname = str_replace(' ', '-', $product_variants['product_name']);
+            $ppname = str_replace("'", '', $ppname);
 
-$imags = json_decode($product_variants['images'], true);
-$ppimg = array_reverse($imags);
+            $imags = json_decode($product_variants['images'], true);
+            $ppimg = array_reverse($imags);
         ?>
             <div class="absolute top-[<?= $value['top_position'] ?>%] left-[<?= $value['left_position'] ?>%] group max-md:hidden">
                 <!-- Animated Dot -->
@@ -485,7 +506,7 @@ $ppimg = array_reverse($imags);
             </div>
         <?php } ?>
         <!-- Hotspot 2 (center) -->
-        
+
 
     </section>
 

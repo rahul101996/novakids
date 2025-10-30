@@ -35,15 +35,57 @@
                     d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
             </svg>
         </button>
-        <div class="flex items-center space-x-2">
-            <div class="w-9 h-9 bg-fuchsia-600 rounded-xl flex items-center justify-center text-white font-semibold text-sm">
-                <span><?= $companyData['company'][0] ?> </span>
+        <div class="relative inline-block text-left">
+            <!-- Profile Button -->
+            <div id="profileBtn" class="flex items-center space-x-2 cursor-pointer select-none">
+                <div class="w-9 h-9 bg-fuchsia-600 rounded-xl flex items-center justify-center text-white font-semibold text-sm">
+                    <span><?= strtoupper($companyData['company'][0]) ?></span>
+                </div>
+                <span class="text-right text-sm">
+                    <span class="font-semibold text-gray-200"><?= $companyData['company'] ?></span>
+                </span>
             </div>
-            <span class="text-right text-sm">
-                <span class="font-semibold text-gray-300"><?= $companyData['company'] ?></span>
-            </span>
 
+            <!-- Dropdown Menu -->
+            <div id="profileDropdown"
+                class="hidden absolute right-0 mt-2 w-44 bg-white rounded-xl shadow-lg ring-1 ring-gray-200 z-50">
+                <div class="p-2 border-b border-gray-100 flex flex-col">
+                    <span class="text-sm font-medium text-gray-900 capitalize"><?= $_SESSION['name'] ?></span>
+
+                    <span class="text-xs text-gray-500"><?= $_SESSION['email'] ?></span>
+                    
+                </div>
+
+                <div class="p-2">
+                    <a href="/logout"
+                        class="flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-gray-500" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V5m0 6H3" />
+                        </svg>
+                        Logout
+                    </a>
+                </div>
+            </div>
         </div>
+
+        <script>
+            const profileBtn = document.getElementById('profileBtn');
+            const profileDropdown = document.getElementById('profileDropdown');
+
+            profileBtn.addEventListener('click', () => {
+                profileDropdown.classList.toggle('hidden');
+            });
+
+            // Hide dropdown if clicked outside
+            document.addEventListener('click', (e) => {
+                if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.add('hidden');
+                }
+            });
+        </script>
+
     </div>
 </header>
 <script>

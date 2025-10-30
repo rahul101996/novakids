@@ -671,6 +671,7 @@
                 // await changeCartSidebarImage(i)
 
                 selectedId = ar.id
+
                 // console.log("selectedId", selectedId)
                 const sideVariantInput = ele.parentElement.parentElement.querySelector(".sideVarientId");
                 if (sideVariantInput) {
@@ -678,10 +679,21 @@
                 } else {
                     console.warn("No .sideVarientId element found inside:", ele.parentElement.parentElement);
                 }
+                let actual_price = ar.actual_price ? ar.actual_price : ar.price;
+let discount = 0;
 
-                ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
-                    <span class="text-[#f25b21] text-xl">Rs. ${ar.price}.00</span>
-                `
+if (actual_price > ar.price) {
+    discount = Math.round(((actual_price - ar.price) / actual_price) * 100);
+}
+
+ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
+    <span class="text-gray-300 text-xl line-through whitespace-nowrap">Rs.${actual_price}</span>
+    <span class="text-[#f25b21] text-xl whitespace-nowrap">Rs.${ar.price}.0</span>
+    ${discount > 0 ? `<span class="rounded-md bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">${discount}% OFF</span>` : ''}
+`;
+
+
+
                 console.log("ar", ar, ele.parentElement.parentElement.querySelector(".sideVarientId"))
                 let imgHtml = ""
                 JSON.parse(ar.images).forEach((imgh) => {

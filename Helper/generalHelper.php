@@ -763,6 +763,11 @@ function generateRandomString($length = 16)
     return random_int(100, 999);
 }
 
+function GetDiscount()
+{
+    $discount = getData2("SELECT * FROM `tbl_discount` ORDER BY `id` DESC LIMIT 1")[0];
+    return $discount;
+}
 function deleteSQL($table, $sql)
 {
     $db = getDBCon();
