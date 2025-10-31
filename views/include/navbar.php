@@ -157,6 +157,12 @@
                 icon: `<img src='/public/icons/notification.png' class='h-5 invert'>`
             },
             {
+                label: "Sales & Offers",
+                desc: "Set offer and discounts",
+                link: "/admin/discount",
+                icon: `<img src="/public/icons/discount.png" class="h-6 mr-2 invert" alt="">`
+            },
+            {
                 label: "Free Shipping",
                 desc: "Set free shipping conditions",
                 link: "/admin/free-shipping",

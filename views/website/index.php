@@ -355,12 +355,11 @@ $discount = GetDiscount();
                                     <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?>
                                     </h3>
                                     <div class="flex items-center justify-start gap-3 w-full">
-                                        <p class="text-gray-500 line-through text-sm price" data-price="<?= str_replace(',', '', $product['compare_price']) ?>">₹
-                                            <?= formatNumber($product['compare_price']) ?>
+                                        <p class="text-gray-500 line-through text-sm price" data-price="<?= str_replace(',', '', $product['compare_price']) ?>">
                                         </p>
                                         <!-- <?= $price ?> -->
                                         <p class="text-[#f25b21] font-bold price" data-price="<?= str_replace(',', '', $price) ?>">
-                                            ₹ <?= formatNumber($price) ?>
+                                            
                                         </p>
 
                                     </div>
