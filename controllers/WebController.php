@@ -14,6 +14,7 @@ class WebController extends LoginController
         parent::__construct($this->db);
     }
 
+
     public function getProductData()
     {
         $discount = GetDiscount();
@@ -31,9 +32,11 @@ class WebController extends LoginController
         $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $id");
         foreach ($varients as $key => $variant) {
 
-
             if ($checked) {
+                // echo "ahecked";
+
                 $price = $variant['price'];
+                // echo $price;
                 $discountPercent = $discount['discount'];
 
                 // Subtract the discount percentage from the original price
@@ -44,8 +47,17 @@ class WebController extends LoginController
                 );
                 $varients[$key]['actual_price'] = $price;
                 $ProductData['compare_price'] = $price;
+                // echo $ProductData['compare_price'];
+                // echo "<br>";
+
             }
         }
+
+        if ($varients[0]['actual_price']) {
+            $ProductData['compare_price'] = $varients[0]['actual_price'];
+        }
+        // echo "<br>";
+        // echo $ProductData['compare_price'];
         $ProductData['varients'] = $varients;
 
         // Start output buffering
@@ -137,9 +149,9 @@ class WebController extends LoginController
                         <h2 class="w-full text-[1.7rem] max-md:text-lg leading-[2rem] uppercase "><?= $ProductData['name'] ?></h2>
                         <div class="flex items-center justify-center gap-3 mt-1 prices">
                             <span
-                                class="text-gray-300 text-xl line-through whitespace-nowrap">Rs.<?= formatNumber($ProductData['compare_price']) ?></span>
+                                class="text-gray-300 text-xl line-through whitespace-nowrap price" data-price="<?= $ProductData['compare_price'] ?>">Rs.<?= formatNumber($ProductData['compare_price']) ?></span>
                             <span
-                                class="text-[#f25b21] text-xl whitespace-nowrap">Rs.<?= formatNumber($ProductData['varients'][0]["price"]) ?></span>
+                                class="text-[#f25b21] text-xl whitespace-nowrap price" data-price="<?= formatNumber($ProductData['varients'][0]["price"]) ?>">Rs.<?= formatNumber($ProductData['varients'][0]["price"]) ?></span>
                             <span class="text-xs bg-[#f25b21] text-white py-1 px-2 rounded-lg whitespace-nowrap">SAVE
                                 <?= $discountPercentage ?>%</span>
 
@@ -637,7 +649,7 @@ class WebController extends LoginController
                                     <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
                                 <?php } ?>
                             </div>
-                            <span class="font-bold text-[#f25b21] total">₹<span><?= $totalprice ?></span></span>
+                            <span class="font-bold text-[#f25b21] total"><span class="price" data-price="<?= $totalprice ?>"><?= $totalprice ?></span></span>
 
                             <!-- Quantity controls -->
                             <div class="flex items-center md:mt-2 border w-fit">
@@ -738,7 +750,7 @@ class WebController extends LoginController
                                     <p class="!mb-0 text-xs text-gray-600 uppercase"><?= $key ?>: <?= $variant ?></p>
                                 <?php } ?>
                             </div>
-                            <span class="font-bold text-[#f25b21] total">₹<span><?= $totalprice ?></span></span>
+                            <span class="font-bold text-[#f25b21] total"><span class="price" data-price="<?= $totalprice ?>"><?= $totalprice ?></span></span>
 
                             <!-- Quantity controls -->
                             <div class="flex items-center md:mt-2 border w-fit">
@@ -1856,11 +1868,37 @@ class WebController extends LoginController
                             <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
                             <script>
-                                $(document).ready(function() {
+                                $(document).ready( async function() {
+                                    const API_KEY = '2cae02057a1e6382011bb0bf'; // Exchange rate API key
+                                    const baseAmountInINR = <?= $_POST["allTotal"] ?>; // Your total in INR
+                                    const selectedCurrency = localStorage.getItem('currency') || 'INR';
+
+                                    let convertedAmount = baseAmountInINR;
+                                    let finalCurrency = 'INR';
+
+                                    // 🔁 Convert amount if user selected non-INR currency
+                                    if (selectedCurrency !== 'INR') {
+                                        try {
+                                            const res = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/pair/INR/${selectedCurrency}`);
+                                            const data = await res.json();
+                                            if (data.result === 'success') {
+                                                convertedAmount = (baseAmountInINR * data.conversion_rate).toFixed(2);
+                                                finalCurrency = selectedCurrency;
+                                            } else {
+                                                console.warn('Currency conversion failed, using INR instead.');
+                                            }
+                                        } catch (error) {
+                                            console.error('Currency conversion error:', error);
+                                        }
+                                    }
+
+                                    // 🔹 Convert to subunits (Razorpay expects smallest unit — paise, cents, etc.)
+                                    const amountInSubunits = Math.round(convertedAmount * 100);
+
                                     var options = {
                                         "key": "<?= $keyapi ?>",
-                                        "amount": "<?= $_POST["allTotal"] * 100 ?>",
-                                        "currency": "INR",
+                                        "amount": amountInSubunits,
+                                        "currency": finalCurrency,
                                         "name": "Nova Kids",
                                         "description": "Authentic streetwear for the next generation. Quality pieces that speak your language and match your vibe.",
                                         "image": "https://nova.bloomcrm.in/public/logos/nova_logo.png",

@@ -124,11 +124,28 @@ $encodedAddress = urlencode($OrderData['address_line2'] . ", " . $OrderData['add
                     $totalAmount = 0;
 
                     foreach ($PurchaseItems as $key => $cid) {
-                        $id = $cid["product"];
-                        $variant_id = $cid['varient'];
-                        $quantity = $cid['quantity'];
+                        $id = $cartData["product"][$key];
+                        $ids = json_decode($discount['product_id'], true);
+                        foreach ($ids as $idv) {
+                            if ($idv == $id) {
+                                $checked = true;
+                                break;
+                            } else {
+                                $checked = false;
+                            }
+                        }
+                        $variant_id = $cartData['varient'][$key];
+                        $quantity = $cartData['quantity'][$key];
+                        $category = $cartData['category'][$key];
                         $vdata = getData2("SELECT tbl_variants.* , tbl_products.name as product_name, tbl_products.id as product_id, tbl_products.category as category FROM `tbl_variants` LEFT JOIN tbl_products ON tbl_variants.product_id = tbl_products.id WHERE tbl_variants.id = '$variant_id'")[0];
-                        // echo $vdata['image'];
+                        if ($checked) {
+
+                            $price = $vdata['price'];
+                            $discountPercent = $discount['discount'];
+
+                            // Subtract the discount percentage from the original price
+                            $vdata['price'] = round($price - (($discountPercent / 100) * $price), 0, PHP_ROUND_HALF_UP);
+                        }
                         $images = array_reverse(json_decode($vdata['images'], true));
                         $variants = json_decode($vdata['options'], true);
                         $variants = json_decode($variants, true);

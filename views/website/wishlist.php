@@ -1,6 +1,7 @@
 <?php
 // printWithPre($_SESSION);
 $page = 'Wishlist';
+$discount = GetDiscount();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,10 +60,27 @@ $page = 'Wishlist';
 
                     foreach ($wishlists as $key => $wishlist) {
                         $product = getData2("SELECT * FROM `tbl_products` WHERE `id` = " . $wishlist['product'])[0];
+                        $ids = json_decode($discount['product_id'], true);
+                        foreach ($ids as $id) {
+                            if ($id == $product['id']) {
+                                $checked = true;
+                                break;
+                            } else {
+                                $checked = false;
+                            }
+                        }
                         // $images = json_decode($product['product_images'], true);
                         // $images = array_reverse($images);
                         $SecondImage = true;
                         $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
+                        if ($checked) {
+                            $price = $varients['price'];
+                            $discountPercent = $discount['discount'];
+
+                            // Subtract the discount percentage from the original price
+                            $varients['price'] = $price - (($discountPercent / 100) * $price);
+                            $product['compare_price'] = $price;
+                        }
                         // printWithPre($varients);
                         $images = json_decode($varients['images'], true);
                         $images = array_reverse($images);
@@ -75,6 +93,7 @@ $page = 'Wishlist';
                         $name = str_replace(' ', '-', $product['name']);
                         $name = str_replace("'", '', $name);
 
+                        $price = round($price, 0, PHP_ROUND_HALF_UP);
 
                         // printWithPre($images);
                     ?>
@@ -115,10 +134,10 @@ $page = 'Wishlist';
                                 <div class="pt-4 w-full ">
                                     <h3 class="text-base font-semibold uppercase max-md:text-sm"><?= $product['name'] ?></h3>
                                     <div class="flex items-center justify-start gap-3 w-full">
-                                        <p class="text-gray-500 line-through text-sm">₹
-                                            <?= formatNumber($product['compare_price']) ?>.00
+                                        <p class="text-gray-500 line-through text-sm price" data-price="<?= $product['compare_price'] ?>">₹
+                                            <?= formatNumber($product['compare_price']) ?>
                                         </p>
-                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?>.00</p>
+                                        <p class="text-[#f25b21] font-bold price" data-price="<?= $price ?>">₹ <?= formatNumber($price) ?></p>
                                     </div>
                                     <!-- reviews -->
                                     <div class="flex items-center justify-start space-x-1 hidden">
@@ -171,17 +190,40 @@ $page = 'Wishlist';
                     $wishlists = $_SESSION['wishlist'];
                     foreach ($wishlists as $key => $wishlist) {
                         $product = getData2("SELECT * FROM `tbl_products` WHERE `id` = " . $wishlist['product'])[0];
-                        $images = json_decode($product['product_images'], true);
-                        $images = array_reverse($images);
+                        $ids = json_decode($discount['product_id'], true);
+                        foreach ($ids as $id) {
+                            if ($id == $product['id']) {
+                                $checked = true;
+                                break;
+                            } else {
+                                $checked = false;
+                            }
+                        }
+                        // $images = json_decode($product['product_images'], true);
+                        // $images = array_reverse($images);
                         $SecondImage = true;
+                        $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
+                        if ($checked) {
+                            $price = $varients['price'];
+                            $discountPercent = $discount['discount'];
+
+                            // Subtract the discount percentage from the original price
+                            $varients['price'] = $price - (($discountPercent / 100) * $price);
+                            $product['compare_price'] = $price;
+                        }
+                        // printWithPre($varients);
+                        $images = json_decode($varients['images'], true);
+                        $images = array_reverse($images);
                         (isset($images[1])) ? $SecondImage = $images[1] : $SecondImage = $images[0];
                         $comparePrice = floatval($product['compare_price']);
-                        $price = floatval($product['price']);
+                        $price = floatval($varients['price']);
                         $discountAmount = $comparePrice - $price;
                         $discountPercentage = $comparePrice > 0 ? round(($discountAmount / $comparePrice) * 100) : 0;
 
                         $name = str_replace(' ', '-', $product['name']);
                         $name = str_replace("'", '', $name);
+
+                        $price = round($price, 0, PHP_ROUND_HALF_UP);
 
                         // printWithPre($images);
                     ?>
@@ -189,7 +231,7 @@ $page = 'Wishlist';
                             <div
                                 class="group relative  cursor-pointer transition overflow-hidden">
                                 <!-- Discount Badge -->
-                                <span class="absolute top-2 left-2 bg-[#f25b21] text-white text-xs px-2 py-1 z-20">
+                                <span class="absolute top-2 left-2 max-md:top-0 max-md:left-0 bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">
                                     SAVE <?= $discountPercentage ?>%
                                 </span>
 
@@ -206,8 +248,8 @@ $page = 'Wishlist';
 
                                     <!-- Add to favorites Icon (top-right) -->
                                     <button
-                                        class="addToWishlistBtn absolute top-2 right-3 bg-[#f25b21] text-white h-10 w-10 rounded-full  group-hover:opacity-100 z-20 stop-link">
-                                        <i class="fas fa-heart"></i>
+                                        class="addToWishlistBtn absolute top-2 right-3 bg-[#f25b21] text-white h-10 w-10 max-md:h-6 max-md:w-6 flex items-center justify-center rounded-full  group-hover:opacity-100 z-20 stop-link">
+                                        <i class="fas fa-heart max-md:text-xs"></i>
                                     </button>
 
                                     <!-- Add to Cart Icon -->
@@ -220,12 +262,12 @@ $page = 'Wishlist';
 
                                 <!-- Product Details -->
                                 <div class="pt-4 w-full ">
-                                    <h3 class="text-base font-semibold uppercase"><?= $product['name'] ?></h3>
+                                    <h3 class="text-base font-semibold uppercase max-md:text-sm"><?= $product['name'] ?></h3>
                                     <div class="flex items-center justify-start gap-3 w-full">
-                                        <p class="text-gray-500 line-through text-sm">₹
-                                            <?= formatNumber($product['compare_price']) ?>.00
+                                        <p class="text-gray-500 line-through text-sm price" data-price="<?= $product['compare_price'] ?>">₹
+                                            <?= formatNumber($product['compare_price']) ?>
                                         </p>
-                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($product['price']) ?>.00</p>
+                                        <p class="text-[#f25b21] font-bold price" data-price="<?= $price ?>">₹ <?= formatNumber($price) ?></p>
                                     </div>
                                     <!-- reviews -->
                                     <div class="flex items-center justify-start space-x-1 hidden">
@@ -234,7 +276,6 @@ $page = 'Wishlist';
                                 </div>
                             </div>
                         </a>
-
                     <?php } ?>
 
 

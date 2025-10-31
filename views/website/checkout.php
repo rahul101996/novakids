@@ -2,7 +2,8 @@
 // printWithPre($_SESSION);
 $allstates = getData("indian_states");
 $getallcoupons = getData("tbl_coupons");
-$page = 'checkout'
+$page = 'checkout';
+$discount = GetDiscount();
 ?>
 
 <!DOCTYPE html>
@@ -236,10 +237,27 @@ $page = 'checkout'
 
                     foreach ($cartData["cartid"] as $key => $cid) {
                         $id = $cartData["product"][$key];
+                        $ids = json_decode($discount['product_id'], true);
+                        foreach ($ids as $idv) {
+                            if ($idv == $id) {
+                                $checked = true;
+                                break;
+                            } else {
+                                $checked = false;
+                            }
+                        }
                         $variant_id = $cartData['varient'][$key];
                         $quantity = $cartData['quantity'][$key];
                         $category = $cartData['category'][$key];
                         $vdata = getData2("SELECT tbl_variants.* , tbl_products.name as product_name, tbl_products.id as product_id, tbl_products.category as category FROM `tbl_variants` LEFT JOIN tbl_products ON tbl_variants.product_id = tbl_products.id WHERE tbl_variants.id = '$variant_id'")[0];
+                        if ($checked) {
+
+                            $price = $vdata['price'];
+                            $discountPercent = $discount['discount'];
+
+                            // Subtract the discount percentage from the original price
+                            $vdata['price'] = round($price - (($discountPercent / 100) * $price), 0, PHP_ROUND_HALF_UP);
+                        }
                         // echo $vdata['image'];
                         // printWithPre($vdata);
                         $images = array_reverse(json_decode($vdata['images'], true));
@@ -270,7 +288,7 @@ $page = 'checkout'
                             <input type="text" value="<?= $variant_id ?>" class="sideVarientId hidden">
                             <input type="text" value="<?= $category ?>" class="sideCategoryId hidden">
                             <input type="text" value="<?= $id ?>" class="sideProductId hidden">
-                            <p class="font-semibold xprice">₹<?= $totalprice ?></p>
+                            <p class="font-semibold xprice price" data-price="<?= $totalprice ?>">₹<?= $totalprice ?></p>
                         </div>
                     <?php } ?>
                     <!-- Product 2 -->
@@ -285,11 +303,11 @@ $page = 'checkout'
                 <div class="space-y-2 text-sm mt-2">
                     <div class="flex justify-between">
                         <span>Subtotal</span>
-                        <span id="subTotalSpan">₹<?= $totalAmount ?></span>
+                        <span id="subTotalSpan" class="price" data-price="<?= $totalAmount ?>">₹<?= $totalAmount ?></span>
                     </div>
                     <div class="flex justify-between">
                         <span>Coupon</span>
-                        <span id="coupenDiscountSpan">₹0</span>
+                        <span id="coupenDiscountSpan" class="price" data-price="0">₹0</span>
                     </div>
                     <div class="flex justify-between">
                         <span>Shipping</span>
@@ -297,7 +315,7 @@ $page = 'checkout'
                     </div>
                     <div class="flex justify-between font-bold text-lg border-t pt-3">
                         <span>Total</span>
-                        <span id="allTotalSpan">₹<?= $totalAmount ?></span>
+                        <span id="allTotalSpan" class="price" data-price="<?= $totalAmount ?>">₹<?= $totalAmount ?></span>
                     </div>
                     <input type="text" id="subtotal" value="<?= $totalAmount ?>" class="hidden">
                     <input type="text" name="allTotal" value="<?= $totalAmount ?>" class="hidden" id="allTotal">
@@ -307,7 +325,7 @@ $page = 'checkout'
                         <div class="px-3 py-5 mb-3 bg-white max-md:py-2 ">
                             <div class="flex w-full justify-between ">
                                 <div class="border-dashed border-2 bg-[#ebe7f5] border-gray-400 p-2 rounded text-gray-600 max-md:h-8  max-md:justify-center max-md:flex max-md:items-center" style="width: fit-content;">
-                                    <span class="font-semibold text-uppercase max-md:text-xs" id='coupon_<?= $value["id"] ?>'><?= $value["coupon_secret"] ?></span> - <span class="max-md:text-xs"><?= $currency ?><?= $value["discount"] ?></span>
+                                    <span class="font-semibold text-uppercase max-md:text-xs" id='coupon_<?= $value["id"] ?>'><?= $value["coupon_secret"] ?></span> - <span class="max-md:text-xs price" data-price="<?= $value["discount"] ?>"><?= $currency ?><?= $value["discount"] ?></span>
                                 </div>
                                 <button type="button" class="border  px-4  bg-gray-200 hover:bg-gray-300 text-gray-500 text-sm justify-self-end max-md:text-xs"
                                     onclick="copyCoupon('<?= $value['coupon_secret'] ?>')">Add</button>
@@ -450,14 +468,17 @@ $page = 'checkout'
                 toastr.success(result.data.message);
 
                 document.getElementById('coupenDiscount').value = result.data.discount;
-                document.getElementById('coupenDiscountSpan').innerText = '₹' + result.data.discount;
+                // document.getElementById('coupenDiscountSpan').innerText = '₹' + result.data.discount;
+                document.getElementById('coupenDiscountSpan').setAttribute('data-price', result.data.discount);
                 let subtotal = document.getElementById('subtotal').value;
                 console.log(subtotal);
                 // console.log(result.data.discount);
                 let allTotal = document.getElementById('allTotal').value = parseFloat(subtotal) - parseFloat(result.data.discount);
                 console.log(allTotal);
-                document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
+                // document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
+                document.getElementById('allTotalSpan').setAttribute('data-price', allTotal);
 
+                loadCurrencies();
 
             } else {
                 toastr.error(result.data.message);
@@ -529,20 +550,25 @@ $page = 'checkout'
 
                 }
                 parentElement.querySelector(".xquantity").innerText = quantityValue;
-                parentElement.querySelector(".xprice").innerText = price * quantityValue;
+                // parentElement.querySelector(".xprice").innerText = price * quantityValue;
+                parentElement.querySelector(".xprice").setAttribute('data-price', price * quantityValue);
                 quantity.innerText = quantityValue;
                 console.log(quantityValue);
                 let subtotal = document.getElementById('subtotal');
 
                 let subtotalspan = document.getElementById('subTotalSpan');
                 subtotal.value = parseFloat(subtotal.value) + parseFloat(price);
-                subtotalspan.innerText = '₹' + subtotal.value;
+                // subtotalspan.innerText = '₹' + subtotal.value;
+                subtotalspan.setAttribute('data-price', subtotal.value);
                 // console.log(subtotal);
                 let allTotal = parseFloat(document.getElementById('allTotal').value) + parseFloat(price);
                 document.getElementById('allTotal').value = allTotal;
                 console.log(allTotal);
-                document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
+                // document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
+                document.getElementById('allTotalSpan').setAttribute('data-price', allTotal);
                 toastr.success(result.data.message);
+                loadCurrencies();
+
             } else {
                 toastr.error(result.data.message);
             }
@@ -582,20 +608,25 @@ $page = 'checkout'
                     }
 
                     parentElement.querySelector(".xquantity").innerText = quantityValue;
-                    parentElement.querySelector(".xprice").innerText = price * quantityValue;
+                    // parentElement.querySelector(".xprice").innerText = price * quantityValue;
+                    parentElement.querySelector(".xprice").setAttribute('data-price', price * quantityValue);
                     quantity.innerText = quantityValue;
                     console.log(quantityValue);
                     let subtotal = document.getElementById('subtotal');
 
                     let subtotalspan = document.getElementById('subTotalSpan');
                     subtotal.value = parseFloat(subtotal.value) - parseFloat(price);
-                    subtotalspan.innerText = '₹' + subtotal.value;
+                    // subtotalspan.innerText = '₹' + subtotal.value;
+                    subtotalspan.setAttribute('data-price', subtotal.value);
                     // console.log(subtotal);
                     let allTotal = parseFloat(document.getElementById('allTotal').value) - parseFloat(price);
                     document.getElementById('allTotal').value = allTotal;
                     console.log(allTotal);
-                    document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
+                    // document.getElementById('allTotalSpan').innerText = '₹' + allTotal;
+                    document.getElementById('allTotalSpan').setAttribute('data-price', allTotal);
                     toastr.success(result.data.message);
+                    loadCurrencies();
+
                 } else {
                     toastr.error(result.data.message);
                 }

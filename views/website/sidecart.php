@@ -131,7 +131,7 @@
                             <img src="/<?= $firstImage ?>" alt="Product" class="w-16 h-16 object-cover">
                             <div class="flex-1">
                                 <h3 class="font-semibold text-base"><?= $sunit['name'] ?></h3>
-                                <p class="font-bold text-[#f25b21]">₹<span id="cartTotal"><?= $sunit['price'] ?></span></p>
+                                <p class="font-bold text-[#f25b21]"><span id="cartTotal" class="price" data-price="<?= $sunit['price'] ?>"><?= $sunit['price'] ?></span></p>
                             </div>
                             <span
                                 class="relative inline-block text-sm px-2 py-1 rounded-md border border-[#f25b21] text-[#f25b21] font-semibold overflow-hidden group">
@@ -150,7 +150,7 @@
         <div class="px-6 py-2 border-t  sticky bottom-0 bg-white fixed">
             <div class="flex justify-between font-bold text-xl mb-2">
                 <span>Total</span>
-                <span id="All_Side_Total"></span>
+                <span id="All_Side_Total" class="price" data-price=""></span>
             </div>
             <div class="flex gap-6">
                 <!-- <button
@@ -330,7 +330,6 @@
             cartItems.innerHTML = request.data.cart_div;
             setTotal();
         }
-
     }
     <?php
     if ($page != "shop") {
@@ -410,7 +409,7 @@
                     }
 
                     // addToCartSidebar(ee.querySelector(".sideVarientId").value, ee.querySelector(".sideCategoryId").value, ee.querySelector(".sideProductId").value, btn)
-
+                    loadCurrencies();
 
                 });
             });
@@ -680,15 +679,15 @@
                     console.warn("No .sideVarientId element found inside:", ele.parentElement.parentElement);
                 }
                 let actual_price = ar.actual_price ? ar.actual_price : ar.price;
-let discount = 0;
+                let discount = 0;
 
-if (actual_price > ar.price) {
-    discount = Math.round(((actual_price - ar.price) / actual_price) * 100);
-}
+                if (actual_price > ar.price) {
+                    discount = Math.round(((actual_price - ar.price) / actual_price) * 100);
+                }
 
-ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
-    <span class="text-gray-300 text-xl line-through whitespace-nowrap">Rs.${actual_price}</span>
-    <span class="text-[#f25b21] text-xl whitespace-nowrap">Rs.${ar.price}.0</span>
+                ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
+    <span class="text-gray-300 text-xl line-through whitespace-nowrap price" data-price="${actual_price}">Rs.${actual_price}</span>
+    <span class="text-[#f25b21] text-xl whitespace-nowrap price" data-price="${ar.price}">Rs.${ar.price}.0</span>
     ${discount > 0 ? `<span class="rounded-md bg-[#f25b21] text-white text-xs max-md:text-[11px] px-2 py-1 max-md:px-1.5 max-md:py-0.5 z-20">${discount}% OFF</span>` : ''}
 `;
 
@@ -704,7 +703,7 @@ ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
                 document.getElementById("VarImg").innerHTML = imgHtml
             }
         })
-
+        loadCurrencies();
     }
 
     function AddToCartslider(btn, sidecart = false) {
@@ -879,6 +878,7 @@ ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
 
 
         document.getElementById("All_Side_Total").innerText = '<?= $currency ?>' + total
+         document.getElementById("All_Side_Total").setAttribute('data-price', total)
         let remaining = parseFloat(response.data.price) - total;
         console.log(remaining)
         if (remaining > 0) {
@@ -894,6 +894,8 @@ ele.parentElement.parentElement.querySelector(".prices").innerHTML = `
         }
         let percentage = total * parseFloat(response.data.price) / 100;
         console.log(percentage)
+        loadCurrencies();
+
         return total
     }
 

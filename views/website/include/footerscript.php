@@ -1,3 +1,6 @@
+<select id="currencySelector" class="border rounded p-1 selectElement fixed bottom-24 right-5 z-50">
+    <option value="">Select Currency</option>
+</select>
 <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
 <!-- <script src="./js/script.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -10,7 +13,7 @@
 
 <!-- Include AOS JS -->
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
 
@@ -56,7 +59,7 @@
         })
         .then(async (token) => {
             if (token) {
-                
+
                 let userid = '<?= $_SESSION['userid'] ?>';
 
                 console.log(token)
@@ -73,7 +76,7 @@
                     })
                 });
                 let data = await res.json();
-                
+
                 console.log(data);
 
                 localStorage.setItem("token", token);
@@ -97,6 +100,18 @@
     AOS.init({
         once: true, // Ensures the animation runs only once
     });
+
+    function setAllSlim(ele = null) {
+
+        if (ele == null) {
+            ele = document
+        }
+        ele.querySelectorAll('select.selectElement').forEach(function(selectElement) {
+            new SlimSelect({
+                select: selectElement
+            });
+        });
+    }
 </script>
 
 <script>
@@ -135,14 +150,14 @@
 
     <?php if (isset($_SESSION['success']) && !empty($_SESSION['success'])): ?>
         console.log("Success: <?= $_SESSION['success'] ?>");
-        $(document).ready(function () {
+        $(document).ready(function() {
             toastr.success("<?= $_SESSION['success'] ?>");
         });
         <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
 
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.home-banner-slider').owlCarousel({
             loop: true,
             items: 1, // Fade effect works best with a single item
@@ -154,7 +169,7 @@
             nav: false
         });
     });
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.testimonial').owlCarousel({
             loop: true,
             items: 1, // Fade effect works best with a single item
@@ -164,7 +179,7 @@
             nav: false
         });
     });
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.testimonial-video').owlCarousel({
             loop: true,
             items: 2, // Fade effect works best with a single item
@@ -189,7 +204,7 @@
             }
         });
     });
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.PastQuiz').owlCarousel({
             loop: true,
             margin: 15,
@@ -242,7 +257,7 @@
             console.error("Banner slider not found");
         }
     }
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         const counters = document.querySelectorAll(".count-up");
 
         const observer = new IntersectionObserver(
@@ -262,8 +277,8 @@
                     }
                 });
             }, {
-            threshold: 0.5
-        }
+                threshold: 0.5
+            }
         );
 
         counters.forEach((counter) => observer.observe(counter));
@@ -418,4 +433,62 @@
         }
         return true;
     }
+</script>
+<script>
+    const dropdown = document.getElementById('currencySelector');
+
+    // Load the Razorpay currency list dynamically
+    async function loadCurrencies() {
+
+        console.log('Loading currencies...');
+        const response = await fetch('/razorpay_supported_currencies.json');
+        const currencies = await response.json();
+
+        currencies.forEach(c => {
+            const option = document.createElement('option');
+            option.value = c.code;
+            option.textContent = `${c.name} (${c.code})`;
+            dropdown.appendChild(option);
+        });
+
+        // Load stored currency or default to INR
+        const savedCurrency = localStorage.getItem('currency') || 'INR';
+        dropdown.value = savedCurrency;
+        updateCurrency(savedCurrency);
+    }
+
+    // Convert prices and update UI
+    async function updateCurrency(selectedCurrency) {
+        if (!selectedCurrency) return;
+        let prices = document.querySelectorAll('.price');
+        console.log(prices);
+        console.log(selectedCurrency);
+        try {
+            const API_KEY = '2cae02057a1e6382011bb0bf';
+            const res = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/pair/INR/${selectedCurrency}`);
+            const data = await res.json();
+            console.log(data);
+            const rate = data.conversion_rate;
+
+
+            prices.forEach(el => {
+                const inrPrice = parseFloat(el.dataset.price.replace(/,/g, ""));
+                console.log(inrPrice);
+                const converted = (inrPrice * rate).toFixed(2);
+                console.log(converted);
+                el.textContent = `${selectedCurrency} ${converted}`;
+            });
+
+            localStorage.setItem('currency', selectedCurrency);
+        } catch (err) {
+            console.error('Currency conversion error:', err);
+        }
+    }
+
+    dropdown.addEventListener('change', e => {
+        updateCurrency(e.target.value);
+    });
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', loadCurrencies);
 </script>

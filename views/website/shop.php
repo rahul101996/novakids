@@ -299,6 +299,7 @@ $page = "shop";
             // console.log(activeFilters);
             AddToCart();
             AddToWishlist();
+            loadCurrencies();
         }
 
         // ✅ Render single product HTML
@@ -333,8 +334,8 @@ $page = "shop";
                             <div class="pt-4 w-full">
                                 <h3 class="text-base max-md:text-sm font-semibold uppercase">${product.name}</h3>
                                 <div class="flex items-center justify-start gap-3 w-full">
-                                    <p class="text-gray-500 line-through text-sm">₹ ${formatNumber(product.compare_price)}.00</p>
-                                    <p class="text-[#f25b21] font-bold">
+                                    <p class="text-gray-500 line-through text-sm price"  data-price="${product.compare_price}" >₹ ${formatNumber(product.compare_price)}.00</p>
+                                    <p class="text-[#f25b21] font-bold price"  data-price="${price}">
                                     ₹ ${formatNumber(Math.floor(price))}.00
                                     </p>
                                 </div>

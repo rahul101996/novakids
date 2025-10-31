@@ -380,10 +380,10 @@ if ($checked) {
                         <div class="flex flex-col items-start justify-center mb-2 w-[75%]">
                             <h2 class="w-full text-[1.7rem] max-md:text-lg leading-[2rem] uppercase"><?= $ProductData['name'] ?></h2>
                             <div class="flex items-center justify-center gap-3 mt-1 ">
-                                <span class="text-gray-300 text-xl max-md:text-base line-through whitespace-nowrap">Rs. <span
-                                        id="comparePrice99"><?= formatNumber($ProductData['compare_price']) ?></span></span>
+                                <span class="text-gray-300 text-xl max-md:text-base line-through whitespace-nowrap"><span
+                                        id="comparePrice99" class="price" data-price="<?= $ProductData['compare_price'] ?>"><?= formatNumber($ProductData['compare_price']) ?></span></span>
                                 <span
-                                    class="text-[#f25b21] text-xl max-md:text-base whitespace-nowrap prices">Rs.<?= formatNumber($ProductData['varients'][0]["price"]) ?></span>
+                                    class="text-[#f25b21] text-xl max-md:text-base whitespace-nowrap prices "><span class="price" data-price="<?= formatNumber($ProductData['varients'][0]["price"]) ?>">Rs.<?= formatNumber($ProductData['varients'][0]["price"]) ?></span></span>
                                 <span class="bg-[#f25b21] text-white text-xs px-2 py-1 z-20 whitespace-nowrap">SAVE
                                     <span id="save"><?= $discountPercentage ?></span>%</span>
 
@@ -945,10 +945,10 @@ if ($checked) {
                                         <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?>
                                         </h3>
                                         <div class="flex items-center justify-start gap-3 w-full">
-                                            <p class="text-gray-500 line-through text-sm">₹
+                                            <p class="text-gray-500 line-through text-sm price" data-price="<?= str_replace(',', '', $product['compare_price']) ?>">₹
                                                 <?= formatNumber($product['compare_price']) ?>
                                             </p>
-                                            <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?></p>
+                                            <p class="text-[#f25b21] font-bold price" data-price="<?= str_replace(',', '', $price) ?>">₹ <?= formatNumber($price) ?></p>
                                         </div>
                                         <!-- reviews -->
                                         <div class="flex items-center justify-start space-x-1 hidden">
@@ -975,10 +975,10 @@ if ($checked) {
                 <div>
                     <h4 class="text-sm text-black max-md:text-sm"><?= $ProductData['name'] ?></h4>
                     <p class="text-sm">
-                        <span class="line-through text-black">
+                        <span class="line-through text-black price" id="comparePrice999" data-price="<?= $ProductData['compare_price'] ?>">
                             ₹<?= formatNumber($ProductData['compare_price']) ?></span>
-                        <span class="text-[#f25b21] font-semibold text-sm max-md:text-base prices">
-                            ₹<?= formatNumber($ProductData['price']) ?></span>
+                        <span
+                            class="text-[#f25b21] text-xl max-md:text-base whitespace-nowrap prices "><span class="price" data-price="<?= formatNumber($ProductData['varients'][0]["price"]) ?>">Rs.<?= formatNumber($ProductData['varients'][0]["price"]) ?></span></span>
                     </p>
                 </div>
             </div>
@@ -1803,17 +1803,25 @@ if ($checked) {
                         // console.warn("No .sideVarientId element found inside:", ele.parentElement.parentElement);
                     }
                     document.querySelectorAll(".prices").forEach(el => {
-                        el.innerHTML = `<span class="text-[#f25b21] text-xl prices">Rs. ${ar.price}.0</span>`;
+                        el.innerHTML = `<span class="text-[#f25b21] text-xl price" data-price="${ar.price}">Rs. ${ar.price}.0</span>`;
+                        console.log(ar.price)
                     });
                     if (ar.actual_price) {
+                        console.log(document.getElementById('comparePrice99'));
+
                         document.getElementById('comparePrice99').innerHTML = `${ar.actual_price}`
+                        document.getElementById('comparePrice99').setAttribute('data-price', ar.actual_price);
+                        document.getElementById('comparePrice999').innerHTML = `${ar.actual_price}`
+                        document.getElementById('comparePrice999').setAttribute('data-price', ar.actual_price);
+
+
 
                     }
                     // let comparePrice99 = document.getElementById('comparePrice99');
                     // console.log(comparePrice99)
 
                     if (comparePrice99) {
-                        comparePrice99 = parseFloat(comparePrice99.innerHTML.replace(/,/g, ''))
+                        comparePrice99 = parseFloat(ar.actual_price);
                         let original = parseFloat(comparePrice99);
                         let discounted = parseFloat(ar.price);
                         console.log(original, discounted)
@@ -1851,7 +1859,7 @@ if ($checked) {
                     document.getElementById('DownImage').src = '/' + productimages[0];
                     document.getElementById("ProductDetailImg").innerHTML = imgHtml
                     document.getElementById('mobileProductDetailImg').innerHTML = mobileimgHtml;
-
+                    loadCurrencies();
                     // Reinitialize swiper or update slides
                     if (typeof swiper !== "undefined") {
                         swiper.update();

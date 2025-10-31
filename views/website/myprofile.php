@@ -537,28 +537,28 @@ $discount = GetDiscount();
 
                             foreach ($wishlists as $key => $wishlist) {
                                 $product = getData2("SELECT * FROM `tbl_products` WHERE `id` = " . $wishlist['product'])[0];
-                                                        $ids = json_decode($discount['product_id'], true);
+                                $ids = json_decode($discount['product_id'], true);
 
                                 foreach ($ids as $id) {
-                            if ($id == $product['id']) {
-                                $checked = true;
-                                break;
-                            } else {
-                                $checked = false;
-                            }
-                        }
+                                    if ($id == $product['id']) {
+                                        $checked = true;
+                                        break;
+                                    } else {
+                                        $checked = false;
+                                    }
+                                }
                                 // $images = json_decode($product['product_images'], true);
                                 // $images = array_reverse($images);
                                 $SecondImage = true;
                                 $varients = getData2("SELECT * FROM `tbl_variants` WHERE `product_id` = $product[id]")[0];
                                 if ($checked) {
-                            $price = $varients['price'];
-                            $discountPercent = $discount['discount'];
+                                    $price = $varients['price'];
+                                    $discountPercent = $discount['discount'];
 
-                            // Subtract the discount percentage from the original price
-                            $varients['price'] = $price - (($discountPercent / 100) * $price);
-                            $product['compare_price'] = $price;
-                        }
+                                    // Subtract the discount percentage from the original price
+                                    $varients['price'] = $price - (($discountPercent / 100) * $price);
+                                    $product['compare_price'] = $price;
+                                }
                                 // printWithPre($varients);
                                 $images = json_decode($varients['images'], true);
                                 $images = array_reverse($images);
@@ -611,10 +611,10 @@ $discount = GetDiscount();
                                         <div class="pt-4 w-full ">
                                             <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?></h3>
                                             <div class="flex items-center justify-start gap-3 w-full">
-                                                <p class="text-gray-500 line-through text-sm">₹
+                                                <p class="text-gray-500 line-through text-sm price" data-price="<?= str_replace(',', '', $product['compare_price']) ?>">₹
                                                     <?= formatNumber($product['compare_price']) ?>.00
                                                 </p>
-                                                <p class="text-[#f25b21] font-bold max-md:text-sm max-md:font-semibold">₹ <?= formatNumber($price) ?>.00</p>
+                                                <p class="text-[#f25b21] font-bold max-md:text-sm max-md:font-semibold price" data-price="<?= str_replace(',', '', $price) ?>">₹ <?= formatNumber($price) ?>.00</p>
                                             </div>
                                             <!-- reviews -->
                                             <div class="flex items-center justify-start space-x-1 hidden">

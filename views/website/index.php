@@ -355,10 +355,14 @@ $discount = GetDiscount();
                                     <h3 class="text-base max-md:text-sm font-semibold uppercase"><?= $product['name'] ?>
                                     </h3>
                                     <div class="flex items-center justify-start gap-3 w-full">
-                                        <p class="text-gray-500 line-through text-sm">₹
+                                        <p class="text-gray-500 line-through text-sm price" data-price="<?= str_replace(',', '', $product['compare_price']) ?>">₹
                                             <?= formatNumber($product['compare_price']) ?>
                                         </p>
-                                        <p class="text-[#f25b21] font-bold">₹ <?= formatNumber($price) ?></p>
+                                        <!-- <?= $price ?> -->
+                                        <p class="text-[#f25b21] font-bold price" data-price="<?= str_replace(',', '', $price) ?>">
+                                            ₹ <?= formatNumber($price) ?>
+                                        </p>
+
                                     </div>
                                     <!-- reviews -->
                                     <div class="flex items-center justify-start space-x-1 hidden">
@@ -462,8 +466,24 @@ $discount = GetDiscount();
 
         foreach (getData2("SELECT * FROM `product_banner_anchors` WHERE `product_banner_id` = " . $product_imge['id']) as $key => $value) {
             $product_variants = getData2("SELECT tv.*,tp.name as product_name, tp.price, tp.product_images FROM `tbl_variants` as tv LEFT JOIN 
-tbl_products as tp ON tp.id = tv.product_id WHERE tv.product_id = $value[product_name] ORDER BY `id` DESC LIMIT 1")[0];
+tbl_products as tp ON tp.id = tv.product_id WHERE tv.product_id = $value[product_name] ORDER BY tv.id DESC LIMIT 1")[0];
+            $ids = json_decode($discount['product_id'], true);
 
+            foreach ($ids as $id) {
+                if ($id == $value['product_name']) {
+                    $checked = true;
+                    break;
+                } else {
+                    $checked = false;
+                }
+            }
+            if ($checked) {
+                $price = $product_variants['price'];
+                $discountPercent = $discount['discount'];
+
+                // Subtract the discount percentage from the original price
+                $product_variants['price'] = round($price - (($discountPercent / 100) * $price), 0, PHP_ROUND_HALF_UP);
+            }
             // printWithPre($product_imge);
             // die();
 
@@ -495,7 +515,7 @@ tbl_products as tp ON tp.id = tv.product_id WHERE tv.product_id = $value[product
                             class="w-20 h-20 object-cover">
                         <div>
                             <p class="text-sm font-semibold text-gray-800"><?= $product_variants['product_name'] ?></p>
-                            <p class="text-sm font-semibold text-[#f25b21]">₹ <?= formatNumber($product_variants['price']) ?>
+                            <p class="text-sm font-semibold text-[#f25b21] price" data-price="<?= $product_variants['price'] ?>">₹ <?= formatNumber($product_variants['price']) ?>
                             </p>
                             <a href="/products/product-details/<?= $ppname ?>" class="text-sm text-gray-800 underline">View
                                 Product</a>
