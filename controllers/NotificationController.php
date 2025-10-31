@@ -37,7 +37,7 @@ class NotificationController
                 // 1. Retrieve data from the form
                 $notificationTitle = $_POST['title'] ?? 'Default Title';
                 $notificationBody = $_POST['body'] ?? 'Default Body';
-                $imageUrl = "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1240w,f_auto,q_auto:best/newscms/2015_02/835681/150106-mia-khalifa-830a.jpg";
+                $imageUrl = "";
                 $clickActionUrl = !empty($_POST['click_action_url']) ? $_POST['click_action_url'] : null;
 
                 // Initialize Google Client for authentication
